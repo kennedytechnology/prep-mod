@@ -60,8 +60,13 @@
                         }
                     }
                     .links-field {
-                        @apply flex justify-between mb-12 text-gray-600 font-normal text-sm;
-                        &:hover { @apply text-brand-red; }
+                        @apply flex justify-between;
+
+                        .links {
+                            @apply mb-12 text-gray-600 font-normal text-sm;
+                            &:hover { @apply text-brand-red; }
+
+                        }
                     }
 
                     .actions {

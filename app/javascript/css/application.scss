@@ -5,7 +5,7 @@
 @import "sessions";
 
 body {
-    @apply bg-gray;
+    @apply bg-brand-gray-200;
 }
 // This will be changed
 .container {
@@ -31,5 +31,6 @@ body {
       max-width: 1200px;
     }
   }
+  
   
   

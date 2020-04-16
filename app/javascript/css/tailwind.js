@@ -1,14 +1,14 @@
 const brandColors = new Object({
-  'red': '#e80001' 
+  'red': '#e80001' ,
+  'gray': {
+    '200': '#fafafe'
+  }
 })
 module.exports = {
   theme: {
     extend: { 
       colors: {
         'brand': brandColors
-      },
-      backgroundColor: {
-        gray: '#fafafe'
       },
       borderColor: {
         gray: '#e7e7e7'
