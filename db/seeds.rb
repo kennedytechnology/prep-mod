@@ -10,7 +10,7 @@ NAMED_PLACE_COUNT = 15
 VENUE_COUNT = 100
 CLINIC_COUNT = 230
 USER_COUNT = 50
-VENUE_STATES = ["MD", "DC"]
+VENUE_STATES = ["MD", "DC", "VA"]
 
 NAMED_PLACE_COUNT.times.each do |i|
   NamedPlace.create(
