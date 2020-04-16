@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe VenueAgeGroup, type: :model do
+RSpec.describe ClinicAgeGroup, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end

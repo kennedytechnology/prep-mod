@@ -51,8 +51,8 @@ CLINIC_COUNT.times.each do |i|
     start_time: "10:00",
     end_time: "13:00",
     duration: 180,
-    age_groups: ClinicAgeGroup.all.sample(rand(ClinicAgeGroup.count)),
-    services: ClinicService.all.sample(rand(ClinicService.count)),
+    age_groups: ClinicAgeGroup.all.sample(rand(ClinicAgeGroup.count) + 1),
+    services: ClinicService.all.sample(rand(ClinicService.count) + 1),
     address: "#{address['address1']}, #{address['city']}, #{address['state']} #{address['postalCode']}",
     longitude: address['coordinates']['lng'],
     latitude: address['coordinates']['lat']
