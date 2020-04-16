@@ -16,10 +16,10 @@
     }
 
     .login-section {
-        @apply bg-white px-12 py-8 border-gray border;
+        @apply bg-white px-12 py-8 border-brand-gray-300 border;
 
         .header {
-            @apply text-brand-red text-3xl border-b-2 border-gray mb-10;
+            @apply text-brand-red text-3xl border-b-2 border-brand-gray-300 mb-10;
 
             h2 {
                 @apply mb-2 text-3xl font-normal;
@@ -47,27 +47,33 @@
                         input {
                             @apply w-full border-b text-base px-6 py-4 outline-none font-light; 
                             border-color: #404141;
+                            transition: all 0.3s ease;
+
+                            &:focus {
+                                @apply border-brand-red;
+                            }
                         }
-                        span {
+                        span, span.lock-icon {
                             @apply absolute;
                             top: 20px;
                             width: 17px;
                         }
                         .lock-icon{
-                            @apply absolute;
                             top: 22px;
                             width: 13px;
                         }
                     }
                     .links-field {
                         @apply flex justify-between mb-12 text-gray-600 font-normal text-sm;
-                        &:hover { @apply text-brand-red; }
+
+                        a:hover { @apply text-brand-red; transition: all 0.3s ease;}
                     }
 
                     .actions {
                         .login-button {
-                            @apply w-1/2 bg-red-600 py-4 rounded-full mb-8 text-white text-lg mt-2 font-light;
+                            @apply w-1/2 bg-red-600 py-4 rounded-full mb-8 text-white text-lg mt-2 font-light cursor-pointer;
                             padding: 12px 18px;
+                            transition: all 0.3s ease;
                             &:hover { @apply bg-red-800; }
                         }
                     }
