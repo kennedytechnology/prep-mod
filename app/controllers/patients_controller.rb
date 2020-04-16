@@ -12,7 +12,7 @@ class PatientsController < ApplicationController
   def create
     @patient = Patient.new(patient_params)
     if @patient.save
-      redirect_to root_path
+      redirect_to root_path, :alert => "Your patient profile is saved."
     else
       render "new", :alert => "Your request WAS NOT saved!"
     end
@@ -24,7 +24,7 @@ class PatientsController < ApplicationController
 private
 
 def patient_params
-  params.require(:patient).permit(:state, :county, :city, :school, :email, :phone_number, :first_name, :last_name, :mother_maiden_name, :date_of_birth,  :password, :password_confirmation, :age, :sex)
+  params.require(:patient).permit(:state, :county, :city, :school, :email, :phone_number, :first_name, :last_name, :mothers_maiden_name, :date_of_birth,  :password, :password_confirmation, :age, :sex)
 end
 
 end
