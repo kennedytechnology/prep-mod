@@ -1,1 +1,45 @@
-<h1>Find Clinic</h1>
+<h1>Find a COVID-19 Service</h1>
+
+<form action="/clinic/search" method="post">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+  <p>What service(s) are you seeking?</p>
+  <% ClinicService.all.each do |service| %>
+    <label>
+      <%= check_box_tag "service[]", service.name, params[:service].to_a.include?(service.name) %>
+      <%= service.name %>
+    </label><br/>
+  <% end %>
+
+  <p>Age Group of Person(s) Seeking Services</p>
+  <% ClinicAgeGroup.all.each do |age_group| %>
+    <label>
+      <%= check_box_tag "age_group[]", age_group.name, params[:age_group].to_a.include?(age_group.name)%>
+      <%= age_group.name %>
+    </label><br/>
+  <% end %>
+
+  <p>Search Within</p>
+  <%= select_tag(:search_radius, options_for_select(["All", "5 miles", "10 miles", "25 miles", "50 miles", "100 miles", "100+ miles"], params[:search_radius]) ) %>
+
+  <p>Location</p>
+  <input name="location" id="autocomplete" value="<%= params[:location] %>">
+  <%= render partial: "google_maps_script" %>
+  <br>
+  <%= submit_tag "Search" %>
+</form> 
+
+<table>
+  <tr>
+    <th>Clinic</th>
+    <th>Address</th>
+    <th>Services</th>
+    <th>Age Groups</th>
+  </tr>
+  <% @clinics.each do |clinic| %>
+    <tr>
+    <td><%= clinic.name %></td><td><%= clinic.address %></td>
+    <td><%= clinic.services.collect(&:name).join(", ") %>
+    <td><%= clinic.age_groups.collect(&:name).join(", ") %>
+    </tr>
+  <% end %>
+</table>
