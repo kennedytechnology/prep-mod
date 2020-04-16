@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get 'public_portal/index'
   get '/clinic/search', to: 'public/clinics#index'
+  post '/clinic/search', to: 'public/clinics#search'
 
   resources :news_signups
   resources :clinics, only: [:index]
