@@ -1,0 +1,2 @@
+class NewsSignup < ApplicationRecord
+end

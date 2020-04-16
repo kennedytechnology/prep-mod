@@ -1,0 +1,2 @@
+class ClinicAgeGroup < ApplicationRecord
+end

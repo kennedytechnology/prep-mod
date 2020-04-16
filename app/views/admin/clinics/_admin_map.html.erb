@@ -1,0 +1,1 @@
+<%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=15&size=600x300&markers=size:small%7Ccolor:red%7C#{@clinic.latitude},#{@clinic.longitude}&key=#{ENV['GOOGLE_MAPS_API_KEY']}", alt: "Map" %>
