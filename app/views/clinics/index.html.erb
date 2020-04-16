@@ -1,7 +1,27 @@
-<h1>Clinics Index</h1>
+<%= render "shared/header_logos" %>
 
-<% @clinics.each do |clinic| %>
-  <pre>
-    <%= clinic.inspect %>
-  </pre>
-<% end %>
+<%# @clinics.each do |clinic| %>
+<!--  <pre>-->
+<%#= clinic.inspect %>
+<!--  </pre>-->
+<%# end %>
+
+<div class="container">
+  <div class="card-wrapper">
+    <div class="card-header">
+      <h2>Find a Covid-19 Service</h2>
+    </div>
+    <div class="card-content">
+      <%= form_tag do %>
+        <div class="form-group">
+          <%= label_tag do %>
+            What service(s) are you seeking? <span class="required-field">*</span>
+          <% end %>
+          <%= select_tag "credit_card",
+                         options_for_select([ "Vaccinations", "Screening", "Testing", "Medication",
+                                              "Safety Kit Distribution", "Other" ], "Screening") %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
