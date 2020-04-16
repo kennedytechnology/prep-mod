@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  devise_for :users 
 
   get 'public_portal/index'
   get '/clinic/search', to: 'public/clinics#index'
