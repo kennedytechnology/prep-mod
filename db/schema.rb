@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_16_042713) do
+ActiveRecord::Schema.define(version: 2020_04_16_201732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,6 +140,38 @@ ActiveRecord::Schema.define(version: 2020_04_16_042713) do
     t.integer "downloaded_status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "state"
+    t.string "county"
+    t.string "city"
+    t.integer "zip_code"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "mothers_maiden_name"
+    t.string "address"
+    t.string "email"
+    t.string "email_confirmation"
+    t.date "date_of_birth"
+    t.string "sex"
+    t.string "phone_number"
+    t.string "insured_first_name"
+    t.string "insured_last_name"
+    t.date "insured_date_of_birth"
+    t.string "relation_to_patient_for_insurance"
+    t.string "insurance_type"
+    t.integer "member_id_for_insurance"
+    t.string "card_number_for_insurance"
+    t.text "insurance_company_name"
+    t.string "group_number_for_insurance"
+    t.boolean "has_fever_over"
+    t.boolean "has_caugh"
+    t.boolean "has_difficult_breathing"
+    t.boolean "had_contact_with_confirmed_case"
+    t.boolean "is_age_60_or_more"
+    t.boolean "had_traveled_to_affected_place"
+    t.boolean "has_risk_factor"
+    t.string "consent_signature"
+    t.string "relation_to_patient_for_consent"
+    t.string "consent_date"
   end
 
   create_table "users", force: :cascade do |t|
