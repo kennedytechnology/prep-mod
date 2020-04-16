@@ -6,7 +6,7 @@
 <%# content %>
 <div id="consent-form-body" class="">
   <div class="consent-form-container">
-    <%= form_with model: @patient, method: :post, local: true do |form| %>
+    <%= form_with model: @patient, local: true do |form| %>
       
       <div class="consent-form-container-left">
         <p>
@@ -26,7 +26,7 @@
             </p>
             <p>
               <%= form.label :zip_code %><br>
-              <%= form.text_area :zip %>
+              <%= form.text_area :zip_code %>
             </p>
         </div>
 
