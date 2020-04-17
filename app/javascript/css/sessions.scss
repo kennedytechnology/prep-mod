@@ -4,6 +4,7 @@
     padding-right: 60px;
 
     .logo-headers {
+        display: none;
         @apply flex justify-between my-6;
 
         .mpp-logo {
@@ -75,6 +76,66 @@
                             padding: 12px 18px;
                             transition: all 0.3s ease;
                             &:hover { @apply bg-red-800; }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.password-container {
+    @apply px-64 mt-8 mx-auto;
+
+    .forgot-password-section {
+        @apply bg-white px-12 py-8 border-brand-gray-300 border;
+
+        .title {
+            @apply text-center border-b-2 border-brand-gray-300 mb-10;
+
+            h2 {
+                @apply font-medium text-lg mb-4;
+            }
+        }
+
+        .form-container {
+            @apply pr-0;
+
+            .password-form { 
+                @apply w-full; 
+
+                .field {
+                    @apply mb-4 relative px-8;
+                    input {
+                        @apply w-full border-b text-base px-6 py-4 outline-none font-light text-gray-600; 
+                        border-color: #404141;
+                        transition: all 0.3s ease;
+
+                        &:focus {
+                            @apply border-brand-red;
+                        }
+                    }
+                    span {
+                        @apply absolute;
+                        top: 20px;
+                        width: 17px;
+                    }
+                }
+
+                .links-field {
+                    @apply flex justify-between mb-12 text-gray-600 font-normal text-sm px-8;
+
+                    a:hover { @apply text-brand-red; transition: all 0.3s ease;}
+                }
+                
+                .actions {
+                    .instructions {
+                        @apply w-1/2 bg-red-600 py-4 rounded-full mb-8 text-white text-lg mt-2 font-light cursor-pointer outline-none text-center justify-center;
+                        margin-left: 144px;
+                        transition: all 0.3s ease;
+                        &:hover { @apply bg-red-800; }
+                        input {
+                            @apply justify-center;
                         }
                     }
                 }
