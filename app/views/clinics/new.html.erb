@@ -1,7 +1,6 @@
 <div class="bg-gray-50 overflow-hidden">
     <div class="relative max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <form class="bg-white p-8 md:-12 lg:p-16 rounded-lg shadow">
-            <%= form_with model: @clinic, local: true do |f| %>
+        <%= form_with model: @clinic, local: true, class: "bg-white p-8 md:-12 lg:p-16 rounded-lg shadow" do |f| %>
             <div>
                 <div>
                     <div>
@@ -15,31 +14,26 @@
                             <fieldset>
                                 <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
                                     <div>
-                                        <legend
-                                            class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700">
+                                        <legend class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700">
                                             Clinic status
                                         </legend>
                                     </div>
                                     <div class="sm:col-span-2">
-                                        <div class="max-w-lg">
+                                        <div class="max-w-xs">
                                             <p class="text-sm leading-5 text-gray-500">Is clinic public or private?</p>
-                                            <div class="mt-4">
+                                            <div class="grid grid-cols-2 items-end pt-4">
                                                 <div class="flex items-center">
-                                                    <input id="push_everything" name="form-input push_notifications"
-                                                        type="radio"
-                                                        class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
+                                                    <input id="push_everything" name="form-input push_notifications" type="radio"
+                                                    class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
                                                     <label for="push_everything" class="ml-3">
-                                                        <span class="block text-sm leading-5 font-medium text-gray-700">
-                                                            Public </span>
+                                                        <span class="block text-sm leading-5 font-medium text-gray-700"> Public </span>
                                                     </label>
                                                 </div>
-                                                <div class="mt-4 flex items-center">
-                                                    <input id="push_email" name="form-input push_notifications"
-                                                        type="radio"
+                                                <div class="flex items-center">
+                                                    <input id="push_email" name="form-input push_notifications" type="radio"
                                                         class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
                                                     <label for="push_email" class="ml-3">
-                                                        <span
-                                                            class="block text-sm leading-5 font-medium text-gray-700">Private</span>
+                                                        <span class="block text-sm leading-5 font-medium text-gray-700">Private</span>
                                                     </label>
                                                 </div>
                                             </div>
@@ -54,80 +48,73 @@
                                 <fieldset>
                                     <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
                                         <div>
-                                            <legend
-                                                class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700">
+                                            <legend class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700">
                                                 Services Provided
                                             </legend>
                                         </div>
                                         <div class="mt-4 sm:mt-0 sm:col-span-2">
-                                            <div class="max-w-lg">
+                                            <div class="max-w-xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                                                 <div class="relative flex items-start">
                                                     <div class="absolute flex items-center h-5">
-                                                        <input id="comments" type="checkbox"
+                                                        <input id="vaccinations" type="checkbox"
                                                             class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
                                                     </div>
                                                     <div class="pl-7 text-sm leading-5">
-                                                        <label for="comments"
-                                                            class="font-medium text-gray-700">Vaccinations</label>
+                                                        <label for="vaccinations" class="font-medium text-gray-700">Vaccinations</label>
                                                     </div>
                                                 </div>
-                                                <div class="mt-4">
+                                                <div class="">
                                                     <div class="relative flex items-start">
                                                         <div class="absolute flex items-center h-5">
-                                                            <input id="candidates" type="checkbox"
+                                                            <input id="screening" type="checkbox"
                                                                 class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
                                                         </div>
                                                         <div class="pl-7 text-sm leading-5">
-                                                            <label for="candidates"
-                                                                class="font-medium text-gray-700">Screening</label>
+                                                            <label for="screening" class="font-medium text-gray-700">Screening</label>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="mt-4">
+                                                <div class="">
                                                     <div class="relative flex items-start">
                                                         <div class="absolute flex items-center h-5">
-                                                            <input id="offers" type="checkbox"
+                                                            <input id="testing" type="checkbox"
                                                                 class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
                                                         </div>
                                                         <div class="pl-7 text-sm leading-5">
-                                                            <label for="offers"
-                                                                class="font-medium text-gray-700">Testing</label>
+                                                            <label for="testing" class="font-medium text-gray-700">Testing</label>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="mt-4">
+                                                <div class="">
                                                     <div class="relative flex items-start">
                                                         <div class="absolute flex items-center h-5">
-                                                            <input id="offers" type="checkbox"
+                                                            <input id="medication" type="checkbox"
                                                                 class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
                                                         </div>
                                                         <div class="pl-7 text-sm leading-5">
-                                                            <label for="offers"
-                                                                class="font-medium text-gray-700">Medication</label>
+                                                            <label for="medication" class="font-medium text-gray-700">Medication</label>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="mt-4">
+                                                <div class="">
                                                     <div class="relative flex items-start">
                                                         <div class="absolute flex items-center h-5">
-                                                            <input id="offers" type="checkbox"
+                                                            <input id="kits_distribution" type="checkbox"
                                                                 class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
                                                         </div>
                                                         <div class="pl-7 text-sm leading-5">
-                                                            <label for="offers" class="font-medium text-gray-700">Safety
-                                                                Kit Distribution</label>
+                                                            <label for="kits_distribution" class="font-medium text-gray-700">Safety Kit Distribution</label>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="mt-4">
+                                                <div class="">
                                                     <div class="relative flex items-start">
                                                         <div class="absolute flex items-center h-5">
-                                                            <input id="offers" type="checkbox"
+                                                            <input id="other_services_provided" type="checkbox"
                                                                 class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
                                                         </div>
                                                         <div class="pl-7 text-sm leading-5">
-                                                            <label for="offers"
-                                                                class="font-medium text-gray-700">Other</label>
+                                                            <label for="other_services_provided" class="font-medium text-gray-700">Other</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -137,267 +124,263 @@
                                 </fieldset>
                             </div>
 
-                                                    <div class="mt-6 sm:mt-5">
-                            <div class="sm:border-t sm:border-gray-200 sm:pt-5">
-                                <fieldset>
-                                    <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
-                                        <div>
-                                            <legend
-                                                class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700">
-                                                Open to
-                                            </legend>
-                                        </div>
-                                        <div class="mt-4 sm:mt-0 sm:col-span-2">
-                                            <div class="max-w-lg">
-                                                <div class="relative flex items-start">
-                                                    <div class="absolute flex items-center h-5">
-                                                        <input id="comments" type="checkbox"
-                                                            class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                    </div>
-                                                    <div class="pl-7 text-sm leading-5">
-                                                        <label for="comments"
-                                                            class="font-medium text-gray-700">All ages</label>
-                                                    </div>
-                                                </div>
-                                                <div class="mt-4">
+                            <div class="mt-6 sm:mt-5">
+                                <div class="sm:border-t sm:border-gray-200 sm:pt-5">
+                                    <fieldset>
+                                        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
+                                            <div>
+                                                <legend class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700">
+                                                    Open to
+                                                </legend>
+                                            </div>
+                                            <div class="mt-4 sm:mt-0 sm:col-span-2">
+                                                <div class="max-w-xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                                                     <div class="relative flex items-start">
                                                         <div class="absolute flex items-center h-5">
-                                                            <input id="candidates" type="checkbox"
-                                                                class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
+                                                            <input id="all_ages" type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
                                                         </div>
                                                         <div class="pl-7 text-sm leading-5">
-                                                            <label for="candidates"
-                                                                class="font-medium text-gray-700">Children</label>
+                                                            <label for="all_ages" class="font-medium text-gray-700">All ages</label>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="mt-4">
-                                                    <div class="relative flex items-start">
-                                                        <div class="absolute flex items-center h-5">
-                                                            <input id="offers" type="checkbox"
-                                                                class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                        </div>
-                                                        <div class="pl-7 text-sm leading-5">
-                                                            <label for="offers"
-                                                                class="font-medium text-gray-700">Adults</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="mt-4">
-                                                    <div class="relative flex items-start">
-                                                        <div class="absolute flex items-center h-5">
-                                                            <input id="offers" type="checkbox"
-                                                                class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                        </div>
-                                                        <div class="pl-7 text-sm leading-5">
-                                                            <label for="offers"
-                                                                class="font-medium text-gray-700">Seniors</label>
+                                                    <div class="">
+                                                        <div class="relative flex items-start">
+                                                            <div class="absolute flex items-center h-5">
+                                                                <input id="children" type="checkbox"
+                                                                    class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
+                                                            </div>
+                                                            <div class="pl-7 text-sm leading-5">
+                                                                <label for="children" class="font-medium text-gray-700">Children</label>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="mt-4">
-                                                    <div class="relative flex items-start">
-                                                        <div class="absolute flex items-center h-5">
-                                                            <input id="offers" type="checkbox"
-                                                                class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
+                                                    <div class="">
+                                                        <div class="relative flex items-start">
+                                                            <div class="absolute flex items-center h-5">
+                                                                <input id="adults" type="checkbox"
+                                                                    class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
+                                                            </div>
+                                                            <div class="pl-7 text-sm leading-5">
+                                                                <label for="adults" class="font-medium text-gray-700">Adults</label>
+                                                            </div>
                                                         </div>
-                                                        <div class="pl-7 text-sm leading-5">
-                                                            <label for="offers"
-                                                                class="font-medium text-gray-700">Other</label>
+                                                    </div>
+                                                    <div class="">
+                                                        <div class="relative flex items-start">
+                                                            <div class="absolute flex items-center h-5">
+                                                                <input id="seniors" type="checkbox"
+                                                                    class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
+                                                            </div>
+                                                            <div class="pl-7 text-sm leading-5">
+                                                                <label for="seniors" class="font-medium text-gray-700">Seniors</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="">
+                                                        <div class="relative flex items-start">
+                                                            <div class="absolute flex items-center h-5">
+                                                                <input id="open_to_other" type="checkbox"
+                                                                    class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
+                                                            </div>
+                                                            <div class="pl-7 text-sm leading-5">
+                                                                <label for="open_to_other" class="font-medium text-gray-700">Other</label>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-8 border-t border-gray-200 pt-8 sm:mt-5 sm:pt-10">
-                        <div>
-                            <h3 class="text-lg leading-6 font-medium text-gray-900">
-                                Clinic Information
-                            </h3>
-                        </div>
-                        <div class="mt-6 sm:mt-5">
-                            <div
-                                class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                                <label for="first_name"
-                                    class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
-                                    Clinic Date and Time
-                                </label>
-                                <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                    <div class="max-w-xs rounded-md shadow-sm">
-                                        <p class="text-sm leading-5 text-gray-500">Enter Clinic Date</p>
-                                        <input id="first_name"
-                                            class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4 " />
-                                        
-                                        <p class="text-sm leading-5 text-gray-500">Enter Clinic Start Time</p>
-                                        <input id="first_name"
-                                            class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" />
-                                            <p class="text-sm leading-5 text-gray-500">Enter Clinic End Time</p>
-                                        <input id="first_name"
-                                            class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-                                    </div>
+                                    </fieldset>
                                 </div>
                             </div>
+                        </div>
+                        <div class="mt-8 border-t border-gray-200 pt-8 sm:mt-5 sm:pt-10">
+                            <div>
+                                <h3 class="text-lg leading-6 font-medium text-gray-900"> Clinic Information </h3>
+                            </div>
+                            <div class="mt-6 sm:mt-5">
+                                <div
+                                    class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                                    <label for="first_name"
+                                        class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
+                                        Clinic Date and Time
+                                    </label>
+                                    <div class="mt-1 sm:mt-0 sm:col-span-2">
+                                        <div class="max-w-xs rounded-md shadow-sm">
+                                            <input id="first_name"
+                                                class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4 " placeholder="Clinic Date" />
 
-                            <div
-                                class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                                <label for="last_name"
-                                    class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
-                                    Clinic Location
-                                </label>
-                                <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                    <div class="max-w-xs rounded-md shadow-sm">
-                                        <input id="last_name"
-                                            class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4", placeholder="Country" />
-                                    </div>
+                                            <input id="first_name"
+                                                class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" placeholder="Clinic Start Time" />
 
-                                    <div class="max-w-xs rounded-md shadow-sm">
-                                        <input id="last_name"
-                                            class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4", placeholder="Location" />
+                                            <input id="first_name"
+                                                class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" placeholder="Clinic End Time" />
+                                        </div>
                                     </div>
+                                </div>
 
-                                    <div class="max-w-md rounded-md shadow-sm">
+                                <div
+                                    class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                                    <label for="last_name"
+                                        class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
+                                        Clinic Location
+                                    </label>
+                                    <div class="mt-1 sm:mt-0 sm:col-span-2">
+                                        <div class="max-w-xs rounded-md shadow-sm">
                                             <input id="last_name"
-                                            class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4", placeholder="Address" />
-                                    </div>
-                                    <div class="max-w-md grid grid-cols-1 md:grid-cols-3 md:gap-4">
-                                        <input id="last_name"
-                                            class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4", placeholder="Zip" />
+                                                class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
+                                                , placeholder="Country" />
+                                        </div>
+
+                                        <div class="max-w-xs rounded-md shadow-sm">
                                             <input id="last_name"
-                                            class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4", placeholder="City" />
+                                                class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
+                                                , placeholder="Location" />
+                                        </div>
+
+                                        <div class="max-w-md rounded-md shadow-sm">
                                             <input id="last_name"
-                                            class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4", placeholder="State" />
+                                                class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
+                                                , placeholder="Address" />
+                                        </div>
+                                        <div class="max-w-md grid grid-cols-1 md:grid-cols-3 md:gap-4">
+                                            <input id="last_name"
+                                                class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
+                                                , placeholder="Zip" />
+                                            <input id="last_name"
+                                                class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
+                                                , placeholder="City" />
+                                            <input id="last_name"
+                                                class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
+                                                , placeholder="State" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="mt-8 border-t border-gray-200 pt-8 sm:mt-5 sm:pt-10">
-                        <div>
-                            <h3 class="text-lg leading-6 font-medium text-gray-900">
-                                Appointment Information
-                            </h3>
-                        </div>
-                        <div class="mt-6 sm:mt-5">
-                            <div class="sm:border-t sm:border-gray-200 sm:pt-5">
-                                <fieldset>
-                                    <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
-                                        <div>
-                                            <legend
-                                                class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700">
-                                                Appointments available
-                                            </legend>
-                                        </div>
-                                        <div class="mt-4 sm:mt-0 sm:col-span-2">
-                                            <div class="max-w-lg">
-                                                <div class="relative flex items-start">
-                                                    <div class="absolute flex items-center h-5">
-                                                        <input id="comments" type="checkbox"
-                                                            class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                    </div>
-                                                    <div class="pl-7 text-sm leading-5">
-                                                        <label for="comments"
-                                                            class="font-medium text-gray-700">Yes, required</label>
-                                                    </div>
-                                                </div>
-                                                <div class="mt-4">
+                        <div class="mt-8 border-t border-gray-200 pt-8 sm:mt-5 sm:pt-10">
+                            <div>
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                                    Appointment Information
+                                </h3>
+                            </div>
+                            <div class="mt-6 sm:mt-5">
+                                <div class="sm:border-t sm:border-gray-200 sm:pt-5">
+                                    <fieldset>
+                                        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
+                                            <div>
+                                                <legend
+                                                    class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700">
+                                                    Appointments available
+                                                </legend>
+                                            </div>
+                                            <div class="mt-4 sm:mt-0 sm:col-span-2">
+                                                <div class="max-w-lg grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                                                     <div class="relative flex items-start">
                                                         <div class="absolute flex items-center h-5">
-                                                            <input id="candidates" type="checkbox"
+                                                            <input id="yes_required" type="checkbox"
                                                                 class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
                                                         </div>
                                                         <div class="pl-7 text-sm leading-5">
-                                                            <label for="candidates"
-                                                                class="font-medium text-gray-700">Yes, optional</label>
+                                                            <label for="yes_required" class="font-medium text-gray-700">Yes, required</label>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="mt-4">
-                                                    <div class="relative flex items-start">
-                                                        <div class="absolute flex items-center h-5">
-                                                            <input id="offers" type="checkbox"
-                                                                class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                        </div>
-                                                        <div class="pl-7 text-sm leading-5">
-                                                            <label for="offers"
-                                                                class="font-medium text-gray-700">No (Walk-In)</label>
+                                                    <div class="">
+                                                        <div class="relative flex items-start">
+                                                            <div class="absolute flex items-center h-5">
+                                                                <input id="yes_optional" type="checkbox"
+                                                                    class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
+                                                            </div>
+                                                            <div class="pl-7 text-sm leading-5">
+                                                                <label for="yes_optional" class="font-medium text-gray-700">Yes, optional</label>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-                            <div class="mt-6 sm:mt-5 sm:border-t sm:border-gray-200 sm:pt-5">
-                                <fieldset>
-                                    <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
-                                        <div>
-                                            <legend
-                                                class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700">
-                                                Appointment Frequency
-                                            </legend>
-                                        </div>
-                                        <div class="sm:col-span-2">
-                                            <div class="max-w-lg">
-                                                <div class="mt-4">
-                                                    <label for="country" class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
-                                                        Appointment Frequency: Every (Minutes)
-                                                    </label>
-                                                    <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                                        <div class="max-w-xs rounded-md shadow-sm">
-                                                        <select id="country" class="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
-                                                            <option>10</option>
-                                                            <option>20</option>
-                                                            <option>30</option>
-                                                        </select>
+                                                    <div class="">
+                                                        <div class="relative flex items-start">
+                                                            <div class="absolute flex items-center h-5">
+                                                                <input id="no_walk_in" type="checkbox"
+                                                                    class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
+                                                            </div>
+                                                            <div class="pl-7 text-sm leading-5">
+                                                                <label for="no_walk_in" class="font-medium text-gray-700">No (Walk-In)</label>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-                            <div class="mt-6 sm:mt-5 sm:border-t sm:border-gray-200 sm:pt-5">
-                                <fieldset>
-                                    <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
-                                        <div>
-                                            <legend
-                                                class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700">
-                                                Appointment Slots
-                                            </legend>
-                                        </div>
-                                        <div class="sm:col-span-2">
-                                            <div class="max-w-lg">
-                                                <div class="mt-4">
-                                                    <label for="country" class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
-                                                        Number of Appointment Slots per Frequency
-                                                    </label>
-                                                    <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                                        <div class="max-w-xs rounded-md shadow-sm">
-                                                        <select id="country" class="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
-                                                            <option>1</option>
-                                                            <option>2</option>
-                                                            <option>3</option>
-                                                        </select>
+                                    </fieldset>
+                                </div>
+                                <div class="mt-6 sm:mt-5 sm:border-t sm:border-gray-200 sm:pt-5">
+                                    <fieldset>
+                                        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
+                                            <div>
+                                                <legend
+                                                    class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700">
+                                                    Appointment Frequency
+                                                </legend>
+                                            </div>
+                                            <div class="sm:col-span-2">
+                                                <div class="max-w-lg">
+                                                    <div class="mt-4">
+                                                        <label for="country"
+                                                            class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
+                                                            Appointment Frequency: Every (Minutes)
+                                                        </label>
+                                                        <div class="mt-1 sm:mt-0 sm:col-span-2">
+                                                            <div class="max-w-xs rounded-md shadow-sm">
+                                                                <select id="country"
+                                                                    class="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                                                                    <option>10</option>
+                                                                    <option>20</option>
+                                                                    <option>30</option>
+                                                                </select>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </fieldset>
+                                    </fieldset>
+                                </div>
+                                <div class="mt-6 sm:mt-5 sm:border-t sm:border-gray-200 sm:pt-5">
+                                    <fieldset>
+                                        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
+                                            <div>
+                                                <legend
+                                                    class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700">
+                                                    Appointment Slots
+                                                </legend>
+                                            </div>
+                                            <div class="sm:col-span-2">
+                                                <div class="max-w-lg">
+                                                    <div class="mt-4">
+                                                        <label for="country"
+                                                            class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
+                                                            Number of Appointment Slots per Frequency
+                                                        </label>
+                                                        <div class="mt-1 sm:mt-0 sm:col-span-2">
+                                                            <div class="max-w-xs rounded-md shadow-sm">
+                                                                <select id="country"
+                                                                    class="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                                                                    <option>1</option>
+                                                                    <option>2</option>
+                                                                    <option>3</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="mt-8 border-t border-gray-200 pt-8 sm:mt-5 sm:pt-10">
+                    <div class="mt-8 border-t border-gray-200 pt-8 sm:mt-5 sm:pt-10">
                         <div>
                             <h3 class="text-lg leading-6 font-medium text-gray-900">
                                 Contact Information
@@ -412,12 +395,14 @@
                             <div class="mt-1 sm:mt-0 sm:col-span-2">
                                 <div class="max-w-xs rounded-md shadow-sm">
                                     <input id="last_name"
-                                        class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4", placeholder="Contact Person" />
+                                        class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
+                                        placeholder="Contact Person" />
                                 </div>
 
                                 <div class="max-w-xs rounded-md shadow-sm">
                                     <input id="last_name"
-                                        class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4", placeholder="Contact Number" />
+                                        class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
+                                        placeholder="Contact Number" />
                                 </div>
                             </div>
 
@@ -428,12 +413,14 @@
                             <div class="mt-1 sm:mt-0 sm:col-span-2">
                                 <div class="max-w-xs rounded-md shadow-sm">
                                     <input id="last_name"
-                                        class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4", placeholder="Back-Up Contact Person" />
+                                        class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
+                                        placeholder="Back-Up Contact Person" />
                                 </div>
 
                                 <div class="max-w-xs rounded-md shadow-sm">
                                     <input id="last_name"
-                                        class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4", placeholder="Back-Up Contact Number" />
+                                        class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
+                                        placeholder="Back-Up Contact Number" />
                                 </div>
                             </div>
                         </div>
@@ -441,60 +428,65 @@
                 </div>
 
                 <div class="mt-8 border-t border-gray-200 pt-8 sm:mt-5 sm:pt-10">
-                        <div>
-                            <h3 class="text-lg leading-6 font-medium text-gray-900">
-                                Other Information
-                            </h3>
-                        </div>
-                        <div
-                            class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                            <label for="last_name"
-                                class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
-                                Contact Information
-                            </label>
-                            <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                <div class="max-w-xs rounded-md shadow-sm">
-                                    <input id="last_name"
-                                        class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4", placeholder="Number of Patients Registered" />
-                                </div>
+                    <div>
+                        <h3 class="text-lg leading-6 font-medium text-gray-900">
+                            Other Information
+                        </h3>
+                    </div>
+                    <div
+                        class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                        <label for="last_name"
+                            class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
+                            Clinic Remaining Information
+                        </label>
+                        <div class="mt-1 sm:mt-0 sm:col-span-2">
+                            <div class="max-w-xs rounded-md shadow-sm">
+                                <input id="last_name"
+                                    class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
+                                    , placeholder="Number of Patients Registered" />
+                            </div>
 
-                                <div class="mt-1 sm:mt-0 sm:col-span-2 mb-4">
-                                    <div class="max-w-lg flex rounded-md shadow-sm">
-                                        <textarea id="about" rows="3" class="form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" placeholder="Enter Details Here"></textarea>
-                                    </div>
-                                    <p class="mt-2 text-sm text-gray-500">Clinic Details or Special Instructions.</p>
+                            <div class="mt-1 sm:mt-0 sm:col-span-2 mb-4">
+                                <div class="max-w-xs flex rounded-md shadow-sm">
+                                    <textarea id="about" rows="3"
+                                        class="form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                                        placeholder="Enter Details Here"></textarea>
                                 </div>
+                                <p class="mt-2 text-sm text-gray-500">Clinic Details or Special Instructions.</p>
+                            </div>
 
-                                <div class="max-w-xs rounded-md shadow-sm">
-                                    <input id="last_name"
-                                        class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4", placeholder="Lead Tester's Name" />
-                                </div>
+                            <div class="max-w-xs rounded-md shadow-sm">
+                                <input id="last_name"
+                                    class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
+                                    placeholder="Lead Tester's Name" />
+                            </div>
 
-                                <div class="max-w-xs rounded-md shadow-sm">
-                                    <input id="last_name"
-                                        class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4", placeholder="Clinic Staff Person's Name" />
-                                </div>
+                            <div class="max-w-xs rounded-md shadow-sm">
+                                <input id="last_name"
+                                    class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
+                                    placeholder="Clinic Staff Person's Name" />
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="mt-8 border-t border-gray-200 pt-5">
-                    <div class="flex justify-end">
-                        <span class="inline-flex rounded-md shadow-sm">
-                            <button type="button"
-                                class="py-2 px-4 border border-gray-300 rounded-md text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out">
-                                Cancel
-                            </button>
-                        </span>
-                        <span class="ml-3 inline-flex rounded-md shadow-sm">
-                            <button type="submit"
-                                class="inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
-                                Save
-                            </button>
-                        </span>
-                    </div>
-                </div>
-                <% end %>
             </div>
+
+            <div class="mt-8 border-t border-gray-200 pt-5">
+                <div class="flex justify-end">
+                    <span class="inline-flex rounded-md shadow-sm">
+                        <button type="button"
+                            class="py-2 px-4 border border-gray-300 rounded-md text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out">
+                            Cancel
+                        </button>
+                    </span>
+                    <span class="ml-3 inline-flex rounded-md shadow-sm">
+                        <button type="submit"
+                            class="inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+                            Save
+                        </button>
+                    </span>
+                </div>
+            </div>
+        <% end %>
     </div>
+</div>
