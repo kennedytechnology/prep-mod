@@ -1,0 +1,84 @@
+.sessions-container {
+    @apply mx-auto;
+    padding-left: 60px;
+    padding-right: 60px;
+
+    .logo-headers {
+        @apply flex justify-between my-6;
+
+        .mpp-logo {
+            width: 238px;
+        }
+
+        .msp-logo {
+            width: 178px;
+        }
+    }
+
+    .login-section {
+        @apply bg-white px-12 py-8 border-brand-gray-300 border;
+
+        .header {
+            @apply text-brand-red text-3xl border-b-2 border-brand-gray-300 mb-10;
+
+            h2 {
+                @apply mb-2 text-3xl font-normal;
+            }
+        }
+
+        .login-inner-container {
+            @apply flex flex-wrap;
+
+            .wizard-logo, .form-container {
+                @apply w-full pr-8;
+
+                @screen lg {
+                    @apply w-1/2;
+                }
+            }
+
+            .form-container {
+                @apply pr-0 pt-6;
+                .login-form {
+                    @apply w-full;
+
+                    .field {
+                        @apply mb-4 relative;
+                        input {
+                            @apply w-full border-b text-base px-6 py-4 outline-none font-light; 
+                            border-color: #404141;
+                            transition: all 0.3s ease;
+
+                            &:focus {
+                                @apply border-brand-red;
+                            }
+                        }
+                        span, span.lock-icon {
+                            @apply absolute;
+                            top: 20px;
+                            width: 17px;
+                        }
+                        .lock-icon{
+                            top: 22px;
+                            width: 13px;
+                        }
+                    }
+                    .links-field {
+                        @apply flex justify-between mb-12 text-gray-600 font-normal text-sm;
+
+                        a:hover { @apply text-brand-red; transition: all 0.3s ease;}
+                    }
+
+                    .actions {
+                        .red-button {
+                            @apply w-1/2 bg-red-600 py-4 rounded-full mb-8 text-white text-lg mt-2 font-light cursor-pointer;
+                            padding: 12px 18px;
+                            transition: all 0.3s ease;
+                            &:hover { @apply bg-red-800; }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
