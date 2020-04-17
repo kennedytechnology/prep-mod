@@ -1,20 +1,3 @@
-<h1>PublicPortal#index</h1>
-<p>Find me in app/views/public_portal/index.html.erb</p>
-
-<ul>
-<li>
-  <%= link_to "Sign Up for News and Notifications", new_news_signup_path %>
-</li>
-<li>
-  Testing – I have a referral code
-  <span class="helptext">You must have a code to schedule a testing appointment</span>
-</li>
-<li>
-  Testing – I DO NOT have a referral code
-  <span class="helptext">At this time, we are not testing the general public.  Fill out this form and we will notify you when testing is available.</span>
-</li>
-
-<li>Find COVID-19 Safety Kits</li>
-<li class="disabled">Anti-Viral Distribution</li>
-<li class="disabled">Vaccination</li>
-</ul>
+<%= render partial: "public_portal/header" %>
+<%= render partial: "public_portal/services" %>
+<%= render partial: "public_portal/footer" %>
