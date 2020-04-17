@@ -7,6 +7,7 @@ class ClinicsController < ApplicationController
   end
 
   def index
+    @clinics = Clinic.all
   end
 
   private

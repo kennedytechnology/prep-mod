@@ -1,0 +1,81 @@
+.container {
+  @apply w-full mx-auto my-6;
+
+  @media (min-width: 576px) {
+    max-width: 576px;
+  }
+
+  @media (min-width: 768px) {
+    max-width: 768px;
+  }
+
+  @media (min-width: 992px) {
+    max-width: 992px;
+  }
+
+  @media (min-width: 1200px) {
+    max-width: 1200px;
+  }
+}
+
+.required-field {
+  @apply text-brand-red;
+}
+
+.card-wrapper {
+  @apply bg-white border border-brand-gray-200;
+  padding: 25px 45px 20px 45px;
+
+  .card-header {
+    @apply text-brand-red text-2xl my-8 pb-2 border-b-2 border-brand-gray-200;
+  }
+
+  .card-content {
+    .form-group {
+      @apply flex flex-wrap;
+
+      &:last-child {
+        @apply border-b-2 border-brand-gray-300 pb-10 mb-10;
+      }
+
+      p, label {
+        @apply text-sm text-gray-600;
+      }
+
+      .group-elem {
+        @apply w-1/2;
+
+        &:first-child {
+          @apply pr-4;
+        }
+
+        .checkbox-options {
+          @apply flex justify-between;
+        }
+      }
+    }
+
+    .button-container {
+      @apply flex items-center justify-center;
+
+      .submit-button {
+        @apply flex justify-center items-center bg-brand-red text-white rounded-full;
+        width: 200px;
+        height: 51px;
+      }
+    }
+  }
+}
+
+// Shared Navbar
+.header-logos {
+  @apply flex justify-between;
+
+  .mpp-logo {
+    width: 238px;
+  }
+
+  .mp4p-logo {
+    width: 178px;
+  }
+}

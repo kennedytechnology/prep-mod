@@ -1,32 +1,102 @@
-<h1>Find a COVID-19 Service</h1>
+<div class="container">
+  <div class="card-wrapper">
+    <div class="card-header">
+      <h2>Find a Covid-19 Service</h2>
+    </div>
+    <div class="card-content">
+      <%= form_tag do |f| %>
+        <div class="form-group">
+          <div class="group-elem">
+            <%= label_tag do %>
+              What service(s) are you seeking? <span class="required-field">*</span>
+            <% end %>
+            <%= select_tag "seeking",
+                           options_for_select([ "Vaccinations", "Screening", "Testing", "Medication",
+                                                "Safety Kit Distribution", "Other" ], "Screening") %>
+          </div>
+          <div class="group-elem">
+            <p>Age Group of Person(s) Seeking Services <span class="required-field">*</span></p>
+            <div class="checkbox-options">
+              <div class="checkbox-group">
+                <%= check_box_tag 'all_ages' %>
+                <%= label_tag "All Ages" %>
+              </div>
+              <div class="checkbox-group">
+                <%= check_box_tag 'children' %>
+                <%= label_tag "Children" %>
+              </div>
+              <div class="checkbox-group">
+                <%= check_box_tag 'adults' %>
+                <%= label_tag "Adults" %>
+              </div>
+              <div class="checkbox-group">
+                <%= check_box_tag 'seniors' %>
+                <%= label_tag "Seniors" %>
+              </div>
+              <div class="checkbox-group">
+                <%= check_box_tag 'other' %>
+                <%= label_tag "Other" %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="group-elem">
+            <div class="select-group">
+              <%= label_tag do %>
+                Search Within <span class="required-field">*</span>
+              <% end %>
+              <%= select_tag "range", options_for_select([ "05", "10", "25", "50", "100", "100+" ], "Miles"),
+                             class: "miles-range form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+            </div>
+            <div class="input-group">
+              <%= label_tag "Zip Code" %>
+              <%= text_field_tag "zip_code", "Enter Zip Code", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+            </div>
+          </div>
+          <div class="group-elem">
+            <div class="input-group">
+              <%= label_tag "Address" %>
+              <%= text_field_tag "zip_code", "Enter Address", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+            </div>
+          </div>
+        </div>
 
-<form action="/clinic/search" method="post">
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-  <p>What service(s) are you seeking?</p>
-  <% ClinicService.all.each do |service| %>
-    <label>
-      <%= check_box_tag "service[]", service.name, params[:service].to_a.include?(service.name) %>
-      <%= service.name %>
-    </label><br/>
-  <% end %>
+        <div class="button-container">
+          <button class="submit-button">Search</button>
+        </div>
+      <% end %>
 
-  <p>Age Group of Person(s) Seeking Services</p>
-  <% ClinicAgeGroup.all.each do |age_group| %>
-    <label>
-      <%= check_box_tag "age_group[]", age_group.name, params[:age_group].to_a.include?(age_group.name)%>
-      <%= age_group.name %>
-    </label><br/>
-  <% end %>
+<!--      <form action="/clinic/search" method="post">-->
+        <%#= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+<!--        <p>What service(s) are you seeking?</p>-->
+        <%# ClinicService.all.each do |service| %>
+<!--          <label>-->
+            <%#= check_box_tag "service[]", service.name, params[:service].to_a.include?(service.name) %>
+            <%#= service.name %>
+<!--          </label><br/>-->
+        <%# end %>
 
-  <p>Search Within</p>
-  <%= select_tag(:search_radius, options_for_select(["All", "5 miles", "10 miles", "25 miles", "50 miles", "100 miles", "100+ miles"], params[:search_radius]) ) %>
+<!--        <p>Age Group of Person(s) Seeking Services</p>-->
+        <%# ClinicAgeGroup.all.each do |age_group| %>
+<!--          <label>-->
+            <%#= check_box_tag "age_group[]", age_group.name, params[:age_group].to_a.include?(age_group.name)%>
+            <%#= age_group.name %>
+<!--          </label><br/>-->
+        <%# end %>
 
-  <p>Location</p>
-  <input name="location" id="autocomplete" value="<%= params[:location] %>">
-  <%= render partial: "google_maps_script" %>
-  <br>
-  <%= submit_tag "Search" %>
-</form> 
+<!--        <p>Search Within</p>-->
+        <%#= select_tag(:search_radius, options_for_select(["All", "5 miles", "10 miles", "25 miles", "50 miles", "100 miles", "100+ miles"], params[:search_radius]) ) %>
+
+<!--        <p>Location</p>-->
+<!--        <input name="location" id="autocomplete" value="<%#= params[:location] %>">-->
+        <%#= render partial: "google_maps_script" %>
+<!--        <br>-->
+        <%#= submit_tag "Search" %>
+<!--      </form>-->
+    </div>
+  </div>
+</div>
 
 <table>
   <tr>
