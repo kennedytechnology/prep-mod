@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post '/clinic/search', to: 'public/clinics#search'
 
   resources :news_signups
+  resources :patients
   resources :clinics, only: [:index]
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

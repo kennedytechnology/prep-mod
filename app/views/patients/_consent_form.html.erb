@@ -1,0 +1,95 @@
+<%# navbar %>
+<div class="consent-form-nav-container">
+
+</div>
+
+<%# content %>
+<div id="consent-form-body" class="">
+  <div class="consent-form-container">
+    <%= form_with model: @patient, local: true do |form| %>
+      
+      <div class="consent-form-container-left">
+        <p>
+          <%= form.label :state %><br>
+          <%= form.select :state, options_for_select(us_states), {include_blank: "Please choose"} %>
+        </p>
+
+        <p>
+          <%= form.label :county %><br>
+          <%= form.select :county, options_for_select(us_states), {include_blank: "Please choose"} %>
+        </p>
+
+        <div>
+            <p>
+              <%= form.label :city %><br>
+              <%= form.text_area :city %>
+            </p>
+            <p>
+              <%= form.label :zip_code %><br>
+              <%= form.text_area :zip_code %>
+            </p>
+        </div>
+
+        <p>
+          <%= form.label :school %><br>
+          <%= form.select :school, options_for_select(us_states), {include_blank: "Please choose"} %>
+        </p>                
+      
+        <p>
+          <%= form.label :first_name %><br>
+          <%= form.text_area :first_name %>
+        </p>
+      </div>
+    
+      <div class="consent-form-container-right">
+        <p>
+          <%= form.label :mothers_maiden_name %><br>
+          <%= form.text_area :mothers_maiden_name %>
+        </p>  
+
+        <p>
+          <%= form.label :last_name %><br>
+          <%= form.text_area :last_name %>
+        </p>      
+
+        <p>
+          <%= form.label :address %><br>
+          <%= form.text_area :address %>
+        </p>      
+
+        <p>
+          <%= form.label :email %><br>
+          <%= form.email_field :email %>
+        </p>
+        <p>
+          <%= form.label :email_confirmation %><br>
+          <%= form.email_field :email_confirmation %>
+        </p>
+
+        <div>
+            <p>
+              <%= form.label :date_of_birth %><br>
+              <%= form.date_field :date_of_birth %>
+            </p>
+            <p>
+              <%= form.label :age %><br>
+              <%= form.text_area :age, disabled: true %>
+            </p>
+            <p>
+              <%= form.label :sex %><br>
+              <%= form.select :sex, options_for_select(['Male', 'Female', 'Other', 'Non-Binary']), {include_blank: "Please choose"}%>
+            </p>            
+        </div>
+        <p>
+          <%= form.label :phone_number %><br>
+          <%= form.email_field :phone_number %>
+        </p>
+      </div>
+
+      <div>
+        <%= form.submit %>
+      </div>
+    
+    <% end %>
+  </div>
+</div>
