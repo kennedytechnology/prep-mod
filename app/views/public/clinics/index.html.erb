@@ -47,19 +47,23 @@
                 Search Within <span class="required-field">*</span>
               <% end %>
               <%= select_tag "range", options_for_select([ "05", "10", "25", "50", "100", "100+" ], "Miles"),
-                             class: "miles-range" %>
+                             class: "miles-range form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
             </div>
             <div class="input-group">
               <%= label_tag "Zip Code" %>
-              <%= text_field_tag "zip_code", "Enter Zip Code" %>
+              <%= text_field_tag "zip_code", "Enter Zip Code", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
             </div>
           </div>
           <div class="group-elem">
             <div class="input-group">
               <%= label_tag "Address" %>
-              <%= text_field_tag "zip_code", "Enter Address" %>
+              <%= text_field_tag "zip_code", "Enter Address", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
             </div>
           </div>
+        </div>
+
+        <div class="button-container">
+          <button class="submit-button">Search</button>
         </div>
       <% end %>
 

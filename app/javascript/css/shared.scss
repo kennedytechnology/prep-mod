@@ -38,6 +38,10 @@
         @apply border-b-2 border-brand-gray-300 pb-10 mb-10;
       }
 
+      p, label {
+        @apply text-sm text-gray-600;
+      }
+
       .group-elem {
         @apply w-1/2;
 
@@ -48,6 +52,16 @@
         .checkbox-options {
           @apply flex justify-between;
         }
+      }
+    }
+
+    .button-container {
+      @apply flex items-center justify-center;
+
+      .submit-button {
+        @apply flex justify-center items-center bg-brand-red text-white rounded-full;
+        width: 200px;
+        height: 51px;
       }
     }
   }
