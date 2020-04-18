@@ -1,20 +1,8 @@
 .container {
-  @apply w-full mx-auto my-6;
+  @apply max-w-screen-xl mx-auto px-4 py-4 px-6;
 
-  @media (min-width: 576px) {
-    max-width: 576px;
-  }
-
-  @media (min-width: 768px) {
-    max-width: 768px;
-  }
-
-  @media (min-width: 992px) {
-    max-width: 992px;
-  }
-
-  @media (min-width: 1200px) {
-    max-width: 1200px;
+  @screen lg {
+    @apply pb-4 px-8 py-8;
   }
 }
 
@@ -22,35 +10,81 @@
   @apply text-brand-red;
 }
 
+// Form card
 .card-wrapper {
-  @apply bg-white border border-brand-gray-200;
+  @apply bg-white shadow rounded;
   padding: 25px 45px 20px 45px;
 
   .card-header {
-    @apply text-brand-red text-2xl my-8 pb-2 border-b-2 border-brand-gray-200;
+    @apply text-brand-red text-2xl my-8 pb-2 border-b-2 border-brand-gray-300;
   }
 
   .card-content {
     .form-group {
       @apply flex flex-wrap;
 
-      &:last-child {
+      &:nth-child(3) {
         @apply border-b-2 border-brand-gray-300 pb-10 mb-10;
       }
 
-      p, label {
-        @apply text-sm text-gray-600;
+      .label, label {
+        @apply text-gray-600 font-bold;
+      }
+
+      input:not([type='checkbox']), select {
+        @apply form-input block w-full transition duration-150 ease-in-out bg-brand-gray-100 outline-none rounded-none;
+        height: 42px;
+
+        &:focus {
+          @apply border-brand-red;
+        }
+      }
+
+      input, select, label, .label {
+        @apply text-sm;
       }
 
       .group-elem {
-        @apply w-1/2;
+        @apply w-full mb-5;
+
+        @screen md {
+          @apply w-1/2;
+        }
 
         &:first-child {
-          @apply pr-4;
+          @apply pr-0;
+
+          @screen md {
+            @apply pr-12;
+          }
         }
 
         .checkbox-options {
-          @apply flex justify-between;
+          @apply block;
+
+          @screen lg {
+            @apply flex justify-between;
+          }
+
+          .checkbox-group {
+            @apply relative flex items-start;
+
+            .checkbox-icon {
+              @apply absolute flex items-center h-5;
+            }
+
+            .label-wrapper {
+              @apply pl-7 text-sm leading-5;
+
+              @screen md {
+                @apply pl-6;
+              }
+            }
+          }
+
+          .form-checkbox {
+            @apply transition duration-300 ease-in-out text-brand-red outline-none;
+          }
         }
       }
     }
@@ -59,7 +93,7 @@
       @apply flex items-center justify-center;
 
       .submit-button {
-        @apply flex justify-center items-center bg-brand-red text-white rounded-full;
+        @apply flex justify-center items-center bg-brand-red text-white rounded-full mb-12;
         width: 200px;
         height: 51px;
       }
