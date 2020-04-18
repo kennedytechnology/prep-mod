@@ -1,0 +1,41 @@
+.clinics-page {
+  .clinics-table-wrapper {
+    @apply flex flex-col mt-12;
+
+    .clinics-table-outer {
+      @apply -my-2 py-2 overflow-x-auto -mx-6 px-6;
+
+      @screen lg {
+        @apply -mx-8 px-8;
+      }
+
+      .clinics-table-container {
+        @apply align-middle inline-block min-w-full shadow overflow-hidden rounded-lg border-b border-brand-gray-300;
+
+        table {
+          @apply min-w-full;
+
+          thead tr {
+            th {
+              @apply px-6 py-3 border-b border-gray-200 bg-white text-left text-sm leading-4 font-medium text-brand-red tracking-wider;
+            }
+          }
+
+          tbody {
+            tr:nth-child(even) {
+              @apply bg-white;
+            }
+
+            td {
+              @apply px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .no-message-panel {
+    @apply bg-white shadow rounded text-center text-brand-red;
+  }
+}

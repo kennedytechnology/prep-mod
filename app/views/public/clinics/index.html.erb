@@ -1,42 +1,33 @@
-<div class="container">
+<div class="container clinics-page">
   <div class="card-wrapper">
     <div class="card-header">
       <h2>Find a Covid-19 Service</h2>
     </div>
     <div class="card-content">
-      <%= form_tag do |f| %>
+      <form action="/clinic/search" method="post">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
         <div class="form-group">
           <div class="group-elem">
-            <%= label_tag do %>
-              What service(s) are you seeking? <span class="required-field">*</span>
-            <% end %>
-            <%= select_tag "seeking",
-                           options_for_select([ "Vaccinations", "Screening", "Testing", "Medication",
-                                                "Safety Kit Distribution", "Other" ], "Screening") %>
+            <span class="label">What service(s) are you seeking? <span class="required-field">*</span></span>
+            <div class="checkbox-services">
+              <%= select_tag(:search_radius,
+                             options_for_select(ClinicService.all.map {|cs| cs.name}, params[:search_radius]),
+                             class: "miles-range", required: true) %>
+            </div>
           </div>
           <div class="group-elem">
-            <p>Age Group of Person(s) Seeking Services <span class="required-field">*</span></p>
+            <p class="label">Age Group of Person(s) Seeking Services <span class="required-field">*</span></p>
             <div class="checkbox-options">
-              <div class="checkbox-group">
-                <%= check_box_tag 'all_ages' %>
-                <%= label_tag "All Ages" %>
-              </div>
-              <div class="checkbox-group">
-                <%= check_box_tag 'children' %>
-                <%= label_tag "Children" %>
-              </div>
-              <div class="checkbox-group">
-                <%= check_box_tag 'adults' %>
-                <%= label_tag "Adults" %>
-              </div>
-              <div class="checkbox-group">
-                <%= check_box_tag 'seniors' %>
-                <%= label_tag "Seniors" %>
-              </div>
-              <div class="checkbox-group">
-                <%= check_box_tag 'other' %>
-                <%= label_tag "Other" %>
-              </div>
+              <% ClinicAgeGroup.all.each do |age_group| %>
+                <div class="checkbox-group">
+                  <div class="checkbox-icon">
+                    <%= check_box_tag "age_group[]", age_group.name, params[:age_group].to_a.include?(age_group.name), class: "form-checkbox" %>
+                  </div>
+                  <div class="label-wrapper">
+                    <%= label_tag age_group.name, age_group.name, class: "font-medium text-gray-700" %>
+                  </div>
+                </div>
+              <% end %>
             </div>
           </div>
         </div>
@@ -46,70 +37,69 @@
               <%= label_tag do %>
                 Search Within <span class="required-field">*</span>
               <% end %>
-              <%= select_tag "range", options_for_select([ "05", "10", "25", "50", "100", "100+" ], "Miles"),
-                             class: "miles-range form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
-            </div>
-            <div class="input-group">
-              <%= label_tag "Zip Code" %>
-              <%= text_field_tag "zip_code", "Enter Zip Code", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+              <%= select_tag(:search_radius,
+                             options_for_select(["All", "5 miles", "10 miles", "25 miles", "50 miles", "100 miles", "100+ miles"], params[:search_radius]),
+                             class: "miles-range", required: true) %>
             </div>
           </div>
           <div class="group-elem">
-            <div class="input-group">
-              <%= label_tag "Address" %>
-              <%= text_field_tag "zip_code", "Enter Address", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
-            </div>
+            <%= label_tag "location", "Location" %>
+            <%= text_field_tag "location", "Enter location", value: params[:location], id: "autocomplete" %>
+            <%= render partial: "google_maps_script" %>
           </div>
         </div>
 
         <div class="button-container">
-          <button class="submit-button">Search</button>
+          <%= submit_tag "Search", class: "submit-button" %>
         </div>
-      <% end %>
+      </form>
+    </div>
+  </div>
 
-<!--      <form action="/clinic/search" method="post">-->
-        <%#= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-<!--        <p>What service(s) are you seeking?</p>-->
-        <%# ClinicService.all.each do |service| %>
-<!--          <label>-->
-            <%#= check_box_tag "service[]", service.name, params[:service].to_a.include?(service.name) %>
-            <%#= service.name %>
-<!--          </label><br/>-->
-        <%# end %>
-
-<!--        <p>Age Group of Person(s) Seeking Services</p>-->
-        <%# ClinicAgeGroup.all.each do |age_group| %>
-<!--          <label>-->
-            <%#= check_box_tag "age_group[]", age_group.name, params[:age_group].to_a.include?(age_group.name)%>
-            <%#= age_group.name %>
-<!--          </label><br/>-->
-        <%# end %>
-
-<!--        <p>Search Within</p>-->
-        <%#= select_tag(:search_radius, options_for_select(["All", "5 miles", "10 miles", "25 miles", "50 miles", "100 miles", "100+ miles"], params[:search_radius]) ) %>
-
-<!--        <p>Location</p>-->
-<!--        <input name="location" id="autocomplete" value="<%#= params[:location] %>">-->
-        <%#= render partial: "google_maps_script" %>
-<!--        <br>-->
-        <%#= submit_tag "Search" %>
-<!--      </form>-->
+  <div class="clinics-table-wrapper">
+    <div class="clinics-table-outer">
+      <div class="clinics-table-container">
+        <% if @clinics.length == 0 %>
+          <div class="no-message-panel">
+            <div class="px-4 py-5 sm:p-6">
+              <p>No clinics to  show.</p>
+            </div>
+          </div>
+        <% else %>
+          <table>
+            <thead>
+            <tr>
+              <th>Clinic</th>
+              <th>Address</th>
+              <th>Services</th>
+              <th>Age Groups</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @clinics.each do |clinic| %>
+              <tr>
+                <td><%= clinic.name %></td>
+                <td><%= clinic.address %></td>
+                <td><%= clinic.services.collect(&:name).join(", ") %>
+                <td><%= clinic.age_groups.collect(&:name).join(", ") %>
+              </tr>
+            <% end %>
+            <tr>
+              <td>Clinic 1</td>
+              <td>Address 1</td>
+              <td>Vaccinations</td>
+              <td>All Ages</td>
+            </tr>
+            <tr>
+              <td>Clinic 2</td>
+              <td>Address 2</td>
+              <td>Screening</td>
+              <td>Children</td>
+            </tr>
+            </tbody>
+          </table>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
-
-<table>
-  <tr>
-    <th>Clinic</th>
-    <th>Address</th>
-    <th>Services</th>
-    <th>Age Groups</th>
-  </tr>
-  <% @clinics.each do |clinic| %>
-    <tr>
-    <td><%= clinic.name %></td><td><%= clinic.address %></td>
-    <td><%= clinic.services.collect(&:name).join(", ") %>
-    <td><%= clinic.age_groups.collect(&:name).join(", ") %>
-    </tr>
-  <% end %>
-</table>
