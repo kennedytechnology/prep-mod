@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_16_210656) do
+ActiveRecord::Schema.define(version: 2020_04_20_022906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -173,6 +173,7 @@ ActiveRecord::Schema.define(version: 2020_04_16_210656) do
     t.string "relation_to_patient_for_consent"
     t.string "consent_date"
     t.string "school"
+    t.string "access_code"
   end
 
   create_table "users", force: :cascade do |t|

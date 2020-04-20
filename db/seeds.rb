@@ -10,6 +10,7 @@ NAMED_PLACE_COUNT = 15
 VENUE_COUNT = 100
 CLINIC_COUNT = 230
 USER_COUNT = 50
+PATIENT_COUNT = 50
 VENUE_STATES = ["MD", "DC", "VA"]
 
 NAMED_PLACE_COUNT.times.each do |i|
@@ -68,6 +69,10 @@ USER_COUNT.times.each do |i|
     name: Faker::Name.unique.name,
     clinics: Clinic.all.sample(5)
   )
+end
+
+PATIENT_COUNT.times.each do |i|
+
 end
 
 
