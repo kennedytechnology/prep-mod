@@ -24,11 +24,11 @@
       @apply flex flex-wrap;
 
       &:nth-child(3) {
-        @apply border-b-2 border-brand-gray-300 pb-10 mb-10;
+        @apply mb-10;
       }
 
-      .label, label {
-        @apply text-gray-600 font-bold;
+      .form-question {
+        @apply text-sm text-gray-600 font-bold mb-2;
       }
 
       input:not([type='checkbox']), select {
@@ -113,3 +113,16 @@
     width: 178px;
   }
 }
+
+
+.clinic-result{
+  @apply bg-white px-12 py-8 border-brand-gray-300 border;
+  h1 {
+    @apply text-2xl font-bold;
+  }
+
+  h4{
+    @apply text-sm text-gray-600;
+  }
+}
+
