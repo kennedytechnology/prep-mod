@@ -10,7 +10,7 @@ NAMED_PLACE_COUNT = 15
 VENUE_COUNT = 100
 CLINIC_COUNT = 230
 USER_COUNT = 50
-PATIENT_COUNT = 50
+PATIENT_COUNT = 2000
 VENUE_STATES = ["MD", "DC", "VA"]
 
 NAMED_PLACE_COUNT.times.each do |i|
@@ -62,7 +62,7 @@ end
 
 USER_COUNT.times.each do |i|
   User.create!(
-    email: Faker::Internet.unique.email,
+    email: i == 5 ? "sam@test.com" : Faker::Internet.unique.email,
     password: 'password',
     password_confirmation: 'password',
     role: USER_ROLES.sample,
@@ -71,8 +71,29 @@ USER_COUNT.times.each do |i|
   )
 end
 
-PATIENT_COUNT.times.each do |i|
+addresses = JSON.load(Rails.root.join("db/addresses.json"))["addresses"]
+addresses.select!{|a| VENUE_STATES.include?(a["state"])}
 
+PATIENT_COUNT.times.each do |i|
+  address = addresses.sample
+  Patient.create!(
+    clinic: Clinic.all.sample,
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    middle_initial: ("A".."Z").to_a.sample,
+    mothers_maiden_name: Faker::Name.last_name,
+    age: (3..80).to_a.sample,
+    email: Faker::Internet.email,
+    date_of_birth: Faker::Date.birthday,
+    address: address['address1'],
+    city: address['city'],
+    state: address['state'],
+    zip_code: address['postalCode'],
+    county: COUNTIES.sample,
+    access_code: Patient.generate_access_code,
+    sex: %w(M F).sample,
+    phone_number: Faker::PhoneNumber.cell_phone
+  )
 end
 
 

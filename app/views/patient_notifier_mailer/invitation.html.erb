@@ -1,0 +1,22 @@
+<h1>Your COVID-19 Test Registration</h1>
+
+<p>Dear <%= @patient.full_name %>,
+<p>
+Your registration for a COVID-19 test has been processed. To proceed, please
+register and arrange your appointment online at <%= ENV['SITE_NAME'] %> using
+your access code:
+<p>
+<strong><%= @patient.access_code %></strong>
+<p>
+Or just click the link here:
+  <a href="<%= ENV['SITE_URL'] %>/client/registration/<%= @patient.access_code %>">
+    <%= ENV['SITE_URL'] %>/client/registration/<%= @patient.access_code %>
+  </a>
+<p>
+If you have any questions or problems, just email us at 
+<a href="mailto:help@vaccineconsent.com">help@vaccineconsent.com</a>.
+<p>
+Thank you,
+<p>
+Clinic Wizard
+

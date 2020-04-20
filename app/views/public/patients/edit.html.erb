@@ -1,0 +1,19 @@
+<div class="container bg-gray-50 overflow-hidden">
+
+  <%= form_for( @patient , url: "/client/registration" ,remote: false, class: "bg-white p-8 md:-12 lg:p-16 rounded-lg shadow") do |f| %>
+    <h1 class="text-2xl leading-6 font-medium text-blue-600 font-bold mb-2">Register for COVID-19 Testing</h1>
+
+    <% %w(personal_information health_insurance health_questions consent_for_services).each do |step| %>
+      &mdash;
+      <span class="<%= step == @step ? "text-red-700 font-bold" : "text-gray-400" %>">
+      <%= step.humanize.titleize %></span>
+    <% end %> &mdash; <br/><br/>
+
+    <%= render '/public/patients/edit/' + @step, f: f %>
+    <%# <a href="/clear_session">Log Out</a> %>
+    <div class="button-container">
+      <%= submit_tag "Save and Continue →", class: "submit-button mt-10" %>
+    </div>
+  <% end %>
+
+</div>
