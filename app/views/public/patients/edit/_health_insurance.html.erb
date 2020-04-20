@@ -1,0 +1,45 @@
+<div class="flex mb-4">
+  <div class="w-1/2 mr-4">
+    <div class="form-question">Type of Insurance</div>
+    <%= f.select :insurance_type, options_for_select(INSURANCE_TYPES, @patient.insurance_type),{}, class: "w-full form-select block rounded m-1" %>
+  </div>
+  <div class="w-1/2">
+    <div class="form-question">Insurance Company Name</div>
+    <%= f.text_field :insurance_company_name, class: "w-full form-input block rounded m-1" %>
+  </div>
+</div>
+
+<div class="flex mb-4">
+  <div class="w-1/2 mr-4">
+    <div class="form-question">Member ID Number</div>
+    <%= f.text_field :member_id_for_insurance, class: "w-full form-input block rounded m-1" %>
+  </div>
+  <div class="w-1/2">
+    <div class="form-question">Group Number</div>
+    <%= f.text_field :group_number_for_insurance, class: "w-full form-input block rounded m-1" %>
+  </div>
+</div>
+
+<div class="flex mb-4">
+  <div class="w-1/2 mr-4">
+    <div class="form-question">Medical Assistance Number, Recipient Number, or any other number on card</div>
+    <%= f.text_field :card_number_for_insurance, class: "w-full form-input block rounded m-1" %>
+  </div>
+  <div class="w-1/2">
+    <div class="form-question">Insured Adult's Name</div>
+    <%= f.text_field :insured_name, class: "w-full form-input block rounded m-1" %>
+  </div>
+</div>
+
+<div class="flex mb-4">
+  <div class="w-1/2 mr-4">
+    <div class="form-question">Insured Adult's Date Of Birth</div>
+    <%= f.text_field :insured_date_of_birth, class: "w-full form-input block rounded m-1" %>
+  </div>
+  <div class="w-1/2">
+    <div class="form-question">Relationship To Patient</div>
+    <%= f.select :relation_to_patient_for_consent, options_for_select(RELATIONSHIP_TYPES, @patient.relation_to_patient_for_consent),{}, class: "w-full form-select block rounded m-1" %>
+  </div>
+</div>
+
+<%# hidden_field_tag :next_step, "health_questions" %>

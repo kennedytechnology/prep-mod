@@ -126,3 +126,26 @@
   }
 }
 
+.form-question {
+  @apply text-sm text-gray-600 font-bold mb-2;
+}
+
+.button-container {
+  @apply flex items-center justify-center;
+
+  .submit-button {
+    @apply flex justify-center items-center bg-blue-500 text-white rounded-full mb-12;
+    width: 200px;
+    height: 51px;
+  }
+}
+
+.clinic-management-links {
+  @apply flex mt-4 mb-4 justify-center;
+  a {
+    @apply bg-blue-500 text-white font-bold py-2 px-4 mr-2 rounded-full;
+  }
+  a:hover {
+    @apply bg-blue-600;
+  }
+}

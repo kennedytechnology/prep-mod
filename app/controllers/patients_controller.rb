@@ -1,4 +1,7 @@
 class PatientsController < ApplicationController
+  layout "clinic_management"
+  before_action :authenticate_user!
+
   def index
   end
 
@@ -6,25 +9,29 @@ class PatientsController < ApplicationController
   end
 
   def new
-    @patient = Patient.new
+    @patient = Patient.new  
   end
 
   def create
     @patient = Patient.new(patient_params)
+    @patient.access_code = Patient.generate_access_code
     if @patient.save
-      redirect_to root_path, :alert => "Your patient profile is saved."
+      PatientNotifierMailer.invitation(@patient).deliver if @patient.notify_via_email?
+      @patient.sms_invite if @patient.notify_via_sms?
+      redirect_to edit_patient_path(@patient), :alert => "Your patient referral is created."
     else
-      render "new", :alert => "Your request WAS NOT saved!"
+      render "new", :alert => "Your referral was not saved!"
     end
   end
 
   def edit
+    @patient = Patient.find(params[:id])
   end
 
 private
 
 def patient_params
-  params.require(:patient).permit(:state, :county, :city, :school, :email, :phone_number, :first_name, :last_name, :mothers_maiden_name, :date_of_birth,  :password, :password_confirmation, :age, :sex)
+  params.require(:patient).permit(:clinic, :clinic_id, :middle_initial, :address, :zip_code, :state, :county, :city, :school, :email, :phone_number, :first_name, :last_name, :mothers_maiden_name, :date_of_birth,  :password, :password_confirmation, :age, :sex, :notify_via_sms, :notify_via_email)
 end
 
 end

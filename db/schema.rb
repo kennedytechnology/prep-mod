@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_16_210656) do
+ActiveRecord::Schema.define(version: 2020_04_20_095604) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -153,14 +153,12 @@ ActiveRecord::Schema.define(version: 2020_04_16_210656) do
     t.date "date_of_birth"
     t.string "sex"
     t.string "phone_number"
-    t.string "insured_first_name"
-    t.string "insured_last_name"
     t.date "insured_date_of_birth"
     t.string "relation_to_patient_for_insurance"
     t.string "insurance_type"
-    t.integer "member_id_for_insurance"
+    t.string "member_id_for_insurance"
     t.string "card_number_for_insurance"
-    t.text "insurance_company_name"
+    t.string "insurance_company_name"
     t.string "group_number_for_insurance"
     t.boolean "has_fever_over"
     t.boolean "has_caugh"
@@ -173,6 +171,12 @@ ActiveRecord::Schema.define(version: 2020_04_16_210656) do
     t.string "relation_to_patient_for_consent"
     t.string "consent_date"
     t.string "school"
+    t.string "access_code"
+    t.boolean "notify_via_sms"
+    t.boolean "notify_via_email"
+    t.string "middle_initial"
+    t.string "age"
+    t.string "insured_name"
   end
 
   create_table "users", force: :cascade do |t|
