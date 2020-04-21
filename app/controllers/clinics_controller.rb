@@ -9,7 +9,7 @@ class ClinicsController < ApplicationController
   end
 
   def index
-    @clinics = Clinic.all
+    @clinics = Clinic.all.paginate(page: params[:page], per_page: 5)
   end
 
   private

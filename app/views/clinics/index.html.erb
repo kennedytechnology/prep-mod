@@ -1,5 +1,26 @@
-<% @clinics.each do |clinic| %>
-  <pre>
-<%= clinic.inspect %>
-  </pre>
-<% end %>
+<div class="clinics-index-page">
+  <div class="container">
+    <div class="card">
+      <div>
+        <h3 class="text-2xl leading-6 font-medium text-indigo-600 font-bold mb-2">
+          Create a public Clinic
+        </h3>
+      </div>
+      <% @clinics.each do |clinic| %>
+        <div><%= clinic.inspect %></div>
+      <% end %>
+
+      <div class="pagination-section">
+        <div class="pagination-container">
+          <div class="pagination-info">
+            <p><%= page_entries_info @clinics %></p>
+          </div>
+          <div class="pagination-buttons">
+            <span class="lg-buttons"><%= will_paginate @clinics %></span>
+            <span class="sm-buttons"><%= will_paginate @clinics, page_links: false %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

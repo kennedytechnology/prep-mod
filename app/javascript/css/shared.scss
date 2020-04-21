@@ -1,5 +1,5 @@
 .container {
-  @apply max-w-screen-xl mx-auto px-4 py-4 px-6;
+  @apply relative max-w-screen-xl mx-auto px-4 py-4 px-6;
 
   @screen lg {
     @apply pb-4 px-8 py-8;
