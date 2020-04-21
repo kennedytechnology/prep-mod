@@ -12,6 +12,8 @@ class PatientsController < ApplicationController
       @patients = @patients.select{|p| p.search_string.include?(params[:q])}
     end
     @patients = @patients.take(40)
+    @patients.uniq!
+    
   end
 
   def show
@@ -27,9 +29,9 @@ class PatientsController < ApplicationController
     if @patient.save
       PatientNotifierMailer.invitation(@patient).deliver if @patient.notify_via_email?
       @patient.sms_invite if @patient.notify_via_sms?
-      redirect_to edit_patient_path(@patient), :alert => "Your patient referral is created."
+      redirect_to edit_patient_path(@patient), alert: "Your patient referral is created."
     else
-      render "new", :alert => "Your referral was not saved!"
+      render "new", alert: "Your referral was not saved!"
     end
   end
 
