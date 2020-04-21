@@ -11,5 +11,6 @@ class AddRemainingFieldsToClinics < ActiveRecord::Migration[6.0]
     add_column :clinics, :backup_contact_phone_number, :string
     add_column :clinics, :appointment_frequency_minutes, :string
     add_column :clinics, :appointment_slots, :string
+    add_column :clinics, :appointments_available, :string
   end
 end

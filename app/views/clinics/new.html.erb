@@ -52,70 +52,16 @@
                                         </div>
                                         <div class="mt-4 sm:mt-0 sm:col-span-2">
                                             <div class="max-w-xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                                <%= collection_check_boxes(:clinic, :service_ids, ClinicService.all, :id, :name) do |b| %>
                                                 <div class="relative flex items-start">
                                                     <div class="absolute flex items-center h-5">
-                                                        <input id="vaccinations" type="checkbox"
-                                                            class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
+                                                        <%= b.check_box(class: "form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out") %>
                                                     </div>
                                                     <div class="pl-7 text-sm leading-5">
-                                                        <label for="vaccinations" class="font-medium text-gray-700">Vaccinations</label>
+                                                        <%= b.label(class: "font-meidum text-gray-700") %>
                                                     </div>
                                                 </div>
-                                                <div class="">
-                                                    <div class="relative flex items-start">
-                                                        <div class="absolute flex items-center h-5">
-                                                            <input id="screening" type="checkbox"
-                                                                class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                        </div>
-                                                        <div class="pl-7 text-sm leading-5">
-                                                            <label for="screening" class="font-medium text-gray-700">Screening</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="">
-                                                    <div class="relative flex items-start">
-                                                        <div class="absolute flex items-center h-5">
-                                                            <input id="testing" type="checkbox"
-                                                                class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                        </div>
-                                                        <div class="pl-7 text-sm leading-5">
-                                                            <label for="testing" class="font-medium text-gray-700">Testing</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="">
-                                                    <div class="relative flex items-start">
-                                                        <div class="absolute flex items-center h-5">
-                                                            <input id="medication" type="checkbox"
-                                                                class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                        </div>
-                                                        <div class="pl-7 text-sm leading-5">
-                                                            <label for="medication" class="font-medium text-gray-700">Medication</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="">
-                                                    <div class="relative flex items-start">
-                                                        <div class="absolute flex items-center h-5">
-                                                            <input id="kits_distribution" type="checkbox"
-                                                                class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                        </div>
-                                                        <div class="pl-7 text-sm leading-5">
-                                                            <label for="kits_distribution" class="font-medium text-gray-700">Safety Kit Distribution</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="">
-                                                    <div class="relative flex items-start">
-                                                        <div class="absolute flex items-center h-5">
-                                                            <input id="other_services_provided" type="checkbox"
-                                                                class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                        </div>
-                                                        <div class="pl-7 text-sm leading-5">
-                                                            <label for="other_services_provided" class="font-medium text-gray-700">Other</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <% end %>
                                             </div>
                                         </div>
                                     </div>
@@ -133,58 +79,16 @@
                                             </div>
                                             <div class="mt-4 sm:mt-0 sm:col-span-2">
                                                 <div class="max-w-xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                                                    <div class="relative flex items-start">
-                                                        <div class="absolute flex items-center h-5">
-                                                            <input id="all_ages" type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                        </div>
-                                                        <div class="pl-7 text-sm leading-5">
-                                                            <label for="all_ages" class="font-medium text-gray-700">All ages</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="">
+                                                    <%= collection_check_boxes(:clinic, :age_group_ids, ClinicAgeGroup.all, :id, :name) do |b| %>
                                                         <div class="relative flex items-start">
                                                             <div class="absolute flex items-center h-5">
-                                                                <input id="children" type="checkbox"
-                                                                    class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
+                                                                <%= b.check_box(class: "form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out") %>
                                                             </div>
                                                             <div class="pl-7 text-sm leading-5">
-                                                                <label for="children" class="font-medium text-gray-700">Children</label>
+                                                                <%= b.label(class: "font-meidum text-gray-700") %>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="">
-                                                        <div class="relative flex items-start">
-                                                            <div class="absolute flex items-center h-5">
-                                                                <input id="adults" type="checkbox"
-                                                                    class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                            </div>
-                                                            <div class="pl-7 text-sm leading-5">
-                                                                <label for="adults" class="font-medium text-gray-700">Adults</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="">
-                                                        <div class="relative flex items-start">
-                                                            <div class="absolute flex items-center h-5">
-                                                                <input id="seniors" type="checkbox"
-                                                                    class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                            </div>
-                                                            <div class="pl-7 text-sm leading-5">
-                                                                <label for="seniors" class="font-medium text-gray-700">Seniors</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="">
-                                                        <div class="relative flex items-start">
-                                                            <div class="absolute flex items-center h-5">
-                                                                <input id="open_to_other" type="checkbox"
-                                                                    class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                            </div>
-                                                            <div class="pl-7 text-sm leading-5">
-                                                                <label for="open_to_other" class="font-medium text-gray-700">Other</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    <% end %>
                                                 </div>
                                             </div>
                                         </div>
@@ -288,35 +192,22 @@
                                             <div class="mt-4 sm:mt-0 sm:col-span-2">
                                                 <div class="max-w-lg grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                                                     <div class="relative flex items-start">
-                                                        <div class="absolute flex items-center h-5">
-                                                            <input id="yes_required" type="checkbox"
-                                                                class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                        </div>
-                                                        <div class="pl-7 text-sm leading-5">
-                                                            <label for="yes_required" class="font-medium text-gray-700">Yes, required</label>
-                                                        </div>
+                                                        <%= f.radio_button :appointments_available, "Yes, required", id: "yes_required", class: "form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" %>
+                                                        <%= f.label :clinic_status, value: "public", for: "yes_required", class: "ml-3" do %>
+                                                            <span class="block text-sm leading-5 font-medium text-gray-700"> Yes, required </span>
+                                                        <% end %>
                                                     </div>
-                                                    <div class="">
-                                                        <div class="relative flex items-start">
-                                                            <div class="absolute flex items-center h-5">
-                                                                <input id="yes_optional" type="checkbox"
-                                                                    class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                            </div>
-                                                            <div class="pl-7 text-sm leading-5">
-                                                                <label for="yes_optional" class="font-medium text-gray-700">Yes, optional</label>
-                                                            </div>
-                                                        </div>
+                                                    <div class="relative flex items-start">
+                                                        <%= f.radio_button :appointments_available, "Yes, optional", id: "yes_optional", class: "form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" %>
+                                                        <%= f.label :clinic_status, value: "public", for: "yes_optional", class: "ml-3" do %>
+                                                            <span class="block text-sm leading-5 font-medium text-gray-700"> Yes, optional </span>
+                                                        <% end %>
                                                     </div>
-                                                    <div class="">
-                                                        <div class="relative flex items-start">
-                                                            <div class="absolute flex items-center h-5">
-                                                                <input id="no_walk_in" type="checkbox"
-                                                                    class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                            </div>
-                                                            <div class="pl-7 text-sm leading-5">
-                                                                <label for="no_walk_in" class="font-medium text-gray-700">No (Walk-In)</label>
-                                                            </div>
-                                                        </div>
+                                                    <div class="relative flex items-start">
+                                                        <%= f.radio_button :appointments_available, "No (Walk-In)", id: "no_walk_in", class: "form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" %>
+                                                        <%= f.label :clinic_status, value: "public", for: "no_walk_in", class: "ml-3" do %>
+                                                            <span class="block text-sm leading-5 font-medium text-gray-700"> No (Walk-In) </span>
+                                                        <% end %>
                                                     </div>
                                                 </div>
                                             </div>

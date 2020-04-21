@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 2020_04_21_145321) do
     t.string "backup_contact_phone_number"
     t.string "appointment_frequency_minutes"
     t.string "appointment_slots"
+    t.string "appointments_available"
   end
 
   create_table "clinics_users", id: false, force: :cascade do |t|

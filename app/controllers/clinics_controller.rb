@@ -13,6 +13,7 @@ class ClinicsController < ApplicationController
     params[:clinic]["end_time"] = params[:clinic]["end_time"].strftime("%H:%M")
 
     @clinic = Clinic.new(clinic_params)
+    byebug
   end
 
   def index
@@ -30,6 +31,8 @@ class ClinicsController < ApplicationController
       :city, :state, :appointment_frequency_minutes,
       :appointment_slots, :contact_person, :contact_phone_number,
       :backup_contact_person, :backup_contact_phone_number,
+      :appointments_available, :service_ids => [],
+      :age_group_ids => [],
       clinic_personnel_attributes: [:name, :_destroy]
     )
   end
