@@ -2,6 +2,8 @@ class Clinic < ApplicationRecord
   belongs_to :venue
   has_many :clinic_vaccines
   has_many :clinic_personnel, class_name: "ClinicStaff"
+  has_many :clinic_events
+  has_many :patients, through: :clinic_events
   has_and_belongs_to_many :users
 
   delegate :place_name, to: :venue

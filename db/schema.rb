@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_20_165359) do
+ActiveRecord::Schema.define(version: 2020_04_21_090020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,20 @@ ActiveRecord::Schema.define(version: 2020_04_20_165359) do
   create_table "clinic_age_groups_clinics", id: false, force: :cascade do |t|
     t.bigint "clinic_id", null: false
     t.bigint "clinic_age_group_id", null: false
+  end
+
+  create_table "clinic_events", force: :cascade do |t|
+    t.integer "clinic_id"
+    t.integer "patient_id"
+    t.integer "clinic_staff_id"
+    t.string "category"
+    t.string "outcome"
+    t.integer "inventory_item_id"
+    t.string "inventory_item_name"
+    t.text "notes"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
   end
 
   create_table "clinic_services", force: :cascade do |t|

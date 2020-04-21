@@ -1,2 +1,48 @@
-<h1>Patients#index</h1>
-<p>Find me in app/views/patients/index.html.erb</p>
+<div class="flex">
+  <div class="w-9/12">
+    <h1 class="text-2xl font-bold">Patients Listing
+      <% if @clinic %>
+        - <%= @clinic.name %>
+      <% end %>
+      <% if params[:q].present? %>
+        - "<%= params[:q] %>"
+      <% end %>
+    </h1>
+  </div>
+  <div class="w-3/12">
+    <form>
+    <input type="text" name="q" value="<%= params[:q] %>" class="form-input m-4">
+    <input type="submit" value="Search">
+    </form>
+  </div>
+</div>
+
+<% @patients.each do |patient| %>
+  <div class="border p-5 flex">
+    <div class="w-1/2">
+      <h1 class="text-xl"><%= patient.full_name %></h1>
+      <p><strong>Date Of Birth:</strong> <%= patient.date_of_birth.strftime("%m/%d/%y") %></p>
+      <p><strong>Address:</strong> <%= patient.full_address %></p>
+      <br/>
+      <%= link_to "Event Entry", new_clinic_event_path(clinic_id: @clinic, patient_id: patient.id), class: "bg-blue-500 text-white font-bold py-2 px-4 mr-2 mt-4 rounded-full"  %>
+
+
+    </div>
+    <div class="w-1/2">
+      <span class="text-large font-bold">History</span>
+      <table class="w-full">
+        <% patient.clinic_events.sort_by(&:created_at).each do |clinic_event| %>
+          <tr class="border">
+            <td class="border"><%= clinic_event.clinic.name %></td>
+            <td class="border"><%= clinic_event.created_at.strftime("%m/%d/%Y") %></td>
+            <td class="border"><%= clinic_event.category %></td>
+            <td class="border"><%= clinic_event.outcome %></td>
+            <td class="border"><%= clinic_event.notes %></td>
+          </tr>
+        <% end %>
+      </table>
+      
+    </div>
+  </div>
+
+<% end %>

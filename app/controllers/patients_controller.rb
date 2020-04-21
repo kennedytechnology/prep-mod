@@ -3,6 +3,15 @@ class PatientsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @patients = Patient.all
+    if params[:clinic_id]
+      @clinic = Clinic.find(params[:clinic_id])
+      @patients = @clinic.patients
+    end
+    if params[:q].present?
+      @patients = @patients.select{|p| p.search_string.include?(params[:q])}
+    end
+    @patients = @patients.take(40)
   end
 
   def show

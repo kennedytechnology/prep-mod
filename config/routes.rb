@@ -13,7 +13,10 @@ Rails.application.routes.draw do
 
   resources :news_signups
   resources :patients
-  resources :clinics, only: [:index, :new, :create]
+  resources :clinics, only: [:index, :new, :create, :edit] do
+    resources :patients
+  end
+  resources :clinic_events
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

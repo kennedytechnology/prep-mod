@@ -1,0 +1,2 @@
+module ClinicEventsHelper
+end

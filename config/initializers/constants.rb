@@ -6,3 +6,18 @@ US_STATES = [["Alaska", "AK"], ["Alabama", "AL"], ["Arkansas", "AR"], ["American
 US_RACES = ["---", "American Indian or Alaska Native", "Asian", "Black or African-American", "Native Hawaiian and Pacific Islander", "White", "Some Other Race"]
 INSURANCE_TYPES = ["Private Insurance", "Medicaid/Medical Assistance", "No Insurance"]
 RELATIONSHIP_TYPES = ["Self", "Spouse", "Other"]
+
+CLINIC_EVENTS = [
+  { name: "Testing",
+    outcomes: %w(Pending Positive Negative Indeterminate)
+  },
+  { name: "Vaccination",
+    outcomes: %w(Success Reaction Refused Cancelled)
+  },
+  { name: "Safety Kit Pickup",
+    outcomes: %w(Pending Registered PickedUp Cancelled)
+  },
+  { name: "Screening",
+    outcomes: %w(Pending Refused Cancelled Positive Negative Indeterminate)
+  }
+  ]

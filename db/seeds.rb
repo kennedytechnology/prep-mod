@@ -6,12 +6,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-NAMED_PLACE_COUNT = 15
-VENUE_COUNT = 100
-CLINIC_COUNT = 230
+NAMED_PLACE_COUNT = 5
+VENUE_COUNT = 20
+CLINIC_COUNT = 50
 USER_COUNT = 50
-PATIENT_COUNT = 2000
-VENUE_STATES = ["MD", "DC", "VA"]
+PATIENT_COUNT = 200
+CLINIC_EVENTS_PER_PATIENT = 4
+CLINIC_STAFF_PER_CLINIC = 5
+VENUE_STATES = ["MD"]
 
 NAMED_PLACE_COUNT.times.each do |i|
   NamedPlace.create(
@@ -60,13 +62,20 @@ CLINIC_COUNT.times.each do |i|
   )
 end
 
+(CLINIC_COUNT * CLINIC_STAFF_PER_CLINIC).times.each do |i|
+  ClinicStaff.create(
+    name: Faker::Name.unique.name,
+    clinic: Clinic.all.sample
+  )
+end
+
 USER_COUNT.times.each do |i|
   User.create!(
     email: i == 5 ? "sam@test.com" : Faker::Internet.unique.email,
     password: 'password',
     password_confirmation: 'password',
     role: USER_ROLES.sample,
-    name: Faker::Name.unique.name,
+    name: i == 5 ? "Sam Kennedy" : Faker::Name.unique.name,
     clinics: Clinic.all.sample(5)
   )
 end
@@ -77,7 +86,6 @@ addresses.select!{|a| VENUE_STATES.include?(a["state"])}
 PATIENT_COUNT.times.each do |i|
   address = addresses.sample
   Patient.create!(
-    clinic: Clinic.all.sample,
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     middle_initial: ("A".."Z").to_a.sample,
@@ -94,6 +102,22 @@ PATIENT_COUNT.times.each do |i|
     sex: %w(M F).sample,
     phone_number: Faker::PhoneNumber.cell_phone
   )
+end
+
+(PATIENT_COUNT * CLINIC_EVENTS_PER_PATIENT).times.each do |i|
+  clinic = Clinic.all.sample
+  clinic_event = CLINIC_EVENTS.sample
+  ClinicEvent.create(
+    clinic: clinic,
+    patient: Patient.all.sample,
+    category: clinic_event[:name],
+    clinic_staff_id: clinic.clinic_personnel.sample,
+    outcome: clinic_event[:outcomes].sample,
+    created_at: Faker::Date.between(from: 30.days.ago, to:Date.today),
+    user: User.all.sample,
+    notes: Faker::Lorem.paragraph(sentence_count: 0, random_sentences_to_add: 2, supplemental: true)
+  )
+
 end
 
 
