@@ -1,0 +1,29 @@
+.clinics-edit-page {
+  .card-wrapper {
+    .card-content {
+      .form-group {
+        @apply mb-0;
+
+        .staff-input {
+          @apply mb-2;
+        }
+
+        .add-more-staff {
+          @apply text-brand-red text-xs underline;
+        }
+      }
+
+      .submit-buttons {
+        @apply border-t-2 border-brand-gray-300 mt-3 pt-6;
+
+        .submit-button {
+          @apply mr-3;
+
+          &:last-child {
+            @apply mr-0;
+          }
+        }
+      }
+    }
+  }
+}
