@@ -6,6 +6,9 @@ class Clinic < ApplicationRecord
   has_many :patients, through: :clinic_events
   has_and_belongs_to_many :users
 
+  accepts_nested_attributes_for :clinic_personnel, allow_destroy: true, 
+    reject_if: lambda {|attributes| attributes['name'].blank?}
+
   delegate :place_name, to: :venue
 
   geocoded_by :address
