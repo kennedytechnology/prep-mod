@@ -1,13 +1,13 @@
-<div class="border p-5 flex">
-  <div class="w-1/2">
-  <h1 class="text-2xl"><%= clinic.name %></h1>
-  <h2><%= clinic.venue.name %></h2>
-  <h2><%= clinic.address %></h2>
-  <h2><%= clinic.clinic_date.strftime("%A %B %e, %Y") %></h2>
+<div class="clinic-details-wrapper <%= "last-child" if @clinics.last == clinic %>">
+  <div class="clinic-info-wrapper">
+    <h3 class="clinic-name"><%= clinic.name %></h3>
+    <p><%= clinic.venue.name %></p>
+    <p><%= clinic.address %></p>
+    <p><%= clinic.clinic_date.strftime("%A %B %e, %Y") %></p>
   </div>
-  <div class="w-1/2">
-    <%= link_to "Registration List >>", clinic_patients_path(clinic_id: clinic.id), class: "clinic-action" %><br/><br/>
-    <%= link_to "Edit Clinic >>", edit_clinic_path(id: clinic.id), class: "clinic-action" %><br/><br/>
-    <%= link_to "Clinic Activity >>", clinic_events_path(clinic_id: clinic.id), class: "clinic-action" %>
+  <div class="clinic-actions-wrapper">
+    <%= link_to "Registration List", clinic_patients_path(clinic_id: clinic.id), class: "clinic-action" %>
+    <%= link_to "Edit Clinic", edit_clinic_path(id: clinic.id), class: "clinic-action" %>
+    <%= link_to "Clinic Activity", clinic_events_path(clinic_id: clinic.id), class: "clinic-action" %>
   </div>
 </div>
