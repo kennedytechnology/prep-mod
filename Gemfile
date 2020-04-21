@@ -70,3 +70,4 @@ gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'mast
 gem 'geocoder'
 gem "letter_opener", :group => :development
 gem 'twilio-ruby'
+gem "combined_time_select", "~> 2.0.0"
