@@ -9,7 +9,6 @@ class ClinicEventsController < ApplicationController
   def create
     @clinic_event = ClinicEvent.new(clinic_event_params)
     @clinic_event.user = current_user
-    debugger
     if @clinic_event.save
       redirect_to clinic_patients_path(clinic_id: @clinic_event.clinic)
     else
