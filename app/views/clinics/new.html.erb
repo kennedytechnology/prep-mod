@@ -210,12 +210,32 @@
 
                                             <div class="w-full">
                                                 <p class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2"> Start Time </p>
-                                                <%= f.time_select :start_time, {ampm: true}, class: "form-input transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
+                                                <%= f.time_select :start_time,
+                                                    :combined => true,
+                                                    :default => Time.now.change(:hour => 11, :min => 30),
+                                                    :minute_interval => 15,
+                                                    :time_separator => "",
+                                                    :start_hour => 10,
+                                                    :start_minute => 30,
+                                                    :end_hour => 14,
+                                                    :end_minute => 30,
+                                                    :class=> "form-input transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
+                                                %>
                                             </div>
 
                                             <div class="w-full">
                                                 <p class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2"> End Time </p>
-                                                <%= f.time_select :end_time, {ampm: true}, class: "form-input transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
+                                                <%= f.time_select :end_time,
+                                                    :combined => true,
+                                                    :default => Time.now.change(:hour => 11, :min => 30),
+                                                    :minute_interval => 15,
+                                                    :time_separator => "",
+                                                    :start_hour => 10,
+                                                    :start_minute => 30,
+                                                    :end_hour => 14,
+                                                    :end_minute => 30,
+                                                    :class=> "form-input transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
+                                                %>
                                             </div>
                                         </div>
                                     </div>
@@ -241,9 +261,7 @@
                                         </div>
 
                                         <div class="max-w-md rounded-md shadow-sm">
-                                            <input id="last_name"
-                                                class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
-                                                , placeholder="Address" />
+                                            <%= f.text_field :address, class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4", placeholder: "Address" %>
                                         </div>
                                         <div class="max-w-md grid grid-cols-1 md:grid-cols-3 md:gap-4">
                                             <input id="last_name"
@@ -443,9 +461,7 @@
                         </label>
                         <div class="mt-1 sm:mt-0 sm:col-span-2">
                             <div class="max-w-xs rounded-md shadow-sm">
-                                <input id="last_name"
-                                    class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
-                                    , placeholder="Number of Patients Registered" />
+                                <%= f.number_field :students_registered, placeholder: "Number of Patients Registered", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
                             </div>
 
                             <div class="mt-1 sm:mt-0 sm:col-span-2 mb-4">
@@ -458,9 +474,7 @@
                             </div>
 
                             <div class="max-w-xs rounded-md shadow-sm">
-                                <input id="last_name"
-                                    class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
-                                    placeholder="Lead Tester's Name" />
+                                <%= f.text_field :lead_vaccinator_name, placeholder: "Lead Tester's Name", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
                             </div>
 
                             <div class="max-w-xs rounded-md shadow-sm -mb-4">
