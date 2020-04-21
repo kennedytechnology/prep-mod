@@ -13,7 +13,6 @@ class ClinicsController < ApplicationController
     params[:clinic]["end_time"] = params[:clinic]["end_time"].strftime("%H:%M")
 
     @clinic = Clinic.new(clinic_params)
-    byebug
   end
 
   def index
