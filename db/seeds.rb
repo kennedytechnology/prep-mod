@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+puts 'Seeding...'
+
 NAMED_PLACE_COUNT = 5
 VENUE_COUNT = 20
 CLINIC_COUNT = 50
@@ -122,3 +124,5 @@ end
 
 
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+
+puts 'Done.'

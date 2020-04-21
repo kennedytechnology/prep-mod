@@ -42,3 +42,4 @@
     <p> Relationship to Patient<span class="text-red-500">*</span> <%= f.select :relation_to_patient_for_insurance, ["Self","Parent/Guardian","Other"], {}, class: "form-select" %></p>
   </div>
 </div>
+<%= hidden_field_tag :next_step, "end_flag" %>
