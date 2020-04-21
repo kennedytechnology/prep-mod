@@ -3,9 +3,11 @@ class ClinicsController < ApplicationController
   layout "clinic_management"
   def new
     @clinic = Clinic.new
+    @clinic.clinic_personnel.build
   end
 
   def create
+    @clinic = Clinic.new(clinic_params)
   end
 
   def index
@@ -15,6 +17,8 @@ class ClinicsController < ApplicationController
   private
 
   def clinic_params
-    params.require(:clinic).permit()
+    params.require(:clinic).permit(
+      clinic_personnel_attributes: [:name, :_destroy]
+    )
   end
 end
