@@ -10,6 +10,10 @@
   @apply text-brand-red;
 }
 
+.page-header {
+  @apply text-brand-red text-2xl leading-6 font-bold mb-4 pb-3 border-b-2 border-brand-gray-300;
+}
+
 // Form card
 .card-wrapper {
   @apply bg-white shadow rounded;
@@ -150,6 +154,98 @@
   }
 }
 
-.clinic-action{
-  @apply bg-blue-500 text-white rounded-full mb-12 p-2;
+// Pagination
+.pagination-section {
+  @apply px-6 py-3 flex items-center justify-between border-t border-gray-200 mt-4;
+
+  @screen md {
+    @apply px-4;
+  }
+
+  .pagination-container {
+    @apply flex-1 flex items-center justify-between;
+
+    .pagination-info {
+      @apply hidden;
+
+      @screen md {
+        @apply flex;
+      }
+
+      p {
+        @apply text-sm leading-5 text-gray-700;
+      }
+    }
+
+    .pagination-buttons {
+      @apply w-full;
+
+      @screen md {
+        @apply w-auto;
+      }
+
+      .lg-buttons {
+        @apply hidden;
+
+        @screen lg {
+          @apply flex relative z-0 inline-flex shadow-sm;
+        }
+      }
+
+      .sm-buttons {
+        @apply flex relative z-0 inline-flex w-full;
+
+        .pagination {
+          @apply w-full justify-between;
+
+          .previous_page, .next_page {
+            @apply rounded-md;
+          }
+        }
+
+        @screen lg {
+          @apply hidden;
+        }
+      }
+    }
+  }
+
+  .pagination {
+    @apply flex;
+
+    @screen md {
+      @apply flex;
+    }
+
+    .previous_page, .next_page {
+      //@apply p-3 border-gray-300 border rounded mr-2 font-bold;
+      @apply relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 transition ease-in-out duration-150;
+      &:hover{
+        @apply text-gray-400;
+      }
+
+      &:focus {
+        @apply z-10 outline-none border-blue-300 shadow-outline-blue;
+      }
+
+      &:active{
+        @apply bg-gray-100 text-gray-500;
+      }
+    }
+
+    .previous_page { @apply rounded-l-md; }
+    .next_page { @apply rounded-r-md; }
+
+    a, .current, .gap {
+      @apply -ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 transition ease-in-out duration-150;
+
+      &:hover{@apply text-gray-500;}
+      &:focus{@apply z-10 outline-none border-blue-300 shadow-outline-blue;}
+      &:active{@apply bg-gray-100 text-gray-700;}
+    }
+
+    .previous_page.disabled, .next_page.disabled, a.disabled {
+      @apply bg-gray-50;
+    }
+  }
 }
