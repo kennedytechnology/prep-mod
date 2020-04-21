@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_21_090020) do
+ActiveRecord::Schema.define(version: 2020_04_21_145321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,6 +116,17 @@ ActiveRecord::Schema.define(version: 2020_04_21_090020) do
     t.string "address"
     t.float "latitude"
     t.float "longitude"
+    t.string "country"
+    t.string "location"
+    t.string "zip"
+    t.string "city"
+    t.string "state"
+    t.string "contact_person"
+    t.string "contact_phone_number"
+    t.string "backup_contact_person"
+    t.string "backup_contact_phone_number"
+    t.string "appointment_frequency_minutes"
+    t.string "appointment_slots"
   end
 
   create_table "clinics_users", id: false, force: :cascade do |t|

@@ -250,30 +250,20 @@
                                     </label>
                                     <div class="mt-1 sm:mt-0 sm:col-span-2">
                                         <div class="max-w-xs rounded-md shadow-sm">
-                                            <input id="last_name"
-                                                class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
-                                                , placeholder="Country" />
+                                            <%= f.text_field :country, placeholder: "Country", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
                                         </div>
 
                                         <div class="max-w-xs rounded-md shadow-sm">
-                                            <input id="last_name"
-                                                class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
-                                                , placeholder="Location" />
+                                            <%= f.text_field :location, placeholder: "Location", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
                                         </div>
 
                                         <div class="max-w-md rounded-md shadow-sm">
                                             <%= f.text_field :address, class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4", placeholder: "Address" %>
                                         </div>
                                         <div class="max-w-md grid grid-cols-1 md:grid-cols-3 md:gap-4">
-                                            <input id="last_name"
-                                                class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
-                                                , placeholder="Zip" />
-                                            <input id="last_name"
-                                                class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
-                                                , placeholder="City" />
-                                            <input id="last_name"
-                                                class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
-                                                , placeholder="State" />
+                                            <%= f.text_field :zip, placeholder: "Zip", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
+                                            <%= f.text_field :city, placeholder: "City", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
+                                            <%= f.text_field :state, placeholder: "State", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
                                         </div>
                                     </div>
                                 </div>
@@ -350,13 +340,8 @@
                                                             Appointment Frequency: Every (Minutes)
                                                         </label>
                                                         <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                                            <div class="max-w-xs rounded-md shadow-sm">
-                                                                <select id="country"
-                                                                    class="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
-                                                                    <option>10</option>
-                                                                    <option>20</option>
-                                                                    <option>30</option>
-                                                                </select>
+                                                            <div class="max-w-xs rounded-md">
+                                                                <%= f.select :appointment_frequency_minutes, ["10", "20", "30"], class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -382,13 +367,8 @@
                                                             Number of Appointment Slots per Frequency
                                                         </label>
                                                         <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                                            <div class="max-w-xs rounded-md shadow-sm">
-                                                                <select id="country"
-                                                                    class="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
-                                                                    <option>1</option>
-                                                                    <option>2</option>
-                                                                    <option>3</option>
-                                                                </select>
+                                                            <div class="max-w-xs rounded-md">
+                                                                <%= f.select :appointment_slots, ["1", "2", "3"], class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"%>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -415,15 +395,11 @@
                             </label>
                             <div class="mt-1 sm:mt-0 sm:col-span-2">
                                 <div class="max-w-xs rounded-md shadow-sm">
-                                    <input id="last_name"
-                                        class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
-                                        placeholder="Contact Person" />
+                                    <%= f.text_field :contact_person, placeholder: "Contact Person", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
                                 </div>
 
                                 <div class="max-w-xs rounded-md shadow-sm">
-                                    <input id="last_name"
-                                        class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
-                                        placeholder="Contact Number" />
+                                    <%= f.text_field :contact_phone_number, placeholder: "Contact Number", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
                                 </div>
                             </div>
 
@@ -433,15 +409,11 @@
                             </label>
                             <div class="mt-1 sm:mt-0 sm:col-span-2">
                                 <div class="max-w-xs rounded-md shadow-sm">
-                                    <input id="last_name"
-                                        class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
-                                        placeholder="Back-Up Contact Person" />
+                                    <%= f.text_field :backup_contact_person, placeholder: "Back-Up Contact Person", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
                                 </div>
 
                                 <div class="max-w-xs rounded-md shadow-sm">
-                                    <input id="last_name"
-                                        class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
-                                        placeholder="Back-Up Contact Number" />
+                                    <%= f.text_field :backup_contact_phone_number, placeholder: "Back-Up Contact Number", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
                                 </div>
                             </div>
                         </div>
