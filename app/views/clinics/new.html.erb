@@ -204,10 +204,11 @@
                                         Clinic Date and Time
                                     </label>
                                     <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                        <div class="max-w-xs rounded-md shadow-sm">
-                                            <input id="first_name"
-                                                class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4 " placeholder="Clinic Date" />
-
+                                        <div class="max-w-xs rounded-md">
+                                            <div>
+                                                <p class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2"> Clinic Date </p>
+                                                <%= f.date_field :clinic_date, class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4 ", placeholder: "MM/DD/YYYY" %>
+                                            </div>
                                             <div class="w-full">
                                                 <p class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2"> Start Time </p>
                                                 <%= f.time_select :start_time,
@@ -466,9 +467,7 @@
 
                             <div class="mt-1 sm:mt-0 sm:col-span-2 mb-4">
                                 <div class="max-w-xs flex rounded-md shadow-sm">
-                                    <textarea id="about" rows="3"
-                                        class="form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                                        placeholder="Enter Details Here"></textarea>
+                                    <%= f.text_area :incidents_comments, class: "form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5", placeholder: "Enter Details Here" %>
                                 </div>
                                 <p class="mt-2 text-sm text-gray-500">Clinic Details or Special Instructions.</p>
                             </div>

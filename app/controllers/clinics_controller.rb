@@ -13,7 +13,6 @@ class ClinicsController < ApplicationController
     params[:clinic]["end_time"] = params[:clinic]["end_time"].strftime("%H:%M")
 
     @clinic = Clinic.new(clinic_params)
-    # byebug
   end
 
   def index
@@ -26,6 +25,8 @@ class ClinicsController < ApplicationController
     params.require(:clinic).permit(
       :clinic_status, :start_time, :end_time,
       :address, :lead_vaccinator_name,
+      :clinic_date, :students_registered,
+      :incidents_comments,
       clinic_personnel_attributes: [:name, :_destroy]
     )
   end
