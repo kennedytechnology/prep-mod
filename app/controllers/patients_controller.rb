@@ -12,6 +12,8 @@ class PatientsController < ApplicationController
       @patients = @patients.select{|p| p.search_string.include?(params[:q])}
     end
     @patients = @patients.take(40)
+    @patients.uniq!
+    
   end
 
   def show
