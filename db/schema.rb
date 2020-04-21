@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_20_095604) do
+ActiveRecord::Schema.define(version: 2020_04_20_165359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -169,7 +169,6 @@ ActiveRecord::Schema.define(version: 2020_04_20_095604) do
     t.boolean "has_risk_factor"
     t.string "consent_signature"
     t.string "relation_to_patient_for_consent"
-    t.string "consent_date"
     t.string "school"
     t.string "access_code"
     t.boolean "notify_via_sms"
@@ -177,6 +176,9 @@ ActiveRecord::Schema.define(version: 2020_04_20_095604) do
     t.string "middle_initial"
     t.string "age"
     t.string "insured_name"
+    t.boolean "has_other_reason"
+    t.text "other_reason_explanation"
+    t.date "consent_date"
   end
 
   create_table "users", force: :cascade do |t|

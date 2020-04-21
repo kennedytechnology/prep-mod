@@ -1,0 +1,35 @@
+<p class="text-sm font-semibold text-red-500 mb-4"> You must compelete all fields with a star. </p>
+<p class="mb-4 text-red-500"> If you have questions about COVID-19, please contact your doctor, local health department, or go to <%= link_to "www.cdc.gov/coronavirus", "www.cdc.gov/coronavirus", target: "_blank" %> </p>
+
+<p class="pb-3 border-b text-red-500 mb-4"> Consent for COVID-19 Testing - You Must Sign This to be Tested </p>
+<div class="text-gray-500 bg-white p-4 rounded"> 
+    <p> By signing this form, I give permission for a COVID-19 test to be administered and a 
+        record of the test and results be entered into a database for use to monitor control of the disease.
+        Further, I agree that the information above is correct, and:</p>
+    <ol>
+        <li> I have read information about the test or someone has explained it to me; </li>
+        <li> I understand the risks and benefits of being tested and consent to be tested, and </li>
+        <li> Any questions I had about the test have been answered. </li>
+    </ol>
+</div>
+<button class="rounded-full bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 my-6"> CLICK HERE to sign with your finger or mouse </button> <span class="text-red-500">*</span>
+
+<div class="flex mb-4">
+  <div class="w-1/2 mr-4">
+    <input type="text" value="signature" class="w-auto px-4 pb-2 border-b bg-transparent mb-4" />
+    <p class="font-semibold"> Signature </p>
+  </div>
+  <div class="w-1/2">
+    <%= f.date_field :consent_date, as: :date, value: Date.today, class: "px-4 pb-2 border-b bg-transparent mb-4" %>
+    <p class="font-semibold"> Date </p>
+  </div>
+</div>
+
+<div class="flex mb-4">
+  <div class="w-1/2 mr-4">
+    <p> Please type your first and last name <%= f.text_field :first_name, placeholder: "First Name" %>  <%= f.text_field :last_name, placeholder: "Last Name" %> <span class="text-red-500">*</span></p>
+  </div>
+  <div class="w-1/2">
+    <p> Relationship to Patient<span class="text-red-500">*</span> <%= f.select :relation_to_patient_for_insurance, ["Relation1","Relation2","Relation3"] %></p>
+  </div>
+</div>
