@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_21_141140) do
+ActiveRecord::Schema.define(version: 2020_04_21_144322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -175,7 +175,7 @@ ActiveRecord::Schema.define(version: 2020_04_21_141140) do
     t.string "insurance_company_name"
     t.string "group_number_for_insurance"
     t.boolean "has_fever_over"
-    t.boolean "has_caugh"
+    t.boolean "has_cough"
     t.boolean "has_difficult_breathing"
     t.boolean "had_contact_with_confirmed_case"
     t.boolean "is_age_60_or_more"
