@@ -36,7 +36,7 @@
       }
 
       input:not([type='checkbox']), select {
-        @apply form-input block w-full transition duration-150 ease-in-out bg-brand-gray-100 outline-none rounded-none;
+        @apply form-input block w-full transition duration-150 ease-in-out bg-brand-gray-100 outline-none rounded-none text-sm text-gray-600;
         height: 42px;
 
         &:focus {
@@ -93,7 +93,7 @@
       }
     }
 
-    .button-container {
+    .button-container, .submit-buttons {
       @apply flex items-center justify-center;
 
       .submit-button {
@@ -101,6 +101,10 @@
         width: 200px;
         height: 51px;
       }
+    }
+
+    .submit-buttons {
+      @apply ;
     }
   }
 }

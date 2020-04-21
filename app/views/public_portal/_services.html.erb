@@ -13,63 +13,63 @@
 
         <div class="relative lg:grid lg:grid-cols-3 lg:col-gap-8">
             <div class="lg:col-span-1">
-                <h3 class="text-4xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
+                <h3 class="xl:text-4xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
                     Which C-19 service would you like?
                 </h3>
             </div>
             <div class="mt-10 sm:grid sm:grid-cols-2 sm:col-gap-8 sm:row-gap-10 lg:col-span-2 lg:mt-0">
                 <div class="flex flex-col">
                     <div class="mb-5">
-                        <h5 class="text-3xl leading-6 font-bold text-gray-900">News & Notifications</h5>
+                        <h5 class="xl:text-3xl lg:text-xl leading-6 font-bold text-gray-900">News & Notifications</h5>
                         <p class="mt-2 text-xl text-base leading-6 text-gray-500">
                             Sign Up for News and Notifications to get the latest on C-19.
                         </p>
                     </div>
-                    <div class="self-end flex items-center justify-center py-3 px-8 text-3xl rounded-md bg-indigo-600 hover:bg-indigo-500 text-white">
-                        <%= link_to "Subscribe Me", new_news_signup_path %>
+                    <div class="self-end flex items-center justify-center py-3 px-8 xl:text-3xl xl:py-2 lg:text-xl rounded-md bg-indigo-600 hover:bg-indigo-500 text-white">
+                        <%= link_to "Subscribe", new_news_signup_path %>
                     </div>
                 </div>
                 <div class="mt-10 sm:mt-0 flex flex-col">
                     <div class="mb-5">
-                        <h5 class="text-lg leading-6 font-medium text-gray-900">Testing - I have a referral code </h5>
+                        <h5 class="lg:text-3xl lg:text-xl leading-6 font-medium text-gray-900">Testing - I have a referral code </h5>
                         <p class="mt-2 text-base leading-6 text-gray-500">
                             You must have a referral code to schedule a testing appointment.
                         </p>
                     </div>
-                    <div class="self-end flex items-center justify-center py-3 px-8 rounded-md bg-indigo-600 hover:bg-indigo-500 text-white">
+                    <div class="self-end flex items-center justify-center py-3 px-8 xl:text-3xl lg:text-xl rounded-md bg-indigo-600 hover:bg-indigo-500 text-white">
                         <%= link_to "Schedule Testing", "/client/registration" %>
                     </div>
                 </div>
                 <div class="mt-10 sm:mt-0 flex flex-col">
                     <div class="mb-5">
-                        <h5 class="text-lg leading-6 font-medium text-gray-900"> Testing - I DO NOT have a referral code </h5>
+                        <h5 class="xl:text-3xl lg:text-xl leading-6 font-medium text-gray-900"> Testing - I DO NOT have a referral code </h5>
                         <p class="mt-2 text-base leading-6 text-gray-500">
                             At this time, we are not testing the general public.  Fill out this form and we will notify you when testing is available.
                         </p>
                     </div>
-                    <div class="self-end flex items-center justify-center py-3 px-8 rounded-md bg-indigo-600 hover:bg-indigo-500 text-white">
-                        <%= link_to "Schedule Testing", "" %>
+                    <div class="self-end flex items-center justify-center py-3 px-8 xl:text-3xl lg:text-xl rounded-md bg-indigo-600 hover:bg-indigo-500 text-white">
+                        <%= link_to "Schedule Testing", new_news_signup_path %>
                     </div>
                 </div>
                 <div class="mt-10 sm:mt-0 flex flex-col">
                     <div class="mb-5">
-                        <h5 class="text-lg leading-6 font-medium text-gray-900"> COVID-19 Safety Kit </h5>
+                        <h5 class="xl:text-3xl lg:text-xl leading-6 font-medium text-gray-900"> COVID-19 Safety Kit </h5>
                         <p class="mt-2 text-base leading-6 text-gray-500">
                             Find COVID-19 Safety Kit.
                         </p>
                     </div>
-                    <div class="self-end flex items-center justify-center py-3 px-8 rounded-md bg-indigo-600 hover:bg-indigo-500 text-white">
+                    <div class="self-end flex items-center justify-center py-3 px-8 xl:text-3xl lg:text-xl rounded-md bg-indigo-600 hover:bg-indigo-500 text-white">
                         <%= link_to "Find Safety Kit", "" %>
                     </div>
                 </div>
                 <div class="mt-10 sm:mt-0 flex flex-col">
                     <div class="mt-5">
-                        <h5 class="text-lg leading-6 font-medium text-gray-900"> Request Service </h5>
-                        <p class="mt-2 text-base leading-6 text-gray-500">
+                        <h5 class="xl:text-3xl lg:text-lg leading-6 font-medium text-gray-900"> Request Service </h5>
+                        <p class="mt-2 text-base leading-6 text-gray-500 xl:mb-4">
                             For Healthcare Providers.
                         </p>
                     </div>
-                    <div class="self-end flex items-center justify-center py-3 px-8 rounded-md bg-indigo-600 hover:bg-indigo-500 text-white">
+                    <div class="self-end flex items-center justify-center py-3 px-8 xl:text-3xl lg:text-xl rounded-md bg-indigo-600 hover:bg-indigo-500 text-white">
                         <%= link_to "Request Service", "" %>
                     </div>
                 </div>

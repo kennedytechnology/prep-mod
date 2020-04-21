@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   resources :news_signups
   resources :patients
-  resources :clinics, only: [:index, :new, :create, :edit] do
+  resources :clinics, only: [:index, :new, :create, :edit, :update] do
     resources :patients
   end
   resources :clinic_events
