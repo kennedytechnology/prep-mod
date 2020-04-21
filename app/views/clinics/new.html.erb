@@ -23,18 +23,16 @@
                                             <p class="text-sm leading-5 text-gray-500">Is clinic public or private?</p>
                                             <div class="grid grid-cols-2 items-end pt-4">
                                                 <div class="flex items-center">
-                                                    <input id="push_everything" name="form-input push_notifications" type="radio"
-                                                    class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                    <label for="push_everything" class="ml-3">
+                                                    <%= f.radio_button :clinic_status, "public", id: "clinic_status_public", class: "form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" %>
+                                                    <%= f.label :clinic_status, value: "public", for: "clinic_status_public", class: "ml-3" do %>
                                                         <span class="block text-sm leading-5 font-medium text-gray-700"> Public </span>
-                                                    </label>
+                                                    <% end %>
                                                 </div>
                                                 <div class="flex items-center">
-                                                    <input id="push_email" name="form-input push_notifications" type="radio"
-                                                        class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                    <label for="push_email" class="ml-3">
-                                                        <span class="block text-sm leading-5 font-medium text-gray-700">Private</span>
-                                                    </label>
+                                                    <%= f.radio_button :clinic_status, "private", id: "clinic_status_private", class: "form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" %>
+                                                    <%= f.label :clinic_status, value: "private", for: "clinic_status_private", class: "ml-3" do %>
+                                                        <span class="block text-sm leading-5 font-medium text-gray-700"> Private </span>
+                                                    <% end %>
                                                 </div>
                                             </div>
                                         </div>
@@ -210,11 +208,15 @@
                                             <input id="first_name"
                                                 class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4 " placeholder="Clinic Date" />
 
-                                            <input id="first_name"
-                                                class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" placeholder="Clinic Start Time" />
+                                            <div class="w-full">
+                                                <p class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2"> Start Time </p>
+                                                <%= f.time_select :start_time, {ampm: true}, class: "form-input transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
+                                            </div>
 
-                                            <input id="first_name"
-                                                class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" placeholder="Clinic End Time" />
+                                            <div class="w-full">
+                                                <p class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2"> End Time </p>
+                                                <%= f.time_select :end_time, {ampm: true}, class: "form-input transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

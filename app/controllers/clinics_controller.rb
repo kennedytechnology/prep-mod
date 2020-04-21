@@ -18,6 +18,7 @@ class ClinicsController < ApplicationController
 
   def clinic_params
     params.require(:clinic).permit(
+      :clinic_status, :start_time, :end_time,
       clinic_personnel_attributes: [:name, :_destroy]
     )
   end
