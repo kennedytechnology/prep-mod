@@ -5,8 +5,6 @@
 
     <div class="flex mb-4">
       <div class="w-1/2 mr-4">
-        <div class="form-question">Clinic</div>
-        <%= f.select :clinic_id, options_for_select(Clinic.all.collect{|c| [c.name, c.id]}, @patient.clinic),{}, class: "w-11/12 form-select block rounded m-1" %>
       </div>
       <div class="w-1/2">
         <div class="form-question">County</div>
