@@ -85,6 +85,22 @@
 <div class="flex mb-4">
   <div class="w-1/2 mr-4">
     <label>
+      <div class="form-question">Number of Adults in Your Household</div>
+      <%= select_tag :number_of_adults, options_for_select((1..10).to_a), class: "w-full form-select block rounded" %>
+    </label>
+  </div>
+  <div class="w-1/2">
+    <label>
+      <div class="form-question">Number of Children in Your Household</div>
+      <%= select_tag :number_of_children, options_for_select((1..10).to_a), class: "w-full form-select block rounded" %>
+    </label>
+  </div>
+</div>
+
+
+<div class="flex mb-4">
+  <div class="w-1/2 mr-4">
+    <label>
       <div class="form-question">Email Address</div>
       <%= f.text_field :email, disabled: true, class: "w-full form-input block rounded" %>
     </label>
@@ -97,7 +113,9 @@
   </div>
 </div>
 
+<div class="form-question">Your Signature: I certify the information I have provided is correct.</form>
 <div style="border: solid black 1px; height: 150px; width: 300px;">
+  
  <canvas></canvas>
 </div>
 <%# TODO: Move this into the proper place. %>
