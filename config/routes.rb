@@ -2,7 +2,10 @@ Rails.application.routes.draw do
 
   get 'kit/new'
   post 'kit/thanks'
-  devise_for :users 
+  devise_for :users,
+    controllers: {
+      registrations: 'users/registrations'
+    }
 
   get 'public_portal/index'
   get '/clinic/search', to: 'public/clinics#index'
