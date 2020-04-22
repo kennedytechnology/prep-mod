@@ -21,7 +21,7 @@ class ClinicsController < ApplicationController
 
   def update
     if @clinic.update(order_update_params)
-      flash[:notice] = "Success. Your order was updated successfully!"
+      flash[:notice] = "Success. Clinic was updated successfully!"
     else
       flash[:error] = "Oops something went wrong. Please, try again!"
     end
