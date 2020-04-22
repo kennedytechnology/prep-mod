@@ -1,48 +1,64 @@
-<div class="flex">
-  <div class="w-9/12">
-    <h1 class="text-2xl font-bold">Patients Listing
-      <% if @clinic %>
-        - <%= @clinic.name %>
-      <% end %>
-      <% if params[:q].present? %>
-        - "<%= params[:q] %>"
-      <% end %>
-    </h1>
+<div class="clinic-patients-index-page">
+  <div class="header-section">
+    <div class="header">
+      <h1>Patients Listing
+        <% if @clinic %>
+          - <%= @clinic.name %>
+        <% end %>
+        <% if params[:q].present? %>
+          - "<%= params[:q] %>"
+        <% end %>
+      </h1>
+    </div>
+    <div class="search-form">
+      <form>
+        <input type="text" name="q" value="<%= params[:q] %>" class="search-input">
+        <input type="submit" value="Search">
+      </form>
+    </div>
   </div>
-  <div class="w-3/12">
-    <form>
-    <input type="text" name="q" value="<%= params[:q] %>" class="form-input m-4">
-    <input type="submit" value="Search">
-    </form>
+
+  <div class="flex flex-col">
+    <div class="sorting-table-wrapper">
+      <div class="sorting-table-container">
+        <table class="sorting-table">
+          <thead>
+          <tr>
+            <th><%= link_to "Name", sort: 'last_name' %></th>
+            <th><%= link_to "Date of Birth", sort: 'date_of_birth' %></th>
+            <th><%= link_to "Gender", sort: 'sex' %></th>
+            <th><%= link_to "Address", sort: 'state' %></th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @patients.each do |patient| %>
+            <tr class="<%= "border-none" if patient == @patients.last %>">
+              <td class="underline"><%= link_to patient.full_name, clinic_patient_path(id: patient.id) %></td>
+              <td><%= patient.date_of_birth.strftime("%m/%d/%y") %></td>
+              <td><%= patient.sex == "F" ? "Female" : "Male" %></td>
+              <td><%= patient.full_address %></td>
+              <td>
+                <%= link_to "Event Entry", new_clinic_event_path(clinic_id: @clinic, patient_id: patient.id),
+                            class: "bg-gray-500 text-xs text-white py-1 px-4 mr-2 mt-4 rounded-full" %>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="pagination-section">
+    <div class="pagination-container">
+      <div class="pagination-info">
+        <p><%= page_entries_info @patients %></p>
+      </div>
+      <div class="pagination-buttons">
+        <span class="lg-buttons"><%= will_paginate @patients %></span>
+        <span class="sm-buttons"><%= will_paginate @patients, page_links: false %></span>
+      </div>
+    </div>
   </div>
 </div>
-
-<% @patients.each do |patient| %>
-  <div class="border p-5 flex">
-    <div class="w-1/2">
-      <h1 class="text-xl"><%= patient.full_name %></h1>
-      <p><strong>Date Of Birth:</strong> <%= patient.date_of_birth.strftime("%m/%d/%y") %></p>
-      <p><strong>Address:</strong> <%= patient.full_address %></p>
-      <br/>
-      <%= link_to "Event Entry", new_clinic_event_path(clinic_id: @clinic, patient_id: patient.id), class: "bg-blue-500 text-white font-bold py-2 px-4 mr-2 mt-4 rounded-full"  %>
-
-
-    </div>
-    <div class="w-1/2">
-      <span class="text-large font-bold">History</span>
-      <table class="w-full">
-        <% patient.clinic_events.sort_by(&:created_at).each do |clinic_event| %>
-          <tr class="border">
-            <td class="border"><%= clinic_event.clinic.name %></td>
-            <td class="border"><%= clinic_event.created_at.strftime("%m/%d/%Y") %></td>
-            <td class="border"><%= clinic_event.category %></td>
-            <td class="border"><%= clinic_event.outcome %></td>
-            <td class="border"><%= clinic_event.notes %></td>
-          </tr>
-        <% end %>
-      </table>
-      
-    </div>
-  </div>
-
-<% end %>

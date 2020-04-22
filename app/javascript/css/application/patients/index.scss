@@ -1,0 +1,64 @@
+.clinic-patients-index-page {
+  @apply px-4;
+
+  @screen lg {
+    @apply px-12;
+  }
+
+  .header-section {
+    @apply flex items-center justify-between mb-4;
+
+    .header {
+      h1 {
+        @apply text-2xl font-bold;
+      }
+    }
+
+    .search-form {
+      form {
+        @apply flex;
+
+        .search-input {
+          @apply form-input mr-4 outline-none;
+
+          &:focus {
+            @apply border-brand-red;
+          }
+        }
+
+        input[type='submit'] {
+          @apply flex items-center justify-center rounded-full bg-brand-red text-white px-4 py-1;
+        }
+      }
+    }
+  }
+}
+
+
+.sorting-table-wrapper {
+  @apply -my-2 py-2 overflow-x-auto -mx-6 px-6;
+
+  @screen lg {
+    @apply -mx-8 px-8;
+  }
+
+  .sorting-table-container {
+    @apply align-middle inline-block min-w-full shadow overflow-hidden rounded-lg border-b border-gray-200;
+
+    .sorting-table {
+      @apply table-auto w-full;
+
+      thead tr {
+        th {
+          @apply px-4 py-3 text-white text-left bg-red-700;
+        }
+      }
+
+      tbody tr {
+        td {
+          @apply px-4 py-3 text-gray-600 border-b border-brand-gray-300;
+        }
+      }
+    }
+  }
+}
