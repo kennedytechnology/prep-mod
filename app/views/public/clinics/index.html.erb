@@ -47,7 +47,7 @@
           </div>
           <div class="group-elem">
             <div class="form-question">Address</div>
-            <%= text_field_tag "location", "Enter location", value: params[:location], id: "autocomplete" %>
+            <%= text_field_tag "location", "Enter address", value: params[:location], id: "autocomplete", placeholder: "Enter address" %>
             <%= render partial: "google_maps_script" %>
           </div>
         </div>
