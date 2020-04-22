@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'kit/new'
+  post 'kit/thanks'
   devise_for :users 
 
   get 'public_portal/index'
@@ -13,8 +15,8 @@ Rails.application.routes.draw do
 
   resources :news_signups
   resources :patients
-  resources :clinics, only: [:index, :new, :create, :edit] do
-    resources :patients
+  resources :clinics, only: [:index, :new, :create, :edit, :update] do
+  resources :patients
   end
   resources :clinic_events
   devise_for :admin_users, ActiveAdmin::Devise.config

@@ -3,7 +3,7 @@
   <%= form_for( @patient , url: "/client/registration" ,remote: false, class: "bg-white p-8 md:-12 lg:p-16 rounded-lg shadow") do |f| %>
     <h1 class="text-2xl leading-6 font-medium text-blue-600 font-bold mb-2">Register for COVID-19 Testing</h1>
 
-    <% %w(personal_information health_insurance health_questions consent_for_services).each do |step| %>
+    <% %w(personal_information health_insurance health_questions consent_for_services appointment).each do |step| %>
       &mdash;
       <span class="<%= step == @step ? "text-red-700 font-bold" : "text-gray-400" %>">
       <%= step.humanize.titleize %></span>
@@ -13,6 +13,9 @@
     <%# <a href="/clear_session">Log Out</a> %>
     <div class="button-container">
       <%= submit_tag "Save and Continue →", class: "submit-button mt-10" %>
+      <% if @step == "consent_for_services" %>
+          <%= submit_tag "Save and Add Family Member →", class: "submit-button flex justify-center items-center bg-blue-500 text-white rounded-full mb-12 mt-10 ml-2 pl-6 pr-6", style: "width: auto;" %>
+      <% end %>
     </div>
   <% end %>
 

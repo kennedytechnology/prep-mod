@@ -6,7 +6,7 @@ class Public::PatientsController < ApplicationController
   end
   
   def edit
-    @patient = Patient.find(session[:patient_id]) if session[:patient_id]
+    @patient = Patient.find(session[:patient_id]) if session[:patient_id] && Patient.exists?(session[:patient_id])
     @patient = Patient.find_by_access_code(params[:access_code]) if params[:access_code]
     
     if @patient

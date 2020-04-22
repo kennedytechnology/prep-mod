@@ -8,79 +8,40 @@
       @apply p-16;
     }
   }
-}
 
-.pagination-section {
-  @apply px-6 py-3 flex items-center justify-between border-t border-gray-200;
+  .clinic-details-wrapper {
+    @apply flex border-b border-brand-gray-300 mb-4 pb-3;
 
-  @screen md {
-    @apply px-4;
-  }
-
-  .pagination-container {
-    @apply hidden;
-
-    @screen lg {
-      @apply flex-1 flex items-center justify-between;
+    &.last-child {
+      @apply border-none mb-0 pb-0 ;
     }
 
-    .pagination-info {
+    .clinic-info-wrapper, .clinic-actions-wrapper {
+      @screen lg {
+        @apply w-1/2;
+      }
+    }
+
+    .clinic-info-wrapper {
+      .clinic-name {
+        @apply text-lg font-medium;
+      }
+
       p {
-        @apply text-sm leading-5 text-gray-700;
+        @apply text-gray-500 text-sm;
       }
     }
 
-    .pagination-buttons {
-      .lg-buttons {
-        @apply hidden;
+    .clinic-actions-wrapper {
+      @apply flex justify-end;
 
-        @screen lg {
-          @apply flex relative z-0 inline-flex shadow-sm;
+      .clinic-action {
+        @apply bg-red-600 text-white text-xs rounded-full flex justify-center items-center h-8 px-4 mr-4;
+
+        &:last-child {
+          @apply mr-0;
         }
       }
-
-      .sm-buttons {
-        @apply flex relative z-0 inline-flex shadow-sm;
-
-        @screen lg {
-          @apply hidden;
-        }
-      }
-    }
-  }
-
-  .pagination {
-    @apply flex;
-
-    .previous_page, .next_page {
-      //@apply p-3 border-gray-300 border rounded mr-2 font-bold;
-      @apply relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 transition ease-in-out duration-150;
-      &:hover{
-        @apply text-gray-400;
-      }
-
-      &:focus {
-        @apply z-10 outline-none border-blue-300 shadow-outline-blue;
-      }
-
-      &:active{
-        @apply bg-gray-100 text-gray-500;
-      }
-    }
-
-    .previous_page { @apply rounded-l-md; }
-    .next_page { @apply rounded-r-md; }
-
-    a, .current, .gap {
-      @apply -ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 transition ease-in-out duration-150;
-
-      &:hover{@apply text-gray-500;}
-      &:focus{@apply z-10 outline-none border-blue-300 shadow-outline-blue;}
-      &:active{@apply bg-gray-100 text-gray-700;}
-    }
-
-    .previous_page.disabled, .next_page.disabled, a.disabled {
-      @apply bg-gray-50;
     }
   }
 }
