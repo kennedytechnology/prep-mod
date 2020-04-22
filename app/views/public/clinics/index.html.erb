@@ -1,7 +1,7 @@
 <div class="container public-clinics-page">
   <div class="card-wrapper">
     <div class="card-header">
-      <h2>Find a Covid-19 Service</h2>
+      <h2 class="font-bold">Find a Covid-19 Service</h2>
     </div>
     <div class="card-content">
       <form action="/clinic/search" method="post">
@@ -41,13 +41,13 @@
                 Search Within <span class="required-field">*</span>
               </div>
               <%= select_tag(:search_radius,
-                             options_for_select(["All", "5 miles", "10 miles", "25 miles", "50 miles", "100 miles", "100+ miles"], params[:search_radius]),
+                             options_for_select(["All", "1 mile", "5 miles", "10 miles", "25 miles", "50 miles", "100 miles", "100+ miles"], params[:search_radius]),
                              class: "miles-range", required: true) %>
             </div>
           </div>
           <div class="group-elem">
-            <div class="form-question">Location</div>
-            <%= text_field_tag "location", "Enter location", value: params[:location], id: "autocomplete" %>
+            <div class="form-question">Address</div>
+            <%= text_field_tag "location", "Enter address", value: params[:location], id: "autocomplete", placeholder: "Enter address" %>
             <%= render partial: "google_maps_script" %>
           </div>
         </div>
