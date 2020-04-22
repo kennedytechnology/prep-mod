@@ -43,7 +43,8 @@ step 1 %>
   <div class="w-1/2">
     <label>
       <div class="form-question">Address</div>
-      <%= f.text_field :address, class: "w-full form-input block rounded" %>
+      <%= f.text_field :address, id: "autocomplete", class: "w-full form-input block rounded" %>
+      <%= render partial: "public/clinics/google_maps_script" %>
     </label>
   </div>
 </div>
