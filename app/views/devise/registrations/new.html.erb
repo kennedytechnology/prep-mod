@@ -10,7 +10,7 @@
     <div class="login-inner-container">
       <div class="wizard-logo"><%= image_tag 'clinicwizard_white_bg.png' %></div>
       <div class="form-container">
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "login-form"}) do |f| %>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "login-form"}) do |f| %>
           <div class="field">
            <span><%= image_tag 'mail.png' %></span> <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email Address" %>
           </div>
