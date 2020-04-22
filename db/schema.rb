@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(version: 2020_04_21_145321) do
     t.string "address"
     t.float "latitude"
     t.float "longitude"
-    t.string "country"
+    t.string "county"
     t.string "location"
     t.string "zip"
     t.string "city"

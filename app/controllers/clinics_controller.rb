@@ -45,7 +45,7 @@ class ClinicsController < ApplicationController
       :clinic_status, :start_time, :end_time,
       :address, :lead_vaccinator_name,
       :clinic_date, :students_registered,
-      :incidents_comments, :country, :location, :zip, 
+      :incidents_comments, :county, :location, :zip, 
       :city, :state, :appointment_frequency_minutes,
       :appointment_slots, :contact_person, :contact_phone_number,
       :backup_contact_person, :backup_contact_phone_number,

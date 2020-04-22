@@ -1,6 +1,6 @@
 class AddRemainingFieldsToClinics < ActiveRecord::Migration[6.0]
   def change
-    add_column :clinics, :country, :string
+    add_column :clinics, :county, :string
     add_column :clinics, :location, :string
     add_column :clinics, :zip, :string
     add_column :clinics, :city, :string

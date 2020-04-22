@@ -5,7 +5,7 @@
                 <div>
                     <div>
                         <h3 class="text-2xl leading-6 font-medium text-indigo-600 font-bold mb-2">
-                            Create a public Clinic
+                            Create a Public Clinic
                         </h3>
 
                     </div>
@@ -154,7 +154,7 @@
                                     </label>
                                     <div class="mt-1 sm:mt-0 sm:col-span-2">
                                         <div class="max-w-xs rounded-md shadow-sm">
-                                            <%= f.text_field :country, placeholder: "Country", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
+                                            <%= f.select :county, ["Allegany", "Baltimore", "Caroline"], {prompt: "Select County"}, {class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"} %>
                                         </div>
 
                                         <div class="max-w-xs rounded-md shadow-sm">
@@ -227,12 +227,12 @@
                                                 <div class="max-w-lg">
                                                     <div class="mt-4">
                                                         <label for="country"
-                                                            class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
-                                                            Appointment Frequency: Every (Minutes)
+                                                            class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2 mb-1">
+                                                            Appointment Frequency: Every
                                                         </label>
                                                         <div class="mt-1 sm:mt-0 sm:col-span-2">
                                                             <div class="max-w-xs rounded-md">
-                                                                <%= f.select :appointment_frequency_minutes, ["10", "20", "30"], class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+                                                                <%= f.select :appointment_frequency_minutes, [5, 15], {prompt: "Minutes"}, {class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"} %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -254,12 +254,12 @@
                                                 <div class="max-w-lg">
                                                     <div class="mt-4">
                                                         <label for="country"
-                                                            class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
+                                                            class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2 mb-1">
                                                             Number of Appointment Slots per Frequency
                                                         </label>
                                                         <div class="mt-1 sm:mt-0 sm:col-span-2">
                                                             <div class="max-w-xs rounded-md">
-                                                                <%= f.select :appointment_slots, ["1", "2", "3"], class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"%>
+                                                                <%= f.select :appointment_slots, (1..50), {prompt: "Select"}, {class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"} %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -321,7 +321,7 @@
                         class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                         <label for="last_name"
                             class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
-                            Clinic Remaining Information
+                            Additional Clinic Details
                         </label>
                         <div class="mt-1 sm:mt-0 sm:col-span-2">
                             <div class="max-w-xs rounded-md shadow-sm">
@@ -354,14 +354,14 @@
 
             <div class="mt-8 border-t border-gray-200 pt-5">
                 <div class="flex justify-end">
+                    <span class="mr-3 inline-flex rounded-md shadow-sm">
+                        <%= f.submit "Submit", class: "inline-flex cursor-pointer justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out" %>
+                    </span>
                     <span class="inline-flex rounded-md shadow-sm">
                         <button type="button"
                             class="py-2 px-4 border border-gray-300 rounded-md text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out">
                             Cancel
                         </button>
-                    </span>
-                    <span class="ml-3 inline-flex rounded-md shadow-sm">
-                        <%= f.submit "Save", class: "inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out" %>
                     </span>
                 </div>
             </div>
