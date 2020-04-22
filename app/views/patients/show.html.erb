@@ -1,2 +1,24 @@
-<h1>Patients#show</h1>
-<p>Find me in app/views/patients/show.html.erb</p>
+<table class="table-auto w-full">
+  <thead>
+  <tr class="text-left">
+    <th class="px-4 py-2"><%= link_to "Clinic Name", sort: 'clinic.name' %></th>
+    <th class="px-4 py-2"><%= link_to "Created at", sort: 'created_at' %></th>
+    <th class="px-4 py-2"><%= link_to "Service", sort: 'category' %></th>
+    <th class="px-4 py-2"><%= link_to "Status", sort: 'outcome' %></th>
+    <th class="px-4 py-2"><%= link_to "notes", sort: 'notes' %></th>
+    <th class="px-4 py-2">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @patient.clinic_events.sort_by(&:created_at).each do |clinic_event| %>
+    <tr class="border-b border-brand-gray-300 <%= "border-none" if clinic_event == @patient.clinic_events.sort_by(&:created_at).last %>">
+      <td class="px-4 py-2"><%= clinic_event.clinic.name %></td>
+      <td class="px-4 py-2"><%= clinic_event.created_at.strftime("%m/%d/%Y") %></td>
+      <td class="px-4 py-2"><%= clinic_event.category %></td>
+      <td class="px-4 py-2"><%= clinic_event.outcome %></td>
+      <td class="px-4 py-2"><%= clinic_event.notes %></td>
+      <td class="px-4 py-2">Delete</td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
