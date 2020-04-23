@@ -43,7 +43,8 @@ step 1 %>
   <div class="w-1/2">
     <label>
       <div class="form-question">Address</div>
-      <%= f.text_field :address, class: "w-full form-input block rounded" %>
+      <%= f.text_field :address, id: "autocomplete", class: "w-full form-input block rounded" %>
+      <%= render partial: "public/clinics/google_maps_script" %>
     </label>
   </div>
 </div>
@@ -71,7 +72,7 @@ step 1 %>
   <div class="w-1/2 flex">
     <label class="w-5/12 mr-1">
       <div class="form-question">Date Of Birth</div>
-      <%= f.text_field :date_of_birth, class: "w-12/12 form-input block rounded" %>
+      <%= f.date_field :date_of_birth, placeholder: "MM/DD/YYYY", onChange:"calculateAge();", class: "w-12/12 form-input block rounded" %>
     </label>
     <label class="w-4/12 mr-1">
       <div class="form-question">Age</div>
@@ -104,4 +105,17 @@ step 1 %>
     </label>
   </div>
 </div>
+
+<script>
+    function calculateAge() {
+        var patientAge = document.getElementById("patient_age");
+        var patientDOB = document.getElementById("patient_date_of_birth");
+
+        dob = new Date(patientDOB.value);
+        var today = new Date();
+        var age = Math.floor((today-dob) / (365.25 * 24 * 60 * 60 * 1000));
+
+        patientAge.value = age.toString();
+    }
+</script>
 <%= hidden_field_tag :next_step, "health_insurance" %>
