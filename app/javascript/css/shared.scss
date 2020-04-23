@@ -110,6 +110,22 @@
 }
 
 // Shared Navbar
+.logo {
+  @apply bg-white flex justify-start;
+
+  .mod-logo {
+    width: 120px;
+
+    @screen md {
+      width: 158px;
+    }
+
+    @screen lg {
+      width: 220px;
+    }
+  }
+}
+
 .header-logos {
   @apply flex justify-between;
 
