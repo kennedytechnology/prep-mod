@@ -3,7 +3,7 @@ class PatientsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @patients = Patient.all
+    @patients = Patient.all.paginate(page: params[:page], per_page: 50)
     if params[:clinic_id]
       @clinic = Clinic.find(params[:clinic_id])
       # @patients = @clinic.patients
@@ -14,7 +14,6 @@ class PatientsController < ApplicationController
     end
     @patients = @patients.take(40)
     @patients.uniq!
-    
   end
 
   def show
