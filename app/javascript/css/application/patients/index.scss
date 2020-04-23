@@ -1,4 +1,5 @@
-.clinic-patients-index-page {
+.clinic-patients-index-page,
+.clinic-patients-show-page {
   @apply px-4;
 
   @screen lg {
@@ -43,20 +44,54 @@
   }
 
   .sorting-table-container {
-    @apply align-middle inline-block min-w-full shadow overflow-hidden rounded-lg border-b border-gray-200;
+    @apply align-middle inline-block min-w-full shadow overflow-hidden rounded border-b border-gray-200;
 
     .sorting-table {
       @apply table-auto w-full;
 
       thead tr {
         th {
-          @apply px-4 py-3 text-white text-left bg-red-700;
+          @apply px-4 py-3 text-white text-left text-sm bg-red-700;
+
+          a {
+            @apply relative;
+
+            &:before,
+            &:after {
+              border: 4px solid transparent;
+              content: "";
+              display: block;
+              height: 0;
+              right: -15px;
+              top: 60%;
+              position: absolute;
+              width: 0;
+            }
+
+            &:before {
+              border-bottom-color: #fff;
+              margin-top: -10px;
+            }
+
+            &:after {
+              border-top-color: #fff;
+              margin-top: 1px;
+            }
+          }
         }
       }
 
       tbody tr {
         td {
-          @apply px-4 py-3 text-gray-600 border-b border-brand-gray-300;
+          @apply px-4 py-3 text-gray-600 text-sm border-b border-brand-gray-300;
+        }
+      }
+
+      .action-button {
+        @apply bg-gray-500 text-xs text-white py-1 px-4 mr-2 mt-4 rounded-full;
+
+        &:last-child {
+          @apply ;
         }
       }
     }

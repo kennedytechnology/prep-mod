@@ -28,6 +28,7 @@
             <th><%= link_to "Date of Birth", sort: 'date_of_birth' %></th>
             <th><%= link_to "Gender", sort: 'sex' %></th>
             <th><%= link_to "Address", sort: 'state' %></th>
+            <th><%= link_to "Created at", sort: 'created_at' %></th>
             <th>Actions</th>
           </tr>
           </thead>
@@ -38,9 +39,10 @@
               <td><%= patient.date_of_birth.strftime("%m/%d/%y") %></td>
               <td><%= patient.sex == "F" ? "Female" : "Male" %></td>
               <td><%= patient.full_address %></td>
+              <td><%= patient.created_at.strftime("%m/%d/%y") %></td>
               <td>
                 <%= link_to "Event Entry", new_clinic_event_path(clinic_id: @clinic, patient_id: patient.id),
-                            class: "bg-gray-500 text-xs text-white py-1 px-4 mr-2 mt-4 rounded-full" %>
+                            class: "action-button" %>
               </td>
             </tr>
           <% end %>
