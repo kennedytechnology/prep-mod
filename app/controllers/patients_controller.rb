@@ -19,7 +19,6 @@ class PatientsController < ApplicationController
   def show
     @patient = Patient.find(params[:id])
     @patient_clinic_events = @patient.clinic_events.order(params[:sort]).paginate(page: params[:page], per_page: 50)
-    @clinic = Clinic.find(params[:clinic_id])
   end
 
   def new

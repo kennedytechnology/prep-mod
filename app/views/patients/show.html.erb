@@ -1,18 +1,8 @@
 <div class="clinic-patients-show-page">
   <div class="page-header">
-    <h1>Clinic Registration</h1>
-  </div>
-  <div class="show-page-header">
-    <h3>Clinic Date: <%= @clinic.clinic_date.strftime("%m-%d-%y") %></h3>
-    <h3>County: <%= @clinic.address.split(',')[1] %></h3>
-    <h3>Location: <%=  %></h3>
-    <h3>Total Registered: <%= @patient_clinic_events.length %></h3>
+    <h1>Patient History</h1>
   </div>
 
-  <div class="action-all-buttons-container">
-    <%= link_to "Download Selected Students", "#" %>
-    <%= link_to "Print", "#" %>
-  </div>
 
   <div class="flex flex-col">
     <div class="sorting-table-wrapper">
