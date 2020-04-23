@@ -1,11 +1,12 @@
 ActiveAdmin.register Patient do
 
-  permit_params :clinic_id, :student_id, :vaccination_status, :clinic_vaccine_id, :user_id, :clinic_staff_id, :reaction_type, :downloaded_status, :state, :county, :city, :zip_code, :first_name, :last_name, :mothers_maiden_name, :address, :email, :email_confirmation, :date_of_birth, :sex, :phone_number, :insured_first_name, :insured_last_name, :insured_date_of_birth, :relation_to_patient_for_insurance, :insurance_type, :member_id_for_insurance, :card_number_for_insurance, :insurance_company_name, :group_number_for_insurance, :has_fever_over, :has_cough, :has_difficult_breathing, :had_contact_with_confirmed_case, :is_age_60_or_more, :had_traveled_to_affected_place, :has_risk_factor, :consent_signature, :relation_to_patient_for_consent, :consent_date, :school, :access_code
+  permit_params :clinic_id, :clinic_event_id, :student_id, :vaccination_status, :clinic_vaccine_id, :user_id, :clinic_staff_id, :reaction_type, :downloaded_status, :state, :county, :city, :zip_code, :first_name, :last_name, :mothers_maiden_name, :address, :email, :email_confirmation, :date_of_birth, :sex, :phone_number, :insured_first_name, :insured_last_name, :insured_date_of_birth, :relation_to_patient_for_insurance, :insurance_type, :member_id_for_insurance, :card_number_for_insurance, :insurance_company_name, :group_number_for_insurance, :has_fever_over, :has_cough, :has_difficult_breathing, :had_contact_with_confirmed_case, :has_other_reason, :other_reason_explanation, :is_age_60_or_more, :had_traveled_to_affected_place, :has_risk_factor, :consent_signature, :relation_to_patient_for_consent, :consent_date, :school, :access_code, :venue_id, :venue
   
-  filter :clinic
-  filter :state
-  filter :county
+  # filter :venues, as: :select, collection: proc { Venue.all.collect{|v| v.name}.uniq}
+  filter :clinics, as: :select, collection: Clinic.all
   filter :city
+  filter :county
+  filter :state
   filter :zip_code
   filter :first_name
   filter :last_name
@@ -19,7 +20,6 @@ ActiveAdmin.register Patient do
     column :first_name
     column :last_name
     column :sex
-    column :clinic
     column :state
     column :county
     actions
@@ -45,7 +45,6 @@ ActiveAdmin.register Patient do
     end
 
     attributes_table title: "Patient Clinic Record" do
-      row :clinic    
       row :vaccination_status
       row :clinic_staff
       row :reaction_type
@@ -63,12 +62,13 @@ ActiveAdmin.register Patient do
       row :group_number_for_insurance
     end
     
-    
     attributes_table title: "Intake Questionnaire Responses" do
       row :has_fever_over
       row :has_cough
       row :has_difficult_breathing
       row :had_contact_with_confirmed_case
+      row :has_other_reason
+      row :other_reason_explanation
       row :is_age_60_or_more
       row :had_traveled_to_affected_place
       row :has_risk_factor
@@ -104,7 +104,7 @@ ActiveAdmin.register Patient do
   
       tab "Patient Clinic Record" do
         f.inputs do
-          input :clinic
+          input :clinic_events
           input :vaccination_status
           input :reaction_type
         end
@@ -112,8 +112,8 @@ ActiveAdmin.register Patient do
   
       tab "Health Insurance" do
         f.inputs do
-          input :insured_first_name
-          input :insured_last_name
+          # input :insured_first_name
+          # input :insured_last_name
           input :insured_date_of_birth
           input :relation_to_patient_for_insurance
           input :insurance_type
@@ -130,6 +130,8 @@ ActiveAdmin.register Patient do
           input :has_cough
           input :has_difficult_breathing
           input :had_contact_with_confirmed_case
+          input :has_other_reason
+          input :other_reason_explanation
           input :is_age_60_or_more
           input :had_traveled_to_affected_place
           input :has_risk_factor
