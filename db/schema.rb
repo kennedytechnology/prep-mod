@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2020_04_21_144322) do
+=======
+ActiveRecord::Schema.define(version: 2020_04_21_145321) do
+>>>>>>> 70573e7584bfeb30ad0bdd0d26fd4785cd50129a
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,6 +120,18 @@ ActiveRecord::Schema.define(version: 2020_04_21_144322) do
     t.string "address"
     t.float "latitude"
     t.float "longitude"
+    t.string "county"
+    t.string "location"
+    t.string "zip"
+    t.string "city"
+    t.string "state"
+    t.string "contact_person"
+    t.string "contact_phone_number"
+    t.string "backup_contact_person"
+    t.string "backup_contact_phone_number"
+    t.string "appointment_frequency_minutes"
+    t.string "appointment_slots"
+    t.string "appointments_available"
   end
 
   create_table "clinics_users", id: false, force: :cascade do |t|
