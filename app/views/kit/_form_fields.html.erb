@@ -10,17 +10,17 @@
   <div class="w-1/2 mr-4">
     <label>
       <div class="form-question">First Name</div>
-      <%= f.text_field :first_name, disabled: true, class: "w-full form-input block rounded" %>
+      <%= f.text_field :first_name, class: "w-full form-input block rounded" %>
     </label>
   </div>
   <div class="w-1/2 flex">
+     <label class="w-3/12">
+      <div class="form-question">Middle Initial</div>
+      <%= f.text_field :middle_initial, class: "w-11/12 form-input block rounded" %>
+    </label>
     <label class="w-9/12">
       <div class="form-question">Last Name</div>
-      <%= f.text_field :last_name, disabled: true, class: "w-11/12 form-input block rounded" %>
-    </label>
-    <label class="w-3/12">
-      <div class="form-question">Middle Initial</div>
-      <%= f.text_field :middle_initial, disabled: true, class: "w-full form-input block rounded" %>
+      <%= f.text_field :last_name, class: "w-full form-input block rounded" %>
     </label>
   </div>
 </div>
@@ -29,13 +29,14 @@
   <div class="w-1/2 mr-4">
     <label>
       <div class="form-question">Mother's Maiden Name</div>
-      <%= f.text_field :mothers_maiden_name, class: "w-full form-input block rounded" %>
+      <%= f.text_field :mothers_maiden_name, disabled: true, class: "w-full form-input block rounded bg-gray-100 cursor-not-allowed" %>
     </label>
   </div>
   <div class="w-1/2">
     <label>
       <div class="form-question">Address</div>
-      <%= f.text_field :address, class: "w-full form-input block rounded" %>
+        <%= f.text_field :address, id: "autocomplete", placeholder: "", class: "w-full form-input block rounded" %>
+       <%= render partial: "public/clinics/google_maps_script" %>
     </label>
   </div>
 </div>
@@ -63,21 +64,21 @@
   <div class="w-1/2 flex">
     <label class="w-5/12 mr-1">
       <div class="form-question">Date Of Birth</div>
-      <%= f.text_field :date_of_birth, class: "w-12/12 form-input block rounded" %>
+      <%= f.text_field :date_of_birth, disabled: true, class: "w-12/12 form-input block rounded bg-gray-100 cursor-not-allowed" %>
     </label>
     <label class="w-4/12 mr-1">
       <div class="form-question">Age</div>
-      <%= f.text_field :age, class: "w-4/12 form-input block rounded" %>
+      <%= f.text_field :age, disabled: true, class: "w-4/12 form-input block rounded bg-gray-100 cursor-not-allowed" %>
     </label>
     <label class="w-3/12 mr-4">
       <div class="form-question">Gender</div>
-      <%= f.select :sex, [["Male", "M"], ["Female", "F"], ["Other", "O"]], {}, class: "w-full form-input block rounded" %>
+      <%= f.select :sex, [["Male", "M"], ["Female", "F"], ["Other", "O"]], {prompt: "Choose Gender"}, {disabled: true, class: "w-full form-input block rounded bg-gray-100 cursor-not-allowed"} %>
     </label>
   </div>
   <div class="w-1/2">
     <label>
       <div class="form-question">Race</div>
-      <%= f.select :state, options_for_select(US_RACES), {}, class: "w-full form-input block rounded" %>
+      <%= f.select :state, options_for_select(US_RACES), {}, {disabled: true, class: "w-full form-input block rounded bg-gray-100 cursor-not-allowed"} %>
     </label>
   </div>
 </div>
