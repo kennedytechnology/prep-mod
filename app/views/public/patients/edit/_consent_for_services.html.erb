@@ -33,7 +33,7 @@
 
 <div class="flex mb-4">
   <div class="w-1/2 mr-4">
-    <p> Please type your first and last name<br/> <%= f.text_field :first_name, placeholder: "First Name", value: "", class: "form-input" %>  <%= f.text_field :last_name, placeholder: "Last Name", value: "", class: "form-input" %> <span class="text-red-500">*</span></p>
+    <p> Please type your first and last name<br/> <%= f.text_field :signatory_first_name, placeholder: "First Name", value: "", class: "form-input" %>  <%= f.text_field :signatory_last_name, placeholder: "Last Name", value: "", class: "form-input" %> <span class="text-red-500">*</span></p>
   </div>
   <div class="w-1/2">
     <p> Relationship to Patient<span class="text-red-500">*</span> <%= f.select :relation_to_patient_for_insurance, ["Self","Parent/Guardian","Other"], {}, class: "form-select" %></p>
