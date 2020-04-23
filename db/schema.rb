@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_23_181018) do
+ActiveRecord::Schema.define(version: 2020_04_23_192654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -211,6 +211,7 @@ ActiveRecord::Schema.define(version: 2020_04_23_181018) do
     t.string "signatory_last_name"
     t.string "insured_first_name"
     t.string "insured_last_name"
+    t.string "appointment_time"
   end
 
   create_table "users", force: :cascade do |t|
