@@ -160,12 +160,13 @@
                                         </div>
 
                                         <div class="max-w-md rounded-md shadow-sm">
-                                            <%= f.text_field :address, class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4", placeholder: "Address" %>
+                                            <%= f.text_field :address, id: "autocomplete", onFocus: "geolocate()", placeholder: "", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4", placeholder: "Address" %>
+                                            <%= render partial: "public/clinics/google_maps_script" %>
                                         </div>
                                         <div class="max-w-md grid grid-cols-1 md:grid-cols-3 md:gap-4">
-                                            <%= f.text_field :zip, placeholder: "Zip", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
-                                            <%= f.text_field :city, placeholder: "City", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
-                                            <%= f.text_field :state, placeholder: "State", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
+                                            <%= f.text_field :zip, placeholder: "Zip", id: "postal_code", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
+                                            <%= f.text_field :city, placeholder: "City", id: "locality", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
+                                            <%= f.text_field :state, placeholder: "State", id: "administrative_area_level_1", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
                                         </div>
                                     </div>
                                 </div>
