@@ -35,7 +35,7 @@
           <tbody>
           <% @patients.each do |patient| %>
             <tr class="<%= "border-none" if patient == @patients.last %>">
-              <td class="underline"><%= link_to patient.full_name, clinic_patient_path(id: patient.id) %></td>
+              <td class="underline"><%= link_to patient.full_name, @clinic ? clinic_patient_path(clinic_id: @clinic, id: patient.id) : clinics_path(patient_id: patient.id) %></td>
               <td><%= patient.date_of_birth.strftime("%m/%d/%y") %></td>
               <td><%= patient.sex == "F" ? "Female" : "Male" %></td>
               <td><%= patient.full_address %></td>

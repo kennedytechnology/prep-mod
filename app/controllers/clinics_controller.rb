@@ -19,6 +19,9 @@ class ClinicsController < ApplicationController
 
   def index
     @clinics = Clinic.all.paginate(page: params[:page], per_page: 50)
+    if params[:patient_id]
+      @clinics = Patient.find(params[:patient_id]).clinics.order(params[:sort]).paginate(page: params[:page], per_page: 50)
+    end
   end
 
   def edit
