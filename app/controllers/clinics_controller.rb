@@ -9,6 +9,11 @@ class ClinicsController < ApplicationController
   end
 
   def create
+    params[:clinic].parse_time_select! :start_time
+    params[:clinic]["start_time"] = params[:clinic]["start_time"].strftime("%H:%M")
+    params[:clinic].parse_time_select! :end_time
+    params[:clinic]["end_time"] = params[:clinic]["end_time"].strftime("%H:%M")
+
     @clinic = Clinic.new(clinic_params)
   end
 
@@ -36,7 +41,16 @@ class ClinicsController < ApplicationController
   end
 
   def clinic_params
-    params.require(:clinic).permit(:clinic_date, :country, :address, :students_registered, :lead_vaccinator_name, users: [],
+    params.require(:clinic).permit(
+      :clinic_status, :start_time, :end_time,
+      :address, :lead_vaccinator_name,
+      :clinic_date, :students_registered,
+      :incidents_comments, :county, :location, :zip, 
+      :city, :state, :appointment_frequency_minutes,
+      :appointment_slots, :contact_person, :contact_phone_number,
+      :backup_contact_person, :backup_contact_phone_number,
+      :appointments_available, users: [], :service_ids => [],
+      :age_group_ids => [],
       clinic_personnel_attributes: [:name, :_destroy]
     )
   end

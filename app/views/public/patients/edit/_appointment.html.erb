@@ -13,16 +13,16 @@
   <div class="w-1/2 mr-4">
     <div class="form-question">Time</div>
     <%= f.time_select :school,
-  {:combined => true,
-  :default => Time.now.change(:hour => 11, :min => 30),
-  :minute_interval => 15,
-  :time_separator => "",
-  :start_hour => 10,
-  :start_minute => 30,
-  :end_hour => 14,
-  :end_minute => 30,
-  :ampm => true},
-%>
+        {:combined => true,
+        :default => Time.now.change(:hour => 11, :min => 30),
+        :minute_interval => 15,
+        :time_separator => "",
+        :start_hour => 10,
+        :start_minute => 30,
+        :end_hour => 14,
+        :end_minute => 30,
+        :ampm => true}
+    %>
   
   </div>
   <div class="w-1/2"></div>

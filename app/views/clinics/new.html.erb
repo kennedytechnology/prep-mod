@@ -5,7 +5,7 @@
                 <div>
                     <div>
                         <h3 class="text-2xl leading-6 font-medium text-indigo-600 font-bold mb-2">
-                            Create a public Clinic
+                            Create a Public Clinic
                         </h3>
 
                     </div>
@@ -23,18 +23,16 @@
                                             <p class="text-sm leading-5 text-gray-500">Is clinic public or private?</p>
                                             <div class="grid grid-cols-2 items-end pt-4">
                                                 <div class="flex items-center">
-                                                    <input id="push_everything" name="form-input push_notifications" type="radio"
-                                                    class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                    <label for="push_everything" class="ml-3">
+                                                    <%= f.radio_button :clinic_status, "public", id: "clinic_status_public", class: "form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" %>
+                                                    <%= f.label :clinic_status, value: "public", for: "clinic_status_public", class: "ml-3" do %>
                                                         <span class="block text-sm leading-5 font-medium text-gray-700"> Public </span>
-                                                    </label>
+                                                    <% end %>
                                                 </div>
                                                 <div class="flex items-center">
-                                                    <input id="push_email" name="form-input push_notifications" type="radio"
-                                                        class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                    <label for="push_email" class="ml-3">
-                                                        <span class="block text-sm leading-5 font-medium text-gray-700">Private</span>
-                                                    </label>
+                                                    <%= f.radio_button :clinic_status, "private", id: "clinic_status_private", class: "form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" %>
+                                                    <%= f.label :clinic_status, value: "private", for: "clinic_status_private", class: "ml-3" do %>
+                                                        <span class="block text-sm leading-5 font-medium text-gray-700"> Private </span>
+                                                    <% end %>
                                                 </div>
                                             </div>
                                         </div>
@@ -54,70 +52,16 @@
                                         </div>
                                         <div class="mt-4 sm:mt-0 sm:col-span-2">
                                             <div class="max-w-xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                                <%= collection_check_boxes(:clinic, :service_ids, ClinicService.all, :id, :name) do |b| %>
                                                 <div class="relative flex items-start">
                                                     <div class="absolute flex items-center h-5">
-                                                        <input id="vaccinations" type="checkbox"
-                                                            class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
+                                                        <%= b.check_box(class: "form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out") %>
                                                     </div>
                                                     <div class="pl-7 text-sm leading-5">
-                                                        <label for="vaccinations" class="font-medium text-gray-700">Vaccinations</label>
+                                                        <%= b.label(class: "font-meidum text-gray-700") %>
                                                     </div>
                                                 </div>
-                                                <div class="">
-                                                    <div class="relative flex items-start">
-                                                        <div class="absolute flex items-center h-5">
-                                                            <input id="screening" type="checkbox"
-                                                                class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                        </div>
-                                                        <div class="pl-7 text-sm leading-5">
-                                                            <label for="screening" class="font-medium text-gray-700">Screening</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="">
-                                                    <div class="relative flex items-start">
-                                                        <div class="absolute flex items-center h-5">
-                                                            <input id="testing" type="checkbox"
-                                                                class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                        </div>
-                                                        <div class="pl-7 text-sm leading-5">
-                                                            <label for="testing" class="font-medium text-gray-700">Testing</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="">
-                                                    <div class="relative flex items-start">
-                                                        <div class="absolute flex items-center h-5">
-                                                            <input id="medication" type="checkbox"
-                                                                class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                        </div>
-                                                        <div class="pl-7 text-sm leading-5">
-                                                            <label for="medication" class="font-medium text-gray-700">Medication</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="">
-                                                    <div class="relative flex items-start">
-                                                        <div class="absolute flex items-center h-5">
-                                                            <input id="kits_distribution" type="checkbox"
-                                                                class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                        </div>
-                                                        <div class="pl-7 text-sm leading-5">
-                                                            <label for="kits_distribution" class="font-medium text-gray-700">Safety Kit Distribution</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="">
-                                                    <div class="relative flex items-start">
-                                                        <div class="absolute flex items-center h-5">
-                                                            <input id="other_services_provided" type="checkbox"
-                                                                class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                        </div>
-                                                        <div class="pl-7 text-sm leading-5">
-                                                            <label for="other_services_provided" class="font-medium text-gray-700">Other</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <% end %>
                                             </div>
                                         </div>
                                     </div>
@@ -135,58 +79,16 @@
                                             </div>
                                             <div class="mt-4 sm:mt-0 sm:col-span-2">
                                                 <div class="max-w-xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                                                    <div class="relative flex items-start">
-                                                        <div class="absolute flex items-center h-5">
-                                                            <input id="all_ages" type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                        </div>
-                                                        <div class="pl-7 text-sm leading-5">
-                                                            <label for="all_ages" class="font-medium text-gray-700">All ages</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="">
+                                                    <%= collection_check_boxes(:clinic, :age_group_ids, ClinicAgeGroup.all, :id, :name) do |b| %>
                                                         <div class="relative flex items-start">
                                                             <div class="absolute flex items-center h-5">
-                                                                <input id="children" type="checkbox"
-                                                                    class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
+                                                                <%= b.check_box(class: "form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out") %>
                                                             </div>
                                                             <div class="pl-7 text-sm leading-5">
-                                                                <label for="children" class="font-medium text-gray-700">Children</label>
+                                                                <%= b.label(class: "font-meidum text-gray-700") %>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="">
-                                                        <div class="relative flex items-start">
-                                                            <div class="absolute flex items-center h-5">
-                                                                <input id="adults" type="checkbox"
-                                                                    class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                            </div>
-                                                            <div class="pl-7 text-sm leading-5">
-                                                                <label for="adults" class="font-medium text-gray-700">Adults</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="">
-                                                        <div class="relative flex items-start">
-                                                            <div class="absolute flex items-center h-5">
-                                                                <input id="seniors" type="checkbox"
-                                                                    class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                            </div>
-                                                            <div class="pl-7 text-sm leading-5">
-                                                                <label for="seniors" class="font-medium text-gray-700">Seniors</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="">
-                                                        <div class="relative flex items-start">
-                                                            <div class="absolute flex items-center h-5">
-                                                                <input id="open_to_other" type="checkbox"
-                                                                    class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                            </div>
-                                                            <div class="pl-7 text-sm leading-5">
-                                                                <label for="open_to_other" class="font-medium text-gray-700">Other</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    <% end %>
                                                 </div>
                                             </div>
                                         </div>
@@ -206,15 +108,38 @@
                                         Clinic Date and Time
                                     </label>
                                     <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                        <div class="max-w-xs rounded-md shadow-sm">
-                                            <input id="first_name"
-                                                class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4 " placeholder="Clinic Date" />
+                                        <div class="max-w-xs rounded-md">
+                                            <div>
+                                                <p class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2"> Clinic Date </p>
+                                                <%= f.date_field :clinic_date, class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4 ", placeholder: "MM/DD/YYYY" %>
+                                            </div>
+                                            <div class="w-full">
+                                                <p class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2"> Start Time </p>
+                                                <%= f.time_select :start_time,
+                                                    :combined => true,
+                                                    :default => Time.now.change(:hour => 11, :min => 30),
+                                                    :minute_interval => 15,
+                                                    :time_separator => "",
+                                                    :start_hour => 10,
+                                                    :start_minute => 30,
+                                                    :end_hour => 14,
+                                                    :end_minute => 30
+                                                %>
+                                            </div>
 
-                                            <input id="first_name"
-                                                class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" placeholder="Clinic Start Time" />
-
-                                            <input id="first_name"
-                                                class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" placeholder="Clinic End Time" />
+                                            <div class="w-full">
+                                                <p class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2"> End Time </p>
+                                                <%= f.time_select :end_time,
+                                                    :combined => true,
+                                                    :default => Time.now.change(:hour => 11, :min => 30),
+                                                    :minute_interval => 15,
+                                                    :time_separator => "",
+                                                    :start_hour => 10,
+                                                    :start_minute => 30,
+                                                    :end_hour => 14,
+                                                    :end_minute => 30
+                                                %>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -227,32 +152,20 @@
                                     </label>
                                     <div class="mt-1 sm:mt-0 sm:col-span-2">
                                         <div class="max-w-xs rounded-md shadow-sm">
-                                            <input id="last_name"
-                                                class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
-                                                , placeholder="Country" />
+                                            <%= f.select :county, COUNTIES, {prompt: "Select County"}, {class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"} %>
                                         </div>
 
                                         <div class="max-w-xs rounded-md shadow-sm">
-                                            <input id="last_name"
-                                                class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
-                                                , placeholder="Location" />
+                                            <%= f.text_field :location, placeholder: "Location", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
                                         </div>
 
                                         <div class="max-w-md rounded-md shadow-sm">
-                                            <input id="last_name"
-                                                class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
-                                                , placeholder="Address" />
+                                            <%= f.text_field :address, class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4", placeholder: "Address" %>
                                         </div>
                                         <div class="max-w-md grid grid-cols-1 md:grid-cols-3 md:gap-4">
-                                            <input id="last_name"
-                                                class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
-                                                , placeholder="Zip" />
-                                            <input id="last_name"
-                                                class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
-                                                , placeholder="City" />
-                                            <input id="last_name"
-                                                class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
-                                                , placeholder="State" />
+                                            <%= f.text_field :zip, placeholder: "Zip", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
+                                            <%= f.text_field :city, placeholder: "City", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
+                                            <%= f.text_field :state, placeholder: "State", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
                                         </div>
                                     </div>
                                 </div>
@@ -277,35 +190,22 @@
                                             <div class="mt-4 sm:mt-0 sm:col-span-2">
                                                 <div class="max-w-lg grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                                                     <div class="relative flex items-start">
-                                                        <div class="absolute flex items-center h-5">
-                                                            <input id="yes_required" type="checkbox"
-                                                                class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                        </div>
-                                                        <div class="pl-7 text-sm leading-5">
-                                                            <label for="yes_required" class="font-medium text-gray-700">Yes, required</label>
-                                                        </div>
+                                                        <%= f.radio_button :appointments_available, "Yes, required", id: "yes_required", class: "form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" %>
+                                                        <%= f.label :clinic_status, value: "public", for: "yes_required", class: "ml-3" do %>
+                                                            <span class="block text-sm leading-5 font-medium text-gray-700"> Yes, required </span>
+                                                        <% end %>
                                                     </div>
-                                                    <div class="">
-                                                        <div class="relative flex items-start">
-                                                            <div class="absolute flex items-center h-5">
-                                                                <input id="yes_optional" type="checkbox"
-                                                                    class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                            </div>
-                                                            <div class="pl-7 text-sm leading-5">
-                                                                <label for="yes_optional" class="font-medium text-gray-700">Yes, optional</label>
-                                                            </div>
-                                                        </div>
+                                                    <div class="relative flex items-start">
+                                                        <%= f.radio_button :appointments_available, "Yes, optional", id: "yes_optional", class: "form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" %>
+                                                        <%= f.label :clinic_status, value: "public", for: "yes_optional", class: "ml-3" do %>
+                                                            <span class="block text-sm leading-5 font-medium text-gray-700"> Yes, optional </span>
+                                                        <% end %>
                                                     </div>
-                                                    <div class="">
-                                                        <div class="relative flex items-start">
-                                                            <div class="absolute flex items-center h-5">
-                                                                <input id="no_walk_in" type="checkbox"
-                                                                    class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" />
-                                                            </div>
-                                                            <div class="pl-7 text-sm leading-5">
-                                                                <label for="no_walk_in" class="font-medium text-gray-700">No (Walk-In)</label>
-                                                            </div>
-                                                        </div>
+                                                    <div class="relative flex items-start">
+                                                        <%= f.radio_button :appointments_available, "No (Walk-In)", id: "no_walk_in", class: "form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" %>
+                                                        <%= f.label :clinic_status, value: "public", for: "no_walk_in", class: "ml-3" do %>
+                                                            <span class="block text-sm leading-5 font-medium text-gray-700"> No (Walk-In) </span>
+                                                        <% end %>
                                                     </div>
                                                 </div>
                                             </div>
@@ -325,17 +225,12 @@
                                                 <div class="max-w-lg">
                                                     <div class="mt-4">
                                                         <label for="country"
-                                                            class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
-                                                            Appointment Frequency: Every (Minutes)
+                                                            class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2 mb-1">
+                                                            Appointment Frequency: Every
                                                         </label>
                                                         <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                                            <div class="max-w-xs rounded-md shadow-sm">
-                                                                <select id="country"
-                                                                    class="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
-                                                                    <option>10</option>
-                                                                    <option>20</option>
-                                                                    <option>30</option>
-                                                                </select>
+                                                            <div class="max-w-xs rounded-md">
+                                                                <%= f.select :appointment_frequency_minutes, [5, 15], {prompt: "Minutes"}, {class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"} %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -357,17 +252,12 @@
                                                 <div class="max-w-lg">
                                                     <div class="mt-4">
                                                         <label for="country"
-                                                            class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
+                                                            class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2 mb-1">
                                                             Number of Appointment Slots per Frequency
                                                         </label>
                                                         <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                                            <div class="max-w-xs rounded-md shadow-sm">
-                                                                <select id="country"
-                                                                    class="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
-                                                                    <option>1</option>
-                                                                    <option>2</option>
-                                                                    <option>3</option>
-                                                                </select>
+                                                            <div class="max-w-xs rounded-md">
+                                                                <%= f.select :appointment_slots, (1..50), {prompt: "Select"}, {class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"} %>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -394,15 +284,11 @@
                             </label>
                             <div class="mt-1 sm:mt-0 sm:col-span-2">
                                 <div class="max-w-xs rounded-md shadow-sm">
-                                    <input id="last_name"
-                                        class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
-                                        placeholder="Contact Person" />
+                                    <%= f.text_field :contact_person, placeholder: "Contact Person", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
                                 </div>
 
                                 <div class="max-w-xs rounded-md shadow-sm">
-                                    <input id="last_name"
-                                        class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
-                                        placeholder="Contact Number" />
+                                    <%= f.text_field :contact_phone_number, placeholder: "Contact Number", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
                                 </div>
                             </div>
 
@@ -412,15 +298,11 @@
                             </label>
                             <div class="mt-1 sm:mt-0 sm:col-span-2">
                                 <div class="max-w-xs rounded-md shadow-sm">
-                                    <input id="last_name"
-                                        class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
-                                        placeholder="Back-Up Contact Person" />
+                                    <%= f.text_field :backup_contact_person, placeholder: "Back-Up Contact Person", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
                                 </div>
 
                                 <div class="max-w-xs rounded-md shadow-sm">
-                                    <input id="last_name"
-                                        class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
-                                        placeholder="Back-Up Contact Number" />
+                                    <%= f.text_field :backup_contact_phone_number, placeholder: "Back-Up Contact Number", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
                                 </div>
                             </div>
                         </div>
@@ -437,28 +319,22 @@
                         class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                         <label for="last_name"
                             class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
-                            Clinic Remaining Information
+                            Additional Clinic Details
                         </label>
                         <div class="mt-1 sm:mt-0 sm:col-span-2">
                             <div class="max-w-xs rounded-md shadow-sm">
-                                <input id="last_name"
-                                    class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
-                                    , placeholder="Number of Patients Registered" />
+                                <%= f.number_field :students_registered, placeholder: "Number of Patients Registered", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
                             </div>
 
                             <div class="mt-1 sm:mt-0 sm:col-span-2 mb-4">
                                 <div class="max-w-xs flex rounded-md shadow-sm">
-                                    <textarea id="about" rows="3"
-                                        class="form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                                        placeholder="Enter Details Here"></textarea>
+                                    <%= f.text_area :incidents_comments, class: "form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5", placeholder: "Enter Details Here" %>
                                 </div>
                                 <p class="mt-2 text-sm text-gray-500">Clinic Details or Special Instructions.</p>
                             </div>
 
                             <div class="max-w-xs rounded-md shadow-sm">
-                                <input id="last_name"
-                                    class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"
-                                    placeholder="Lead Tester's Name" />
+                                <%= f.text_field :lead_vaccinator_name, placeholder: "Lead Tester's Name", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
                             </div>
 
                             <div class="max-w-xs rounded-md shadow-sm -mb-4">
@@ -476,14 +352,14 @@
 
             <div class="mt-8 border-t border-gray-200 pt-5">
                 <div class="flex justify-end">
+                    <span class="mr-3 inline-flex rounded-md shadow-sm">
+                        <%= f.submit "Submit", class: "inline-flex cursor-pointer justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out" %>
+                    </span>
                     <span class="inline-flex rounded-md shadow-sm">
                         <button type="button"
                             class="py-2 px-4 border border-gray-300 rounded-md text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out">
                             Cancel
                         </button>
-                    </span>
-                    <span class="ml-3 inline-flex rounded-md shadow-sm">
-                        <%= f.submit "Save", class: "inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out" %>
                     </span>
                 </div>
             </div>

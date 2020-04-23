@@ -1,6 +1,6 @@
 ActiveAdmin.register Patient do
 
-  permit_params :clinic_id, :student_id, :vaccination_status, :clinic_vaccine_id, :user_id, :clinic_staff_id, :reaction_type, :downloaded_status, :state, :county, :city, :zip_code, :first_name, :last_name, :mothers_maiden_name, :address, :email, :email_confirmation, :date_of_birth, :sex, :phone_number, :insured_first_name, :insured_last_name, :insured_date_of_birth, :relation_to_patient_for_insurance, :insurance_type, :member_id_for_insurance, :card_number_for_insurance, :insurance_company_name, :group_number_for_insurance, :has_fever_over, :has_caugh, :has_difficult_breathing, :had_contact_with_confirmed_case, :is_age_60_or_more, :had_traveled_to_affected_place, :has_risk_factor, :consent_signature, :relation_to_patient_for_consent, :consent_date, :school, :access_code
+  permit_params :clinic_id, :student_id, :vaccination_status, :clinic_vaccine_id, :user_id, :clinic_staff_id, :reaction_type, :downloaded_status, :state, :county, :city, :zip_code, :first_name, :last_name, :mothers_maiden_name, :address, :email, :email_confirmation, :date_of_birth, :sex, :phone_number, :insured_first_name, :insured_last_name, :insured_date_of_birth, :relation_to_patient_for_insurance, :insurance_type, :member_id_for_insurance, :card_number_for_insurance, :insurance_company_name, :group_number_for_insurance, :has_fever_over, :has_cough, :has_difficult_breathing, :had_contact_with_confirmed_case, :is_age_60_or_more, :had_traveled_to_affected_place, :has_risk_factor, :consent_signature, :relation_to_patient_for_consent, :consent_date, :school, :access_code
   
   filter :clinic
   filter :state
@@ -66,7 +66,7 @@ ActiveAdmin.register Patient do
     
     attributes_table title: "Intake Questionnaire Responses" do
       row :has_fever_over
-      row :has_caugh
+      row :has_cough
       row :has_difficult_breathing
       row :had_contact_with_confirmed_case
       row :is_age_60_or_more
@@ -127,7 +127,7 @@ ActiveAdmin.register Patient do
       tab "Intake Questionnaire Responses" do
         f.inputs do
           input :has_fever_over
-          input :has_caugh
+          input :has_cough
           input :has_difficult_breathing
           input :had_contact_with_confirmed_case
           input :is_age_60_or_more

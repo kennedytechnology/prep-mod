@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_21_090020) do
+ActiveRecord::Schema.define(version: 2020_04_21_145321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,6 +116,18 @@ ActiveRecord::Schema.define(version: 2020_04_21_090020) do
     t.string "address"
     t.float "latitude"
     t.float "longitude"
+    t.string "county"
+    t.string "location"
+    t.string "zip"
+    t.string "city"
+    t.string "state"
+    t.string "contact_person"
+    t.string "contact_phone_number"
+    t.string "backup_contact_person"
+    t.string "backup_contact_phone_number"
+    t.string "appointment_frequency_minutes"
+    t.string "appointment_slots"
+    t.string "appointments_available"
   end
 
   create_table "clinics_users", id: false, force: :cascade do |t|
@@ -175,7 +187,7 @@ ActiveRecord::Schema.define(version: 2020_04_21_090020) do
     t.string "insurance_company_name"
     t.string "group_number_for_insurance"
     t.boolean "has_fever_over"
-    t.boolean "has_caugh"
+    t.boolean "has_cough"
     t.boolean "has_difficult_breathing"
     t.boolean "had_contact_with_confirmed_case"
     t.boolean "is_age_60_or_more"
@@ -193,6 +205,8 @@ ActiveRecord::Schema.define(version: 2020_04_21_090020) do
     t.boolean "has_other_reason"
     t.text "other_reason_explanation"
     t.date "consent_date"
+    t.string "signatory_first_name"
+    t.string "signatory_last_name"
   end
 
   create_table "users", force: :cascade do |t|
