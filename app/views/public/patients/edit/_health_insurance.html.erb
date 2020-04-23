@@ -25,9 +25,16 @@
     <div class="form-question">Medical Assistance Number, Recipient Number, or any other number on card</div>
     <%= f.text_field :card_number_for_insurance, class: "w-full form-input block rounded m-1" %>
   </div>
-  <div class="w-1/2">
-    <div class="form-question">Insured Adult's Name</div>
-    <%= f.text_field :insured_name, class: "w-full form-input block rounded m-1" %>
+  <div class="w-1/2 flex">
+    <div class="w-1/2">
+      <div class="form-question">Insured Adult's First Name</div>
+      <%= f.text_field :insured_last_name, class: "w-11/12 form-input block rounded m-1" %>
+    </div>
+    <div class="w-1/2">
+      <div class="form-question">Insured Adult's Last Name</div>
+      <%= f.text_field :insured_first_name, class: "w-11/12 form-input block rounded m-1" %>
+    </div>
+    
   </div>
 </div>
 

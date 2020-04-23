@@ -25,4 +25,11 @@ class Clinic < ApplicationRecord
     "#{venue.name} on #{clinic_date}"
   end
 
+  def self.appointment_times
+    base_time = Time.new(2000,1,1,10,30,0)
+    (0..16).to_a.collect{|i|
+      (base_time + (i * 15).minutes).strftime("%l:%M%P")
+    }
+  end
+
 end
