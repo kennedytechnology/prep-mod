@@ -1,5 +1,7 @@
 class ClinicEventsController < ApplicationController
   layout "clinic_management"
+  before_action :authenticate_user!
+  
   def new
     @clinic_event = ClinicEvent.new
     @clinic_event.clinic = Clinic.find(params[:clinic_id]) if params[:clinic_id]
