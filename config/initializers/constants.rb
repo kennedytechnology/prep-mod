@@ -21,3 +21,19 @@ CLINIC_EVENTS = [
     outcomes: %w(Pending Refused Cancelled Positive Negative Indeterminate)
   }
   ]
+
+  PATIENT_OCCUPATIONS = [
+    "Construction, Landscaping, Other Trades",
+    "First Responder - Fire, Police, EMT",
+    "Healthcare - Direct Patient Contact",
+    "Healthcare - NO Direct Patient Contact",
+    "Office Worker - Manager, Supervisor, Employee, Clerical",
+    "Plant Worker, Manufacturing, and Machine Operators, and Assemblers",
+    "School Employee or Contractor",
+    "Service - Restaurants, Bars, Catering, Food Service, Fast Food",
+    "Service - Retail, Cosmetology, Massage, Elective Services",
+    "Service - Transportation",
+    "Service - Entertainment, Performance",
+    "Skilled agricultural, forestry and fishery workers",
+    "Other"
+  ]
