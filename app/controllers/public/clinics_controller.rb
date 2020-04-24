@@ -1,10 +1,6 @@
 class Public::ClinicsController < ApplicationController
   
   def index
-    @clinics = []
-  end
-
-  def search
     @clinics = Clinic.all
     if params[:location].present?
       params[:search_radius] = 999 if params[:search_radius] == "All"

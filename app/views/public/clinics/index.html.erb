@@ -76,8 +76,13 @@
                   <h4><%= clinic.address %></h4>
                   <p><strong>Services available:</strong> <%= clinic.services.collect(&:name).join(", ") %></p>
                   <p><strong>Age groups served:</strong> <%= clinic.age_groups.collect(&:name).join(", ") %></p>
+                  <% if session[:patient_id] && clinic.services.include?(ClinicService.find_by_name("Testing")) %>
+                    <p><a href="/client/registration?clinic_id=<%= clinic.id %>" class="submit-button flex justify-center items-center bg-blue-500 text-white w-1/2 rounded-full mb-12 mt-10 ml-2 pl-6 pr-6">
+                      Select Testing Appointment Here
+                    </a></p>
+                  <% end %>
                   <% if clinic.services.include?(ClinicService.find_by_name("Safety Kit Distribution")) %>
-                  <p><a href="/kit/new" class="submit-button flex justify-center items-center bg-blue-500 text-white w-1/2 rounded-full mb-12 mt-10 ml-2 pl-6 pr-6">Sign-Up For Safety Kit</a></p>
+                    <p><a href="/kit/new" class="submit-button flex justify-center items-center bg-blue-500 text-white w-1/2 rounded-full mb-12 mt-10 ml-2 pl-6 pr-6">Sign-Up For Safety Kit</a></p>
                   <% end %>
                 </div>
                 <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=15&size=400x280&markers=size:small%7Ccolor:red%7C#{clinic.latitude},#{clinic.longitude}&key=#{ENV['GOOGLE_MAPS_API_KEY']}", alt: "Map", class: "flex-none" %>

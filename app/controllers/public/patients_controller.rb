@@ -2,22 +2,13 @@ class Public::PatientsController < ApplicationController
 
   def clear_session
     session.destroy
-    redirect_to "/client/registration"
+    redirect_to "/"
   end
   
   def edit
-    @patient = Patient.find(session[:patient_id]) if session[:patient_id] && Patient.exists?(session[:patient_id])
-    @patient = Patient.find_by_access_code(params[:access_code]) if params[:access_code]
-    
-    if @patient
-      session[:patient_id] = @patient.id
-    else
-      render :access
-    end
-
+    edit_gate
     @step = params[:next_step] || "personal_information"
     update && return unless @step == "personal_information"
-
   end
 
   def update
@@ -33,6 +24,36 @@ class Public::PatientsController < ApplicationController
   end
 
   private
+
+  def edit_gate
+    # To be able to access the consent form (the edit action), you should have
+    # entered a registration code and also already selected a clinic. This
+    # method handles that.
+    @patient = Patient.find(session[:patient_id]) if session[:patient_id] && Patient.exists?(session[:patient_id])
+    @patient = Patient.find_by_access_code(params[:access_code]) if params[:access_code]
+    session[:patient_id] = @patient.id if @patient
+
+    @clinic = Clinic.find(session[:clinic_id]) if session[:clinic_id] && Clinic.exists?(session[:clinic_id])
+    @clinic = Clinic.find(params[:clinic_id]) if params[:clinic_id]
+    session[:clinic_id] = @clinic.id if @clinic
+    
+
+    if @patient.nil?    
+      render :access
+      return
+    end
+
+    if params[:clinic_id]
+      redirect_to "/client/registration"
+    end
+
+    if @clinic.nil?
+      flash[:notice] = "Access code was successfully processed. Please select a testing location."
+      redirect_to "/clinic/search?service[]=Testing"
+      return
+    end
+
+  end
 
   def patient_params
     params.require(:patient).permit(:clinic, :clinic_id, :user_id, :student_id, :access_code, :vaccination_status, :clinic_vaccine_id, 

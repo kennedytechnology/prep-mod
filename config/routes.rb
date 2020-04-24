@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   get 'kit/new'
   post 'kit/thanks'
+
   devise_for :users,
     controllers: {
       registrations: 'users/registrations'
@@ -9,7 +10,7 @@ Rails.application.routes.draw do
 
   get 'public_portal/index'
   get '/clinic/search', to: 'public/clinics#index'
-  post '/clinic/search', to: 'public/clinics#search'
+  post '/clinic/search', to: 'public/clinics#index'
   # get '/client/registration', to: 'public/patients#edit', as: :client_registration
   get '/client/registration(/:access_code)', to: 'public/patients#edit', as: :client_registration
   patch '/client/registration/(/:access_code)', to: 'public/patients#edit'
