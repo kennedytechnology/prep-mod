@@ -3,7 +3,7 @@ class Clinic < ApplicationRecord
   has_many :clinic_vaccines
   has_many :clinic_personnel, class_name: "ClinicStaff"
   has_many :clinic_events
-  has_many :patients, through: :clinic_events
+  has_many :patients #, through: :clinic_events
   has_and_belongs_to_many :users
 
   accepts_nested_attributes_for :clinic_personnel, allow_destroy: true, 
@@ -25,11 +25,15 @@ class Clinic < ApplicationRecord
     "#{venue.name} on #{clinic_date}"
   end
 
-  def self.appointment_times
-    base_time = Time.new(2000,1,1,10,30,0)
-    (0..16).to_a.collect{|i|
-      (base_time + (i * 15).minutes).strftime("%l:%M%P")
-    }
+  def appointment_times
+    this_time = Time.parse(start_time)
+    last_time = Time.parse(end_time)
+    results = []
+    while this_time < last_time
+      results << this_time.strftime("%l:%M%P")
+      this_time = this_time + appointment_frequency_minutes.to_i.minutes
+    end
+    return results
   end
 
 end

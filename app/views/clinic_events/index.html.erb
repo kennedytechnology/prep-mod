@@ -1,0 +1,160 @@
+<div class="clinic-events-page">
+  <div class="container">
+    <div class="card-wrapper">
+      <div class="card-header">
+        <h3>Clinic Activity Form</h3>
+        <div class="links-buttons">
+          <%= link_to "Registration List", clinic_patients_path(clinic_id: @clinic.id), class: "clinic-action" %>
+          <%= link_to "Edit Clinic", edit_clinic_path(id: @clinic.id), class: "clinic-action" %>
+        </div>
+      </div>
+
+      <div class="details-section">
+        <h3>Clinic Date: <%= @clinic.clinic_date %></h3>
+        <h3>County: <%= @clinic.address.split(',')[1] %></h3>
+        <h3>Location: <%= @clinic.address %></h3>
+        <h3>Lead Tester's Name: <%= @clinic.lead_vaccinator_name %> </h3>
+      </div>
+
+      <div class="card-content">
+        <%= form_with(model: @clinic, url: clinic_path(@clinic), method: :put) do |f| %>
+          <div class="form-group form-group-time">
+            <div class="group-elem">
+              <%= f.label :start_time, "Clinic Start Time", class: "form-group-label" %>
+              <%= f.text_field :start_time %>
+              
+            </div>
+            <div class="group-elem">
+              <%= f.label :end_time, "Clinic End Time", class: "form-group-label" %>
+              <%= f.text_field :end_time %>
+            </div>
+            <div class="group-elem">
+              <label>Clinic Length(in Minutes)</label>
+              <input type="text" placeholder="315" value="<%= (@clinic.end_time.to_i - @clinic.start_time.to_i) * 60 %>" disabled>
+            </div>
+          </div>
+          <div class="clinic-comments">
+            <%= f.label :incidents_comments, "Clinic Incidents or Comments", class: "form-group-label" %>
+            <%= f.text_area :incidents_comments %>
+          </div>
+
+          <div class="tests-table-section">
+            <div class="add-more-tests-button-container">
+              <%= link_to sanitize("Add More Test &#43;"), "#", class: "add-more-tests-button" %>
+            </div>
+            <div class="tests-table-outer">
+              <div class="tests-table-wrapper">
+                <div class="tests-table-container">
+                  <table class="tests-table">
+                    <thead>
+                    <tr>
+                      <th>Test Name</th>
+                      <th># Lot Number</th>
+                      <th># of Starting Kits</th>
+                      <th># Tests Administered</th>
+                      <th># Unusable Tests</th>
+                      <th># Tests Returned</th>
+                      <th>Default</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td><input type="text"></td>
+                      <td><input type="text"></td>
+                      <td><input type="text"></td>
+                      <td><input type="text"></td>
+                      <td><input type="text"></td>
+                      <td><input type="text"></td>
+                      <td>
+                        <div class="flex">
+                          <%= link_to "Yes", "#", class: "table-actions" %>
+                          <%= link_to "No", "#", class: "table-actions" %>
+                        </div>
+                      </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                      <td>TOTALS:</td>
+                      <td></td>
+                      <td>10</td>
+                      <td>0</td>
+                      <td>0</td>
+                      <td>0</td>
+                    </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="patients-table-section" data-controller="clinic-activity-patients">
+
+           
+
+            <div class="patients-table-header">
+              <div class="search-section">
+                <label for="search">Search: </label>
+                <input id="search" type="text">
+              </div>
+              <div class="add-more-patients">
+                <%= link_to sanitize("Add More Patients &#43;"), "#", class: "add-more-patients-button" %>
+              </div>
+            </div>
+            <div class="patients-table-outer">
+              <div class="patients-table-wrapper">
+                <div class="patients-table-container">
+                  <table class="patients-table">
+                    <thead>
+                    <tr>
+                      <th>Patient Name</th>
+                      <th>DOB</th>
+                      <th>Scheduled</th>
+                      <th>Screened</th>
+                      <th>Tested</th>
+                      <th>Safety Kit</th>
+                      <th>Cancelled</th>
+                      <th>No Show</th>
+                      <th>Follow Up</th>
+                      <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% @clinic.patients.each do |patient| %>
+                      <tr data-action="click->clinic-activity-patients#showModal">
+                        <td><%= link_to patient.first_name + ' ' + patient.last_name, patient %></td>
+                        <td><%= patient.date_of_birth.strftime("%D") %></td>
+                        <td><%= patient.appointment_time %></td>
+                        <td><%= radio_button_tag 'screened', true %></td>
+                        <td><%= radio_button_tag 'tested', true %></td>
+                        <td><%= radio_button_tag "cancelled", true %></td>
+                        <td><%= radio_button_tag "noshow", true %></td>
+                        <td><%= check_box("safety_kit", {}) %></td>
+                        <td><%= link_to "Remark", "#", class: "remark-link" %></td>
+                        <td>
+                          <div class="flex">
+                            <%= link_to "Delete", "#", class: "table-actions" %>
+                          </div>
+                        </td>
+                      </tr>
+                    <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+ <div data-target="clinic-activity-patients.modal" id="clinic-activity-modal" class="modal opacity-0 pointer-events-none absolute w-full h-full top-0 left-0 flex items-center justify-center">
+  <div class="modal-overlay absolute w-full h-full bg-black opacity-25 top-0 left-0 cursor-pointer"></div>
+  <div class="absolute w-1/2 h-32 bg-white rounded-sm shadow-lg flex items-center justify-center text-2xl">
+    🚀
+  </div>
+</div>

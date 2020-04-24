@@ -10,13 +10,14 @@ puts 'Seeding...'
 
 NAMED_PLACE_COUNT = 5
 VENUE_COUNT = 20
-CLINIC_COUNT = 50
+CLINIC_COUNT = 35
 USER_COUNT = 50
-PATIENT_COUNT = 200
-CLINIC_EVENTS_PER_PATIENT = 4
-CLINIC_STAFF_PER_CLINIC = 5
+PATIENT_COUNT = 1500
+CLINIC_EVENTS_PER_PATIENT = 2
+CLINIC_STAFF_PER_CLINIC = 4
 VENUE_STATES = ["MD"]
 
+puts "Creating named places..."
 NAMED_PLACE_COUNT.times.each do |i|
   NamedPlace.create(
     name: Faker::JapaneseMedia::OnePiece.unique.island
@@ -31,6 +32,7 @@ end
   ClinicAgeGroup.create!(name: name)
 end
 
+puts "Creating venues..."
 addresses = JSON.load(Rails.root.join("db/addresses.json"))["addresses"]
 addresses.select!{|a| VENUE_STATES.include?(a["state"])}
 addresses.shuffle!
@@ -43,6 +45,7 @@ VENUE_COUNT.times.each do |i|
   )
 end
 
+puts "Creating clinics..."
 CLINIC_COUNT.times.each do |i|
   address = addresses.pop
   Clinic.create(
@@ -53,17 +56,21 @@ CLINIC_COUNT.times.each do |i|
     clinic_status: %w(Pending Completed Cancelled).sample,
     outcome_comments: Faker::Lorem.paragraph(sentence_count: 0, random_sentences_to_add: 9, supplemental: true),
     incidents_comments: Faker::Lorem.paragraph(sentence_count: 0, random_sentences_to_add: 9, supplemental: true),
-    start_time: "10:00",
-    end_time: "13:00",
+    start_time: "#{(9..12).to_a.sample}:00",
+    end_time: "#{(13..17).to_a.sample}:00",
     duration: 180,
     age_groups: ClinicAgeGroup.all.sample(rand(ClinicAgeGroup.count) + 1),
     services: ClinicService.all.sample(rand(ClinicService.count) + 1),
     address: "#{address['address1']}, #{address['city']}, #{address['state']} #{address['postalCode']}",
     longitude: address['coordinates']['lng'],
-    latitude: address['coordinates']['lat']
+    latitude: address['coordinates']['lat'],
+    appointment_frequency_minutes: [10, 15, 30, 60].sample,
+    appointment_slots: (2..10).to_a.sample,
+    appointments_available: 'required'
   )
 end
 
+puts "Creating clinic staff..."
 (CLINIC_COUNT * CLINIC_STAFF_PER_CLINIC).times.each do |i|
   ClinicStaff.create(
     name: Faker::Name.unique.name,
@@ -71,6 +78,7 @@ end
   )
 end
 
+puts "Creating users..."
 USER_COUNT.times.each do |i|
   User.create!(
     email: i == 5 ? "sam@test.com" : Faker::Internet.unique.email,
@@ -84,10 +92,12 @@ end
 
 addresses = JSON.load(Rails.root.join("db/addresses.json"))["addresses"]
 addresses.select!{|a| VENUE_STATES.include?(a["state"])}
-
+puts "Creating patients..."
 PATIENT_COUNT.times.each do |i|
   address = addresses.sample
+  clinic = Clinic.all.sample
   Patient.create!(
+    clinic: clinic,
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     middle_initial: ("A".."Z").to_a.sample,
@@ -102,16 +112,20 @@ PATIENT_COUNT.times.each do |i|
     county: COUNTIES.sample,
     access_code: Patient.generate_access_code,
     sex: %w(M F).sample,
-    phone_number: Faker::PhoneNumber.cell_phone
+    phone_number: Faker::PhoneNumber.cell_phone,
+    appointment_time: clinic.appointment_times.sample
   )
 end
 
+puts "Creating clinic events..."
 (PATIENT_COUNT * CLINIC_EVENTS_PER_PATIENT).times.each do |i|
   clinic = Clinic.all.sample
   clinic_event = CLINIC_EVENTS.sample
+  patients = Patient.all.to_a
+  users = User.all.to_a
   ClinicEvent.create(
     clinic: clinic,
-    patient: Patient.all.sample,
+    patient: patients.sample,
     category: clinic_event[:name],
     clinic_staff_id: clinic.clinic_personnel.sample,
     outcome: clinic_event[:outcomes].sample,

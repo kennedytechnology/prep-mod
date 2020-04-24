@@ -19,6 +19,12 @@
         .submit-button {
           @apply mr-3;
 
+          &:after {
+            @apply relative text-base;
+            content: ' \00bb';
+            left: 3%;
+          }
+
           &:last-child {
             @apply mr-0;
           }

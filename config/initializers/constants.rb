@@ -37,3 +37,5 @@ CLINIC_EVENTS = [
     "Skilled agricultural, forestry and fishery workers",
     "Other"
   ]
+
+  Date::DATE_FORMATS[:default] = "%A %B %e, %Y"

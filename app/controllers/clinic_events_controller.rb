@@ -16,6 +16,11 @@ class ClinicEventsController < ApplicationController
     end
   end
 
+  def index
+    @clinic = Clinic.find(params[:clinic_id])
+    @clinic_events = @clinic.clinic_events
+  end
+
   def clinic_event_params
     params.require(:clinic_event).permit(:clinic_id, :patient_id, :category, :outcome, :notes)
   end

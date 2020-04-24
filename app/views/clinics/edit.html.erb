@@ -2,7 +2,11 @@
   <div class="container">
     <div class="card-wrapper">
       <div class="card-header">
-        <h3>Edit Clinic</h3>
+        <h3>Edit a Public Clinic</h3>
+        <div class="links-buttons">
+          <%= link_to "Registration List", clinic_patients_path(clinic_id: @clinic.id), class: "clinic-action" %>
+          <%= link_to "Clinic Activity", clinic_events_path(clinic_id: @clinic.id), class: "clinic-action" %>
+        </div>
       </div>
       <div class="card-content">
         <%= form_with(model: @clinic, url: clinic_path(@clinic), method: :put) do |f| %>
@@ -55,7 +59,7 @@
             </div>
           </div>
           <div class="submit-buttons">
-            <%= f.submit "Submit", class: "submit-button" %>
+            <%= f.button "Review & Submit", class: "submit-button" %>
             <%= link_to "Cancel", clinics_path, class: "submit-button" %>
           </div>
         <% end %>
