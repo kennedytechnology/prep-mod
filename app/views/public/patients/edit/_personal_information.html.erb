@@ -1,11 +1,3 @@
-<%# <div class="form-fields flex mb-4">
-
-  <div class="w-1/2 h-12"> </div>
-
-</div>
-
-step 1 %>
-
 <div class="flex mb-4">
   <div class="w-1/2 mr-4">
     <div class="form-question">County</div>
@@ -118,4 +110,5 @@ step 1 %>
         patientAge.value = age.toString();
     }
 </script>
+<%= f.hidden_field :clinic_id, value: session[:clinic_id] %>
 <%= hidden_field_tag :next_step, "health_insurance" %>
