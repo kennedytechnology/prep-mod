@@ -14,6 +14,8 @@ class Clinic < ApplicationRecord
   geocoded_by :address
   after_validation :geocode, if: :should_geocode?
 
+  def clinic_staff; clinic_personnel; end
+
   def should_geocode?
     address_changed? && !latitude_changed?
   end
