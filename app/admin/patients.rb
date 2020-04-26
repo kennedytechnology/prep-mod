@@ -1,6 +1,14 @@
 ActiveAdmin.register Patient do
 
-  permit_params :clinic_id, :clinic_event_id, :student_id, :vaccination_status, :clinic_vaccine_id, :user_id, :clinic_staff_id, :reaction_type, :downloaded_status, :state, :county, :city, :zip_code, :first_name, :last_name, :mothers_maiden_name, :address, :email, :email_confirmation, :date_of_birth, :sex, :phone_number, :insured_first_name, :insured_last_name, :insured_date_of_birth, :relation_to_patient_for_insurance, :insurance_type, :member_id_for_insurance, :card_number_for_insurance, :insurance_company_name, :group_number_for_insurance, :has_fever_over, :has_cough, :has_difficult_breathing, :had_contact_with_confirmed_case, :has_other_reason, :other_reason_explanation, :is_age_60_or_more, :had_traveled_to_affected_place, :has_risk_factor, :consent_signature, :relation_to_patient_for_consent, :consent_date, :school, :access_code, :venue_id, :venue
+  permit_params :clinic_id, :clinic_event_id, :student_id, :vaccination_status, :clinic_vaccine_id, 
+  :user_id, :clinic_staff_id, :reaction_type, :downloaded_status, :state, :county, :city, :zip_code, 
+  :first_name, :last_name, :mothers_maiden_name, :address, :email, :email_confirmation, :date_of_birth, 
+  :sex, :phone_number, :insured_first_name, :insured_last_name, :insured_date_of_birth, :relation_to_patient_for_insurance, 
+  :insurance_type, :member_id_for_insurance, :card_number_for_insurance, :insurance_company_name, 
+  :group_number_for_insurance, :has_fever_over, :has_cough, :has_difficult_breathing, :had_contact_with_confirmed_case, 
+  :has_other_reason, :other_reason_explanation, :is_age_60_or_more, :had_traveled_to_affected_place, :has_risk_factor, 
+  :consent_signature, :relation_to_patient_for_consent, :consent_date, :school, :access_code, :venue_id, :venue,
+  :signatory_first_name, :signatory_last_name
   
   # filter :venues, as: :select, collection: proc { Venue.all.collect{|v| v.name}.uniq}
   filter :clinics, as: :select, collection: Clinic.all
@@ -45,10 +53,27 @@ ActiveAdmin.register Patient do
     end
 
     attributes_table title: "Patient Clinic Record" do
+      row "Clinic events" do
+        patient.clinic_events.collect{|ce| ce.category }
+      end 
       row :vaccination_status
       row :clinic_staff
       row :reaction_type
     end
+    
+    # clinic_events attributes:
+    
+    # t.string "category"
+    # t.string "outcome"
+    # t.integer "inventory_item_id"
+    # t.string "inventory_item_name"
+    # t.text "notes"
+    # t.string "contact_type"
+    # t.string "screening_outcome"
+    # t.string "test_name"
+    # t.string "test_type"
+    # t.string "test_processing"
+    # t.boolean "safety_kit_received"
 
     attributes_table title: "Health Insurance" do
       row :insured_first_name
@@ -67,11 +92,11 @@ ActiveAdmin.register Patient do
       row :has_cough
       row :has_difficult_breathing
       row :had_contact_with_confirmed_case
-      row :has_other_reason
-      row :other_reason_explanation
       row :is_age_60_or_more
       row :had_traveled_to_affected_place
       row :has_risk_factor
+      row :has_other_reason
+      row :other_reason_explanation
     end
 
     attributes_table title: "Consent Form Status" do
@@ -90,7 +115,7 @@ ActiveAdmin.register Patient do
           input :first_name
           input :last_name
           input :mothers_maiden_name
-          input :date_of_birth, label: "Date of Birth"
+          input :date_of_birth, label: "Date of Birth", as: :datetime_picker
           input :sex
           input :phone_number
           input :email
@@ -104,7 +129,7 @@ ActiveAdmin.register Patient do
   
       tab "Patient Clinic Record" do
         f.inputs do
-          input :clinic_events
+          input :clinic_events, as: :select, collection: ClinicEvent.where(patient_id: patient.id).collect{|ce| ce.category}
           input :vaccination_status
           input :reaction_type
         end
@@ -112,8 +137,8 @@ ActiveAdmin.register Patient do
   
       tab "Health Insurance" do
         f.inputs do
-          # input :insured_first_name
-          # input :insured_last_name
+          input :insured_first_name
+          input :insured_last_name
           input :insured_date_of_birth
           input :relation_to_patient_for_insurance
           input :insurance_type
@@ -141,6 +166,8 @@ ActiveAdmin.register Patient do
       tab "Consent Form Status" do
         f.inputs do
           input :access_code
+          input :signatory_first_name
+          input :signatory_last_name
           input :consent_signature
           input :relation_to_patient_for_consent
           input :consent_date
