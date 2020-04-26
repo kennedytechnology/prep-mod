@@ -137,6 +137,24 @@ puts "Creating clinic events..."
 end
 
 
+20.times do
+  SupplyInventory.create!(
+    clinic_id: 1,
+    received_at: Faker::Date.between(from: 30.days.ago, to:Date.today),
+    item_type: INVENTORY_ITEM_TYPES.sample,
+    item_name: Faker::Company.name,
+    manufacturer: INVENTORY_MANUFACTURERS.sample,
+    lot_number: Faker::Code.asin,
+    expiration_date: Faker::Date.between(from: Date.today, to: 30.days.from_now),
+    quantity: Faker::Number.between(from: 1, to: 20),
+    packaging: INVENTORY_PACKAGINGS.sample,
+    source: INVENTORY_SOURCES.sample,
+    product_name: Faker::Company.name,
+    event_type: INVENTORY_EVENT_TYPES.sample
+  )
+end
+
+
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
 
 puts 'Done.'

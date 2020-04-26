@@ -1,0 +1,178 @@
+<div class="bg-gray-50 overflow-hidden">
+    <div class="relative max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <%= form_with model: @supply_inventory, local: true, class: "bg-white p-8 md:-12 lg:p-16 rounded-lg shadow" do |f| %>
+            <div>
+                <div>
+                    <div>
+                        <h3 class="text-2xl leading-6 font-medium text-indigo-600 font-bold mb-2">
+                            New Supply Inventory Item
+                        </h3>
+
+                    </div>
+                    <div class="mt-6 sm:mt-5">
+                        <% if params[:clinic_id] %>
+                            <%= f.hidden_field :clinic_id, value: params[:clinic_id] %>
+                        <% else %>
+                            <div class="mt-6 sm:mt-5 sm:border-t sm:border-gray-200 sm:pt-5">
+                                <fieldset>
+                                    <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
+                                        <div>
+                                            <legend class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700">
+                                                Choose Clinic
+                                            </legend>
+                                        </div>
+                                        <div class="sm:col-span-2">
+                                            <div class="max-w-xs">
+                                                <p class="text-sm leading-5 text-gray-500">Choose Clinic for this inventory item</p>
+                                                <div class="max-w-xs rounded-md shadow-sm">
+                                                    <%= f.select :clinic_id, Clinic.all.collect {|c| [ c.name, c.id ] }, {prompt: "Select Clinic"}, {class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"} %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div> 
+                        <% end %>
+
+                        <div class="mt-6 sm:mt-5">
+                            <div class="sm:border-t sm:border-gray-200 sm:pt-5">
+                                <fieldset>
+                                    <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
+                                        <div>
+                                            <legend class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700">
+                                                Enter Inventory Item Details
+                                            </legend>
+                                        </div>
+                                        <div class="mt-4 sm:mt-0 sm:col-span-2">
+                                            <p class="text-sm leading-5 text-gray-500"> Inventory Source</p>
+                                            <div class="max-w-xs rounded-md shadow-sm">
+                                                <%= f.select :source, INVENTORY_SOURCES, {prompt: "Select Source"}, {class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"} %>
+                                            </div>
+
+                                            <div class="max-w-xs rounded-md shadow-sm">
+                                                <%= f.text_field :item_name, placeholder: "Inventory Item Name", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
+                                            </div>
+
+                                            <p class="text-sm leading-5 text-gray-500"> Inventory Item Type </p>
+                                            <div class="max-w-xs rounded-md shadow-sm">
+                                                <%= f.select :item_type, INVENTORY_ITEM_TYPES, {prompt: "Select Item Type"}, {class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"} %>
+                                            </div>
+
+                                            <p class="text-sm leading-5 text-gray-500"> Inventory Item Received Date </p>
+                                            <div class="max-w-xs rounded-md shadow-sm">
+                                                <%= f.date_field :received_at, class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4 ", placeholder: "MM/DD/YYYY" %>
+                                            </div>
+
+                                            <div class="max-w-xs rounded-md shadow-sm">
+                                                <%= f.text_field :quantity, placeholder: "Quantity", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
+                                            </div>
+
+                                            <div class="max-w-xs rounded-md shadow-sm">
+                                                <%= f.text_field :lot_number, placeholder: "Lot Number", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
+                                            </div>
+
+                                            <p class="text-sm leading-5 text-gray-500"> Expiration Date </p>
+                                            <div class="max-w-xs rounded-md shadow-sm">
+                                                <%= f.date_field :expiration_date, class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4 ", placeholder: "MM/DD/YYYY" %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+
+                            <div class="mt-6 sm:mt-5">
+                                <div class="sm:border-t sm:border-gray-200 sm:pt-5">
+                                    <fieldset>
+                                        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
+                                            <div>
+                                                <legend class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700">
+                                                    Packaging
+                                                </legend>
+                                            </div>
+                                            <div class="mt-4 sm:mt-0 sm:col-span-2">
+                                                <p class="text-sm leading-5 text-gray-500"> Choose Packaging </p>
+                                                <div class="max-w-xs rounded-md shadow-sm">
+                                                    <%= f.select :packaging, INVENTORY_PACKAGINGS, {prompt: "Select Packaging"}, {class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"} %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+
+                            <div class="mt-6 sm:mt-5">
+                                <div class="sm:border-t sm:border-gray-200 sm:pt-5">
+                                    <fieldset>
+                                        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
+                                            <div>
+                                                <legend class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700">
+                                                    Manufacturer
+                                                </legend>
+                                            </div>
+                                            <div class="mt-4 sm:mt-0 sm:col-span-2">
+                                                <p class="text-sm leading-5 text-gray-500"> Choose Manufacturer </p>
+                                                <div class="max-w-xs rounded-md shadow-sm">
+                                                    <%= f.select :manufacturer, INVENTORY_MANUFACTURERS, {prompt: "Select Manufacturer"}, {class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"} %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+
+                            <div class="mt-6 sm:mt-5">
+                                <div class="sm:border-t sm:border-gray-200 sm:pt-5">
+                                    <fieldset>
+                                        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
+                                            <div>
+                                                <legend class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700">
+                                                    Even Type
+                                                </legend>
+                                            </div>
+                                            <div class="mt-4 sm:mt-0 sm:col-span-2">
+                                                <p class="text-sm leading-5 text-gray-500"> Choose Event Type </p>
+                                                <div class="max-w-xs rounded-md shadow-sm">
+                                                    <%= f.select :event_type, INVENTORY_EVENT_TYPES, {prompt: "Select Event Type"}, {class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"} %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+
+                            <div class="mt-6 sm:mt-5">
+                                <div class="sm:border-t sm:border-gray-200 sm:pt-5">
+                                    <fieldset>
+                                        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
+                                            <div>
+                                                <legend class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700">
+                                                    Product Name
+                                                </legend>
+                                            </div>
+                                            <div class="mt-4 sm:mt-0 sm:col-span-2">
+                                                <div class="max-w-xs rounded-md shadow-sm">
+                                                    <%= f.text_field :product_name, placeholder: "Product Name", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 border-t border-gray-200 pt-5">
+                <div class="flex justify-end">
+                    <span class="mr-3 inline-flex rounded-md shadow-sm">
+                        <%= f.submit "Submit", class: "inline-flex cursor-pointer justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out" %>
+                    </span>
+                    <span class="inline-flex rounded-md shadow-sm">
+                        <%= link_to "Cancel", clinics_path, class: "py-2 px-4 border border-gray-300 rounded-md text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out" %>
+                    </span>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>

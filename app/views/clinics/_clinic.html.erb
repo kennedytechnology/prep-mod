@@ -9,5 +9,6 @@
     <%= link_to "Registration List", clinic_patients_path(clinic_id: clinic.id), class: "clinic-action" %>
     <%= link_to "Edit Clinic", edit_clinic_path(id: clinic.id), class: "clinic-action" %>
     <%= link_to "Clinic Activity", clinic_events_path(clinic_id: clinic.id), class: "clinic-action" %>
+    <%= link_to "Supply Inventories", supply_inventories_path(clinic_id: clinic.id), class: 'clinic-action'%>
   </div>
 </div>

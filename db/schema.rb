@@ -221,6 +221,23 @@ ActiveRecord::Schema.define(version: 2020_04_24_091333) do
     t.string "occupation"
   end
 
+  create_table "supply_inventories", force: :cascade do |t|
+    t.date "received_at"
+    t.string "item_type"
+    t.string "item_name"
+    t.string "manufacturer"
+    t.string "lot_number"
+    t.date "expiration_date"
+    t.integer "quantity"
+    t.string "packaging"
+    t.string "source"
+    t.string "product_name"
+    t.string "event_type"
+    t.bigint "clinic_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
