@@ -59,7 +59,8 @@ CLINIC_COUNT.times.each do |i|
     latitude: address['coordinates']['lat'],
     appointment_frequency_minutes: [10, 15, 30, 60].sample,
     appointment_slots: (2..10).to_a.sample,
-    appointments_available: 'required'
+    appointments_available: 'required',
+    county: COUNTIES.sample
   )
 end
 
