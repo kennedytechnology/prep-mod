@@ -10,7 +10,7 @@ class PatientsController < ApplicationController
       @patients = @clinic.patients.order(params[:sort]).paginate(page: params[:page], per_page: 50)
     end
     if params[:q].present?
-      @patients = @patients.select{|p| p.search_string.include?(params[:q])}
+      @patients = @patients.select{|p| p.search_string.downcase.include?(params[:q].downcase)}
     end
     @patients = @patients.take(40)
     @patients.uniq!

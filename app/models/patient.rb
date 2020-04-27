@@ -18,7 +18,7 @@ class Patient < ApplicationRecord
   end
 
   def search_string
-    full_name + full_address
+    first_name + last_name + full_address + mothers_maiden_name + date_of_birth.strftime("%m/%d/%y")
   end
 
   def event_for_clinic(clinic)
