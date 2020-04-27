@@ -61,7 +61,7 @@ class ClinicsController < ClinicManagementController
       :end_hour, :end_minute, :end_meridiem,
       :appointments_available, users: [], :service_ids => [],
       :age_group_ids => [],
-      clinic_personnel_attributes: [:name, :_destroy],
+      clinic_personnel_attributes: [:id, :name, :_destroy],
       clinic_events_attributes: [:id, :patient_id, :outcome, :safety_kit_received],
       test_kits_attributes: [:id, :test_name, :test_manufacturer,
       :test_lot_number, :test_type, :test_processing, 
