@@ -19,7 +19,7 @@
             </div>
             <div class="group-elem">
               <%= f.label :county, class: "form-question" do %>
-                Country <span class="required-field">*</span>
+                County <span class="required-field">*</span>
               <% end %>
               <%= f.select(:county, options_for_select(COUNTIES), {include_blank: "Please choose"}, required: true) %>
             </div>
