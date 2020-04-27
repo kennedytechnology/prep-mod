@@ -97,3 +97,21 @@
     }
   }
 }
+
+.search-form {
+  form {
+    @apply flex;
+
+    .search-input {
+      @apply form-input mr-4 outline-none;
+
+      &:focus {
+        @apply border-brand-red;
+      }
+    }
+
+    input[type='submit'] {
+      @apply flex items-center justify-center rounded-full bg-brand-red text-white px-4 py-1;
+    }
+  }
+}
