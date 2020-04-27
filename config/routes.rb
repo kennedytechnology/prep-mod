@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  get 'kit/new', to: 'public/kit#new'
-  post 'kit/thanks', to: 'public/kit#thanks'
+
+  get 'message_board/index'
+  get 'kit/new'
+  post 'kit/thanks'
 
   devise_for :users,
     controllers: {
@@ -15,6 +17,7 @@ Rails.application.routes.draw do
   patch '/client/registration/(/:access_code)', to: 'public/patients#edit'
 
   get "/clear_session", to: 'public/patients#clear_session'
+
 
   resources :news_signups
   resources :patients
