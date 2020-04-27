@@ -50,12 +50,12 @@
               <label class="form-question">
                 Clinic Staff Person's Name <span class="required-field">*</span>
               </label>
-              <% @clinic.users.each do |user| %>
-                <div class="staff-input">
-                  <%= f.text_field 'users[]', value: user.name, required: true %>
+              <div class="fields flex flex-wrap">
+                    <%= f.fields_for :clinic_personnel do |c| %>
+                        <%= render 'clinics/clinic_personnel', f: c %>
+                    <% end %>
                 </div>
-              <% end %>
-              <span class="add-more-staff">Add more staff</span>
+                <%= link_to_add_row('Add more staff', f, :clinic_personnel, class: 'text-xs text-red-600 pb-1 border-b-2 border-red-600 hover:text-red-500 hover:border-red-500') %>
             </div>
           </div>
 
