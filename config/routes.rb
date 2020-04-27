@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get 'kit/new'
-  post 'kit/thanks'
+  get 'kit/new', to: 'public/kit#new'
+  post 'kit/thanks', to: 'public/kit#thanks'
 
   devise_for :users,
     controllers: {

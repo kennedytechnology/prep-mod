@@ -1,7 +1,6 @@
-class ClinicsController < ApplicationController
-  before_action :authenticate_user!
+class ClinicsController < ClinicManagementController
+
   before_action :get_clinic, only: [:edit, :update]
-  layout "clinic_management"
 
   def new
     @clinic = Clinic.new

@@ -1,4 +1,4 @@
-class KitController < ApplicationController
+class Public::KitController < ApplicationController
   def new
   end
 
