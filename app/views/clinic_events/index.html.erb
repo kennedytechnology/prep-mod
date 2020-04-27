@@ -1,5 +1,4 @@
 <div class="clinic-events-page">
-  <div class="container">
     <div class="card-wrapper">
       <div class="card-header">
         <h3>Clinic Activity Form</h3>
@@ -18,21 +17,39 @@
 
       <div class="card-content">
         <%= form_with(model: @clinic, url: clinic_path(@clinic), method: :put) do |f| %>
-          <div class="form-group form-group-time">
-            <div class="group-elem">
-              <%= f.label :start_time, "Clinic Start Time", class: "form-group-label" %>
-              <%= f.text_field :start_time %>
-              
+          <div class="flex mb-4">
+            <div class="w-4/12 mr-4">
+              <%= f.label :start_time, "Clinic Start Time:", class: "mr-3 font-bold" %><br/>
+              <select class="form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="clinic[start_hour]">
+                  <%= options_for_select((1..12).to_a, @clinic.start_time ? @clinic.start_time.strftime('%l').to_i : nil) %>
+              </select>
+              <span class="colon">:</span>
+              <select class="form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="clinic[start_minute]" >
+                  <%= options_for_select(['00', '15', '30', '45'], @clinic.start_time ? @clinic.start_time.strftime('%M').to_i : nil) %>
+              </select>
+              <select class="form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="clinic[start_meridiem]" >
+                  <%= options_for_select(['AM', 'PM'], @clinic.start_time ? @clinic.start_time.strftime('%p') : nil) %>
+              </select>
             </div>
-            <div class="group-elem">
-              <%= f.label :end_time, "Clinic End Time", class: "form-group-label" %>
-              <%= f.text_field :end_time %>
+            <div class="w-4/12 mr-4">
+              <%= f.label :end_time, "Clinic End Time:", class: "mr-3 font-bold" %><br/>
+              <select class="form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="clinic[end_hour]">
+                  <%= options_for_select((1..12).to_a, @clinic.end_time ? @clinic.end_time.strftime('%l').to_i : nil) %>
+              </select>
+              <span class="colon">:</span>
+              <select class="form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="clinic[end_minute]" >
+                  <%= options_for_select(['00', '15', '30', '45'], @clinic.end_time ? @clinic.end_time.strftime('%M').to_i : nil) %>
+              </select>
+              <select class="form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="clinic[end_meridiem]" >
+                  <%= options_for_select(['AM', 'PM'], @clinic.end_time ? @clinic.end_time.strftime('%p') : nil) %>
+              </select>
             </div>
-            <div class="group-elem">
-              <label>Clinic Length(in Minutes)</label>
-              <input type="text" placeholder="315" value="<%= (@clinic.end_time.to_i - @clinic.start_time.to_i) * 60 %>" disabled>
+            <div class="w-4/12">
+              <label>Clinic Length (in minutes)</label>:
+              <input type="text" placeholder="315" value="<%= (@clinic.end_time.to_i - @clinic.start_time.to_i) / 60 %>" disabled>
             </div>
           </div>
+
           <div class="clinic-comments">
             <%= f.label :incidents_comments, "Clinic Incidents or Comments", class: "form-group-label" %>
             <%= f.text_area :incidents_comments %>
@@ -176,10 +193,13 @@
               </div>
             </div>
           </div>
+          <div class="button-container">
+            <input type="submit" name="save" value="Save" class="submit-button mr-2 mt-10">
+            <input type="submit" name="save-submit" value="Save and Submit" class="submit-button ml-2 bg-blue-500 text-white mt-10">
+          </div>
         <% end %>
       </div>
     </div>
-  </div>
 </div>
 
 
@@ -359,4 +379,5 @@
       </div>
     </div>
   </div>
+ 
 <% end %>

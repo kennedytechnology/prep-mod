@@ -39,7 +39,11 @@ class ClinicsController < ClinicManagementController
       flash[:error] = "Oops something went wrong. Please, try again!"
     end
 
-    redirect_back fallback_location: root_path
+    if params['save-submit']
+      redirect_to "/clinics"
+    else
+      redirect_back fallback_location: root_path
+    end
   end
 
   private

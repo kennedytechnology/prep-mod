@@ -122,7 +122,7 @@
                                             <%= options_for_select(['00', '15', '30', '45'], @clinic.start_time ? @clinic.start_time.strftime('%M').to_i : nil) %>
                                         </select>
                                         <select class="meridiem form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="clinic[start_meridiem]" >
-                                            <%= options_for_select(['AM', 'PM'], @clinic.start_time ? @derp.start_time.strftime('%p') : nil) %>
+                                            <%= options_for_select(['AM', 'PM'], @clinic.start_time ? @clinic.start_time.strftime('%p') : nil) %>
                                         </select>
                                     </div>
 
@@ -136,7 +136,7 @@
                                                 <%= options_for_select(['00', '15', '30', '45'], @clinic.end_time ? @clinic.end_time.strftime('%M').to_i : nil) %>
                                             </select>
                                             <select class="meridiem form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="clinic[end_meridiem]" >
-                                                <%= options_for_select(['AM', 'PM'], @clinic.end_time ? @derp.end_time.strftime('%p') : nil) %>
+                                                <%= options_for_select(['AM', 'PM'], @clinic.end_time ? @clinic.end_time.strftime('%p') : nil) %>
                                             </select>
                                     </div>
                                 </div>

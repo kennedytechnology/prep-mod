@@ -17,11 +17,11 @@ class Clinic < ApplicationRecord
     :end_hour, :end_minute, :end_meridiem
 
   def parse_time
-    if start_hour && start_minute && start_meridiem 
-      self.start_time = Time.parse("#{start_hour}:#{start_minute}#{start_meridiem}")
+    if start_hour && start_minute && start_meridiem
+      self.start_time = Time.find_zone("UTC").parse("#{start_hour}:#{start_minute}#{start_meridiem}")
     end
     if end_hour && end_minute && end_meridiem 
-      self.end_time = Time.parse("#{end_hour}:#{end_minute}#{end_meridiem}")
+      self.end_time = Time.find_zone("UTC").parse("#{end_hour}:#{end_minute}#{end_meridiem}")
     end
   end
   def clinic_staff; clinic_personnel; end

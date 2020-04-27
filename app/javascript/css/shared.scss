@@ -20,9 +20,7 @@
 
 // Form card
 .card-wrapper {
-  @apply bg-white shadow rounded;
-  padding: 25px 25px 20px;
-
+  
   .card-header {
     @apply flex justify-between mb-8 pb-2 border-b-2 border-brand-gray-300;
 
@@ -48,7 +46,7 @@
   }
 
   .details-section {
-    @apply flex flex-wrap mb-12;
+    @apply flex flex-wrap mb-6;
 
     h3 {
       @apply w-full font-bold text-black text-base mb-1;
@@ -148,25 +146,11 @@
       }
     }
 
-    .form-group-time {
-      .group-elem {
-        @apply w-full;
-
-        @screen md {
-          @apply w-1/2;
-        }
-
-        @screen lg {
-          width: calc(100%/3);
-        }
-      }
-    }
-
     .button-container, .submit-buttons {
       @apply flex items-center justify-center;
 
       .submit-button {
-        @apply flex justify-center items-center bg-brand-red text-white rounded-full mb-12;
+        @apply flex justify-center items-center bg-blue-500 text-white rounded-full mb-12;
         width: 200px;
         height: 51px;
       }
