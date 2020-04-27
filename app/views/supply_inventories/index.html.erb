@@ -82,16 +82,16 @@
                                     <%= supply_inventory.quantity %>
                                 </td>
                                 <td class="">
-                                    <%= (supply_inventory.quantity * 0.6666).to_i %>
+                                    <%= supply_inventory.quantity_used %>
                                 </td>
                                 <td class="">
-                                    <%= (supply_inventory.quantity * 0.333).to_i %>
+                                    <%= supply_inventory.quantity_lost %>
                                 </td>
                                 <td class="">
-                                    <%= "0" %>
+                                    <%= supply_inventory.quantity_loaned %>
                                 </td>
                                 <td class="">
-                                    <%= "2" %>
+                                    <%= supply_inventory.quantity - (supply_inventory.quantity_used + supply_inventory.quantity_lost + supply_inventory.quantity_loaned) %>
                                 </td>
                             </tr>
                         <% end %>

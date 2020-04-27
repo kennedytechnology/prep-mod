@@ -21,6 +21,20 @@ class SupplyInventoriesController < InheritedResources::Base
     end
   end
 
+  def edit
+    @supply_inventory = SupplyInventory.find(params[:id])
+  end
+
+  def create
+    @supply_inventory = SupplyInventory.find(params[:id])
+
+    if @supply_inventory.update(supply_inventory_params)
+      redirect_to supply_inventories_path(clinic_id: @supply_inventory.clinic), notice: "Successfully Updated Inventory Item"
+    else
+      redirect_back fallback_location: supply_inventories_path(clinic_id: @supply_inventory.clinic), alert: "Error!"
+    end
+  end
+
   private
 
     def supply_inventory_params
