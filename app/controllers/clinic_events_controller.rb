@@ -1,6 +1,4 @@
-class ClinicEventsController < ApplicationController
-  layout "clinic_management"
-  before_action :authenticate_user!
+class ClinicEventsController < ClinicManagementController
   
   def new
     @clinic_event = ClinicEvent.new

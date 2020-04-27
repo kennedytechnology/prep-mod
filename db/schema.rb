@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_24_091333) do
+ActiveRecord::Schema.define(version: 2020_04_27_155004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,8 +114,6 @@ ActiveRecord::Schema.define(version: 2020_04_24_091333) do
     t.integer "user_id"
     t.text "outcome_comments"
     t.text "incidents_comments"
-    t.string "start_time"
-    t.string "end_time"
     t.integer "duration"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -123,7 +121,6 @@ ActiveRecord::Schema.define(version: 2020_04_24_091333) do
     t.float "latitude"
     t.float "longitude"
     t.string "county"
-    t.string "location"
     t.string "zip"
     t.string "city"
     t.string "state"
@@ -134,6 +131,9 @@ ActiveRecord::Schema.define(version: 2020_04_24_091333) do
     t.string "appointment_frequency_minutes"
     t.string "appointment_slots"
     t.string "appointments_available"
+    t.time "start_time"
+    t.time "end_time"
+    t.string "venue_name"
   end
 
   create_table "clinics_users", id: false, force: :cascade do |t|
@@ -221,6 +221,43 @@ ActiveRecord::Schema.define(version: 2020_04_24_091333) do
     t.string "occupation"
   end
 
+  create_table "supply_inventories", force: :cascade do |t|
+    t.date "received_at"
+    t.string "item_type"
+    t.string "item_name"
+    t.string "manufacturer"
+    t.string "lot_number"
+    t.date "expiration_date"
+    t.integer "quantity"
+    t.string "packaging"
+    t.string "source"
+    t.string "product_name"
+    t.string "event_type"
+    t.bigint "clinic_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "quantity_used"
+    t.integer "quantity_lost"
+    t.integer "quantity_loaned"
+  end
+
+  create_table "test_kits", force: :cascade do |t|
+    t.bigint "clinic_id", null: false
+    t.string "test_name"
+    t.string "test_manufacturer"
+    t.string "test_lot_number"
+    t.string "test_type"
+    t.string "test_processing"
+    t.date "test_expiration_date"
+    t.integer "test_kits_quantity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "tests_administered"
+    t.integer "unusable_tests"
+    t.integer "tests_returned"
+    t.index ["clinic_id"], name: "index_test_kits_on_clinic_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -249,12 +286,5 @@ ActiveRecord::Schema.define(version: 2020_04_24_091333) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
-  create_table "venues", force: :cascade do |t|
-    t.integer "named_place_id"
-    t.string "name"
-    t.string "venue_category"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
+  add_foreign_key "test_kits", "clinics"
 end

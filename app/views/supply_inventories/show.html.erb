@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Received at:</strong>
+  <%= @supply_inventory.received_at %>
+</p>
+
+<p>
+  <strong>Item type:</strong>
+  <%= @supply_inventory.item_type %>
+</p>
+
+<p>
+  <strong>Item name:</strong>
+  <%= @supply_inventory.item_name %>
+</p>
+
+<p>
+  <strong>Manufacturer:</strong>
+  <%= @supply_inventory.manufacturer %>
+</p>
+
+<p>
+  <strong>Lot number:</strong>
+  <%= @supply_inventory.lot_number %>
+</p>
+
+<p>
+  <strong>Expiration date:</strong>
+  <%= @supply_inventory.expiration_date %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @supply_inventory.quantity %>
+</p>
+
+<p>
+  <strong>Packaging:</strong>
+  <%= @supply_inventory.packaging %>
+</p>
+
+<p>
+  <strong>Source:</strong>
+  <%= @supply_inventory.source %>
+</p>
+
+<p>
+  <strong>Product name:</strong>
+  <%= @supply_inventory.product_name %>
+</p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @supply_inventory.client %>
+</p>
+
+<%= link_to 'Edit', edit_supply_inventory_path(@supply_inventory) %> |
+<%= link_to 'Back', supply_inventories_path %>

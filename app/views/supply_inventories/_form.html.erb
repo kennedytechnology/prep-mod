@@ -1,0 +1,72 @@
+<%= form_with(model: supply_inventory, local: true) do |form| %>
+  <% if supply_inventory.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(supply_inventory.errors.count, "error") %> prohibited this supply_inventory from being saved:</h2>
+
+      <ul>
+        <% supply_inventory.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :received_at %>
+    <%= form.date_select :received_at %>
+  </div>
+
+  <div class="field">
+    <%= form.label :item_type %>
+    <%= form.text_field :item_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :item_name %>
+    <%= form.text_field :item_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :manufacturer %>
+    <%= form.text_field :manufacturer %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lot_number %>
+    <%= form.text_field :lot_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :expiration_date %>
+    <%= form.date_select :expiration_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :quantity %>
+    <%= form.number_field :quantity %>
+  </div>
+
+  <div class="field">
+    <%= form.label :packaging %>
+    <%= form.text_field :packaging %>
+  </div>
+
+  <div class="field">
+    <%= form.label :source %>
+    <%= form.text_field :source %>
+  </div>
+
+  <div class="field">
+    <%= form.label :product_name %>
+    <%= form.text_field :product_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :client %>
+    <%= form.text_field :client %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

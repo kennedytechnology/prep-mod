@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'message_board/index'
   get 'kit/new'
   post 'kit/thanks'
 
@@ -17,12 +18,15 @@ Rails.application.routes.draw do
 
   get "/clear_session", to: 'public/patients#clear_session'
 
+
   resources :news_signups
   resources :patients
   resources :clinics, only: [:index, :new, :create, :edit, :update] do
     resources :patients
   end
   resources :clinic_events
+  resources :supply_inventories 
+  resources :test_kits
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

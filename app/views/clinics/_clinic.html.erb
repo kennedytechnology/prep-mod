@@ -1,13 +1,29 @@
-<div class="clinic-details-wrapper <%= "last-child" if @clinics.last == clinic %>">
-  <div class="clinic-info-wrapper">
-    <h3 class="clinic-name"><%= clinic.name %></h3>
-    <p><%= clinic.venue.name %></p>
-    <p><%= clinic.address %></p>
-    <p><%= clinic.clinic_date.strftime("%A %B %e, %Y") %></p>
-  </div>
-  <div class="clinic-actions-wrapper">
-    <%= link_to "Registration List", clinic_patients_path(clinic_id: clinic.id), class: "clinic-action" %>
-    <%= link_to "Edit Clinic", edit_clinic_path(id: clinic.id), class: "clinic-action" %>
-    <%= link_to "Clinic Activity", clinic_events_path(clinic_id: clinic.id), class: "clinic-action" %>
-  </div>
-</div>
+<tr class="hover:bg-gray-50">
+    <td class="px-6 py-4 border-b border-gray-200 text-sm leading-5 font-medium text-gray-900">
+        <%= clinic.clinic_date.to_datetime.strftime("%m-%d-%Y") %>
+    </td>
+    <td class="px-6 py-4 border-b border-gray-200 text-sm leading-5 text-gray-500">
+        <%= clinic.county %>
+    </td>
+    <td class="px-6 py-4 border-b border-gray-200 text-sm leading-5 text-gray-500">
+        <%= clinic.venue_name %>
+    </td>
+    <td class="px-6 py-4 border-b border-gray-200 text-sm leading-5 text-gray-500 flex flex-wrap">
+        <%= link_to clinic_patients_path(clinic_id: clinic.id), class: "clinic-action hover:text-red-600 w-1/3 mr-2 mb-2" do %>
+            <span class="text-red-600"> &raquo; </span>
+            <span> Registration List </span>
+        <% end %>
+        <%= link_to edit_clinic_path(id: clinic.id), class: "clinic-action hover:text-red-600 w-1/3 mr-2 mb-2" do %>
+            <span class="text-red-600"> &raquo; </span>
+            <span> Edit Clinic </span>
+        <% end %>
+        <%= link_to clinic_events_path(clinic_id: clinic.id), class: "clinic-action hover:text-red-600 w-1/3 mr-2 mb-2" do %>
+            <span class="text-red-600"> &raquo; </span>
+            <span> Clinic Activity </span>
+        <% end %>
+        <%= link_to supply_inventories_path(clinic_id: clinic.id), class: 'clinic-action hover:text-red-600 w-1/3 mb-2' do %>
+            <span class="text-red-600"> &raquo; </span>
+            <span> Inventory Management </span>
+        <% end %>
+    </td>
+</tr>

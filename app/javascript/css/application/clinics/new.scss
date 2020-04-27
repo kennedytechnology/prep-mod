@@ -4,6 +4,10 @@
     }
 }
 
+.new_test_kit_row:first-child {
+    .remove_test_kit_record { display: none !important; }
+}
+
 #clinic_end_time_5i,
 #clinic_start_time_5i {
     @apply appearance-none bg-white;

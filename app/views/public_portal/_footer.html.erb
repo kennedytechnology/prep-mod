@@ -1,18 +1,23 @@
 <div class="bg-white">
   <div class="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
-    <div class="max-w-screen-xl mx-auto px-4 py-4 sm:px-6 lg:pb-4 lg:px-8 lg:py-8 flex justify-between items-end">
-        <div>
-            <%= image_tag "maryland_partnership_logo.png", style: "max-height: 60px;" %>
-        </div>
 
-        <div>
-            <%= image_tag "multi_state_partnership_logo.png", style: "max-height: 86px;" %>
+      <div class="sm:grid sm:grid-cols-1 sm:col-gap-10 sm:row-gap-10 md:grid-cols-3 lg:mt-12 lg:mb-24 lg:flex items-center justify-center">
+        <div class="mr-12">
+          <%= image_tag 'multi_state_partnership_logo.png', style: "width: 190px; height: auto;" %>
         </div>
-    </div>
+        <div class="mod-logo mr-12">
+            <%= image_tag "prep-mod.png", style: "width: 332px;" %>
+        </div>
+        <div class="">
+            <%= image_tag "maryland_partnership_logo.png", style: "width: 255px;" %>
+        </div>
+      </div>
+
     <div class="mt-8 border-t border-gray-200 pt-8 md:flex md:items-center md:justify-between">
       <p class="mt-8 text-base leading-6 text-gray-400 md:mt-0 md:order-1">
         &copy; <%= Date.current.year %> ClinicWizard, Inc. All rights reserved.
       </p>
     </div>
+
   </div>
 </div>

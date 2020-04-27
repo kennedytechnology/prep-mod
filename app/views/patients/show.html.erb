@@ -1,6 +1,9 @@
 <div class="clinic-patients-show-page">
   <div class="page-header">
     <h1>Patient History</h1>
+    <form>
+      <input type="button" value="Print" onClick="window.print()" class="bg-gray-500 text-xs text-white py-1 px-4 mr-2 mt-4 rounded-full;">
+    </form>
   </div>
 
 
@@ -21,12 +24,13 @@
           <tbody>
           <% @patient_clinic_events.sort_by(&:created_at).each do |clinic_event| %>
             <tr class="<%= "border-none" if clinic_event == @patient.clinic_events.sort_by(&:created_at).last %>">
-              <td><%= clinic_event.clinic.venue.name %></td>
+              <td><%= clinic_event.clinic.name %></td>
               <td><%= clinic_event.created_at.strftime("%m/%d/%Y") %></td>
               <td><%= clinic_event.category %></td>
               <td><%= clinic_event.outcome %></td>
               <td><%= clinic_event.notes %></td>
-              <td><%= link_to "Delete", "#", class: "action-button" %></td>
+              <td><%= link_to "Delete", "#", class: "action-button" %>
+              </td>
             </tr>
           <% end %>
           </tbody>

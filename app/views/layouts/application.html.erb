@@ -14,7 +14,7 @@
   </head>
 
   <body>
-    <%= render partial: "layouts/header" %>
+    <%= render partial: "layouts/header" unless (action_name == "index" && controller_name == "public_portal") %>
     <!-- These are from devise. This is to be better-handled elsewise -->
     <% if notice || alert %>
     <script>

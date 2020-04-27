@@ -1,0 +1,102 @@
+
+    <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9 sm:truncate mb-3">
+        Supply Inventory for <%= @clinic.name %>
+    </h2>
+    <%= link_to 'New Supply Inventory Entry', new_supply_inventory_path(clinic_id: @clinic.id), class: " mb-3 px-6 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out sm:mt-0 sm:flex-shrink-0 sm:inline-flex sm:items-center sm:w-auto" %> 
+    <%# <div class="flex flex-col">
+        <div class="-my-2 py-2 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+            <div class="align-middle inline-block "> %>
+                <table class="inventory-table">
+                    <thead>
+                        <tr>
+                            <th class="">
+                                Date Received
+                            </th>
+                            <th class="">
+                                Item Type
+                            </th>
+                            <th class="">
+                                Item Name
+                            </th>
+                            <th class="">
+                                Manufacturer
+                            </th>
+                            <th class="">
+                                Source
+                            </th>
+                            <th class="">
+                                Lot Number
+                            </th>
+                            <th class="">
+                                Expiration Date
+                            </th>
+                            <th class="">
+                                Starting Qty
+                            </th>
+                            <th class="">
+                                Packaging
+                            </th>
+                            <th class="">
+                                Qty<br>Used
+                            </th>
+                            <th class="">
+                                Qty<br>Lost
+                            </th>
+                            <th class="">
+                                Qty<br>Loaned
+                            </th>
+                            <th class="">
+                                Current<br>Qty
+                            </th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                        <% @supply_inventories.each do |supply_inventory| %>
+                            <tr class="hover:bg-gray-50">
+                                <td class="">
+                                    <%= supply_inventory.received_at.strftime("%m-%d-%Y") %>
+                                </td>
+                                <td class="">
+                                    <%= supply_inventory.item_type %>
+                                </td>
+                                <td class="">
+                                    <%= supply_inventory.item_name %>
+                                </td>
+                                <td class="">
+                                    <%= supply_inventory.manufacturer %>
+                                </td>
+                                <td class="">
+                                    <%= supply_inventory.source %>
+                                </td>
+                                <td class="">
+                                    <%= supply_inventory.lot_number %>
+                                </td>
+                                <td class="">
+                                    <%= supply_inventory.expiration_date.strftime("%m-%d-%Y") %>
+                                </td>
+                                <td class="">
+                                    <%= supply_inventory.packaging %>
+                                </td>
+                                <td class="">
+                                    <%= supply_inventory.quantity %>
+                                </td>
+                                <td class="">
+                                    <%= supply_inventory.quantity_used %>
+                                </td>
+                                <td class="">
+                                    <%= supply_inventory.quantity_lost %>
+                                </td>
+                                <td class="">
+                                    <%= supply_inventory.quantity_loaned %>
+                                </td>
+                                <td class="">
+                                    <%= supply_inventory.quantity - (supply_inventory.quantity_used + supply_inventory.quantity_lost + supply_inventory.quantity_loaned) %>
+                                </td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            <%# </div>
+        </div>
+    </div> %>

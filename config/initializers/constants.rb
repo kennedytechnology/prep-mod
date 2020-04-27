@@ -38,4 +38,11 @@ CLINIC_EVENTS = [
     "Other"
   ]
 
+  INVENTORY_ITEM_TYPES = ["Test Kit-PCR", "Test Kit - Blood", "Safety Kit", "Supplies", "Influenza", "Tdap", 
+    "MCV4", "HPV", "IPV", "Var", "MMR", "Hep B", "Hep A", "DTaP", "Hib", "Pnemococcal", "Zoster", "Other" ]
+  INVENTORY_MANUFACTURERS = ["GlaxoSmithKline", "MedImmune", "Pfizer", "Sanofi Pasteur", "Seqiris"]
+  INVENTORY_PACKAGINGS = ["Unit", "Box", "Case", "Other"]
+  INVENTORY_SOURCES = ["Private Purchase", "VFC", "Borrowed", "Other"]
+  INVENTORY_EVENT_TYPES = ["Community", "Health Department", "LTC", "School", "Loan", "Hospital", "Other"]
+
   Date::DATE_FORMATS[:default] = "%A %B %e, %Y"
