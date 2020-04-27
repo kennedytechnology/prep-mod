@@ -25,7 +25,7 @@ class SupplyInventoriesController < InheritedResources::Base
     @supply_inventory = SupplyInventory.find(params[:id])
   end
 
-  def create
+  def update
     @supply_inventory = SupplyInventory.find(params[:id])
 
     if @supply_inventory.update(supply_inventory_params)
@@ -41,7 +41,8 @@ class SupplyInventoriesController < InheritedResources::Base
       params.require(:supply_inventory).permit(
         :received_at, :item_type, :item_name, 
         :manufacturer, :lot_number, :expiration_date,
-        :quantity, :packaging, :source, :product_name, 
+        :quantity, :quantity_used, :quantity_loaned,
+        :quantity_lost, :packaging, :source, :product_name, 
         :event_type, :clinic_id
       )
     end
