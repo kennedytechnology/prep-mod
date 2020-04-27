@@ -9,55 +9,252 @@
         </div>
       </div>
       <div class="card-content">
-        <%= form_with(model: @clinic, url: clinic_path(@clinic), method: :put) do |f| %>
-          <div class="form-group">
-            <div class="group-elem">
-              <%= f.label :clinic_date, class: "form-question" do %>
-                Clinic Date <span class="required-field">*</span>
-              <% end %>
-              <%= f.date_field :clinic_date, required: true %>
-            </div>
-            <div class="group-elem">
-              <%= f.label :county, class: "form-question" do %>
-                Country <span class="required-field">*</span>
-              <% end %>
-              <%= f.select(:county, options_for_select(COUNTIES), {include_blank: "Please choose"}, required: true) %>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="group-elem">
-              <%= f.label :address, class: "form-question" do %>
-                Clinic Location <span class="required-field">*</span>
-              <% end %>
-              <%= f.select(:address, options_for_select(['Tester Middle School']), {include_blank: "Please choose"},
-                           required: true) %>
-            </div>
-            <div class="group-elem">
-              <%= f.label :students_registered, class: "form-question" do %>
-                Number of Students Registered <span class="required-field">*</span>
-              <% end %>
-              <%= f.number_field :students_registered, required: true %>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="group-elem">
-              <%= f.label :lead_vaccinator_name, class: "form-question" do %>
-                Lead Vaccinator's Name <span class="required-field">*</span>
-              <% end %>
-              <%= f.text_field :lead_vaccinator_name, required: true %>
-            </div>
-            <div class="group-elem">
-              <label class="form-question">
-                Clinic Staff Person's Name <span class="required-field">*</span>
-              </label>
-              <% @clinic.users.each do |user| %>
-                <div class="staff-input">
-                  <%= f.text_field 'users[]', value: user.name, required: true %>
+        <%= form_with model: @clinic, class: "edit-new-form", local: true do |f| %>
+          <div class="public-private-container">
+            <fieldset>
+              <p class="title">Is clinic public or private?</p>
+              <div class="fields-container">
+                <div class="field">
+                  <%= f.radio_button :clinic_status, "public", id: "clinic_status_public", class: "form-radio" %>
+                  <%= f.label :clinic_status, value: "public", for: "clinic_status_public" do %>
+                    <span>Public</span>
+                  <% end %>
                 </div>
-              <% end %>
-              <span class="add-more-staff">Add more staff</span>
+                <div class="field">
+                  <%= f.radio_button :clinic_status, "private", id: "clinic_status_private", class: "form-radio" %>
+                  <%= f.label :clinic_status, value: "private", for: "clinic_status_private" do %>
+                    <span>Private</span>
+                  <% end %>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="service-provider-open-section">
+            <fieldset class="service-provider">
+              <legend class="title">Services Provided</legend>
+              <div class="checkbox-section">
+                <%= collection_check_boxes(:clinic, :service_ids, ClinicService.all, :id, :name) do |b| %>
+                  <div class="checkbox-container">
+                    <div class="checkbox">
+                      <%= b.check_box(class: "form-checkbox") %>
+                    </div>
+                    <div class="label">
+                      <%= b.label %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </fieldset>
+
+            <fieldset class="open-to">
+              <legend class="title">Open to</legend>
+              <div class="checkbox-section">
+                <%= collection_check_boxes(:clinic, :age_group_ids, ClinicAgeGroup.all, :id, :name) do |b| %>
+                  <div class="checkbox-container">
+                    <div class="checkbox">
+                      <%= b.check_box(class: "form-checkbox") %>
+                    </div>
+                    <div class="label">
+                      <%= b.label %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="date-time-section">
+            <h3 class="title">Date and Time</h3>
+            <div class="clinic-date-time-section">
+              <div class="date-time-inner">
+                <div class="clinic-date">
+                  <p class="label">Clinic Date</p>
+                  <%= f.date_field :clinic_date, class: "form-input", placeholder: "MM/DD/YYYY" %>
+                </div>
+                <div class="start-time">
+                  <p class="label"> Start Time </p>
+                  <%= f.time_select :start_time,
+                                    :combined => true,
+                                    :default => Time.now.change(:hour => 11, :min => 30),
+                                    :minute_interval => 15,
+                                    :time_separator => "",
+                                    :start_hour => 10,
+                                    :start_minute => 30,
+                                    :end_hour => 14,
+                                    :end_minute => 30, class: "form-input" %>
+                </div>
+
+                <div class="end-time">
+                  <p class="label"> End Time </p>
+                  <%= f.time_select :end_time,
+                                    :combined => true,
+                                    :default => Time.now.change(:hour => 11, :min => 30),
+                                    :minute_interval => 15,
+                                    :time_separator => "",
+                                    :start_hour => 10,
+                                    :start_minute => 30,
+                                    :end_hour => 14,
+                                    :end_minute => 30, class: "form-input" %>
+                </div>
+              </div>
+            </div>
+
+            <div class="clinic-location-section">
+              <h3 class="label">Clinic Location</h3>
+              <div class="clinic-location col-span-2">
+                <div class="county">
+                  <%= f.select :county, COUNTIES, {prompt: "Select County"}, {class: "form-select"} %>
+                </div>
+
+                <div class="location">
+                  <%= f.text_field :location, placeholder: "Location", class: "form-input" %>
+                </div>
+
+                <div class="address">
+                  <%= f.text_field :address, id: "autocomplete", onFocus: "geolocate()", class: "form-input", placeholder: "Address" %>
+                  <%= render partial: "public/clinics/google_maps_script" %>
+                </div>
+                <div class="zip-city-state">
+                  <%= f.text_field :zip, placeholder: "Zip", id: "postal_code", class: "form-input" %>
+                  <%= f.text_field :city, placeholder: "City", id: "locality", class: "form-input" %>
+                  <%= f.text_field :state, placeholder: "State", id: "administrative_area_level_1", class: "form-input" %>
+                </div>
+              </div>
             </div>
           </div>
+
+          <div class="appointment-info-section">
+            <h3 class="title">Appointment Information</h3>
+            <div class="appointment-info-section-inner">
+              <fieldset>
+                <div class="available-container">
+                  <p class="label">Appointments available</p>
+                  <div class="radio-section sm:col-span-2">
+                    <div class="radio-section-inner">
+                      <div class="radio-inputs">
+                        <%= f.radio_button :appointments_available, "Yes, required", id: "yes_required", class: "form-radio" %>
+                        <%= f.label :clinic_status, value: "public", for: "yes_required" do %>
+                          <span> Yes, required </span>
+                        <% end %>
+                      </div>
+                      <div class="radio-inputs">
+                        <%= f.radio_button :appointments_available, "Yes, optional", id: "yes_optional", class: "form-radio" %>
+                        <%= f.label :clinic_status, value: "public", for: "yes_optional" do %>
+                          <span> Yes, optional </span>
+                        <% end %>
+                      </div>
+                      <div class="radio-inputs">
+                        <%= f.radio_button :appointments_available, "No (Walk-In)", id: "no_walk_in", class: "form-radio" %>
+                        <%= f.label :clinic_status, value: "public", for: "no_walk_in" do %>
+                          <span> No (Walk-In) </span>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset>
+                <div class="frequency-container">
+                  <p class="label">Appointment Frequency</p>
+                  <div class="sm:col-span-2">
+                    <div class="max-w-lg">
+                      <div class="mt-4">
+                        <label for="country">Appointment Frequency: Every</label>
+                        <div class="frequency-minutes-section sm:col-span-2">
+                          <div class="frequency-minutes-section-inner">
+                            <%= f.select :appointment_frequency_minutes, [5, 15], {prompt: "Minutes"}, {class: "form-select"} %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset>
+                <div class="slots-container">
+                  <p class="label">Appointment Slots</p>
+                  <div class="sm:col-span-2">
+                    <div class="max-w-lg">
+                      <div class="mt-4">
+                        <label for="country">Number of Appointment Slots per Frequency</label>
+                        <div class="appointment-slots mt-1 sm:col-span-2">
+                          <div class="appointment-slots-inner">
+                            <%= f.select :appointment_slots, (1..50), {prompt: "Select"}, {class: "form-select"} %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+
+          <div class="contact-section">
+            <h3 class="title">Contact Information</h3>
+            <div class="contact-section-inner">
+              <div class="fields-container">
+                <%= f.label :contact_person %>
+                <div class="input-container">
+                  <%= f.text_field :contact_person, placeholder: "Contact Person", class: "form-input" %>
+                </div>
+              </div>
+              <div class="fields-container">
+                <%= f.label :contact_phone_number %>
+                <div class="input-container">
+                  <%= f.text_field :contact_phone_number, placeholder: "Contact Number", class: "form-input" %>
+                </div>
+              </div>
+              <div class="fields-container">
+                <%= f.label :backup_contact_person %>
+                <div class="input-container">
+                  <%= f.text_field :backup_contact_person, placeholder: "Back-Up Contact Person", class: "form-input" %>
+                </div>
+              </div>
+              <div class="fields-container">
+                <%= f.label :backup_contact_phone_number %>
+                <div class="input-container">
+                  <%= f.text_field :backup_contact_phone_number, placeholder: "Back-Up Contact Number", class: "form-input" %>
+                </div>
+              </div>
+              <div class="fields-container">
+                <%= f.label :students_registered, "Number of Patients Registered" %>
+                <div class="input-container">
+                  <%= f.number_field :students_registered, class: "form-input" %>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="other-info-section">
+            <h3 class="title">Other Information</h3>
+            <div class="other-info-section-inner">
+              <div class="notes-container">
+                <%= f.label :incidents_comments, "Incidents Comments" %>
+                <div class="input-container">
+                  <%= f.text_area :incidents_comments, class: "form-textarea", placeholder: "Enter Details Here" %>
+                </div>
+              </div>
+              <div class="clinic-staff-container">
+                <div class="input-container">
+                  <%= f.label :lead_vaccinator_name, "Lead Tester’s Name" %>
+                  <%= f.text_field :lead_vaccinator_name, placeholder: "Lead Tester's Name", class: "form-input" %>
+                </div>
+
+                <div class="input-container">
+                  <div class="fields">
+                    <%= f.label :clinic_personnel, "Clinic Staff" %>
+                    <%= f.fields_for :clinic_personnel do |c| %>
+                      <%= render 'clinics/clinic_personnel', f: c %>
+                    <% end %>
+                  </div>
+                </div>
+                <%= link_to_add_row('Add more staff', f, :clinic_personnel, class: 'add-more-staff-button') %>
+              </div>
+            </div>
+          </div>
+
           <div class="submit-buttons">
             <%= f.button "Review & Submit", class: "submit-button" %>
             <%= link_to "Cancel", clinics_path, class: "submit-button" %>
