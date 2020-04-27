@@ -124,7 +124,7 @@
             <div class="patients-table-header">
               <div class="search-section">
                 <label for="search">Search: </label>
-                <input id="search" type="text">
+                <input id="search" data-action="keyup->clinic-activity-patients#search" type="text">
               </div>
               <div class="add-more-patients">
                 <%= link_to sanitize("Add More Patients &#43;"), "/patients/new", class: "add-more-patients-button" %>
@@ -150,7 +150,7 @@
                     </thead>
                     <tbody>
                     <% @clinic.patients.each do |patient| %>
-                      <tr data-patient-id="<%= patient.id %>">
+                      <tr class="patient-row" data-target="clinic-activity-patients.searchableRow" data-search-content="<%= [patient.first_name.downcase, patient.last_name.downcase].join(" ") %>" data-patient-id="<%= patient.id %>">
                         <td>
                           <%= link_to patient.first_name + ' ' + patient.last_name, patient %> <br/>
                         </td>
