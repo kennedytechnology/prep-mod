@@ -1,9 +1,9 @@
 <div class="clinic-details-wrapper <%= "last-child" if @clinics.last == clinic %>">
   <div class="clinic-info-wrapper">
     <h3 class="clinic-name"><%= clinic.name %></h3>
-    <p><%= clinic.venue.name %></p>
+    <p><%= clinic.venue_name %></p>
     <p><%= clinic.address %></p>
-    <p><%= clinic.clinic_date.strftime("%A %B %e, %Y") %></p>
+    <p><%= clinic.clinic_date.to_datetime.strftime("%A %B %e, %Y") %></p>
   </div>
   <div class="clinic-actions-wrapper">
     <%= link_to "Registration List", clinic_patients_path(clinic_id: clinic.id), class: "clinic-action" %>

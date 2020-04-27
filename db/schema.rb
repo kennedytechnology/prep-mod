@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_24_091333) do
+ActiveRecord::Schema.define(version: 2020_04_27_033309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,8 +114,6 @@ ActiveRecord::Schema.define(version: 2020_04_24_091333) do
     t.integer "user_id"
     t.text "outcome_comments"
     t.text "incidents_comments"
-    t.string "start_time"
-    t.string "end_time"
     t.integer "duration"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -123,7 +121,6 @@ ActiveRecord::Schema.define(version: 2020_04_24_091333) do
     t.float "latitude"
     t.float "longitude"
     t.string "county"
-    t.string "location"
     t.string "zip"
     t.string "city"
     t.string "state"
@@ -134,6 +131,9 @@ ActiveRecord::Schema.define(version: 2020_04_24_091333) do
     t.string "appointment_frequency_minutes"
     t.string "appointment_slots"
     t.string "appointments_available"
+    t.time "start_time"
+    t.time "end_time"
+    t.string "venue_name"
   end
 
   create_table "clinics_users", id: false, force: :cascade do |t|
@@ -264,14 +264,6 @@ ActiveRecord::Schema.define(version: 2020_04_24_091333) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
-  end
-
-  create_table "venues", force: :cascade do |t|
-    t.integer "named_place_id"
-    t.string "name"
-    t.string "venue_category"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
 end

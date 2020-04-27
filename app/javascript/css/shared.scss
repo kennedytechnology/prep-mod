@@ -236,10 +236,11 @@
 .clinic-management-links {
   @apply flex mt-4 mb-4 justify-center;
   a {
-    @apply bg-blue-500 text-white font-bold py-2 px-4 mr-2 rounded-full;
+    @apply mr-2 inline-block border border-gray-800 bg-blue-500 rounded text-white py-1 px-3;
   }
+
   a:hover {
-    @apply bg-blue-600;
+    @apply border-black bg-blue-600;
   }
 }
 
@@ -341,4 +342,24 @@
 
 .modal {
   transition: opacity 0.25s ease;
+}
+
+.clinic-management-container{
+  @apply bg-white p-8 rounded shadow;
+}
+
+.inventory-table{
+  @apply min-w-full shadow border-b border-gray-200;
+
+  th{
+    @apply font-bold text-xs border-b;
+  }
+  td{
+    @apply border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 text-gray-500;
+  }
+
+  tbody tr 
+  {
+    @apply mb-2 border-b border-gray-200 text-xs text-gray-500;
+  }
 }

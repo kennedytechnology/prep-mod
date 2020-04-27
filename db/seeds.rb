@@ -9,12 +9,12 @@
 puts 'Seeding...'
 
 NAMED_PLACE_COUNT = 5
-VENUE_COUNT = 20
-CLINIC_COUNT = 35
-USER_COUNT = 50
-PATIENT_COUNT = 1500
+CLINIC_COUNT = 50
+USER_COUNT = 10
+PATIENT_COUNT = 500
 CLINIC_EVENTS_PER_PATIENT = 2
 CLINIC_STAFF_PER_CLINIC = 4
+SUPPLY_INVENTORY_PER_CLINIC = 6
 VENUE_STATES = ["MD"]
 
 puts "Creating named places..."
@@ -32,24 +32,16 @@ end
   ClinicAgeGroup.create!(name: name)
 end
 
-puts "Creating venues..."
+
 addresses = JSON.load(Rails.root.join("db/addresses.json"))["addresses"]
 addresses.select!{|a| VENUE_STATES.include?(a["state"])}
 addresses.shuffle!
-
-VENUE_COUNT.times.each do |i|
-  Venue.create(
-    named_place: NamedPlace.all.sample,
-    name: Faker::University.unique.name,
-    venue_category: "University"
-  )
-end
 
 puts "Creating clinics..."
 CLINIC_COUNT.times.each do |i|
   address = addresses.pop
   Clinic.create(
-    venue: Venue.all.sample,
+    venue_name: Faker::University.unique.name,
     clinic_date: Faker::Date.between(from: 1.month.ago, to: 6.months.from_now),
     lead_vaccinator_name: Faker::Name.unique.name,
     students_registered: Faker::Number.normal(mean: 100, standard_deviation: 50),
@@ -93,9 +85,10 @@ end
 addresses = JSON.load(Rails.root.join("db/addresses.json"))["addresses"]
 addresses.select!{|a| VENUE_STATES.include?(a["state"])}
 puts "Creating patients..."
+clinics = Clinic.all
 PATIENT_COUNT.times.each do |i|
   address = addresses.sample
-  clinic = Clinic.all.sample
+  clinic = clinics.sample
   Patient.create!(
     clinic: clinic,
     first_name: Faker::Name.first_name,
@@ -118,11 +111,12 @@ PATIENT_COUNT.times.each do |i|
 end
 
 puts "Creating clinic events..."
+patients = Patient.all.to_a
+users = User.all.to_a
+clinics = Clinic.all.to_a
 (PATIENT_COUNT * CLINIC_EVENTS_PER_PATIENT).times.each do |i|
-  clinic = Clinic.all.sample
-  clinic_event = CLINIC_EVENTS.sample
-  patients = Patient.all.to_a
-  users = User.all.to_a
+  clinic_event = CLINIC_EVENTS.sample  
+  clinic = clinics.sample
   ClinicEvent.create(
     clinic: clinic,
     patient: patients.sample,
@@ -130,28 +124,30 @@ puts "Creating clinic events..."
     clinic_staff_id: clinic.clinic_personnel.sample,
     outcome: clinic_event[:outcomes].sample,
     created_at: Faker::Date.between(from: 30.days.ago, to:Date.today),
-    user: User.all.sample,
+    user: users.sample,
     notes: Faker::Lorem.paragraph(sentence_count: 0, random_sentences_to_add: 2, supplemental: true)
   )
 
 end
 
 
-20.times do
-  SupplyInventory.create!(
-    clinic_id: 1,
-    received_at: Faker::Date.between(from: 30.days.ago, to:Date.today),
-    item_type: INVENTORY_ITEM_TYPES.sample,
-    item_name: Faker::Company.name,
-    manufacturer: INVENTORY_MANUFACTURERS.sample,
-    lot_number: Faker::Code.asin,
-    expiration_date: Faker::Date.between(from: Date.today, to: 30.days.from_now),
-    quantity: Faker::Number.between(from: 1, to: 20),
-    packaging: INVENTORY_PACKAGINGS.sample,
-    source: INVENTORY_SOURCES.sample,
-    product_name: Faker::Company.name,
-    event_type: INVENTORY_EVENT_TYPES.sample
-  )
+Clinic.all.each do |clinic|
+  SUPPLY_INVENTORY_PER_CLINIC.times do
+    SupplyInventory.create!(
+      clinic: clinic,
+      received_at: Faker::Date.between(from: 30.days.ago, to:Date.today),
+      item_type: INVENTORY_ITEM_TYPES.sample,
+      item_name: Faker::Lorem.words(number: 2).collect(&:capitalize).join(" "),
+      manufacturer: INVENTORY_MANUFACTURERS.sample,
+      lot_number: Faker::Code.asin,
+      expiration_date: Faker::Date.between(from: Date.today, to: 30.days.from_now),
+      quantity: Faker::Number.between(from: 1, to: 20),
+      packaging: INVENTORY_PACKAGINGS.sample,
+      source: INVENTORY_SOURCES.sample,
+      product_name: Faker::Company.name,
+      event_type: INVENTORY_EVENT_TYPES.sample
+    )
+  end
 end
 
 

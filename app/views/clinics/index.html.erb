@@ -1,22 +1,18 @@
 <div class="clinics-index-page">
-  <div class="container">
-    <div class="card">
-      <div class="page-header">
-        <h3>Clinics Listing</h3>
+  <div class="page-header">
+    <h3>Clinics Listing</h3>
+  </div>
+
+  <%= render @clinics %>
+
+  <div class="pagination-section">
+    <div class="pagination-container">
+      <div class="pagination-info">
+        <p><%= page_entries_info @clinics %></p>
       </div>
-
-      <%= render @clinics %>
-
-      <div class="pagination-section">
-        <div class="pagination-container">
-          <div class="pagination-info">
-            <p><%= page_entries_info @clinics %></p>
-          </div>
-          <div class="pagination-buttons">
-            <span class="lg-buttons"><%= will_paginate @clinics %></span>
-            <span class="sm-buttons"><%= will_paginate @clinics, page_links: false %></span>
-          </div>
-        </div>
+      <div class="pagination-buttons">
+        <span class="lg-buttons"><%= will_paginate @clinics %></span>
+        <span class="sm-buttons"><%= will_paginate @clinics, page_links: false %></span>
       </div>
     </div>
   </div>

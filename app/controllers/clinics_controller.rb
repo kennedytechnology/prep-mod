@@ -8,12 +8,18 @@ class ClinicsController < ClinicManagementController
   end
 
   def create
-    params[:clinic].parse_time_select! :start_time
-    params[:clinic]["start_time"] = params[:clinic]["start_time"].strftime("%H:%M")
-    params[:clinic].parse_time_select! :end_time
-    params[:clinic]["end_time"] = params[:clinic]["end_time"].strftime("%H:%M")
-
+    # params[:clinic].parse_time_select! :start_time
+    # params[:clinic]["start_time"] = params[:clinic]["start_time"].strftime("%H:%M")
+    # params[:clinic].parse_time_select! :end_time
+    # params[:clinic]["end_time"] = params[:clinic]["end_time"].strftime("%H:%M")
+    debugger
     @clinic = Clinic.new(clinic_params)
+    if @clinic.save
+      redirect_to "/clinics"
+    else
+      render "new", alert: "Your clinic entry was not saved." + @clinic.errors.to_s
+    end
+    
   end
 
   def index
@@ -47,13 +53,15 @@ class ClinicsController < ClinicManagementController
       :clinic_status, :start_time, :end_time,
       :address, :lead_vaccinator_name,
       :clinic_date, :students_registered,
-      :incidents_comments, :county, :location, :zip, 
+      :incidents_comments, :county, :venue_name, :zip, 
       :city, :state, :appointment_frequency_minutes,
       :appointment_slots, :contact_person, :contact_phone_number,
       :backup_contact_person, :backup_contact_phone_number,
+      :start_hour, :start_minute, :start_meridiem,
+      :end_hour, :end_minute, :end_meridiem,
       :appointments_available, users: [], :service_ids => [],
       :age_group_ids => [],
-      clinic_personnel_attributes: [:name, :_destroy]
+      clinic_personnel_attributes: [:name, :_destroy],
     )
   end
 end

@@ -1,20 +1,29 @@
 class Clinic < ApplicationRecord
-  belongs_to :venue
   has_many :clinic_vaccines
   has_many :clinic_personnel, class_name: "ClinicStaff"
   has_many :clinic_events
   has_many :patients #, through: :clinic_events
   has_and_belongs_to_many :users
   has_many :supply_inventories
-
+  
   accepts_nested_attributes_for :clinic_personnel, allow_destroy: true, 
     reject_if: lambda {|attributes| attributes['name'].blank?}
 
-  delegate :place_name, to: :venue
-
   geocoded_by :address
   after_validation :geocode, if: :should_geocode?
+  after_validation :parse_time
 
+  attr_accessor :start_hour, :start_minute, :start_meridiem,
+    :end_hour, :end_minute, :end_meridiem
+
+  def parse_time
+    if start_hour && start_minute && start_meridiem 
+      self.start_time = Time.parse("#{start_hour}:#{start_minute}#{start_meridiem}")
+    end
+    if end_hour && end_minute && end_meridiem 
+      self.end_time = Time.parse("#{end_hour}:#{end_minute}#{end_meridiem}")
+    end
+  end
   def clinic_staff; clinic_personnel; end
 
   def should_geocode?
@@ -25,12 +34,12 @@ class Clinic < ApplicationRecord
   has_and_belongs_to_many :age_groups, class_name: "ClinicAgeGroup"
 
   def name
-    "#{venue.name} on #{clinic_date}"
+    "#{venue_name} on #{clinic_date}"
   end
 
   def appointment_times
-    this_time = Time.parse(start_time)
-    last_time = Time.parse(end_time)
+    this_time = start_time
+    last_time = end_time
     results = []
     while this_time < last_time
       results << this_time.strftime("%l:%M%P")

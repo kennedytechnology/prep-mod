@@ -1,108 +1,102 @@
-<div class="py-12 px-12">
+
     <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9 sm:truncate mb-3">
         Supply Inventory for <%= @clinic.name %>
     </h2>
-    <%= link_to 'New Supply Inventory', new_supply_inventory_path(clinic_id: @clinic.id), class: " mb-3 px-6 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out sm:mt-0 sm:flex-shrink-0 sm:inline-flex sm:items-center sm:w-auto" %>
-    <div class="flex flex-col">
-        <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-            <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
-                <table class="min-w-full">
+    <%= link_to 'New Supply Inventory Entry', new_supply_inventory_path(clinic_id: @clinic.id), class: " mb-3 px-6 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out sm:mt-0 sm:flex-shrink-0 sm:inline-flex sm:items-center sm:w-auto" %> 
+    <%# <div class="flex flex-col">
+        <div class="-my-2 py-2 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+            <div class="align-middle inline-block "> %>
+                <table class="inventory-table">
                     <thead>
                         <tr>
-                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            <th class="">
                                 Date Received
                             </th>
-                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            <th class="">
                                 Item Type
                             </th>
-                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            <th class="">
                                 Item Name
                             </th>
-                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                Product Name
-                            </th>
-                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            <th class="">
                                 Manufacturer
                             </th>
-                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                Lot Number
-                            </th>
-                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                Expiration Date
-                            </th>
-                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                Starting Quantity
-                            </th>
-                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                Packaging
-                            </th>
-                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                Quantity Used
-                            </th>
-                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                Quantity Lost
-                            </th>
-                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                Quantity Loaned
-                            </th>
-                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                Current Quantity
-                            </th>
-                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            <th class="">
                                 Source
                             </th>
+                            <th class="">
+                                Lot Number
+                            </th>
+                            <th class="">
+                                Expiration Date
+                            </th>
+                            <th class="">
+                                Starting Qty
+                            </th>
+                            <th class="">
+                                Packaging
+                            </th>
+                            <th class="">
+                                Qty<br>Used
+                            </th>
+                            <th class="">
+                                Qty<br>Lost
+                            </th>
+                            <th class="">
+                                Qty<br>Loaned
+                            </th>
+                            <th class="">
+                                Current<br>Qty
+                            </th>
+                            
                         </tr>
                     </thead>
                     <tbody class="bg-white">
                         <% @supply_inventories.each do |supply_inventory| %>
                             <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                                    <%= supply_inventory.received_at %>
+                                <td class="">
+                                    <%= supply_inventory.received_at.strftime("%m-%d-%Y") %>
                                 </td>
-                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
+                                <td class="">
                                     <%= supply_inventory.item_type %>
                                 </td>
-                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
+                                <td class="">
                                     <%= supply_inventory.item_name %>
                                 </td>
-                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                                    <%= supply_inventory.product_name %>
-                                </td>
-                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
+                                <td class="">
                                     <%= supply_inventory.manufacturer %>
                                 </td>
-                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
+                                <td class="">
+                                    <%= supply_inventory.source %>
+                                </td>
+                                <td class="">
                                     <%= supply_inventory.lot_number %>
                                 </td>
-                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                                    <%= supply_inventory.expiration_date %>
+                                <td class="">
+                                    <%= supply_inventory.expiration_date.strftime("%m-%d-%Y") %>
                                 </td>
-                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                                    <%= supply_inventory.quantity %>
-                                </td>
-                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
+                                <td class="">
                                     <%= supply_inventory.packaging %>
                                 </td>
-                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                                    <%= supply_inventory.quantity - 0.6666 %>
+                                <td class="">
+                                    <%= supply_inventory.quantity %>
                                 </td>
-                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                                    <%= supply_inventory.quantity - 0.333 %>
+                                <td class="">
+                                    <%= (supply_inventory.quantity * 0.6666).to_i %>
                                 </td>
-                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
+                                <td class="">
+                                    <%= (supply_inventory.quantity * 0.333).to_i %>
+                                </td>
+                                <td class="">
                                     <%= "0" %>
                                 </td>
-                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
+                                <td class="">
                                     <%= "2" %>
-                                </td>
-                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                                    <%= supply_inventory.source %>
                                 </td>
                             </tr>
                         <% end %>
                     </tbody>
                 </table>
-            </div>
+            <%# </div>
         </div>
-    </div>
-</div>
+    </div> %>
