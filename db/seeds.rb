@@ -15,6 +15,7 @@ PATIENT_COUNT = 1500
 CLINIC_EVENTS_PER_PATIENT = 2
 CLINIC_STAFF_PER_CLINIC = 4
 SUPPLY_INVENTORY_PER_CLINIC = 6
+TEST_KITS_PER_CLINIC = 3
 VENUE_STATES = ["MD"]
 
 puts "Creating named places..."
@@ -149,6 +150,21 @@ Clinic.all.each do |clinic|
       source: INVENTORY_SOURCES.sample,
       product_name: Faker::Company.name,
       event_type: INVENTORY_EVENT_TYPES.sample
+    )
+  end
+end
+
+Clinic.all.each do |clinic|
+  TEST_KITS_PER_CLINIC.times do
+    TestKit.create!(
+      clinic: clinic,
+      test_name: Faker::Lorem.words(number: 2).collect(&:capitalize).join(" "),
+      test_manufacturer: INVENTORY_MANUFACTURERS.sample,
+      test_lot_number: Faker::Code.asin,
+      test_type: %w(PCR Serological).sample,
+      test_processing: %w(Standard Rapid).sample,
+      test_expiration_date: Faker::Date.between(from: 30.days.from_now, to: 365.days.from_now),
+      test_kits_quantity: Faker::Number.between(from: 50, to: 1000)
     )
   end
 end

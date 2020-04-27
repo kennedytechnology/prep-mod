@@ -56,80 +56,47 @@
           </div>
 
           <div class="tests-table-section">
-            <div class="add-more-tests-button-container">
-              <%= link_to sanitize("Add More Test &#43;"), "#", class: "add-more-tests-button" %>
-            </div>
             <div class="tests-table-outer">
               <div class="tests-table-wrapper">
-                <div class="tests-table-container">
-                  <table class="tests-table">
-                    <thead>
-                    <tr>
-                      <th>Test Name</th>
-                      <th># Lot Number</th>
-                      <th># of Starting Kits</th>
-                      <th># Tests Administered</th>
-                      <th># Unusable Tests</th>
-                      <th># Tests Returned</th>
-                      <th>Default</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td><input type="text" value="Fluzone"></td>
-                      <td><input type="text" value=2392></td>
-                      <td><input type="text" value=200></td>
-                      <td><input type="text" value=100></td>
-                      <td><input type="text" value=10></td>
-                      <td><input type="text" value=10></td>
-                      <td>
-                        <div class="flex">
-                          <%= link_to "Yes", "#", class: "table-actions" %>
-                          <%= link_to "No", "#", class: "table-actions" %>
+                    <div class="flex justify-end mb-4">
+                        <%= link_to_add_test_kit('Add More Test Kits', f, :test_kits, class: 'max-w-xs inline-flex cursor-pointer justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out') %>
+                    </div>
+                    <div class="flex flex-col">
+                        <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+                            <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
+                            <table class="min-w-full">
+                                <thead>
+                                <tr>
+                                    <th class="px-1 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                    Test Name
+                                    </th>
+                                    <th class="px-1 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                    Test Lot Number
+                                    </th>
+                                    <th class="px-1 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                    # of Starting kits
+                                    </th>
+                                    <th class="px-1 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                    # of Tests Administered
+                                    </th>
+                                    <th class="px-1 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                    # Unusable tests
+                                    </th>
+                                    <th class="px-1 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                    # Tests Returned
+                                    </th>
+                                    <th class="px-1 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase"> Action </th>
+                                </tr>
+                                </thead>
+                                <tbody class="bg-white" id="testKits">
+                                    <%= f.fields_for :test_kits do |test_kit_fields| %>
+                                        <%= render 'clinics/test_kit', f: test_kit_fields %>
+                                    <% end %>
+                                </tbody>
+                            </table>
+                            </div>
                         </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><input type="text" value="Flu Test One"></td>
-                      <td><input type="text"  value=2393></td>
-                      <td><input type="text"  value=100></td>
-                      <td><input type="text"  value=50></td>
-                      <td><input type="text"  value=10></td>
-                      <td><input type="text"  value=10></td>
-                      <td>
-                        <div class="flex">
-                          <%= link_to "Yes", "#", class: "table-actions" %>
-                          <%= link_to "No", "#", class: "table-actions" %>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><input type="text" value="Flu Test Two"></td>
-                      <td><input type="text" value=2394></td>
-                      <td><input type="text" value=100></td>
-                      <td><input type="text" value=50></td>
-                      <td><input type="text" value=10></td>
-                      <td><input type="text" value=10></td>
-                      <td>
-                        <div class="flex">
-                          <%= link_to "Yes", "#", class: "table-actions" %>
-                          <%= link_to "No", "#", class: "table-actions" %>
-                        </div>
-                      </td>
-                    </tr>
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                      <td>TOTALS:</td>
-                      <td></td>
-                      <td>400</td>
-                      <td>200</td>
-                      <td>30</td>
-                      <td>30</td>
-                    </tr>
-                    </tfoot>
-                  </table>
-                </div>
+                    </div>
               </div>
             </div>
           </div>
@@ -309,7 +276,7 @@
                 </p>
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
                     <div class="max-w-xs rounded-md shadow-sm">
-                    <%= f.select :test_name, options_for_select(["Fluzone", "Flu Test One", "Flu Test Two"], f.object.test_name), {}, class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+                    <%= f.select :test_name, options_for_select(@clinic.test_kits.collect(&:test_name), f.object.test_name), {}, class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
                     </div>
                 </div>
             </div>

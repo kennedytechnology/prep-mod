@@ -63,9 +63,10 @@ class ClinicsController < ClinicManagementController
       :age_group_ids => [],
       clinic_personnel_attributes: [:name, :_destroy],
       clinic_events_attributes: [:id, :patient_id, :outcome, :safety_kit_received],
-      clinic_test_kits_attributes: [:test_name, :test_manufacturer,
+      test_kits_attributes: [:id, :test_name, :test_manufacturer,
       :test_lot_number, :test_type, :test_processing, 
-      :test_expiration_date, :test_kits_quantity, :_destroy]
+      :test_expiration_date, :test_kits_quantity, :tests_administered, 
+      :unusable_tests, :tests_returned, :_destroy]
     )
   end
 end

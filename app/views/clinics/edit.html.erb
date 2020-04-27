@@ -21,7 +21,7 @@
               <%= f.label :county, class: "form-question" do %>
                 County <span class="required-field">*</span>
               <% end %>
-              <%= f.select(:county, options_for_select(COUNTIES), {include_blank: "Please choose"}, required: true) %>
+              <%= f.select(:county, options_for_select(COUNTIES, @clinic.county), {include_blank: "Please choose"}, required: true) %>
             </div>
           </div>
           <div class="form-group">
@@ -29,8 +29,7 @@
               <%= f.label :address, class: "form-question" do %>
                 Clinic Location <span class="required-field">*</span>
               <% end %>
-              <%= f.select(:address, options_for_select(['Tester Middle School']), {include_blank: "Please choose"},
-                           required: true) %>
+              <%= f.text_field :venue_name %>
             </div>
             <div class="group-elem">
               <%= f.label :students_registered, class: "form-question" do %>
@@ -101,8 +100,10 @@
                                 </tr>
                                 </thead>
                                 <tbody class="bg-white" id="testKits">
-                                    <%= f.fields_for :test_kits do |test_kit_fields| %>
-                                        <%= render 'clinics/test_kit', f: test_kit_fields %>
+                                    <% @clinic.test_kits.each do |test_kit| %>
+                                      <%= f.fields_for :test_kits, test_kit do |test_kit_fields| %>
+                                          <%= render 'clinics/test_kit', f: test_kit_fields %>
+                                      <% end %>
                                     <% end %>
                                 </tbody>
                             </table>
