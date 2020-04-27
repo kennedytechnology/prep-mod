@@ -21,13 +21,28 @@ class SupplyInventoriesController < InheritedResources::Base
     end
   end
 
+  def edit
+    @supply_inventory = SupplyInventory.find(params[:id])
+  end
+
+  def update
+    @supply_inventory = SupplyInventory.find(params[:id])
+
+    if @supply_inventory.update(supply_inventory_params)
+      redirect_to supply_inventories_path(clinic_id: @supply_inventory.clinic), notice: "Successfully Updated Inventory Item"
+    else
+      redirect_back fallback_location: supply_inventories_path(clinic_id: @supply_inventory.clinic), alert: "Error!"
+    end
+  end
+
   private
 
     def supply_inventory_params
       params.require(:supply_inventory).permit(
         :received_at, :item_type, :item_name, 
         :manufacturer, :lot_number, :expiration_date,
-        :quantity, :packaging, :source, :product_name, 
+        :quantity, :quantity_used, :quantity_loaned,
+        :quantity_lost, :packaging, :source, :product_name, 
         :event_type, :clinic_id
       )
     end
