@@ -4,6 +4,6 @@ class NewsSignupsController < InheritedResources::Base
   private
     def news_signup_params
       params.require(:news_signup).permit(:name,
-        :email, :date_of_birth, :zip_code, topics: [])
+        :email, :date_of_birth, :zip_code, :occupation, topics: [])
     end
 end
