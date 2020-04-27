@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_27_033309) do
+ActiveRecord::Schema.define(version: 2020_04_27_073811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -238,6 +238,20 @@ ActiveRecord::Schema.define(version: 2020_04_27_033309) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "test_kits", force: :cascade do |t|
+    t.bigint "clinic_id", null: false
+    t.string "test_name"
+    t.string "test_manufacturer"
+    t.string "test_lot_number"
+    t.string "test_type"
+    t.string "test_processing"
+    t.date "test_expiration_date"
+    t.integer "test_kits_quantity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["clinic_id"], name: "index_test_kits_on_clinic_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -266,4 +280,5 @@ ActiveRecord::Schema.define(version: 2020_04_27_033309) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "test_kits", "clinics"
 end

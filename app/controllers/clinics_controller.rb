@@ -5,6 +5,7 @@ class ClinicsController < ClinicManagementController
   def new
     @clinic = Clinic.new
     @clinic.clinic_personnel.build
+    @clinic.test_kits.build
   end
 
   def create
@@ -66,6 +67,9 @@ class ClinicsController < ClinicManagementController
       :appointments_available, users: [], :service_ids => [],
       :age_group_ids => [],
       clinic_personnel_attributes: [:name, :_destroy],
+      clinic_test_kits_attributes: [:test_name, :test_manufacturer,
+      :test_lot_number, :test_type, :test_processing, 
+      :test_expiration_date, :test_kits_quantity, :_destroy]
     )
   end
 end

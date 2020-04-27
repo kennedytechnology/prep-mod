@@ -5,9 +5,12 @@ class Clinic < ApplicationRecord
   has_many :patients #, through: :clinic_events
   has_and_belongs_to_many :users
   has_many :supply_inventories
+  has_many :test_kits
   
   accepts_nested_attributes_for :clinic_personnel, allow_destroy: true, 
     reject_if: lambda {|attributes| attributes['name'].blank?}
+
+  accepts_nested_attributes_for :test_kits, allow_destroy: true, reject_if: :all_blank
 
   geocoded_by :address
   after_validation :geocode, if: :should_geocode?
