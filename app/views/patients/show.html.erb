@@ -1,6 +1,9 @@
 <div class="clinic-patients-show-page">
   <div class="page-header">
     <h1>Patient History</h1>
+    <form>
+      <input type="button" value="Print" onClick="window.print()" class="action-button">
+    </form>
   </div>
 
 
@@ -26,7 +29,9 @@
               <td><%= clinic_event.category %></td>
               <td><%= clinic_event.outcome %></td>
               <td><%= clinic_event.notes %></td>
-              <td><%= link_to "Delete", "#", class: "action-button" %></td>
+              <td><%= link_to "Delete", "#", class: "action-button" %>
+                <a href="#" class="action-button" onClick="window.print()"> Print </a>
+              </td>
             </tr>
           <% end %>
           </tbody>
