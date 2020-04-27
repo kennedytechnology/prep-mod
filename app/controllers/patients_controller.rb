@@ -21,6 +21,12 @@ class PatientsController < ApplicationController
     @patient_clinic_events = @patient.clinic_events.order(params[:sort]).paginate(page: params[:page], per_page: 50)
   end
 
+  def destroy
+    Patient.destroy(params[:id])
+    session[:alert] = "The patient was deleted."
+    redirect_back fallback_location: "/clinics"
+  end
+
   def new
     @patient = Patient.new  
   end

@@ -158,34 +158,36 @@
                       <th>Scheduled</th>
                       <th>Screened</th>
                       <th>Tested</th>
+                      <th>Safety Kit</th>
                       <th>Cancelled</th>
                       <th>No Show</th>
-                      <th>Safety Kit</th>                      
                       <th>Follow Up</th>
                       <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     <% @clinic.patients.each do |patient| %>
-                      <tr class="patient-row" data-target="clinic-activity-patients.searchableRow" data-search-content="<%= [patient.first_name.downcase, patient.last_name.downcase].join(" ") %>" data-patient-id="<%= patient.id %>">
-                        <td>
-                          <%= link_to patient.first_name + ' ' + patient.last_name, patient %> <br/>
-                        </td>
-                        <td><%= patient.date_of_birth.strftime("%D") %></td>
-                        <td><%= patient.appointment_time %></td>
-                        <% ["Screened", "Tested", "Cancelled", "No Show"].each do |outcome| %>
-                          <td><%= radio_button_tag "outcome-#{patient.id}", outcome, (patient.event_for_clinic(@clinic).outcome == outcome), data: {action: "clinic-activity-patients#showModal", selection: outcome} %></td>
-                        <% end %>
-                        
-                        
-                        <td><%= check_box("safety_kit", {}) %></td>
-                        <td><%= link_to "Remark", "#", class: "remark-link" %></td>
-                        <td>
-                          <div class="flex">
-                            <%= link_to "Delete", "#", class: "table-actions" %>
-                          </div>
-                        </td>
-                      </tr>
+                      <%= f.fields_for :clinic_events, patient.event_for_clinic(@clinic) do |event_form| %>
+                        <%= event_form.hidden_field :patient_id %>
+                        <tr class="patient-row" data-target="clinic-activity-patients.searchableRow" data-search-content="<%= [patient.first_name.downcase, patient.last_name.downcase].join(" ") %>" data-patient-id="<%= patient.id %>">
+                          <td>
+                            <%= link_to patient.first_name + ' ' + patient.last_name, patient %> <br/>
+                          </td>
+                          <td><%= patient.date_of_birth.strftime("%D") %></td>
+                          <td><%= patient.appointment_time %></td>
+                          <td><%= event_form.radio_button :outcome, "Screened", data: {action: "clinic-activity-patients#showModal", selection: "Screened"} %></td>
+                          <td><%= event_form.radio_button :outcome, "Tested", data: {action: "clinic-activity-patients#showModal", selection: "Tested"} %></td>
+                          <td><%= event_form.check_box :safety_kit_received %></td>
+                          <td><%= event_form.radio_button :outcome, "Cancelled"  %></td>
+                          <td><%= event_form.radio_button :outcome, "No Show"  %></td>
+                          <td><%= link_to "Remark", "#", class: "remark-link" %></td>
+                          <td>
+                            <div class="flex">
+                              <%= link_to "Delete", patient, method: :delete, class: "table-actions" %>
+                            </div>
+                          </td>
+                        </tr>
+                      <% end %>
                     <% end %>
                     </tbody>
                   </table>

@@ -10,6 +10,7 @@ class Clinic < ApplicationRecord
   accepts_nested_attributes_for :clinic_personnel, allow_destroy: true, 
     reject_if: lambda {|attributes| attributes['name'].blank?}
 
+  accepts_nested_attributes_for :clinic_events, reject_if: lambda {|attributes| attributes['outcome'].blank?}
   accepts_nested_attributes_for :test_kits, allow_destroy: true, reject_if: :all_blank
 
   geocoded_by :address

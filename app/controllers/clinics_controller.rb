@@ -9,11 +9,6 @@ class ClinicsController < ClinicManagementController
   end
 
   def create
-    # params[:clinic].parse_time_select! :start_time
-    # params[:clinic]["start_time"] = params[:clinic]["start_time"].strftime("%H:%M")
-    # params[:clinic].parse_time_select! :end_time
-    # params[:clinic]["end_time"] = params[:clinic]["end_time"].strftime("%H:%M")
-    debugger
     @clinic = Clinic.new(clinic_params)
     if @clinic.save
       redirect_to "/clinics"
@@ -67,6 +62,7 @@ class ClinicsController < ClinicManagementController
       :appointments_available, users: [], :service_ids => [],
       :age_group_ids => [],
       clinic_personnel_attributes: [:name, :_destroy],
+      clinic_events_attributes: [:id, :patient_id, :outcome, :safety_kit_received],
       clinic_test_kits_attributes: [:test_name, :test_manufacturer,
       :test_lot_number, :test_type, :test_processing, 
       :test_expiration_date, :test_kits_quantity, :_destroy]
