@@ -21,7 +21,7 @@
           <tbody>
           <% @patient_clinic_events.sort_by(&:created_at).each do |clinic_event| %>
             <tr class="<%= "border-none" if clinic_event == @patient.clinic_events.sort_by(&:created_at).last %>">
-              <td><%= clinic_event.clinic.venue.name %></td>
+              <td><%= clinic_event.clinic.name %></td>
               <td><%= clinic_event.created_at.strftime("%m/%d/%Y") %></td>
               <td><%= clinic_event.category %></td>
               <td><%= clinic_event.outcome %></td>
