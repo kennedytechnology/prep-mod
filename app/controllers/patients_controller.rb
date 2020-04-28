@@ -1,6 +1,7 @@
 class PatientsController < ApplicationController
   layout "clinic_management"
   before_action :authenticate_user!
+  helper_method :sort_column, :sort_direction
 
   def index
     @patients = Patient.all.paginate(page: params[:page], per_page: 50)
@@ -18,7 +19,7 @@ class PatientsController < ApplicationController
 
   def show
     @patient = Patient.find(params[:id])
-    @patient_clinic_events = @patient.clinic_events.order(params[:sort]).paginate(page: params[:page], per_page: 50)
+    @patient_clinic_events = @patient.clinic_events.order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 50)
   end
 
   def destroy
@@ -48,6 +49,14 @@ class PatientsController < ApplicationController
   end
 
 private
+
+  def sort_column
+    Patient.where(id: params[:id]).column_names.include?(params[:sort]) ? params[:sort] : "clinic_id"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
 
   def patient_params
     params.require(:patient).permit(:clinic, :clinic_id, :user_id, :student_id, :access_code, :vaccination_status, :clinic_vaccine_id,
