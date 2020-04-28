@@ -1,9 +1,9 @@
-<div class="clinic_new_personnel">
-    <%= f.text_field :name, placeholder: "Clinic Staff Person's Name", class: "form-input" %>
-    <div class="clinic-new-personnel-delete-button">
-        <%= f.hidden_field :_destroy %>
-        <%= link_to '#', class: 'remove_record' do %>
-            <span> &#10005; </span>
-        <% end %>
-    </div>
+<div class="w-5/12 relative mr-2 clinic_new_personnel">
+  <%= f.text_field :name, placeholder: "Clinic Staff Person's Name", class: "form-input inline-block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
+  <div class="absolute clinic-new-personnel-delete-button" style="top: -8px; right: -8px;">
+    <%= f.hidden_field :_destroy %>
+    <%= link_to '#', class: 'remove_record rounded-full shadow flex justify-center items-center bg-indigo-600 text-white', style: "width: 25px; height: 25px;" do %>
+      <span class="text-xs"> &#10005; </span>
+    <% end %>
+  </div>
 </div>

@@ -12,7 +12,7 @@
         <%= form_with model: @clinic, class: "edit-new-form", local: true do |f| %>
           <div class="public-private-container">
             <fieldset>
-              <p class="title">Is clinic public or private?</p>
+              <p class="title">Is clinic public or private? <span class="required-field">*</span></p>
               <div class="fields-container">
                 <div class="field">
                   <%= f.radio_button :clinic_status, "public", id: "clinic_status_public", class: "form-radio" %>
@@ -32,7 +32,7 @@
 
           <div class="service-provider-open-section">
             <fieldset class="service-provider">
-              <legend class="title">Services Provided</legend>
+              <legend class="title">Services Provided <span class="required-field">*</span></legend>
               <div class="checkbox-section">
                 <%= collection_check_boxes(:clinic, :service_ids, ClinicService.all, :id, :name) do |b| %>
                   <div class="checkbox-container">
@@ -48,7 +48,7 @@
             </fieldset>
 
             <fieldset class="open-to">
-              <legend class="title">Open to</legend>
+              <legend class="title">Open to <span class="required-field">*</span></legend>
               <div class="checkbox-section">
                 <%= collection_check_boxes(:clinic, :age_group_ids, ClinicAgeGroup.all, :id, :name) do |b| %>
                   <div class="checkbox-container">
@@ -69,11 +69,11 @@
             <div class="clinic-date-time-section">
               <div class="date-time-inner">
                 <div class="clinic-date">
-                  <p class="label">Clinic Date</p>
+                  <p class="label">Clinic Date <span class="required-field">*</span></p>
                   <%= f.date_field :clinic_date, class: "form-input", placeholder: "MM/DD/YYYY" %>
                 </div>
                 <div class="start-time">
-                  <p class="label"> Start Time </p>
+                  <p class="label">Start Time <span class="required-field">*</span></p>
                   <%= f.time_select :start_time,
                                     :combined => true,
                                     :default => Time.now.change(:hour => 11, :min => 30),
@@ -86,7 +86,7 @@
                 </div>
 
                 <div class="end-time">
-                  <p class="label"> End Time </p>
+                  <p class="label">End Time <span class="required-field">*</span></p>
                   <%= f.time_select :end_time,
                                     :combined => true,
                                     :default => Time.now.change(:hour => 11, :min => 30),
@@ -100,7 +100,7 @@
               </div>
             </div>
             <div class="clinic-location-section">
-              <h3 class="label">Clinic Location</h3>
+              <h3 class="label">Clinic Location <span class="required-field">*</span></h3>
               <div class="clinic-location col-span-2">
                 <div class="county">
                   <%= f.select :county, COUNTIES, {prompt: "Select County"}, {class: "form-select"} %>
@@ -128,7 +128,7 @@
             <div class="appointment-info-section-inner">
               <fieldset>
                 <div class="available-container">
-                  <p class="label">Appointments available</p>
+                  <p class="label">Appointments available <span class="required-field">*</span></p>
                   <div class="radio-section sm:col-span-2">
                     <div class="radio-section-inner">
                       <div class="radio-inputs">
@@ -155,7 +155,7 @@
               </fieldset>
               <fieldset>
                 <div class="frequency-container">
-                  <p class="label">Appointment Frequency</p>
+                  <p class="label">Appointment Frequency <span class="required-field">*</span></p>
                   <div class="sm:col-span-2">
                     <div class="max-w-lg">
                       <div class="mt-4">
@@ -172,7 +172,7 @@
               </fieldset>
               <fieldset>
                 <div class="slots-container">
-                  <p class="label">Appointment Slots</p>
+                  <p class="label">Appointment Slots <span class="required-field">*</span></p>
                   <div class="sm:col-span-2">
                     <div class="max-w-lg">
                       <div class="mt-4">
@@ -189,50 +189,46 @@
               </fieldset>
             </div>
           </div>
-          <div class="form-group">
-            <div class="group-elem">
-              <%= f.label :address, class: "form-question" do %>
-                Clinic Location <span class="required-field">*</span>
-              <% end %>
-              <%= f.text_field :venue_name %>
-            </div>
-            <div class="group-elem">
-              <%= f.label :students_registered, class: "form-question" do %>
-                Number of Students Registered <span class="required-field">*</span>
-              <% end %>
-              <%= f.number_field :students_registered, required: true %>
-            </div>
-          </div>
 
           <div class="contact-section">
             <h3 class="title">Contact Information</h3>
             <div class="contact-section-inner">
               <div class="fields-container">
-                <%= f.label :contact_person %>
+                <%= f.label :contact_person do %>
+                  Contact Person <span class="required-field">*</span>
+                <% end %>
                 <div class="input-container">
                   <%= f.text_field :contact_person, placeholder: "Contact Person", class: "form-input" %>
                 </div>
               </div>
               <div class="fields-container">
-                <%= f.label :contact_phone_number %>
+                <%= f.label :contact_phone_number do %>
+                  Contact phone number <span class="required-field">*</span>
+                <% end %>
                 <div class="input-container">
                   <%= f.text_field :contact_phone_number, placeholder: "Contact Number", class: "form-input" %>
                 </div>
               </div>
               <div class="fields-container">
-                <%= f.label :backup_contact_person %>
+                <%= f.label :backup_contact_person do %>
+                  Backup contact person <span class="required-field">*</span>
+                <% end %>
                 <div class="input-container">
                   <%= f.text_field :backup_contact_person, placeholder: "Back-Up Contact Person", class: "form-input" %>
                 </div>
               </div>
               <div class="fields-container">
-                <%= f.label :backup_contact_phone_number %>
+                <%= f.label :backup_contact_phone_number do %>
+                  Backup contact phone number <span class="required-field">*</span>
+                <% end %>
                 <div class="input-container">
                   <%= f.text_field :backup_contact_phone_number, placeholder: "Back-Up Contact Number", class: "form-input" %>
                 </div>
               </div>
               <div class="fields-container">
-                <%= f.label :students_registered, "Number of Patients Registered" %>
+                <%= f.label :students_registered do %>
+                  Number of Patients Registered <span class="required-field">*</span>
+                <% end %>
                 <div class="input-container">
                   <%= f.number_field :students_registered, class: "form-input" %>
                 </div>
@@ -251,21 +247,20 @@
               </div>
               <div class="clinic-staff-container">
                 <div class="input-container">
-                  <%= f.label :lead_vaccinator_name, "Lead Tester’s Name" %>
+                  <%= f.label :lead_vaccinator_name do %>
+                    Lead Tester’s Name <span class="required-field">*</span>
+                  <% end %>
                   <%= f.text_field :lead_vaccinator_name, placeholder: "Lead Tester's Name", class: "form-input" %>
                 </div>
 
-                <div class="input-container">
-                  <div class="fields">
-                    <%= f.label :clinic_personnel do %>
-                      Clinic Staff <span class="required-field">*</span>
-                    <% end %>
-                    <%= f.fields_for :clinic_personnel do |c| %>
-                      <%= render 'clinics/clinic_personnel', f: c %>
-                    <% end %>
-                  </div>
+
+                <div class="fields flex flex-wrap">
+                  <label class="w-full">Clinic Staff</label>
+                  <%= f.fields_for :clinic_personnel do |c| %>
+                    <%= render 'clinics/clinic_personnel', f: c %>
+                  <% end %>
                 </div>
-                <%= link_to_add_row('Add more staff', f, :clinic_personnel, class: 'add-more-staff-button') %>
+                <%= link_to_add_row('Add more staff', f, :clinic_personnel, class: 'text-xs text-indigo-600 pb-1 border-b-2 border-indigo-600 hover:text-indigo-500 hover:border-indigo-500') %>
               </div>
             </div>
           </div>
