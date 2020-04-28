@@ -40,7 +40,7 @@
             <tr class="<%= "border-none" if patient == @patients.last %>">
               <td class="underline"><%= link_to patient.full_name, patient %></td>
               <td><%= patient.date_of_birth.strftime("%m/%d/%y") %></td>
-              <td><%= (((Date.today.to_time - patient.date_of_birth.to_time) / 1.year.seconds).floor).to_s %></td>
+              <td><%= ((Date.today.to_time - patient.date_of_birth.to_time) / 1.year.seconds).floor %></td>
               <td><%= patient.sex == "F" ? "Female" : "Male" %></td>
               <td><%= patient.county %></td>              
               <td>
