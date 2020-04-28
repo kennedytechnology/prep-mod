@@ -27,11 +27,11 @@
         <table class="sorting-table">
           <thead>
           <tr>
-            <th><%= link_to "Name", sort: 'last_name' %></th>
-            <th><%= link_to "Date of Birth", sort: 'date_of_birth' %></th>
-            <th><%= link_to "Age", sort: 'age' %></th>
-            <th><%= link_to "Gender", sort: 'sex' %></th>
-            <th><%= link_to "County", sort: 'county' %></th>
+            <th><%= sortable "last_name", "Name" %></th>
+            <th><%= sortable "date_of_birth", "Date of Birth" %></th>
+            <th><%= sortable "date_of_birth", "Age" %></th>
+            <th><%= sortable "sex", "Gender" %></th>
+            <th><%= sortable "county" %></th>
             <th>Actions</th>
           </tr>
           </thead>
@@ -40,7 +40,7 @@
             <tr class="<%= "border-none" if patient == @patients.last %>">
               <td class="underline"><%= link_to patient.full_name, patient %></td>
               <td><%= patient.date_of_birth.strftime("%m/%d/%y") %></td>
-              <td><%= ((Date.today.to_time - patient.date_of_birth.to_time) / 1.year.seconds).floor %></td>              
+              <td><%= (((Date.today.to_time - patient.date_of_birth.to_time) / 1.year.seconds).floor).to_s %></td>
               <td><%= patient.sex == "F" ? "Female" : "Male" %></td>
               <td><%= patient.county %></td>              
               <td>

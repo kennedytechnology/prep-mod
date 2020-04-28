@@ -4,7 +4,7 @@ class PatientsController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @patients = Patient.all.paginate(page: params[:page], per_page: 50)
+    @patients = Patient.order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 50)
     if params[:clinic_id]
       @clinic = Clinic.find(params[:clinic_id])
       # @patients = @clinic.patients
