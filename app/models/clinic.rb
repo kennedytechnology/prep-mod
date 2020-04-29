@@ -4,6 +4,8 @@ class Clinic < ApplicationRecord
   has_many :clinic_events
   has_many :patients #, through: :clinic_events
   has_and_belongs_to_many :users
+  has_and_belongs_to_many :services, class_name: "ClinicService"
+  has_and_belongs_to_many :age_groups, class_name: "ClinicAgeGroup"
   has_many :supply_inventories
   has_many :test_kits
   
@@ -33,9 +35,6 @@ class Clinic < ApplicationRecord
   def should_geocode?
     address_changed? && !latitude_changed?
   end
-
-  has_and_belongs_to_many :services, class_name: "ClinicService"
-  has_and_belongs_to_many :age_groups, class_name: "ClinicAgeGroup"
 
   def name
     "#{venue_name} on #{clinic_date}"

@@ -101,6 +101,8 @@ ActiveAdmin.register Patient do
 
     attributes_table title: "Consent Form Status" do
       row :access_code
+      row :signatory_first_name
+      row :signatory_last_name
       row :consent_signature
       row :relation_to_patient_for_consent
       row :consent_date

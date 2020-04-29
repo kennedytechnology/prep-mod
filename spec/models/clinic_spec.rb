@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe Clinic, type: :model do
+# RSpec.describe Clinic, type: :model do
   
-end
+# end
