@@ -15,14 +15,10 @@ class ClinicsController < ClinicManagementController
     else
       render "new", alert: "Your clinic entry was not saved." + @clinic.errors.to_s
     end
-    
   end
 
   def index
     @clinics = Clinic.all.paginate(page: params[:page], per_page: 50)
-    if params[:patient_id]
-      @clinics = Patient.find(params[:patient_id]).clinics.order(params[:sort]).paginate(page: params[:page], per_page: 50)
-    end
     if params[:q].present?
       @clinics = @clinics.select{|c| c.search_string.downcase.include?(params[:q].downcase)}
     end
