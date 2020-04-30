@@ -13,16 +13,16 @@
         <table class="sorting-table">
           <thead>
           <tr>
-            <th><%= link_to "Clinic Name", sort: 'clinic.name' %></th>
-            <th><%= link_to "Created at", sort: 'created_at' %></th>
-            <th><%= link_to "Service", sort: 'category' %></th>
-            <th><%= link_to "Status", sort: 'outcome' %></th>
-            <th><%= link_to "notes", sort: 'notes' %></th>
+            <th><%= sortable "clinic_id", "Clinic Id" %></th>
+            <th><%= sortable "created_at" %></th>
+            <th><%= sortable "category", "Service" %></th>
+            <th><%= sortable "outcome", "Status" %></th>
+            <th><%= sortable "notes" %></th>
             <th>Actions</th>
           </tr>
           </thead>
           <tbody>
-          <% @patient_clinic_events.sort_by(&:created_at).each do |clinic_event| %>
+          <% @patient_clinic_events.each do |clinic_event| %>
             <tr class="<%= "border-none" if clinic_event == @patient.clinic_events.sort_by(&:created_at).last %>">
               <td><%= clinic_event.clinic.name %></td>
               <td><%= clinic_event.created_at.strftime("%m/%d/%Y") %></td>
