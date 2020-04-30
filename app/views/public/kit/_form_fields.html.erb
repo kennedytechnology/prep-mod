@@ -64,7 +64,7 @@
   <div class="w-1/2 flex">
     <label class="w-5/12 mr-1">
       <div class="form-question">Date Of Birth</div>
-      <%= f.text_field :date_of_birth, disabled: true, class: "w-12/12 form-input block rounded bg-gray-100 cursor-not-allowed" %>
+      <%= f.date_field :date_of_birth, class: "form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
     </label>
     <label class="w-4/12 mr-1">
       <div class="form-question">Age</div>
@@ -78,7 +78,7 @@
   <div class="w-1/2">
     <label>
       <div class="form-question">Race</div>
-      <%= f.select :state, options_for_select(US_RACES), {}, {disabled: true, class: "w-full form-input block rounded bg-gray-100 cursor-not-allowed"} %>
+      <%= f.select :state, options_for_select(US_RACES), {prompt: "Select"}, {class: "w-full form-input block rounded"} %>
     </label>
   </div>
 </div>
