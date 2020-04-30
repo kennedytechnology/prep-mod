@@ -1,0 +1,2 @@
+class ProviderEnrollment < ApplicationRecord
+end

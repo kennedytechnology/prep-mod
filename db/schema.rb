@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_27_172608) do
+ActiveRecord::Schema.define(version: 2020_04_30_095436) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -220,6 +220,21 @@ ActiveRecord::Schema.define(version: 2020_04_27_172608) do
     t.string "insured_last_name"
     t.string "appointment_time"
     t.string "occupation"
+  end
+
+  create_table "provider_enrollments", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "address"
+    t.string "phone_number"
+    t.string "fax_number"
+    t.string "email"
+    t.string "npi_number"
+    t.string "license_number"
+    t.string "license_type"
+    t.string "medial_specialty"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "supply_inventories", force: :cascade do |t|
