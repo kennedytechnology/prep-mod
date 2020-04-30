@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   get 'message_board/index'
   get 'kit/new', to: 'public/kit#new'
-  post 'kit/thanks', to: 'public/kit#thanks'
+  post 'kit/create', to: 'public/kit#create'
 
   devise_for :users,
     controllers: {

@@ -9,4 +9,9 @@ class PatientNotifierMailer < ApplicationMailer
     @patient = patient
     mail to: patient.email, subject: "Your COVID-19 Test Registration Access Code"
   end
+
+  def kit_created(patient)
+    @patient = patient
+    mail to: patient.email, subject: "Safety Kit Successfully Created"
+  end
 end
