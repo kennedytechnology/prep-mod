@@ -35,7 +35,7 @@
   <div class="w-1/2">
     <label>
       <div class="form-question">Address</div>
-        <%= f.text_field :address, id: "autocomplete", placeholder: "", class: "w-full form-input block rounded" %>
+        <%= f.text_field :address, id: "autocomplete", onFocus: "geolocate()", placeholder: "", class: "w-full form-input block rounded" %>
        <%= render partial: "public/clinics/google_maps_script" %>
     </label>
   </div>
@@ -45,17 +45,17 @@
   <div class="w-1/2 mr-4">
     <label>
       <div class="form-question">State</div>
-      <%= f.select :state, options_for_select(US_STATES), {}, class: "w-full form-input block rounded" %>
+      <%= f.select :state, options_for_select(US_STATES), {}, {class: "w-full form-input block rounded", id: "administrative_area_level_1"} %>
     </label>
   </div>
   <div class="w-1/2 flex">
     <label class="w-1/2">
       <div class="form-question">City</div>
-      <%= f.text_field :city, class: "w-11/12 form-input block rounded" %>
+      <%= f.text_field :city, id: "locality", class: "w-11/12 form-input block rounded" %>
     </label>
     <label class="w-1/2">
       <div class="form-question">Zip Code</div>
-      <%= f.text_field :zip_code, class: "w-full form-input block rounded" %>
+      <%= f.text_field :zip_code, id: "postal_code", class: "w-full form-input block rounded" %>
     </label>
   </div>
 </div>
