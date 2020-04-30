@@ -74,28 +74,29 @@
                 </div>
                 <div class="start-time">
                   <p class="label">Start Time <span class="required-field">*</span></p>
-                  <%= f.time_select :start_time,
-                                    :combined => true,
-                                    :default => Time.now.change(:hour => 11, :min => 30),
-                                    :minute_interval => 15,
-                                    :time_separator => "",
-                                    :start_hour => 10,
-                                    :start_minute => 30,
-                                    :end_hour => 14,
-                                    :end_minute => 30, class: "form-input" %>
+                  <% 
+                        start_time = Time.parse("1 AM").to_i
+                        end_time = Time.parse("12 PM").to_i
+                        values = (start_time..end_time).step(15.minutes)
+                    %>
+                    <select class="hour form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="clinic[start_hour_minute]">
+                        <%= options_for_select(values.map{ |t| Time.at(t).strftime("%I:%M") }, @clinic.start_time ? @clinic.start_time.strftime('%I:%M') : nil) %>
+                    </select>
+
+                    <select name="clinic[start_meridiem]" class="meridiem form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                        <%= options_for_select(['AM', 'PM'], @clinic.start_time ? @clinic.start_time.strftime("%p") : nil) %>
+                    </select>
                 </div>
 
                 <div class="end-time">
                   <p class="label">End Time <span class="required-field">*</span></p>
-                  <%= f.time_select :end_time,
-                                    :combined => true,
-                                    :default => Time.now.change(:hour => 11, :min => 30),
-                                    :minute_interval => 15,
-                                    :time_separator => "",
-                                    :start_hour => 10,
-                                    :start_minute => 30,
-                                    :end_hour => 14,
-                                    :end_minute => 30, class: "form-input" %>
+                  <select class="hour form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="clinic[end_hour_minute]">
+                        <%= options_for_select(values.map{ |t| Time.at(t).strftime("%I:%M") }, @clinic.end_time ? @clinic.end_time.strftime('%I:%M') : nil) %>
+                    </select>
+
+                    <select name="clinic[end_meridiem]" class="meridiem form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                        <%= options_for_select(['AM', 'PM'], @clinic.end_time ? @clinic.end_time.strftime("%p") : nil) %>
+                    </select>
                 </div>
               </div>
             </div>

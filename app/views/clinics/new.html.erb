@@ -114,30 +114,29 @@
                                     <div class="w-full mb-3">
                                         <p class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2"> Start Time </p>
                                         <!-- TODO: Make a form helper out of this. -->
-                                        <select class="hour form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="clinic[start_hour]">
-                                            <%= options_for_select((1..12).to_a, @clinic.start_time ? @clinic.start_time.strftime('%l').to_i : nil) %>
+                                        <% 
+                                            start_time = Time.parse("1 AM").to_i
+                                            end_time = Time.parse("12 PM").to_i
+                                            values = (start_time..end_time).step(15.minutes)
+                                        %>
+                                        <select class="hour form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="clinic[start_hour_minute]">
+                                            <%= options_for_select(values.map{ |t| Time.at(t).strftime("%I:%M") }, @clinic.start_time ? @clinic.start_time.strftime('%I:%M').to_i : nil) %>
                                         </select>
-                                        <span class="colon">:</span>
-                                        <select class="minute form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="clinic[start_minute]" >
-                                            <%= options_for_select(['00', '15', '30', '45'], @clinic.start_time ? @clinic.start_time.strftime('%M').to_i : nil) %>
-                                        </select>
-                                        <select class="meridiem form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="clinic[start_meridiem]" >
-                                            <%= options_for_select(['AM', 'PM'], @clinic.start_time ? @clinic.start_time.strftime('%p') : nil) %>
+
+                                        <select name="clinic[start_meridiem]" class="meridiem form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                                            <%= options_for_select(['AM', 'PM']) %>
                                         </select>
                                     </div>
 
                                     <div class="w-full">
                                         <p class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2"> End Time </p>
-                                            <select class="hour form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="clinic[end_hour]">
-                                                <%= options_for_select((1..12).to_a, @clinic.end_time ? @clinic.end_time.strftime('%l').to_i : nil) %>
-                                            </select>
-                                            <span class="colon">:</span>
-                                            <select class="minute form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="clinic[end_minute]" >
-                                                <%= options_for_select(['00', '15', '30', '45'], @clinic.end_time ? @clinic.end_time.strftime('%M').to_i : nil) %>
-                                            </select>
-                                            <select class="meridiem form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="clinic[end_meridiem]" >
-                                                <%= options_for_select(['AM', 'PM'], @clinic.end_time ? @clinic.end_time.strftime('%p') : nil) %>
-                                            </select>
+                                        <select class="hour form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="clinic[end_hour_minute]">
+                                            <%= options_for_select(values.map{ |t| Time.at(t).strftime("%H:%M") }, @clinic.end_time ? @clinic.end_time.strftime('%I:%M').to_i : nil) %>
+                                        </select>
+
+                                        <select name="clinic[end_meridiem]" class="meridiem form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                                            <%= options_for_select(['AM', 'PM']) %>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -416,7 +415,7 @@
     <div class="mt-8 border-t border-gray-200 pt-5">
         <div class="flex justify-end">
             <span class="mr-3 inline-flex rounded-md shadow-sm">
-                <%= f.submit "Submit", class: "inline-flex cursor-pointer justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out" %>
+                <%= f.submit "Submit", data: {action: "click->new-clinic-form#setAMPM"}, class: "inline-flex cursor-pointer justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out" %>
             </span>
             <span class="inline-flex rounded-md shadow-sm">
                 <button type="button"
