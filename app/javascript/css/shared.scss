@@ -218,13 +218,13 @@
 }
 
 .clinic-management-links {
-  @apply flex mt-4 mb-4 justify-center;
+  @apply flex mt-4 mb-4 justify-center flex-wrap px-12;
   a {
-    @apply mr-2 inline-block border border-gray-800 bg-blue-500 rounded text-white py-1 px-3;
+    @apply mr-4 inline-block border-2 border-blue-200 bg-brand-gray-100 rounded-lg text-cool-gray-500 py-1 px-3 mb-4;
   }
 
   a:hover {
-    @apply border-black bg-blue-600;
+    @apply border-blue-200 bg-blue-500 text-white;
   }
 }
 
