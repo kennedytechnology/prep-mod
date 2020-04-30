@@ -1,8 +1,93 @@
 
-    <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9 sm:truncate mb-3">
+    <h2 class="text-2xl font-bold leading-7 text-brand-red-500 sm:text-3xl sm:leading-9 sm:truncate mb-3 pb-4 border-b border-gray-100">
         Supply Inventory for <%= @clinic.name %>
     </h2>
-    <%= link_to 'New Supply Inventory Entry', new_supply_inventory_path(clinic_id: @clinic.id), class: " mb-3 px-6 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out sm:mt-0 sm:flex-shrink-0 sm:inline-flex sm:items-center sm:w-auto" %> 
+
+    <%= form_with model: @supply_inventory, local: true, class: "py-5", data: {controller: "inventory-new-entry"} do |f| %>
+        <%= f.hidden_field :clinic_id, value: params[:clinic_id] %>
+
+        <div class="sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 lg:gap-6">
+            <div class="">
+                <%= f.label :source, class: "text-sm leading-5" do %>
+                    <span class="text-gray-500"> Source of Items </span>
+                    <span class="text-brand-red-500">*</span>
+                <% end %>
+                <%= f.select :source, INVENTORY_SOURCES, {prompt: "Select"}, {class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5", required: true, data: {action: "change->inventory-new-entry#updateModalField"}} %>
+            </div>
+
+            <div class="">
+                <%= f.label :item_type, class: "text-sm leading-5" do %>
+                    <span class="text-gray-500"> Item Type </span>
+                    <span class="text-brand-red-500">*</span>
+                <% end %>
+                <%= f.select :item_type, INVENTORY_ITEM_TYPES, {prompt: "Select"}, {class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5", required: true, data: {action: "change->inventory-new-entry#updateModalField"}} %>
+            </div>
+
+            <div class="">
+                <%= f.label :received_at, class: "text-sm leading-5" do %>
+                    <span class="text-gray-500"> Received Date </span>
+                    <span class="text-brand-red-500">*</span>
+                <% end %>
+                <%= f.date_field :received_at, class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5", placeholder: "MM/DD/YYYY", required: true, data: {action: "change->inventory-new-entry#updateModalField"} %>
+            </div>
+
+            <div class="">
+                <%= f.label :quantity, class: "text-sm leading-5" do %>
+                    <span class="text-gray-500"> Number of Items </span>
+                    <span class="text-brand-red-500">*</span>
+                <% end %>
+                <%= f.number_field :quantity, class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5", required: true, data: {action: "keyup->inventory-new-entry#updateModalField"} %>
+            </div>
+
+            <div class="">
+                <%= f.label :lot_number, class: "text-sm leading-5" do %>
+                    <span class="text-gray-500"> Lot Number </span>
+                    <span class="text-brand-red-500">*</span>
+                <% end %>
+                <%= f.text_field :lot_number, class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5", required: true, data: {action: "keyup->inventory-new-entry#updateModalField"} %>
+            </div>
+
+            <div class="">
+                <%= f.label :expiration_date, class: "text-sm leading-5" do %>
+                    <span class="text-gray-500"> Expiration Date </span>
+                    <span class="text-brand-red-500">*</span>
+                <% end %>
+                <%= f.date_field :expiration_date, class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5", placeholder: "MM/DD/YYYY", required: true, data: {action: "change->inventory-new-entry#updateModalField"} %>
+            </div>
+
+            <div class="">
+                <%= f.label :packaging, class: "text-sm leading-5" do %>
+                    <span class="text-gray-500"> Inventory Packaging </span>
+                    <span class="text-brand-red-500">*</span>
+                <% end %>
+                <%= f.select :packaging, INVENTORY_PACKAGINGS, {prompt: "Select"}, {class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5", required: true, data: {action: "change->inventory-new-entry#updateModalField"}} %>
+            </div>
+
+            <div class="">
+                <%= f.label :manufacturer, class: "text-sm leading-5" do %>
+                    <span class="text-gray-500"> Manufacturer </span>
+                    <span class="text-brand-red-500">*</span>
+                <% end %>
+                <%= f.select :manufacturer, INVENTORY_MANUFACTURERS, {prompt: "Select"}, {class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5", required: true, data: {action: "change->inventory-new-entry#updateModalField"}} %>
+            </div>
+
+            <div class="">
+                <%= f.label :product_name, class: "text-sm leading-5" do %>
+                    <span class="text-gray-500"> Product Name </span>
+                    <span class="text-brand-red-500">*</span>
+                <% end %>
+                <%= f.text_field :product_name, class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5", required: true, data: {action: "keyup->inventory-new-entry#updateModalField"} %>
+            </div>
+        </div>
+
+        <div class="flex justify-end items-end mt-2 mb-8">
+            <p class="px-6 py-3 bg-brand-red-500 rounded-full text-white cursor-pointer" data-action="click->inventory-new-entry#toggleModal"> Review & Confirm </p>
+        </div>
+
+        <%= render partial: "supply_inventories/new_entry_review", locals: {f: f} %>
+    <% end %>
+
+
     <%# <div class="flex flex-col">
         <div class="-my-2 py-2 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
             <div class="align-middle inline-block "> %>
@@ -91,7 +176,9 @@
                                     <%= supply_inventory.quantity_loaned %>
                                 </td>
                                 <td class="">
-                                    <%= supply_inventory.quantity - (supply_inventory.quantity_used + supply_inventory.quantity_lost + supply_inventory.quantity_loaned) %>
+                                    <%# TODO: Handle the function properly and extract it! %>
+                                    <%# supply_inventory.quantity - (supply_inventory.quantity_used + supply_inventory.quantity_lost + supply_inventory.quantity_loaned) %>
+                                    ?
                                 </td>
                             </tr>
                         <% end %>

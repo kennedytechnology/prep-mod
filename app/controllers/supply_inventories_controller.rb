@@ -5,6 +5,7 @@ class SupplyInventoriesController < InheritedResources::Base
   def index
     @clinic = Clinic.find(params[:clinic_id])
     @supply_inventories = @clinic.supply_inventories
+    @supply_inventory = SupplyInventory.new
   end
 
   def new
