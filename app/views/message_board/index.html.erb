@@ -1,55 +1,49 @@
-<div class="message-board bg-white container justify-center mt-24 lg:mx-auto lg:flex">
-    <div class="board-container w-full flex flex-wrap justify-center">
-        <div class="main-title"> 
-            <h2> Message Board </h2>
-        </div>
+<h2 class="main-title"> Message Board </h2>
 
+<div class="message-board bg-white container justify-center mt-12 lg:mx-auto lg:flex">
+    <div class="board-container w-full flex flex-wrap justify-center">
         <div class="content w-full flex flex-wrap justify-between">
-            <div class="message-container py-12 px-6 max-w-xl lg:max-w-5xl lg:w-1/2 mt-4 w-full">
-                <label class="subject block w-full">
-                        <input type="subject" class="form-input mt-1 block w-full text-lg text-gray-700" placeholder="Subject: ">
-                </label>
-                <label class="message block w-full">
-                        <textarea class="form-textarea text-base mt-1 block w-full text-gray-600" rows="9" placeholder="Enter your message here.. "></textarea>
-                </label>
+            <div class="message-container py-12 px-6 max-w-xl lg:max-w-5xl lg:w-1/2 w-full">
+                <input type="subject" class="form-input block w-full mb-4" placeholder="Subject: ">
+                <textarea class="form-textarea block w-full" rows="9" placeholder="Enter your message here.. "></textarea>
             </div> 
-            <div class="send-container py-12 px-6 max-w-xl lg:max-w-5xl lg:w-1/2 mt-4 w-full">
+            <div class="send-container py-12 px-6 max-w-xl lg:max-w-5xl lg:w-1/2 w-full">
                 <div class="send-content block w-full">
                     <span class="title text-gray-900 text-xl">Send Message to: </span>
-                    <div class="options mt-2">
+                    <div class="options mt-4">
                         <div>
-                            <label class="check-options inline-flex items-center mt-4">
+                            <label>
                                 <input type="checkbox" class="form-checkbox text-blue-500" checked>
-                                <span class="ml-2 text-lg text-gray-700">All users</span>
+                                <span class="ml-2 text-base text-gray-700">All users</span>
                             </label>
                         </div>
                         <div>
                             <label class="inline-flex items-center mt-4">
                                 <input type="checkbox" class="form-checkbox text-blue-500">
-                                <span class="ml-2 text-lg text-gray-700">Healthcare Providers</span>
+                                <span class="ml-2 text-base text-gray-700">Healthcare Providers</span>
                             </label>
                         </div>
                         <div>
                             <label class="inline-flex items-center mt-4">
                                 <input type="checkbox" class="form-checkbox text-blue-500">
-                                <span class="ml-2 text-lg text-gray-700">Local Health Departments</span>
+                                <span class="ml-2 text-base text-gray-700">Local Health Departments</span>
                             </label>
                         </div>
                         <div>
                             <label class="inline-flex items-center mt-4">
                                 <input type="checkbox" class="form-checkbox text-blue-500">
-                                <span class="ml-2 text-lg text-gray-700">School Health</span>
+                                <span class="ml-2 text-base text-gray-700">School Health</span>
                             </label>
                         </div>
                         <div>
                             <label class="inline-flex items-center mt-4">
                                 <input type="checkbox" class="form-checkbox text-blue-500">
-                                <span class="ml-2 text-lg text-gray-700">Agency Administrator</span>
+                                <span class="ml-2 text-base text-gray-700">Agency Administrator</span>
                             </label>
                         </div>
                         <p class="text-sm mt-4 font-semibold"> * All messages must be approved by Regional Administrator </p>
                         <div class="mt-8">
-                            <a href="#" class="bg-blue-500 text-gray-100 px-5 py-3 font-semibold rounded hover:bg-blue-600">Submit Message</a>
+                            <a href="#" class="button-primary">Submit Message</a>
                         </div>
                     </div>
                 </div>

@@ -14,63 +14,39 @@
         </div>
             <%= form_with model: @news_signup, local: true do |f| %>
                 <div class="mt-4">
-                    <%= f.label :name, class: "block text-sm font-medium leading-5 text-gray-700" %>
-                    <div class="mt-1">
-                        <%= f.text_field :name, class: "form-input w-full", required: true %>
-                    </div>
+                    <%= f.label :name %>
+                    <%= f.text_field :name, class: "form-input w-full", required: true %>
                 </div>
 
-                <div>
-                    <%= f.label :zip_code, class: "block text-sm font-medium leading-5 text-gray-700" %>
-                    <div class="mt-1">
-                        <%= f.text_field :zip_code, class: "form-input w-full", required: true %>
-                    </div>
-                </div>
+                <%= f.label :zip_code %>
+                <%= f.text_field :zip_code, class: "form-input w-full", required: true %>
 
-                <div>
-                    <%= f.label :date_of_birth, class: "block text-sm font-medium leading-5 text-gray-700" %>
-                    <div class="mt-1">
-                        <%= f.date_field :date_of_birth, min: Date.today - 50.years, max: Date.today, class: "form-input block w-full", placeholder: "MM/DD/YYYY", required: true %>
-                    </div>
-                </div>
+                <%= f.label :date_of_birth %>
+                <%= f.date_field :date_of_birth, min: Date.today - 50.years, max: Date.today, class: "form-input block w-full", placeholder: "MM/DD/YYYY", required: true %>
 
                 <div class="mb-4">
-                    <%= f.label :topics, class: "block text-sm font-medium leading-5 text-gray-700 mb-3" %>
-                    <div class="">
+                    <%= f.label :topics %>
                     <div class="max-w-xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         <% ["Testing", "Screening", "Safety Kit", "Medication", "Other"].each do |topic|%>
                             <div class="relative flex items-start">
                                 <div class="absolute flex items-center h-5">
                                     <%= f.check_box(:topics, {multiple: true, id: "topic_#{topic}", class: "form-checkbox"}, topic) %>
                                 </div>
-                                <div class="pl-7 text-sm leading-5">
-                                    <label for="topic_<%=topic%>" class="font-meidum text-gray-700"> <%= topic %> </label>
+                                <div class="pl-6 text-sm leading-5">
+                                    <label for="topic_<%=topic%>"> <%= topic %> </label>
                                 </div>
                             </div>
                         <% end %>
                     </div>
-                    </div>
-
-                    
                 </div>
 
-                <div>
-                    <%= f.label :occupation, "Choose Occupation", class: "block text-sm font-medium leading-5 text-gray-700" %>
-                    <div class="mt-1">
-                        <%= f.select :occupation, PATIENT_OCCUPATIONS, {prompt: "Select"}, {class: "block form-select w-full", required: true} %>
-                    </div>
-                </div>
+                <%= f.label :occupation, "Choose Occupation" %>
+                <%= f.select :occupation, PATIENT_OCCUPATIONS, {prompt: "Select"}, {class: "block form-select w-full", required: true} %>
 
-                <div>
-                    <%= f.label :email, "Email Address", class: "block text-sm font-medium leading-5 text-gray-700" %>
-                    <div class="mt-1">
-                        <%= f.email_field :email, class: "form-input w-full", required: true %>
-                    </div>
-                </div>
+                <%= f.label :email, "Email Address" %>
+                <%= f.email_field :email, class: "form-input w-full", required: true %>
 
-                <div>
-                    <%= f.submit "Sign Up", class: "button-primary-fullwidth" %>
-                </div>
+                <%= f.submit "Sign Up", class: "button-primary-fullwidth" %>
             <% end %>
 
             <div>

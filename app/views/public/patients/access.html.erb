@@ -1,12 +1,11 @@
-
 <div class="container bg-gray-50 overflow-hidden">
-
-  <form class="bg-white p-8 md:-12 lg:p-16 rounded-lg shadow">
-    <h1 class="text-3xl">COVID-19 Testing: Do you have a code?</h1>
-    If you've been referred for COVID-19 testing and you've received an access code, please enter it here to proceed with registration for testing.
-    <input name="access_code" class="form-input text-2xl block rounded mt-5 mb-5" value="<%= Patient.all.sample.access_code %>">
-    <input type="submit" value="Continue" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-  </form>
-
+    <form class="bg-white p-8 md:-12 lg:p-16 rounded-lg shadow">
+        <h1 class="text-3xl mb-4">COVID-19 Testing: Do you have a code?</h1>
+        <p class="mb-3"> If you've been referred for COVID-19 testing and you've received an access code, please enter it here to proceed with registration for testing. </p>
+        <div class="w-1/3 my-3">
+            <input name="access_code" class="form-input block w-full mb-4" value="<%= Patient.all.sample.access_code %>">
+            <input type="submit" value="Continue" class="button-primary-fullwidth">
+        </div>
+    </form>
 </div>
 

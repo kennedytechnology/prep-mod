@@ -1,34 +1,34 @@
-<div class="container bg-gray-50 overflow-hidden">
+<h1 class="main-title">Enter a patient event</h1>
+<div class="container overflow-hidden">
   <%= form_for(@clinic_event, remote: false, class: "bg-white p-8 md:-12 lg:p-16 rounded-lg shadow") do |f| %>
-      <h1 class="text-2xl leading-6 font-medium text-blue-600 font-bold mb-6">Enter a patient event</h1>
       <h2 class="text-xl font-bold m-4">Patient: <%= @clinic_event.patient.full_name %> (<%= @clinic_event.patient.date_of_birth.strftime("%B %e, %Y") %>)
 
       <div class="mt-4">
-        <div class="form-question">Logged In User</div>
-        <div class="w-11/12 form-input block rounded m-1"><%= current_user.name %>
+        <div class="label">Logged In User</div>
+        <input class="w-11/12 form-input block" value="<%= current_user.name %>" disabled="true" />
       </div>
 
       <div class="mt-4">
-        <div class="form-question">Clinic</div>
-        <%= f.select :clinic_id, options_for_select(Clinic.all.collect{|c| [c.name, c.id]}, @clinic_event.clinic_id),{}, class: "w-11/12 form-select block rounded m-1" %>
+        <%= f.label :clinic_id, "Clinic" %>
+        <%= f.select :clinic_id, options_for_select(Clinic.all.collect{|c| [c.name, c.id]}, @clinic_event.clinic_id),{}, class: "w-11/12 form-select block" %>
       </div>
 
       <div class="mt-4">
-        <div class="form-question">Category</div>
-        <%= f.select :category, options_for_select(CLINIC_EVENTS.collect{|h| h[:name]}, @clinic_event.category),{}, class: "w-11/12 form-select block rounded m-1" %>
+        <%= f.label :category %>
+        <%= f.select :category, options_for_select(CLINIC_EVENTS.collect{|h| h[:name]}, @clinic_event.category),{}, class: "w-11/12 form-select block" %>
       </div>
 
       <div class="mt-4">
-        <div class="form-question">Outcome</div>
-        <%= f.select :outcome, options_for_select(CLINIC_EVENTS.collect{|h| h[:outcomes]}.flatten.uniq, @clinic_event.outcome),{}, class: "w-11/12 form-select block rounded m-1" %>
+        <%= f.label :outcome %>
+        <%= f.select :outcome, options_for_select(CLINIC_EVENTS.collect{|h| h[:outcomes]}.flatten.uniq, @clinic_event.outcome),{}, class: "w-11/12 form-select block" %>
       </div>
       <%= f.hidden_field :patient_id %>
       <div class="mt-4">
-        <div class="form-question">Note</div>
-        <%= f.text_area :notes, class: "w-11/12 form-input block rounded m-1" %>
+        <%= f.label :notes %>
+        <%= f.text_area :notes, class: "w-11/12 form-textarea block mb-4" %>
       </div>
       <div class="button-container">
-        <%= submit_tag "Save and Continue →", class: "bg-blue-500 text-white py-2 px-4 mr-2 mt-4 rounded-full" %>
+        <%= submit_tag "Save and Continue →", class: "button-primary" %>
       </div>
   <% end %>
 </div>
