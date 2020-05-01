@@ -52,8 +52,8 @@
               <td><%= patient.county %></td>              
               <td>
                 <%= link_to "Event Entry", new_clinic_event_path(clinic_id: @clinic, patient_id: patient.id),
-                            class: "button-primary" %>
-                <%= link_to "Delete", patient, method: :delete, class: "button-primary" %>
+                            class: "button-action" %>
+                <%= link_to "Delete", patient, method: :delete, class: "button-action" %>
               </td> 
             </tr>
           <% end %>

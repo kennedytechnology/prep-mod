@@ -8,6 +8,15 @@
         &:focus { @apply outline-none; }
     }
 
+    &-action{
+        @extend .button-base;
+        @apply p-2 inline-block mt-4 bg-brand-blue-600 text-white;
+        min-height: auto;
+        min-width: auto;
+        width: auto;
+        &:hover { background-color: lighten(#2699FB, 5%); }
+    }
+
     &-primary {
         @extend .button-base;
         @apply bg-brand-blue-600 text-white;
