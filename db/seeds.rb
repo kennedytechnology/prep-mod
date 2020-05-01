@@ -91,6 +91,7 @@ clinics = Clinic.all
 PATIENT_COUNT.times.each do |i|
   address = addresses.sample
   clinic = clinics.sample
+  patientEmail = Faker::Internet.email
   Patient.create!(
     clinic: clinic,
     first_name: Faker::Name.first_name,
@@ -98,7 +99,7 @@ PATIENT_COUNT.times.each do |i|
     middle_initial: ("A".."Z").to_a.sample,
     mothers_maiden_name: Faker::Name.last_name,
     age: (3..80).to_a.sample,
-    email: Faker::Internet.email,
+    email: patientEmail,
     date_of_birth: Faker::Date.birthday,
     address: address['address1'],
     city: address['city'],
@@ -108,7 +109,12 @@ PATIENT_COUNT.times.each do |i|
     access_code: Patient.generate_access_code,
     sex: %w(M F).sample,
     phone_number: Faker::PhoneNumber.cell_phone,
-    appointment_time: clinic.appointment_times.sample
+    appointment_time: clinic.appointment_times.sample, 
+    student_id: Faker::IDNumber.unique,
+    user_id: Faker::IDNumber.unique,
+    email_confirmation: patientEmail,
+    notify_via_sms: Faker::Boolean.boolean,
+    notify_via_email: Faker::Boolean.boolean,
   )
 end
 
@@ -131,7 +137,6 @@ clinics = Clinic.all.to_a
   )
 
 end
-
 
 Clinic.all.each do |clinic|
   SUPPLY_INVENTORY_PER_CLINIC.times do
