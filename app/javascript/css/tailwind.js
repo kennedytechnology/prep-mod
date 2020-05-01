@@ -6,7 +6,10 @@ const brandColors = new Object({
     'gray-200': "#fafafe",
     'gray-300': '#e7e7e7',
     'gray-600': '#666666',
-    'gray-900': '#333333'
+    'gray-900': '#333333',
+    'blue-200': "#BCE0FD",
+    'blue-300': "#7FC4FD",
+    'blue-600': "#2699FB"
 })
 module.exports = {
   theme: {

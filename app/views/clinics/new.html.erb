@@ -2,7 +2,7 @@
     <div>
         <div>
             <div>
-                <h3 class="text-2xl leading-6 font-medium text-indigo-600 font-bold mb-2">
+                <h3 class="main-title">
                     Create a Public Clinic
                 </h3>
 
@@ -21,13 +21,13 @@
                                     <p class="text-sm leading-5 text-gray-500">Is clinic public or private?</p>
                                     <div class="grid grid-cols-2 items-end pt-4">
                                         <div class="flex items-center">
-                                            <%= f.radio_button :clinic_status, "public", id: "clinic_status_public", class: "form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" %>
+                                            <%= f.radio_button :clinic_status, "public", id: "clinic_status_public", class: "form-radio" %>
                                             <%= f.label :clinic_status, value: "public", for: "clinic_status_public", class: "ml-3" do %>
                                                 <span class="block text-sm leading-5 font-medium text-gray-700"> Public </span>
                                             <% end %>
                                         </div>
                                         <div class="flex items-center">
-                                            <%= f.radio_button :clinic_status, "private", id: "clinic_status_private", class: "form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" %>
+                                            <%= f.radio_button :clinic_status, "private", id: "clinic_status_private", class: "form-radio" %>
                                             <%= f.label :clinic_status, value: "private", for: "clinic_status_private", class: "ml-3" do %>
                                                 <span class="block text-sm leading-5 font-medium text-gray-700"> Private </span>
                                             <% end %>
@@ -53,7 +53,7 @@
                                         <%= collection_check_boxes(:clinic, :service_ids, ClinicService.all, :id, :name) do |b| %>
                                         <div class="relative flex items-start">
                                             <div class="absolute flex items-center h-5">
-                                                <%= b.check_box(class: "form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out") %>
+                                                <%= b.check_box(class: "form-checkbox") %>
                                             </div>
                                             <div class="pl-7 text-sm leading-5">
                                                 <%= b.label(class: "font-meidum text-gray-700") %>
@@ -80,7 +80,7 @@
                                             <%= collection_check_boxes(:clinic, :age_group_ids, ClinicAgeGroup.all, :id, :name) do |b| %>
                                                 <div class="relative flex items-start">
                                                     <div class="absolute flex items-center h-5">
-                                                        <%= b.check_box(class: "form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out") %>
+                                                        <%= b.check_box(class: "form-checkbox") %>
                                                     </div>
                                                     <div class="pl-7 text-sm leading-5">
                                                         <%= b.label(class: "font-meidum text-gray-700") %>
@@ -109,7 +109,7 @@
                                 <div class="max-w-xs rounded-md">
                                     <div class="mb-3">
                                         <p class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2"> Clinic Date </p>
-                                        <%= f.date_select :clinic_date, {order: [:month, :day, :year], start_year: Date.today.year}, { class: "form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5"} %>
+                                        <%= f.date_select :clinic_date, {order: [:month, :day, :year], start_year: Date.today.year}, { class: "form-select"} %>
                                     </div>
                                     <div class="w-full mb-3">
                                         <p class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2"> Start Time </p>
@@ -119,22 +119,22 @@
                                             end_time = Time.parse("12 PM").to_i
                                             values = (start_time..end_time).step(15.minutes)
                                         %>
-                                        <select class="hour form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="clinic[start_hour_minute]">
+                                        <select class="hour form-select" name="clinic[start_hour_minute]">
                                             <%= options_for_select(values.map{ |t| Time.at(t).strftime("%I:%M") }, @clinic.start_time ? @clinic.start_time.strftime('%I:%M').to_i : nil) %>
                                         </select>
 
-                                        <select name="clinic[start_meridiem]" class="meridiem form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                                        <select name="clinic[start_meridiem]" class="meridiem form-select">
                                             <%= options_for_select(['AM', 'PM']) %>
                                         </select>
                                     </div>
 
                                     <div class="w-full">
                                         <p class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2"> End Time </p>
-                                        <select class="hour form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="clinic[end_hour_minute]">
+                                        <select class="hour form-select" name="clinic[end_hour_minute]">
                                             <%= options_for_select(values.map{ |t| Time.at(t).strftime("%H:%M") }, @clinic.end_time ? @clinic.end_time.strftime('%I:%M').to_i : nil) %>
                                         </select>
 
-                                        <select name="clinic[end_meridiem]" class="meridiem form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                                        <select name="clinic[end_meridiem]" class="meridiem form-select">
                                             <%= options_for_select(['AM', 'PM']) %>
                                         </select>
                                     </div>
@@ -149,22 +149,22 @@
                                 Clinic Location
                             </label>
                             <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                <div class="max-w-xs rounded-md shadow-sm">
-                                    <%= f.select :county, COUNTIES, {prompt: "Select County"}, {class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"} %>
+                                <div class="max-w-md">
+                                    <%= f.select :county, COUNTIES, {prompt: "Select County"}, {class: "block form-select w-full"} %>
                                 </div>
 
-                                <div class="max-w-xs rounded-md shadow-sm">
-                                    <%= f.text_field :venue_name, placeholder: "Venue Name", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
+                                <div class="max-w-md">
+                                    <%= f.text_field :venue_name, placeholder: "Venue Name", class: "form-input w-full" %>
                                 </div>
 
-                                <div class="max-w-md rounded-md shadow-sm">
-                                    <%= f.text_field :address, id: "autocomplete", onFocus: "geolocate()", placeholder: "", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4", placeholder: "Address" %>
+                                <div class="max-w-md">
+                                    <%= f.text_field :address, id: "autocomplete", onFocus: "geolocate()", class: "form-input w-full", placeholder: "Address" %>
                                     <%= render partial: "public/clinics/google_maps_script" %>
                                 </div>
                                 <div class="max-w-md grid grid-cols-1 md:grid-cols-3 md:gap-4">
-                                    <%= f.text_field :zip, placeholder: "Zip", id: "postal_code", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
-                                    <%= f.text_field :city, placeholder: "City", id: "locality", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
-                                    <%= f.text_field :state, placeholder: "State", id: "administrative_area_level_1", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
+                                    <%= f.text_field :zip, placeholder: "Zip", id: "postal_code", class: "form-input w-full" %>
+                                    <%= f.text_field :city, placeholder: "City", id: "locality", class: "form-input w-full" %>
+                                    <%= f.text_field :state, placeholder: "State", id: "administrative_area_level_1", class: "form-input w-full" %>
                                 </div>
                             </div>
                         </div>
@@ -189,19 +189,19 @@
                                     <div class="mt-4 sm:mt-0 sm:col-span-2">
                                         <div class="max-w-lg grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                                             <div class="relative flex items-start">
-                                                <%= f.radio_button :appointments_available, "Yes, required", id: "yes_required", class: "form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" %>
+                                                <%= f.radio_button :appointments_available, "Yes, required", id: "yes_required", class: "form-radio" %>
                                                 <%= f.label :clinic_status, value: "public", for: "yes_required", class: "ml-3" do %>
                                                     <span class="block text-sm leading-5 font-medium text-gray-700"> Yes, required </span>
                                                 <% end %>
                                             </div>
                                             <div class="relative flex items-start">
-                                                <%= f.radio_button :appointments_available, "Yes, optional", id: "yes_optional", class: "form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" %>
+                                                <%= f.radio_button :appointments_available, "Yes, optional", id: "yes_optional", class: "form-radio" %>
                                                 <%= f.label :clinic_status, value: "public", for: "yes_optional", class: "ml-3" do %>
                                                     <span class="block text-sm leading-5 font-medium text-gray-700"> Yes, optional </span>
                                                 <% end %>
                                             </div>
                                             <div class="relative flex items-start">
-                                                <%= f.radio_button :appointments_available, "No (Walk-In)", id: "no_walk_in", class: "form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" %>
+                                                <%= f.radio_button :appointments_available, "No (Walk-In)", id: "no_walk_in", class: "form-radio" %>
                                                 <%= f.label :clinic_status, value: "public", for: "no_walk_in", class: "ml-3" do %>
                                                     <span class="block text-sm leading-5 font-medium text-gray-700"> No (Walk-In) </span>
                                                 <% end %>
@@ -229,7 +229,7 @@
                                                 </label>
                                                 <div class="mt-1 sm:mt-0 sm:col-span-2">
                                                     <div class="max-w-xs rounded-md">
-                                                        <%= f.select :appointment_frequency_minutes, [5, 10, 15, 20, 25, 30], {prompt: "Minutes"}, {class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"} %>
+                                                        <%= f.select :appointment_frequency_minutes, [5, 10, 15, 20, 25, 30], {prompt: "Minutes"}, {class: "block form-select w-full"} %>
                                                     </div>
                                                 </div>
                                             </div>
@@ -256,7 +256,7 @@
                                                 </label>
                                                 <div class="mt-1 sm:mt-0 sm:col-span-2">
                                                     <div class="max-w-xs rounded-md">
-                                                        <%= f.select :appointment_slots, (1..50), {prompt: "Select"}, {class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4"} %>
+                                                        <%= f.select :appointment_slots, (1..50), {prompt: "Select"}, {class: "block form-select w-full"} %>
                                                     </div>
                                                 </div>
                                             </div>
@@ -282,12 +282,12 @@
                         Contact Information
                     </label>
                     <div class="mt-1 sm:mt-0 sm:col-span-2">
-                        <div class="max-w-xs rounded-md shadow-sm">
-                            <%= f.text_field :contact_person, placeholder: "Contact Person", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
+                        <div class="max-w-xs">
+                            <%= f.text_field :contact_person, placeholder: "Contact Person", class: "form-input w-full" %>
                         </div>
 
-                        <div class="max-w-xs rounded-md shadow-sm">
-                            <%= f.text_field :contact_phone_number, placeholder: "Contact Number", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
+                        <div class="max-w-xs">
+                            <%= f.text_field :contact_phone_number, placeholder: "Contact Number", class: "form-input w-full" %>
                         </div>
                     </div>
 
@@ -296,12 +296,12 @@
                         Back-Up Contact Information
                     </label>
                     <div class="mt-1 sm:mt-0 sm:col-span-2">
-                        <div class="max-w-xs rounded-md shadow-sm">
-                            <%= f.text_field :backup_contact_person, placeholder: "Back-Up Contact Person", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
+                        <div class="max-w-xs">
+                            <%= f.text_field :backup_contact_person, placeholder: "Back-Up Contact Person", class: "form-input w-full" %>
                         </div>
 
-                        <div class="max-w-xs rounded-md shadow-sm">
-                            <%= f.text_field :backup_contact_phone_number, placeholder: "Back-Up Contact Number", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
+                        <div class="max-w-xs">
+                            <%= f.text_field :backup_contact_phone_number, placeholder: "Back-Up Contact Number", class: "form-input w-full" %>
                         </div>
                     </div>
                 </div>
@@ -322,8 +322,8 @@
                 </label>
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
                     <div class="mt-1 sm:mt-0 sm:col-span-2 mb-4">
-                        <div class="max-w-xs flex rounded-md shadow-sm">
-                            <%= f.text_area :incidents_comments, class: "form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5", placeholder: "Enter Details Here" %>
+                        <div class="max-w-xs flex">
+                            <%= f.text_area :incidents_comments, class: "form-textarea block w-full", placeholder: "Enter Details Here" %>
                         </div>
                         <p class="mt-2 text-sm text-gray-500">Clinic Details or Special Instructions.</p>
                     </div>
@@ -337,22 +337,20 @@
                     Registration and Staff
                 </label>
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
-                    <div class="max-w-xs rounded-md shadow-sm">
-                        <%= f.number_field :students_registered, placeholder: "Number of Patients Registered", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
+                    <div class="max-w-xs">
+                        <%= f.number_field :students_registered, placeholder: "Number of Patients Registered", class: "form-input w-full" %>
                     </div>
 
-                    <div class="max-w-xs rounded-md shadow-sm">
-                        <%= f.text_field :lead_vaccinator_name, placeholder: "Lead Tester's Name", class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-4" %>
+                    <div class="max-w-xs">
+                        <%= f.text_field :lead_vaccinator_name, placeholder: "Lead Tester's Name", class: "form-input w-full" %>
                     </div>
 
                     <div class="fields flex flex-wrap">
-                        
-                            <%= f.fields_for :clinic_personnel do |c| %>
-                                <%= render 'clinics/clinic_personnel', f: c %>
-                            <% end %>
-                        
+                        <%= f.fields_for :clinic_personnel do |c| %>
+                            <%= render 'clinics/clinic_personnel', f: c %>
+                        <% end %>
                     </div>
-                    <%= link_to_add_row('Add more staff', f, :clinic_personnel, class: 'text-xs text-indigo-600 pb-1 border-b-2 border-indigo-600 hover:text-indigo-500 hover:border-indigo-500') %>
+                    <%= link_to_add_row('Add more staff', f, :clinic_personnel, class: 'text-xs text-brand-blue-600 pb-1 border-b border-brand-blue-600 hover:text-blue-400 hover:border-blue-400') %>
                 </div>
             </div>
         </div>
@@ -366,36 +364,22 @@
             <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-2 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                 <div class="mt-1 sm:mt-0 sm:col-span-3">
                     <div class="flex justify-end mb-4">
-                        <%= link_to_add_test_kit('Add More Test Kits', f, :test_kits, class: 'max-w-xs inline-flex cursor-pointer justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out') %>
+                        <%= link_to_add_test_kit('Add More Test Kits', f, :test_kits, class: 'max-w-xs inline-flex cursor-pointer justify-center button-primary') %>
                     </div>
                     <div class="flex flex-col">
                         <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-                            <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
-                            <table class="min-w-full">
+                            <div class="align-middle inline-block min-w-full overflow-hidden border-b border-gray-200">
+                            <table class="table">
                                 <thead>
                                 <tr>
-                                    <th class="px-1 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    Test Name
-                                    </th>
-                                    <th class="px-1 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    Test Manufacturer
-                                    </th>
-                                    <th class="px-1 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    Test Lot Number
-                                    </th>
-                                    <th class="px-1 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    Test Type
-                                    </th>
-                                    <th class="px-1 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    Processing
-                                    </th>
-                                    <th class="px-1 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    Test Expiration Date
-                                    </th>
-                                    <th class="px-1 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    Number of test kits
-                                    </th>
-                                    <th class="px-1 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase"> Action </th>
+                                    <th> Test Name </th>
+                                    <th> Test Manufacturer </th>
+                                    <th> Test Lot Number </th>
+                                    <th> Test Type </th>
+                                    <th> Processing </th>
+                                    <th> Test Expiration Date </th>
+                                    <th> Number of test kits </th>
+                                    <th> Action </th>
                                 </tr>
                                 </thead>
                                 <tbody class="bg-white" id="testKits">
@@ -414,14 +398,9 @@
 
     <div class="mt-8 border-t border-gray-200 pt-5">
         <div class="flex justify-end">
-            <span class="mr-3 inline-flex rounded-md shadow-sm">
-                <%= f.submit "Submit", data: {action: "click->new-clinic-form#setAMPM"}, class: "inline-flex cursor-pointer justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out" %>
-            </span>
-            <span class="inline-flex rounded-md shadow-sm">
-                <button type="button"
-                    class="py-2 px-4 border border-gray-300 rounded-md text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out">
-                    Cancel
-                </button>
+            <span class="mr-3 inline-flex"> <%= f.submit "Submit", class: "button-primary" %> </span>
+            <span class="inline-flex">
+                <button type="button" class="button-primary"> Cancel </button>
             </span>
         </div>
     </div>

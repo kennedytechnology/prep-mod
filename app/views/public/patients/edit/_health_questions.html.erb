@@ -3,23 +3,23 @@
 <div class="flex mb-4">
   <div class="w-1/2 mr-4">
     <div class="form-question">Do you have: </div>
-    <%= f.check_box :has_fever_over, class: "form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out rounded m-1" %>
+    <%= f.check_box :has_fever_over, class: "form-checkbox " %>
     <%= f.label :has_fever_over, "A fever of 100.4 degrees Fahrenheit or higher", class: "ml-2 text-sm leading-5 text-gray-900" %>
 
     <br />
-    <%= f.check_box :has_cough, class: "form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out rounded m-1" %>
+    <%= f.check_box :has_cough, class: "form-checkbox " %>
     <%= f.label :has_cough, "A cough", class: "ml-2 text-sm leading-5 text-gray-900" %>
     
     <br />
-    <%= f.check_box :has_difficult_breathing, class: "form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out rounded m-1" %>
+    <%= f.check_box :has_difficult_breathing, class: "form-checkbox " %>
     <%= f.label :has_difficult_breathing, "Shortness of breath or difficulty breathing", class: "ml-2 text-sm leading-5 text-gray-900" %>
   </div>
   <div class="w-1/2">
     <div class="form-question">Have you traveled in the past 14 days to regions affected by COVID-19?<span class="text-red-500">*</span></div>
-    <%= f.radio_button :had_traveled_to_affected_place, true, class: "form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out rounded m-1" %>
+    <%= f.radio_button :had_traveled_to_affected_place, true, class: "form-radio " %>
     <%= f.label :had_traveled_to_affected_place, "Yes", class: "text-sm leading-5 text-gray-900" %>
 
-    <%= f.radio_button :had_traveled_to_affected_place, false, class: "form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out rounded m-1" %>
+    <%= f.radio_button :had_traveled_to_affected_place, false, class: "form-radio " %>
     <%= f.label :had_traveled_to_affected_place, "No", class: "text-sm leading-5 text-gray-900" %>
   </div>
 </div>
@@ -27,18 +27,18 @@
 <div class="flex mb-4">
   <div class="w-1/2 mr-4">
     <div class="form-question"> Have you been in close contact with anyone who has a confirmed COVID-19 diagnosis?<span class="text-red-500">*</span> </div>
-    <%= f.radio_button :had_contact_with_confirmed_case, true, class: "form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out rounded m-1" %>
+    <%= f.radio_button :had_contact_with_confirmed_case, true, class: "form-radio " %>
     <%= f.label :had_contact_with_confirmed_case, "Yes", class: "text-sm leading-5 text-gray-900" %>
 
-    <%= f.radio_button :had_contact_with_confirmed_case, false, class: "form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out rounded m-1" %>
+    <%= f.radio_button :had_contact_with_confirmed_case, false, class: "form-radio " %>
     <%= f.label :had_contact_with_confirmed_case, "No", class: "text-sm leading-5 text-gray-900" %>
   </div>
   <div class="w-1/2">
     <div class="form-question">Do you have heart disease, lung disease, kidney disease or diabetes?<span class="text-red-500">*</span></div>
-    <%= f.radio_button :has_risk_factor, true, class: "form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out rounded m-1" %>
+    <%= f.radio_button :has_risk_factor, true, class: "form-radio " %>
     <%= f.label :has_risk_factor, "Yes", class: "text-sm leading-5 text-gray-900" %>
 
-    <%= f.radio_button :has_risk_factor, false, class: "form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out rounded m-1" %>
+    <%= f.radio_button :has_risk_factor, false, class: "form-radio " %>
     <%= f.label :has_risk_factor, "No", class: "text-sm leading-5 text-gray-900" %>
   </div>
 </div>
@@ -46,18 +46,18 @@
 <div class="flex mb-4">
   <div class="w-1/2 mr-4">
     <div class="form-question">Are you 60 or older?<span class="text-red-500">*</span></div>
-    <%= f.radio_button :is_age_60_or_more, true, class: "form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out rounded m-1" %>
+    <%= f.radio_button :is_age_60_or_more, true, class: "form-radio" %>
     <%= f.label :is_age_60_or_more, "Yes", class: "text-sm leading-5 text-gray-900" %>
 
-    <%= f.radio_button :is_age_60_or_more, false, class: "form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out rounded m-1" %>
+    <%= f.radio_button :is_age_60_or_more, false, class: "form-radio " %>
     <%= f.label :is_age_60_or_more, "No", class: "text-sm leading-5 text-gray-900" %>
   </div>
   <div class="w-1/2">
     <div class="form-question">Is there any other reason you think you should be tested for COVID-19? If "yes", explain<span class="text-red-500">*</span></div>
-    <%= f.radio_button :has_other_reason, true, class: "form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out rounded m-1" %>
+    <%= f.radio_button :has_other_reason, true, class: "form-radio" %>
     <%= f.label :has_other_reason, "Yes", class: "text-sm leading-5 text-gray-900" %>
 
-    <%= f.radio_button :has_other_reason, false, class: "form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out rounded m-1" %>
+    <%= f.radio_button :has_other_reason, false, class: "form-radio" %>
     <%= f.label :has_other_reason, "No", class: "text-sm leading-5 text-gray-900" %>
   </div>
 </div>

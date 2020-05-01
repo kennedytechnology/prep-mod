@@ -1,11 +1,6 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-
-body {
-  @apply bg-brand-gray-200;
-}
-
 @import "./application/all";
-@import "sessions";
+
 

@@ -15,28 +15,30 @@
   <body>
     <%= render partial: "layouts/header" %>
     <!-- These are from devise. This is to be better-handled elsewise -->
-    <div class="clinic-management-links">
-      <a href="/clinics/new">Create Public Clinic</a>
-      <a href="/clinics"> Clinic List </a>
-      <a href="#">Past Clinics</a>
-      <a href="/patients">Patient Registry</a>
-      <a href="#">Registration List</a>
-      <a href="/patients/new">Refer Patient for Testing</a>
-      <a href="#">Data Transfer</a>
-      <a href="/message_board/index">Message Board</a>
-      <a href="#">Upload Records</a>
-      <a href="#">Create Users</a>
-      <a href="#">Change Password</a>
-      <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
-    </div>
 
     <% if notice || alert %>
     <script>
       alert("<%= notice.to_s + " " + alert.to_s %>")
     </script>
     <% end %>
-    <div class="clinic-management-container container"> 
-      <%= yield %>
+    <div class="main-container"> 
+        <div class="flex flex-wrap justify-center items-center text-gray-600 pb-12 border-b mb-8">
+            <a class="button-tab" href="/clinics/new">Create Public Clinic</a>
+            <a class="button-tab" href="/clinics"> Clinic List </a>
+            <a class="button-tab" href="#">Past Clinics</a>
+            <a class="button-tab" href="/patients">Patient Registry</a>
+            <a class="button-tab" href="#">Registration List</a>
+            <a class="button-tab" href="/patients/new">Refer Patient for Testing</a>
+            <a class="button-tab" href="#">Data Transfer</a>
+            <a class="button-tab" href="/message_board/index">Message Board</a>
+            <a class="button-tab" href="#">Upload Records</a>
+            <a class="button-tab" href="#">Create Users</a>
+            <a class="button-tab" href="#">Change Password</a>
+            <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "button-tab") %>
+        </div>
+        <%= yield %>
     </div>
+
+    <%= render partial: "layouts/footer" %>
   </body>
 </html>

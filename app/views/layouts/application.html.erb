@@ -22,6 +22,10 @@
     </script>
     <% end %>
 
-    <%= yield %>
+    <div class="main-container">
+        <%= yield %>
+    </div>
+
+    <%= render partial: "layouts/footer" unless (action_name == "index" && controller_name == "public_portal") %>
   </body>
 </html>

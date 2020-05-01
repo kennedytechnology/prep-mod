@@ -1,7 +1,7 @@
 <div class="clinic-patients-index-page">
   <div class="header-section">
     <div class="header">
-      <h1>Patients Listing
+      <h1 class="main-title">Patients Listing
         <% if @clinic %>
           - <%= @clinic.name %>
         <% end %>
@@ -13,17 +13,17 @@
         <h3>Total Registered: <%= @clinic.patients.size %></h3>
       <% end %>
     </div>
-    <div class="search-form">
-      <form>
-        <input type="text" name="q" value="<%= params[:q] %>" class="search-input">
-        <input type="submit" value="Search">
+    <div class="flex justify-end">
+      <form class="flex w-2/4">
+        <input type="text" name="q" value="<%= params[:q] %>" placeholder="Search here" class="input-primary w-full mr-3">
+        <input type="submit" value="Search" class="button-primary">
       </form>
     </div>
     
   </div>
   <div class="flex justify-end">
       <form>
-        <input type="button" value="Print" onClick="window.print()" class="bg-gray-500 text-xs text-white py-1 px-4 mr-2 mt-1 mb-2 rounded-full;">
+        <input type="button" value="Print" onClick="window.print()" class="button-primary">
       </form>
   </div>
   
@@ -31,7 +31,7 @@
   <div class="flex flex-col">
     <div class="sorting-table-wrapper">
       <div class="sorting-table-container">
-        <table class="sorting-table">
+        <table class="table">
           <thead>
           <tr>
             <th><%= sortable "last_name", "Name" %></th>
@@ -44,7 +44,7 @@
           </thead>
           <tbody>
           <% @patients.each do |patient| %>
-            <tr class="<%= "border-none" if patient == @patients.last %>">
+            <tr>
               <td class="underline"><%= link_to patient.full_name, patient %></td>
               <td><%= patient.date_of_birth.strftime("%m/%d/%y") %></td>
               <td><%= ((Date.today.to_time - patient.date_of_birth.to_time) / 1.year.seconds).floor %></td>
@@ -52,8 +52,8 @@
               <td><%= patient.county %></td>              
               <td>
                 <%= link_to "Event Entry", new_clinic_event_path(clinic_id: @clinic, patient_id: patient.id),
-                            class: "action-button" %>
-                <%= link_to "Delete", patient, method: :delete, class: "action-button" %>
+                            class: "button-primary" %>
+                <%= link_to "Delete", patient, method: :delete, class: "button-primary" %>
               </td> 
             </tr>
           <% end %>

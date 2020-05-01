@@ -1,0 +1,35 @@
+.button {
+    &-base {
+        @apply rounded-lg border-2 border-brand-blue-200 cursor-pointer;
+        @apply flex justify-center items-center mb-4 mr-4;
+        min-height: 50px;
+        max-height: 50px;
+
+        &:focus { @apply outline-none; }
+    }
+
+    &-primary {
+        @extend .button-base;
+        @apply bg-brand-blue-600 text-white;
+        min-width: 210px;
+        max-width: 210px;
+
+        &:hover { background-color: lighten(#2699FB, 5%); }
+    }
+
+    &-primary-fullwidth {
+        @extend .button-base;
+        @apply bg-brand-blue-600 text-white w-full;
+
+        &:hover { background-color: lighten(#2699FB, 5%); }
+    }
+
+    &-tab {
+        @extend .button-base;
+        @apply bg-gray-100 text-gray-600;
+        min-width: 210px;
+        max-width: 210px;
+
+        &:hover { @apply bg-gray-50; }
+    }
+}

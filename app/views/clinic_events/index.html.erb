@@ -1,14 +1,14 @@
 <div class="clinic-events-page">
     <div class="card-wrapper">
       <div class="card-header">
-        <h3>Clinic Activity Form</h3>
-        <div class="links-buttons">
-          <%= link_to "Registration List", clinic_patients_path(clinic_id: @clinic.id), class: "clinic-action" %>
+        <h3 class="main-title">Clinic Activity Form</h3>
+        <div class="links-buttons flex justify-end items-center pb-4 mb-4 border-b">
+          <%= link_to "Registration List", clinic_patients_path(clinic_id: @clinic.id), class: "clinic-action mr-4" %>
           <%= link_to "Edit Clinic", edit_clinic_path(id: @clinic.id), class: "clinic-action" %>
         </div>
       </div>
 
-      <div class="details-section">
+      <div class="grid grid-cols-3 gap-4 font-bold mb-8">
         <h3>Clinic Date: <%= @clinic.clinic_date %></h3>
         <h3>County: <%= @clinic.address.split(',')[1] %></h3>
         <h3>Location: <%= @clinic.address %></h3>
@@ -20,27 +20,27 @@
           <div class="flex mb-4">
             <div class="w-4/12 mr-4">
               <%= f.label :start_time, "Clinic Start Time:", class: "mr-3 font-bold" %><br/>
-              <select class="form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="clinic[start_hour]">
+              <select class="form-select" name="clinic[start_hour]">
                   <%= options_for_select((1..12).to_a, @clinic.start_time ? @clinic.start_time.strftime('%l').to_i : nil) %>
               </select>
               <span class="colon">:</span>
-              <select class="form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="clinic[start_minute]" >
+              <select class="form-select" name="clinic[start_minute]" >
                   <%= options_for_select(['00', '15', '30', '45'], @clinic.start_time ? @clinic.start_time.strftime('%M').to_i : nil) %>
               </select>
-              <select class="form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="clinic[start_meridiem]" >
+              <select class="form-select" name="clinic[start_meridiem]" >
                   <%= options_for_select(['AM', 'PM'], @clinic.start_time ? @clinic.start_time.strftime('%p') : nil) %>
               </select>
             </div>
             <div class="w-4/12 mr-4">
               <%= f.label :end_time, "Clinic End Time:", class: "mr-3 font-bold" %><br/>
-              <select class="form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="clinic[end_hour]">
+              <select class="form-select" name="clinic[end_hour]">
                   <%= options_for_select((1..12).to_a, @clinic.end_time ? @clinic.end_time.strftime('%l').to_i : nil) %>
               </select>
               <span class="colon">:</span>
-              <select class="form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="clinic[end_minute]" >
+              <select class="form-select" name="clinic[end_minute]" >
                   <%= options_for_select(['00', '15', '30', '45'], @clinic.end_time ? @clinic.end_time.strftime('%M').to_i : nil) %>
               </select>
-              <select class="form-select transition duration-150 ease-in-out sm:text-sm sm:leading-5" name="clinic[end_meridiem]" >
+              <select class="form-select" name="clinic[end_meridiem]" >
                   <%= options_for_select(['AM', 'PM'], @clinic.end_time ? @clinic.end_time.strftime('%p') : nil) %>
               </select>
             </div>
@@ -51,44 +51,32 @@
           </div>
 
           <div class="clinic-comments">
-            <%= f.label :incidents_comments, "Clinic Incidents or Comments", class: "form-group-label" %>
-            <%= f.text_area :incidents_comments %>
+            <%= f.label :incidents_comments, "Clinic Incidents or Comments", class: "form-group-label block font-bold" %>
+            <%= f.text_area :incidents_comments, class: "form-textarea w-2/4" %>
           </div>
 
           <div class="tests-table-section">
             <div class="tests-table-outer">
               <div class="tests-table-wrapper">
                     <div class="flex justify-end mb-4">
-                        <%= link_to_add_test_kit('Add More Test Kits', f, :test_kits, class: 'max-w-xs inline-flex cursor-pointer justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out') %>
+                        <%= link_to_add_test_kit('Add More Test Kits', f, :test_kits, class: 'button-primary') %>
                     </div>
                     <div class="flex flex-col">
                         <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-                            <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
-                            <table class="min-w-full">
+                            <div class="align-middle inline-block min-w-full overflow-hidden border-b border-gray-200">
+                            <table class="table">
                                 <thead>
-                                <tr>
-                                    <th class="px-1 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    Test Name
-                                    </th>
-                                    <th class="px-1 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    Test Lot Number
-                                    </th>
-                                    <th class="px-1 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    # of Starting kits
-                                    </th>
-                                    <th class="px-1 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    # of Tests Administered
-                                    </th>
-                                    <th class="px-1 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    # Unusable tests
-                                    </th>
-                                    <th class="px-1 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    # Tests Returned
-                                    </th>
-                                    <th class="px-1 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase"> Action </th>
-                                </tr>
+                                    <tr>
+                                        <th> Test Name </th>
+                                        <th> Test Lot Number </th>
+                                        <th> # of Starting kits </th>
+                                        <th> # of Tests Administered </th>
+                                        <th> # Unusable tests </th>
+                                        <th> # Tests Returned </th>
+                                        <th> Action </th>
+                                    </tr>
                                 </thead>
-                                <tbody class="bg-white" id="testKits">
+                                <tbody id="testKits">
                                     <%= f.fields_for :test_kits do |test_kit_fields| %>
                                         <%= render 'clinics/test_kit', f: test_kit_fields %>
                                     <% end %>
@@ -106,18 +94,20 @@
            
 
             <div class="patients-table-header">
-              <div class="search-section">
-                <label for="search">Search: </label>
-                <input id="search" data-action="keyup->clinic-activity-patients#search" type="text">
-              </div>
+                <div class="flex justify-end mt-12">
+                    <div class="flex w-2/4">
+                        <input for="search" type="text" class="input-primary w-full mr-3" placeholder="Search Here">
+                        <input class="button-primary" id="search" value="Search" data-action="keyup->clinic-activity-patients#search" type="text">
+                    </div>
+                </div>
               <div class="add-more-patients">
-                <%= link_to sanitize("Add More Patients &#43;"), "/patients/new", class: "add-more-patients-button" %>
+                <%= link_to sanitize("Add More Patients &#43;"), "/patients/new", class: "button-primary" %>
               </div>
             </div>
             <div class="patients-table-outer">
               <div class="patients-table-wrapper">
                 <div class="patients-table-container">
-                  <table class="patients-table">
+                  <table class="table">
                     <thead>
                     <tr>
                       <th>Patient Name</th>
@@ -136,21 +126,21 @@
                     <% @clinic.patients.each do |patient| %>
                       <%= f.fields_for :clinic_events, patient.event_for_clinic(@clinic) do |event_form| %>
                         <%= event_form.hidden_field :patient_id %>
-                        <tr class="patient-row" data-target="clinic-activity-patients.searchableRow" data-search-content="<%= [patient.first_name.downcase, patient.last_name.downcase].join(" ") %>" data-patient-id="<%= patient.id %>">
+                        <tr data-target="clinic-activity-patients.searchableRow" data-search-content="<%= [patient.first_name.downcase, patient.last_name.downcase].join(" ") %>" data-patient-id="<%= patient.id %>">
                           <td>
                             <%= link_to patient.first_name + ' ' + patient.last_name, patient %> <br/>
                           </td>
                           <td><%= patient.date_of_birth.strftime("%D") %></td>
                           <td><%= patient.appointment_time %></td>
-                          <td><%= event_form.radio_button :outcome, "Screened", data: {action: "clinic-activity-patients#showModal", selection: "Screened"} %></td>
-                          <td><%= event_form.radio_button :outcome, "Tested", data: {action: "clinic-activity-patients#showModal", selection: "Tested"} %></td>
-                          <td><%= event_form.check_box :safety_kit_received %></td>
-                          <td><%= event_form.radio_button :outcome, "Cancelled"  %></td>
-                          <td><%= event_form.radio_button :outcome, "No Show"  %></td>
-                          <td><%= link_to "Remark", "#", class: "remark-link" %></td>
+                          <td><%= event_form.radio_button :outcome, "Screened", data: {action: "clinic-activity-patients#showModal", selection: "Screened"}, class: "form-radio" %></td>
+                          <td><%= event_form.radio_button :outcome, "Tested", data: {action: "clinic-activity-patients#showModal", selection: "Tested"}, class: "form-radio" %></td>
+                          <td><%= event_form.check_box :safety_kit_received, class: "form-checkbox" %></td>
+                          <td><%= event_form.radio_button :outcome, "Cancelled", class: "form-radio"  %></td>
+                          <td><%= event_form.radio_button :outcome, "No Show", class: "form-radio"  %></td>
+                          <td><%= link_to "Remark", "#", class: "" %></td>
                           <td>
                             <div class="flex">
-                              <%= link_to "Delete", patient, method: :delete, class: "table-actions" %>
+                              <%= link_to "Delete", patient, method: :delete, class: "button-primary mb-0" %>
                             </div>
                           </td>
                         </tr>
@@ -162,9 +152,9 @@
               </div>
             </div>
           </div>
-          <div class="button-container">
-            <input type="submit" name="save" value="Save" class="submit-button mr-2 mt-10">
-            <input type="submit" name="save-submit" value="Save and Submit" class="submit-button ml-2 bg-blue-500 text-white mt-10">
+          <div class="button-container flex justify-end">
+            <input type="submit" name="save" value="Save" class="button-primary mr-2 mt-10">
+            <input type="submit" name="save-submit" value="Save and Submit" class="button-primary ml-2 bg-blue-500 text-white mt-10">
           </div>
         <% end %>
       </div>
@@ -192,7 +182,7 @@
                 </p>
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
                     <div class="max-w-xs rounded-md shadow-sm">
-                        <%= f.select :contact_type, options_for_select(["In Person", "Telephone", "Electronic", "Other"], f.object.screening_outcome), {}, class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+                        <%= f.select :contact_type, options_for_select(["In Person", "Telephone", "Electronic", "Other"], f.object.screening_outcome), {}, class: "block form-select w-full" %>
                     </div>
                 </div>
             </div>
@@ -203,7 +193,7 @@
                 </p>
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
                     <div class="max-w-xs rounded-md shadow-sm">
-                        <%= f.select :screening_outcome, options_for_select(["Low Risk", "Moderate Risk", "Refer for Testing", "Other"], f.object.screening_outcome), {}, class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+                        <%= f.select :screening_outcome, options_for_select(["Low Risk", "Moderate Risk", "Refer for Testing", "Other"], f.object.screening_outcome), {}, class: "block form-select w-full" %>
                     </div>
                 </div>
             </div>
@@ -214,7 +204,7 @@
                 </p>
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
                     <div class="max-w-xs rounded-md shadow-sm">
-                        <%= f.select :clinic_staff_id, options_from_collection_for_select(@clinic.clinic_personnel, 'id', 'name', f.object.clinic_staff_id), {}, class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+                        <%= f.select :clinic_staff_id, options_from_collection_for_select(@clinic.clinic_personnel, 'id', 'name', f.object.clinic_staff_id), {}, class: "block form-select w-full" %>
                     </div>
                 </div>
             </div>
@@ -225,7 +215,7 @@
                 </p>
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
                     <div class="max-w-lg flex rounded-md shadow-sm">
-                        <%= f.text_area :notes, rows: "3", class: "form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+                        <%= f.text_area :notes, rows: "3", class: "form-textarea block w-full" %>
                     </div>
                 </div>
             </div>
@@ -239,15 +229,15 @@
         <div class="mt-8 border-t border-gray-200 pt-5">
             <div class="flex justify-end">
                 <span class="inline-flex rounded-md shadow-sm">
-                    <a href="#" onClick="this.closest('.modal').classList.toggle('opacity-0');" class="py-2 px-4 border border-gray-300 rounded-md text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out">Cancel</a>
+                    <a href="#" onClick="this.closest('.modal').classList.toggle('opacity-0');" class="button-primary">Cancel</a>
                 </span>
                 <% if f.object.new_record? %>
                     <span class="ml-3 inline-flex rounded-md shadow-sm">
-                        <%= f.submit "Create Record", class: "inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-brand-red-500 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-500 transition duration-150 ease-in-out" %>
+                        <%= f.submit "Create Record", class: "button-primary" %>
                     </span>
                 <% else %>
                     <span class="inline-flex rounded-md shadow-sm">
-                        <%= f.submit "Update Record", data: {confirm: "Are you sure you want to update the previously entered information for this patient?"}, class: "inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-brand-red-500 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-500 transition duration-150 ease-in-out" %>
+                        <%= f.submit "Update Record", data: {confirm: "Are you sure you want to update the previously entered information for this patient?"}, class: "button-primary" %>
                     </span>
                 <% end %>
             </div>
@@ -276,7 +266,7 @@
                 </p>
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
                     <div class="max-w-xs rounded-md shadow-sm">
-                    <%= f.select :test_name, options_for_select(@clinic.test_kits.collect(&:test_name), f.object.test_name), {}, class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+                    <%= f.select :test_name, options_for_select(@clinic.test_kits.collect(&:test_name), f.object.test_name), {}, class: "block form-select w-full" %>
                     </div>
                 </div>
             </div>
@@ -287,7 +277,7 @@
                 </p>
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
                     <div class="max-w-xs rounded-md shadow-sm">
-                    <%= f.select :test_type, options_for_select(["PCR", "Blood"], f.object.test_type), {}, class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+                    <%= f.select :test_type, options_for_select(["PCR", "Blood"], f.object.test_type), {}, class: "block form-select w-full" %>
                     </div>
                 </div>
             </div>
@@ -298,7 +288,7 @@
                 </p>
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
                     <div class="max-w-xs rounded-md shadow-sm">
-                    <%= f.select :test_processing, options_for_select(["Standard", "Rapid"], f.object.test_processing), {}, class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+                    <%= f.select :test_processing, options_for_select(["Standard", "Rapid"], f.object.test_processing), {}, class: "block form-select w-full" %>
                     </div>
                 </div>
             </div>
@@ -309,7 +299,7 @@
                 </p>
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
                     <div class="max-w-xs rounded-md shadow-sm">
-                    <%= f.select :clinic_staff_id, options_from_collection_for_select(@clinic.clinic_personnel, 'id', 'name', f.object.clinic_staff_id), {}, class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+                    <%= f.select :clinic_staff_id, options_from_collection_for_select(@clinic.clinic_personnel, 'id', 'name', f.object.clinic_staff_id), {}, class: "block form-select w-full" %>
                     </div>
                 </div>
             </div>
@@ -320,7 +310,7 @@
                 </p>
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
                     <div class="max-w-lg flex rounded-md shadow-sm">
-                        <%= f.text_area :notes, rows: "3", class: "form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
+                        <%= f.text_area :notes, rows: "3", class: "form-textarea block w-full" %>
                     </div>
                 </div>
             </div>
@@ -331,15 +321,15 @@
         <div class="mt-8 border-t border-gray-200 pt-5">
             <div class="flex justify-end">
                 <span class="inline-flex rounded-md shadow-sm">
-                    <a href="#" onClick="this.closest('.modal').classList.toggle('opacity-0');" class="py-2 px-4 border border-gray-300 rounded-md text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out">Cancel</a>
+                    <a href="#" onClick="this.closest('.modal').classList.toggle('opacity-0');" class="button-primary">Cancel</a>
                 </span>
                 <% if f.object.new_record? %>
                     <span class="ml-3 inline-flex rounded-md shadow-sm">
-                        <%= f.submit "Create Record", class: "inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-brand-red-500 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-brand-red-500 hover:bg-red-500 transition duration-150 ease-in-out" %>
+                        <%= f.submit "Create Record", class: "button-primary" %>
                     </span>
                 <% else %>
                     <span class="inline-flex rounded-md shadow-sm">
-                        <%= f.submit "Update Record", data: {confirm: "Are you sure you want to update the previously entered information for this patient?"}, class: "inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-brand-red-500 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-500 transition duration-150 ease-in-out" %>
+                        <%= f.submit "Update Record", data: {confirm: "Are you sure you want to update the previously entered information for this patient?"}, class: "button-primary" %>
                     </span>
                 <% end %>
             </div>

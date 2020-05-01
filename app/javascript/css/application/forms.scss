@@ -1,0 +1,41 @@
+input {
+    // for all inputs
+    @apply bg-white border border-brand-blue-300 transition duration-150 ease-in-out;
+    &::placeholder { @apply text-gray-500; }
+    &:focus {  @apply outline-none; }
+
+    // based on type
+    &[type='text'],
+    &[type='number'],
+    &[type='date'],
+    &[type='email'],
+    &[type='password'] {
+        @apply px-3 mb-4;
+        min-height: 50px;
+        max-height: 50px;
+    }
+
+    &.form-input,
+    &.form-select { 
+        @apply border-brand-blue-300 rounded-none;
+    }
+}
+
+.form-textarea { 
+    @apply border-brand-blue-300 rounded-none;
+}
+
+select {
+    &.form-select {
+        @apply border-brand-blue-300 rounded-none transition duration-150 ease-in-out mb-4;
+        min-height: 50px;
+        max-height: 50px;
+    }
+}
+
+input,
+select {
+    &:disabled {
+        @apply bg-gray-50 text-gray-500 cursor-not-allowed;
+    }
+}

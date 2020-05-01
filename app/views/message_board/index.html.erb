@@ -1,20 +1,9 @@
- <div class="clinic-management-links">
-      <a href="/clinics/new">Create Public Clinic</a>
-      <a href="/clinics">List Clinics</a>
-      <a href="/patients">Patient Registry</a>
-      <a href="/patients/new">Refer Patient for Testing</a>
-      <a href="#">Upload to ImmuNet</a>
-      <a href="#">Upload to Office Ally</a>
-      <a href="/message_board/index">Message Board</a>
-      <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
-</div>
-
-<div class="message-board bg-white container justify-center mt-24 lg:mx-auto lg:flex lg:shadow-lg lg:rounded-lg">
+<div class="message-board bg-white container justify-center mt-24 lg:mx-auto lg:flex">
     <div class="board-container w-full flex flex-wrap justify-center">
-        <div class="header text-3xl"> 
+        <div class="main-title"> 
             <h2> Message Board </h2>
         </div>
-          
+
         <div class="content w-full flex flex-wrap justify-between">
             <div class="message-container py-12 px-6 max-w-xl lg:max-w-5xl lg:w-1/2 mt-4 w-full">
                 <label class="subject block w-full">

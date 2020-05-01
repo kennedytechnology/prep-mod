@@ -1,31 +1,27 @@
-<tr class="hover:bg-gray-50">
-    <td class="px-6 py-4 border-b border-gray-200 text-sm leading-5 font-medium text-gray-900">
-        <%= clinic.clinic_date.to_datetime.strftime("%m-%d-%Y") %>
-    </td>
-    <td class="px-6 py-4 border-b border-gray-200 text-sm leading-5 text-gray-500">
-        <%= clinic.county %>
-    </td>
-    <td class="px-6 py-4 border-b border-gray-200 text-sm leading-5 text-gray-500">
-        <%= clinic.venue_name %>
-    </td>
-    <td class="px-6 py-4 border-b border-gray-200 text-sm leading-5 text-gray-500 flex flex-wrap">
-        <%= link_to clinic_patients_path(clinic_id: clinic.id), class: "clinic-action hover:text-red-600 w-1/3 mr-2 mb-2" do %>
-            <span class="text-red-600"> &raquo; </span>
+<tr>
+    <td> <%= clinic.clinic_date.to_datetime.strftime("%m-%d-%Y") %> </td>
+    <td> <%= clinic.county %> </td>
+    <td> <%= clinic.venue_name %> </td>
+    <td class="flex flex-wrap">
+        <%= link_to clinic_patients_path(clinic_id: clinic.id), class: "clinic-action hover:text-brand-blue-600 w-1/3 mr-2 mb-2" do %>
+            <span class="text-brand-blue-600"> &raquo; </span>
             <span> Registration List </span>
         <% end %>
-        <%= link_to edit_clinic_path(id: clinic.id), class: "clinic-action hover:text-red-600 w-1/3 mr-2 mb-2" do %>
-            <span class="text-red-600"> &raquo; </span>
+        <%= link_to edit_clinic_path(id: clinic.id), class: "clinic-action hover:text-brand-blue-600 w-1/3 mr-2 mb-2" do %>
+            <span class="text-brand-blue-600"> &raquo; </span>
             <span> Edit Clinic </span>
         <% end %>
-        <%= link_to clinic_events_path(clinic_id: clinic.id), class: "clinic-action hover:text-red-600 w-1/3 mr-2 mb-2" do %>
-            <span class="text-red-600"> &raquo; </span>
+        <%= link_to clinic_events_path(clinic_id: clinic.id), class: "clinic-action hover:text-brand-blue-600 w-1/3 mr-2 mb-2" do %>
+            <span class="text-brand-blue-600"> &raquo; </span>
             <span> Clinic Activity </span>
         <% end %>
-        <%= link_to supply_inventories_path(clinic_id: clinic.id), class: 'clinic-action hover:text-red-600 w-1/3 mb-2' do %>
-            <span class="text-red-600"> &raquo; </span>
+        <%= link_to supply_inventories_path(clinic_id: clinic.id), class: 'clinic-action hover:text-brand-blue-600 w-1/3 mb-2' do %>
+            <span class="text-brand-blue-600"> &raquo; </span>
             <span> Inventory Management </span>
         <% end %>
-            <span class="text-red-600"> &raquo; </span>
+        <%= link_to "", class: 'clinic-action hover:text-brand-blue-600 w-1/3 mb-2' do %>
+            <span class="text-brand-blue-600"> &raquo; </span>
             <span> Customized Report </span>
+        <% end %>
     </td>
 </tr>

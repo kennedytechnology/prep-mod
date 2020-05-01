@@ -1,0 +1,8 @@
+.main-container {
+    @apply p-5;
+
+    @screen lg {
+        @apply px-24 pt-24 pb-20;
+        @apply max-w-screen-xl mx-auto;
+    }
+}

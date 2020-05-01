@@ -1,43 +1,23 @@
 <tr class="new_test_kit_row">
-    <td class="px-1 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium text-gray-900">
-        <%= f.text_field :test_name, class: "form-input transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
-    </td>
+    <td> <%= f.text_field :test_name, class: "form-input w-full" %> </td>
     <% if params[:controller] == "clinics" %>
-    <td class="px-1 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-        <%= f.text_field :test_manufacturer, class: "form-input transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
-    </td>
+    <td> <%= f.text_field :test_manufacturer, class: "form-input w-full" %> </td>
     <% end %>
-    <td class="px-1 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-        <%= f.text_field :test_lot_number, class: "form-input transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
-    </td>
+    <td> <%= f.text_field :test_lot_number, class: "form-input w-full" %> </td>
     <% if params[:controller] == "clinics" %>
-    <td class="px-1 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-        <%= f.select :test_type, ["PCR", "Serological"], {prompt: "Select"}, {class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"} %>
-    </td>
-    <td class="px-1 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-        <%= f.select :test_processing, ["Standard", "Rapid"], {prompt: "Select"}, {class: "block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"} %>
-    </td>
-    <td class="px-1 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-        <%= f.date_field :test_expiration_date, class: "form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5", placeholder: "MM/DD/YYYY" %>
-    </td>
+    <td> <%= f.select :test_type, ["PCR", "Serological"], {prompt: "Select"}, {class: "block form-select w-full"} %> </td>
+    <td> <%= f.select :test_processing, ["Standard", "Rapid"], {prompt: "Select"}, {class: "block form-select w-full"} %> </td>
+    <td> <%= f.date_field :test_expiration_date, class: "form-input w-full", placeholder: "MM/DD/YYYY" %> </td>
     <% end %>
-    <td class="px-1 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-        <%= f.number_field :test_kits_quantity, class: "form-input transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
-    </td>
+    <td> <%= f.number_field :test_kits_quantity, class: "form-input w-full" %> </td>
     <% if params[:controller] == "clinic_events" %>
-    <td class="px-1 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-        <%= f.number_field :tests_administered, class: "form-input transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
-    </td>
-    <td class="px-1 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-        <%= f.number_field :unusable_tests, class: "form-input transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
-    </td>
-    <td class="px-1 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-        <%= f.number_field :tests_returned, class: "form-input transition duration-150 ease-in-out sm:text-sm sm:leading-5" %>
-    </td>
+    <td> <%= f.number_field :tests_administered, class: "form-input w-full" %> </td>
+    <td> <%= f.number_field :unusable_tests, class: "form-input w-full" %> </td>
+    <td> <%= f.number_field :tests_returned, class: "form-input w-full" %> </td>
     <% end %>
-    <td class="px-1 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
+    <td>
         <%= f.hidden_field :_destroy %>
-        <%= link_to '#', class: 'remove_test_kit_record inline-flex cursor-pointer justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out' do %>
+        <%= link_to '#', class: 'remove_test_kit_record button-primary' do %>
             <span class="text-xs"> Delete </span>
         <% end %>
     </td>

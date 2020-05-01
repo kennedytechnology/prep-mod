@@ -1,16 +1,5 @@
-@import "homepage";
-@import "../shared";
-
-// Public Clinics
-@import "public_clinics";
-
-// Clinics
-@import "clinics/index";
-@import "clinics/new";
-@import "clinics/edit";
-  // Clinic Events
-  @import "clinic_events/index";
-
-// Patients
-@import "patients/index";
-@import "patients/show";
+@import "layout";
+@import "typography";
+@import "buttons";
+@import "forms";
+@import "tables";

@@ -1,17 +1,17 @@
 <div class="container public-clinics-page">
   <div class="card-wrapper">
     <div class="card-header">
-      <h2 class="font-bold">Find a Covid-19 Service</h2>
+      <h2 class="main-title">Find a Covid-19 Service</h2>
     </div>
     <div class="card-content">
       <form action="/clinic/search" method="post">
         <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-        <div class="form-group">
-          <div class="group-elem">
-            <div class="form-question">What service(s) are you seeking? <span class="required-field">*</span></div>
-            <div class="checkbox-options">
+        <div class="w-full form-group grid grid-cols-2 gap-8 mb-8 text-sm">
+          <div class="mr-8 group-elem">
+            <div class="font-bold mb-3">What service(s) are you seeking? <span class="text-red-600">*</span></div>
+            <div class="grid grid-cols-3 gap-1">
               <% ClinicService.all.each do |service| %>
-                <div class="checkbox-group">
+                <div class="">
                   <label>
                     <%= check_box_tag "service[]", service.name, params[:service].to_a.include?(service.name), class: "form-checkbox" %>
                     <%= service.name %>
@@ -21,10 +21,10 @@
             </div>
           </div>
           <div class="group-elem">
-            <div class="form-question">Age Group of Person(s) Seeking Services <span class="required-field">*</span></div>
-            <div class="checkbox-options">
+            <div class="font-bold mb-2">Age Group of Person(s) Seeking Services <span class="text-red-600">*</span></div>
+            <div class="grid grid-cols-3 gap-1">
               <% ClinicAgeGroup.all.each do |age_group| %>
-                <div class="checkbox-group">
+                <div class="">
                   <label>
                     <%= check_box_tag "age_group[]", age_group.name, params[:age_group].to_a.include?(age_group.name), class: "form-checkbox" %>
                     <%= age_group.name %>
@@ -34,26 +34,26 @@
             </div>
           </div>
         </div>
-        <div class="form-group">
+        <div class="grid grid-cols-2 gap-8 mb-8">
           <div class="group-elem">
             <div class="select-group">
-              <div class="form-question">
-                Search Within <span class="required-field">*</span>
+              <div class="font-bold mb-2">
+                Search Within <span class="text-red-600">*</span>
               </div>
               <%= select_tag(:search_radius,
                              options_for_select(["All", "1 mile", "5 miles", "10 miles", "25 miles", "50 miles", "100 miles", "100+ miles"], params[:search_radius]),
-                             class: "miles-range", required: true) %>
+                             class: "form-select block w-full", required: true) %>
             </div>
           </div>
           <div class="group-elem">
-            <div class="form-question">Address</div>
-            <%= text_field_tag "location", "Enter address", value: params[:location], id: "autocomplete", placeholder: "Enter address" %>
+            <div class="font-bold mb-2">Address</div>
+            <%= text_field_tag "location", "Enter address", value: params[:location], id: "autocomplete", class: "form-input w-full", placeholder: "Enter address" %>
             <%= render partial: "google_maps_script" %>
           </div>
         </div>
 
-        <div class="button-container">
-          <%= submit_tag "Search", class: "submit-button" %>
+        <div class="flex justify-center mb-12">
+          <%= submit_tag "Search", class: "button-primary" %>
         </div>
       </form>
     </div>
@@ -61,7 +61,7 @@
 
   <div class="clinics-table-wrapper">
     <div class="clinics-table-outer">
-      <div class="clinics-table-container">
+      <div class="clinics-table-container border-t pt-8">
         <% if @clinics.length == 0 %>
           <div class="no-message-panel">
             <div class="px-4 py-5 sm:p-6">
@@ -70,19 +70,19 @@
           </div>
         <% else %>          
             <% @clinics.each do |clinic| %>
-              <div class="clinic-result flex">
+              <div class="clinic-result flex border-b pb-8 mb-8">
                 <div class="flex-1">
-                  <h1><%= clinic.name %></h1>
+                  <h1 class="font-bold text-3xl"><%= clinic.name %></h1>
                   <h4><%= clinic.address %></h4>
                   <p><strong>Services available:</strong> <%= clinic.services.collect(&:name).join(", ") %></p>
                   <p><strong>Age groups served:</strong> <%= clinic.age_groups.collect(&:name).join(", ") %></p>
                   <% if session[:patient_id] && clinic.services.include?(ClinicService.find_by_name("Testing")) %>
-                    <p><a href="/client/registration?clinic_id=<%= clinic.id %>" class="submit-button flex justify-center items-center bg-blue-500 text-white w-1/2 rounded-full mb-12 mt-10 ml-2 pl-6 pr-6">
+                    <p class="w-9/12 my-3"><a href="/client/registration?clinic_id=<%= clinic.id %>" class="button-primary px-4">
                       Select Testing Appointment Here
                     </a></p>
                   <% end %>
                   <% if clinic.services.include?(ClinicService.find_by_name("Safety Kit Distribution")) %>
-                    <p><a href="/kit/new" class="submit-button flex justify-center items-center bg-blue-500 text-white w-1/2 rounded-full mb-12 mt-10 ml-2 pl-6 pr-6">Sign-Up For Safety Kit</a></p>
+                    <p class="w-9/12 my-3"><a href="/kit/new" class="button-primary">Sign-Up For Safety Kit</a></p>
                   <% end %>
                 </div>
                 <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=15&size=400x280&markers=size:small%7Ccolor:red%7C#{clinic.latitude},#{clinic.longitude}&key=#{ENV['GOOGLE_MAPS_API_KEY']}", alt: "Map", class: "flex-none" %>

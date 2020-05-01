@@ -1,0 +1,20 @@
+.table {
+    @apply min-w-full;
+
+    tbody {
+        tr:hover { @apply bg-gray-50; }
+    }
+
+    tr {
+        @apply border-b border-gray-200;
+
+        th {
+            @apply px-2 py-3 text-gray-600 font-bold;
+            @apply text-left text-base leading-4 font-medium tracking-wider;
+        }
+
+        td {
+            @apply px-2 py-3 text-sm leading-5 text-gray-500;
+        }
+    }
+}
