@@ -1,26 +1,18 @@
-<div class="header">
-    <h2 class="main-title">Login</h2>
-</div>
+<h2 class="main-title">Login</h2>
 <div class="login-inner-container flex">
-    <div class="wizard-logo mr-8"><%= image_tag 'clinicwizard_white_bg.png', style: "max-width: 600px;" %></div>
-    <div class="form-container flex-1">
+    <div class="mr-8"><%= image_tag 'clinicwizard_white_bg.png', style: "max-width: 600px;" %></div>
+    <div class="flex-1">
         <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "login-form"}) do |f| %>
-        <div class="field relative">
+
             <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-input w-full", placeholder: "Email Address" %>
-        </div>
-
-        <div class="field">
             <%= f.password_field :password, autocomplete: "current-password", class: "form-input w-full", placeholder: "Password" %>
-        </div>
 
-        <div class="links-field flex justify-between px-3 my-3">
-            <%= link_to 'Sign up', new_user_registration_path, class: "" %>
-            <%= link_to 'Forgot password?', new_user_password_path, class: "links" %>
-        </div>
+            <div class="links-field flex justify-between px-3 my-3">
+                <%= link_to 'Sign up', new_user_registration_path, class: "" %>
+                <%= link_to 'Forgot password?', new_user_password_path, class: "links" %>
+            </div>
 
-        <div class="actions">
             <%= f.submit 'Login', class: "button-primary-fullwidth" %>
-        </div>
         <% end %>
     </div>
 </div>

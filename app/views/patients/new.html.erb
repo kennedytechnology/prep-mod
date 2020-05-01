@@ -1,6 +1,6 @@
 <div class="container overflow-hidden">
 
-  <%= form_for(@patient, remote: false, class: "bg-white p-8 md:-12 lg:p-16 rounded-lg shadow") do |f| %>
+  <%= form_for(@patient, remote: false, class: "bg-white p-8 md:-12 lg:p-16-lg shadow") do |f| %>
     <h1 class="text-2xl leading-6 font-medium text-blue-600 font-bold mb-6">Create a COVID-19 Testing Referral</h1>
 
     <div class="flex mb-4">
@@ -8,7 +8,7 @@
       </div>
       <div class="w-1/2">
         <div class="form-question">County</div>
-        <%= f.select :county, options_for_select(COUNTIES, @patient.county),{}, class: "w-11/12 form-select block rounded m-1" %>
+        <%= f.select :county, options_for_select(COUNTIES, @patient.county),{}, class: "w-11/12 form-select" %>
       </div>
     </div>
 
@@ -16,17 +16,17 @@
       <div class="w-1/2 mr-4">
         <label>
           <div class="form-question">First Name</div>
-          <%= f.text_field :first_name, class: "w-full form-input block rounded" %>
+          <%= f.text_field :first_name, class: "w-full form-input" %>
         </label>
       </div>
       <div class="w-1/2 flex">
         <label class="w-3/12">
           <div class="form-question">Middle Initial</div>
-          <%= f.text_field :middle_initial, class: "w-11/12 form-input block rounded" %>
+          <%= f.text_field :middle_initial, class: "w-11/12 form-input" %>
         </label>
         <label class="w-9/12">
           <div class="form-question">Last Name</div>
-          <%= f.text_field :last_name, class: "w-full form-input block rounded" %>
+          <%= f.text_field :last_name, class: "w-full form-input" %>
         </label>
       </div>
     </div>
@@ -35,13 +35,13 @@
       <div class="w-1/2 mr-4">
         <label>
           <div class="form-question">Mother's Maiden Name</div>
-          <%= f.text_field :mothers_maiden_name, class: "w-full form-input block rounded" %>
+          <%= f.text_field :mothers_maiden_name, class: "w-full form-input" %>
         </label>
       </div>
       <div class="w-1/2">
         <label>
             <div class="form-question">Address</div>
-            <%= f.text_field :address, placeholder: "", id: "autocomplete", class: "w-full form-input block rounded" %>
+            <%= f.text_field :address, placeholder: "", id: "autocomplete", class: "w-full form-input" %>
             <%= render partial: "public/clinics/google_maps_script" %>
         </label>
       </div>
@@ -51,17 +51,17 @@
       <div class="w-1/2 mr-4">
         <label>
           <div class="form-question">State</div>
-          <%= f.select :state, options_for_select(US_STATES, @patient.state), {}, class: "w-full form-input block rounded" %>
+          <%= f.select :state, options_for_select(US_STATES, @patient.state), {}, class: "w-full form-select" %>
         </label>
       </div>
       <div class="w-1/2 flex">
         <label class="w-1/2">
           <div class="form-question">City</div>
-          <%= f.text_field :city, class: "w-11/12 form-input block rounded" %>
+          <%= f.text_field :city, class: "w-11/12 form-input" %>
         </label>
         <label class="w-1/2">
           <div class="form-question">Zip Code</div>
-          <%= f.text_field :zip_code, class: "w-full form-input block rounded" %>
+          <%= f.text_field :zip_code, class: "w-full form-input" %>
         </label>
       </div>
     </div>
@@ -70,21 +70,21 @@
       <div class="w-1/2 flex">
         <label class="w-5/12 mr-1">
           <div class="form-question">Date Of Birth</div>
-          <%= f.date_field :date_of_birth, placeholder: "MM/DD/YYYY",class: "w-12/12 form-input block rounded" %>
+          <%= f.date_field :date_of_birth, placeholder: "MM/DD/YYYY",class: "w-12/12 form-input" %>
         </label>
         <label class="w-4/12 mr-1">
           <div class="form-question">Age</div>
-          <%= f.text_field :age, class: "w-4/12 form-input block rounded" %>
+          <%= f.text_field :age, class: "w-4/12 form-input" %>
         </label>
         <label class="w-3/12 mr-4">
           <div class="form-question">Gender</div>
-          <%= f.select :sex, [["Male", "M"], ["Female", "F"], ["Other", "O"]], {}, class: "w-full form-input block rounded" %>
+          <%= f.select :sex, [["Male", "M"], ["Female", "F"], ["Other", "O"]], {}, class: "w-full form-select" %>
         </label>
       </div>
       <div class="w-1/2">
         <label>
           <div class="form-question">Race</div>
-          <%= f.select :state, options_for_select(US_RACES, @patient.state), {}, class: "w-full form-input block rounded" %>
+          <%= f.select :state, options_for_select(US_RACES, @patient.state), {}, class: "w-full form-select" %>
         </label>
       </div>
     </div>
@@ -93,13 +93,13 @@
       <div class="w-1/2 mr-4">
         <label>
           <div class="form-question">Email Address</div>
-          <%= f.text_field :email, class: "w-full form-input block rounded" %>
+          <%= f.text_field :email, class: "w-full form-input" %>
         </label>
       </div>
       <div class="w-1/2">
         <label>
           <div class="form-question">Mobile or Daytime Number</div>
-          <%= f.text_field :phone_number, class: "w-full form-input block rounded" %>
+          <%= f.text_field :phone_number, class: "w-full form-input" %>
         </label>
       </div>
     </div>
@@ -108,15 +108,15 @@
       <div class="w-1/2 mr-4">
           <div class="form-question">Send Patient Invitation Via</div>
           <div class="mr-4 inline">
-            <%= f.check_box :notify_via_sms %> 
+            <%= f.check_box :notify_via_sms, class: "form-checkbox" %> 
             <%= f.label :notify_via_sms, "SMS" %>
           </div>
 
           <div class="inline">
-            <%= f.check_box :notify_via_email %> 
+            <%= f.check_box :notify_via_email, class: "form-checkbox" %> 
             <%= f.label :notify_via_email, "Email" %>
           </div>
-          <!-- <%= f.text_field :phone_number, class: "w-full form-input block rounded" %> -->
+          <!-- <%= f.text_field :phone_number, class: "w-full form-input block" %> -->
         
       </div>
       <div class="w-1/2"></div>
@@ -136,7 +136,7 @@
 
 
     <div class="button-container">
-      <%= submit_tag "Save and Continue →", class: "submit-button mt-10" %>
+      <%= submit_tag "Save and Continue →", class: "button-primary mt-10" %>
     </div>
   <% end %>
 
