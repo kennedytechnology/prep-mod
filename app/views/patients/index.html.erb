@@ -39,7 +39,7 @@
             <th><%= sortable "date_of_birth", "Age" %></th>
             <th><%= sortable "sex", "Gender" %></th>
             <th><%= sortable "county" %></th>
-            <th>Actions</th>
+            <th>&nbsp;</th>
           </tr>
           </thead>
           <tbody>
@@ -50,7 +50,7 @@
               <td><%= ((Date.today.to_time - patient.date_of_birth.to_time) / 1.year.seconds).floor %></td>
               <td><%= patient.sex == "F" ? "Female" : "Male" %></td>
               <td><%= patient.county %></td>              
-              <td>
+              <td class="w-3/12 text-right">
                 <%= link_to "Event Entry", new_clinic_event_path(clinic_id: @clinic, patient_id: patient.id),
                             class: "button-action" %>
                 <%= link_to "Delete", patient, method: :delete, class: "button-action" %>

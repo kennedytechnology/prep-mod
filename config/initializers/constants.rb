@@ -8,16 +8,19 @@ INSURANCE_TYPES = ["Private Insurance", "Medicaid/Medical Assistance", "No Insur
 RELATIONSHIP_TYPES = ["Self", "Spouse", "Other"]
 
 CLINIC_EVENTS = [
-  { name: "Testing",
+  { name: "Tested",
     outcomes: %w(Pending Positive Negative Indeterminate)
   },
-  { name: "Vaccination",
-    outcomes: %w(Success Reaction Refused Cancelled)
+  { name: "No Show",
+    outcomes: %w(Refused Cancelled)
   },
-  { name: "Safety Kit Pickup",
+  { name: "Cancelled",
+    outcomes: %w(Refused Cancelled)
+  },
+  { name: "Safety Kit",
     outcomes: %w(Pending Registered PickedUp Cancelled)
   },
-  { name: "Screening",
+  { name: "Screened",
     outcomes: %w(Pending Refused Cancelled Positive Negative Indeterminate)
   }
   ]
