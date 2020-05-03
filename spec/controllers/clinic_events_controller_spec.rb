@@ -6,14 +6,14 @@ RSpec.describe ClinicEventsController, type: :controller do
 
   describe "GET #index" do
     it "returns http success" do
-      get :index
+      get :index, params: {clinic_id: clinic_event.clinic.id}
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET #new" do
     it "returns http success" do
-      get :new
+      get :new, params: {patient_id: clinic_event.patient.id}
       expect(response).to have_http_status(:success)
     end
   end
