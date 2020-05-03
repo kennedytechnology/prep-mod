@@ -21,7 +21,8 @@ class Public::KitController < ApplicationController
         :county, :first_name, :middle_initial, :last_name, :address,
         :state, :city, :zip_code, :number_of_adults,
         :number_of_children, :email, :phone_number,
-        :relation_to_patient_for_insurance, :consent_date
+        :relation_to_patient_for_insurance, :consent_date,
+        :occupation, :date_of_birth, :race
       )
     end
 end

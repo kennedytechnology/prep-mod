@@ -1,52 +1,51 @@
-<div class="flex mb-4">
-  <div class="w-1/2 mr-4">
-    <%= f.label :insurance_type, "Type of Insurance" %>
-    <%= f.select :insurance_type, options_for_select(INSURANCE_TYPES, @patient.insurance_type),{}, class: "w-full form-select" %>
-  </div>
-  <div class="w-1/2">
-    <%= f.label :insurance_company_name, "Insurance Company Name" %>
-    <%= f.text_field :insurance_company_name, class: "w-full form-input" %>
-  </div>
-</div>
-
-<div class="flex mb-4">
-  <div class="w-1/2 mr-4">
-    <%= f.label :member_id_for_insurance, "Member ID Number" %>
-    <%= f.text_field :member_id_for_insurance, class: "w-full form-input" %>
-  </div>
-  <div class="w-1/2">
-    <%= f.label :group_number_for_insurance, "Group Number" %>
-    <%= f.text_field :group_number_for_insurance, class: "w-full form-input" %>
-  </div>
-</div>
-
-<div class="flex mb-4">
-  <div class="w-1/2 mr-4">
-    <%= f.label :card_number_for_insurance, "Medical Assistance Number, Recipient Number, or any other number on card" %>
-    <%= f.text_field :card_number_for_insurance, class: "w-full form-input" %>
-  </div>
-  <div class="w-1/2 flex">
-    <div class="w-1/2">
-      <%= f.label :insured_first_name, "Insured Adult's First Name" %>
-      <%= f.text_field :insured_first_name, class: "w-11/12 form-input" %>
+<div class="field-side-by-side">
+    <div>
+        <%= f.label :insurance_type, "Type of Insurance", class: "block" %>
+        <%= f.select :insurance_type, options_for_select(INSURANCE_TYPES, @patient.insurance_type),{}, class: "w-full form-select" %>
     </div>
-    <div class="w-1/2">
-      <%= f.label :insured_last_name, "Insured Adult's Last Name" %>
-      <%= f.text_field :insured_last_name, class: "w-11/12 form-input" %>
+    <div>
+        <%= f.label :insurance_company_name, "Insurance Company Name" %>
+        <%= f.text_field :insurance_company_name, class: "w-full form-input" %>
     </div>
-    
-  </div>
 </div>
 
-<div class="flex mb-4">
-  <div class="w-1/2 mr-4">
-    <%= f.label :insured_date_of_birth, "Insured Adult's Date Of Birth" %>
-    <%= f.date_field :insured_date_of_birth, class: "w-full form-input" %>
-  </div>
-  <div class="w-1/2">
-    <%= f.label :relation_to_patient_for_consent, "Relationship To Patient" %>
-    <%= f.select :relation_to_patient_for_consent, options_for_select(RELATIONSHIP_TYPES, @patient.relation_to_patient_for_consent),{}, class: "w-full form-select" %>
-  </div>
+<div class="field-side-by-side">
+    <div>
+        <%= f.label :member_id_for_insurance, "Member ID Number", class: "block" %>
+        <%= f.text_field :member_id_for_insurance, class: "w-full form-input" %>
+    </div>
+    <div>
+        <%= f.label :group_number_for_insurance, "Group Number", class: "block" %>
+        <%= f.text_field :group_number_for_insurance, class: "w-full form-input" %>
+    </div>
+</div>
+
+<div class="field-side-by-side">
+    <div>
+        <%= f.label :card_number_for_insurance, "Medical Assistance Number, Recipient Number, or any other number on card", class: "block" %>
+        <%= f.text_field :card_number_for_insurance, class: "w-full form-input" %>
+    </div>
+    <div class="flex">
+        <div class="flex-1 mr-2">
+            <%= f.label :insured_first_name, "Insured Adult's First Name", class: "block" %>
+            <%= f.text_field :insured_first_name, class: "w-11/12 form-input" %>
+        </div>
+        <div class="flex-1">
+            <%= f.label :insured_last_name, "Insured Adult's Last Name", class: "block" %>
+            <%= f.text_field :insured_last_name, class: "w-11/12 form-input" %>
+        </div>
+    </div>
+</div>
+
+<div class="field-side-by-side">
+    <div>
+        <%= f.label :insured_date_of_birth, "Insured Adult's Date Of Birth", class: "block" %>
+        <%= f.date_field :insured_date_of_birth, class: "w-full form-input" %>
+    </div>
+    <div>
+        <%= f.label :relation_to_patient_for_consent, "Relationship To Patient", class: "block" %>
+        <%= f.select :relation_to_patient_for_consent, options_for_select(RELATIONSHIP_TYPES, @patient.relation_to_patient_for_consent),{}, class: "w-full form-select" %>
+    </div>
 </div>
 
 <%= hidden_field_tag :next_step, "health_questions" %>

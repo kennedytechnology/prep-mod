@@ -1,70 +1,53 @@
-<div class="min-h-screen bg-white flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div class="bg-white py-8 px-4 sm:px-10">
-            <div class="sm:mx-auto sm:w-full sm:max-w-md">
-            <h2 class="text-center text-3xl leading-9 font-extrabold text-gray-900">
-                Sign Up
-            </h2>
-            <div class="mt-2 text-center text-sm leading-5 text-gray-600 max-w">
-                <p
-                    class="font-medium text-brand-blue-600 hover:text-blue-400 focus:outline-none focus:underline transition ease-in-out duration-150">
-                    Sign Up for News and Notifications to get the latest news on C-19.
-                </p>
-            </div>
+<h1 class="main-title"> Sign Up for News and Notifications to get the latest news on C-19 </h1>
+<%= form_with model: @news_signup, local: true do |f| %>
+    <div class="field-side-by-side">
+        <div>
+            <%= f.label :name, class: "block" %>
+            <%= f.text_field :name, class: "form-input w-full", required: true %>
         </div>
-            <%= form_with model: @news_signup, local: true do |f| %>
-                <div class="mt-4">
-                    <%= f.label :name %>
-                    <%= f.text_field :name, class: "form-input w-full", required: true %>
-                </div>
+        <div>
+            <%= f.label :email, "Email Address", class: "block" %>
+            <%= f.email_field :email, class: "form-input w-full", required: true %>
+        </div>
+    </div>
 
-                <%= f.label :zip_code %>
-                <%= f.text_field :zip_code, class: "form-input w-full", required: true %>
-
-                <%= f.label :date_of_birth %>
+    <div class="field-side-by-side">
+        <div>
+            <%= f.label :occupation, "Choose Occupation", class: "block" %>
+            <%= f.select :occupation, PATIENT_OCCUPATIONS, {prompt: "Select"}, {class: "block form-select w-full", required: true} %>
+        </div>
+        <div class="flex">
+            <div class="flex-1 mr-2">
+                <%= f.label :date_of_birth, class: "block" %>
                 <%= f.date_field :date_of_birth, min: Date.today - 50.years, max: Date.today, class: "form-input block w-full", placeholder: "MM/DD/YYYY", required: true %>
-
-                <div class="mb-4">
-                    <%= f.label :topics %>
-                    <div class="max-w-xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <% ["Testing", "Screening", "Safety Kit", "Medication", "Other"].each do |topic|%>
-                            <div class="relative flex items-start">
-                                <div class="absolute flex items-center h-5">
-                                    <%= f.check_box(:topics, {multiple: true, id: "topic_#{topic}", class: "form-checkbox"}, topic) %>
-                                </div>
-                                <div class="pl-6 text-sm leading-5">
-                                    <label for="topic_<%=topic%>"> <%= topic %> </label>
-                                </div>
-                            </div>
-                        <% end %>
-                    </div>
-                </div>
-
-                <%= f.label :occupation, "Choose Occupation" %>
-                <%= f.select :occupation, PATIENT_OCCUPATIONS, {prompt: "Select"}, {class: "block form-select w-full", required: true} %>
-
-                <%= f.label :email, "Email Address" %>
-                <%= f.email_field :email, class: "form-input w-full", required: true %>
-
-                <%= f.submit "Sign Up", class: "button-primary-fullwidth" %>
-            <% end %>
-
-            <div>
-                <div class="relative my-4">
-                    <div class="absolute inset-0 flex items-center">
-                        <div class="w-full border-t border-gray-300"></div>
-                    </div>
-                    <div class="relative flex justify-center text-sm leading-5">
-                        <span class="px-2 bg-white text-gray-500">
-                            Or
-                        </span>
-                    </div>
-                </div>
-
-                <div>
-                    <%= link_to "Go Back", root_path, class: "button-primary-fullwidth" %>
-                </div>
+            </div>
+            <div class="flex-1">
+                <%= f.label :zip_code, class: "block" %>
+                <%= f.text_field :zip_code, class: "form-input w-full", required: true %>
             </div>
         </div>
     </div>
-</div>
+
+    <div class="field-fullwidth">
+        <div>
+            <%= f.label :topics, class: "block" %>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 lg:gap-4">
+                <% ["Testing", "Screening", "Safety Kit", "Medication", "Other"].each do |topic|%>
+                    <div class="relative flex items-start mb-4">
+                        <div class="absolute flex items-center h-5">
+                            <%= f.check_box(:topics, {multiple: true, id: "topic_#{topic}", class: "form-checkbox"}, topic) %>
+                        </div>
+                        <div class="pl-6 text-sm leading-5">
+                            <label for="topic_<%=topic%>"> <%= topic %> </label>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex justify-end">
+        <%= f.submit "Sign Up", class: "button-primary" %>
+        <%= link_to "Back", root_path, class: "button-primary" %>
+    </div>
+<% end %>

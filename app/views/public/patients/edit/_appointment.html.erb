@@ -1,44 +1,33 @@
 <p class="text-xl font-semibold mb-4"> Please select a time for your appointment</p>
 
-<div class="flex mb-8">
-    <div class="w-1/2 mr-4">
+<div class="field-side-by-side">
     <div class="flex flex-col">
         <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
             <div class="align-middle inline-block min-w-full overflow-hidden border-b border-gray-200">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th> Time </th>
-                    <th> Appointments Available </th>
-                </tr>
-                </thead>
-                <tbody>
-                    <% @clinic.appointment_times.each do |time| %>
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td>
-                                <%= f.radio_button(:appointment_time, time, class: "form-radio") %>
-                                <span class="ml-1"><%= time %></span>
-                            </td>
-                            <td> <p> <%= rand(10).to_i %> appointments available </p> </td>
+                            <th> Time </th>
+                            <th> Appointments Available </th>
                         </tr>
-                    <% end %>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <% @clinic.appointment_times.each do |time| %>
+                            <tr>
+                                <td>
+                                    <%= f.radio_button(:appointment_time, time, class: "form-radio") %>
+                                    <span class="ml-1"><%= time %></span>
+                                </td>
+                                <td> <p> <%= rand(10).to_i %> appointments available </p> </td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
             </div>
         </div>
-        </div>
+        <button type="button" class="button-primary mt-6"> Add Me to the Waiting List </button>
     </div>
-    <div class="w-1/2"></div>
+    <div> </div>
 </div>
-
-<div class="flex mb-4">
-  <div class="w-1/2 mr-4">
-    <button type="button" class="button-primary">
-        Add Me to the Waiting List
-    </button>
-  </div>
-  <div class="w-1/2"></div>
-</div>
-
 
 <%= hidden_field_tag :next_step, "end_flag" %>

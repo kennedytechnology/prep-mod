@@ -1,0 +1,47 @@
+// Multistep form progressbar
+.multistep-form-progressbar {
+    counter-reset: step;
+    @apply flex;
+
+    li {
+        @apply list-none flex-1 float-left text-xs relative text-center uppercase text-gray-600;
+
+        &:before{
+            @apply  border-2 border-gray-600 block text-center rounded-full bg-white;
+            width: 30px;
+            height: 30px;
+            content: counter(step);
+            counter-increment: step;
+            line-height: 30px;
+            margin: 0 auto 10px auto;
+        }
+
+        &:after {
+            @apply w-full absolute bg-gray-600;
+            height: 2px;
+            content: '';
+            top: 15px;
+            left: -50%;
+            z-index: -1;
+        }
+
+        &:first-child:after {
+            content: none;
+        }
+    }
+
+    // When li is active
+    li {
+        &.active {
+            @apply text-brand-blue-600;
+
+            &:before {
+                @apply border-brand-blue-600;
+            }
+
+            & + li:after {
+                @apply bg-brand-blue-600;
+            }
+        }
+    }
+}

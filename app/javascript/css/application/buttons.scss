@@ -41,4 +41,10 @@
 
         &:hover { @apply bg-gray-50; }
     }
+
+    &-add-more-staff {
+        @apply text-xs text-brand-blue-600 pb-1 border-b border-brand-blue-600;
+
+        &:hover { @apply text-blue-400 border-blue-400; }
+    }
 }
