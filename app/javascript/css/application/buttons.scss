@@ -1,6 +1,6 @@
 .button {
     &-base {
-        @apply rounded-lg border-2 border-brand-blue-200 cursor-pointer;
+        @apply rounded-lg border-2 border-brand-blue-600 cursor-pointer text-center;
         @apply flex justify-center items-center mr-4;
         min-height: 50px;
         max-height: 50px;
@@ -35,7 +35,7 @@
 
     &-tab {
         @extend .button-base;
-        @apply bg-gray-100 text-gray-600 mb-2;
+        @apply bg-blue-100 text-gray-600 text-lg font-bold mb-2;
         min-width: 210px;
         max-width: 210px;
 

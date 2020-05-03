@@ -12,22 +12,22 @@ class Clinic < ApplicationRecord
   accepts_nested_attributes_for :clinic_personnel, allow_destroy: true, 
     reject_if: lambda {|attributes| attributes['name'].blank?}
 
-  accepts_nested_attributes_for :clinic_events, reject_if: lambda {|attributes| attributes['outcome'].blank?}
+  accepts_nested_attributes_for :clinic_events, reject_if: lambda {|attributes| attributes['category'].blank?}
   accepts_nested_attributes_for :test_kits, allow_destroy: true, reject_if: :all_blank
 
   geocoded_by :address
   after_validation :geocode, if: :should_geocode?
   after_validation :parse_time
 
-  attr_accessor :start_hour_minute, :start_meridiem,
-    :end_hour_minute, :end_meridiem
+  attr_accessor :start_hour, :start_minute, :start_meridiem,
+    :end_hour, :end_minute, :end_meridiem
 
   def parse_time
-    if start_hour_minute && start_meridiem
-      self.start_time = Time.find_zone("UTC").parse("#{start_hour_minute}#{start_meridiem}")
+    if start_hour && start_minute && start_meridiem
+      self.start_time = Time.find_zone("UTC").parse("#{start_hour}:#{end_minute}#{start_meridiem}")
     end
-    if end_hour_minute && end_meridiem 
-      self.end_time = Time.find_zone("UTC").parse("#{end_hour_minute}#{end_meridiem}")
+    if end_hour && end_minute && end_meridiem 
+      self.end_time = Time.find_zone("UTC").parse("#{end_hour}:#{end_minute}#{end_meridiem}")
     end
   end
   def clinic_staff; clinic_personnel; end
