@@ -32,7 +32,7 @@
             <a class="button-tab" href="#">Data Transfer</a>
             <a class="button-tab" href="/message_board/index">Message Board</a>
             <a class="button-tab" href="#">Upload Records</a>
-            <a class="button-tab" href="#">Create Users</a>
+            <%= link_to "Create Users", new_user_invitation_path, class: "button-tab" %>
             <%= link_to "Change Password", edit_user_registration_path, class: "button-tab" %>
             <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "button-tab") %>
         </div>

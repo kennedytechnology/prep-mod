@@ -29,6 +29,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 # Will Paginate
 gem 'will_paginate', '~> 3.3.0'
+# Devise Invitable
+gem 'devise_invitable', '~> 2.0.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
