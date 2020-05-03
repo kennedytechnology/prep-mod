@@ -1,6 +1,12 @@
 class ClinicsController < ClinicManagementController
-
   before_action :get_clinic, only: [:edit, :update]
+
+  def index
+    @clinics = Clinic.all.paginate(page: params[:page], per_page: 50)
+    if params[:q].present?
+      @clinics = @clinics.select{|c| c.search_string.downcase.include?(params[:q].downcase)}
+    end
+  end
 
   def new
     @clinic = Clinic.new
@@ -15,13 +21,6 @@ class ClinicsController < ClinicManagementController
       redirect_to "/clinics"
     else
       render "new", alert: "Your clinic entry was not saved." + @clinic.errors.to_s
-    end
-  end
-
-  def index
-    @clinics = Clinic.all.paginate(page: params[:page], per_page: 50)
-    if params[:q].present?
-      @clinics = @clinics.select{|c| c.search_string.downcase.include?(params[:q].downcase)}
     end
   end
 
