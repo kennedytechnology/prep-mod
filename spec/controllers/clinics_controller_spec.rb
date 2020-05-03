@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe ClinicsController, type: :controller do
   let(:clinic) { create(:clinic) }
-
   before { sign_in create(:user) }
 
   describe "GET #index" do

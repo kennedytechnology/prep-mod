@@ -54,5 +54,4 @@ class Clinic < ApplicationRecord
   def search_string
     venue_name + clinic_date.to_s + county
   end
-
 end
