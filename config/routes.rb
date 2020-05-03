@@ -15,13 +15,14 @@ Rails.application.routes.draw do
   # get '/client/registration', to: 'public/patients#edit', as: :client_registration
   get '/client/registration(/:access_code)', to: 'public/patients#edit', as: :client_registration
   patch '/client/registration/(/:access_code)', to: 'public/patients#edit'
-
+  
   get "/clear_session", to: 'public/patients#clear_session'
 
 
   resources :news_signups
   resources :patients
   resources :clinics, only: [:index, :new, :create, :edit, :update] do
+    get :activity
     resources :patients
   end
   resources :clinic_events

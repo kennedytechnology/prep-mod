@@ -1,0 +1,91 @@
+<div class="clinic-events-page">
+    <div class="card-wrapper">
+      <%= render 'clinics/activity/header' %>
+      <div class="card-content">
+        <%= form_with(model: @clinic, url: clinic_path(@clinic), method: :put) do |f| %>
+          <%= render partial: 'clinics/activity/details', locals: {f: f} %>
+
+          <%= render partial: 'clinics/activity/test_kits', locals: {f: f} %>
+
+          <div class="patients-table-section" data-controller="clinic-activity-patients">
+
+           
+
+            <div class="patients-table-header">
+                <div class="flex justify-end mt-12">
+                    <div class="flex w-2/4">
+                        <input for="search" type="text" class="input-primary w-full mr-3" placeholder="Search Here">
+                        <input class="button-primary" id="search" value="Search" data-action="keyup->clinic-activity-patients#search" type="text">
+                    </div>
+                </div>
+              <div class="add-more-patients">
+                <%= link_to sanitize("Add More Patients &#43;"), "/patients/new", class: "button-primary" %>
+              </div>
+            </div>
+            <div class="patients-table-outer">
+              <div class="patients-table-wrapper">
+                <div class="patients-table-container">
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th>Patient Name</th>
+                      <th>DOB</th>
+                      <th>Screened</th>
+                      <th>Tested</th>
+                      <th>Safety Kit</th>
+                      <th>Cancelled</th>
+                      <th>No Show</th>
+                      <th>Follow Up</th>
+                      <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% @clinic.patients.each do |patient| %>
+                      <%= f.fields_for :clinic_events, patient.event_for_clinic(@clinic) do |event_form| %>
+                        <%= event_form.hidden_field :patient_id %>
+                        
+                        
+                        
+                        <tr data-target="clinic-activity-patients.searchableRow" data-search-content="<%= [patient.first_name.downcase, patient.last_name.downcase].join(" ") %>" data-patient-id="<%= patient.id %>">
+                          
+                          <td>
+                          <%= render partial: '/clinics/activity/screened_details', layout: "clinics/activity/clinic_event_modal", locals: {patient: patient, event_form: event_form, outcome_selection: 'Screened'} %>
+                          <%= render partial: '/clinics/activity/tested_details', layout: "clinics/activity/clinic_event_modal", locals: {patient: patient, event_form: event_form, outcome_selection: 'Tested'} %>
+                            <%= link_to patient.first_name + ' ' + patient.last_name, patient %> <br/>
+                          </td>
+                          <td><%= patient.date_of_birth.strftime("%D") %></td>
+                          
+                          <td><%= event_form.radio_button :outcome, "Screened", data: {action: "clinic-activity-patients#showModal", selection: "Screened"}, class: "form-radio" %></td>
+                          <td><%= event_form.radio_button :outcome, "Tested", data: {action: "clinic-activity-patients#showModal", selection: "Tested"}, class: "form-radio" %></td>
+                          <td><%= event_form.check_box :safety_kit_received, class: "form-checkbox" %></td>
+                          <td><%= event_form.radio_button :outcome, "Cancelled", class: "form-radio"  %></td>
+                          <td><%= event_form.radio_button :outcome, "No Show", class: "form-radio"  %></td>
+                          <td><%= link_to "Remark", "#", class: "" %></td>
+                          <td>
+                            <div class="flex">
+                              <%= link_to "Delete", patient, method: :delete, class: "button-action mb-0" %>
+                            </div>
+                          </td>
+                        </tr>
+                      <% end %>
+                    <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="button-container flex justify-end">
+            <input type="submit" name="save" value="Save" class="button-primary mr-2 mt-10">
+            <input type="submit" name="save-submit" value="Save and Submit" class="button-primary ml-2 bg-blue-500 text-white mt-10">
+          </div>
+        <% end %>
+      </div>
+    </div>
+</div>
+
+
+<% @clinic.patients.each do |patient| %>
+
+
+<% end %>

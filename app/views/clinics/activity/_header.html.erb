@@ -1,0 +1,14 @@
+<div class="card-header">
+  <h3 class="main-title">Clinic Activity Form</h3>
+  <div class="links-buttons flex justify-end items-center pb-4 mb-4 border-b">
+    <%= link_to "Registration List", clinic_patients_path(clinic_id: @clinic.id), class: "clinic-action mr-4" %>
+    <%= link_to "Edit Clinic", edit_clinic_path(id: @clinic.id), class: "clinic-action" %>
+  </div>
+</div>
+
+<div class="grid grid-cols-3 gap-4 font-bold mb-8">
+  <h3>Clinic Date: <%= @clinic.clinic_date %></h3>
+  <h3>County: <%= @clinic.address.split(',')[1] %></h3>
+  <h3>Venue Name: <%= @clinic.venue_name %></h3>
+  <h3>Lead Tester's Name: <%= @clinic.lead_vaccinator_name %> </h3>
+</div>

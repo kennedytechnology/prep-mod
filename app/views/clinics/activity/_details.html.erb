@@ -1,0 +1,37 @@
+<div class="flex mb-4">
+  <div class="w-4/12 mr-4">
+    <%= f.label :start_time, "Clinic Start Time:", class: "mr-3 font-bold" %><br/>
+    <select class="form-select" name="clinic[start_hour]">
+        <%= options_for_select((1..12).to_a, @clinic.start_time ? @clinic.start_time.strftime('%l').to_i : nil) %>
+    </select>
+    <span class="colon">:</span>
+    <select class="form-select" name="clinic[start_minute]" >
+        <%= options_for_select(['00', '15', '30', '45'], @clinic.start_time ? @clinic.start_time.strftime('%M').to_i : nil) %>
+    </select>
+    <select class="form-select" name="clinic[start_meridiem]" >
+        <%= options_for_select(['AM', 'PM'], @clinic.start_time ? @clinic.start_time.strftime('%p') : nil) %>
+    </select>
+  </div>
+  <div class="w-4/12 mr-4">
+    <%= f.label :end_time, "Clinic End Time:", class: "mr-3 font-bold" %><br/>
+    <select class="form-select" name="clinic[end_hour]">
+        <%= options_for_select((1..12).to_a, @clinic.end_time ? @clinic.end_time.strftime('%l').to_i : nil) %>
+    </select>
+    <span class="colon">:</span>
+    <select class="form-select" name="clinic[end_minute]" >
+        <%= options_for_select(['00', '15', '30', '45'], @clinic.end_time ? @clinic.end_time.strftime('%M').to_i : nil) %>
+    </select>
+    <select class="form-select" name="clinic[end_meridiem]" >
+        <%= options_for_select(['AM', 'PM'], @clinic.end_time ? @clinic.end_time.strftime('%p') : nil) %>
+    </select>
+  </div>
+  <div class="w-4/12">
+    <label>Clinic Length (in minutes)</label>:
+    <input type="text" placeholder="315" value="<%= (@clinic.end_time.to_i - @clinic.start_time.to_i) / 60 %>" disabled>
+  </div>
+</div>
+
+<div class="clinic-comments">
+  <%= f.label :incidents_comments, "Clinic Incidents or Comments", class: "form-group-label block font-bold" %>
+  <%= f.text_area :incidents_comments, class: "form-textarea w-2/4" %>
+</div>

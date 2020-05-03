@@ -1,7 +1,7 @@
 .button {
     &-base {
         @apply rounded-lg border-2 border-brand-blue-200 cursor-pointer;
-        @apply flex justify-center items-center mb-4 mr-4;
+        @apply flex justify-center items-center mr-4;
         min-height: 50px;
         max-height: 50px;
 
@@ -10,7 +10,7 @@
 
     &-action{
         @extend .button-base;
-        @apply p-2 inline-block mt-4 bg-brand-blue-600 text-white;
+        @apply p-2 inline-block bg-brand-blue-600 text-white;
         min-height: auto;
         min-width: auto;
         width: auto;
@@ -35,7 +35,7 @@
 
     &-tab {
         @extend .button-base;
-        @apply bg-gray-100 text-gray-600;
+        @apply bg-gray-100 text-gray-600 mb-2;
         min-width: 210px;
         max-width: 210px;
 

@@ -28,6 +28,10 @@ class ClinicsController < ClinicManagementController
   def edit
   end
 
+  def activity
+    @clinic = Clinic.find(params['clinic_id'])
+  end
+
   def update
     if @clinic.update(clinic_params)
       flash[:notice] = "Success. Clinic was updated successfully!"
