@@ -51,6 +51,7 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
   gem 'shoulda-matchers'
+  gem 'simplecov', require: false
 end
 
 group :development, :test do

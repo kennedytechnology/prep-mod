@@ -40,3 +40,4 @@ spec/.DS_Store
 public/.DS_Store
 config/env_vars.yml
 app/.DS_Store
+coverage

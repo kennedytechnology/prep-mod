@@ -1,5 +1,4 @@
 class ClinicEventsController < ClinicManagementController
-  
   def new
     @clinic_event = ClinicEvent.new
     @clinic_event.clinic = Clinic.find(params[:clinic_id]) if params[:clinic_id]
