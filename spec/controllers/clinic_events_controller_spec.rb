@@ -52,7 +52,7 @@ RSpec.describe ClinicEventsController, type: :controller do
     end
   end
 
-    it do
+  it do
     params = {
       clinic_event: {
         clinic: clinic_event.clinic,
