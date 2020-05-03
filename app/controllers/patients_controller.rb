@@ -19,17 +19,6 @@ class PatientsController < ApplicationController
     @patients.uniq!
   end
 
-  def show
-    @patient = Patient.find(params[:id])
-    @patient_clinic_events = @patient.clinic_events.order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 50)
-  end
-
-  def destroy
-    Patient.destroy(params[:id])
-    session[:alert] = "The patient was deleted."
-    redirect_back fallback_location: "/clinics"
-  end
-
   def new
     @patient = Patient.new  
   end
@@ -46,11 +35,22 @@ class PatientsController < ApplicationController
     end
   end
 
+  def show
+    @patient = Patient.find(params[:id])
+    @patient_clinic_events = @patient.clinic_events.order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 50)
+  end
+
   def edit
     @patient = Patient.find(params[:id])
   end
 
-private
+  def destroy
+    Patient.destroy(params[:id])
+    session[:alert] = "The patient was deleted."
+    redirect_back fallback_location: "/clinics"
+  end
+
+  private
 
   def sort_column
     Patient.where(id: params[:id]).column_names.include?(params[:sort]) ? params[:sort] : "clinic_id"
