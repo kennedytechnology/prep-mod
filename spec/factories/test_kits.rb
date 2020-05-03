@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :test_kit do
-    clinic { nil }
+    association :clinic, factory: :clinic
+
     test_name { "MyString" }
     test_manufacturer { "MyString" }
     test_lot_number { "MyString" }
