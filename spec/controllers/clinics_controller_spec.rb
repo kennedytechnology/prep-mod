@@ -68,6 +68,20 @@ RSpec.describe ClinicsController, type: :controller do
     end
   end
 
+  describe "POST #update" do
+    context "success" do
+      before do
+        put :update, params: { id: clinic.id, "save-submit": "Save and Submit", clinic: { 
+          clinic_date: Date.today 
+        } }
+        clinic.reload
+      end
+
+      it { expect(response).to redirect_to clinics_path }
+      it { expect(flash[:notice]).to match("Success. Clinic was updated successfully!") }
+    end
+  end
+
   describe "GET #acitivity" do
     it "returns http success" do
       get :activity, params: { clinic_id: clinic.id }
