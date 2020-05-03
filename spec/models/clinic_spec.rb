@@ -20,4 +20,9 @@ RSpec.describe Clinic, type: :model do
 
     it { should be_valid }
   end
+
+  context "should return clinic name" do
+    subject { create(:clinic) }
+    it { expect(subject.name).to eq("#{subject.venue_name} on #{subject.clinic_date}") }
+  end
 end
