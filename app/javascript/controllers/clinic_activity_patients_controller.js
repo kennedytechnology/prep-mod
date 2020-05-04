@@ -4,11 +4,11 @@ export default class extends Controller {
   static targets = [ "modal", "searchableRow" ]
 
   showModal(event) {
-    let outcomeSelection = event.target.dataset.selection;
+    let categorySelection = event.target.dataset.selection;
     let patientId = event.target.closest("tr").dataset.patientId
     let modals = this.modalTargets;
     let modal = modals.filter(function(el) {
-      return (el.dataset['patientId'] == patientId && el.dataset['outcomeSelection'] == outcomeSelection )
+      return (el.dataset['patientId'] == patientId && el.dataset['categorySelection'] == categorySelection )
     })[0]
 
     modal.classList.toggle('hidden')
@@ -16,11 +16,13 @@ export default class extends Controller {
   }
 
   okModal(event) {
+    event.target.closest("tr").setAttribute('data-event-category', event.target.dataset.eventCategory)
     event.target.closest('.modal').classList.toggle('hidden');
   }
 
   cancelModal(event) {
-    let originallySelectedElement = [...event.target.closest("tr").getElementsByTagName("input")].find(element => element.value == event.target.dataset['outcomeSelection'])
+    // debugger
+    let originallySelectedElement = [...event.target.closest("tr").getElementsByTagName("input")].find(element => element.value == event.target.closest('tr').dataset['eventCategory'])
     if(originallySelectedElement) {
       originallySelectedElement.checked = true;
     } else {

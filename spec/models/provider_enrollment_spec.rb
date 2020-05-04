@@ -1,5 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe ProviderEnrollment, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context "validations" do
+    subject { create(:provider_enrollment) }
+    it { should be_valid }
+  end
 end

@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe TestKit, type: :model do
+RSpec.describe ClinicVaccine, type: :model do
   it { should belong_to :clinic }
 
   context "validations" do
-    subject { create(:test_kit) }
+    subject { create(:clinic_vaccine) }
     it { should be_valid }
   end
 end

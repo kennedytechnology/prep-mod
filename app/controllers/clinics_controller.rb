@@ -1,6 +1,12 @@
 class ClinicsController < ClinicManagementController
-
   before_action :get_clinic, only: [:edit, :update]
+
+  def index
+    @clinics = Clinic.all.paginate(page: params[:page], per_page: 50)
+    if params[:q].present?
+      @clinics = @clinics.select{|c| c.search_string.downcase.include?(params[:q].downcase)}
+    end
+  end
 
   def new
     @clinic = Clinic.new
@@ -15,13 +21,6 @@ class ClinicsController < ClinicManagementController
       redirect_to "/clinics"
     else
       render "new", alert: "Your clinic entry was not saved." + @clinic.errors.to_s
-    end
-  end
-
-  def index
-    @clinics = Clinic.all.paginate(page: params[:page], per_page: 50)
-    if params[:q].present?
-      @clinics = @clinics.select{|c| c.search_string.downcase.include?(params[:q].downcase)}
     end
   end
 
@@ -62,15 +61,17 @@ class ClinicsController < ClinicManagementController
       :appointment_slots, :contact_person, :contact_phone_number,
       :backup_contact_person, :backup_contact_phone_number,
       :start_hour_minute, :start_meridiem,
-      :end_hour_minute, :end_meridiem,
+      :end_hour_minute, :end_meridiem, :start_hour, :start_minute, :end_hour, :end_minute,
       :appointments_available, users: [], :service_ids => [],
       :age_group_ids => [],
       clinic_personnel_attributes: [:id, :name, :_destroy],
-      clinic_events_attributes: [:id, :patient_id, :outcome, :safety_kit_received],
+      clinic_events_attributes: [:id, :patient_id, :outcome, :safety_kit_received,
+        :contact_type, :screening_outcome, :clinic_staff_id, :notes, :test_name,
+        :test_type, :test_processing, :category],
       test_kits_attributes: [:id, :test_name, :test_manufacturer,
-      :test_lot_number, :test_type, :test_processing, 
-      :test_expiration_date, :test_kits_quantity, :tests_administered, 
-      :unusable_tests, :tests_returned, :_destroy]
+        :test_lot_number, :test_type, :test_processing, 
+        :test_expiration_date, :test_kits_quantity, :tests_administered, 
+        :unusable_tests, :tests_returned, :_destroy]
     )
   end
 end

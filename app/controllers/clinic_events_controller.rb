@@ -1,4 +1,9 @@
 class ClinicEventsController < ClinicManagementController
+  def index
+    @clinic = Clinic.find(params[:clinic_id])
+    @clinic_events = @clinic.clinic_events
+  end
+
   def new
     @clinic_event = ClinicEvent.new
     @clinic_event.clinic = Clinic.find(params[:clinic_id]) if params[:clinic_id]
@@ -26,12 +31,11 @@ class ClinicEventsController < ClinicManagementController
     redirect_back fallback_location: root_path
   end
 
-  def index
-    @clinic = Clinic.find(params[:clinic_id])
-    @clinic_events = @clinic.clinic_events
-  end
-
   def clinic_event_params
-    params.require(:clinic_event).permit(:clinic_id, :patient_id, :category, :outcome, :notes, :contact_type, :screening_outcome, :test_name, :test_type, :test_processing, :clinic_staff_id)
+    params.require(:clinic_event).permit(
+      :clinic_id, :patient_id, :category, :outcome,
+      :notes, :contact_type, :screening_outcome,
+      :test_name, :test_type, :test_processing, :clinic_staff_id
+    )
   end
 end

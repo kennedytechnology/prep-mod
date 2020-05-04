@@ -43,20 +43,20 @@
                         
                         
                         
-                        <tr data-target="clinic-activity-patients.searchableRow" data-search-content="<%= [patient.first_name.downcase, patient.last_name.downcase].join(" ") %>" data-patient-id="<%= patient.id %>">
+                        <tr data-target="clinic-activity-patients.searchableRow" data-event-category="<%= event_form.object.category %>" data-search-content="<%= [patient.first_name.downcase, patient.last_name.downcase].join(" ") %>" data-patient-id="<%= patient.id %>">
                           
                           <td>
-                          <%= render partial: '/clinics/activity/screened_details', layout: "clinics/activity/clinic_event_modal", locals: {patient: patient, event_form: event_form, outcome_selection: 'Screened'} %>
-                          <%= render partial: '/clinics/activity/tested_details', layout: "clinics/activity/clinic_event_modal", locals: {patient: patient, event_form: event_form, outcome_selection: 'Tested'} %>
+                          <%= render partial: '/clinics/activity/screened_details', layout: "clinics/activity/clinic_event_modal", locals: {patient: patient, event_form: event_form, category_selection: 'Screened'} %>
+                          <%= render partial: '/clinics/activity/tested_details', layout: "clinics/activity/clinic_event_modal", locals: {patient: patient, event_form: event_form, category_selection: 'Tested'} %>
                             <%= link_to patient.first_name + ' ' + patient.last_name, patient %> <br/>
                           </td>
                           <td><%= patient.date_of_birth.strftime("%D") %></td>
                           
-                          <td><%= event_form.radio_button :outcome, "Screened", data: {action: "clinic-activity-patients#showModal", selection: "Screened"}, class: "form-radio" %></td>
-                          <td><%= event_form.radio_button :outcome, "Tested", data: {action: "clinic-activity-patients#showModal", selection: "Tested"}, class: "form-radio" %></td>
+                          <td><%= event_form.radio_button :category, "Screened", data: {action: "clinic-activity-patients#showModal", selection: "Screened"}, class: "form-radio" %></td>
+                          <td><%= event_form.radio_button :category, "Tested", data: {action: "clinic-activity-patients#showModal", selection: "Tested"}, class: "form-radio" %></td>
                           <td><%= event_form.check_box :safety_kit_received, class: "form-checkbox" %></td>
-                          <td><%= event_form.radio_button :outcome, "Cancelled", class: "form-radio"  %></td>
-                          <td><%= event_form.radio_button :outcome, "No Show", class: "form-radio"  %></td>
+                          <td><%= event_form.radio_button :category, "Cancelled", class: "form-radio"  %></td>
+                          <td><%= event_form.radio_button :category, "No Show", class: "form-radio"  %></td>
                           <td><%= link_to "Remark", "#", class: "" %></td>
                           <td>
                             <div class="flex">
