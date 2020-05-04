@@ -1,10 +1,14 @@
 class ClinicsController < ClinicManagementController
   before_action :get_clinic, only: [:edit, :update]
+  helper_method :sort_column, :sort_direction
 
   def index
-    @clinics = Clinic.all.paginate(page: params[:page], per_page: 50)
     if params[:q].present?
-      @clinics = @clinics.select{|c| c.search_string.downcase.include?(params[:q].downcase)}
+      @clinics = Clinic.all.select{|c| c.search_string.downcase.include?(params[:q].downcase)}
+    elsif sort_column && sort_direction
+      @clinics = Clinic.order(sort_column + " " + sort_direction)
+    else 
+      @clinics = Clinic.all.paginate(page: params[:page], per_page: 50)
     end
   end
 
@@ -50,6 +54,14 @@ class ClinicsController < ClinicManagementController
   end
 
   private
+
+  def sort_column
+    Clinic.where(id: params[:id]).column_names.include?(params[:sort]) ? params[:sort] : nil
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : nil
+  end
 
   def get_clinic
     @clinic = Clinic.find(params[:id])
