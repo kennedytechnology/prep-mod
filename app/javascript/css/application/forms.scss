@@ -50,17 +50,22 @@ input {
 
     &.form-input,
     &.form-select { 
-        @apply border-brand-blue-600 rounded-none;
+        @apply border-brand-blue-300 rounded-none rounded-sm;
+    }
+
+    &.form-radio,
+    &.form-checkbox {
+        @apply border-brand-blue-300;
     }
 }
 
 .form-textarea { 
-    @apply border-brand-blue-600 rounded-none;
+    @apply border-brand-blue-300 rounded-none rounded-sm;
 }
 
 select {
     &.form-select {
-        @apply border-brand-blue-600 rounded-none transition duration-150 ease-in-out mb-4;
+        @apply border-brand-blue-300 rounded-none transition duration-150 ease-in-out mb-4 rounded-sm;
         min-height: 50px;
         max-height: 50px;
     }
@@ -89,8 +94,4 @@ select {
 // Radio buttons group
 .radio-buttons-container {
     @apply grid grid-cols-3 gap-2;
-}
-
-.form-radio, .form-checkbox{
-    border-color: black;
 }
