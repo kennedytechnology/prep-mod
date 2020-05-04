@@ -1,5 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe SupplyInventory, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should belong_to(:clinic) }
+
+  context "validations" do
+    subject { create(:supply_inventory) }
+    it { should be_valid }
+  end
 end
