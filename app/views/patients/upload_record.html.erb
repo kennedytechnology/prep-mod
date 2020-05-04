@@ -1,0 +1,87 @@
+<div class="clinic-patients-index-page">
+  <div class="header-section">
+    <div class="header">
+      <h1 class="main-title">Upload Records
+        <% if @clinic %>
+          - <%= @clinic.name %>
+        <% end %>
+        <% if params[:q].present? %>
+          - "<%= params[:q] %>"
+        <% end %>
+      </h1>
+      <% if @clinic %>
+        <h3>Total Registered: <%= @clinic.patients.size %></h3>
+      <% end %>
+    </div>
+
+    <div>
+      <%= link_to "All Students Report", "#", class: "block text-blue-600 text-sm underline mb-6" %>
+      <%= link_to "View/Download Upload File Format", "#", class: "block text-blue-600 text-sm underline mb-6" %>
+    </div>
+    
+    <form>
+      <div class="sm:grid sm:grid-cols-2 lg:grid-cols-6 sm:gap-4 lg:gap-4 items-center mb-10">
+        <div>
+          <label class="text-gray-500 text-xl">Select County</label>
+          <%= select_tag :county, options_for_select(COUNTIES, selected: 'Please Select'), {class: "block form-select w-full"} %>
+        </div>
+        <div>
+          <label class="text-gray-500 text-xl">School Name</label>
+          <%= select_tag :county, options_for_select(Clinic.find(params[:id]).clinic_personnel.select(:name), selected: 'Please Select'), {class: "block form-select w-full"} %>
+        </div>
+        <input type="submit" value="Search" class="button-primary lg:min-w-full lg:max-w-full mt-3">
+
+        <%= link_to "Download", "#", class: "button-primary lg:min-w-full lg:max-w-full mt-3" %>
+        <%= link_to "Choose File", "#", class: "button-primary lg:min-w-full lg:max-w-full mt-3" %>
+        <%= link_to "Submit", "#", class: "button-primary lg:min-w-full lg:max-w-full mt-3" %>
+      </div>
+    </form>
+  </div>
+
+  <div class="flex flex-col">
+    <div class="sorting-table-wrapper">
+      <div class="sorting-table-container">
+        <table class="table">
+          <thead>
+          <tr>
+            <th><%= sortable "last_name", "Name" %></th>
+            <th><%= sortable "date_of_birth", "Date of Birth" %></th>
+            <th><%= sortable "date_of_birth", "Age" %></th>
+            <th><%= sortable "sex", "Gender" %></th>
+            <th><%= sortable "county" %></th>
+            <th>&nbsp;</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @patients.each do |patient| %>
+            <tr>
+              <td class="underline"><%= link_to patient.full_name, patient %></td>
+              <td><%= patient.date_of_birth.strftime("%m/%d/%y") %></td>
+              <td><%= ((Date.today.to_time - patient.date_of_birth.to_time) / 1.year.seconds).floor %></td>
+              <td><%= patient.sex == "F" ? "Female" : "Male" %></td>
+              <td><%= patient.county %></td>              
+              <td class="w-3/12 text-right">
+                <%= link_to "Event Entry", new_clinic_event_path(clinic_id: @clinic, patient_id: patient.id),
+                            class: "button-action" %>
+                <%= link_to "Delete", patient, method: :delete, class: "button-action" %>
+              </td> 
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+<!--
+  <div class="pagination-section">
+    <div class="pagination-container">
+      <div class="pagination-info">
+        <p><%# page_entries_info @patients %></p>
+      </div>
+      <div class="pagination-buttons">
+        <span class="lg-buttons"><%# will_paginate @patients %></span>
+        <span class="sm-buttons"><%# will_paginate @patients, page_links: false %></span>
+      </div>
+    </div>
+  </div> -->
+</div>

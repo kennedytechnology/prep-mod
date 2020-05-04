@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   patch '/client/registration/(/:access_code)', to: 'public/patients#edit'
   
   get "/clear_session", to: 'public/patients#clear_session'
+  get '/clinics/:id/patients/upload_record', to: 'patients#upload_record'
 
 
   resources :news_signups

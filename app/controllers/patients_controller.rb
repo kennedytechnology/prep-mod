@@ -2,21 +2,9 @@ class PatientsController < ApplicationController
   layout "clinic_management"
   before_action :authenticate_user!
   helper_method :sort_column, :sort_direction
+  before_action :patients_listing, only: [:index, :upload_record]
 
   def index
-    case
-      when params[:clinic_id]
-        @clinic = Clinic.find(params[:clinic_id])
-        @patients = @clinic.patients.order(params[:sort]).paginate(page: params[:page], per_page: 50)
-      when params[:direction]
-        @patients = Patient.order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 50)
-      when params[:q]
-        @patients = Patient.all.select{|p| p.search_string.downcase.include?(params[:q].downcase)}
-      else
-        @patients = Patient.all.paginate(page: params[:page], per_page: 50)
-      end
-    @patients = @patients.take(40)
-    @patients.uniq!
   end
 
   def new
@@ -50,6 +38,9 @@ class PatientsController < ApplicationController
     redirect_back fallback_location: "/clinics"
   end
 
+  def upload_record
+  end
+
   private
 
   def sort_column
@@ -58,6 +49,22 @@ class PatientsController < ApplicationController
 
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
+  def patients_listing
+    case
+    when params[:clinic_id]
+      @clinic = Clinic.find(params[:clinic_id])
+      @patients = @clinic.patients.order(params[:sort]).paginate(page: params[:page], per_page: 50)
+    when params[:direction]
+      @patients = Patient.order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 50)
+    when params[:q]
+      @patients = Patient.all.select{|p| p.search_string.downcase.include?(params[:q].downcase)}
+    else
+      @patients = Patient.all.paginate(page: params[:page], per_page: 50)
+    end
+    @patients = @patients.take(40)
+    @patients.uniq!
   end
 
   def patient_params
