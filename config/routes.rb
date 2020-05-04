@@ -6,7 +6,8 @@ Rails.application.routes.draw do
 
   devise_for :users,
     controllers: {
-      registrations: 'users/registrations'
+      registrations: 'users/registrations',
+      invitations: 'users/invitations'
     }
 
   get 'public_portal/index'
