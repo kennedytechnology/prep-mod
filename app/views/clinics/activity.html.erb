@@ -8,18 +8,15 @@
           <%= render partial: 'clinics/activity/test_kits', locals: {f: f} %>
 
           <div class="patients-table-section" data-controller="clinic-activity-patients">
-
-           
-
             <div class="patients-table-header">
-                <div class="flex justify-end mt-12">
-                    <div class="flex w-2/4">
-                        <input for="search" type="text" class="input-primary w-full mr-3" placeholder="Search Here">
-                        <input class="button-primary" id="search" value="Search" data-action="keyup->clinic-activity-patients#search" type="text">
-                    </div>
-                </div>
-              <div class="add-more-patients">
-                <%= link_to sanitize("Add More Patients &#43;"), "/patients/new", class: "button-primary" %>
+              <div class="mt-12">
+                  <div class="flex w-2/4">
+                      <label class="flex items-center text-lg mr-3 text-gray-600 block" for="search"> Search here: </label>
+                      <input class="form-input w-2/3" id="search" data-action="keyup->clinic-activity-patients#search" type="text">
+                  </div>
+              </div>
+              <div class="flex justify-end">
+                  <%= link_to sanitize("Add More Patients &#43;"), "/patients/new", class: "button-primary" %>
               </div>
             </div>
             <div class="patients-table-outer">
