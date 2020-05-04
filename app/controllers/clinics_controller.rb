@@ -3,13 +3,12 @@ class ClinicsController < ClinicManagementController
   helper_method :sort_column, :sort_direction
 
   def index
-    if sort_column and sort_direction
-      @clinics = Clinic.order(sort_column + " " + sort_direction)
-    else
-    @clinics = Clinic.all.paginate(page: params[:page], per_page: 50)
-    end
     if params[:q].present?
-      @clinics = @clinics.select{|c| c.search_string.downcase.include?(params[:q].downcase)}
+      @clinics = Clinic.all.select{|c| c.search_string.downcase.include?(params[:q].downcase)}
+    elsif sort_column && sort_direction
+      @clinics = Clinic.order(sort_column + " " + sort_direction)
+    else 
+      @clinics = Clinic.all.paginate(page: params[:page], per_page: 50)
     end
   end
 
