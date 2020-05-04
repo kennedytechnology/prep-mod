@@ -1,8 +1,13 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create, :update], if: :devise_controller?
+  before_action :redirect_to_root, only: [:new, :create]
   layout "clinic_management"
 
   protected
+
+  def redirect_to_root
+    redirect_to root_path
+  end
 
   def configure_sign_up_params    
     added_attribs = [:name, :email, :password, :password_confirmation, :remember_me]
