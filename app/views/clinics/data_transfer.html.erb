@@ -1,0 +1,51 @@
+<div class="main-container">
+    <h3 class="main-title">Download ImmuNet and Billing List</h3>
+    <form class="py-5">
+        <div class="sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 lg:gap-6">
+            <div>
+                <label class="text-gray-500"> Select County <span class="text-brand-red-500">*</span></label>
+                <%= select_tag :county, options_for_select(COUNTIES, selected: 'Please Select'), {class: "block form-select w-full"} %>
+            </div>
+            <div>
+                <label class="text-gray-500"> Clinic Location <span class="text-brand-red-500">*</span></label>
+                <%= select_tag :clinic, options_for_select(@clinics.map(&:venue_name), selected: 'Please Select'), {class: "block form-select w-full"} %>
+            </div>
+        </div>
+    </form>
+    <form class="py-5 -mt-8">
+        <div class="sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 lg:gap-6">
+            <div class="col-span-2">
+                <label class="text-gray-500"> Date Range: </label>
+                <%= link_to "Today", "#", class: "button-primary lg:max-w-xs" %>
+            </div>  
+            <div>
+                <label class="text-gray-500"> From: <span class="text-brand-red-500">*</span></label>
+                <input type="date" class="block form-input w-full">
+            </div>
+            <div>
+                <label class="text-gray-500"> To: <span class="text-brand-red-500">*</span></label>
+                <input type="date" class="block form-input w-full">
+            </div>
+        </div>
+    </form>
+    <div class="sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-4 lg:gap-3 mb-20 mt-20">
+        <div>
+            <%= link_to "FTP Patient CSV", "#", class: "button-primary lg:max-w-full" %>
+        </div>
+        <div>
+            <%= link_to "Download Immunization CSV", "#", class: "button-primary lg:max-w-full" %>
+        </div>
+        <div>
+            <%= link_to "Upload to IIS", "#", class: "button-primary lg:max-w-full" %>
+        </div>
+        <div>
+            <%= link_to "Upload to Billing", "#", class: "button-primary lg:max-w-full" %>
+        </div>
+        <div>
+            <%= link_to "Upload to HIE", "#", class: "button-primary lg:max-w-full" %>
+        </div>
+        <div>
+            <%= link_to "FTP Immunization CSV", "#", class: "button-primary lg:max-w-full" %>
+        </div>
+    </div>
+</div>

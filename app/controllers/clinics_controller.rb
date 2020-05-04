@@ -45,6 +45,10 @@ class ClinicsController < ClinicManagementController
     end
   end
 
+  def data_transfer
+    @clinics = Clinic.all
+  end
+
   private
 
   def get_clinic

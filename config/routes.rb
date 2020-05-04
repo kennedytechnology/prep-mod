@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'public_portal/index'
   get '/clinic/search', to: 'public/clinics#index'
   post '/clinic/search', to: 'public/clinics#index'
+  get '/clinic/data_transfer', to: 'clinics#data_transfer'
   # get '/client/registration', to: 'public/patients#edit', as: :client_registration
   get '/client/registration(/:access_code)', to: 'public/patients#edit', as: :client_registration
   patch '/client/registration/(/:access_code)', to: 'public/patients#edit'
