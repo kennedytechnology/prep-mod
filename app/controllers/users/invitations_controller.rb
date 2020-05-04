@@ -1,6 +1,6 @@
 class Users::InvitationsController < Devise::InvitationsController
   before_action :configure_permitted_parameters, only: [:create], if: :devise_controller?
-  layout "clinic_management"
+  layout "clinic_management", only: [:new]
 
   protected
 
