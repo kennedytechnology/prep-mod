@@ -1,53 +1,43 @@
-<div class="clinic-patients-show-page">
-  <div class="page-header">
-    <h1>Patient History</h1>
-    <form>
-      <input type="button" value="Print" onClick="window.print()" class="bg-gray-500 text-xs text-white py-1 px-4 mr-2 mt-4 rounded-full;">
-    </form>
-  </div>
+<h1 class="main-title">Patient History</h1>
 
+<form class="flex justify-end mb-6">
+    <input type="button" value="Print" onClick="window.print()" class="button-primary">
+</form>
 
-  <div class="flex flex-col">
-    <div class="sorting-table-wrapper">
-      <div class="sorting-table-container">
-        <table class="sorting-table">
-          <thead>
-          <tr>
+<table class="table">
+    <thead>
+        <tr>
             <th><%= sortable "clinic_id", "Clinic Id" %></th>
             <th><%= sortable "created_at" %></th>
             <th><%= sortable "category", "Service" %></th>
             <th><%= sortable "outcome", "Status" %></th>
             <th><%= sortable "notes" %></th>
             <th>Actions</th>
-          </tr>
-          </thead>
-          <tbody>
-          <% @patient_clinic_events.each do |clinic_event| %>
-            <tr class="<%= "border-none" if clinic_event == @patient.clinic_events.sort_by(&:created_at).last %>">
-              <td><%= clinic_event.clinic.name %></td>
-              <td><%= clinic_event.created_at.strftime("%m/%d/%Y") %></td>
-              <td><%= clinic_event.category %></td>
-              <td><%= clinic_event.outcome %></td>
-              <td><%= clinic_event.notes %></td>
-              <td><%= link_to "Delete", "#", class: "action-button" %>
-              </td>
-            </tr>
-          <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+        </tr>
+    </thead>
+    <tbody>
+        <% @patient_clinic_events.each do |clinic_event| %>
+        <tr>
+            <td><%= clinic_event.clinic.name %></td>
+            <td><%= clinic_event.created_at.strftime("%m/%d/%Y") %></td>
+            <td><%= clinic_event.category %></td>
+            <td><%= clinic_event.outcome %></td>
+            <td><%= clinic_event.notes %></td>
+            <td><%= link_to "Delete", "#", class: "button-action" %>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
 
-  <div class="pagination-section">
+<div class="pagination-section">
     <div class="pagination-container">
-      <div class="pagination-info">
-        <p><%= page_entries_info @patient_clinic_events %></p>
-      </div>
-      <div class="pagination-buttons">
-        <span class="lg-buttons"><%= will_paginate @patient_clinic_events %></span>
-        <span class="sm-buttons"><%= will_paginate @patient_clinic_events, page_links: false %></span>
-      </div>
+        <div class="pagination-info">
+            <p><%= page_entries_info @patient_clinic_events %></p>
+        </div>
+        <div class="pagination-buttons">
+            <span class="lg-buttons"><%= will_paginate @patient_clinic_events %></span>
+            <span class="sm-buttons"><%= will_paginate @patient_clinic_events, page_links: false %></span>
+        </div>
     </div>
-  </div>
 </div>
