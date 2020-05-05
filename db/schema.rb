@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_03_161412) do
+ActiveRecord::Schema.define(version: 2020_05_04_190416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,6 +134,9 @@ ActiveRecord::Schema.define(version: 2020_05_03_161412) do
     t.time "start_time"
     t.time "end_time"
     t.string "venue_name"
+    t.time "start_hour_minute"
+    t.time "end_hour_minute"
+    t.string "location"
   end
 
   create_table "clinics_users", id: false, force: :cascade do |t|
