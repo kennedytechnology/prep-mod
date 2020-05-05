@@ -13,11 +13,15 @@
         <h3>Total Registered: <%= @clinic.patients.size %></h3>
       <% end %>
     </div>
-    <div class="flex justify-end">
-      <form class="flex w-2/4">
-        <input type="text" name="q" value="<%= params[:q] %>" placeholder="Search here" class="input-primary w-full mr-3">
-        <input type="submit" value="Search" class="button-primary">
-      </form>
+    <div class="flex justify-end my-4">
+      <%= search_form_for @q, class: "flex items-center w-full" do |f| %>
+            <%= f.search_field :first_name_cont, placeholder: "First Name", class: "form-input flex-1 mr-2" %>
+            <%= f.search_field :last_name_cont, placeholder: "Last Name",class: "form-input flex-1 mr-2" %>
+            <%= f.search_field :mothers_maiden_name_cont, placeholder: "Mother's maiden name",class: "form-input flex-1 mr-2" %>
+            <%= f.search_field :date_of_birth_cont, placeholder: "Date of birth",class: "form-input flex-1 mr-2" %>
+            <%= link_to "Reset", patients_path, class: "button-action" %>
+            <%= f.submit "Search", class: "button-action" %>
+      <% end %>
     </div>
     
   </div>

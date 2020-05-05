@@ -52,14 +52,16 @@ class PatientsController < ApplicationController
   end
 
   def patients_listing
+    @q = Patient.ransack(params[:q])
+
     case
     when params[:clinic_id]
       @clinic = Clinic.find(params[:clinic_id])
       @patients = @clinic.patients.order(params[:sort]).paginate(page: params[:page], per_page: 50)
     when params[:direction]
       @patients = Patient.order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 50)
-    when params[:q]
-      @patients = Patient.all.select{|p| p.search_string.downcase.include?(params[:q].downcase)}
+    when @q.result
+      @patients = @q.result.page(params[:page]).to_a.uniq
     else
       @patients = Patient.all.paginate(page: params[:page], per_page: 50)
     end
