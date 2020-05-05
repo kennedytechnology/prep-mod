@@ -12,7 +12,7 @@ A new public clinic has been created. Here are the details:
     <li> Clinic Start Time: <%= @clinic.start_time %> </li>
     <li> Clinic End Time: <%= @clinic.end_time  %> </li>
     <li> Clinic Duration: <%= @clinic.duration %> </li>
-    <li> Clinic Age Groups: <%= @clinic.age_groups %> </li>
+    <li> Clinic Age Groups: <%= @clinic.age_groups.map(&:name).join(", ") if @clinic.age_groups.any? %> </li>
     <li> Address: <%= @clinic.address %> </li>
     <li> Appointment Frequency Minutes: <%= @clinic.appointment_frequency_minutes %> </li>
     <li> Appointment Slots: <%= @clinic.appointment_slots %> </li>
