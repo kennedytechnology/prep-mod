@@ -17,10 +17,6 @@ class Patient < ApplicationRecord
     "#{address}, #{city}, #{state} #{zip_code}"
   end
 
-  # def search_string
-  #   first_name + last_name + full_address + mothers_maiden_name + date_of_birth.strftime("%m/%d/%y")
-  # end
-
   def event_for_clinic(clinic)
     result = clinic_events.detect{|ce| ce.clinic == clinic}
     if result.nil?
