@@ -30,7 +30,7 @@
 <div class="field-side-by-side">
     <div>
         <%= f.label :consent_date, "Date", class: "block" %>
-        <%= f.date_field :consent_date, as: :date, value: Date.today, placeholder: Date.today.strftime("%d/%m/%Y%"), disabled: true, class: "form-input w-full" %>
+        <%= f.text_field :consent_date, value: Date.today.strftime("%m/%d/%y"), disabled: true, class: "form-input w-full" %>
     </div>
     <div> </div>
 </div>
