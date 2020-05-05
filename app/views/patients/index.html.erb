@@ -5,9 +5,6 @@
         <% if @clinic %>
           - <%= @clinic.name %>
         <% end %>
-        <% if params[:q].present? %>
-          - "<%= params[:q] %>"
-        <% end %>
       </h1>
       <% if @clinic %>
         <h3>Total Registered: <%= @clinic.patients.size %></h3>
@@ -18,7 +15,7 @@
             <%= f.search_field :first_name_cont, placeholder: "First Name", class: "form-input flex-1 mr-2" %>
             <%= f.search_field :last_name_cont, placeholder: "Last Name",class: "form-input flex-1 mr-2" %>
             <%= f.search_field :mothers_maiden_name_cont, placeholder: "Mother's maiden name",class: "form-input flex-1 mr-2" %>
-            <%= f.search_field :date_of_birth_cont, placeholder: "Date of birth",class: "form-input flex-1 mr-2" %>
+            <%= f.search_field :date_of_birth_equals, placeholder: "Date of birth",class: "form-input flex-1 mr-2" %>
             <%= link_to "Reset", patients_path, class: "button-action" %>
             <%= f.submit "Search", class: "button-action" %>
       <% end %>
