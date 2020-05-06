@@ -58,7 +58,7 @@
                           <td><%= event_form.check_box :safety_kit_received, class: "form-checkbox" %></td>
                           <td><%= event_form.radio_button :category, "Cancelled", class: "form-radio"  %></td>
                           <td><%= event_form.radio_button :category, "No Show", class: "form-radio"  %></td>
-                          <td data-action="click->clinic-activity-patients#showModal" class="form-text">Remark</td>
+                          <td><%= link_to "Remark", "javascript:", data: {action: "clinic-activity-patients#showModal", selection: "Remark"}, class: "form-text" %></td>
                           <td>
                             <div class="flex">
                               <%= link_to "Delete", patient, method: :delete, class: "button-action mb-0" %>
