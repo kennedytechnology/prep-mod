@@ -17,10 +17,6 @@ class Patient < ApplicationRecord
     "#{address}, #{city}, #{state} #{zip_code}"
   end
 
-  def search_string
-    first_name + last_name + full_address + mothers_maiden_name + date_of_birth.strftime("%m/%d/%y")
-  end
-
   def event_for_clinic(clinic)
     result = clinic_events.detect{|ce| ce.clinic == clinic}
     if result.nil?
@@ -38,5 +34,9 @@ class Patient < ApplicationRecord
       to: to_number,
       body: "Your registration is complete. To schedule your COVID-19 test, go to #{ENV['SITE_URL']}/client/registration/#{access_code}"
     })
+  end
+
+  ransacker :date_of_birth_cont, type: :date do
+    Arel.sql('date(date_of_birth_cont)')
   end
 end

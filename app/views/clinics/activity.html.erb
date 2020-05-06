@@ -16,7 +16,7 @@
                   </div>
               </div>
               <div class="flex justify-end">
-                  <%= link_to sanitize("Add More Patients &#43;"), "/patients/new", class: "button-primary" %>
+                  <%= link_to sanitize("Add More Patients &#43;"), "javascript:", data: {action: "clinic-activity-patients#showModal", selection: "AddPatient"}, class: "button-primary" %>
               </div>
             </div>
             <div class="patients-table-outer">
@@ -48,6 +48,7 @@
                           <td>
                           <%= render partial: '/clinics/activity/screened_details', layout: "clinics/activity/clinic_event_modal", locals: {patient: patient, event_form: event_form, category_selection: 'Screened'} %>
                           <%= render partial: '/clinics/activity/tested_details', layout: "clinics/activity/clinic_event_modal", locals: {patient: patient, event_form: event_form, category_selection: 'Tested'} %>
+                          <%= render partial: '/clinics/activity/remark_details', layout: "clinics/activity/clinic_event_modal", locals: {patient: patient, event_form: event_form, category_selection: 'Remark'} %>
                             <%= link_to patient.first_name + ' ' + patient.last_name, patient %> <br/>
                           </td>
                           <td><%= patient.date_of_birth.strftime("%D") %></td>
@@ -57,7 +58,7 @@
                           <td><%= event_form.check_box :safety_kit_received, class: "form-checkbox" %></td>
                           <td><%= event_form.radio_button :category, "Cancelled", class: "form-radio"  %></td>
                           <td><%= event_form.radio_button :category, "No Show", class: "form-radio"  %></td>
-                          <td><%= link_to "Remark", "#", class: "" %></td>
+                          <td><%= link_to "Remark", "javascript:", data: {action: "clinic-activity-patients#showModal", selection: "Remark"}, class: "form-text" %></td>
                           <td>
                             <div class="flex">
                               <%= link_to "Delete", patient, method: :delete, class: "button-action mb-0" %>
@@ -71,6 +72,7 @@
                 </div>
               </div>
             </div>
+            <%= render partial: '/clinics/activity/add_more_patients', layout: "clinics/activity/clinic_event_modal", locals: {patient: @patient = Patient.new, event_form: nil, category_selection: 'AddPatient'} %>
           </div>
           <div class="button-container flex justify-end">
             <input type="submit" name="save" value="Save" class="button-primary mr-2 mt-10">

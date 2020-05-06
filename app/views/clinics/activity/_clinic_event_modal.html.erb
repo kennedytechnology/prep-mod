@@ -1,11 +1,11 @@
 <div
   data-target="clinic-activity-patients.modal"
-  data-patient-id="<%= patient.id %>"
+  data-patient-id="<%= patient.id.nil? ? "addMorePatients" : patient.id %>"
   data-category-selection="<%= category_selection %>"
-  class="modal hidden fixed w-full h-full top-0 left-0 flex items-center justify-center">
+  class="modal hidden fixed w-full h-full top-0 left-0 flex items-center justify-center <%= "z-50" if patient.id.nil? %>">
 
   <div class="modal-overlay fixed w-full h-full bg-black opacity-25 top-0 left-0 cursor-pointer"></div>
-  <div class="absolute w-2/3 p-8 bg-white rounded-lg shadow-lg flex">
+  <div class="absolute w-2/3 p-8 bg-white rounded-lg shadow-lg flex <%= "overflow-y-scroll" if patient.id.nil? %>" style="<%= "top:50px; bottom: 50px;" if patient.id.nil? %>">
     <div class="w-1/3"> 
       <h1 class="text-lg leading-6 font-medium text-gray-900">
         <%= category_selection %>: <span class="font-bold"> <%= patient.full_name %> </span>
@@ -14,19 +14,21 @@
 
     <div class="w-2/3">
       <%= yield %>
-      <div class="mt-8 border-t border-gray-200 pt-5">
+      <div class="mt-8 pt-5">
           <div class="flex justify-end">
               <span class="inline-flex rounded-md shadow-sm">
-                  <a data-action="clinic-activity-patients#cancelModal" class="button-primary">Cancel</a>
+                <a data-action="clinic-activity-patients#cancelModal" data-parent="<%= patient.id.nil? ? "addMorePatients" : patient.id %>" class="button-primary">Cancel</a>
               </span>
-              <% if event_form.object.new_record? %>
-                  <span class="ml-3 inline-flex rounded-md shadow-sm">
-                    <a class="button-primary" data-action="clinic-activity-patients#okModal" data-event-category="<%= category_selection %>">Save</a>
-                  </span>
-              <% else %>
-                  <span class="inline-flex rounded-md shadow-sm">
-                      <a data-action="clinic-activity-patients#okModal" class="button-primary" data-event-category="<%= category_selection %>" data-confirm="Are you sure?">Update</a>
-                  </span>
+              <% unless event_form.nil? %>
+                <% if event_form.object.new_record? %>
+                    <span class="ml-3 inline-flex rounded-md shadow-sm">
+                      <a class="button-primary" data-action="clinic-activity-patients#okModal" data-event-category="<%= category_selection %>">Save</a>
+                    </span>
+                <% else %>
+                    <span class="inline-flex rounded-md shadow-sm">
+                        <a data-action="clinic-activity-patients#okModal" class="button-primary" data-event-category="<%= category_selection %>" data-confirm="Are you sure?">Update</a>
+                    </span>
+                <% end %>
               <% end %>
           </div>
       </div>

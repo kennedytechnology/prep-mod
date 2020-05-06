@@ -1,28 +1,12 @@
-<div class="password-container container">
-  <div class="forgot-password-section">
-    <div class="title">
-      <h2>Forgot your password?</h2>
-    </div>  
-    <div class="form-container">
-      <div class="password-form">
-        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-        <%= render "devise/shared/error_messages", resource: resource %>
+<h1 class="main-title">Forgot your password?</h1>
 
-        <div class="field">
-          <span><%= image_tag 'mail.png' %></span> <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email Address" , class: "w-full border-b text-base px-6 py-4 outline-none font-light"%>
-        </div>
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
 
-        <div class="links-field">
-              <%= link_to 'Log in',  user_session_path, class: "links" %>
-              <%= link_to 'Sign up', new_user_registration_path, class: "links" %>
-        </div>
-
-        <div class="actions">
-          <%= f.submit "Send me password instructions", class: "instructions" %>
-        </div>
-       <% end %>
-      </div> 
+    <div class="w-1/2">
+        <%= f.label :email, "Email Address", class: "block" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-input w-full" %>
+        <%= f.submit "Send me password instructions", class: "button-primary-fullwidth" %>
+        <%= link_to 'Cancel',  root_path, class: "button-primary-fullwidth my-4" %>
     </div>
-  </div>
-</div>
-
+<% end %>

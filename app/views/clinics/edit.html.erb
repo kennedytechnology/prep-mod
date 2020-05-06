@@ -146,7 +146,7 @@
         <div>
             <h1 class="title">Contact Information</h1>
             
-            <%= f.label :contact_person, class: "block" do %>
+            <%= f.label :contact_person do %>
                 <span> Contact Person </span>
                 <span class="field-required">*</span>
             <% end %>
@@ -175,80 +175,94 @@
         </div>
     </div>
 
-    <div class="field-side-by-side">
+    <div class="field-fullwidth">
         <div>
-            <h1 class="title"> Other Information </h1>
-            <%= f.label :students_registered, "Number of Patients Registered", class: "block w-full" %>
-            <%= f.number_field :students_registered, placeholder: "Number of Patients Registered", class: "form-input w-full" %>
-
-            <%= f.label :lead_vaccinator_name, class: "block" do %>
-                <span> Lead Tester’s Name </span>
-                <span class="field-required">*</span>
-            <% end %>
-            <%= f.text_field :lead_vaccinator_name, placeholder: "Lead Tester's Name", class: "form-input w-full" %>
-
-            <%= f.label :incidents_comments, "Incidents Comments", class: "block" %>
-            <%= f.text_area :incidents_comments, placeholder: "Enter Details Here", class: "form-textarea w-full" %>
+            <h3 class="title">
+                Other Information
+            </h3>
         </div>
-
-        <div>
-            <h1 class="title"> &nbsp; </h1>
-            <p class="label w-full"> Clinic Staff </p>
-            <div class="fields grid grid-cols-2 gap-3">
-                <%= f.fields_for :clinic_personnel do |c| %>
-                    <%= render 'clinics/clinic_personnel', f: c %>
-                <% end %>
+        <div
+            class="grid grid-cols-2 gap-4 items-start">
+            <label for="last_name"
+                class="label">
+                Additional Clinic Details
+            </label>
+            <div class="col-span-2">
+                        <% f.label :incidents_comments, class: "block" %>
+                        <%= f.text_area :incidents_comments, placeholder: "Enter Details Here", class: "form-textarea w-1/2" %>
+                    <p class="mt-2 text-sm text-gray-500">Incidents Comments.</p>
             </div>
-            <%= link_to_add_row('Add more staff', f, :clinic_personnel, class: 'button-add-more-staff') %>
         </div>
+    </div>    
+
+    <div
+        class="field-fullwidth">
+        <div>
+            <h3 class="title">
+                Registration and Staff
+            </h3>
+        </div>
+        <%= f.label :students_registered, "Number of Patients Registered", class: "block" %>
+        <%= f.number_field :students_registered, placeholder: "Number of Patients Registered", class: "form-input w-1/2" %>
+
+        <%= f.label :lead_vaccinator_name, class: "block" do %>
+            <span> Lead Tester’s Name </span>
+            <span class="field-required">*</span>
+        <% end %>
+        <%= f.text_field :lead_vaccinator_name, placeholder: "Lead Tester's Name", class: "form-input w-1/2" %>
+
+        <h1 class="title"> &nbsp; </h1>
+        <p class="label w-full"> Clinic Staff </p>
+        <div class="fields grid grid-cols-2 gap-3">
+            <%= f.fields_for :clinic_personnel do |c| %>
+                <%= render 'clinics/clinic_personnel', f: c %>
+            <% end %>
+        </div>
+        <%= link_to_add_row('Add more staff', f, :clinic_personnel, class: 'button-add-more-staff') %>
     </div>
 
-    
-    <div class="mt-8 sm:mt-5 sm:pt-10">
+    <div class="field-fullwidth">
         <div>
-            <h1 class="text-lg leading-6 font-medium text-gray-900">
+            <h1 class="title">
                 Test Kits
             </h1>
         </div>
-        <div
-            class="mt-6 sm:mt-5 sm:grid sm:grid-cols-2 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-            <div class="mt-1 sm:mt-0 sm:col-span-3">
-                <div class="flex justify-end mb-4">
-                    <%= link_to_add_test_kit('Add More Test Kits', f, :test_kits, class: 'button-primary') %>
-                </div>
-                <div class="flex flex-col">
-                    <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-                        <div class="align-middle inline-block min-w-full overflow-hidden border-b border-gray-200">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th> Test Name </th>
-                                        <th> Test Manufacturer </th>
-                                        <th> Test Lot Number </th>
-                                        <th> Test Type </th>
-                                        <th> Processing </th>
-                                        <th> Test Expiration Date </th>
-                                        <th> Number of test kits </th>
-                                        <th> Action </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white" id="testKits">
-                                    <% @clinic.test_kits.each do |test_kit| %>
-                                        <%= f.fields_for :test_kits, test_kit do |test_kit_fields| %>
-                                            <%= render 'clinics/test_kit', f: test_kit_fields %>
-                                        <% end %>
+            <div class="flex justify-end mb-4">
+                <%= link_to_add_test_kit('Add More Test Kits', f, :test_kits, class: 'button-primary') %>
+            </div>
+            <div class="flex flex-col">
+                <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+                    <div class="align-middle inline-block min-w-full overflow-hidden border-b border-gray-200">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th> Test Name </th>
+                                    <th> Test Manufacturer </th>
+                                    <th> Test Lot Number </th>
+                                    <th> Test Type </th>
+                                    <th> Processing </th>
+                                    <th> Test Expiration Date </th>
+                                    <th> Number of test kits </th>
+                                    <th> Action </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white" id="testKits">
+                                <% @clinic.test_kits.each do |test_kit| %>
+                                    <%= f.fields_for :test_kits, test_kit do |test_kit_fields| %>
+                                        <%= render 'clinics/test_kit', f: test_kit_fields %>
                                     <% end %>
-                                </tbody>
-                            </table>
-                        </div>
+                                <% end %>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
     <div class="flex justify-end mt-8">
         <%= f.button "Review & Submit", class: "button-primary" %>
         <%= link_to "Cancel", clinics_path, class: "button-primary" %>
     </div>
+    </div>
+
+    
 <% end %>

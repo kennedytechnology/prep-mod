@@ -8,7 +8,7 @@ RSpec.describe NewsSignupMailer, type: :mailer do
     it "renders the headers" do
       expect(mail.subject).to eq("Thank you for your subscription")
       expect(mail.to).to eq([news_signup.email])
-      expect(mail.from).to eq(["info@clinicwizard.com"])
+      expect(mail.from).to eq(["notifications@clinicwizard.com"])
     end
 
     it "renders the body" do

@@ -1,0 +1,19 @@
+Dear <%= @user.name %>,
+
+A new public clinic has been created. Here are the details:
+
+Venue Name: <%= @clinic.venue_name %>
+Clinic Date: <%= @clinic.clinic_date %>
+Lead Vaccinator Name <%= @clinic.lead_vaccinator_name %>
+Students Registered: <%= @clinic.students_registered %>
+Clinic Status: <%= @clinic.clinic_status %>
+Outcome Comments: <%= @clinic.outcome_comments %>
+Clinic Start Time: <%= @clinic.start_time %>
+Clinic End Time: <%= @clinic.end_time  %>
+Clinic Duration: <%= @clinic.duration %>
+Clinic Age Groups: <%= @clinic.age_groups.map(&:name).join(", ") if @clinic.age_groups.any? %>
+Address: <%= @clinic.address %>
+Appointment Frequency Minutes: <%= @clinic.appointment_frequency_minutes %>
+Appointment Slots: <%= @clinic.appointment_slots %>
+Appointments Available: <%= @clinic.appointments_available %>
+County: <%= @clinic.county %>
