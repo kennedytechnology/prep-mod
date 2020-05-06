@@ -16,7 +16,7 @@
                   </div>
               </div>
               <div class="flex justify-end">
-                  <%= link_to sanitize("Add More Patients &#43;"), "/patients/new", class: "button-primary" %>
+                  <%= link_to sanitize("Add More Patients &#43;"), "javascript:", data: {action: "clinic-activity-patients#showModal", selection: "AddPatient"}, class: "button-primary" %>
               </div>
             </div>
             <div class="patients-table-outer">
@@ -71,6 +71,7 @@
                 </div>
               </div>
             </div>
+            <%= render partial: '/clinics/activity/add_more_patients', layout: "clinics/activity/clinic_event_modal", locals: {patient: @patient = Patient.new, event_form: nil, category_selection: 'AddPatient'} %>
           </div>
           <div class="button-container flex justify-end">
             <input type="submit" name="save" value="Save" class="button-primary mr-2 mt-10">

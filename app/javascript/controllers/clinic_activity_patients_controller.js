@@ -5,14 +5,17 @@ export default class extends Controller {
 
   showModal(event) {
     let categorySelection = event.target.dataset.selection;
-    let patientId = event.target.closest("tr").dataset.patientId
     let modals = this.modalTargets;
     let modal = modals.filter(function(el) {
-      return (el.dataset['patientId'] == patientId && el.dataset['categorySelection'] == categorySelection )
+      if (categorySelection == 'AddPatient') {
+        return el.dataset['categorySelection'] == categorySelection
+      } else {
+        let patientId = event.target.closest("tr").dataset.patientId
+        return (el.dataset['patientId'] == patientId && el.dataset['categorySelection'] == categorySelection )
+      }
     })[0]
 
     modal.classList.toggle('hidden')
-
   }
 
   okModal(event) {
@@ -22,14 +25,18 @@ export default class extends Controller {
 
   cancelModal(event) {
     // debugger
-    let originallySelectedElement = [...event.target.closest("tr").getElementsByTagName("input")].find(element => element.value == event.target.closest('tr').dataset['eventCategory'])
-    if(originallySelectedElement) {
-      originallySelectedElement.checked = true;
+    if (event.target.dataset['parent'] == 'addMorePatients') {
+      event.target.closest('.modal').classList.toggle('hidden');
     } else {
-      [...event.target.closest("tr").getElementsByTagName("input")].forEach(element => element.checked = false);
+      let originallySelectedElement = [...event.target.closest("tr").getElementsByTagName("input")].find(element => element.value == event.target.closest('tr').dataset['eventCategory'])
+      if(originallySelectedElement) {
+        originallySelectedElement.checked = true;
+      } else {
+        [...event.target.closest("tr").getElementsByTagName("input")].forEach(element => element.checked = false);
+      }
+
+      event.target.closest('.modal').classList.toggle('hidden');
     }
-    
-    event.target.closest('.modal').classList.toggle('hidden');
   }
 
   search(event) {
