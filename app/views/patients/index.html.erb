@@ -35,11 +35,11 @@
         <table class="table">
           <thead>
           <tr>
-            <th><%= sortable "last_name", "Name" %></th>
-            <th><%= sortable "date_of_birth", "Date of Birth" %></th>
-            <th><%= sortable "date_of_birth", "Age" %></th>
-            <th><%= sortable "sex", "Gender" %></th>
-            <th><%= sortable "county" %></th>
+            <th><%= sort_link(@q, :last_name, 'Name', default_order: :desc) %></th>
+            <th><%= sort_link(@q, :date_of_birth, 'Date of Birth', default_order: :desc) %></th>
+            <th><%= sort_link(@q, :date_of_birth, 'Age', default_order: :desc) %></th>
+            <th><%= sort_link(@q, :sex, 'Gender', default_order: :desc) %></th>
+            <th><%= sort_link(@q, :county, 'County', default_order: :desc) %></th>
             <th>&nbsp;</th>
           </tr>
           </thead>
@@ -47,8 +47,8 @@
           <% @patients.each do |patient| %>
             <tr>
               <td class="underline"><%= link_to patient.full_name, patient %></td>
-              <td><%= patient.date_of_birth.strftime("%m/%d/%y") %></td>
-              <td><%= ((Date.today.to_time - patient.date_of_birth.to_time) / 1.year.seconds).floor %></td>
+              <td><%= patient.date_of_birth.strftime("%m/%d/%y") if patient.date_of_birth %></td>
+              <td><%= ((Date.today.to_time - patient.date_of_birth.to_time) / 1.year.seconds).floor if patient.date_of_birth %></td>
               <td><%= patient.sex == "F" ? "Female" : "Male" %></td>
               <td><%= patient.county %></td>              
               <td class="w-3/12 text-right">
