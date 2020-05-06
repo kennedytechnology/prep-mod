@@ -4,7 +4,7 @@
     </p>
     <div class="mt-1 sm:mt-0 sm:col-span-2">
         <div class="max-w-xs rounded-md shadow-sm">
-            <%# Text area should go here %>
+            <%= event_form.text_area :notes, cols: 6, rows: 4, placeholder: "Add a remark...", class:"block form-textarea w-full" %>
         </div>
     </div>
 </div>
