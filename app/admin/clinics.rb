@@ -27,7 +27,7 @@ ActiveAdmin.register Clinic do
     attributes_table do
       row :id
       row :clinic_date
-      row :venue
+      # row :venue
       row :address
       row :lead_vaccinator_name
       row :students_registered
@@ -54,7 +54,7 @@ ActiveAdmin.register Clinic do
     f.inputs do
       f.input :clinic_date
       f.input :address
-      f.input :venue
+      # f.input :venue
       f.input :lead_vaccinator_name
       f.input :students_registered
       f.input :clinic_status
