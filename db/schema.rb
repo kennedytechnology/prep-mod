@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_07_090322) do
+ActiveRecord::Schema.define(version: 2020_05_07_142501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -240,7 +240,7 @@ ActiveRecord::Schema.define(version: 2020_05_07_090322) do
     t.string "npi_number"
     t.string "license_number"
     t.string "license_type"
-    t.string "medial_specialty"
+    t.string "medical_specialty"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
