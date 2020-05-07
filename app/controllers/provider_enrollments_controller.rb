@@ -1,4 +1,5 @@
 class ProviderEnrollmentsController < ApplicationController
+  before_action :authenticate_user!
   layout "clinic_management"
 
   def index
@@ -7,11 +8,11 @@ class ProviderEnrollmentsController < ApplicationController
   end
 
   def new
-    @provider_enrollment = SupplyInventory.new
+    @provider_enrollment = ProviderEnrollment.new
   end
 
   def create
-    @provider_enrollment = SupplyInventory.new(provider_enrollment_params)
+    @provider_enrollment = ProviderEnrollment.new(provider_enrollment_params)
 
     if @provider_enrollment.save
       redirect_to provider_enrollments_path#(clinic_id: @supply_inventory.clinic), notice: "Successfully Added Inventory Item"

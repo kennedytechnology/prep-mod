@@ -76,12 +76,13 @@
         <%= f.text_field :license_type, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
     </div>    
 
-    <%= f.label :medial_specialty do %>
-        <span class="text-gray-500"> Medical Specialty </span>
-        <span class="text-brand-red-500">*</span>
-    <% end %>
-    <%= f.text_field :medial_specialty, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
-</div>   
+    <div>
+        <%= f.label :medial_specialty do %>
+            <span class="text-gray-500"> Medical Specialty </span>
+            <span class="text-brand-red-500">*</span>
+        <% end %>
+        <%= f.text_field :medial_specialty, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+    </div>   
 
     <div class="flex justify-end items-end mt-2 mb-8">
         <p class="button-primary" data-action="click->provider-enrollment-new-entry#toggleModal"> Review & Confirm </p>
@@ -113,8 +114,3 @@
         <% end %>
     </tbody>
 </table>
-<%# 
-    Form at top should say I would like to provide (checkbox): Testing, Screening, Safety Kit Distribution, Other (specify)
-
-    Medical Specialty (drop-down: Family Practice, Internist, Pediatrics, Specialty (specify)
-    Have Review button with pop-up of information entered and Submit or Edit button at bottom %>
