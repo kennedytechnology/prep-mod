@@ -4,7 +4,7 @@
 
     <div class="sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 lg:gap-6">
         <div>
-            <%= f.label :first_name do %>
+            <%= f.label :first_name, class: "block" do %>
             <span class="text-gray-500"> First Name </span>
             <span class="text-brand-red-500">*</span>
             <% end %>
@@ -12,7 +12,7 @@
         </div>
 
         <div>
-            <%= f.label :last_name do %>
+            <%= f.label :last_name, class: "block" do %>
             <span class="text-gray-500"> Last Name </span>
             <span class="text-brand-red-500">*</span>
             <% end %>
@@ -20,7 +20,7 @@
         </div>
 
         <div>
-            <%= f.label :address do %>
+            <%= f.label :address, class: "block" do %>
             <span class="text-gray-500"> Address </span>
             <span class="text-brand-red-500">*</span>
             <% end %>
@@ -28,15 +28,15 @@
         </div>
 
         <div>
-            <%= f.label :phone_number do %>
+            <%= f.label :phone_number, class: "block" do %>
             <span class="text-gray-500"> Phone Number </span>
             <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.number_field :phone_number, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            <%= f.text_field :phone_number, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
         <div>
-            <%= f.label :fax_number do %>
+            <%= f.label :fax_number, class: "block" do %>
             <span class="text-gray-500"> Fax Number </span>
             <span class="text-brand-red-500">*</span>
             <% end %>
@@ -44,7 +44,7 @@
         </div>
 
         <div>
-            <%= f.label :email do %>
+            <%= f.label :email, class: "block" do %>
             <span class="text-gray-500"> Email Address </span>
             <span class="text-brand-red-500">*</span>
             <% end %>
@@ -52,7 +52,7 @@
         </div>
 
         <div>
-            <%= f.label :npi_number do %>
+            <%= f.label :npi_number, class: "block" do %>
             <span class="text-gray-500"> NPI Number </span>
             <span class="text-brand-red-500">*</span>
             <% end %>
@@ -60,7 +60,7 @@
         </div>
 
         <div>
-            <%= f.label :license_number do %>
+            <%= f.label :license_number, class: "block" do %>
             <span class="text-gray-500"> License Number </span>
             <span class="text-brand-red-500">*</span>
             <% end %>
@@ -68,7 +68,7 @@
         </div>
 
         <div>
-            <%= f.label :license_type do %>
+            <%= f.label :license_type, class: "block" do %>
             <span class="text-gray-500"> License Type </span>
             <span class="text-brand-red-500">*</span>
             <% end %>
@@ -76,9 +76,9 @@
         </div>
 
         <div>
-            <%= f.label :medial_specialty, class: "block" do %>
-            <span class="text-gray-500"> Medical Specialty </span>
-            <span class="text-brand-red-500">*</span>
+            <%= f.label :medial_specialty, class: "block", class: "block" do %>
+                <span class="text-gray-500"> Medical Specialty </span>
+                <span class="text-brand-red-500">*</span>
             <% end %>
             <%= f.text_field :medial_specialty, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
