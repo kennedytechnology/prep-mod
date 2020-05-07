@@ -40,7 +40,7 @@ class ProviderEnrollmentsController < ApplicationController
     def provider_enrollment_params
       params.require(:provider_enrollment).permit(
         :first_name, :last_name, :manufacturer, :address, :phone_number, :fax_number, :email, :npi_number,
-        :license_number, :license_type, :medial_specialty
+        :license_number, :license_type, :medical_specialty
       )
     end
 
