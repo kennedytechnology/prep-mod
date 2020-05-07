@@ -17,7 +17,6 @@ RSpec.describe "/kit", type: :request do
 
   let(:valid_attributes) {
     {
-      # clinic_id: clinic.id,
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
       middle_initial: ("A".."Z").to_a.sample,
@@ -29,7 +28,6 @@ RSpec.describe "/kit", type: :request do
       zip_code: 21122,
       county: COUNTIES.sample,
       phone_number: Faker::PhoneNumber.cell_phone,
-      # user_id: Faker::IDNumber.unique,
     }
   }
 
@@ -61,12 +59,12 @@ RSpec.describe "/kit", type: :request do
     context "with invalid parameters" do
       it "does not create a new kit(patient)" do
         expect {
-          post "/kit/create", params: { kit: invalid_attributes }
+          post "/kit/create", params: { patient: invalid_attributes }
         }.to change(Patient, :count).by(0)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
-        post "/kit/create", params: { kit: invalid_attributes }
+        post "/kit/create", params: { patient: invalid_attributes }
         expect(response).to be_successful
       end
     end
