@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   get '/clinics/:id/patients/upload_record', to: 'patients#upload_record'
 
 
-  resources :news_signups
+  resources :news_signups, only: [:new, :create]
   resources :patients
   resources :clinics, only: [:index, :new, :create, :edit, :update] do
     get :activity
