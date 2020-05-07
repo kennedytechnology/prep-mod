@@ -11,7 +11,7 @@ export default class extends Controller {
 
   toggleModal(event) {
     let modal = document.getElementById("ProviderEnrollmentNewEntryModal");
-    modal.classList.toggle('opacity-0');
+    modal.classList.toggle('opacity-0')
     modal.classList.toggle('pointer-events-none')
   }
 
