@@ -144,6 +144,11 @@ ActiveRecord::Schema.define(version: 2020_05_07_142501) do
     t.bigint "user_id", null: false
   end
 
+  create_table "customized_reports", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "insurance_types", force: :cascade do |t|
     t.string "name"
     t.integer "sort_order"

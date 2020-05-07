@@ -1,0 +1,2 @@
+class CustomizedReport < ApplicationRecord
+end

@@ -3,13 +3,13 @@ Rails.application.routes.draw do
   get 'message_board/index'
   get 'kit/new', to: 'public/kit#new'
   post 'kit/create', to: 'public/kit#create'
-
+  
   devise_for :users,
-    controllers: {
-      registrations: 'users/registrations',
-      invitations: 'users/invitations'
-    }
-
+  controllers: {
+    registrations: 'users/registrations',
+    invitations: 'users/invitations'
+  }
+  
   get 'public_portal/index'
   get '/clinic/search', to: 'public/clinics#index'
   post '/clinic/search', to: 'public/clinics#index'
@@ -21,13 +21,13 @@ Rails.application.routes.draw do
   get "/clear_session", to: 'public/patients#clear_session'
   get '/clinics/:id/patients/upload_record', to: 'patients#upload_record'
 
-
   resources :news_signups, only: [:new, :create]
   resources :patients
   resources :clinics, only: [:index, :new, :create, :edit, :update] do
     get :activity
     resources :patients
   end
+  resources :customized_reports
   resources :clinic_events
   resources :supply_inventories 
   resources :test_kits
