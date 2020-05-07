@@ -186,7 +186,7 @@ end
     npi_number: "npi number #{i}",
     license_number: "license number #{i}",
     license_type: "license type #{i}",
-    medial_specialty: "specialty #{i}"
+    medical_specialty: "specialty #{i}"
   )
 end
 
