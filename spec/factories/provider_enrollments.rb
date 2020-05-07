@@ -9,6 +9,6 @@ FactoryBot.define do
     npi_number { "MyString" }
     license_number { "MyString" }
     license_type { "MyString" }
-    medial_specialty { "MyString" }
+    medical_specialty { "MyString" }
   end
 end

@@ -75,24 +75,14 @@
             <%= f.text_field :license_type, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
-<<<<<<< HEAD
-    <div>
-        <%= f.label :medial_specialty do %>
-            <span class="text-gray-500"> Medical Specialty </span>
-            <span class="text-brand-red-500">*</span>
-        <% end %>
-        <%= f.text_field :medial_specialty, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
-    </div>   
-=======
         <div>
-            <%= f.label :medial_specialty, class: "block", class: "block" do %>
+            <%= f.label :medical_specialty, class: "block", class: "block" do %>
                 <span class="text-gray-500"> Medical Specialty </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.text_field :medial_specialty, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            <%= f.text_field :medical_specialty, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
     </div>
->>>>>>> d16a0584835aca87fafc5273142287c379b281b3
 
     <div class="flex justify-end items-end mt-2 mb-8">
         <p class="button-primary" data-action="click->provider-enrollment-new-entry#toggleModal"> Review & Confirm </p>
