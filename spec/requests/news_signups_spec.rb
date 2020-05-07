@@ -16,40 +16,21 @@ RSpec.describe "/news_signups", type: :request do
   # NewsSignup. As you add validations to NewsSignup, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {name: Faker::Name.name,
+    email: Faker::Internet.email,
+    date_of_birth: Faker::Date.birthday,
+    zip_code: Faker::Address.zip_code,
+    topics: ["Testing", "Screening", "Safety Kit", "Medication", "Other"],
+    occupation: PATIENT_OCCUPATIONS.sample}
   }
 
   let(:invalid_attributes) {
     skip("Add a hash of attributes invalid for your model")
   }
 
-  describe "GET /index" do
-    it "renders a successful response" do
-      NewsSignup.create! valid_attributes
-      get news_signups_url
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /show" do
-    it "renders a successful response" do
-      news_signup = NewsSignup.create! valid_attributes
-      get news_signup_url(news_signup)
-      expect(response).to be_successful
-    end
-  end
-
   describe "GET /new" do
     it "renders a successful response" do
       get new_news_signup_url
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /edit" do
-    it "render a successful response" do
-      news_signup = NewsSignup.create! valid_attributes
-      get edit_news_signup_url(news_signup)
       expect(response).to be_successful
     end
   end
@@ -64,7 +45,7 @@ RSpec.describe "/news_signups", type: :request do
 
       it "redirects to the created news_signup" do
         post news_signups_url, params: { news_signup: valid_attributes }
-        expect(response).to redirect_to(news_signup_url(NewsSignup.last))
+        expect(response).to redirect_to(root_url)
       end
     end
 
@@ -82,48 +63,4 @@ RSpec.describe "/news_signups", type: :request do
     end
   end
 
-  describe "PATCH /update" do
-    context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
-
-      it "updates the requested news_signup" do
-        news_signup = NewsSignup.create! valid_attributes
-        patch news_signup_url(news_signup), params: { news_signup: new_attributes }
-        news_signup.reload
-        skip("Add assertions for updated state")
-      end
-
-      it "redirects to the news_signup" do
-        news_signup = NewsSignup.create! valid_attributes
-        patch news_signup_url(news_signup), params: { news_signup: new_attributes }
-        news_signup.reload
-        expect(response).to redirect_to(news_signup_url(news_signup))
-      end
-    end
-
-    context "with invalid parameters" do
-      it "renders a successful response (i.e. to display the 'edit' template)" do
-        news_signup = NewsSignup.create! valid_attributes
-        patch news_signup_url(news_signup), params: { news_signup: invalid_attributes }
-        expect(response).to be_successful
-      end
-    end
-  end
-
-  describe "DELETE /destroy" do
-    it "destroys the requested news_signup" do
-      news_signup = NewsSignup.create! valid_attributes
-      expect {
-        delete news_signup_url(news_signup)
-      }.to change(NewsSignup, :count).by(-1)
-    end
-
-    it "redirects to the news_signups list" do
-      news_signup = NewsSignup.create! valid_attributes
-      delete news_signup_url(news_signup)
-      expect(response).to redirect_to(news_signups_url)
-    end
-  end
 end
