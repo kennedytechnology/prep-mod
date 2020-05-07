@@ -5,90 +5,90 @@
     <div class="sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 lg:gap-6">
         <div>
             <%= f.label :first_name do %>
-                <span class="text-gray-500"> First Name </span>
-                <span class="text-brand-red-500">*</span>
+            <span class="text-gray-500"> First Name </span>
+            <span class="text-brand-red-500">*</span>
             <% end %>
             <%= f.text_field :first_name, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
         <div>
             <%= f.label :last_name do %>
-                <span class="text-gray-500"> Last Name </span>
-                <span class="text-brand-red-500">*</span>
+            <span class="text-gray-500"> Last Name </span>
+            <span class="text-brand-red-500">*</span>
             <% end %>
             <%= f.text_field :last_name, class: "block form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
         <div>
             <%= f.label :address do %>
-                <span class="text-gray-500"> Address </span>
-                <span class="text-brand-red-500">*</span>
+            <span class="text-gray-500"> Address </span>
+            <span class="text-brand-red-500">*</span>
             <% end %>
             <%= f.text_field :address, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
         <div>
             <%= f.label :phone_number do %>
-                <span class="text-gray-500"> Phone Number </span>
-                <span class="text-brand-red-500">*</span>
+            <span class="text-gray-500"> Phone Number </span>
+            <span class="text-brand-red-500">*</span>
             <% end %>
             <%= f.number_field :phone_number, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
         <div>
             <%= f.label :fax_number do %>
-                <span class="text-gray-500"> Fax Number </span>
-                <span class="text-brand-red-500">*</span>
+            <span class="text-gray-500"> Fax Number </span>
+            <span class="text-brand-red-500">*</span>
             <% end %>
             <%= f.text_field :fax_number, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
         <div>
             <%= f.label :email do %>
-                <span class="text-gray-500"> Email Address </span>
-                <span class="text-brand-red-500">*</span>
+            <span class="text-gray-500"> Email Address </span>
+            <span class="text-brand-red-500">*</span>
             <% end %>
             <%= f.email_field :email, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
-    </div>
 
-    <div>
-        <%= f.label :npi_number do %>
+        <div>
+            <%= f.label :npi_number do %>
             <span class="text-gray-500"> NPI Number </span>
             <span class="text-brand-red-500">*</span>
-        <% end %>
-        <%= f.text_field :npi_number, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
-    </div>    
-    
-    <div>
-        <%= f.label :license_number do %>
+            <% end %>
+            <%= f.text_field :npi_number, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+        </div>
+
+        <div>
+            <%= f.label :license_number do %>
             <span class="text-gray-500"> License Number </span>
             <span class="text-brand-red-500">*</span>
-        <% end %>
-        <%= f.text_field :license_number, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
-    </div>    
+            <% end %>
+            <%= f.text_field :license_number, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+        </div>
 
-    <div>
-        <%= f.label :license_type do %>
+        <div>
+            <%= f.label :license_type do %>
             <span class="text-gray-500"> License Type </span>
             <span class="text-brand-red-500">*</span>
-        <% end %>
-        <%= f.text_field :license_type, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
-    </div>    
+            <% end %>
+            <%= f.text_field :license_type, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+        </div>
 
-    <%= f.label :medial_specialty do %>
-        <span class="text-gray-500"> Medical Specialty </span>
-        <span class="text-brand-red-500">*</span>
-    <% end %>
-    <%= f.text_field :medial_specialty, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
-</div>   
+        <div>
+            <%= f.label :medial_specialty, class: "block" do %>
+            <span class="text-gray-500"> Medical Specialty </span>
+            <span class="text-brand-red-500">*</span>
+            <% end %>
+            <%= f.text_field :medial_specialty, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+        </div>
+    </div>
 
     <div class="flex justify-end items-end mt-2 mb-8">
         <p class="button-primary" data-action="click->provider-enrollment-new-entry#toggleModal"> Review & Confirm </p>
     </div>
 
     <%= render partial: "provider_enrollments/new_entry_review", locals: {f: f} %>
-    
 <% end %>
 
 <table class="table">
@@ -103,13 +103,13 @@
     </thead>
     <tbody>
         <% @provider_enrollments.each do |provider| %>
-            <tr>
-                <td> <%= provider.first_name %> </td>
-                <td> <%= provider.last_name %> </td>
-                <td> <%= provider.address %> </td>
-                <td> <%= provider.phone_number %> </td>
-                <td> <%= provider.email %> </td>
-            </tr>
+        <tr>
+            <td> <%= provider.first_name %> </td>
+            <td> <%= provider.last_name %> </td>
+            <td> <%= provider.address %> </td>
+            <td> <%= provider.phone_number %> </td>
+            <td> <%= provider.email %> </td>
+        </tr>
         <% end %>
     </tbody>
 </table>
