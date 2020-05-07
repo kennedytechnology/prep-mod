@@ -1,5 +1,5 @@
 class SupplyInventoriesController < InheritedResources::Base
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
   layout "clinic_management"
 
   def index
