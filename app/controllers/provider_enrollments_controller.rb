@@ -14,9 +14,9 @@ class ProviderEnrollmentsController < ApplicationController
     @provider_enrollment = SupplyInventory.new(provider_enrollment_params)
 
     if @provider_enrollment.save
-      redirect_to provider_enrollments_path#(clinic_id: @supply_inventory.clinic), notice: "Successfully Added Inventory Item"
+      redirect_to provider_enrollments_path, notice: "Successfully Added Provider"
     else
-      redirect_back fallback_location: provider_enrollments_path#(clinic_id: @supply_inventory.clinic), alert: "Error!"
+      redirect_back fallback_location: provider_enrollments_path, alert: "Error!"
     end
   end
 
@@ -28,9 +28,9 @@ class ProviderEnrollmentsController < ApplicationController
     @provider_enrollment = ProviderEnrollment.find(params[:id])
 
     if @provider_enrollment.update(provider_enrollment_params)
-      redirect_to provider_enrollments_path#(clinic_id: @supply_inventory.clinic), notice: "Successfully Updated Inventory Item"
+      redirect_to provider_enrollments_path, notice: "Successfully Updated Provider"
     else
-      redirect_back fallback_location: provider_enrollments_path#(clinic_id: @supply_inventory.clinic), alert: "Error!"
+      redirect_back fallback_location: provider_enrollments_path, alert: "Error!"
     end
   end
 
@@ -38,7 +38,7 @@ class ProviderEnrollmentsController < ApplicationController
 
     def provider_enrollment_params
       params.require(:provider_enrollment).permit(
-        :first_name, :last_name, :manufacturer, :address, :phone_number, :fax_number, :email, :npi_number,
+        :first_name, :last_name, :address, :phone_number, :fax_number, :email, :npi_number,
         :license_number, :license_type, :medial_specialty
       )
     end

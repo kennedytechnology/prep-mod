@@ -175,6 +175,21 @@ Clinic.all.each do |clinic|
   end
 end
 
+10.times do |i|
+  ProviderEnrollment.create!(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.first_name,
+    address: Faker::Address.full_address,
+    phone_number: Faker::PhoneNumber.cell_phone,
+    fax_number: "fax #{i}",
+    email: Faker::Internet.email,
+    npi_number: "npi number #{i}",
+    license_number: "license number #{i}",
+    license_type: "license type #{i}",
+    medial_specialty: "specialty #{i}"
+  )
+end
+
 
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
 
