@@ -1,4 +1,4 @@
-<div class="opacity-0 pointer-events-none fixed bottom-0 inset-x-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center" id="InventoryNewEntryModal">
+<div class="opacity-0 pointer-events-none fixed bottom-0 inset-x-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center" id="ProviderEnrollmentNewEntryModal">
     <!--
     Background overlay, show/hide based on modal state.
 
@@ -26,7 +26,7 @@
     <div
         class="relative bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:p-6">
         <div class="hidden sm:block absolute top-0 right-0 pt-4 pr-4">
-            <button data-action="click->inventory-new-entry#toggleModal" type="button"
+            <button data-action="click->provider-enrollment-new-entry#toggleModal" type="button"
                 class="text-gray-400 hover:text-gray-500 focus:outline-none focus:text-gray-500 transition ease-in-out duration-150">
                 <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -43,15 +43,15 @@
                                 <span class="text-gray-500"> First Name </span>
                                 <span class="text-brand-red-500">*</span>
                             <% end %>
-                            <%= f.text_field :first_name, class: "form-input w-full", required: true, data: {action: "change->provider-entrollment-new-entry#updateModalField"} %>
+                            <%= f.text_field :first_name, class: "form-input w-full", required: true, id: "modal_provider_enrollment_first_name" %>
                         </div>
-
+                        
                         <div>
                             <%= f.label :last_name do %>
                                 <span class="text-gray-500"> Last Name </span>
                                 <span class="text-brand-red-500">*</span>
                             <% end %>
-                            <%= f.text_field :last_name, class: "block form-select w-full", required: true, data: {action: "change->provider-entrollment-new-entry#updateModalField"} %>
+                            <%= f.text_field :last_name, class: "block form-select w-full", required: true, id: "modal_provider_enrollment_last_name" %>
                         </div>
 
                         <div>
@@ -59,7 +59,7 @@
                                 <span class="text-gray-500"> Address </span>
                                 <span class="text-brand-red-500">*</span>
                             <% end %>
-                            <%= f.text_field :address, class: "form-input block w-full", placeholder: "MM/DD/YYYY", required: true, data: {action: "change->provider-entrollment-new-entry#updateModalField"} %>
+                            <%= f.text_field :address, class: "form-input block w-full", required: true, id: "modal_provider_enrollment_address" %>
                         </div>
 
                         <div>
@@ -67,7 +67,7 @@
                                 <span class="text-gray-500"> Phone Number </span>
                                 <span class="text-brand-red-500">*</span>
                             <% end %>
-                            <%= f.number_field :phone_number, class: "form-input block w-full", required: true, data: {action: "keyup->provider-entrollment-new-entry#updateModalField"} %>
+                            <%= f.number_field :phone_number, class: "form-input block w-full", required: true, id: "modal_provider_enrollment_phone_number" %>
                         </div>
 
                         <div>
@@ -75,7 +75,7 @@
                                 <span class="text-gray-500"> Fax Number </span>
                                 <span class="text-brand-red-500">*</span>
                             <% end %>
-                            <%= f.text_field :fax_number, class: "form-input w-full", required: true, data: {action: "keyup->provider-entrollment-new-entry#updateModalField"} %>
+                            <%= f.text_field :fax_number, class: "form-input w-full", required: true, id: "modal_provider_enrollment_fax_number" %>
                         </div>
 
                         <div>
@@ -83,8 +83,40 @@
                                 <span class="text-gray-500"> Email Address </span>
                                 <span class="text-brand-red-500">*</span>
                             <% end %>
-                            <%= f.email_field :email, class: "form-input w-full", required: true, data: {action: "keyup->provider-entrollment-new-entry#updateModalField"} %>
+                            <%= f.email_field :email, class: "form-input w-full", required: true, id: "modal_provider_enrollment_email" %>
                         </div>
+
+                        <div>
+                            <%= f.label :npi_number do %>
+                                <span class="text-gray-500"> NPI Number </span>
+                                <span class="text-brand-red-500">*</span>
+                            <% end %>
+                            <%= f.text_field :npi_number, class: "form-input w-full", required: true, id: "modal_provider_enrollment_npi_number" %>
+                        </div>
+
+                        <div>
+                            <%= f.label :license_number do %>
+                                <span class="text-gray-500"> License Number </span>
+                                <span class="text-brand-red-500">*</span>
+                            <% end %>
+                            <%= f.text_field :license_number, class: "form-input w-full", required: true, id: "modal_provider_enrollment_license_number" %>
+                        </div> 
+
+                        <div>
+                            <%= f.label :license_type do %>
+                                <span class="text-gray-500"> License Type </span>
+                                <span class="text-brand-red-500">*</span>
+                            <% end %>
+                            <%= f.text_field :license_type, class: "form-input w-full", required: true, id: "modal_provider_enrollment_license_type" %>
+                        </div>
+
+                        <div>
+                            <%= f.label :medial_specialty do %>
+                                <span class="text-gray-500"> Medical Specialty </span>
+                                <span class="text-brand-red-500">*</span>
+                            <% end %>
+                            <%= f.text_field :medial_specialty, class: "form-input w-full", required: true, id: "modal_provider_enrollment_medical_specialty" %>
+                        </div>                                                
                     </div>
                 </div>
             </div>
