@@ -141,7 +141,7 @@ ActiveAdmin.register Patient do
         f.inputs do
           input :insured_first_name
           input :insured_last_name
-          input :insured_date_of_birth
+          input :insured_date_of_birth, as: :datetime_picker
           input :relation_to_patient_for_insurance
           input :insurance_type
           input :member_id_for_insurance
@@ -172,7 +172,7 @@ ActiveAdmin.register Patient do
           input :signatory_last_name
           input :consent_signature
           input :relation_to_patient_for_consent
-          input :consent_date
+          input :consent_date, as: :datetime_picker
         end
       end
     end
