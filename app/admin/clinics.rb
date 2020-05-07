@@ -1,6 +1,6 @@
 ActiveAdmin.register Clinic do
 
-  permit_params :clinic_date, :venue_id, :lead_vaccinator_name,
+  permit_params :clinic_date, :venue_id, :venue_name, :lead_vaccinator_name,
     :students_registered, :clinic_status, :user_id, :outcome_comments,
     :incidents_comments, :start_time, :end_time, :duration, user_ids: []
 
@@ -27,7 +27,7 @@ ActiveAdmin.register Clinic do
     attributes_table do
       row :id
       row :clinic_date
-      row :venue
+      row :venue_name
       row :address
       row :lead_vaccinator_name
       row :students_registered
@@ -54,7 +54,7 @@ ActiveAdmin.register Clinic do
     f.inputs do
       f.input :clinic_date
       f.input :address
-      f.input :venue
+      f.input :venue_name
       f.input :lead_vaccinator_name
       f.input :students_registered
       f.input :clinic_status
