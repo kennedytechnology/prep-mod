@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Customized Reports</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @customized_reports.each do |customized_report| %>
+      <tr>
+        <td><%= link_to 'Show', customized_report %></td>
+        <td><%= link_to 'Edit', edit_customized_report_path(customized_report) %></td>
+        <td><%= link_to 'Destroy', customized_report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Customized Report', new_customized_report_path %>
