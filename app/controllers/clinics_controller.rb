@@ -7,6 +7,9 @@ class ClinicsController < ClinicManagementController
       @clinics = Clinic.all.select{|c| c.search_string.downcase.include?(params[:q].downcase)}
     elsif sort_column && sort_direction
       @clinics = Clinic.order(sort_column + " " + sort_direction)
+    elsif params[:clinic_date]
+      params[:clinic_date] == 'past' ? @clinics = Clinic.all.where("clinic_date < ?", Date.current)
+          : @clinics = @clinics = Clinic.all.where("clinic_date >= ?", Date.current)
     else 
       @clinics = Clinic.all.paginate(page: params[:page], per_page: 50)
     end
