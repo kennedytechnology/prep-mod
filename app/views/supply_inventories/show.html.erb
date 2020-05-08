@@ -45,11 +45,11 @@
         </div>
 
         <div>
-            <%= f.label :quantity_destoyed do %>
+            <%= f.label :quantity_lost do %>
                 <span class="text-gray-500"> Quantity Destroyed/Returned </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.number_field :quantity_destroyed, class: "form-input block w-full", required: true, data: {action: "keyup->inventory-new-entry#updateModalField"} %>
+            <%= f.number_field :quantity_lost, class: "form-input block w-full", required: true, data: {action: "keyup->inventory-new-entry#updateModalField"} %>
         </div>
     </div>
 
