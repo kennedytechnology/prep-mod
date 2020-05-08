@@ -8,10 +8,6 @@ class SupplyInventoriesController < InheritedResources::Base
     @supply_inventory = SupplyInventory.new
   end
 
-  def new
-    @supply_inventory = SupplyInventory.new
-  end
-
   def create
     @supply_inventory = SupplyInventory.new(supply_inventory_params)
 
@@ -22,7 +18,8 @@ class SupplyInventoriesController < InheritedResources::Base
     end
   end
 
-  def edit
+  def show
+    @clinic = Clinic.find(params[:clinic_id])
     @supply_inventory = SupplyInventory.find(params[:id])
   end
 

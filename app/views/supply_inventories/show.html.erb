@@ -1,59 +1,128 @@
-<p id="notice"><%= notice %></p>
+<h2 class="main-title"> Supply Inventory for <%= @clinic.name %> </h2>
 
-<p>
-  <strong>Received at:</strong>
-  <%= @supply_inventory.received_at %>
-</p>
+<%= form_with model: @supply_inventory, local: true, class: "py-5", data: {controller: "inventory-new-entry"} do |f| %>
+    <%= f.hidden_field :clinic_id, value: params[:clinic_id] %>
 
-<p>
-  <strong>Item type:</strong>
-  <%= @supply_inventory.item_type %>
-</p>
+    <div class="sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 lg:gap-6">
+        <div>
+            <%= f.label :source do %>
+                <span class="text-gray-500"> Source of Items </span>
+                <span class="text-brand-red-500">*</span>
+            <% end %>
+            <%= f.select :source, INVENTORY_SOURCES, {prompt: "Select"}, {class: "block form-select w-full", required: true, data: {action: "change->inventory-new-entry#updateModalField"}} %>
+        </div>
 
-<p>
-  <strong>Item name:</strong>
-  <%= @supply_inventory.item_name %>
-</p>
+        <div>
+            <%= f.label :item_type do %>
+                <span class="text-gray-500"> Item Type </span>
+                <span class="text-brand-red-500">*</span>
+            <% end %>
+            <%= f.select :item_type, INVENTORY_ITEM_TYPES, {prompt: "Select"}, {class: "block form-select w-full", required: true, data: {action: "change->inventory-new-entry#updateModalField"}} %>
+        </div>
 
-<p>
-  <strong>Manufacturer:</strong>
-  <%= @supply_inventory.manufacturer %>
-</p>
+        <div>
+            <%= f.label :received_at do %>
+                <span class="text-gray-500"> Received Date </span>
+                <span class="text-brand-red-500">*</span>
+            <% end %>
+            <%= f.date_field :received_at, class: "form-input block w-full", placeholder: "MM/DD/YYYY", required: true, data: {action: "change->inventory-new-entry#updateModalField"} %>
+        </div>
 
-<p>
-  <strong>Lot number:</strong>
-  <%= @supply_inventory.lot_number %>
-</p>
+        <div>
+            <%= f.label :quantity do %>
+                <span class="text-gray-500"> Number of Items </span>
+                <span class="text-brand-red-500">*</span>
+            <% end %>
+            <%= f.number_field :quantity, class: "form-input block w-full", required: true, data: {action: "keyup->inventory-new-entry#updateModalField"} %>
+        </div>
 
-<p>
-  <strong>Expiration date:</strong>
-  <%= @supply_inventory.expiration_date %>
-</p>
+        <div>
+            <%= f.label :lot_number do %>
+                <span class="text-gray-500"> Lot Number </span>
+                <span class="text-brand-red-500">*</span>
+            <% end %>
+            <%= f.text_field :lot_number, class: "form-input block w-full", required: true, data: {action: "keyup->inventory-new-entry#updateModalField"} %>
+        </div>
 
-<p>
-  <strong>Quantity:</strong>
-  <%= @supply_inventory.quantity %>
-</p>
+        <div>
+            <%= f.label :expiration_date do %>
+                <span class="text-gray-500"> Expiration Date </span>
+                <span class="text-brand-red-500">*</span>
+            <% end %>
+            <%= f.date_field :expiration_date, class: "form-input block w-full", placeholder: "MM/DD/YYYY", required: true, data: {action: "change->inventory-new-entry#updateModalField"} %>
+        </div>
 
-<p>
-  <strong>Packaging:</strong>
-  <%= @supply_inventory.packaging %>
-</p>
+        <div>
+            <%= f.label :packaging do %>
+                <span class="text-gray-500"> Inventory Packaging </span>
+                <span class="text-brand-red-500">*</span>
+            <% end %>
+            <%= f.select :packaging, INVENTORY_PACKAGINGS, {prompt: "Select"}, {class: "block form-select w-full", required: true, data: {action: "change->inventory-new-entry#updateModalField"}} %>
+        </div>
 
-<p>
-  <strong>Source:</strong>
-  <%= @supply_inventory.source %>
-</p>
+        <div>
+            <%= f.label :manufacturer do %>
+                <span class="text-gray-500"> Manufacturer </span>
+                <span class="text-brand-red-500">*</span>
+            <% end %>
+            <%= f.select :manufacturer, INVENTORY_MANUFACTURERS, {prompt: "Select"}, {class: "block form-select w-full", required: true, data: {action: "change->inventory-new-entry#updateModalField"}} %>
+        </div>
 
-<p>
-  <strong>Product name:</strong>
-  <%= @supply_inventory.product_name %>
-</p>
+        <div>
+            <%= f.label :product_name do %>
+                <span class="text-gray-500"> Product Name </span>
+                <span class="text-brand-red-500">*</span>
+            <% end %>
+            <%= f.text_field :product_name, class: "form-input block w-full", required: true, data: {action: "keyup->inventory-new-entry#updateModalField"} %>
+        </div>
+    </div>
 
-<p>
-  <strong>Client:</strong>
-  <%= @supply_inventory.client %>
-</p>
+    <div class="flex justify-end items-end mt-2 mb-8">
+        <p class="button-primary" data-action="click->inventory-new-entry#toggleModal"> Review & Confirm </p>
+    </div>
 
-<%= link_to 'Edit', edit_supply_inventory_path(@supply_inventory) %> |
-<%= link_to 'Back', supply_inventories_path %>
+    <%= render partial: "supply_inventories/new_entry_review", locals: {f: f} %>
+<% end %>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th> Date Received </th>
+            <th> Item Type </th>
+            <th> Item Name </th>
+            <th> Manufacturer </th>
+            <th> Source </th>
+            <th> Lot Number </th>
+            <th> Expiration Date </th>
+            <th> Starting Qty </th>
+            <th> Packaging </th>
+            <th> Qty<br>Used </th>
+            <th> Qty<br>Lost </th>
+            <th> Qty<br>Loaned </th>
+            <th> Current<br>Qty </th>
+        </tr>
+    </thead>
+    <tbody class="bg-white">
+        <% @supply_inventories.each do |supply_inventory| %>
+            <tr class="hover:bg-gray-50">
+                <td> <%= supply_inventory.received_at.strftime("%m-%d-%Y") %> </td>
+                <td> <%= supply_inventory.item_type %> </td>
+                <td> <%= supply_inventory.item_name %> </td>
+                <td> <%= supply_inventory.manufacturer %> </td>
+                <td> <%= supply_inventory.source %> </td>
+                <td> <%= supply_inventory.lot_number %> </td>
+                <td> <%= supply_inventory.expiration_date.strftime("%m-%d-%Y") %> </td>
+                <td> <%= supply_inventory.packaging %> </td>
+                <td> <%= supply_inventory.quantity %> </td>
+                <td> <%= supply_inventory.quantity_used %> </td>
+                <td> <%= supply_inventory.quantity_lost %> </td>
+                <td> <%= supply_inventory.quantity_loaned %> </td>
+                <td>
+                    <%# TODO: Find a solution! %>
+                    10
+                    <%# supply_inventory.quantity - (supply_inventory.quantity_used + supply_inventory.quantity_lost + supply_inventory.quantity_loaned) %>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
