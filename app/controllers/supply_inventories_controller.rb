@@ -41,7 +41,7 @@ class SupplyInventoriesController < InheritedResources::Base
         :manufacturer, :lot_number, :expiration_date,
         :quantity, :quantity_used, :quantity_loaned,
         :quantity_lost, :packaging, :source, :product_name, 
-        :event_type, :clinic_id
+        :event_date, :event_type, :clinic_id
       )
     end
 
