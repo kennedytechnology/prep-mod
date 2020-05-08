@@ -3,6 +3,7 @@
 <%= form_with model: ProviderEnrollment.new, local: true, class: "py-5", data: {controller: "provider-enrollment-new-entry"} do |f| %>
 
     <div class="sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 lg:gap-6">
+
         <div>
             <%= f.label :first_name, class: "block" do %>
             <span class="text-gray-500"> First Name </span>
@@ -102,7 +103,7 @@
         </tr>
     </thead>
     <tbody>
-        <% @provider_enrollments.reverse_each do |provider| %>
+        <% @provider_enrollments.last(10).reverse_each do |provider| %>
         <tr>
             <td> <%= provider.first_name %> </td>
             <td> <%= provider.last_name %> </td>
@@ -113,3 +114,12 @@
         <% end %>
     </tbody>
 </table>
+
+
+<%# 
+    Form at top should say I would like to provide (checkbox): Testing, Screening, Safety Kit Distribution, Other (specify)
+    
+    Medical Specialty (drop-down: Family Practice, Internist, Pediatrics, Specialty (specify)
+    
+    Have Review button with pop-up of information entered and Submit or Edit button at bottom %>
+
