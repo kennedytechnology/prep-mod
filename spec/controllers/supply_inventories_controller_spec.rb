@@ -11,13 +11,6 @@ RSpec.describe SupplyInventoriesController, type: :controller do
     end
   end
 
-  describe "GET #new" do
-    it "returns http success" do
-      get :new
-      expect(response).to have_http_status(:success)
-    end
-  end
-
   describe "POST #create" do
     context "with valid attributes" do
       it "create new supply inventory" do
@@ -41,13 +34,6 @@ RSpec.describe SupplyInventoriesController, type: :controller do
           } }
         }.to change(SupplyInventory, :count).by(1)
       end
-    end
-  end
-
-  describe "GET #edit" do
-    it "returns http success" do
-      get :edit, params: { id: supply_inventory.id }
-      expect(response).to have_http_status(:success)
     end
   end
 
