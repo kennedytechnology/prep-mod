@@ -4,7 +4,6 @@ class ProviderEnrollmentsController < ApplicationController
 
   def index
     @provider_enrollments = ProviderEnrollment.all
-    @provider_enrollment = ProviderEnrollment.new
   end
 
   def new

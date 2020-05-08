@@ -1,6 +1,6 @@
 <h2 class="main-title"> Provider Enrollments </h2>
 
-<%= form_with model: @provider_enrollment, local: true, class: "py-5", data: {controller: "provider-enrollment-new-entry"} do |f| %>
+<%= form_with model: ProviderEnrollment.new, local: true, class: "py-5", data: {controller: "provider-enrollment-new-entry"} do |f| %>
 
     <div class="sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 lg:gap-6">
         <div>
@@ -102,7 +102,7 @@
         </tr>
     </thead>
     <tbody>
-        <% @provider_enrollments.each do |provider| %>
+        <% @provider_enrollments.reverse_each do |provider| %>
         <tr>
             <td> <%= provider.first_name %> </td>
             <td> <%= provider.last_name %> </td>
