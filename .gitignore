@@ -39,5 +39,5 @@ spec/.DS_Store
 .idea/
 public/.DS_Store
 config/env_vars.yml
-app/.DS_Store
 coverage
+**/.DS_Store
