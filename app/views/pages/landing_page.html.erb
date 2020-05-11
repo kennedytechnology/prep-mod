@@ -9,22 +9,22 @@
         <%= image_tag 'icons/virtual_queue.png', class: "mt-6 mx-auto" %>
     <% end %>
 
-    <%= link_to "#", class: "block p-6 border-2 text-center flex flex-col justify-between hover:bg-gray-50" do %>
+    <%= link_to clinics_path, class: "block p-6 border-2 text-center flex flex-col justify-between hover:bg-gray-50" do %>
         <h1 class="text-gray-600 pb-1 border-b"> Start Clinic Standard </h1>
         <%= image_tag 'icons/clinic.png', class: "mt-6 mx-auto" %>
     <% end %>
 
-    <%= link_to "#", class: "block p-6 border-2 text-center flex flex-col justify-between hover:bg-gray-50" do %>
+    <%= link_to patients_path, class: "block p-6 border-2 text-center flex flex-col justify-between hover:bg-gray-50" do %>
         <h1 class="text-gray-600 pb-1 border-b"> Find a Record </h1>
         <%= image_tag 'icons/search_desktop.png', class: "mt-6 mx-auto" %>
     <% end %>
 
-    <%= link_to "#", class: "block p-6 border-2 text-center flex flex-col justify-between hover:bg-gray-50" do %>
+    <%= link_to new_patient_path, class: "block p-6 border-2 text-center flex flex-col justify-between hover:bg-gray-50" do %>
         <h1 class="text-gray-600 pb-1 border-b"> Refer Patient for Services </h1>
         <%= image_tag 'icons/patients.png', class: "mt-6 mx-auto" %>
     <% end %>
 
-    <%= link_to "#", class: "block p-6 border-2 text-center flex flex-col justify-between hover:bg-gray-50" do %>
+    <%= link_to provider_enrollments_path, class: "block p-6 border-2 text-center flex flex-col justify-between hover:bg-gray-50" do %>
         <h1 class="text-gray-600 pb-1 border-b"> Enroll/Accept a Provider </h1>
         <%= image_tag 'icons/provider.png', class: "mt-6 mx-auto" %>
     <% end %>
@@ -34,12 +34,12 @@
         <%= image_tag 'icons/checklist.png', class: "mt-6 mx-auto" %>
     <% end %>
 
-    <%= link_to "#", class: "block p-6 border-2 text-center flex flex-col justify-between hover:bg-gray-50" do %>
+    <%= link_to message_board_index_path, class: "block p-6 border-2 text-center flex flex-col justify-between hover:bg-gray-50" do %>
         <h1 class="text-gray-600 pb-1 border-b"> Send a Message </h1>
         <%= image_tag 'icons/envelope.png', class: "mt-6 mx-auto" %>
     <% end %>
 
-    <%= link_to "#", class: "block p-6 border-2 text-center flex flex-col justify-between hover:bg-gray-50" do %>
+    <%= link_to destroy_user_session_path, method: :delete, class: "block p-6 border-2 text-center flex flex-col justify-between hover:bg-gray-50" do %>
         <h1 class="text-gray-600 pb-1 border-b"> Logout </h1>
         <%= image_tag 'icons/logout.png', class: "mt-6 mx-auto" %>
     <% end %>
