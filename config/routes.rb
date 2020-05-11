@@ -3,11 +3,13 @@ Rails.application.routes.draw do
   get 'message_board/index'
   get 'kit/new', to: 'public/kit#new'
   post 'kit/create', to: 'public/kit#create'
+  get 'pages/landing_page'
   
   devise_for :users,
   controllers: {
     registrations: 'users/registrations',
-    invitations: 'users/invitations'
+    invitations: 'users/invitations',
+    sessions: 'users/sessions'
   }
   
   get 'public_portal/index'
