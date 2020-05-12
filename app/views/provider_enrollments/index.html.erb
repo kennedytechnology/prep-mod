@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <h2 class="main-title">Request to become a COVID-19 service provider</h2>
 
 <%= form_with model: ProviderEnrollment.new, local: true, class: "py-5", data: {controller: "provider-enrollment-new-entry"} do |f| %>
@@ -140,6 +141,9 @@
 
     <%= render partial: "provider_enrollments/new_entry_review", locals: {f: f} %>
 <% end %>
+=======
+<h2 class="main-title"> Provider Enrollments </h2>
+>>>>>>> e3bcc86b4f9c75b6603e24ca0101d3cf8ce3ff09
 
 <table class="table">
     <thead>
@@ -156,9 +160,9 @@
         <tr>
             <td> <%= provider.first_name %> </td>
             <td> <%= provider.last_name %> </td>
-            <td> <%= provider.address %> </td>
-            <td> <%= provider.phone_number %> </td>
-            <td> <%= provider.email %> </td>
+            <td> <%= provider.practice_address %> </td>
+            <td> <%= provider.practice_phone_number %> </td>
+            <td> <%= provider.practice_email %> </td>
         </tr>
         <% end %>
     </tbody>

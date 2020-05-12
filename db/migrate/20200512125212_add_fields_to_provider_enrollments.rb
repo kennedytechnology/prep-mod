@@ -7,7 +7,7 @@ class AddFieldsToProviderEnrollments < ActiveRecord::Migration[6.0]
     add_column :provider_enrollments, :practice_state, :string
     add_column :provider_enrollments, :practice_zip, :integer
     add_column :provider_enrollments, :practice_office_phone, :string
-    add_column :provider_enrollments, :practice_mobile_phone, :string
+    add_column :provider_enrollments, :practice_phone_number, :string
     add_column :provider_enrollments, :practice_email, :string
     add_column :provider_enrollments, :practice_backup_contact, :string
     add_column :provider_enrollments, :practice_backup_contact_phone, :string
