@@ -1,43 +1,37 @@
 <h2 class="main-title">Request to become a COVID-19 service provider</h2>
 
 <%= form_with model: ProviderEnrollment.new, local: true, class: "py-5", data: {controller: "provider-enrollment-new-entry"} do |f| %>
-
-    <h2 class="title"> I would like to provide: </h2>
-    <div class="field-side-by-side">
+    <h2 class="label mb-2"> I would like to provide: </h2>
+    <div class="checkboxes-container mb-6">
+        <%= collection_check_boxes(:provider_enrollment, :clinic_service_ids, ClinicService.all, :id, :name) do |b| %>
         <div>
-            <div class="w-full checkboxes-container">
-                <%= collection_check_boxes(:provider_enrollment, :clinic_service_ids, ClinicService.all, :id, :name) do |b| %>
-                <div>
-                    <span> <%= b.check_box(class: "form-checkbox") %> </span>
-                    <span class="label"> <%= b.label %> </span>
-                </div>
-                <% end %>
-            </div>
+            <span> <%= b.check_box(class: "form-checkbox") %> </span>
+            <span class="label"> <%= b.label %> </span>
         </div>
+        <% end %>
     </div>
 
     <div class="sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 lg:gap-6">
-
         <div>
             <%= f.label :first_name, class: "block" do %>
-            <span class="text-gray-500"> First Name </span>
-            <span class="text-brand-red-500">*</span>
+            <span> First Name </span>
+            <span class="field-required">*</span>
             <% end %>
             <%= f.text_field :first_name, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
         
         <div>
             <%= f.label :middle_initial, class: "block" do %>
-            <span class="text-gray-500"> Middle Initial </span>
-            <span class="text-brand-red-500">*</span>
+            <span> Middle Initial </span>
+            <span class="field-required">*</span>
             <% end %>
             <%= f.text_field :middle_initial, class: "block form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
         <div>
             <%= f.label :last_name, class: "block" do %>
-            <span class="text-gray-500"> Last Name </span>
-            <span class="text-brand-red-500">*</span>
+            <span> Last Name </span>
+            <span class="field-required">*</span>
             <% end %>
             <%= f.text_field :last_name, class: "block form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
@@ -46,92 +40,96 @@
 
         <div>
             <%= f.label :title, class: "block" do %>
-            <span class="text-gray-500"> Title </span>
-            <span class="text-brand-red-500">*</span>
+            <span> Title </span>
+            <span class="field-required">*</span>
             <% end %>
             <%= f.text_field :title, class: "block form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
         <div class="max-w-md">
-            <%= f.select :professional_license, PROFESSIONAL_LICENSES, {prompt: "Select Professional License"}, {class: "block form-select w-full"} %>
+            <%= f.label :professional_license, class: "block" do %>
+                <span> Professional License </span>
+                <span class="field-required">*</span>
+            <% end %>
+            <%= f.select :professional_license, PROFESSIONAL_LICENSES, {prompt: "Select"}, {class: "form-select w-full"} %>
         </div>
 
         <div>
             <%= f.label :address, class: "block" do %>
-            <span class="text-gray-500"> Address </span>
-            <span class="text-brand-red-500">*</span>
+            <span> Address </span>
+            <span class="field-required">*</span>
             <% end %>
             <%= f.text_field :address, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
         <div>
             <%= f.label :phone_number, class: "block" do %>
-            <span class="text-gray-500"> Phone Number </span>
-            <span class="text-brand-red-500">*</span>
+            <span> Phone Number </span>
+            <span class="field-required">*</span>
             <% end %>
             <%= f.text_field :phone_number, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
         <div>
             <%= f.label :fax_number, class: "block" do %>
-            <span class="text-gray-500"> Fax Number </span>
-            <span class="text-brand-red-500">*</span>
+            <span> Fax Number </span>
+            <span class="field-required">*</span>
             <% end %>
             <%= f.text_field :fax_number, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
         <div>
             <%= f.label :email, class: "block" do %>
-            <span class="text-gray-500"> Email Address </span>
-            <span class="text-brand-red-500">*</span>
+            <span> Email Address </span>
+            <span class="field-required">*</span>
             <% end %>
             <%= f.email_field :email, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
         <div>
             <%= f.label :npi_number, class: "block" do %>
-            <span class="text-gray-500"> NPI Number </span>
-            <span class="text-brand-red-500">*</span>
+            <span> NPI Number </span>
+            <span class="field-required">*</span>
             <% end %>
             <%= f.text_field :npi_number, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
         <div>
             <%= f.label :license_number, class: "block" do %>
-            <span class="text-gray-500"> License Number </span>
-            <span class="text-brand-red-500">*</span>
+            <span> License Number </span>
+            <span class="field-required">*</span>
             <% end %>
             <%= f.text_field :license_number, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
         <div>
             <%= f.label :license_state_of_issue, class: "block" do %>
-            <span class="text-gray-500"> State of Issue </span>
-            <span class="text-brand-red-500">*</span>
+            <span> State of Issue </span>
+            <span class="field-required">*</span>
             <% end %>
-            <%= f.select :license_state_of_issue, options_for_select(US_STATES), class: "block form-select w-full" %>
+            <%= f.select :license_state_of_issue, options_for_select(US_STATES), {prompt: "Select"}, {class: "form-select w-full"} %>
         </div>
 
         <div>
             <%= f.label :license_date_of_issue, class: "block" do %>
-            <span class="text-gray-500"> Date of Issue </span>
-            <span class="text-brand-red-500">*</span>
+            <span> Date of Issue </span>
+            <span class="field-required">*</span>
             <% end %>
             <%= f.date_field :license_date_of_issue, class: "form-input w-full", placeholder: "MM/DD/YYYY", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
         <div>
             <%= f.label :medical_specialty, class: "block" do %>
-                <span class="text-gray-500"> Medical Specialty </span>
-                <span class="text-brand-red-500">*</span>
+                <span> Medical Specialty </span>
+                <span class="field-required">*</span>
             <% end %>
-            <%= f.select :medical_specialty, MEDICAL_SPECIALTY, {prompt: "Select Medical Specialty"}, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            <%= f.select :medical_specialty, MEDICAL_SPECIALTY, {prompt: "Select"}, {class: "form-select w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"}} %>
         </div>
 
         <div>
             <%= f.label :license_type, class: "block" do %>
-            <span class="text-gray-500"> Practice Type </span>
-            <span class="text-brand-red-500">*</span>
+            <span> Practice Type </span>
+            <span class="field-required">*</span>
             <% end %>
             <%= f.text_field :license_type, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
