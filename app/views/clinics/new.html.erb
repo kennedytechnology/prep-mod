@@ -1,405 +1,254 @@
+<h1 class="main-title"> New Clinic </h1>
+
 <%= form_with model: @clinic, local: true do |f| %>
-    <div>
-        <div>        
-            <h1 class="main-title">
-                Create a Public Clinic
-            </h1>
-            
-            <div class="mt-6 sm:mt-5">
-                <div class="mt-6 sm:mt-5 sm:border-t sm:border-gray-200 sm:pt-5">
-                    <fieldset>
-                        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
-                            <div>
-                                <legend class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700">
-                                    Clinic status
-                                </legend>
-                            </div>
-                            <div class="sm:col-span-2">
-                                <div class="max-w-xs">
-                                    <p class="text-sm leading-5 text-gray-500">Is clinic public or private?</p>
-                                    <div class="grid grid-cols-2 items-end pt-4">
-                                        <div class="flex items-center">
-                                            <%= f.radio_button :clinic_status, "public", id: "clinic_status_public", class: "form-radio" %>
-                                            <%= f.label :clinic_status, value: "public", for: "clinic_status_public", class: "ml-3" do %>
-                                                <span class="block text-sm leading-5 font-medium text-gray-700"> Public </span>
-                                            <% end %>
-                                        </div>
-                                        <div class="flex items-center">
-                                            <%= f.radio_button :clinic_status, "private", id: "clinic_status_private", class: "form-radio" %>
-                                            <%= f.label :clinic_status, value: "private", for: "clinic_status_private", class: "ml-3" do %>
-                                                <span class="block text-sm leading-5 font-medium text-gray-700"> Private </span>
-                                            <% end %>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-
-                <div class="mt-6 sm:mt-5">
-                    <div class="sm:border-t sm:border-gray-200 sm:pt-5">
-                        <fieldset>
-                            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
-                                <div>
-                                    <legend class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700">
-                                        Services Provided
-                                    </legend>
-                                </div>
-                                <div class="mt-4 sm:mt-0 sm:col-span-2">
-                                    <div class="max-w-xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                                        <%= collection_check_boxes(:clinic, :service_ids, ClinicService.all, :id, :name) do |b| %>
-                                        <div class="relative flex items-start">
-                                            <div class="absolute flex items-center h-5">
-                                                <%= b.check_box(class: "form-checkbox") %>
-                                            </div>
-                                            <div class="pl-7 text-sm leading-5">
-                                                <%= b.label(class: "font-meidum text-gray-700") %>
-                                            </div>
-                                        </div>
-                                        <% end %>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </div>
-
-                    <div class="mt-6 sm:mt-5">
-                        <div class="sm:border-t sm:border-gray-200 sm:pt-5">
-                            <fieldset>
-                                <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
-                                    <div>
-                                        <legend class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700">
-                                            Open to
-                                        </legend>
-                                    </div>
-                                    <div class="mt-4 sm:mt-0 sm:col-span-2">
-                                        <div class="max-w-xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                                            <%= collection_check_boxes(:clinic, :age_group_ids, ClinicAgeGroup.all, :id, :name) do |b| %>
-                                                <div class="relative flex items-start">
-                                                    <div class="absolute flex items-center h-5">
-                                                        <%= b.check_box(class: "form-checkbox") %>
-                                                    </div>
-                                                    <div class="pl-7 text-sm leading-5">
-                                                        <%= b.label(class: "font-meidum text-gray-700") %>
-                                                    </div>
-                                                </div>
-                                            <% end %>
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8 border-t border-gray-200 pt-8 sm:mt-5 sm:pt-10">
-                    <div>
-                        <h3 class="text-lg leading-6 font-medium text-gray-900"> Clinic Information </h3>
-                    </div>
-                    <div class="mt-6 sm:mt-5">
-                        <div
-                            class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                            <label for="first_name"
-                                class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
-                                Clinic Date and Time
-                            </label>
-                            <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                <div class="max-w-xs rounded-md">
-                                    <div class="mb-3">
-                                        <p class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2"> Clinic Date </p>
-                                        <%= f.date_select :clinic_date, {order: [:month, :day, :year], start_year: Date.today.year}, { class: "form-select"} %>
-                                    </div>
-                                    <div class="w-full mb-3">
-                                        <p class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2"> Start Time </p>
-                                        <!-- TODO: Make a form helper out of this. -->
-                                        <% 
-                                            start_time = Time.parse("1 AM").to_i
-                                            end_time = Time.parse("12 PM").to_i
-                                            values = (start_time..end_time).step(15.minutes)
-                                        %>
-                                        <select class="hour form-select" name="clinic[start_hour_minute]">
-                                            <%= options_for_select(values.map{ |t| Time.at(t).strftime("%I:%M") }, @clinic.start_time ? @clinic.start_time.strftime('%I:%M').to_i : nil) %>
-                                        </select>
-
-                                        <select name="clinic[start_meridiem]" class="meridiem form-select">
-                                            <%= options_for_select(['AM', 'PM']) %>
-                                        </select>
-                                    </div>
-
-                                    <div class="w-full">
-                                        <p class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2"> End Time </p>
-                                        <select class="hour form-select" name="clinic[end_hour_minute]">
-                                            <%= options_for_select(values.map{ |t| Time.at(t).strftime("%H:%M") }, @clinic.end_time ? @clinic.end_time.strftime('%I:%M').to_i : nil) %>
-                                        </select>
-
-                                        <select name="clinic[end_meridiem]" class="meridiem form-select">
-                                            <%= options_for_select(['AM', 'PM']) %>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div
-                            class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                            <label for="last_name"
-                                class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
-                                Clinic Location
-                            </label>
-                            <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                <div class="max-w-md">
-                                    <%= f.select :county, COUNTIES, {prompt: "Select County"}, {class: "block form-select w-full"} %>
-                                </div>
-
-                                <div class="max-w-md">
-                                    <%= f.text_field :venue_name, placeholder: "Venue Name", class: "form-input w-full" %>
-                                </div>
-
-                                <div class="max-w-md">
-                                    <%= f.text_field :address, id: "autocomplete", onFocus: "geolocate()", class: "form-input w-full", placeholder: "Address" %>
-                                    <%= render partial: "public/clinics/google_maps_script" %>
-                                </div>
-                                <div class="max-w-md grid grid-cols-1 md:grid-cols-3 md:gap-4">
-                                    <%= f.text_field :zip, placeholder: "Zip", id: "postal_code", class: "form-input w-full" %>
-                                    <%= f.text_field :city, placeholder: "City", id: "locality", class: "form-input w-full" %>
-                                    <%= f.text_field :state, placeholder: "State", id: "administrative_area_level_1", class: "form-input w-full" %>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8 border-t border-gray-200 pt-8 sm:mt-5 sm:pt-10">
-                    <div>
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">
-                            Appointment Information
-                        </h3>
-                    </div>
-                    <div class="mt-6 sm:mt-5">
-                        <div class="sm:border-t sm:border-gray-200 sm:pt-5">
-                            <fieldset>
-                                <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
-                                    <div>
-                                        <legend
-                                            class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700">
-                                            Appointments available
-                                        </legend>
-                                    </div>
-                                    <div class="mt-4 sm:mt-0 sm:col-span-2">
-                                        <div class="max-w-lg grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                                            <div class="relative flex items-start">
-                                                <%= f.radio_button :appointments_available, "Yes, required", id: "yes_required", class: "form-radio" %>
-                                                <%= f.label :clinic_status, value: "public", for: "yes_required", class: "ml-3" do %>
-                                                    <span class="block text-sm leading-5 font-medium text-gray-700"> Yes, required </span>
-                                                <% end %>
-                                            </div>
-                                            <div class="relative flex items-start">
-                                                <%= f.radio_button :appointments_available, "Yes, optional", id: "yes_optional", class: "form-radio" %>
-                                                <%= f.label :clinic_status, value: "public", for: "yes_optional", class: "ml-3" do %>
-                                                    <span class="block text-sm leading-5 font-medium text-gray-700"> Yes, optional </span>
-                                                <% end %>
-                                            </div>
-                                            <div class="relative flex items-start">
-                                                <%= f.radio_button :appointments_available, "No (Walk-In)", id: "no_walk_in", class: "form-radio" %>
-                                                <%= f.label :clinic_status, value: "public", for: "no_walk_in", class: "ml-3" do %>
-                                                    <span class="block text-sm leading-5 font-medium text-gray-700"> No (Walk-In) </span>
-                                                <% end %>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                        <div class="mt-6 sm:mt-5 sm:border-t sm:border-gray-200 sm:pt-5">
-                            <fieldset>
-                                <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
-                                    <div>
-                                        <legend
-                                            class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700">
-                                            Appointment Frequency
-                                        </legend>
-                                    </div>
-                                    <div class="sm:col-span-2">
-                                        <div class="max-w-lg">
-                                            <div class="mt-4">
-                                                <label for="country"
-                                                    class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2 mb-1">
-                                                    Appointment Frequency: Every
-                                                </label>
-                                                <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                                    <div class="max-w-xs rounded-md">
-                                                        <%= f.select :appointment_frequency_minutes, [5, 10, 15, 20, 25, 30], {prompt: "Minutes"}, {class: "block form-select w-full"} %>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                        <div class="mt-6 sm:mt-5 sm:border-t sm:border-gray-200 sm:pt-5">
-                            <fieldset>
-                                <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
-                                    <div>
-                                        <legend
-                                            class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700">
-                                            Appointment Slots
-                                        </legend>
-                                    </div>
-                                    <div class="sm:col-span-2">
-                                        <div class="max-w-lg">
-                                            <div class="mt-4">
-                                                <label for="country"
-                                                    class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2 mb-1">
-                                                    Number of Appointment Slots per Frequency
-                                                </label>
-                                                <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                                    <div class="max-w-xs rounded-md">
-                                                        <%= f.select :appointment_slots, (1..50), {prompt: "Select"}, {class: "block form-select w-full"} %>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                    </div>
-                </div>
+    <div class="field-fullwidth">
+        <p class="title">Is clinic public or private? <span class="field-required">*</span> </p>
+        <div class="w-3/12 radio-buttons-container">
+            <div>
+                <%= f.radio_button :clinic_status, "public", id: "clinic_status_public", class: "form-radio" %>
+                <%= f.label :clinic_status, value: "public", for: "clinic_status_public" do %>
+                <span>Public</span>
+                <% end %>
             </div>
+            <div>
+                <%= f.radio_button :clinic_status, "private", id: "clinic_status_private", class: "form-radio" %>
+                <%= f.label :clinic_status, value: "private", for: "clinic_status_private" do %>
+                <span>Private</span>
+                <% end %>
+            </div>
+        </div>
+    </div>
 
-            <div class="mt-8 border-t border-gray-200 pt-8 sm:mt-5 sm:pt-10">
+    <div class="field-side-by-side">
+        <div>
+            <p class="title">Services Provided <span class="field-required">*</span></p>
+            <div class="w-full checkboxes-container">
+                <%= collection_check_boxes(:clinic, :service_ids, ClinicService.all, :id, :name) do |b| %>
                 <div>
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">
-                        Contact Information
-                    </h3>
+                    <span> <%= b.check_box(class: "form-checkbox") %> </span>
+                    <span class="label"> <%= b.label %> </span>
                 </div>
-                <div
-                    class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                    <label for="last_name"
-                        class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
-                        Contact Information
-                    </label>
-                    <div class="mt-1 sm:mt-0 sm:col-span-2">
-                        <div class="max-w-xs">
-                            <%= f.text_field :contact_person, placeholder: "Contact Person", class: "form-input w-full" %>
-                        </div>
-
-                        <div class="max-w-xs">
-                            <%= f.text_field :contact_phone_number, placeholder: "Contact Number", class: "form-input w-full" %>
-                        </div>
-                    </div>
-
-                    <label for="last_name"
-                        class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
-                        Back-Up Contact Information
-                    </label>
-                    <div class="mt-1 sm:mt-0 sm:col-span-2">
-                        <div class="max-w-xs">
-                            <%= f.text_field :backup_contact_person, placeholder: "Back-Up Contact Person", class: "form-input w-full" %>
-                        </div>
-
-                        <div class="max-w-xs">
-                            <%= f.text_field :backup_contact_phone_number, placeholder: "Back-Up Contact Number", class: "form-input w-full" %>
-                        </div>
-                    </div>
-                </div>
+                <% end %>
             </div>
         </div>
 
-        <div class="mt-8 border-t border-gray-200 pt-8 sm:mt-5 sm:pt-10">
+        <div>
+            <p class="title">Open to <span class="field-required">*</span></p>
+            <div class="w-full checkboxes-container">
+                <%= collection_check_boxes(:clinic, :age_group_ids, ClinicAgeGroup.all, :id, :name) do |b| %>
+                <div>
+                    <span> <%= b.check_box(class: "form-checkbox") %> </span>
+                    <span class="label"> <%= b.label %> </span>
+                </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+
+    <div class="field-side-by-side">
+        <div>
+            <h1 class="title">Date, Time, Location</h1>
+            <%= f.label :clinic_date, class: "block" do %>
+                <span> Clinic Date </span>
+                <span class="field-required">*</span>
+            <% end %>
+            <%= f.date_field :clinic_date, class: "form-input", placeholder: "MM/DD/YYYY" %>
+
+            <p class="label">Start Time <span class="field-required">*</span></p>
+            <% 
+                start_time = Time.parse("1 AM").to_i
+                end_time = Time.parse("12 PM").to_i
+                values = (start_time..end_time).step(15.minutes)
+            %>
+            <select class="hour form-select" name="clinic[start_hour_minute]">
+                <%= options_for_select(values.map{ |t| Time.at(t).strftime("%I:%M") }, @clinic.start_time ? @clinic.start_time.strftime('%I:%M') : nil) %>
+            </select>
+
+            <select class="meridiem form-select" name="clinic[start_meridiem]">
+                <%= options_for_select(['AM', 'PM'], @clinic.start_time ? @clinic.start_time.strftime("%p") : nil) %>
+            </select>
+
+            <p class="label">End Time <span class="field-required">*</span></p>
+            <select class="hour form-select"
+                name="clinic[end_hour_minute]">
+                <%= options_for_select(values.map{ |t| Time.at(t).strftime("%I:%M") }, @clinic.end_time ? @clinic.end_time.strftime('%I:%M') : nil) %>
+            </select>
+
+            <select name="clinic[end_meridiem]"
+                class="meridiem form-select">
+                <%= options_for_select(['AM', 'PM'], @clinic.end_time ? @clinic.end_time.strftime("%p") : nil) %>
+            </select>
+        </div>
+
+        <div>
+            <h1 class="title"> &nbsp; </h1>
+
+            <%= f.label :county, class: "block" do %>
+                <span> County </span>
+                <span class="field-required">*</span>
+            <% end %>
+            <%= f.select :county, COUNTIES, {prompt: "Select"}, {class: "form-select w-full"} %>
+
+            <%= f.label :location, class: "block" %>
+            <%= f.text_field :location, placeholder: "Location", class: "form-input w-full" %>
+
+            <%= f.label :address, class: "block" %>
+            <%= f.text_field :address, id: "autocomplete", onFocus: "geolocate()", class: "form-input w-full", placeholder: "Address" %>
+            <%= render partial: "public/clinics/google_maps_script" %>
+
+            <div class="grid grid-cols-3 gap-7">
+                <%= f.text_field :zip, placeholder: "Zip", id: "postal_code", class: "form-input" %>
+                <%= f.text_field :city, placeholder: "City", id: "locality", class: "form-input" %>
+                <%= f.text_field :state, placeholder: "State", id: "administrative_area_level_1", class: "form-input" %>
+            </div>
+        </div>
+    </div>
+
+    <div class="field-fullwidth">
+        <h1 class="title"> Appointments Information </h1>
+        <p class="label"> Appointments available <span class="field-required">*</span> </p>
+        <div class="w-2/4 radio-buttons-container mb-4">
             <div>
-                <h3 class="text-lg leading-6 font-medium text-gray-900">
-                    Other Information
-                </h3>
+                <%= f.radio_button :appointments_available, "Yes, required", id: "yes_required", class: "form-radio" %>
+                <%= f.label :clinic_status, value: "public", for: "yes_required" do %>
+                <span> Yes, required </span>
+                <% end %>
             </div>
-            <div
-                class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                <label for="last_name"
-                    class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
-                    Additional Clinic Details
-                </label>
-                <div class="mt-1 sm:mt-0 sm:col-span-2">
-                    <div class="mt-1 sm:mt-0 sm:col-span-2 mb-4">
-                        <div class="max-w-xs flex">
-                            <%= f.text_area :incidents_comments, class: "form-textarea block w-full", placeholder: "Enter Details Here" %>
-                        </div>
-                        <p class="mt-2 text-sm text-gray-500">Clinic Details or Special Instructions.</p>
-                    </div>
-
-                </div>
+            
+            <div>
+                <%= f.radio_button :appointments_available, "Yes, optional", id: "yes_optional", class: "form-radio" %>
+                <%= f.label :clinic_status, value: "public", for: "yes_optional" do %>
+                <span> Yes, optional </span>
+                <% end %>
             </div>
-            <div
-                class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                <label for="last_name"
-                    class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
-                    Registration and Staff
-                </label>
-                <div class="mt-1 sm:mt-0 sm:col-span-2">
-                    <div class="max-w-xs">
-                        <%= f.number_field :students_registered, placeholder: "Number of Patients Registered", class: "form-input w-full" %>
-                    </div>
 
-                    <div class="max-w-xs">
-                        <%= f.text_field :lead_vaccinator_name, placeholder: "Lead Tester's Name", class: "form-input w-full" %>
-                    </div>
+            <div>
+                <%= f.radio_button :appointments_available, "No (Walk-In)", id: "no_walk_in", class: "form-radio" %>
+                <%= f.label :clinic_status, value: "public", for: "no_walk_in" do %>
+                <span> No (Walk-In) </span>
+                <% end %>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <%= f.label :appointment_frequency_minutes, "Appointment Frequency: Every", class: "block" %>
+                <%= f.select :appointment_frequency_minutes, [5, 15], {prompt: "Minutes"}, {class: "form-select w-full"} %>
+            </div>
 
-                    <div class="fields flex flex-wrap">
-                        <%= f.fields_for :clinic_personnel do |c| %>
-                            <%= render 'clinics/clinic_personnel', f: c %>
-                        <% end %>
-                    </div>
-                    <%= link_to_add_row('Add more staff', f, :clinic_personnel, class: 'text-xs text-brand-blue-600 pb-1 border-b border-brand-blue-600 hover:text-blue-400 hover:border-blue-400') %>
-                </div>
+            <div>
+                <%= f.label :appointment_slots, class: "block" %>
+                <%= f.select :appointment_slots, (1..50), {prompt: "Select"}, {class: "form-select w-full"} %>
+            </div>
+        </div>
+    </div>
+
+    <div class="field-side-by-side">
+        <div>
+            <h1 class="title">Contact Information</h1>
+            <%= f.label :contact_person do %>
+                <span> Contact Person </span>
+                <span class="field-required">*</span>
+            <% end %>
+            <%= f.text_field :contact_person, placeholder: "Contact Person", class: "form-input w-full" %>
+
+            <%= f.label :backup_contact_person do %>
+                <span> Backup contact person </span>
+                <span class="field-required">*</span>
+            <% end %>
+            <%= f.text_field :backup_contact_person, placeholder: "Back-Up Contact Person", class: "form-input w-full" %>
+        </div>
+        <div>
+            <h1 class="title"> &nbsp; </h1>
+            <%= f.label :contact_phone_number do %>
+                <span> Contact phone number </span>
+                <span class="field-required">*</span>
+            <% end %>
+            <%= f.text_field :contact_phone_number, placeholder: "Contact Number", class: "form-input w-full" %>
+
+            <%= f.label :backup_contact_phone_number do %>
+                <span> Backup contact phone number </span>
+                <span class="field-required">*</span>
+            <% end %>
+            <%= f.text_field :backup_contact_phone_number, placeholder: "Back-Up Contact Number", class: "form-input w-full" %>
+        </div>
+    </div>
+
+    <div class="field-fullwidth">
+        <h3 class="title"> Other Information </h3>
+        <div class="grid grid-cols-2 gap-4 items-start">
+            <p class="label"> Additional Clinic Details </p>
+            <div class="col-span-2">
+                <% f.label :incidents_comments, class: "block" %>
+                <%= f.text_area :incidents_comments, placeholder: "Enter Details Here", class: "form-textarea w-1/2" %>
+                <p class="mt-2 text-sm text-gray-500">Incidents Comments.</p>
+            </div>
+        </div>
+    </div>    
+
+    <div class="field-fullwidth">
+        <h3 class="title"> Registration and Staff </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <%= f.label :students_registered, "Number of Patients Registered", class: "block" %>
+                <%= f.number_field :students_registered, placeholder: "Number of Patients Registered", class: "form-input w-full" %>
+            </div>
+
+            <div>
+                <%= f.label :lead_vaccinator_name, class: "block" do %>
+                    <span> Lead Tester’s Name </span>
+                    <span class="field-required">*</span>
+                <% end %>
+                <%= f.text_field :lead_vaccinator_name, placeholder: "Lead Tester's Name", class: "form-input w-full" %>
             </div>
         </div>
 
-        <div class="mt-8 border-t border-gray-200 pt-8 sm:mt-5 sm:pt-10">
-            <div>
-                <h3 class="text-lg leading-6 font-medium text-gray-900">
-                    Test Kits
-                </h3>
-            </div>
-            <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-2 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                <div class="mt-1 sm:mt-0 sm:col-span-3">
-                    <div class="flex justify-end mb-4">
-                        <%= link_to_add_test_kit('Add More Test Kits', f, :test_kits, class: 'max-w-xs inline-flex cursor-pointer justify-center button-primary') %>
-                    </div>
-                    <div class="flex flex-col">
-                        <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-                            <div class="align-middle inline-block min-w-full overflow-hidden border-b border-gray-200">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th> Test Name </th>
-                                    <th> Test Manufacturer </th>
-                                    <th> Test Lot Number </th>
-                                    <th> Test Type </th>
-                                    <th> Processing </th>
-                                    <th> Test Expiration Date </th>
-                                    <th> Number of test kits </th>
-                                    <th> Action </th>
-                                </tr>
-                                </thead>
-                                <tbody class="bg-white" id="testKits">
-                                    <%= f.fields_for :test_kits do |test_kit_fields| %>
-                                        <%= render 'clinics/test_kit', f: test_kit_fields %>
-                                    <% end %>
-                                </tbody>
-                            </table>
-                            </div>
-                        </div>
-                    </div>
+        <h1 class="title"> &nbsp; </h1>
+        <p class="label w-full"> Clinic Staff </p>
+        <div class="fields grid grid-cols-2 gap-3">
+            <%= f.fields_for :clinic_personnel do |c| %>
+                <%= render 'clinics/clinic_personnel', f: c %>
+            <% end %>
+        </div>
+        <%= link_to_add_row('Add more staff', f, :clinic_personnel, class: 'button-add-more-staff') %>
+    </div>
+
+    <div class="field-fullwidth">
+        <h1 class="title"> Test Kits </h1>
+        <div class="flex justify-end mb-4">
+            <%= link_to_add_test_kit('Add More Test Kits', f, :test_kits, class: 'button-primary') %>
+        </div>
+        <div class="flex flex-col">
+            <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+                <div class="align-middle inline-block min-w-full overflow-hidden border-b border-gray-200">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th> Test Name </th>
+                                <th> Test Manufacturer </th>
+                                <th> Test Lot Number </th>
+                                <th> Test Type </th>
+                                <th> Processing </th>
+                                <th> Test Expiration Date </th>
+                                <th> Number of test kits </th>
+                                <th> Action </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white" id="testKits">
+                            <% @clinic.test_kits.each do |test_kit| %>
+                                <%= f.fields_for :test_kits, test_kit do |test_kit_fields| %>
+                                    <%= render 'clinics/test_kit', f: test_kit_fields %>
+                                <% end %>
+                            <% end %>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="mt-8 border-t border-gray-200 pt-5">
-        <div class="flex justify-end">
-            <span class="mr-3 inline-flex"> <%= f.submit "Submit", class: "button-primary" %> </span>
-            <span class="inline-flex">
-                <button type="button" class="button-primary"> Cancel </button>
-            </span>
-        </div>
+    <div class="flex justify-end mt-8">
+        <%= f.button "Review & Submit", class: "button-primary" %>
+        <%= link_to "Cancel", clinics_path, class: "button-primary" %>
     </div>
 <% end %>
