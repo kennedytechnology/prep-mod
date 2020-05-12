@@ -49,7 +49,7 @@ CLINIC_EVENTS = [
   INVENTORY_EVENT_TYPES = ["Community", "Health Department", "LTC", "School", "Loan", "Hospital", "Other"]
   PROFESSIONAL_LICENSES = %w(MD DO PharmaD/RPh NP PA DDS)
   MEDICAL_SPECIALTY = ["Family Medicine", "Pediatrics", "Internal Medicine", "Cardiology", "Endocrinology", "Podiatry", "Other"]
-  PRACTICE_TYPE = ["Solo Practicioner", "Group Practice", "Hospital Practice", "Federally-Qualified Health Center (FQHC)",
+  PRACTICE_TYPES = ["Solo Practicioner", "Group Practice", "Hospital Practice", "Federally-Qualified Health Center (FQHC)",
     "Pharamacy", "Other"]
 
   Date::DATE_FORMATS[:default] = "%A %B %e, %Y"

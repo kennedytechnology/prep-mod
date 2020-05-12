@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_12_154153) do
+ActiveRecord::Schema.define(version: 2020_05_12_181414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -268,6 +268,7 @@ ActiveRecord::Schema.define(version: 2020_05_12_154153) do
     t.string "refrigerator_thermometer"
     t.text "additional_info"
     t.string "middle_initial"
+    t.string "practice_type"
   end
 
   create_table "supply_inventories", force: :cascade do |t|
