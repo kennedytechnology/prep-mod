@@ -36,14 +36,6 @@
             <%= f.text_field :last_name, class: "block form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
-        <div>
-            <%= f.label :title, class: "block" do %>
-            <span> Title </span>
-            <span class="field-required">*</span>
-            <% end %>
-            <%= f.text_field :title, class: "block form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
-        </div>
-
         <div class="max-w-md">
             <%= f.label :professional_license, class: "block" do %>
                 <span> Professional License </span>
@@ -61,11 +53,19 @@
         </div>
 
         <div>
-            <%= f.label :practice_phone_number, class: "block" do %>
-            <span> Phone Number </span>
+            <%= f.label :practice_office_phone, class: "block" do %>
+            <span> Practice Office Phone Number </span>
             <span class="field-required">*</span>
             <% end %>
-            <%= f.text_field :phone_number, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            <%= f.text_field :practice_office_phone, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+        </div>
+
+        <div>
+            <%= f.label :practice_mobile_phone, class: "block" do %>
+            <span> Practice Mobile Phone Number </span>
+            <span class="field-required">*</span>
+            <% end %>
+            <%= f.text_field :practice_mobile_phone, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
         <div>
@@ -84,6 +84,14 @@
             <%= f.email_field :practice_email, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
+        <div>
+            <%= f.label :title, class: "block" do %>
+            <span> Title </span>
+            <span class="field-required">*</span>
+            <% end %>
+            <%= f.text_field :title, class: "block form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+        </div>
+        
         <div>
             <%= f.label :npi_number, class: "block" do %>
             <span> NPI Number </span>

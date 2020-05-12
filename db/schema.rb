@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_12_134036) do
+ActiveRecord::Schema.define(version: 2020_05_12_154153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -255,7 +255,7 @@ ActiveRecord::Schema.define(version: 2020_05_12_134036) do
     t.string "practice_state"
     t.integer "practice_zip_code"
     t.string "practice_office_phone"
-    t.string "practice_phone_number"
+    t.string "practice_mobile_phone"
     t.string "practice_email"
     t.string "practice_backup_contact"
     t.string "practice_backup_phone"
