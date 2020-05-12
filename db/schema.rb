@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_12_101613) do
+ActiveRecord::Schema.define(version: 2020_05_12_125426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -251,6 +251,25 @@ ActiveRecord::Schema.define(version: 2020_05_12_101613) do
     t.string "professional_license"
     t.string "license_state_of_issue"
     t.date "license_date_of_issue"
+    t.string "title"
+    t.string "practice_name"
+    t.string "practice_address"
+    t.string "practice_city"
+    t.string "practice_state"
+    t.integer "practice_zip_code"
+    t.string "practice_office_phone"
+    t.string "practice_mobile_phone"
+    t.string "practice_email"
+    t.string "practice_backup_contact"
+    t.string "practice_backup_contact_phone"
+    t.string "practice_backup_contact_email"
+    t.string "population_served"
+    t.string "high_risk_group_served"
+    t.boolean "does_provide_vaccination"
+    t.boolean "does_provide_vfc"
+    t.string "refrigerator"
+    t.string "refrigerator_thermometer"
+    t.text "additional_info"
   end
 
   create_table "supply_inventories", force: :cascade do |t|
