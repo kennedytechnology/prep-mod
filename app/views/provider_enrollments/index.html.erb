@@ -53,15 +53,15 @@
         </div>
 
         <div>
-            <%= f.label :address, class: "block" do %>
+            <%= f.label :practice_address, class: "block" do %>
             <span> Address </span>
             <span class="field-required">*</span>
             <% end %>
-            <%= f.text_field :address, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            <%= f.text_field :practice_address, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
         <div>
-            <%= f.label :phone_number, class: "block" do %>
+            <%= f.label :practice_phone_number, class: "block" do %>
             <span> Phone Number </span>
             <span class="field-required">*</span>
             <% end %>
@@ -69,19 +69,19 @@
         </div>
 
         <div>
-            <%= f.label :fax_number, class: "block" do %>
+            <%= f.label :practice_fax_number, class: "block" do %>
             <span> Fax Number </span>
             <span class="field-required">*</span>
             <% end %>
-            <%= f.text_field :fax_number, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            <%= f.text_field :practice_fax_number, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
         <div>
-            <%= f.label :email, class: "block" do %>
+            <%= f.label :practice_email, class: "block" do %>
             <span> Email Address </span>
             <span class="field-required">*</span>
             <% end %>
-            <%= f.email_field :email, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            <%= f.email_field :practice_email, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
         <div>
