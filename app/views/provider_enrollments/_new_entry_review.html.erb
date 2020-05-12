@@ -45,7 +45,15 @@
                             <% end %>
                             <%= f.text_field :first_name, class: "form-input w-full", required: true, id: "modal_provider_enrollment_first_name", disabled: true %>
                         </div>
-                        
+
+                        <div>
+                            <%= f.label :middle_initial do %>
+                                <span class="text-gray-500"> Middle Initial </span>
+                                <span class="text-brand-red-500">*</span>
+                            <% end %>
+                            <%= f.text_field :middle_initial, class: "block form-select w-full", required: true, id: "modal_provider_enrollment_last_name", disabled: true %>
+                        </div>
+
                         <div>
                             <%= f.label :last_name do %>
                                 <span class="text-gray-500"> Last Name </span>
