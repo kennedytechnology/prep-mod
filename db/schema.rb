@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_12_125426) do
+ActiveRecord::Schema.define(version: 2020_05_12_133032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -238,10 +238,7 @@ ActiveRecord::Schema.define(version: 2020_05_12_125426) do
   create_table "provider_enrollments", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.string "address"
-    t.string "phone_number"
-    t.string "fax_number"
-    t.string "email"
+    t.string "practice_fax_number"
     t.string "npi_number"
     t.string "license_number"
     t.string "license_type"
@@ -261,8 +258,8 @@ ActiveRecord::Schema.define(version: 2020_05_12_125426) do
     t.string "practice_mobile_phone"
     t.string "practice_email"
     t.string "practice_backup_contact"
-    t.string "practice_backup_contact_phone"
-    t.string "practice_backup_contact_email"
+    t.string "practice_backup_phone"
+    t.string "practice_backup_email"
     t.string "population_served"
     t.string "high_risk_group_served"
     t.boolean "does_provide_vaccination"
