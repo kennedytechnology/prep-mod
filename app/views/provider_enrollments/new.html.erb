@@ -101,11 +101,43 @@
         </div>
 
         <div>
+            <%= f.label :practice_name, class: "block" do %>
+            <span> Practice Name </span>
+            <span class="field-required">*</span>
+            <% end %>
+            <%= f.text_field :practice_name, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+        </div>
+
+        <div>
             <%= f.label :practice_address, class: "block" do %>
-            <span> Address </span>
+            <span> Practice Address </span>
             <span class="field-required">*</span>
             <% end %>
             <%= f.text_field :practice_address, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+        </div>
+
+        <div>
+            <%= f.label :practice_city, class: "block" do %>
+            <span> Practice City </span>
+            <span class="field-required">*</span>
+            <% end %>
+            <%= f.text_field :practice_city, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+        </div>
+
+        <div>
+            <%= f.label :practice_state, class: "block" do %>
+            <span> Practice State </span>
+            <span class="field-required">*</span>
+            <% end %>
+            <%= f.select :practice_state, options_for_select(US_STATES), {prompt: "Select"}, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+        </div>
+
+        <div>
+            <%= f.label :practice_zip_code, class: "block" do %>
+            <span> Practice Zip code </span>
+            <span class="field-required">*</span>
+            <% end %>
+            <%= f.text_field :practice_zip_code, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
         <div>
@@ -124,6 +156,8 @@
             <%= f.text_field :practice_mobile_phone, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
+        <%# It should be cleared whether the Fax Number entry&database-field should stay, or should be deleted %>
+
         <div>
             <%= f.label :practice_fax_number, class: "block" do %>
             <span> Fax Number </span>
@@ -134,20 +168,35 @@
 
         <div>
             <%= f.label :practice_email, class: "block" do %>
-            <span> Email Address </span>
+            <span> Practice Email Address </span>
             <span class="field-required">*</span>
             <% end %>
             <%= f.email_field :practice_email, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
         <div>
-            <%= f.label :license_type, class: "block" do %>
-            <span> Practice Type </span>
+            <%= f.label :backup_contact, class: "block" do %>
+            <span> Back-Up Contact </span>
             <span class="field-required">*</span>
             <% end %>
-            <%= f.text_field :license_type, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            <%= f.text_field :backup_contact, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
+        <div>
+            <%= f.label :backup_phone, class: "block" do %>
+            <span> Back-Up Contact Phone </span>
+            <span class="field-required">*</span>
+            <% end %>
+            <%= f.text_field :backup_phone, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+        </div>
+        
+        <div>
+            <%= f.label :backup_email, class: "block" do %>
+            <span> Back-Up Contact Email Address </span>
+            <span class="field-required">*</span>
+            <% end %>
+            <%= f.text_field :backup_email, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+        </div>
     </div>
 
     <div class="flex justify-end items-end mt-2 mb-8">
@@ -156,3 +205,13 @@
 
     <%= render partial: "provider_enrollments/new_entry_review", locals: {f: f} %>
 <% end %>
+
+<%# 
+
+Population(s) Served
+
+    Children
+    Adults
+    Seniors
+    All Ages
+%>
