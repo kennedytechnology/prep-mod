@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_12_074928) do
+ActiveRecord::Schema.define(version: 2020_05_12_101613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -248,6 +248,9 @@ ActiveRecord::Schema.define(version: 2020_05_12_074928) do
     t.string "medical_specialty"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "professional_license"
+    t.string "license_state_of_issue"
+    t.date "license_date_of_issue"
   end
 
   create_table "supply_inventories", force: :cascade do |t|
