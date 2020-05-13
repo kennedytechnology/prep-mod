@@ -8,10 +8,6 @@ class SupplyInventoriesController < InheritedResources::Base
     @supply_inventory = SupplyInventory.new
   end
 
-  def new
-    @supply_inventory = SupplyInventory.new
-  end
-
   def create
     @supply_inventory = SupplyInventory.new(supply_inventory_params)
 
@@ -22,7 +18,8 @@ class SupplyInventoriesController < InheritedResources::Base
     end
   end
 
-  def edit
+  def show
+    @clinic = Clinic.find(params[:clinic_id])
     @supply_inventory = SupplyInventory.find(params[:id])
   end
 
@@ -44,7 +41,7 @@ class SupplyInventoriesController < InheritedResources::Base
         :manufacturer, :lot_number, :expiration_date,
         :quantity, :quantity_used, :quantity_loaned,
         :quantity_lost, :packaging, :source, :product_name, 
-        :event_type, :clinic_id
+        :event_date, :event_type, :clinic_id
       )
     end
 
