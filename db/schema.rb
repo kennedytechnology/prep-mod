@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_13_075721) do
+ActiveRecord::Schema.define(version: 2020_05_13_105047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -265,7 +265,7 @@ ActiveRecord::Schema.define(version: 2020_05_13_075721) do
     t.string "practice_backup_contact"
     t.string "practice_backup_phone"
     t.string "practice_backup_email"
-    t.string "population_served"
+    t.string "freezer"
     t.string "high_risk_group_served"
     t.boolean "does_provide_vaccination"
     t.boolean "does_provide_vfc"

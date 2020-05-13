@@ -1,7 +1,8 @@
 <h2 class="main-title">Request to become a COVID-19 service provider</h2>
 
 <%= form_with model: @provider_enrollment, local: true, class: "py-5", data: {controller: "provider-enrollment-new-entry"} do |f| %>
-    <h2 class="label mb-2"> I would like to provide: </h2>
+    
+    <h2 class="title"> I would like to provide: <span class="field-required">*</span> </h2>    
     <div class="checkboxes-container mb-6">
         <%= collection_check_boxes(:provider_enrollment, :clinic_service_ids, ClinicService.all, :id, :name) do |b| %>
         <div>
@@ -11,6 +12,7 @@
         <% end %>
     </div>
 
+    <h2 class="title my-4"> Basic Information </h2> 
     <div class="sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 lg:gap-6">
         <div>
             <%= f.label :first_name, class: "block" do %>
@@ -35,7 +37,10 @@
             <% end %>
             <%= f.text_field :last_name, class: "block form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
+    </div>
 
+    <h2 class="title my-4"> License Information </h2> 
+    <div class="sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 lg:gap-6">
         <div class="max-w-md">
             <%= f.label :professional_license, class: "block" do %>
                 <span> Professional License </span>
@@ -83,7 +88,10 @@
             <% end %>
             <%= f.date_field :license_date_of_issue, class: "form-input w-full", placeholder: "MM/DD/YYYY", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
+    </div>
 
+    <h2 class="title my-4"> Information about the practice </h2> 
+    <div class="sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 lg:gap-6">
         <div>
             <%= f.label :medical_specialty, class: "block" do %>
                 <span> Medical Specialty </span>
@@ -156,16 +164,6 @@
             <%= f.text_field :practice_mobile_phone, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
-        <%# It should be cleared whether the Fax Number entry&database-field should stay, or should be deleted %>
-
-        <div>
-            <%= f.label :practice_fax_number, class: "block" do %>
-            <span> Fax Number </span>
-            <span class="field-required">*</span>
-            <% end %>
-            <%= f.text_field :practice_fax_number, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
-        </div>
-
         <div>
             <%= f.label :practice_email, class: "block" do %>
             <span> Practice Email Address </span>
@@ -175,28 +173,103 @@
         </div>
 
         <div>
-            <%= f.label :backup_contact, class: "block" do %>
+            <%= f.label :practice_backup_contact, class: "block" do %>
             <span> Back-Up Contact </span>
             <span class="field-required">*</span>
             <% end %>
-            <%= f.text_field :backup_contact, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            <%= f.text_field :practice_backup_contact, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
         <div>
-            <%= f.label :backup_phone, class: "block" do %>
+            <%= f.label :practice_backup_phone, class: "block" do %>
             <span> Back-Up Contact Phone </span>
             <span class="field-required">*</span>
             <% end %>
-            <%= f.text_field :backup_phone, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            <%= f.text_field :practice_backup_phone, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-newpractice_-entry#updateModalField"} %>
         </div>
         
         <div>
-            <%= f.label :backup_email, class: "block" do %>
+            <%= f.label :practice_backup_email, practice_class: "block" do %>
             <span> Back-Up Contact Email Address </span>
             <span class="field-required">*</span>
             <% end %>
-            <%= f.text_field :backup_email, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            <%= f.text_field :practice_backup_email, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
+    </div>
+
+    <h2 class="title my-4"> Age Groups Served <span class="field-required">*</span> </h2>
+    <div class="checkboxes-container mb-6">
+        <%= collection_check_boxes(:provider_enrollment, :clinic_age_group_ids, ClinicAgeGroup.all, :id, :name) do |b| %>
+        <div>
+            <span> <%= b.check_box(class: "form-checkbox") %> </span>
+            <span class="label"> <%= b.label %> </span>
+        </div>
+        <% end %>
+    </div>
+
+    <div class="field-side-by-side">
+        <div>
+            <h2 class="title"> Do you currently provide vaccinations? (Yes/No)?<span class="field-required">*</span> </h2> 
+            <%= f.radio_button :does_provide_vaccination, true, class: "form-radio " %>
+            <%= f.label :does_provide_vaccination, "Yes" %>
+
+            <%= f.radio_button :does_provide_vaccination, false, class: "form-radio" %>
+            <%= f.label :does_provide_vaccination, "No" %>
+        </div>
+        <div>
+            <h2 class="title"> Are you a Vaccines for Children (VFC) Provider? (Yes/No)<span class="field-required">*</span> </h2> 
+            <%= f.radio_button :does_provide_vfc, true, class: "form-radio " %>
+            <%= f.label :does_provide_vfc, "Yes" %>
+
+            <%= f.radio_button :does_provide_vfc, false, class: "form-radio" %>
+            <%= f.label :does_provide_vfc, "No" %>
+        </div>
+    </div>
+
+    <div class="sm:grid sm:grid-cols-1 lg:grid-cols-2 sm:gap-2 lg:gap-4">
+        <div>
+            <%= f.label :refrigerator, class: "block" do %>
+                <span> 
+                    What make and model refrigerator do you have? 
+                </span>
+                <span class="field-required">*</span>
+            <% end %>
+            <%= f.text_field :refrigerator, class: "form-input block w-full", data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            <%= f.check_box :refrigerator, {class: "form-checkbox"}, "I do not have a refrigerator" %>
+            <%= f.label :refrigerator, "I do not have a refrigerator" %>
+        </div>
+
+        <div>
+            <%= f.label :freezer, class: "block" do %>
+                <span> 
+                    What make and model freezer do you have?  (Comment box and option )  
+                </span>
+                <span class="field-required">*</span>
+            <% end %>         
+            <%= f.text_field :freezer, class: "form-input block w-full", data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            <%= f.check_box :freezer, {class: "form-checkbox"}, "I do not have a freezer" %>
+            <%= f.label :freezer, "I do not have a freezer" %>   
+        </div>
+
+        <div>
+            <%= f.label :refrigerator_thermometer, class: "block" do %>
+                <span> 
+                    What make and model data logger/refrigerator thermometer do you have?
+                </span>
+                <span class="field-required">*</span>
+            <% end %>           
+            <%= f.text_field :refrigerator_thermometer, class: "form-input block w-full", data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            <%= f.check_box :refrigerator_thermometer, {class: "form-checkbox"}, "I do not have a thermometer" %>
+            <%= f.label :refrigerator_thermometer, "I do not have a thermometer" %>         
+        </div>
+    </div>
+
+    <div class="additional_info my-4">
+        <%= f.label :additional_info, 
+            "Please provide any additional information you would like to share about your interest or relevant experience.", 
+            class: "form-group-label block font-bold" 
+        %>
+        <%= f.text_area :additional_info, class: "form-textarea w-full" %>
     </div>
 
     <div class="flex justify-end items-end mt-2 mb-8">
@@ -208,10 +281,11 @@
 
 <%# 
 
-Population(s) Served
+What high-risk or under-served groups are largely represented in your practice?
 
-    Children
-    Adults
     Seniors
-    All Ages
+    African-Americans
+    Hispanics
+    Chronically Ill (eg. asthma, diabetes, heart disease, hypertension, COPD)
+
 %>
