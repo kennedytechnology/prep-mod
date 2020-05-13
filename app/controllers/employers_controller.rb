@@ -1,4 +1,5 @@
 class EmployersController < InheritedResources::Base
+  before_action :authenticate_user!, only: [:index]
   layout "clinic_management", only: [:index]
 
   def index
