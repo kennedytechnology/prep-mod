@@ -3,7 +3,7 @@
 <%= form_with model: @provider_enrollment, local: true, class: "py-5", data: {controller: "provider-enrollment-new-entry"} do |f| %>
     <div class="field-fullwidth">
         <h2 class="title"> What services would you like to provide? </h2>    
-        <div class="checkboxes-container mb-6">
+        <div class="checkboxes-container">
             <%= collection_check_boxes(:provider_enrollment, :clinic_service_ids, ClinicService.all, :id, :name) do |b| %>
             <div>
                 <span> <%= b.check_box(class: "form-checkbox") %> </span>
@@ -14,7 +14,7 @@
     </div>
 
     <div class="field-fullwidth">
-        <h2 class="title my-4"> Population(s) Served <span class="field-required">*</span> </h2>
+        <h2 class="title mb-4"> Population(s) Served <span class="field-required">*</span> </h2>
         <div class="checkboxes-container">
             <%= collection_check_boxes(:provider_enrollment, :clinic_age_group_ids, ClinicAgeGroup.all, :id, :name) do |b| %>
             <div>
