@@ -1,5 +1,9 @@
 <h2 class="main-title"> Provider Enrollments </h2>
 
+<div class="flex justify-end mb-6">
+    <%= link_to "New Provider Enrollment", new_provider_enrollment_path, class: "button-primary" %>
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -11,7 +15,7 @@
         </tr>
     </thead>
     <tbody>
-        <% @provider_enrollments.last(10).reverse_each do |provider| %>
+        <% @provider_enrollments.each do |provider| %>
         <tr>
             <td> <%= provider.first_name %> </td>
             <td> <%= provider.last_name %> </td>
@@ -22,7 +26,3 @@
         <% end %>
     </tbody>
 </table>
-
-<div class="flex flex-wrap justify-center items-center text-gray-600 my-6">
-    <%= link_to "New Provider Enrollment", new_provider_enrollment_path, class: "button-tab" %>
-</div>
