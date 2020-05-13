@@ -1,1 +1,290 @@
-<h1> Here goes form for creating new provider enrollment </h1>
+<h2 class="main-title">Request to become a COVID-19 service provider</h2>
+
+<%= form_with model: @provider_enrollment, local: true, class: "py-5", data: {controller: "provider-enrollment-new-entry"} do |f| %>
+    <div class="field-fullwidth">
+        <h2 class="title"> What services would you like to provide? </h2>    
+        <div class="checkboxes-container">
+            <%= collection_check_boxes(:provider_enrollment, :clinic_service_ids, ClinicService.all, :id, :name) do |b| %>
+            <div>
+                <span> <%= b.check_box(class: "form-checkbox") %> </span>
+                <span class="label"> <%= b.label %> </span>
+            </div>
+            <% end %>
+        </div>
+    </div>
+
+    <div class="field-fullwidth">
+        <h2 class="title mb-4"> Population(s) Served <span class="field-required">*</span> </h2>
+        <div class="checkboxes-container">
+            <%= collection_check_boxes(:provider_enrollment, :clinic_age_group_ids, ClinicAgeGroup.all, :id, :name) do |b| %>
+            <div>
+                <span> <%= b.check_box(class: "form-checkbox") %> </span>
+                <span class="label"> <%= b.label %> </span>
+            </div>
+            <% end %>
+        </div>
+    </div>
+
+    <div class="field-fullwidth">
+        <h2 class="title"> Basic Information </h2> 
+        <div class="grid grid-cols-3 gap-4">
+            <div>
+                <%= f.label :first_name, class: "block" do %>
+                    <span> First Name </span>
+                    <span class="field-required">*</span>
+                <% end %>
+                <%= f.text_field :first_name, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            </div>
+            <div>
+                <%= f.label :middle_initial, class: "block" do %>
+                <span> Middle Name </span>
+                <span class="field-required">*</span>
+                <% end %>
+                <%= f.text_field :middle_initial, class: "block form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            </div>
+            <div>
+                <%= f.label :last_name, class: "block" do %>
+                <span> Last Name </span>
+                <span class="field-required">*</span>
+                <% end %>
+                <%= f.text_field :last_name, class: "block form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            </div>
+        </div>
+    </div>
+
+    <div class="field-fullwidth">
+        <h2 class="title"> License Information </h2> 
+        <div class="sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-4">
+            <div>
+                <%= f.label :professional_license, class: "block" do %>
+                    <span> Professional License </span>
+                    <span class="field-required">*</span>
+                <% end %>
+                <%= f.select :professional_license, PROFESSIONAL_LICENSES, {prompt: "Select"}, {class: "form-select w-full"} %>
+            </div>
+
+            <div>
+                <%= f.label :title, class: "block" do %>
+                <span> Title </span>
+                <span class="field-required">*</span>
+                <% end %>
+                <%= f.text_field :title, class: "block form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            </div>
+            
+            <div>
+                <%= f.label :npi_number, class: "block" do %>
+                <span> NPI Number </span>
+                <span class="field-required">*</span>
+                <% end %>
+                <%= f.text_field :npi_number, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            </div>
+
+            <div>
+                <%= f.label :license_number, class: "block" do %>
+                <span> License Number </span>
+                <span class="field-required">*</span>
+                <% end %>
+                <%= f.text_field :license_number, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            </div>
+
+            <div>
+                <%= f.label :license_state_of_issue, class: "block" do %>
+                <span> State of Issue </span>
+                <span class="field-required">*</span>
+                <% end %>
+                <%= f.select :license_state_of_issue, options_for_select(US_STATES), {prompt: "Select"}, {class: "form-select w-full"} %>
+            </div>
+
+            <div>
+                <%= f.label :license_date_of_issue, class: "block" do %>
+                <span> Date of Issue </span>
+                <span class="field-required">*</span>
+                <% end %>
+                <%= f.date_field :license_date_of_issue, class: "form-input w-full", placeholder: "MM/DD/YYYY", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            </div>
+        </div>
+    </div>
+
+    <div class="field-fullwidth">
+        <h2 class="title"> Practice Information </h2> 
+        <div class="sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-4">
+            <div>
+                <%= f.label :medical_specialty, class: "block" do %>
+                    <span> Specialty </span>
+                    <span class="field-required">*</span>
+                <% end %>
+                <%= f.select :medical_specialty, MEDICAL_SPECIALTY, {prompt: "Select"}, {class: "form-select w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"}} %>
+            </div>
+
+            <div class="max-w-md">
+                <%= f.label :practice_type, class: "block" do %>
+                    <span> Practice Type </span>
+                    <span class="field-required">*</span>
+                <% end %>
+                <%= f.select :practice_type, PRACTICE_TYPES, {prompt: "Select"}, {class: "form-select w-full"} %>
+            </div>
+
+            <div>
+                <%= f.label :practice_name, class: "block" do %>
+                <span> Practice Name </span>
+                <span class="field-required">*</span>
+                <% end %>
+                <%= f.text_field :practice_name, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            </div>
+
+            <div>
+                <%= f.label :practice_address, class: "block" do %>
+                <span> Practice Address </span>
+                <span class="field-required">*</span>
+                <% end %>
+                <%= f.text_field :practice_address, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            </div>
+
+            <div>
+                <%= f.label :practice_city, class: "block" do %>
+                <span> Practice City </span>
+                <span class="field-required">*</span>
+                <% end %>
+                <%= f.text_field :practice_city, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            </div>
+
+            <div>
+                <%= f.label :practice_state, class: "block" do %>
+                <span> Practice State </span>
+                <span class="field-required">*</span>
+                <% end %>
+                <%= f.select :practice_state, options_for_select(US_STATES), {prompt: "Select"}, class: "form-select w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            </div>
+
+            <div>
+                <%= f.label :practice_zip_code, class: "block" do %>
+                <span> Practice Zip code </span>
+                <span class="field-required">*</span>
+                <% end %>
+                <%= f.text_field :practice_zip_code, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            </div>
+
+            <div>
+                <%= f.label :practice_office_phone, class: "block" do %>
+                <span> Practice Office Phone Number </span>
+                <span class="field-required">*</span>
+                <% end %>
+                <%= f.text_field :practice_office_phone, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            </div>
+
+            <div>
+                <%= f.label :practice_mobile_phone, class: "block" do %>
+                <span> Practice Mobile Phone Number </span>
+                <span class="field-required">*</span>
+                <% end %>
+                <%= f.text_field :practice_mobile_phone, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            </div>
+
+            <div>
+                <%= f.label :practice_email, class: "block" do %>
+                <span> Practice Email Address </span>
+                <span class="field-required">*</span>
+                <% end %>
+                <%= f.email_field :practice_email, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            </div>
+
+            <div>
+                <%= f.label :practice_backup_contact, class: "block" do %>
+                <span> Back-Up Contact </span>
+                <span class="field-required">*</span>
+                <% end %>
+                <%= f.text_field :practice_backup_contact, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            </div>
+
+            <div>
+                <%= f.label :practice_backup_phone, class: "block" do %>
+                <span> Back-Up Contact Phone </span>
+                <span class="field-required">*</span>
+                <% end %>
+                <%= f.text_field :practice_backup_phone, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-newpractice_-entry#updateModalField"} %>
+            </div>
+            
+            <div>
+                <%= f.label :practice_backup_email, practice_class: "block" do %>
+                <span> Back-Up Contact Email Address </span>
+                <span class="field-required">*</span>
+                <% end %>
+                <%= f.text_field :practice_backup_email, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            </div>
+        </div>
+    </div>
+
+    <div class="field-side-by-side">
+        <div>
+            <h2 class="title"> Do you currently provide vaccinations?<span class="field-required">*</span> </h2> 
+            <%= f.radio_button :does_provide_vaccination, true, class: "form-radio" %>
+            <%= f.label :does_provide_vaccination, "Yes" %>
+
+            <%= f.radio_button :does_provide_vaccination, false, class: "form-radio" %>
+            <%= f.label :does_provide_vaccination, "No" %>
+        </div>
+        <div>
+            <h2 class="title"> Are you a Vaccines for Children (VFC) Provider?<span class="field-required">*</span> </h2> 
+            <%= f.radio_button :does_provide_vfc, true, class: "form-radio" %>
+            <%= f.label :does_provide_vfc, "Yes" %>
+
+            <%= f.radio_button :does_provide_vfc, false, class: "form-radio" %>
+            <%= f.label :does_provide_vfc, "No" %>
+        </div>
+    </div>
+
+    <div class="field-fullwidth">
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <h2 class="title"> What make and model refrigerator do you have? <span class="field-required">*</span> </h2>
+                <div class="mb-2">
+                    <%= f.check_box :refrigerator, {class: "form-checkbox"}, "no" %>
+                    <%= f.label :refrigerator, "I do not have a refrigerator" %> 
+                </div>  
+                <%= f.text_field :refrigerator, class: "form-input w-full" %>
+            </div>
+
+            <div>
+                <h2 class="title"> What make and model freezer do you have? <span class="field-required">*</span> </h2>    
+                <div class="mb-2">
+                <%= f.check_box :freezer, {class: "form-checkbox"}, "no" %>
+                <%= f.label :freezer, "I do not have a freezer" %>  
+                </div>
+                <%= f.text_field :freezer, class: "form-input w-full" %>
+            </div>
+
+            <div>
+                <h2 class="title">  What make and model data logger/refrigerator thermometer do you have? <span class="field-required">*</span> </h2>
+                <div class="mb-2">
+                    <%= f.check_box :refrigerator_thermometer, {class: "form-checkbox"}, "no" %>
+                    <%= f.label :refrigerator_thermometer, "I do not have a thermometer" %>    
+                </div>        
+                <%= f.text_field :refrigerator_thermometer, class: "form-input w-full" %>        
+            </div>
+        </div>
+    </div>
+
+    <div class="field-fullwidth">
+        <h2 class="title"> Additional Information </h2>
+        <%= f.label :additional_info, 
+            "Please provide any additional information you would like to share about your interest or relevant experience.", 
+            class: "block" 
+        %>
+        <%= f.text_area :additional_info, class: "form-textarea w-full" %>
+    </div>
+
+    <div class="flex justify-end">
+        <%= f.submit "Submit Request", class: "button-primary"%>
+    </div>
+<% end %>
+
+<%# 
+
+What high-risk or under-served groups are largely represented in your practice?
+
+    Seniors
+    African-Americans
+    Hispanics
+    Chronically Ill (eg. asthma, diabetes, heart disease, hypertension, COPD)
+
+%>

@@ -47,6 +47,10 @@ CLINIC_EVENTS = [
   INVENTORY_PACKAGINGS = ["Unit", "Box", "Case", "Other"]
   INVENTORY_SOURCES = ["Private Purchase", "VFC", "Borrowed", "Other"]
   INVENTORY_EVENT_TYPES = ["Community", "Health Department", "LTC", "School", "Loan", "Hospital", "Other"]
+  PROFESSIONAL_LICENSES = %w(MD DO PharmaD/RPh NP PA DDS)
+  MEDICAL_SPECIALTY = ["Family Medicine", "Pediatrics", "Internal Medicine", "Cardiology", "Endocrinology", "Podiatry", "Other"]
+  PRACTICE_TYPES = ["Solo Practicioner", "Group Practice", "Hospital Practice", "Federally-Qualified Health Center (FQHC)",
+    "Pharamacy", "Other"]
 
   BUSINESS_LOCATIONS = ["Health Care - Medical Practice", "Health Care - Hospital", 
     "Health Care - Outpatient Procedures and Services", "Pharmacy", "Local Health Department",
@@ -61,7 +65,6 @@ CLINIC_EVENTS = [
     "Hair Salon/Barbershop", "Salon and Spa Services (eg. massage, facials, nails, waxing)",
     "Pet Care (eg. Veterinarian, grooming, boarding)", "Banking/Financial", "Taxi/Ride Share",
     "Public Transportation", "General Services (eg. automotive, utilities, etc.)", 
-    "Miscellaneous Services", "Other"
-  ]
+    "Miscellaneous Services", "Other"]
 
   Date::DATE_FORMATS[:default] = "%A %B %e, %Y"

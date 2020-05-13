@@ -2,10 +2,10 @@ FactoryBot.define do
   factory :provider_enrollment do
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
-    address { Faker::Address.full_address }
-    phone_number { Faker::PhoneNumber.cell_phone }
-    fax_number { "MyString" }
-    email { Faker::Internet.email }
+    practice_address { Faker::Address.full_address }
+    practice_office_phone { Faker::PhoneNumber.cell_phone }
+    practice_fax_number { "MyString" }
+    practice_email { Faker::Internet.email }
     npi_number { "MyString" }
     license_number { "MyString" }
     license_type { "MyString" }

@@ -1,10 +1,9 @@
 class ProviderEnrollmentsController < ApplicationController
-  before_action :authenticate_user!
-  layout "clinic_management"
+  before_action :authenticate_user!, except: [:new]
+  layout "clinic_management", except: [:new]
 
   def index
     @provider_enrollments = ProviderEnrollment.all
-    @provider_enrollment = ProviderEnrollment.new
   end
 
   def new
@@ -39,8 +38,18 @@ class ProviderEnrollmentsController < ApplicationController
 
     def provider_enrollment_params
       params.require(:provider_enrollment).permit(
-        :first_name, :last_name, :address, :phone_number, :fax_number, :email, :npi_number,
-        :license_number, :license_type, :medial_specialty
+        :first_name, :last_name, :middle_initial, 
+        :practice_address, :practice_office_phone, :practice_mobile_phone, 
+        :practice_fax_number, :practice_email, :title, 
+        :npi_number, :license_number, :license_type, 
+        :medical_specialty, :professional_license, :license_date_of_issue, 
+        :license_state_of_issue, :practice_type, :practice_name, 
+        :practice_city, :practice_state, :practice_zip_code, 
+        :practice_backup_contact, :practice_backup_phone, :practice_backup_email, 
+        :population_served, :high_risk_group_served, :does_provide_vaccination, 
+        :does_provide_vfc, :refrigerator, :refrigerator_thermometer, 
+        :additional_info, :freezer, :clinic_service_ids => [], 
+        :clinic_age_group_ids => []
       )
     end
 

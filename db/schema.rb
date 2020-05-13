@@ -52,6 +52,11 @@ ActiveRecord::Schema.define(version: 2020_05_13_111341) do
     t.bigint "clinic_age_group_id", null: false
   end
 
+  create_table "clinic_age_groups_provider_enrollments", id: false, force: :cascade do |t|
+    t.bigint "clinic_age_group_id", null: false
+    t.bigint "provider_enrollment_id", null: false
+  end
+
   create_table "clinic_events", force: :cascade do |t|
     t.integer "clinic_id"
     t.integer "patient_id"
@@ -80,6 +85,11 @@ ActiveRecord::Schema.define(version: 2020_05_13_111341) do
 
   create_table "clinic_services_clinics", id: false, force: :cascade do |t|
     t.bigint "clinic_id", null: false
+    t.bigint "clinic_service_id", null: false
+  end
+
+  create_table "clinic_services_provider_enrollments", id: false, force: :cascade do |t|
+    t.bigint "provider_enrollment_id", null: false
     t.bigint "clinic_service_id", null: false
   end
 
@@ -276,16 +286,37 @@ ActiveRecord::Schema.define(version: 2020_05_13_111341) do
   create_table "provider_enrollments", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.string "address"
-    t.string "phone_number"
-    t.string "fax_number"
-    t.string "email"
+    t.string "practice_fax_number"
     t.string "npi_number"
     t.string "license_number"
     t.string "license_type"
     t.string "medical_specialty"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "professional_license"
+    t.string "license_state_of_issue"
+    t.date "license_date_of_issue"
+    t.string "title"
+    t.string "practice_name"
+    t.string "practice_address"
+    t.string "practice_city"
+    t.string "practice_state"
+    t.integer "practice_zip_code"
+    t.string "practice_office_phone"
+    t.string "practice_mobile_phone"
+    t.string "practice_email"
+    t.string "practice_backup_contact"
+    t.string "practice_backup_phone"
+    t.string "practice_backup_email"
+    t.string "freezer"
+    t.string "high_risk_group_served"
+    t.boolean "does_provide_vaccination"
+    t.boolean "does_provide_vfc"
+    t.string "refrigerator"
+    t.string "refrigerator_thermometer"
+    t.text "additional_info"
+    t.string "middle_initial"
+    t.string "practice_type"
   end
 
   create_table "supply_inventories", force: :cascade do |t|
