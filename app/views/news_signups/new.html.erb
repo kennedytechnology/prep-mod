@@ -1,29 +1,35 @@
-<h1 class="main-title"> Sign Up for News and Notifications to get the latest news on C-19 </h1>
+<h1 class="main-title font-bold"> Sign Up for News and Notifications About COVID-19 </h1>
 <%= form_with model: @news_signup, local: true do |f| %>
-    <div class="field-side-by-side">
-        <div>
-            <%= f.label :name, class: "block" %>
-            <%= f.text_field :name, class: "form-input w-full", required: true %>
-        </div>
-        <div>
-            <%= f.label :email, "Email Address", class: "block" %>
-            <%= f.email_field :email, class: "form-input w-full", required: true %>
-        </div>
-    </div>
-
-    <div class="field-side-by-side">
-        <div>
-            <%= f.label :occupation, "Choose Occupation", class: "block" %>
-            <%= f.select :occupation, PATIENT_OCCUPATIONS, {prompt: "Select"}, {class: "block form-select w-full", required: true} %>
-        </div>
-        <div class="flex">
+    <div class="field-fullwidth">
+        <div class="grid grid-cols-3 gap-4">
+            <div>
+                <%= f.label :first_name, "First Name", class: "block" %>
+                <%= f.text_field :first_name, class: "form-input w-full", required: true %>
+            </div>
+            <div>
+                <%= f.label :last_name, "Last Name", class: "block" %>
+                <%= f.text_field :last_name, class: "form-input w-full", required: true %>
+            </div>
             <div class="flex-1 mr-2">
                 <%= f.label :date_of_birth, class: "block" %>
                 <%= f.date_field :date_of_birth, min: Date.today - 50.years, max: Date.today, class: "form-input block w-full", placeholder: "MM/DD/YYYY", required: true %>
             </div>
-            <div class="flex-1">
+        </div>
+    </div>
+
+    <div class="field-fullwidth">
+        <div class="grid grid-cols-3 gap-4">
+            <div>
                 <%= f.label :zip_code, class: "block" %>
                 <%= f.text_field :zip_code, class: "form-input w-full", required: true %>
+            </div>
+            <div>
+                <%= f.label :email, "Email Address", class: "block" %>
+                <%= f.email_field :email, class: "form-input w-full", required: true %>
+            </div>
+            <div>
+                <%= f.label :occupation, "Choose Occupation", class: "block" %>
+                <%= f.select :occupation, PATIENT_OCCUPATIONS, {prompt: "Select"}, {class: "block form-select w-full", required: true} %>
             </div>
         </div>
     </div>
@@ -48,6 +54,5 @@
 
     <div class="flex justify-end">
         <%= f.submit "Sign Up", class: "button-primary" %>
-        <%= link_to "Back", root_path, class: "button-primary" %>
     </div>
 <% end %>
