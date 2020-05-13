@@ -52,4 +52,24 @@ CLINIC_EVENTS = [
   PRACTICE_TYPES = ["Solo Practicioner", "Group Practice", "Hospital Practice", "Federally-Qualified Health Center (FQHC)",
     "Pharamacy", "Other"]
 
+<<<<<<< HEAD
   Date::DATE_FORMATS[:default] = "%A %B %e, %Y"
+=======
+  BUSINESS_LOCATIONS = ["Health Care - Medical Practice", "Health Care - Hospital", 
+    "Health Care - Outpatient Procedures and Services", "Pharmacy", "Local Health Department",
+    "Social Services", "Long Term Care Facility", "Assisted Living", "Office/Professional",
+    "Factory/Manufacturing - Food Products", "Factory/Manufacturing - Non-Food Products",
+    "Office Professional AND Factory", "Hotel, Motel, Resort", "Casino", "Restaurant - Dine-In and Carry-Out",
+    "Restaurant - Carry Out-Only", "Nightclub", "Bar", "Food Delivery Service", "Catering/Hospitality",
+    "Grocery Store", "Retail", "Childcare Provider/Center", "Grade School (Public)", "Grade School (Private)",
+    "College or University", "Trade School", "Recreation Venue", 
+    "Sport/Entertainment Venue (eg. stadium, concert, theater, movie theater)",
+    "Utilities - Field Work", "Health Club/Fitness Center",
+    "Hair Salon/Barbershop", "Salon and Spa Services (eg. massage, facials, nails, waxing)",
+    "Pet Care (eg. Veterinarian, grooming, boarding)", "Banking/Financial", "Taxi/Ride Share",
+    "Public Transportation", "General Services (eg. automotive, utilities, etc.)", 
+    "Miscellaneous Services", "Other"
+  ]
+
+  Date::DATE_FORMATS[:default] = "%A %B %e, %Y"
+>>>>>>> 8021f79e5a87323ec7be85f12b0eb76e2624674d

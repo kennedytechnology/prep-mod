@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2020_05_13_105047) do
+=======
+ActiveRecord::Schema.define(version: 2020_05_13_111341) do
+>>>>>>> 8021f79e5a87323ec7be85f12b0eb76e2624674d
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -159,6 +163,49 @@ ActiveRecord::Schema.define(version: 2020_05_13_105047) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "employers", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "position"
+    t.string "company_name"
+    t.text "company_name_search"
+    t.string "address_1"
+    t.string "address_2"
+    t.string "city"
+    t.string "state"
+    t.string "zip_code"
+    t.string "office_phone"
+    t.string "mobile_phone"
+    t.string "email"
+    t.string "total_employees"
+    t.string "total_locations"
+    t.string "business_locations"
+    t.boolean "screening_info"
+    t.boolean "testing_info"
+    t.boolean "vacination_info"
+    t.boolean "other_info"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "backup_first_name"
+    t.string "backup_last_name"
+    t.string "backup_position"
+    t.string "backup_company_name"
+    t.string "backup_address_1"
+    t.string "backup_address_2"
+    t.string "backup_city"
+    t.string "backup_state"
+    t.string "backup_zip_code"
+    t.string "backup_office_phone"
+    t.string "backup_mobile_phone"
+    t.string "backup_email"
+    t.string "website"
+  end
+
+  create_table "employers_patients", id: false, force: :cascade do |t|
+    t.bigint "employer_id", null: false
+    t.bigint "patient_id", null: false
+  end
+
   create_table "insurance_types", force: :cascade do |t|
     t.string "name"
     t.integer "sort_order"
@@ -294,6 +341,7 @@ ActiveRecord::Schema.define(version: 2020_05_13_105047) do
     t.integer "quantity_used"
     t.integer "quantity_lost"
     t.integer "quantity_loaned"
+    t.date "event_date"
   end
 
   create_table "test_kits", force: :cascade do |t|

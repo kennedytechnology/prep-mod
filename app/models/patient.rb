@@ -3,6 +3,7 @@ class Patient < ApplicationRecord
   has_many :clinic_events
   has_many :clinics, through: :clinic_events
   belongs_to :clinic, optional: true
+  has_and_belongs_to_many :employers
 
   def self.generate_access_code(size = 6)
     charset = %w{2 3 4 6 7 9 A C D E F G H J K M N P Q R T W X Y Z}
