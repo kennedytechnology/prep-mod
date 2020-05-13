@@ -37,7 +37,7 @@
             </div>
             <div>
                 <%= f.label :middle_initial, class: "block" do %>
-                <span> Middle Initial </span>
+                <span> Middle Name </span>
                 <span class="field-required">*</span>
                 <% end %>
                 <%= f.text_field :middle_initial, class: "block form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
@@ -110,7 +110,7 @@
         <div class="sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-4">
             <div>
                 <%= f.label :medical_specialty, class: "block" do %>
-                    <span> Medical Specialty </span>
+                    <span> Specialty </span>
                     <span class="field-required">*</span>
                 <% end %>
                 <%= f.select :medical_specialty, MEDICAL_SPECIALTY, {prompt: "Select"}, {class: "form-select w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"}} %>
@@ -238,7 +238,7 @@
             <div>
                 <h2 class="title"> What make and model refrigerator do you have? <span class="field-required">*</span> </h2>
                 <div class="mb-2">
-                    <%= f.check_box :refrigerator, {class: "form-checkbox" }, "no" %>
+                    <%= f.check_box :refrigerator, {class: "form-checkbox"}, "no" %>
                     <%= f.label :refrigerator, "I do not have a refrigerator" %> 
                 </div>  
                 <%= f.text_field :refrigerator, class: "form-input w-full" %>
