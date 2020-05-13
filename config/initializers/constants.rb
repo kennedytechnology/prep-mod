@@ -65,7 +65,6 @@ CLINIC_EVENTS = [
     "Hair Salon/Barbershop", "Salon and Spa Services (eg. massage, facials, nails, waxing)",
     "Pet Care (eg. Veterinarian, grooming, boarding)", "Banking/Financial", "Taxi/Ride Share",
     "Public Transportation", "General Services (eg. automotive, utilities, etc.)", 
-    "Miscellaneous Services", "Other"
-  ]
+    "Miscellaneous Services", "Other"]
 
   Date::DATE_FORMATS[:default] = "%A %B %e, %Y"
