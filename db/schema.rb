@@ -293,6 +293,7 @@ ActiveRecord::Schema.define(version: 2020_05_12_171757) do
     t.integer "quantity_used"
     t.integer "quantity_lost"
     t.integer "quantity_loaned"
+    t.date "event_date"
   end
 
   create_table "test_kits", force: :cascade do |t|
