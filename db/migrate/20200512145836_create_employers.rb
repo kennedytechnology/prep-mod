@@ -17,6 +17,10 @@ class CreateEmployers < ActiveRecord::Migration[6.0]
       t.string  :total_employees
       t.string  :total_locations
       t.string  :business_locations
+      t.boolean  :screening_info
+      t.boolean  :testing_info
+      t.boolean  :vacination_info
+      t.boolean  :other_info
 
       t.timestamps
     end
