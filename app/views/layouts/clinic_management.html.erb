@@ -30,7 +30,7 @@
             <a class="button-tab" href="#"> Records Search </a>
             <a class="button-tab" href="/clinic/data_transfer">Data Transfer</a>
             <a class="button-tab" href="#">Upload Records</a>
-            <a class="button-tab" href="#">Inventory Management</a>
+            <%= link_to "Inventory Management", supply_inventories_path(clinic_id: Clinic.first.id), class: "button-tab" %>
             <%= link_to "Employer Enrollments", employers_path, class: "button-tab" %>
             <a class="button-tab" href="/message_board/index">Message Board</a>
             <%= link_to "Create Users", new_user_invitation_path, class: "button-tab" %>
