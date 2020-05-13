@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'message_board/index'
   get 'kit/new', to: 'public/kit#new'
   post 'kit/create', to: 'public/kit#create'
   get 'pages/landing_page'
@@ -34,6 +33,7 @@ Rails.application.routes.draw do
   resources :supply_inventories 
   resources :test_kits
   resources :provider_enrollments
+  resources :messages, only: [:new, :create]
   resources :employers, only: [:index, :new, :create]
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

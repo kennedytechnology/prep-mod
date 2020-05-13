@@ -1,0 +1,72 @@
+<h2 class="main-title"> Message Board </h2>
+
+<div class="message-board bg-white container justify-center mt-12 lg:mx-auto lg:flex">
+    <div class="board-container w-full flex flex-wrap justify-center">
+        <%= form_with model: @message, local: true, class: "content w-full flex flex-wrap justify-between" do |f| %>
+            <div class="message-container py-12 px-6 max-w-xl lg:max-w-5xl lg:w-1/2 w-full">
+                <%= f.text_field :subject, class: 'form-input w-full', placeholder: "Subject:", required: true %>
+                <%= f.text_area :body, class: "form-textarea block w-full", rows: "9", placeholder: "Enter your message here.. ", reguired: true %>
+            </div> 
+            <div class="send-container py-12 px-6 max-w-xl lg:max-w-5xl lg:w-1/2 w-full">
+                <div class="send-content block w-full">
+                    <span class="title text-gray-900 text-xl">Send Message to: </span>
+                    <div class="options mt-4">
+                        <div>
+                            <div class="relative flex items-start">
+                                <div class="absolute flex items-center h-5">
+                                    <%= f.check_box :send_to_all_users, class: "form-checkbox" %>
+                                </div>
+                                <div class="pl-7">
+                                    <%= f.label :send_to_all_users, "All users", class: "block" %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="relative flex items-start">
+                                <div class="absolute flex items-center h-5">
+                                    <input id="providers" type="checkbox" class="form-checkbox">
+                                </div>
+                                <div class="pl-7">
+                                    <label for="providers" class="block"> Healthcare Providers </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="relative flex items-start">
+                                <div class="absolute flex items-center h-5">
+                                    <input id="departments" type="checkbox" class="form-checkbox">
+                                </div>
+                                <div class="pl-7">
+                                    <label for="departments" class="block"> Local Health Departments </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="relative flex items-start">
+                                <div class="absolute flex items-center h-5">
+                                    <input id="school" type="checkbox" class="form-checkbox">
+                                </div>
+                                <div class="pl-7">
+                                    <label for="school" class="block"> School Health </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="relative flex items-start">
+                                <div class="absolute flex items-center h-5">
+                                    <input id="admin" type="checkbox" class="form-checkbox">
+                                </div>
+                                <div class="pl-7">
+                                    <label for="admin" class="block"> Agency Administrator </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="field-required my-4"> * All messages must be approved by Regional Administrator </p>
+                        <%= f.submit "Submit Message", class: "button-primary" %>
+                    </div>
+                </div>
+            </div>
+        <% end %>   
+    </div>    
+</div> 

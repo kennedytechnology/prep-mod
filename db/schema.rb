@@ -209,6 +209,15 @@ ActiveRecord::Schema.define(version: 2020_05_13_111341) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.string "subject"
+    t.text "body"
+    t.boolean "send_to_all_users"
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "named_places", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
