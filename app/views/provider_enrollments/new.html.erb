@@ -234,9 +234,9 @@
                 </span>
                 <span class="field-required">*</span>
             <% end %>
-            <%= f.text_field :refrigerator, class: "form-input block w-full", data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
             <%= f.check_box :refrigerator, {class: "form-checkbox"}, "I do not have a refrigerator" %>
-            <%= f.label :refrigerator, "I do not have a refrigerator" %>
+            <%= f.label :refrigerator, "I do not have a refrigerator" %>            
+            <%= f.text_field :refrigerator, class: "form-input block w-full", data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
         <div>
@@ -246,9 +246,9 @@
                 </span>
                 <span class="field-required">*</span>
             <% end %>         
-            <%= f.text_field :freezer, class: "form-input block w-full", data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
             <%= f.check_box :freezer, {class: "form-checkbox"}, "I do not have a freezer" %>
-            <%= f.label :freezer, "I do not have a freezer" %>   
+            <%= f.label :freezer, "I do not have a freezer" %>  
+            <%= f.text_field :freezer, class: "form-input block w-full", data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
         </div>
 
         <div>
@@ -257,10 +257,10 @@
                     What make and model data logger/refrigerator thermometer do you have?
                 </span>
                 <span class="field-required">*</span>
-            <% end %>           
-            <%= f.text_field :refrigerator_thermometer, class: "form-input block w-full", data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            <% end %>
             <%= f.check_box :refrigerator_thermometer, {class: "form-checkbox"}, "I do not have a thermometer" %>
-            <%= f.label :refrigerator_thermometer, "I do not have a thermometer" %>         
+            <%= f.label :refrigerator_thermometer, "I do not have a thermometer" %>            
+            <%= f.text_field :refrigerator_thermometer, class: "form-input block w-full", data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>        
         </div>
     </div>
 
