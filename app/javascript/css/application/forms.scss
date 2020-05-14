@@ -33,7 +33,7 @@ label,
 
 input {
     // for all inputs
-    @apply bg-white border border-brand-blue-300 transition duration-150 ease-in-out;
+    @apply bg-white border border-gray-700 transition duration-150 ease-in-out;
     &::placeholder { @apply text-gray-500; }
     &:focus {  @apply outline-none; }
 
@@ -50,22 +50,22 @@ input {
 
     &.form-input,
     &.form-select { 
-        @apply border-brand-blue-300 rounded-none rounded-sm;
+        @apply border-gray-700 rounded-none rounded-sm;
     }
 
     &.form-radio,
     &.form-checkbox {
-        @apply border-brand-blue-300;
+        @apply border-gray-700;
     }
 }
 
 .form-textarea { 
-    @apply border-brand-blue-300 rounded-none rounded-sm;
+    @apply border-gray-700 rounded-none rounded-sm;
 }
 
 select {
     &.form-select {
-        @apply border-brand-blue-300 rounded-none transition duration-150 ease-in-out mb-4 rounded-sm;
+        @apply border-gray-700 rounded-none transition duration-150 ease-in-out mb-4 rounded-sm;
         min-height: 50px;
         max-height: 50px;
     }

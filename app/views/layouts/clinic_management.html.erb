@@ -22,19 +22,30 @@
     </script>
     <% end %>
     <div class="main-container"> 
-        <div class="flex flex-wrap justify-center items-center text-gray-600 my-6">
-            <%= link_to "Home", pages_landing_page_path, class: "button-tab" %>
-            <%= link_to "Create Clinic", new_clinic_path, class: "button-tab" %>
-            <%= link_to "Upcoming Clinics", clinics_path(clinic_date: 'upcoming'), class: "button-tab" %>
-            <%= link_to "Past Clinics", clinics_path(clinic_date: 'past'), class: "button-tab" %>
-            <a class="button-tab" href="#"> Records Search </a>
-            <a class="button-tab" href="/clinic/data_transfer">Data Transfer</a>
-            <a class="button-tab" href="#">Upload Records</a>
-            <a class="button-tab" href="#">Inventory Management</a>
-            <%= link_to "Message Board", new_message_path, class: "button-tab" %>
-            <%= link_to "Create Users", new_user_invitation_path, class: "button-tab" %>
-            <%= link_to "Change Password", edit_user_registration_path, class: "button-tab" %>
-            <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "button-tab") %>
+        <div class="flex flex-wrap justify-center items-center text-gray-600 my-6 lg:mx-24">
+          <% 
+            cms_menu = {
+              "Home": pages_landing_page_path,
+              "Create Clinic": new_clinic_path,
+              "Upcoming Clinics": clinics_path(clinic_date: 'upcoming'),
+              "Past Clinics": clinics_path(clinic_date: 'past'),
+              "Records Search": patients_path,
+              "Data Transfer": "/clinic/data_transfer",
+              "Upload Records": "#",
+              "Inventory Management": "#",
+              "Message Board": new_message_path,
+              "Create Users": new_user_invitation_path,
+              "Change Password": edit_user_registration_path,
+              'Logout': destroy_user_session_path
+            }
+          %>
+          <% cms_menu.each do |link_name, link_route| %>
+            <%
+              classes_for_link = "button-tab "
+              classes_for_link << "button-tab-active " if current_page?(link_route)
+            %>
+            <%= link_to link_name, link_route, class: classes_for_link %>
+          <% end %>
         </div>
         <%= yield %>
     </div>

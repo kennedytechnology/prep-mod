@@ -16,16 +16,11 @@
             <%= f.search_field :last_name_cont, placeholder: "Last Name",class: "form-input flex-1 mr-2" %>
             <%= f.search_field :mothers_maiden_name_cont, placeholder: "Mother's maiden name",class: "form-input flex-1 mr-2" %>
             <%= f.search_field :date_of_birth_equals, placeholder: "Date of birth",class: "form-input flex-1 mr-2" %>
-            <%= link_to "Reset", patients_path, class: "button-action" %>
+            <%= link_to "Reset", patients_path, class: "button-action ml-2" %>
             <%= f.submit "Search", class: "button-action" %>
       <% end %>
     </div>
     
-  </div>
-  <div class="flex justify-end">
-      <form>
-        <input type="button" value="Print" onClick="window.print()" class="button-primary">
-      </form>
   </div>
   
 
@@ -76,3 +71,8 @@
     </div>
   </div> -->
 </div>
+  <div class="flex mt-4 justify-start">
+      <form>
+        <input type="button" value="Print" onClick="window.print()" class="button-primary">
+      </form>
+  </div>
