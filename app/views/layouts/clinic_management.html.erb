@@ -35,8 +35,7 @@
               "Inventory Management": "#",
               "Message Board": new_message_path,
               "Create Users": new_user_invitation_path,
-              "Change Password": edit_user_registration_path,
-              'Logout': destroy_user_session_path
+              "Change Password": edit_user_registration_path
             }
           %>
           <% cms_menu.each do |link_name, link_route| %>
@@ -46,6 +45,7 @@
             %>
             <%= link_to link_name, link_route, class: classes_for_link %>
           <% end %>
+          <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "button-tab" %>
         </div>
         <%= yield %>
     </div>
