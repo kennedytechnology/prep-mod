@@ -1,0 +1,2 @@
+class ClinicPrimaryGroup < ApplicationRecord
+end
