@@ -1,10 +1,9 @@
 class ProviderEnrollment < ApplicationRecord
   has_and_belongs_to_many :clinic_age_groups
+  has_and_belongs_to_many :clinic_primary_groups
   has_and_belongs_to_many :clinic_services
   accepts_nested_attributes_for :clinic_services
-<<<<<<< HEAD
-  has_and_belongs_to_many :clinic_primary_groups
-=======
+
 
   before_create do
     self.status = "pending"
@@ -22,5 +21,4 @@ class ProviderEnrollment < ApplicationRecord
       self.status = "pending"
     end
   end
->>>>>>> a70f94d06ae5c47a7f317190cda29cbf9db110ff
 end
