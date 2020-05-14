@@ -83,7 +83,7 @@ class ClinicsController < ClinicManagementController
       :start_hour_minute, :start_meridiem,
       :end_hour_minute, :end_meridiem, :start_hour, :start_minute, :end_hour, :end_minute,
       :appointments_available, users: [], :service_ids => [],
-      :age_group_ids => [],
+      :age_group_ids => [], :primary_group_ids => [],
       clinic_personnel_attributes: [:id, :name, :_destroy],
       clinic_events_attributes: [:id, :patient_id, :outcome, :safety_kit_received,
         :contact_type, :screening_outcome, :clinic_staff_id, :notes, :test_name,
@@ -91,7 +91,7 @@ class ClinicsController < ClinicManagementController
       test_kits_attributes: [:id, :test_name, :test_manufacturer,
         :test_lot_number, :test_type, :test_processing, 
         :test_expiration_date, :test_kits_quantity, :tests_administered, 
-        :unusable_tests, :tests_returned, :_destroy]
+        :unusable_tests, :tests_returned, :_destroy],
     )
   end
 end
