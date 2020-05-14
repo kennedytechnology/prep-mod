@@ -13,9 +13,10 @@
     <div class="flex justify-end my-4">
       <%= search_form_for @q, class: "flex items-center w-full" do |f| %>
             <%= f.search_field :first_name_cont, placeholder: "First Name", class: "form-input flex-1 mr-2" %>
-            <%= f.search_field :last_name_cont, placeholder: "Last Name",class: "form-input flex-1 mr-2" %>
-            <%= f.search_field :mothers_maiden_name_cont, placeholder: "Mother's maiden name",class: "form-input flex-1 mr-2" %>
-            <%= f.search_field :date_of_birth_equals, placeholder: "Date of birth",class: "form-input flex-1 mr-2" %>
+            <%= f.search_field :last_name_cont, placeholder: "Last Name", class: "form-input flex-1 mr-2" %>
+            <%= f.search_field :mothers_maiden_name_cont, placeholder: "Mother's maiden name", class: "form-input flex-1 mr-2" %>
+            <%= f.search_field :date_of_birth_equals, type: "date", placeholder: "Date of birth",
+                               class: "form-input flex-1 mr-2", style: "margin-bottom: 0; min-height: 42px; max-height: 42px;" %>
             <%= link_to "Reset", patients_path, class: "button-action ml-2" %>
             <%= f.submit "Search", class: "button-action" %>
       <% end %>
