@@ -1,4 +1,4 @@
-<h2 class="main-title">Request to Become a COVID-19 Service Provider</h2>
+<h2 class="main-title"> COVID-19 Service Provider Request from <%= @provider_enrollment.first_name %> <%= @provider_enrollment.last_name %> </h2>
 
 <%= form_with model: @provider_enrollment, local: true, class: "py-5", data: {controller: "provider-enrollment-new-entry"} do |f| %>
     <div class="field-fullwidth">
@@ -236,7 +236,7 @@
             </div>
             
             <div>
-                <%= f.label :practice_backup_email, class: "block" do %>
+                <%= f.label :practice_backup_email, practice_class: "block" do %>
                 <span> Email Address </span>
                 <span class="field-required">*</span>
                 <% end %>
@@ -313,7 +313,9 @@
     </div>
 
     <div class="flex justify-end">
-        <%= f.submit "Submit Request", class: "button-primary"%>
+        <%= f.submit "Accepted", class: "button-action" %>
+        <%= f.submit "Denied", class: "button-action" %>
+        <%= f.submit "Need Additional Information", class: "button-action" %>
     </div>
 <% end %>
 

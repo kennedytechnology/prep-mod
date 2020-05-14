@@ -1,4 +1,4 @@
-<h2 class="main-title"> Provider Enrollments </h2>
+<h2 class="main-title"> Provider Enrollment Requests </h2>
 
 <div class="flex justify-end mb-6">
     <%= link_to "New Provider Enrollment", new_provider_enrollment_path, class: "button-primary" %>
@@ -7,21 +7,25 @@
 <table class="table">
     <thead>
         <tr>
-            <th> First Name </th>
-            <th> Last Name </th>
-            <th> Address </th>
-            <th> Phone Number </th>
-            <th> Email </th>
+            <th> Name </th>
+            <th> Date of Request </th>
+            <th> Practice Name </th>
+            <th> Specialty </th>
+            <th> County </th>
+            <th> Vaccinator </th>
+            <th> Action </th>
         </tr>
     </thead>
     <tbody>
         <% @provider_enrollments.each do |provider| %>
         <tr>
-            <td> <%= provider.first_name %> </td>
-            <td> <%= provider.last_name %> </td>
-            <td> <%= provider.practice_address %> </td>
-            <td> <%= provider.practice_office_phone %> </td>
-            <td> <%= provider.practice_email %> </td>
+            <td> <%= provider.first_name %> <%= provider.last_name %> </td>
+            <td> <%= provider.created_at.strftime("%m-%d-%Y") %> </td>
+            <td> <%= provider.practice_name %> </td>
+            <td> <%= provider.medical_specialty %> </td>
+            <td> <%= provider.county %> </td>
+            <td> <%= provider.does_provide_vaccination %> </td>
+            <td> <%= link_to "Check Request", edit_provider_enrollment_path(provider), class: "button-action" %> </td>
         </tr>
         <% end %>
     </tbody>
