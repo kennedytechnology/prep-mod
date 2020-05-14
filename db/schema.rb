@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_13_170500) do
+ActiveRecord::Schema.define(version: 2020_05_14_084213) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -316,7 +316,7 @@ ActiveRecord::Schema.define(version: 2020_05_13_170500) do
     t.string "practice_mobile_phone"
     t.string "practice_email"
     t.string "practice_backup_contact"
-    t.string "practice_backup_phone"
+    t.string "practice_backup_office_phone"
     t.string "practice_backup_email"
     t.string "freezer"
     t.string "high_risk_group_served"
@@ -327,6 +327,10 @@ ActiveRecord::Schema.define(version: 2020_05_13_170500) do
     t.text "additional_info"
     t.string "middle_initial"
     t.string "practice_type"
+    t.string "contact_office_phone"
+    t.string "contact_mobile_phone"
+    t.string "contact_email"
+    t.string "practice_backup_mobile_phone"
   end
 
   create_table "supply_inventories", force: :cascade do |t|
