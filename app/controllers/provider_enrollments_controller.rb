@@ -46,11 +46,9 @@ class ProviderEnrollmentsController < ApplicationController
         :license_state_of_issue, :practice_type, :practice_name, 
         :practice_city, :practice_state, :practice_zip_code, 
         :practice_backup_contact, :practice_backup_phone, :practice_backup_email, 
-        :population_served, :high_risk_group_served, :does_provide_vaccination, 
-        :does_provide_vfc, :refrigerator, :refrigerator_thermometer, 
-        :additional_info, :clinic_service_ids => [], :clinic_age_group_ids => [], 
-        :freezer, :seniors, :african_americans, 
-        :hispanics, :chronically_ill
+        :does_provide_vaccination, :does_provide_vfc, :refrigerator, 
+        :refrigerator_thermometer, :additional_info, :freezer, 
+        :clinic_service_ids => [], :clinic_age_group_ids => [], :clinic_primary_groups => []
       )
     end
 
