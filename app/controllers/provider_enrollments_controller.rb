@@ -48,7 +48,7 @@ class ProviderEnrollmentsController < ApplicationController
         :practice_backup_contact, :practice_backup_phone, :practice_backup_email, 
         :does_provide_vaccination, :does_provide_vfc, :refrigerator, 
         :refrigerator_thermometer, :additional_info, :freezer, 
-        :clinic_service_ids => [], :clinic_age_group_ids => [], :clinic_primary_groups => []
+        :clinic_service_ids => [], :clinic_age_group_ids => [], :clinic_primary_group_ids => []
       )
     end
 
