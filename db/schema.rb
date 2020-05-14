@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_14_131344) do
+ActiveRecord::Schema.define(version: 2020_05_14_140355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,10 +78,7 @@ ActiveRecord::Schema.define(version: 2020_05_14_131344) do
   end
 
   create_table "clinic_primary_groups", force: :cascade do |t|
-    t.string "seniors"
-    t.string "african_americans"
-    t.string "hispanics"
-    t.string "chronically_ill"
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
