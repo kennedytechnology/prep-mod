@@ -33,6 +33,9 @@ end
   ClinicAgeGroup.create!(name: name)
 end
 
+["Seniors", "African-Americans", "Hispanics", "Chronically Ill"].each do |name|
+  ClinicPrimaryGroup.create!(name: name)
+end
 
 addresses = JSON.load(Rails.root.join("db/addresses.json"))["addresses"]
 addresses.select!{|a| VENUE_STATES.include?(a["state"])}
