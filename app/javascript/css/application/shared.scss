@@ -45,3 +45,21 @@
         }
     }
 }
+
+// Dropdown with checkboxes
+.multiselect-dropdown { @apply relative; }
+.selectBox { @apply relative; }
+.overSelect { @apply absolute left-0 right-0 top-0 bottom-0; }
+.checkboxes-in-dropdown {
+    @apply hidden border absolute bg-white overflow-scroll py-2;
+    top: 52px;
+    max-height: 300px;
+
+    &::-webkit-scrollbar { width: 4px; }
+
+    &::-webkit-scrollbar-thumb {
+        @apply rounded-lg;
+        background-color: rgba(0, 0, 0, .5);
+        box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+    }
+}

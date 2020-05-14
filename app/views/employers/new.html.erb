@@ -26,8 +26,42 @@
 
     <div class="field-fullwidth">
         <p class="title"> Business Location/Environment (Select all that apply) </p>
-        <%= f.label :business_locations, "Business Location/Environment", class: "block w-full" %>
-        <%= f.select :business_locations, BUSINESS_LOCATIONS, {prompt: "Select"}, {multiple: true, class: "form-select w-full"} %>
+        <div class="multiselect-dropdown">
+            <div class="selectBox" onclick="showCheckboxes()">
+                <select class="form-select w-full">
+                    <option>Select</option>
+                </select>
+                <div class="overSelect"></div>
+            </div>
+            <div class="checkboxes-in-dropdown" id="locationsCheckboxes">
+                <% BUSINESS_LOCATIONS.each do |location| %>
+                <div class="relative flex items-start px-3 hover:bg-blue-50">
+                    <div class="absolute flex items-center h-5">
+                        <%= f.check_box(:business_locations, {multiple: true, id: "location_#{location}", class: "form-checkbox"}, location) %>
+                    </div>
+                    <div class="pl-6 text-sm leading-5">
+                        <label for="location_<%=location%>"> <%= location %> </label>
+                    </div>
+                </div>
+                <% end %>
+            </div>
+        </div>
+
+        <script>
+            var expanded = false;
+
+            function showCheckboxes() {
+                var checkboxes = document.getElementById("locationsCheckboxes");
+                if (!expanded) {
+                    checkboxes.style.display = "block";
+                    expanded = true;
+                } else {
+                    checkboxes.style.display = "none";
+                    expanded = false;
+                }
+            }
+        </script>
+
     </div>
 
     <div class="field-fullwidth">

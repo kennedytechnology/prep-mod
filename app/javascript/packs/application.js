@@ -47,6 +47,5 @@ $(document).on('turbolinks:load', function() {
     $('#testKits').append($(this).data('fields').replace(regexp, time));
     return event.preventDefault();
   });
-  
 });
 import "controllers"
