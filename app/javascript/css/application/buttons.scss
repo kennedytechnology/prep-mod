@@ -19,7 +19,7 @@
 
     &-primary {
         @extend .button-base;
-        @apply bg-red-600 border-red-600 text-white;
+        @apply bg-red-600 border-red-600 text-white text-lg;
         min-width: 210px;
         max-width: 210px;
 

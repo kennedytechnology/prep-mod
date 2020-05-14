@@ -1,4 +1,4 @@
-<h1 class="main-title"> Request to become a COVID-19 employer </h1>
+<h1 class="main-title"> Request to Receive COVID-19 About Your Employees or Students </h1>
 
 <%= form_with model: @employer, local: true do |f| %>
     <div class="field-fullwidth">
@@ -24,15 +24,33 @@
         </div>
     </div>
 
-    <div class="field-fullwidth">
+    <div class="field-fullwidth" data-controller="employer-form">
         <p class="title"> Business Location/Environment (Select all that apply) </p>
-        <%= f.label :business_locations, "Business Location/Environment", class: "block w-full" %>
-        <%= f.select :business_locations, BUSINESS_LOCATIONS, {prompt: "Select"}, {multiple: true, class: "form-select w-full"} %>
+        <div class="multiselect-dropdown">
+            <div class="selectBox"data-action="click->employer-form#showCheckboxes">
+                <select class="form-select w-full">
+                    <option>Select</option>
+                </select>
+                <div class="overSelect"></div>
+            </div>
+            <div class="checkboxes-in-dropdown" data-target="employer-form.locationsCheckboxes">
+                <% BUSINESS_LOCATIONS.each do |location| %>
+                <div class="relative flex items-start px-3 hover:bg-blue-50">
+                    <div class="absolute flex items-center h-5">
+                        <%= f.check_box(:business_locations, {multiple: true, id: "location_#{location}", class: "form-checkbox cursor-pointer"}, location) %>
+                    </div>
+                    <div class="pl-6 text-sm leading-5">
+                        <label for="location_<%=location%>" class="cursor-pointer"> <%= location %> </label>
+                    </div>
+                </div>
+                <% end %>
+            </div>
+        </div>
     </div>
 
     <div class="field-fullwidth">
         <p class="title"> Contact Details </p>
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-3 gap-4">
             <div>
                 <%= f.label :first_name, "First Name", class: "block" %>
                 <%= f.text_field :first_name, class: "form-input w-full" %>
@@ -41,46 +59,40 @@
                 <%= f.label :last_name, "Last Name", class: "block" %>
                 <%= f.text_field :last_name, class: "form-input w-full" %>
             </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-4">
             <div>
                 <%= f.label :position, "Position/Title", class: "block" %>
                 <%= f.text_field :position, class: "form-input w-full" %>
             </div>
-            <div>
-                <%= f.label :company_name, "Company Name", class: "block" %>
-                <%= f.text_field :company_name, class: "form-input w-full" %>
-            </div>
+            <!-- <div>
+                <%# f.label :company_name, "Company Name", class: "block" %>
+                <%# f.text_field :company_name, class: "form-input w-full" %>
+            </div> -->
         </div>
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-5 gap-4">
             <div>
                 <%= f.label :address_1, "Address 1", class: "block" %>
                 <%= f.text_field :address_1, class: "form-input w-full" %>
             </div>
             <div>
                 <%= f.label :address_2, "Address 2", class: "block" %>
-            <%= f.text_field :address_2, class: "form-input w-full" %>
+                <%= f.text_field :address_2, class: "form-input w-full" %>
             </div>
-        </div>
-
-        <div class="grid grid-cols-3 gap-7">
             <div>
                 <%= f.label :city, class: "block" %>
                 <%= f.text_field :city, class: "form-input w-full" %>
             </div>
             <div>
-                <%= f.label :zip_code, "Zip Code", class: "block" %>
-                <%= f.text_field :zip_code, class: "form-input w-full" %>
-            </div>
-            <div>
                 <%= f.label :state, class: "block" %>
                 <%= f.text_field :state, class: "form-input w-full" %>
             </div>
+            <div>
+                <%= f.label :zip_code, "Zip Code", class: "block" %>
+                <%= f.text_field :zip_code, class: "form-input w-full" %>
+            </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-4 gap-4">
             <div>
                 <%= f.label :office_phone, "Office Phone Number", class: "block" %>
                 <%= f.text_field :office_phone, class: "form-input w-full" %>
@@ -89,9 +101,6 @@
                 <%= f.label :mobile_phone, "Mobile Phone Name", class: "block" %>
                 <%= f.text_field :mobile_phone, class: "form-input w-full" %>
             </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-4">
             <div>
                 <%= f.label :email, "Email Address", class: "block" %>
                 <%= f.email_field :email, class: "form-input w-full" %>
@@ -106,7 +115,7 @@
     <!-- Back up Contact Info -->
     <div class="field-fullwidth">
         <p class="title"> Back-Up Contact's Details </p>
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-3 gap-4">
             <div>
                 <%= f.label :backup_first_name, "Back-Up Contact's First Name", class: "block" %>
                 <%= f.text_field :backup_first_name, class: "form-input w-full" %>
@@ -115,73 +124,63 @@
                 <%= f.label :backup_last_name, "Back-Up Contact's Last Name", class: "block" %>
                 <%= f.text_field :backup_last_name, class: "form-input w-full" %>
             </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-4">
             <div>
                 <%= f.label :backup_position, "Back-Up Contact's Position/Title", class: "block" %>
                 <%= f.text_field :backup_position, class: "form-input w-full" %>
             </div>
-            <div>
-                <%= f.label :backup_company_name, "Back-Up Contact's Company Name", class: "block" %>
-                <%= f.text_field :backup_company_name, class: "form-input w-full" %>
-            </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-6 gap-4">
             <div>
-                <%= f.label :backup_address_1, "Back-Up Contact's Address 1", class: "block" %>
+                <%= f.label :backup_company_name, "Company Name", class: "block" %>
+                <%= f.text_field :backup_company_name, class: "form-input w-full" %>
+            </div>
+            <div>
+                <%= f.label :backup_address_1, "Address 1", class: "block" %>
                 <%= f.text_field :backup_address_1, class: "form-input w-full" %>
             </div>
             <div>
-                <%= f.label :backup_address_2, "Back-Up Contact's Address 2", class: "block" %>
+                <%= f.label :backup_address_2, "Address 2", class: "block" %>
                 <%= f.text_field :backup_address_2, class: "form-input w-full" %>
             </div>
-        </div>
-
-        <div class="grid grid-cols-3 gap-7">
             <div>
-                <%= f.label :backup_city, "Back-Up Contact's City", class: "block" %>
+                <%= f.label :backup_city, "City", class: "block" %>
                 <%= f.text_field :backup_city, class: "form-input w-full" %>
             </div>
             <div>
-                <%= f.label :backup_zip_code, "Back-Up Contact's Zip Code", class: "block" %>
-                <%= f.text_field :backup_zip_code, class: "form-input w-full" %>
+                <%= f.label :backup_state, "State", class: "block" %>
+                <%= f.text_field :backup_state, class: "form-input w-full" %>
             </div>
             <div>
-                <%= f.label :backup_state, "Back-Up Contact's State", class: "block" %>
-                <%= f.text_field :backup_state, class: "form-input w-full" %>
+                <%= f.label :backup_zip_code, "Zip Code", class: "block" %>
+                <%= f.text_field :backup_zip_code, class: "form-input w-full" %>
             </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-3 gap-4">
             <div>
-                <%= f.label :backup_office_phone, "Back-Up Contact's Office Phone Number", class: "block" %>
+                <%= f.label :backup_office_phone, "Office Phone Number", class: "block" %>
                 <%= f.text_field :office_phone, class: "form-input w-full" %>
             </div>
             <div>
-                <%= f.label :backup_mobile_phone, "Back-Up Contact's Mobile Phone Name", class: "block" %>
+                <%= f.label :backup_mobile_phone, "Mobile Phone Name", class: "block" %>
                 <%= f.text_field :mobile_phone, class: "form-input w-full" %>
             </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-4">
             <div>
-                <%= f.label :backup_email, "Back-Up Contact's Email Address", class: "block" %>
+                <%= f.label :backup_email, "Email Address", class: "block" %>
                 <%= f.text_field :backup_email, class: "form-input w-full" %>
             </div>
-            <div> </div>
         </div>
     </div>
 
     <div class="field-side-by-side">
         <div>
-            <p class="title">Employees Info </p>
+            <p class="title">Employee Info </p>
             <%= f.label :total_employees, "Total Number of Employees", class: "block" %>
             <%= f.text_field :total_employees, class: "form-input w-full" %>
         </div>
         <div>
-            <p class="title">Locations Info </p>
+            <p class="title">Location Info </p>
             <%= f.label :total_locations, "Total Number of Locations", class: "block" %>
             <%= f.text_field :total_locations, class: "form-input w-full" %>
         </div>
