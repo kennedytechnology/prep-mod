@@ -1,5 +1,5 @@
 class ProviderEnrollmentsController < ApplicationController
-  before_action :authenticate_user!, except: [:new]
+  before_action :authenticate_user!, except: [:new, :create]
   layout "clinic_management", except: [:new]
 
   def index
@@ -14,9 +14,9 @@ class ProviderEnrollmentsController < ApplicationController
     @provider_enrollment = ProviderEnrollment.new(provider_enrollment_params)
 
     if @provider_enrollment.save
-      redirect_to provider_enrollments_path, notice: "Successfully Added Provider"
+      redirect_to root_path, notice: "Your Request to Become a COVID-19 Service Provider is successfully submitted!"
     else
-      redirect_back fallback_location: provider_enrollments_path, alert: "Error!"
+      redirect_back fallback_location: new_provider_enrollments_path, alert: "Error!"
     end
   end
 
