@@ -13,7 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
   </head>
 
-  <body>
+  <body data-controller="main">
     <%= render partial: "layouts/header" unless (action_name == "index" && controller_name == "public_portal") %>
     <!-- These are from devise. This is to be better-handled elsewise -->
     <% if notice || alert %>

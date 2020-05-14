@@ -1,4 +1,4 @@
-<h2 class="main-title">Request to Become a COVID-19 Service Provider</h2>
+<h2 class="main-title"> COVID-19 Service Provider Request from <%= @provider_enrollment.first_name %> <%= @provider_enrollment.last_name %> </h2>
 
 <%= form_with model: @provider_enrollment, local: true, class: "py-5", data: {controller: "provider-enrollment-new-entry"} do |f| %>
     <div class="field-fullwidth">
@@ -26,25 +26,8 @@
     </div>
 
     <div class="field-fullwidth">
-<<<<<<< HEAD
-        <h2 class="title"> What high-risk or under-served groups are largely represented in your practice? <span class="field-required">*</span> </h2>    
-        <div class="checkboxes-container">
-            <%= collection_check_boxes(:provider_enrollment, :clinic_primary_group_ids, ClinicPrimaryGroup.all, :id, :name) do |b| %>
-            <div>
-                <span> <%= b.check_box(class: "form-checkbox") %> </span>
-                <span class="label"> <%= b.label %> </span>
-            </div>
-            <% end %>
-        </div>
-    </div>
-
-    <div class="field-fullwidth">
-        <h2 class="title"> Basic Information </h2> 
-        <div class="grid grid-cols-3 gap-4">
-=======
         <h2 class="title"> Provider Contact's Information </h2> 
         <div class="grid grid-cols-5 gap-4">
->>>>>>> a70f94d06ae5c47a7f317190cda29cbf9db110ff
             <div>
                 <%= f.label :first_name, class: "block" do %>
                     <span> First Name </span>
@@ -253,7 +236,7 @@
             </div>
             
             <div>
-                <%= f.label :practice_backup_email, class: "block" do %>
+                <%= f.label :practice_backup_email, practice_class: "block" do %>
                 <span> Email Address </span>
                 <span class="field-required">*</span>
                 <% end %>
@@ -330,7 +313,9 @@
     </div>
 
     <div class="flex justify-end">
-        <%= f.submit "Submit Request", class: "button-primary"%>
+        <%= f.submit "Accepted", class: "button-action" %>
+        <%= f.submit "Denied", class: "button-action" %>
+        <%= f.submit "Need Additional Information", class: "button-action" %>
     </div>
 <% end %>
 

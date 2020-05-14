@@ -47,7 +47,7 @@ CLINIC_EVENTS = [
   INVENTORY_PACKAGINGS = ["Unit", "Box", "Case", "Other"]
   INVENTORY_SOURCES = ["Private Purchase", "VFC", "Borrowed", "Other"]
   INVENTORY_EVENT_TYPES = ["Community", "Health Department", "LTC", "School", "Loan", "Hospital", "Other"]
-  PROFESSIONAL_LICENSES = %w(MD DO PharmaD/RPh NP PA DDS)
+  PROFESSIONAL_LICENSES = %w(MD DO PharmaD/RPh NP PA DDS Other)
   MEDICAL_SPECIALTY = ["Family Medicine", "Pediatrics", "Internal Medicine", "Cardiology", "Endocrinology", "Podiatry", "Other"]
   PRACTICE_TYPES = ["Solo Practicioner", "Group Practice", "Hospital Practice", "Federally-Qualified Health Center (FQHC)",
     "Pharamacy", "Other"]

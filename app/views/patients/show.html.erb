@@ -1,10 +1,17 @@
-<h1 class="main-title">Patient History</h1>
+<div class="header">
+  <h1 class="main-title lg:mb-0">Patient History</h1>
+  <h2 class="text-2xl font-bold text-gray-400 mb-8"><%= @patient.full_name %></h2>
+</div>
 
-<form class="flex justify-end mb-6">
-    <input type="button" value="Print" onClick="window.print()" class="button-primary">
-</form>
+<div class="flex justify-between items-center mb-3">
+  <%= link_to "Back to records", patients_path, class: "button-action" %>
+  <a href="javascript:"
+     class="button-primary"
+     data-action="click->main#printContent">Print</a>
+</div>
 
-<table class="table">
+
+<table class="table printable">
     <thead>
         <tr>
             <th><%= sortable "clinic_id", "Clinic Id" %></th>
@@ -12,7 +19,7 @@
             <th><%= sortable "category", "Service" %></th>
             <th><%= sortable "outcome", "Status" %></th>
             <th><%= sortable "notes" %></th>
-            <th>Actions</th>
+            <th class="table-action-buttons">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -23,7 +30,7 @@
             <td><%= clinic_event.category %></td>
             <td><%= clinic_event.outcome %></td>
             <td><%= clinic_event.notes %></td>
-            <td><%= link_to "Delete", "#", class: "button-action" %>
+            <td class="table-action-buttons"><%= link_to "Delete", "#", class: "button-action" %>
             </td>
         </tr>
         <% end %>

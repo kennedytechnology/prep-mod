@@ -12,7 +12,7 @@
     <%= yield :google_maps_script if content_for?(:google_maps_script) %>
   </head>
 
-  <body>
+  <body data-controller="main">
     <%= render partial: "layouts/header" %>
     <!-- These are from devise. This is to be better-handled elsewise -->
 
@@ -21,8 +21,8 @@
       alert("<%= notice.to_s + " " + alert.to_s %>")
     </script>
     <% end %>
-    <div class="main-container"> 
-        <div class="flex flex-wrap justify-center items-center text-gray-600 my-6 lg:mx-24">
+    <div class="main-container">
+        <div class="flex flex-wrap justify-center items-center text-gray-600 my-6 lg:mx-24 main-links-container">
           <% 
             cms_menu = {
               "Home": pages_landing_page_path,
@@ -35,8 +35,7 @@
               "Inventory Management": "#",
               "Message Board": new_message_path,
               "Create Users": new_user_invitation_path,
-              "Change Password": edit_user_registration_path,
-              'Logout': destroy_user_session_path
+              "Change Password": edit_user_registration_path
             }
           %>
           <% cms_menu.each do |link_name, link_route| %>
@@ -46,6 +45,7 @@
             %>
             <%= link_to link_name, link_route, class: classes_for_link %>
           <% end %>
+          <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "button-tab" %>
         </div>
         <%= yield %>
     </div>

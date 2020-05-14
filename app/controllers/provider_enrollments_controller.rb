@@ -27,6 +27,10 @@ class ProviderEnrollmentsController < ApplicationController
   def update
     @provider_enrollment = ProviderEnrollment.find(params[:id])
 
+    if params[:commit] == "Need Additional Information" || params[:commit] == "Accepted" || params[:commit] == "Denied"
+      @provider_enrollment.set_status(params[:commit])
+    end
+
     if @provider_enrollment.update(provider_enrollment_params)
       redirect_to provider_enrollments_path, notice: "Successfully Updated Provider"
     else
@@ -46,9 +50,18 @@ class ProviderEnrollmentsController < ApplicationController
         :license_state_of_issue, :practice_type, :practice_name, 
         :practice_city, :practice_state, :practice_zip_code, 
         :practice_backup_contact, :practice_backup_phone, :practice_backup_email, 
+<<<<<<< HEAD
         :does_provide_vaccination, :does_provide_vfc, :refrigerator, 
         :refrigerator_thermometer, :additional_info, :freezer, 
         :clinic_service_ids => [], :clinic_age_group_ids => [], :clinic_primary_group_ids => []
+=======
+        :population_served, :high_risk_group_served, :does_provide_vaccination, 
+        :does_provide_vfc, :refrigerator, :refrigerator_thermometer, 
+        :contact_office_phone, :contact_mobile_phone, :contact_email,
+        :practice_backup_office_phone, :practice_backup_mobile_phone,
+        :additional_info, :freezer, :clinic_service_ids => [], 
+        :clinic_age_group_ids => []
+>>>>>>> a70f94d06ae5c47a7f317190cda29cbf9db110ff
       )
     end
 
