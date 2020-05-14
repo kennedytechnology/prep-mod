@@ -91,7 +91,8 @@ class ClinicsController < ClinicManagementController
       test_kits_attributes: [:id, :test_name, :test_manufacturer,
         :test_lot_number, :test_type, :test_processing, 
         :test_expiration_date, :test_kits_quantity, :tests_administered, 
-        :unusable_tests, :tests_returned, :_destroy]
+        :unusable_tests, :tests_returned, :_destroy],
+      :seniors, :african_americans, :hispanics, :chronically_ill
     )
   end
 end
