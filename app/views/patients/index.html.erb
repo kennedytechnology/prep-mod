@@ -1,7 +1,7 @@
 <div class="clinic-patients-index-page">
   <div class="header-section">
     <div class="header">
-      <h1 class="main-title">Patients Listing
+      <h1 class="main-title">Patient Record Search
         <% if @clinic %>
           - <%= @clinic.name %>
         <% end %>
@@ -12,13 +12,13 @@
     </div>
     <div class="flex justify-end my-4 search-inputs-container">
       <%= search_form_for @q, class: "flex items-center w-full" do |f| %>
-            <%= f.search_field :first_name_cont, placeholder: "First Name", class: "form-input flex-1 mr-2" %>
-            <%= f.search_field :last_name_cont, placeholder: "Last Name", class: "form-input flex-1 mr-2" %>
-            <%= f.search_field :mothers_maiden_name_cont, placeholder: "Mother's maiden name", class: "form-input flex-1 mr-2" %>
-            <%= f.search_field :date_of_birth_equals, type: "date", placeholder: "Date of birth",
+        <%= f.search_field :first_name_cont, placeholder: "First Name", class: "form-input flex-1 mr-2" %>
+        <%= f.search_field :last_name_cont, placeholder: "Last Name", class: "form-input flex-1 mr-2" %>
+        <%= f.search_field :mothers_maiden_name_cont, placeholder: "Mother's maiden name", class: "form-input flex-1 mr-2" %>
+        <%= f.search_field :date_of_birth_equals, type: "date", placeholder: "Date of birth",
                                class: "form-input flex-1 mr-2", style: "margin-bottom: 0; min-height: 42px; max-height: 42px;" %>
-            <%= link_to "Reset", patients_path, class: "button-action ml-2" %>
-            <%= f.submit "Search", class: "button-action" %>
+        <%= f.submit "Search", class: "button-action" %>
+        <%= link_to "Reset", patients_path, class: "button-action" %>
       <% end %>
     </div>
     
@@ -26,12 +26,10 @@
   <div class="flex justify-end mb-3">
     <a href="javascript:"
        class="button-primary"
-       data-target="main.printButton"
-       data-action="click->main#printContent"
-       data-printcontent="tableToPrint">Print</a>
+       data-action="click->main#printContent">Print</a>
   </div>
   
-  <div class="flex flex-col" id="tableToPrint">
+  <div class="flex flex-col printable">
     <div class="sorting-table-wrapper">
       <div class="sorting-table-container">
         <table class="table">

@@ -1,12 +1,11 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "printButton" ];
+  static targets = [ "" ];
 
   connect() {}
 
   printContent(e) {
-    const content = document.getElementById(e.currentTarget.dataset.printcontent);
     window.print();
   }
 }
