@@ -10,7 +10,7 @@
         <h3>Total Registered: <%= @clinic.patients.size %></h3>
       <% end %>
     </div>
-    <div class="flex justify-end my-4">
+    <div class="flex justify-end my-4 search-inputs-container">
       <%= search_form_for @q, class: "flex items-center w-full" do |f| %>
             <%= f.search_field :first_name_cont, placeholder: "First Name", class: "form-input flex-1 mr-2" %>
             <%= f.search_field :last_name_cont, placeholder: "Last Name", class: "form-input flex-1 mr-2" %>
@@ -23,9 +23,15 @@
     </div>
     
   </div>
+  <div class="flex justify-end mb-3">
+    <a href="javascript:"
+       class="button-primary"
+       data-target="main.printButton"
+       data-action="click->main#printContent"
+       data-printcontent="tableToPrint">Print</a>
+  </div>
   
-
-  <div class="flex flex-col">
+  <div class="flex flex-col" id="tableToPrint">
     <div class="sorting-table-wrapper">
       <div class="sorting-table-container">
         <table class="table">
@@ -47,7 +53,7 @@
               <td><%= ((Date.today.to_time - patient.date_of_birth.to_time) / 1.year.seconds).floor if patient.date_of_birth %></td>
               <td><%= patient.sex == "F" ? "Female" : "Male" %></td>
               <td><%= patient.county %></td>              
-              <td class="w-3/12 text-right">
+              <td class="w-3/12 text-right table-action-buttons">
                 <%= link_to "Event Entry", new_clinic_event_path(clinic_id: @clinic, patient_id: patient.id),
                             class: "button-action" %>
                 <%= link_to "Delete", patient, method: :delete, class: "button-action" %>
@@ -72,8 +78,3 @@
     </div>
   </div> -->
 </div>
-  <div class="flex mt-4 justify-start">
-      <form>
-        <input type="button" value="Print" onClick="window.print()" class="button-primary">
-      </form>
-  </div>

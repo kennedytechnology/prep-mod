@@ -46,6 +46,22 @@
     }
 }
 
+@media print {
+    * {
+        @apply p-0 m-0 invisible;
+
+        .main-navbar-container,
+        .main-links-container,
+        .table-action-buttons,
+        .search-inputs-container {
+            @apply hidden;
+        }
+    }
+    #tableToPrint *, .header * {
+        @apply visible;
+    }
+}
+
 // Dropdown with checkboxes
 .multiselect-dropdown { @apply relative; }
 .selectBox { @apply relative; }
