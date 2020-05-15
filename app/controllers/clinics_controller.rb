@@ -74,7 +74,7 @@ class ClinicsController < ClinicManagementController
   def clinic_params
     params.require(:clinic).permit(
       :clinic_status, :start_time, :end_time, :location,
-      :address, :lead_vaccinator_name,
+      :address, :lead_vaccinator_name, :provider_enrollment_id,
       :clinic_date, :students_registered,
       :incidents_comments, :county, :venue_name, :zip, 
       :city, :state, :appointment_frequency_minutes,
