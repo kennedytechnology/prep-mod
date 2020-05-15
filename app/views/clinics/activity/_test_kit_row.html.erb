@@ -1,10 +1,10 @@
 <tr class="new_test_kit_row">
     <td> <%= f.text_field :test_name, class: "form-input w-full" %> </td>
     <td> <%= f.text_field :test_lot_number, class: "form-input w-full" %> </td>
-    <td> <%= f.number_field :test_kits_quantity, class: "form-input w-full" %> </td>
-    <td> <%= f.number_field :tests_administered, class: "form-input w-full" %> </td>
-    <td> <%= f.number_field :unusable_tests, class: "form-input w-full" %> </td>
-    <td> <%= f.number_field :tests_returned, class: "form-input w-full" %> </td>
+    <td> <%= f.number_field :test_kits_quantity, min: 0, oninput: "validity.valid||(value='');", class: "form-input w-full" %> </td>
+    <td> <%= f.number_field :tests_administered, min: 0, oninput: "validity.valid||(value='');", class: "form-input w-full" %> </td>
+    <td> <%= f.number_field :unusable_tests, min: 0, oninput: "validity.valid||(value='');", class: "form-input w-full" %> </td>
+    <td> <%= f.number_field :tests_returned, min: 0, oninput: "validity.valid||(value='');", class: "form-input w-full" %> </td>
     <td>
         <%= f.hidden_field :_destroy %>
         <%= link_to '#', class: 'remove_test_kit_record button-action mb-4' do %>

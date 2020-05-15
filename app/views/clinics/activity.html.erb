@@ -15,7 +15,7 @@
                       <input class="form-input w-2/3" id="search" data-action="keyup->clinic-activity-patients#search" type="text">
                   </div>
               </div>
-              <div class="flex justify-end">
+              <div class="flex justify-end mb-3">
                   <%= link_to sanitize("Add More Patients &#43;"), "javascript:", data: {action: "clinic-activity-patients#showModal", selection: "AddPatient"}, class: "button-primary" %>
               </div>
             </div>
@@ -41,7 +41,7 @@
                       <%= f.fields_for :clinic_events, patient.event_for_clinic(@clinic) do |event_form| %>
                         <%= event_form.hidden_field :patient_id %>
                         
-                        
+
                         
                         <tr data-target="clinic-activity-patients.searchableRow" data-event-category="<%= event_form.object.category %>" data-search-content="<%= [patient.first_name.downcase, patient.last_name.downcase].join(" ") %>" data-patient-id="<%= patient.id %>">
                           
@@ -61,7 +61,11 @@
                           <td><%= link_to "Remark", "javascript:", data: {action: "clinic-activity-patients#showModal", selection: "Remark"}, class: "form-text" %></td>
                           <td>
                             <div class="flex">
-                              <%= link_to "Delete", patient, method: :delete, class: "button-action mb-0" %>
+                              <%= link_to "Delete", "javascript:",
+                                          data: { recordIs: "patients", recordId: patient.id,
+                                                  recordName: patient.full_name,
+                                                  action: "click->clinic-activity-patients#showHideDeleteModal" },
+                                          class: "button-action mb-0" %>
                             </div>
                           </td>
                         </tr>
@@ -73,6 +77,7 @@
               </div>
             </div>
             <%= render partial: '/clinics/activity/add_more_patients', layout: "clinics/activity/clinic_event_modal", locals: {patient: @patient = Patient.new, event_form: nil, category_selection: 'AddPatient'} %>
+            <%= render "clinics/activity/delete_record_modal" %>
           </div>
           <div class="button-container flex justify-end">
             <input type="submit" name="save" value="Save" class="button-primary mr-2 mt-10">

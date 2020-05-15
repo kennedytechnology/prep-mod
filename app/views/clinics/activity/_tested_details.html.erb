@@ -4,11 +4,10 @@
     </p>
     <div class="mt-1 sm:mt-0 sm:col-span-2">
         <div class="max-w-xs rounded-md shadow-sm">
-        <%= event_form.select :test_name, options_for_select(@clinic.test_kits.collect(&:test_name), event_form.object.test_name), {}, class: "block form-select w-full" %>
+        <%= event_form.select :test_name, options_for_select(@clinic.test_kits_names_types, event_form.object.test_name), {}, class: "block form-select w-full" %>
         </div>
     </div>
 </div>
-
 <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
     <p class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
         Test Type
@@ -18,4 +17,23 @@
         <%= event_form.select :test_type, options_for_select(["PCR", "Blood"], event_form.object.test_type), {}, class: "block form-select w-full" %>
         </div>
     </div>
+</div>
+<div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+  <p class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
+    Test Administrator
+  </p>
+  <div class="mt-1 sm:mt-0 sm:col-span-2">
+    <div class="max-w-xs rounded-md shadow-sm">
+      <%= event_form.select :clinic_staff_id, options_from_collection_for_select(@clinic.clinic_personnel, 'id', 'name', event_form.object.clinic_staff_id), {}, class: "block form-select w-full" %>
+    </div>
+  </div>
+</div>
+<div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+  <p class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
+    Test Result
+  </p>
+  <div class="mt-1 sm:mt-0 sm:col-span-2">
+    <div class="max-w-xs rounded-md shadow-sm">
+      <%= event_form.select :test_processing, options_for_select(["Pending", "Negative", "Positive"], event_form.object.test_processing), {}, class: "block form-select w-full" %>    </div>
+  </div>
 </div>
