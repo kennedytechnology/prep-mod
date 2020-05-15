@@ -1,4 +1,5 @@
 class Clinic < ApplicationRecord
+  belongs_to :provider_enrollment
   has_many :clinic_vaccines
   has_many :clinic_personnel, class_name: "ClinicStaff"
   has_many :clinic_events
