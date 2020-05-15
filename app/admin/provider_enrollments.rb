@@ -91,44 +91,46 @@ ActiveAdmin.register ProviderEnrollment do
     end
   end
 
-   form do |f|
-     tabs do
-       tab "Patient Personal Details" do
-         f.inputs do
-           input :id
-           input :first_name
-           input :last_name
-           input :middle_initial
-         end
-       end
-   
-       tab "Vaccination Details" do
-         f.inputs do
-           input :status
-           input :does_provide_vaccination
-           input :does_provide_vfc
-         end
-       end
+  form do |f|
 
-       tab "Professional Details" do
-         f.inputs do
-           input :title
-           input :medical_specialty
-           input :professional_license
-           input :npi_number
-           input :license_number
-           input :license_type
-           input :license_state_of_issue
-           input :license_date_of_issue
-         end
-       end
+    tabs do
+      tab "Patient Personal Details" do
+        f.inputs do
+        #  input :id
+          input :first_name
+          input :last_name
+          input :middle_initial
+        end
+      end
+  
+      tab "Vaccination Details" do
+        f.inputs do
+          input :status
+          input :does_provide_vaccination
+          input :does_provide_vfc
+        end
+      end
+
+      tab "Professional Details" do
+        f.inputs do
+          input :title
+          input :medical_specialty, as: :select, collection: MEDICAL_SPECIALTY
+          input :professional_license, as: :select, collection: PROFESSIONAL_LICENSES
+          input :npi_number
+          input :license_number
+          input :license_type
+          input :license_state_of_issue, as: :select, collection: US_STATES
+          input :license_date_of_issue, as: :datetime_picker
+        end
+      end
 
       tab "Practice Details" do
         f.inputs do
+          input :practice_type, as: :select, collection: PRACTICE_TYPES
           input :practice_address
           input :practice_city
-          input :county
-          input :practice_state
+          input :county, as: :select, collection: COUNTIES
+          input :practice_state, as: :select, collection: US_STATES
           input :practice_zip_code
           input :practice_office_phone
           input :practice_fax_number
@@ -154,7 +156,8 @@ ActiveAdmin.register ProviderEnrollment do
       end
 
     end
-  f.actions
+
+    f.actions
   end
   
 end
