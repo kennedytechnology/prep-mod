@@ -69,24 +69,24 @@
             </div> -->
         </div>
 
-        <div class="grid grid-cols-5 gap-4">
-            <div>
+        <div class="flex">
+            <div class="w-4/12 mr-4">
                 <%= f.label :address_1, "Address 1", class: "block" %>
                 <%= f.text_field :address_1, class: "form-input w-full" %>
             </div>
-            <div>
+            <div class="w-4/12 mr-4">
                 <%= f.label :address_2, "Address 2", class: "block" %>
                 <%= f.text_field :address_2, class: "form-input w-full" %>
             </div>
-            <div>
+            <div class="flex-1 mr-4">
                 <%= f.label :city, class: "block" %>
                 <%= f.text_field :city, class: "form-input w-full" %>
             </div>
-            <div>
+            <div class="flex-1 mr-4">
                 <%= f.label :state, class: "block" %>
                 <%= f.text_field :state, class: "form-input w-full" %>
             </div>
-            <div>
+            <div class="flex-1">
                 <%= f.label :zip_code, "Zip Code", class: "block" %>
                 <%= f.text_field :zip_code, class: "form-input w-full" %>
             </div>
@@ -130,28 +130,28 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-6 gap-4">
-            <div>
+        <div class="flex">
+            <div class="flex-1 mr-4">
                 <%= f.label :backup_company_name, "Company Name", class: "block" %>
                 <%= f.text_field :backup_company_name, class: "form-input w-full" %>
             </div>
-            <div>
+            <div class="w-3/12 mr-4">
                 <%= f.label :backup_address_1, "Address 1", class: "block" %>
                 <%= f.text_field :backup_address_1, class: "form-input w-full" %>
             </div>
-            <div>
+            <div class="w-3/12 mr-4">
                 <%= f.label :backup_address_2, "Address 2", class: "block" %>
                 <%= f.text_field :backup_address_2, class: "form-input w-full" %>
             </div>
-            <div>
+            <div class="flex-1 mr-4">
                 <%= f.label :backup_city, "City", class: "block" %>
                 <%= f.text_field :backup_city, class: "form-input w-full" %>
             </div>
-            <div>
+            <div class="flex-1 mr-4">
                 <%= f.label :backup_state, "State", class: "block" %>
                 <%= f.text_field :backup_state, class: "form-input w-full" %>
             </div>
-            <div>
+            <div class="flex-1 mr-4">
                 <%= f.label :backup_zip_code, "Zip Code", class: "block" %>
                 <%= f.text_field :backup_zip_code, class: "form-input w-full" %>
             </div>
@@ -186,8 +186,13 @@
         </div>
     </div>
 
+    <div class="field-fullwidth">
+        <%= f.label :comment, "Please share any additional, relevant information about your business", class: "block" %>
+        <%= f.text_area :comment, class: "form-textarea w-1/2" %>
+    </div>
+
     <div class="flex justify-end">
         <%= f.submit "Submit Request", class: "button-primary" %>
-        <%= link_to "Cancel", pages_landing_page_path, class: "button-primary" %>
+        <%= link_to "Cancel", root_path, class: "button-primary" %>
     </div>
 <% end %>
