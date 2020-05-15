@@ -14,70 +14,82 @@ ActiveAdmin.register ProviderEnrollment do
     :practice_backup_mobile_phone, :status, :county
 
   #  filter :clinics, as: :select, collection: Clinic.all
-   filter :first_name
-   filter :last_name
-   filter :medical_specialty
-   filter :professional_license
-   filter :practice_type
-   filter :practice_state
-   filter :county
-   filter :practice_city
-   filter :does_provide_vaccination
-   filter :does_provide_vfc
+  filter :first_name
+  filter :last_name
+  filter :medical_specialty
+  filter :professional_license
+  filter :practice_type
+  filter :practice_state
+  filter :county
+  filter :practice_city
+  filter :does_provide_vaccination
+  filter :does_provide_vfc
  
-   index do
-     selectable_column
-     id_column
-     column :medical_specialty
-     column :professional_license
-     column :practice_type
-     column :practice_state
-     column :county
-     column :practice_city
-     column :does_provide_vaccination
-     column :does_provide_vfc
-     actions
-   end
+  index do
+    selectable_column
+    id_column
+    column :medical_specialty
+    column :professional_license
+    column :practice_type
+    column :practice_state
+    column :county
+    column :practice_city
+    column :does_provide_vaccination
+    column :does_provide_vfc
+    actions
+  end
  
-   show do |patient|
-     attributes_table title: "Patient Personal Details" do
-        row :id
-        row :first_name
-        row :last_name
-        row :middle_initial
-        row :does_provide_vaccination
-        row :does_provide_vfc
-        row :status
-        row :title
-        row :medical_specialty
-        row :professional_license
-        row :npi_number
-        row :license_number
-        row :license_type
-        row :license_state_of_issue
-        row :license_date_of_issue
-        #  row :practice_type        
-        row :county
-        row :practice_address
-        row :practice_city
-        row :practice_state
-        row :practice_zip_code
-        row :practice_fax_number
-        row :practice_office_phone
-        row :practice_mobile_phone
-        row :practice_email
-        row :practice_backup_contact
-        row :practice_backup_office_phone
-        row :practice_backup_mobile_phone
-        row :practice_backup_email
-        row :freezer
-        row :refrigerator
-        row :refrigerator_thermometer
-        row :additional_info
-        row :contact_office_phone
-        row :contact_mobile_phone
-        row :contact_email
-     end
+  show do |patient|
+    attributes_table title: "Provider Personal Details" do
+      row :id
+      row :first_name
+      row :last_name
+      row :middle_initial
+    end
+
+    attributes_table title: "Vaccination Details" do
+      row :status
+      row :does_provide_vaccination
+      row :does_provide_vfc
+    end
+
+    attributes_table title: "Professional Details" do     
+      row :title
+      row :medical_specialty
+      row :professional_license
+      row :npi_number
+      row :license_number
+      row :license_type
+      row :license_state_of_issue
+      row :license_date_of_issue
+    end
+
+    attributes_table title: "Practice Details" do
+      #  row :practice_type        
+      row :county
+      row :practice_address
+      row :practice_city
+      row :practice_state
+      row :practice_zip_code
+      row :practice_fax_number
+      row :practice_office_phone
+      row :practice_mobile_phone
+      row :practice_email
+      row :practice_backup_contact
+      row :practice_backup_office_phone
+      row :practice_backup_mobile_phone
+      row :practice_backup_email
+      row :freezer
+      row :refrigerator
+      row :refrigerator_thermometer
+      row :contact_office_phone
+      row :contact_mobile_phone
+      row :contact_email
+    end
+    
+    attributes_table title: "Additional Details" do
+      row :additional_info
+    end
  
   #    attributes_table title: "Patient Clinic Record" do
   #      row "Clinic events" do
@@ -193,7 +205,7 @@ ActiveAdmin.register ProviderEnrollment do
   #      end
   #    end
  
-     f.actions
+  #  f.actions
    end
   
 end
