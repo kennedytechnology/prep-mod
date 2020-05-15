@@ -1,7 +1,6 @@
 <h1 class="main-title">Create a COVID-19 Testing Referral</h1>
-<%= form_for(@patient, remote: false) do |f| %>
-    
 
+<%= form_for(@patient, remote: false) do |f| %>
     <div class="field-side-by-side">
         <div>
             <%= f.label :county, class: "block" %>
@@ -10,49 +9,54 @@
         <div></div>
     </div>
 
-    <div class="field-side-by-side">
-        <div>
-            <%= f.label :first_name, class: "block" %>
-            <%= f.text_field :first_name, class: "w-full form-input" %>
-        </div>
-        <div class="flex">
-            <div class="w-3/12 mr-2">
+    <div class="field-fullwidth">
+        <div class="grid grid-cols-4 gap-4">
+            <div>
+                <%= f.label :first_name, "Patient's First Name", class: "block" %>
+                <%= f.text_field :first_name, class: "w-full form-input" %>
+            </div>
+            <div>
                 <%= f.label :middle_initial, class: "block" %>
                 <%= f.text_field :middle_initial, class: "w-full form-input" %>
             </div>
-            <div class="flex-1">
-                <%= f.label :last_name, class: "block" %>
+            <div>
+                <%= f.label :last_name, "Patient's Last Name", class: "block" %>
                 <%= f.text_field :last_name, class: "w-full form-input" %>
+            </div>
+            <div>
+                <%= f.label :mothers_maiden_name, "Mother's Maiden Name", class: "block" %>
+                <%= f.text_field :mothers_maiden_name, class: "w-full form-input" %>
             </div>
         </div>
     </div>
 
-    <div class="field-side-by-side">
-        <div>
-            <%= f.label :mothers_maiden_name, "Mother's Maiden Name", class: "block" %>
-            <%= f.text_field :mothers_maiden_name, class: "w-full form-input" %>
-        </div>
-        <div>
-            <%= f.label :address, class: "block" %>
-            <%= f.text_field :address, placeholder: "", id: "autocomplete", class: "w-full form-input" %>
-            <%= render partial: "public/clinics/google_maps_script" %>
-        </div>
-    </div>
-
-    <div class="field-side-by-side">
-        <div>
-            <%= f.label :state, class: "block" %>
-            <%= f.select :state, options_for_select(US_STATES, @patient.state), {prompt: "Select"}, class: "w-full form-select" %>
-        </div>
-        <div class="flex">
-            <div class="flex-1 mr-2">
+    <div class="field-fullwidth">
+        <div class="grid grid-cols-5 gap-4">
+            <div>
+                <%= f.label :address, class: "block" %>
+                <%= f.text_field :address, placeholder: "", id: "autocomplete", class: "w-full form-input" %>
+                <%= render partial: "public/clinics/google_maps_script" %>
+            </div>
+            <div>
                 <%= f.label :city, class: "block" %>
                 <%= f.text_field :city, class: "w-full form-input" %>
             </div>
-            <div class="flex-1">
+            <div>
+                <%= f.label :state, class: "block" %>
+                <%= f.select :state, options_for_select(US_STATES, @patient.state), {prompt: "Select"}, class: "w-full form-select" %>
+            </div>
+            <div>
                 <%= f.label :zip_code, "Zip Code", class: "block" %>
                 <%= f.text_field :zip_code, class: "w-full form-input" %>
             </div>
+            <div>
+                <%= f.label :phone_number, "Mobile or Daytime Number", class: "block" %>
+                <%= f.text_field :phone_number, class: "w-full form-input" %>
+            </div>
+        </div>
+        <div class="w-4/12">
+            <%= f.label :email, "Email Address", class: "block" %>
+            <%= f.email_field :email, class: "w-full form-input" %>
         </div>
     </div>
 
@@ -75,17 +79,6 @@
             <%# TODO: Check why this is state instead of race %>
             <%= f.label :state, "Race", class: "block" %>
             <%= f.select :state, options_for_select(US_RACES, @patient.state), {prompt: "Select"}, class: "w-full form-select" %>
-        </div>
-    </div>
-
-    <div class="field-side-by-side">
-        <div>
-            <%= f.label :email, "Email Address", class: "block" %>
-            <%= f.email_field :email, class: "w-full form-input" %>
-        </div>
-        <div>
-            <%= f.label :phone_number, "Mobile or Daytime Number", class: "block" %>
-            <%= f.text_field :phone_number, class: "w-full form-input" %>
         </div>
     </div>
 
