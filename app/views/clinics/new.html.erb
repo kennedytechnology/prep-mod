@@ -1,4 +1,4 @@
-<h1 class="main-title"> New Clinic </h1>
+<h1 class="main-title"> Create Clinic </h1>
 
 <%= form_with model: @clinic, local: true do |f| %>
     <div class="field-fullwidth">
@@ -96,10 +96,19 @@
             <%= f.text_field :address, id: "autocomplete", onFocus: "geolocate()", class: "form-input w-full", placeholder: "Address" %>
             <%= render partial: "public/clinics/google_maps_script" %>
 
-            <div class="grid grid-cols-3 gap-7">
-                <%= f.text_field :zip, placeholder: "Zip", id: "postal_code", class: "form-input" %>
-                <%= f.text_field :city, placeholder: "City", id: "locality", class: "form-input" %>
-                <%= f.text_field :state, placeholder: "State", id: "administrative_area_level_1", class: "form-input" %>
+            <div class="grid grid-cols-3 gap-4">
+                <div>
+                    <%= f.label :zip, "Zip Code", class: "block" %>
+                    <%= f.text_field :zip, placeholder: "Zip", id: "postal_code", class: "form-input" %>
+                </div>
+                <div>
+                    <%= f.label :city, class: "block" %>
+                    <%= f.text_field :city, placeholder: "City", id: "locality", class: "form-input" %>
+                </div>
+                <div>
+                    <%= f.label :state, class: "block" %>
+                    <%= f.text_field :state, placeholder: "State", id: "administrative_area_level_1", class: "form-input" %>
+                </div>
             </div>
         </div>
     </div>
@@ -137,7 +146,7 @@
             </div>
 
             <div>
-                <%= f.label :appointment_slots, class: "block" %>
+                <%= f.label :appointment_slots, "Appointment Slots", class: "block" %>
                 <%= f.select :appointment_slots, (1..50), {prompt: "Select"}, {class: "form-select w-full"} %>
             </div>
         </div>
@@ -153,7 +162,7 @@
             <%= f.text_field :contact_person, placeholder: "Contact Person", class: "form-input w-full" %>
 
             <%= f.label :backup_contact_person do %>
-                <span> Backup contact person </span>
+                <span> Back-Up Contact Person </span>
                 <span class="field-required">*</span>
             <% end %>
             <%= f.text_field :backup_contact_person, placeholder: "Back-Up Contact Person", class: "form-input w-full" %>
@@ -161,13 +170,13 @@
         <div>
             <h1 class="title"> &nbsp; </h1>
             <%= f.label :contact_phone_number do %>
-                <span> Contact phone number </span>
+                <span> Contact Phone Number </span>
                 <span class="field-required">*</span>
             <% end %>
             <%= f.text_field :contact_phone_number, placeholder: "Contact Number", class: "form-input w-full" %>
 
             <%= f.label :backup_contact_phone_number do %>
-                <span> Backup contact phone number </span>
+                <span> Back-Up Contact Phone Number </span>
                 <span class="field-required">*</span>
             <% end %>
             <%= f.text_field :backup_contact_phone_number, placeholder: "Back-Up Contact Number", class: "form-input w-full" %>
@@ -175,13 +184,11 @@
     </div>
 
     <div class="field-fullwidth">
-        <h3 class="title"> Other Information </h3>
+        <h3 class="title"> Additional Clinic Details </h3>
         <div class="grid grid-cols-2 gap-4 items-start">
-            <p class="label"> Additional Clinic Details </p>
             <div class="col-span-2">
-                <% f.label :incidents_comments, class: "block" %>
+                <%= f.label :incidents_comments, "Incidents Comments", class: "block" %>
                 <%= f.text_area :incidents_comments, placeholder: "Enter Details Here", class: "form-textarea w-1/2" %>
-                <p class="mt-2 text-sm text-gray-500">Incidents Comments.</p>
             </div>
         </div>
     </div>    
