@@ -41,10 +41,103 @@ addresses = JSON.load(Rails.root.join("db/addresses.json"))["addresses"]
 addresses.select!{|a| VENUE_STATES.include?(a["state"])}
 addresses.shuffle!
 
+puts "Creating users..."
+USER_COUNT.times.each do |i|
+  User.create!(
+    email: i == 5 ? "sam@test.com" : Faker::Internet.unique.email,
+    password: 'password',
+    password_confirmation: 'password',
+    role: USER_ROLES.sample,
+    name: i == 5 ? "Sam Kennedy" : Faker::Name.unique.name,
+    clinics: Clinic.all.sample(5)
+  )
+end
+
+puts "Creating providers..."
+10.times do |i|
+  ProviderEnrollment.create!(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.first_name,
+    middle_initial: Faker::Name.middle_name,
+    professional_license: PROFESSIONAL_LICENSES.sample,
+    title: "Title #{i}",
+    contact_office_phone: Faker::PhoneNumber.cell_phone,
+    contact_mobile_phone: Faker::PhoneNumber.cell_phone,
+    contact_email: Faker::Internet.email,
+    county: COUNTIES.sample,
+    license_state_of_issue: US_STATES.sample,
+    license_date_of_issue: Faker::Date.between(from: 30.days.from_now, to: 365.days.from_now),
+    practice_office_phone: Faker::PhoneNumber.cell_phone,
+    practice_fax_number: "fax #{i}",
+    practice_mobile_phone: Faker::PhoneNumber.cell_phone,
+    practice_email: Faker::Internet.email,
+    practice_type: PRACTICE_TYPES.sample,
+    practice_name: "Practice Name #{i}",
+    practice_address: Faker::Address.full_address,
+    practice_city: Faker::Address.city,
+    practice_state: US_STATES.sample,
+    practice_zip_code: Faker::Address.zip_code,
+    practice_backup_contact: Faker::Name.name,
+    practice_backup_office_phone: Faker::PhoneNumber.cell_phone,
+    practice_backup_email: Faker::Internet.email,
+    practice_backup_mobile_phone: Faker::PhoneNumber.cell_phone,
+    does_provide_vaccination:Faker::Boolean.boolean,
+    does_provide_vfc: Faker::Boolean.boolean,
+    refrigerator: Faker::Boolean.boolean,
+    freezer: Faker::Boolean.boolean,
+    refrigerator_thermometer: Faker::Boolean.boolean,
+    additional_info: Faker::Lorem.paragraph,
+    npi_number: "npi number #{i}",
+    license_number: "license number #{i}",
+    license_type: "license type #{i}",
+    medical_specialty: MEDICAL_SPECIALTY.sample
+  )
+end
+
+puts "Creating employers..."
+10.times do |i|
+  Employer.create!(
+    screening_info: Faker::Boolean.boolean,
+    testing_info: Faker::Boolean.boolean,
+    vacination_info: Faker::Boolean.boolean,
+    other_info: Faker::Boolean.boolean,
+    business_locations: BUSINESS_LOCATIONS.sample(1 + rand(BUSINESS_LOCATIONS.count)),
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.first_name,
+    position: "position #{i}",
+    company_name: Faker::Company.name,
+    address_1: Faker::Address.full_address,
+    address_2: Faker::Address.full_address,
+    city: Faker::Address.city,
+    zip_code: Faker::Address.zip_code,
+    state: Faker::Address.state,
+    office_phone: Faker::PhoneNumber.cell_phone,
+    mobile_phone: Faker::PhoneNumber.cell_phone,
+    email: Faker::Internet.email,
+    website: Faker::Internet.url,
+    backup_first_name: Faker::Name.first_name,
+    backup_last_name: Faker::Name.first_name,
+    backup_position: "backup position #{i}",
+    backup_company_name: Faker::Company.name,
+    backup_address_1: Faker::Address.full_address,
+    backup_address_2: Faker::Address.full_address,
+    backup_city: Faker::Address.city,
+    backup_zip_code: Faker::Address.zip_code,
+    backup_state: Faker::Address.state,
+    backup_office_phone: Faker::PhoneNumber.cell_phone,
+    backup_mobile_phone: Faker::PhoneNumber.cell_phone,
+    backup_email: Faker::Internet.email,
+    total_employees: Faker::Number.between(from: 5, to: 50),
+    total_locations: Faker::Number.between(from: 5, to: 10)
+  )
+end
+
 puts "Creating clinics..."
 CLINIC_COUNT.times.each do |i|
   address = addresses.pop
   Clinic.create(
+    user_id: User.take.id,
+    provider_enrollment_id: ProviderEnrollment.take.id,
     venue_name: Faker::University.unique.name,
     clinic_date: Faker::Date.between(from: 1.month.ago, to: 6.months.from_now),
     lead_vaccinator_name: Faker::Name.unique.name,
@@ -75,18 +168,6 @@ puts "Creating clinic staff..."
   )
 end
 
-puts "Creating users..."
-USER_COUNT.times.each do |i|
-  User.create!(
-    email: i == 5 ? "sam@test.com" : Faker::Internet.unique.email,
-    password: 'password',
-    password_confirmation: 'password',
-    role: USER_ROLES.sample,
-    name: i == 5 ? "Sam Kennedy" : Faker::Name.unique.name,
-    clinics: Clinic.all.sample(5)
-  )
-end
-
 addresses = JSON.load(Rails.root.join("db/addresses.json"))["addresses"]
 addresses.select!{|a| VENUE_STATES.include?(a["state"])}
 puts "Creating patients..."
@@ -94,6 +175,7 @@ clinics = Clinic.all
 PATIENT_COUNT.times.each do |i|
   address = addresses.sample
   clinic = clinics.sample
+  # debugger
   patientEmail = Faker::Internet.email
   Patient.create!(
     clinic: clinic,
@@ -177,84 +259,6 @@ Clinic.all.each do |clinic|
     )
   end
 end
-
-10.times do |i|
-  ProviderEnrollment.create!(
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.first_name,
-    middle_initial: Faker::Name.middle_name,
-    professional_license: PROFESSIONAL_LICENSES.sample,
-    title: "Title #{i}",
-    contact_office_phone: Faker::PhoneNumber.cell_phone,
-    contact_mobile_phone: Faker::PhoneNumber.cell_phone,
-    contact_email: Faker::Internet.email,
-    county: COUNTIES.sample,
-    license_state_of_issue: US_STATES.sample,
-    license_date_of_issue: Faker::Date.between(from: 30.days.from_now, to: 365.days.from_now),
-    practice_office_phone: Faker::PhoneNumber.cell_phone,
-    practice_fax_number: "fax #{i}",
-    practice_mobile_phone: Faker::PhoneNumber.cell_phone,
-    practice_email: Faker::Internet.email,
-    practice_type: PRACTICE_TYPES.sample,
-    practice_name: "Practice Name #{i}",
-    practice_address: Faker::Address.full_address,
-    practice_city: Faker::Address.city,
-    practice_state: US_STATES.sample,
-    practice_zip_code: Faker::Address.zip_code,
-    practice_backup_contact: Faker::Name.name,
-    practice_backup_office_phone: Faker::PhoneNumber.cell_phone,
-    practice_backup_email: Faker::Internet.email,
-    practice_backup_mobile_phone: Faker::PhoneNumber.cell_phone,
-    does_provide_vaccination:Faker::Boolean.boolean,
-    does_provide_vfc: Faker::Boolean.boolean,
-    refrigerator: Faker::Boolean.boolean,
-    freezer: Faker::Boolean.boolean,
-    refrigerator_thermometer: Faker::Boolean.boolean,
-    additional_info: Faker::Lorem.paragraph,
-    npi_number: "npi number #{i}",
-    license_number: "license number #{i}",
-    license_type: "license type #{i}",
-    medical_specialty: MEDICAL_SPECIALTY.sample
-  )
-end
-
-10.times do |i|
-  Employer.create!(
-    screening_info: Faker::Boolean.boolean,
-    testing_info: Faker::Boolean.boolean,
-    vacination_info: Faker::Boolean.boolean,
-    other_info: Faker::Boolean.boolean,
-    business_locations: BUSINESS_LOCATIONS.sample(1 + rand(BUSINESS_LOCATIONS.count)),
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.first_name,
-    position: "position #{i}",
-    company_name: Faker::Company.name,
-    address_1: Faker::Address.full_address,
-    address_2: Faker::Address.full_address,
-    city: Faker::Address.city,
-    zip_code: Faker::Address.zip_code,
-    state: Faker::Address.state,
-    office_phone: Faker::PhoneNumber.cell_phone,
-    mobile_phone: Faker::PhoneNumber.cell_phone,
-    email: Faker::Internet.email,
-    website: Faker::Internet.url,
-    backup_first_name: Faker::Name.first_name,
-    backup_last_name: Faker::Name.first_name,
-    backup_position: "backup position #{i}",
-    backup_company_name: Faker::Company.name,
-    backup_address_1: Faker::Address.full_address,
-    backup_address_2: Faker::Address.full_address,
-    backup_city: Faker::Address.city,
-    backup_zip_code: Faker::Address.zip_code,
-    backup_state: Faker::Address.state,
-    backup_office_phone: Faker::PhoneNumber.cell_phone,
-    backup_mobile_phone: Faker::PhoneNumber.cell_phone,
-    backup_email: Faker::Internet.email,
-    total_employees: Faker::Number.between(from: 5, to: 50),
-    total_locations: Faker::Number.between(from: 5, to: 10)
-  )
-end
-
 
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
 
