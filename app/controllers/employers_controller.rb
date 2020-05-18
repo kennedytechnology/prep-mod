@@ -29,7 +29,7 @@ class EmployersController < InheritedResources::Base
         :address_1, :address_2, :city, :zip_code, :state, :office_phone, :mobile_phone,
         :email, :website, :backup_first_name, :backup_last_name, :backup_position,
         :backup_company_name, :backup_address_1, :backup_address_2, :backup_city,
-        :backup_zip_code, :backup_state, :total_employees, :total_locations,
+        :backup_zip_code, :backup_state, :total_employees, :total_locations, :comment,
         :backup_email, business_locations: []
       )
     end
