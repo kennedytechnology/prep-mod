@@ -26,7 +26,7 @@ class ClinicsController < ClinicManagementController
 
     if @clinic.save
       ClinicMailer.public_clinic_created(current_user, @clinic).deliver
-      redirect_to clinics_path
+      redirect_to  clinics_path(clinic_date: 'upcoming')
     else
       render "new", alert: "Your clinic entry was not saved." + @clinic.errors.to_s
     end
