@@ -20,9 +20,11 @@ RSpec.describe ClinicsController, type: :controller do
 
   describe "POST #create" do
     context "with valid attributes" do
+      let(:provider_enrollment) { create(:provider_enrollment) }
       it "create new clinic" do
         expect {
           post :create, params: { clinic: {
+            provider_enrollment_id: provider_enrollment.id,
             venue_name: Faker::University.unique.name,
             clinic_date: Faker::Date.between(from: 1.month.ago, to: 6.months.from_now),
             lead_vaccinator_name: Faker::Name.unique.name,
@@ -41,7 +43,10 @@ RSpec.describe ClinicsController, type: :controller do
             appointment_frequency_minutes: [10, 15, 30, 60].sample,
             appointment_slots: (2..10).to_a.sample,
             appointments_available: 'required',
-            county: COUNTIES.sample
+            county: COUNTIES.sample,
+            clinic_primary_groups: ClinicPrimaryGroup.all.sample,
+            clinic_age_groups: ClinicAgeGroup.all.sample,
+            clinic_services: ClinicService.all.sample,
           } }
         }.to change(Clinic, :count).by(1)
       end

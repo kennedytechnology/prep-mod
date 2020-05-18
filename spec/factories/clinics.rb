@@ -1,5 +1,7 @@
 FactoryBot.define do
   factory :clinic do
+    association :provider_enrollment, factory: :provider_enrollment
+
     venue_name { Faker::University.unique.name }
     clinic_date { Faker::Date.between(from: 1.month.ago, to: 6.months.from_now) }
     lead_vaccinator_name { Faker::Name.unique.name }

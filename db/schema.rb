@@ -163,6 +163,7 @@ ActiveRecord::Schema.define(version: 2020_05_15_192602) do
     t.time "start_hour_minute"
     t.time "end_hour_minute"
     t.string "location"
+    t.integer "provider_enrollment_id"
   end
 
   create_table "clinics_users", id: false, force: :cascade do |t|
