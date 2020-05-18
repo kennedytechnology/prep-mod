@@ -49,3 +49,4 @@ $(document).on('turbolinks:load', function() {
   });
 });
 import "controllers"
+require("typeface-roboto")
