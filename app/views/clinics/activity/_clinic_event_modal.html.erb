@@ -5,8 +5,8 @@
   class="modal hidden fixed w-full h-full top-0 left-0 flex items-center justify-center <%= "z-50" if patient.id.nil? %>">
 
   <div class="modal-overlay fixed w-full h-full bg-black opacity-25 top-0 left-0 cursor-pointer"></div>
-  <div class="absolute w-2/3 p-8 bg-white rounded-lg shadow-lg flex <%= "overflow-y-scroll" if patient.id.nil? %>" style="<%= "top:50px; bottom: 50px;" if patient.id.nil? %>">
-    <div class="w-1/3"> 
+  <div class="absolute p-8 bg-white rounded-lg shadow-lg flex <%= patient.id.nil? ? "overflow-y-scroll w-2/3" : "w-2/4" %>" style="<%= "top:50px; bottom: 50px;" if patient.id.nil? %>">
+    <div class="w-1/3">
       <h1 class="text-lg leading-6 font-medium text-gray-900">
         <%= category_selection %>: <span class="font-bold"> <%= patient.full_name %> </span>
       </h1>
@@ -15,22 +15,22 @@
     <div class="w-2/3">
       <%= yield %>
       <div class="mt-8 pt-5">
-          <div class="flex justify-end">
-              <span class="inline-flex rounded-md shadow-sm">
-                <a data-action="clinic-activity-patients#cancelModal" data-parent="<%= patient.id.nil? ? "addMorePatients" : patient.id %>" class="button-primary">Cancel</a>
-              </span>
-              <% unless event_form.nil? %>
-                <% if event_form.object.new_record? %>
+        <div class="flex justify-end">
+          <% unless event_form.nil? %>
+            <% if event_form.object.new_record? %>
                     <span class="ml-3 inline-flex rounded-md shadow-sm">
                       <a class="button-primary" data-action="clinic-activity-patients#okModal" data-event-category="<%= category_selection %>">Save</a>
                     </span>
-                <% else %>
+            <% else %>
                     <span class="inline-flex rounded-md shadow-sm">
                         <a data-action="clinic-activity-patients#okModal" class="button-primary" data-event-category="<%= category_selection %>" data-confirm="Are you sure?">Update</a>
                     </span>
-                <% end %>
-              <% end %>
-          </div>
+            <% end %>
+          <% end %>
+          <span class="inline-flex rounded-md shadow-sm">
+            <a data-action="clinic-activity-patients#cancelModal" data-parent="<%= patient.id.nil? ? "addMorePatients" : patient.id %>" class="button-primary sm:mr-0 md:mr-0">Cancel</a>
+          </span>
+        </div>
       </div>
     </div>
   </div>

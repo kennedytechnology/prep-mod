@@ -53,6 +53,14 @@ class Clinic < ApplicationRecord
     return results
   end
 
+  def test_kits_names_types
+    test_kit_names = []
+    test_kits.each do |t|
+      test_kit_names << t.test_name +  " (" + t.test_type + ")"
+    end
+    return test_kit_names
+  end
+
   def search_string
     venue_name + clinic_date.to_s + county
   end

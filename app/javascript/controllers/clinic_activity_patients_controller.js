@@ -1,7 +1,7 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "modal", "searchableRow" ]
+  static targets = [ "modal", "searchableRow", "deleteModal", "deleteRecordButton" ]
 
   showModal(event) {
     let categorySelection = event.target.dataset.selection;
@@ -47,7 +47,14 @@ export default class extends Controller {
     })
   }
 
-  connect() {
-    
+  connect() {}
+
+  showHideDeleteModal(e) {
+    if (e.currentTarget.text === 'Delete') {
+      this.deleteRecordButtonTarget.setAttribute('href', `/${e.currentTarget.dataset.recordis}/${e.currentTarget.dataset.recordid}`);
+      document.getElementsByClassName('recordName')[0].innerHTML = e.currentTarget.dataset.recordname;
+    }
+
+    this.deleteModalTarget.classList.toggle('hidden');
   }
 }

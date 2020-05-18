@@ -1,12 +1,13 @@
 <div class="flex mb-4">
   <div class="w-4/12 mr-4">
+    <%
+      start_time = Time.parse("1 AM").to_i
+      end_time = Time.parse("12 PM").to_i
+      values = (start_time..end_time).step(15.minutes)
+    %>
     <%= f.label :start_time, "Clinic Start Time:", class: "mr-3 font-bold" %><br/>
     <select class="form-select" name="clinic[start_hour]">
-        <%= options_for_select((1..12).to_a, @clinic.start_time ? @clinic.start_time.strftime('%l').to_i : nil) %>
-    </select>
-    <span class="colon">:</span>
-    <select class="form-select" name="clinic[start_minute]" >
-        <%= options_for_select(['00', '15', '30', '45'], @clinic.start_time ? @clinic.start_time.strftime('%M').to_i : nil) %>
+      <%= options_for_select(values.map{ |t| Time.at(t).strftime("%I:%M") }, @clinic.start_time ? @clinic.start_time.strftime('%I:%M') : nil) %>
     </select>
     <select class="form-select" name="clinic[start_meridiem]" >
         <%= options_for_select(['AM', 'PM'], @clinic.start_time ? @clinic.start_time.strftime('%p') : nil) %>
@@ -15,11 +16,7 @@
   <div class="w-4/12 mr-4">
     <%= f.label :end_time, "Clinic End Time:", class: "mr-3 font-bold" %><br/>
     <select class="form-select" name="clinic[end_hour]">
-        <%= options_for_select((1..12).to_a, @clinic.end_time ? @clinic.end_time.strftime('%l').to_i : nil) %>
-    </select>
-    <span class="colon">:</span>
-    <select class="form-select" name="clinic[end_minute]" >
-        <%= options_for_select(['00', '15', '30', '45'], @clinic.end_time ? @clinic.end_time.strftime('%M').to_i : nil) %>
+      <%= options_for_select(values.map{ |t| Time.at(t).strftime("%I:%M") }, @clinic.end_time ? @clinic.end_time.strftime('%I:%M') : nil) %>
     </select>
     <select class="form-select" name="clinic[end_meridiem]" >
         <%= options_for_select(['AM', 'PM'], @clinic.end_time ? @clinic.end_time.strftime('%p') : nil) %>
