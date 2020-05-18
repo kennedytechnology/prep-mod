@@ -14,16 +14,16 @@
         min-height: auto;
         min-width: auto;
         width: auto;
-        &:hover { @apply bg-red-600 border-red-600 text-white }
+        &:hover { @apply bg-brand-blue-600 border-brand-blue-300 text-white }
     }
 
     &-primary {
         @extend .button-base;
-        @apply bg-red-600 border-red-600 text-white text-lg;
+        @apply bg-brand-blue-600 border-brand-blue-300 text-white text-lg;
         min-width: 210px;
         max-width: 210px;
 
-        &:hover { @apply bg-red-700 }
+        &:hover { background-color: lighten(#2699FB, 5%); }
     }
 
     &-primary-fullwidth {
@@ -40,10 +40,9 @@
         min-width: auto;
         width: auto;
         
-        &:hover {  @apply bg-red-700 border-red-700 text-white; }
+        &:hover {  @apply bg-brand-blue-600 border-brand-blue-300 text-white; }
 
-        &-active {  @apply bg-red-700 border-red-700 text-white; }
-        
+        &-active {  @apply bg-brand-blue-600 border-brand-blue-300 text-white; }
     }
 
     &-add-more-staff {
