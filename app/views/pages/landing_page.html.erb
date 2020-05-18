@@ -1,20 +1,20 @@
 <div class="px-4 my-4 md:my-6 lg:my-8">
     <div class="sm:flex sm:flex-wrap sm:justify-center sm:items-stretch -mx-4">
         <div class="w-full sm:w-1/2 md:w-1/3 md:w-1/3 lg:w-1/5 px-4 mb-4">
-            <%= link_to clinics_path, class: "p-6 text-center flex flex-col justify-between border-2 hover:bg-gray-50 min-h-full" do %>
+            <%= link_to  clinics_path(clinic_date: 'upcoming'), class: "p-6 text-center flex flex-col justify-between border-2 hover:bg-gray-50 min-h-full" do %>
                 <h1 class="text-gray-600 pb-1 border-b"> Manage Clinics and Users </h1>
                 <%= image_tag 'icons/users.png', class: "mt-6 mx-auto" %>
             <% end %>
         </div>
         <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 px-4 mb-4">
             <%= link_to clinics_path, class: "p-6 text-center flex flex-col justify-between border-2 hover:bg-gray-50 min-h-full" do %>
-                <h1 class="text-gray-600 pb-1 border-b"> Start Clinic Virtual Queue </h1>
+                <h1 class="text-gray-600 pb-1 border-b"> Start Clinic <br /> <span class="font-bold">Virtual Queue</span> </h1>
                 <%= image_tag 'icons/virtual_queue.png', class: "mt-6 mx-auto" %>
             <% end %>
         </div>
         <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 px-4 mb-4">
             <%= link_to clinics_path, class: "p-6 text-center flex flex-col justify-between border-2 hover:bg-gray-50 min-h-full" do %>
-                <h1 class="text-gray-600 pb-1 border-b"> Start Clinic Standard </h1>
+                <h1 class="text-gray-600 pb-1 border-b"> Start Clinic <br /> <span class="font-bold">Standard </span> </h1>
                 <%= image_tag 'icons/clinic.png', class: "mt-6 mx-auto" %>
             <% end %>
         </div>
@@ -32,7 +32,7 @@
         </div>
         <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 px-4 mb-4">
             <%= link_to provider_enrollments_path, class: "p-6 text-center flex flex-col justify-between border-2 hover:bg-gray-50 min-h-full" do %>
-                <h1 class="text-gray-600 pb-1 border-b"> Enroll/Accept a Provider </h1>
+                <h1 class="text-gray-600 pb-1 border-b"> Enroll Provider or Employer </h1>
                 <%= image_tag 'icons/provider.png', class: "mt-6 mx-auto" %>
             <% end %>
         </div>
