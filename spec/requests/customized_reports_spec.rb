@@ -23,6 +23,10 @@ RSpec.describe "/customized_reports", type: :request do
     skip("Add a hash of attributes invalid for your model")
   }
 
+  before do
+    clinic = create(:clinic)
+  end
+
   describe "GET /index" do
     it "renders a successful response" do
       CustomizedReport.create! valid_attributes
