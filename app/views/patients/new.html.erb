@@ -29,38 +29,7 @@
             </div>
         </div>
     </div>
-
-    <div class="field-fullwidth">
-        <div class="grid grid-cols-5 gap-4">
-            <div>
-                <%= f.label :address, class: "block" %>
-                <%= f.text_field :address, placeholder: "", id: "autocomplete", class: "w-full form-input", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
-                <%= render partial: "public/clinics/google_maps_script" %>
-            </div>
-            <div>
-                <%= f.label :city, class: "block" %>
-                <%= f.text_field :city, class: "w-full form-input", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
-            </div>
-            <div>
-                <%= f.label :state, class: "block" %>
-                <%= f.select :state, options_for_select(US_STATES, @patient.state), {prompt: "Select"}, {class: "w-full form-select", data: {action: "change->testing-referral-review-form#updateModalField"}} %>
-            </div>
-            <div>
-                <%= f.label :zip_code, "Zip Code", class: "block" %>
-                <%= f.text_field :zip_code, class: "w-full form-input", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
-            </div>
-            <div>
-                <%= f.label :phone_number, "Mobile or Daytime Number", class: "block" %>
-                <%= f.text_field :phone_number, class: "w-full form-input", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
-            </div>
-        </div>
-        <div class="w-4/12">
-            <%= f.label :email, "Email Address", class: "block" %>
-            <%= f.email_field :email, class: "w-full form-input", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
-        </div>
-    </div>
-
-    <div class="field-side-by-side">
+     <div class="field-side-by-side">
         <div class="flex">
             <div class="w-5/12 mr-2">
                 <%= f.label :date_of_birth, "Date of Birth", class: "block" %>
@@ -79,6 +48,36 @@
             <%# TODO: Check why this is state instead of race %>
             <%= f.label :state, "Race", class: "block" %>
             <%= f.select :state, options_for_select(US_RACES, @patient.state), {prompt: "Select"}, {class: "w-full form-select", data: {action: "keyup->testing-referral-review-form#updateModalField"}} %>
+        </div>
+    </div>
+
+    <div class="field-fullwidth">
+        <div class="grid grid-cols-5 gap-4">
+            <div>
+                <%= f.label :address, class: "block" %>
+                <%= f.text_field :address, placeholder: "", id: "autocomplete", onFocus: "geolocate()", class: "w-full form-input", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
+                <%= render partial: "public/clinics/google_maps_script" %>
+            </div>
+            <div>
+                <%= f.label :city, class: "block" %>
+                <%= f.text_field :city, class: "w-full form-input", id: "locality", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
+            </div>
+            <div>
+                <%= f.label :state, class: "block" %>
+                <%= f.select :state, options_for_select(US_STATES, @patient.state), {prompt: "Select"}, {class: "w-full form-select", id: "administrative_area_level_1", data: {action: "change->testing-referral-review-form#updateModalField"}} %>
+            </div>
+            <div>
+                <%= f.label :zip_code, "Zip Code", class: "block" %>
+                <%= f.text_field :zip_code, class: "w-full form-input", id: "postal_code", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
+            </div>
+            <div>
+                <%= f.label :phone_number, "Mobile or Daytime Number", class: "block" %>
+                <%= f.text_field :phone_number, class: "w-full form-input", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
+            </div>
+        </div>
+        <div class="w-4/12">
+            <%= f.label :email, "Email Address", class: "block" %>
+            <%= f.email_field :email, class: "w-full form-input", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
         </div>
     </div>
 
@@ -114,7 +113,7 @@
 
 
     <div class="flex justify-end my-4">
-        <button type="button" class="button-primary" data-action="click->testing-referral-review-form#toggleModal"> Review </button>
+        <button type="button" class="button-primary" data-action="click->testing-referral-review-form#toggleModal"> Submit </button>
     </div>
 
     <%= render partial: "patients/review_form", locals: {f: f} %>

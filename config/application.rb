@@ -17,3 +17,20 @@ module Cw2
     # the framework and any gems in your application.
   end
 end
+
+if Rails.env == "development"
+  require "yaml"
+  rails_root = Rails.root.to_s || File.dirname(__FILE__) + "/../.."
+  env_vars_file = rails_root + "/config/env_vars.yml"
+
+  if File.exists?(env_vars_file)
+    config = YAML.load_file(rails_root.to_s + "/config/env_vars.yml")
+    if config.key?(Rails.env) && config[Rails.env].is_a?(Hash)
+      config[Rails.env].each do |key, value|
+        ENV[key] = value.to_s
+      end
+    end
+  else
+    puts "WARNING: Local environment variable not found. Please rename the config/env_vars.yml.example file to config/env_vars.yml and provide the necessary values."
+  end
+end
