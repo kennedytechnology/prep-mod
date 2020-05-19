@@ -99,7 +99,7 @@
                                 <span class="text-gray-500"> Venue </span>
                                 <span class="text-brand-red-500">*</span>
                             <% end %>
-                            <%= f.select :venue_name, Clinic.pluck(:venue_name), {prompt: "Select"}, {class: "block form-select w-full", required: true, disabled: true, id: "modal_supply_inventory_county"} %>
+                            <%= f.select :venue_name, Clinic.pluck(:venue_name), {prompt: "Select"}, {class: "block form-select w-full", required: true, disabled: true, id: "modal_supply_inventory_venue_name"} %>
                         </div>
                     </div>
                 </div>
