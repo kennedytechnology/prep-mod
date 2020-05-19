@@ -1,8 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe "Patients", type: :request do
-  let(:clinic) { create(:clinic) }
-  before { sign_in create(:user) }
+  # let(:clinic) { create(:clinic) }
+  before do 
+    clinic = create(:clinic)
+    sign_in create(:user)
+  end
 
   let(:valid_attributes) {
     {
