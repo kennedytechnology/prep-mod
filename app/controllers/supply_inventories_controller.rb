@@ -23,6 +23,10 @@ class SupplyInventoriesController < InheritedResources::Base
     @supply_inventory = SupplyInventory.find(params[:id])
   end
 
+  def edit
+    @supply_inventory = SupplyInventory.find(params[:id])
+  end
+
   def update
     @supply_inventory = SupplyInventory.find(params[:id])
 
@@ -31,6 +35,11 @@ class SupplyInventoriesController < InheritedResources::Base
     else
       redirect_back fallback_location: supply_inventories_path(clinic_id: @supply_inventory.clinic), alert: "Error!"
     end
+  end
+
+  def destroy
+    SupplyInventory.destroy(params[:id])
+    redirect_back fallback_location: supply_inventories_path, alert: "The inventory was deleted."
   end
 
   private
