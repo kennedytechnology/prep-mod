@@ -2,12 +2,13 @@ require "rails_helper"
 
 RSpec.describe ProviderEnrollmentMailer, type: :mailer do
   describe "request_confirmation" do
-    let(:mail) { ProviderEnrollmentMailer.request_confirmation }
+    let(:provider_enrollment) {create(:provider_enrollment)}
+    let(:mail) { ProviderEnrollmentMailer.request_confirmation(provider_enrollment) }
 
     it "renders the headers" do
       expect(mail.subject).to eq("Request confirmation")
-      expect(mail.to).to eq(["to@example.org"])
-      expect(mail.from).to eq(["from@example.com"])
+      expect(mail.to).to eq([provider_enrollment.practice_email])
+      expect(mail.from).to eq(["notifications@clinicwizard.com"])
     end
 
     it "renders the body" do

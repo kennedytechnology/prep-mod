@@ -9,6 +9,6 @@ class ProviderEnrollmentMailer < ApplicationMailer
     @greeting = "Hi"
     @provider_enrollment = provider_enrollment
 
-    mail to: provider_enrollment.practice_email, subject: "Your request confirmation."
+    mail to: provider_enrollment.practice_email, subject: "Request confirmation"
   end
 end
