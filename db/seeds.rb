@@ -240,7 +240,10 @@ Clinic.all.each do |clinic|
       packaging: INVENTORY_PACKAGINGS.sample,
       source: INVENTORY_SOURCES.sample,
       product_name: Faker::Company.name,
-      event_type: INVENTORY_EVENT_TYPES.sample
+      event_type: INVENTORY_EVENT_TYPES.sample,
+      county: COUNTIES.sample,
+      venue_name: Clinic.pluck(:venue_name).sample,
+      event_date: Faker::Date.between(from: Date.today, to: 30.days.from_now)
     )
   end
 end

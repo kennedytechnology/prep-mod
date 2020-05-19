@@ -85,6 +85,22 @@
                             <% end %>
                             <%= f.number_field :quantity_lost, class: "form-input block w-full", required: true, disabled: true, id: "modal_supply_inventory_quantity_lost" %>
                         </div>
+
+                        <div>
+                            <%= f.label :county do %>
+                                <span class="text-gray-500"> County </span>
+                                <span class="text-brand-red-500">*</span>
+                            <% end %>
+                            <%= f.select :county, COUNTIES, {prompt: "Select"}, {class: "block form-select w-full", required: true, disabled: true, id: "modal_supply_inventory_county"} %>
+                        </div>
+
+                        <div>
+                            <%= f.label :venue_name do %>
+                                <span class="text-gray-500"> Venue </span>
+                                <span class="text-brand-red-500">*</span>
+                            <% end %>
+                            <%= f.select :venue_name, Clinic.pluck(:venue_name), {prompt: "Select"}, {class: "block form-select w-full", required: true, disabled: true, id: "modal_supply_inventory_venue_name"} %>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -12,5 +12,7 @@ FactoryBot.define do
     packaging { INVENTORY_PACKAGINGS.sample }
     source { INVENTORY_SOURCES.sample }
     product_name { "Product Name" }
+    county { COUNTIES.unshift("All").sample }
+    venue_name { Clinic.pluck(:venue_name).unshift("All").sample }
   end
 end

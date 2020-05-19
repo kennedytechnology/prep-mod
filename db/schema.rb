@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_15_192602) do
+ActiveRecord::Schema.define(version: 2020_05_19_120136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -372,6 +372,8 @@ ActiveRecord::Schema.define(version: 2020_05_15_192602) do
     t.integer "quantity_lost"
     t.integer "quantity_loaned"
     t.date "event_date"
+    t.string "county"
+    t.string "venue_name"
   end
 
   create_table "test_kits", force: :cascade do |t|
