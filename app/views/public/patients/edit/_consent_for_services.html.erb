@@ -17,8 +17,8 @@
     </ol>
 </div>
 
-<p class="mt-10 font-semibold"> Sign here with your finger or stylus.</p>
-<div class="border border-gray-400 mt-6 mb-4 w-1/2 h-40">
+<p class="mt-10 font-semibold"> Please sign here with your finger or mouse.</p>
+<div class="border border-gray-400 mt-2 mb-4 w-1/2 h-40">
  <canvas></canvas>
 </div>
 <%# TODO: Move this into the proper place. %>
@@ -30,22 +30,24 @@
 <div class="field-side-by-side">
     <div>
         <%= f.label :consent_date, "Date", class: "block" %>
-        <%= f.text_field :consent_date, value: Date.today.strftime("%m/%d/%y"), disabled: true, class: "form-input w-full" %>
+        <%= f.text_field :consent_date, value: Date.today.strftime("%m/%d/%y"), disabled: true, class: "form-input w-4/12" %>
     </div>
     <div> </div>
 </div>
 
-<div class="field-side-by-side">
-    <div>
-        <p class="label"> Please type your first and last name <span class="field-required">*</span></p>
-        <div class="flex">
-            <%= f.text_field :signatory_first_name, placeholder: "First Name", value: "", class: "flex-1 mr-3 form-input" %>
-            <%= f.text_field :signatory_last_name, placeholder: "Last Name", value: "", class: "flex-1 form-input" %>
+<div class="field-fullwidth">
+    <div class="flex items-center">
+        <div class="w-8/12 mr-4">
+            <p class="label"> Please type your first and last name <span class="field-required">*</span></p>
+            <div class="flex">
+                <%= f.text_field :signatory_first_name, placeholder: "First Name", value: "", class: "flex-1 mr-3 form-input" %>
+                <%= f.text_field :signatory_last_name, placeholder: "Last Name", value: "", class: "flex-1 form-input" %>
+            </div>
         </div>
-    </div>
-    <div>
-        <%= f.label :relation_to_patient_for_insurance, "Relationship to Patient", class: "block" %>
-        <%= f.select :relation_to_patient_for_insurance, ["Self","Parent/Guardian","Other"], {}, class: "form-select w-full" %>
+        <div class="flex-1">
+            <%= f.label :relation_to_patient_for_insurance, "Relationship to Patient", class: "block" %>
+            <%= f.select :relation_to_patient_for_insurance, ["Self","Parent/Guardian","Other"], {}, class: "form-select w-full" %>
+        </div>
     </div>
 </div>
 

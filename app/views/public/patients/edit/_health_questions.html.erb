@@ -17,7 +17,7 @@
     <div>
         <h2 class="title"> Have you traveled in the past 14 days to regions affected by COVID-19?<span class="field-required">*</span> </h2> 
         <%= f.radio_button :had_traveled_to_affected_place, true, class: "form-radio " %>
-        <%= f.label :had_traveled_to_affected_place, "Yes" %>
+        <%= f.label :had_traveled_to_affected_place, "Yes", class: "mr-3" %>
 
         <%= f.radio_button :had_traveled_to_affected_place, false, class: "form-radio" %>
         <%= f.label :had_traveled_to_affected_place, "No" %>
@@ -28,7 +28,7 @@
     <div>
         <h2 class="title"> Have you been in close contact with anyone who has a confirmed COVID-19 diagnosis?<span class="field-required">*</span> </h2>
         <%= f.radio_button :had_contact_with_confirmed_case, true, class: "form-radio" %>
-        <%= f.label :had_contact_with_confirmed_case, "Yes" %>
+        <%= f.label :had_contact_with_confirmed_case, "Yes", class: "mr-3" %>
 
         <%= f.radio_button :had_contact_with_confirmed_case, false, class: "form-radio" %>
         <%= f.label :had_contact_with_confirmed_case, "No" %>
@@ -36,7 +36,7 @@
     <div>
         <h2 class="title">Do you have heart disease, lung disease, kidney disease or diabetes?<span class="field-required">*</span></h2>
         <%= f.radio_button :has_risk_factor, true, class: "form-radio" %>
-        <%= f.label :has_risk_factor, "Yes" %>
+        <%= f.label :has_risk_factor, "Yes", class: "mr-3" %>
 
         <%= f.radio_button :has_risk_factor, false, class: "form-radio" %>
         <%= f.label :has_risk_factor, "No" %>
@@ -47,7 +47,7 @@
     <div>
         <h2 class="title">Are you 60 or older?<span class="field-required">*</span></h2>
         <%= f.radio_button :is_age_60_or_more, true, class: "form-radio" %>
-        <%= f.label :is_age_60_or_more, "Yes" %>
+        <%= f.label :is_age_60_or_more, "Yes", class: "mr-3" %>
 
         <%= f.radio_button :is_age_60_or_more, false, class: "form-radio " %>
         <%= f.label :is_age_60_or_more, "No" %>
@@ -55,7 +55,7 @@
     <div>
         <h2 class="title">Is there any other reason you think you should be tested for COVID-19? If "yes", explain<span class="field-required">*</span></h2>
         <%= f.radio_button :has_other_reason, true, class: "form-radio" %>
-        <%= f.label :has_other_reason, "Yes" %>
+        <%= f.label :has_other_reason, "Yes", class: "mr-3" %>
 
         <%= f.radio_button :has_other_reason, false, class: "form-radio" %>
         <%= f.label :has_other_reason, "No" %>

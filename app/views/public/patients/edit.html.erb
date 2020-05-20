@@ -13,8 +13,8 @@
 
     <%= render '/public/patients/edit/' + @step, f: f %>
 
-    <div class="flex justify-center">
-    <%= submit_tag "Save and Continue →", class: "button-action mt-10" %>
+    <div class="flex justify-center items-center mt-6">
+    <%= submit_tag "Save and Continue →", class: "button-action" %>
     <% if @step == "consent_for_services" %>
         <%= submit_tag "Save and Add Family Member →", class: "button-action" %>
     <% end %>
