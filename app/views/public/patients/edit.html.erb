@@ -1,6 +1,6 @@
 <h1 class="main-title">Register for COVID-19 Testing: <%= @clinic.name %></h1>
 
-<%= form_for( @patient , url: "/client/registration" ,remote: false) do |f| %>
+<%= form_for( @patient , url: "/client/registration" ,remote: false, data: {controller: "inventory-new-entry"}) do |f| %>
     <div class="min-w-full mb-12">
         <ul class="multistep-form-progressbar">
             <% %w(personal_information health_insurance health_questions consent_for_services appointment).each do |step| %>
@@ -14,9 +14,19 @@
     <%= render '/public/patients/edit/' + @step, f: f %>
 
     <div class="flex justify-center items-center mt-6">
-    <%= submit_tag "Save and Continue →", class: "button-action" %>
-    <% if @step == "consent_for_services" %>
-        <%= submit_tag "Save and Add Family Member →", class: "button-action" %>
+    <% if @step != "consent_for_services" %>
+        <%= submit_tag "Save and Continue →", class: "button-action" %>
+    <% else %>
+        <button type="button" class="button-action" data-action="click->inventory-new-entry#toggleModal"> Review & Submit </button>
     <% end %>
+
+    <%# if @step == "consent_for_services" %>
+        <%# submit_tag "Save and Add Family Member →", class: "button-action" %>
+    <%# end %>
+
     </div>
+
+    <% if @step == "consent_for_services" %>
+        <%= render "public/patients/review_form", f: f %>
+    <% end %>
 <% end %>
