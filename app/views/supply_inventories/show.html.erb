@@ -1,4 +1,4 @@
-<h2 class="main-title"> <%= @supply_inventory.item_name %> </h2>
+<h2 class="main-title"> <%= @supply_inventory.product_name %> </h2>
 
 <%= form_with model: @supply_inventory, local: true, class: "py-5", data: {controller: "inventory-new-entry"} do |f| %>
     <div class="sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 lg:gap-6">

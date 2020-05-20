@@ -106,7 +106,7 @@
             <tr class="hover:bg-gray-50">
                 <td> <%= supply_inventory.received_at.strftime("%m-%d-%Y") %> </td>
                 <td> <%= supply_inventory.item_type %> </td>
-                <td class="underline"> <%= link_to supply_inventory.item_name, supply_inventory_path(supply_inventory, clinic_id: params[:clinic_id]) %> </td>
+                <td class="underline"> <%= link_to supply_inventory.product_name, supply_inventory_path(supply_inventory, clinic_id: params[:clinic_id]) %> </td>
                 <td> <%= supply_inventory.manufacturer %> </td>
                 <td> <%= supply_inventory.source %> </td>
                 <td> <%= supply_inventory.lot_number %> </td>
