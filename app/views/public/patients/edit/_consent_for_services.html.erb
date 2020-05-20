@@ -19,18 +19,14 @@
         </div>
         <div class="checkboxes-in-dropdown" data-target="employer-form.locationsCheckboxes">
             <%= collection_check_boxes(:patient, :employer_ids, Employer.all, :id, :company_name) do |b| %>
-            <div class="py-2 border-b border-gray-50">
                 <div class="relative flex items-start px-3 hover:bg-blue-50">
                     <div class="absolute flex items-center h-5">
                         <%= b.check_box(class: "form-checkbox cursor-pointer text-base") %> 
                     </div>
                     <div class="pl-6 text-sm leading-5">
                         <%= b.label %>
-                        <p class="inline text-sm text-gray-500"> (<%= b.object.business_locations.join(", ") %>) </p>
                     </div>
                 </div>
-                
-            </div>
             <% end %>
 
         </div>
