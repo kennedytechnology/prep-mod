@@ -223,10 +223,10 @@ clinics = Clinic.all.to_a
 
 end
 
-Clinic.all.each do |clinic|
+# Clinic.all.each do |clinic|
   SUPPLY_INVENTORY_PER_CLINIC.times do
     SupplyInventory.create!(
-      clinic: clinic,
+      # clinic: clinic,
       received_at: Faker::Date.between(from: 30.days.ago, to:Date.today),
       item_type: INVENTORY_ITEM_TYPES.sample,
       item_name: Faker::Lorem.words(number: 2).collect(&:capitalize).join(" "),
@@ -246,7 +246,7 @@ Clinic.all.each do |clinic|
       event_date: Faker::Date.between(from: Date.today, to: 30.days.from_now)
     )
   end
-end
+# end
 
 Clinic.all.each do |clinic|
   TEST_KITS_PER_CLINIC.times do

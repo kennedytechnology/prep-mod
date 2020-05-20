@@ -1,8 +1,6 @@
 <h2 class="main-title"> Inventory Management </h2>
 
 <%= form_with model: @supply_inventory, local: true, class: "py-5", data: {controller: "inventory-new-entry"} do |f| %>
-    <%= f.hidden_field :clinic_id, value: params[:clinic_id] %>
-
     <div class="sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 lg:gap-6">
         <div>
             <%= f.label :received_at do %>

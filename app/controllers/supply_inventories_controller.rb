@@ -3,8 +3,7 @@ class SupplyInventoriesController < InheritedResources::Base
   layout "clinic_management"
 
   def index
-    @clinic = Clinic.find(params[:clinic_id])
-    @supply_inventories = @clinic.supply_inventories
+    @supply_inventories = SupplyInventory.all
     @supply_inventory = SupplyInventory.new
   end
 
@@ -12,14 +11,13 @@ class SupplyInventoriesController < InheritedResources::Base
     @supply_inventory = SupplyInventory.new(supply_inventory_params)
 
     if @supply_inventory.save
-      redirect_to supply_inventories_path(clinic_id: @supply_inventory.clinic), notice: "Successfully Added Inventory Item"
+      redirect_to supply_inventories_path, notice: "Successfully Added Inventory Item"
     else
-      redirect_back fallback_location: supply_inventories_path(clinic_id: @supply_inventory.clinic), alert: "Error!"
+      redirect_back fallback_location: supply_inventories_path, alert: "Error!"
     end
   end
 
   def show
-    @clinic = Clinic.find(params[:clinic_id])
     @supply_inventory = SupplyInventory.find(params[:id])
   end
 
@@ -31,9 +29,9 @@ class SupplyInventoriesController < InheritedResources::Base
     @supply_inventory = SupplyInventory.find(params[:id])
 
     if @supply_inventory.update(supply_inventory_params)
-      redirect_to supply_inventories_path(clinic_id: @supply_inventory.clinic), notice: "Successfully Updated Inventory Item"
+      redirect_to supply_inventories_path, notice: "Successfully Updated Inventory Item"
     else
-      redirect_back fallback_location: supply_inventories_path(clinic_id: @supply_inventory.clinic), alert: "Error!"
+      redirect_back fallback_location: supply_inventories_path, alert: "Error!"
     end
   end
 
@@ -50,7 +48,7 @@ class SupplyInventoriesController < InheritedResources::Base
         :manufacturer, :lot_number, :expiration_date,
         :quantity, :quantity_used, :quantity_loaned,
         :quantity_lost, :packaging, :source, :product_name, 
-        :event_date, :event_type, :clinic_id, :county, :venue_name
+        :event_date, :event_type, :county, :venue_name
       )
     end
 
