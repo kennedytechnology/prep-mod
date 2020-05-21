@@ -95,3 +95,12 @@ select {
 .radio-buttons-container {
     @apply grid grid-cols-3 gap-2;
 }
+
+// New Employer Form Validation Invalid Fields
+input.invalid {
+    @apply border-yellow-400;
+}
+
+input.invalid::placeholder {
+    @apply text-yellow-400;
+}
