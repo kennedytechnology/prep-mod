@@ -68,4 +68,13 @@
         width: auto;
         &:hover { background-color: lighten(#ff1a1a, 5%);}
     }
+
+    &-cancel {
+        @extend .button-base;
+        @apply  rounded-lg px-2 mx-3 inline-block py-0 bg-brand-blue-600 text-white text-xs ml-8 relative;
+        min-height: auto;
+        min-width: auto;
+        width: auto;
+        &:hover { @apply text-white bg-brand-blue-300; }
+    }
 }

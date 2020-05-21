@@ -3,10 +3,10 @@
         <h3 class="main-title">Clinics Listing</h3>
     </div>
 
-    
-    <form class="flex justify-end items-center">
+
+    <form class="flex justify-end items-center mt-12">
         <label class="flex text-lg mr-3 align-middle text-gray-600 block mb-2" for="search"> Search: </label>
-        <input class="form-input w-4/12"id="search" data-action="keyup->clinic-activity-patients#search" type="text">
+        <input class="form-input w-2/12" id="search" data-action="keyup->clinic-activity-patients#search" type="text">
     </form>
 
 
@@ -19,6 +19,7 @@
                             <th><%= sortable "clinic_date", "Date" %></th>
                             <th><%= sortable "county", "County" %></th>
                             <th><%= sortable "venue_name", "Venue Name" %></th>
+                            <th><%= sortable "links", "Links" %></th>
                             <th> &nbsp; </th>
                         </tr>
                     </thead>
@@ -30,7 +31,7 @@
         </div>
     </div>
 
-<!--    <div class="pagination-section">
+    <!--    <div class="pagination-section">
         <div class="pagination-container">
             <div class="pagination-info">
                 <p><%# page_entries_info @clinics %></p>
@@ -41,4 +42,26 @@
             </div>
         </div>
     </div> -->
+
+    <div data-target="clinic-activity-patients.cancelModal"
+        class="modal hidden fixed w-full h-full top-0 left-0 flex items-center justify-center">
+        <div class="modal-overlay fixed w-full h-full bg-black opacity-25 top-0 left-0 cursor-pointer"></div>
+        <div class="absolute p-8 bg-white rounded-lg shadow-lg flex w-2/4">
+            <div class="w-full">
+                <p>Are you sure you want to cancel this clinic?</p>
+                <div class="mt-8 pt-5">
+                    <div class="flex justify-end">
+                        <span class="inline-flex rounded-md shadow-sm">
+                            <a class="button-primary" rel="nofollow" data-method="delete"
+                                data-target="clinic-activity-patients.cancelRecordButton" href="">Yes</a>
+                        </span>
+                        <span class="inline-flex rounded-md shadow-sm">
+                            <a data-action="click->clinic-activity-patients#onShowHideCancelModal"
+                                class="button-primary sm:mr-0 md:mr-0">Cancel</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
