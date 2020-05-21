@@ -237,6 +237,7 @@ end
       quantity_used: Faker::Number.between(from: 1, to: 5),
       quantity_lost: Faker::Number.between(from: 1, to: 3),
       quantity_loaned: Faker::Number.between(from: 1, to: 3),
+      quantity_destroyed: Faker::Number.between(from: 1, to: 3),
       packaging: INVENTORY_PACKAGINGS.sample,
       source: INVENTORY_SOURCES.sample,
       product_name: Faker::Company.name,
