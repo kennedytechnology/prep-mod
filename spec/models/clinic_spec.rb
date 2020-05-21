@@ -8,7 +8,6 @@ RSpec.describe Clinic, type: :model do
   it { should have_and_belong_to_many :users }
   it { should have_and_belong_to_many(:services).class_name("ClinicService") }
   it { should have_and_belong_to_many(:age_groups).class_name("ClinicAgeGroup") }
-  it { should have_many :supply_inventories }
   it { should have_many :test_kits }
 
   it { should accept_nested_attributes_for :clinic_personnel }

@@ -1,7 +1,7 @@
 <div class="field-side-by-side">
     <div>
         <%= f.label :county %>
-        <%= f.select :county, options_for_select(COUNTIES, @patient.county),{}, class: "w-full form-select" %>
+        <%= f.select :county, options_for_select(COUNTIES, @patient.county),{}, {class: "w-full form-select", data: {action: "change->inventory-new-entry#updateModalField"}}%>
     </div>
     <div> </div>
 </div>
@@ -10,45 +10,21 @@
     <div class="flex">
         <div class="w-9/12 mr-2">
             <%= f.label :first_name, "First Name" %>
-            <%= f.text_field :first_name, disabled: true, class: "form-input w-full" %>
+            <%= f.text_field :first_name, disabled: true, class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField"} %>
         </div>
         <div class="flex-1">
             <%= f.label :middle_initial, "Middle Initial" %>
-            <%= f.text_field :middle_initial, disabled: true, class: "form-input w-full" %>
+            <%= f.text_field :middle_initial, disabled: true, class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField"} %>
         </div>
     </div>
     <div class="flex">
         <div class="flex-1 mr-2">
             <%= f.label :last_name, "Last Name" %>
-            <%= f.text_field :last_name, disabled: true, class: "w-full form-input" %>
+            <%= f.text_field :last_name, disabled: true, class: "w-full form-input", data: {action: "keyup->inventory-new-entry#updateModalField"} %>
         </div>
         <div class="flex-1">
             <%= f.label :mothers_maiden_name, "Mother's Maiden Name" %>
-            <%= f.text_field :mothers_maiden_name, class: "form-input w-full" %>
-        </div>
-    </div>
-</div>
-
-<div class="field-side-by-side">
-    <div class="flex">
-        <div class="flex-1 mr-2">
-            <%= f.label :address %>
-            <%= f.text_field :address, id: "autocomplete", class: "form-input w-full" %>
-            <%= render partial: "public/clinics/google_maps_script" %>
-        </div>
-        <div class="flex-1">
-            <%= f.label :city %>
-            <%= f.text_field :city, class: "form-input w-full" %>
-        </div>
-    </div>
-    <div class="flex">
-        <div class="flex-1 mr-2">
-            <%= f.label :state %>
-            <%= f.select :state, options_for_select(US_STATES, @patient.state), {}, class: "form-select w-full" %>
-        </div>
-        <div class="flex-1">
-            <%= f.label :zip_code, "Zip Code" %>
-            <%= f.text_field :zip_code, class: "form-input w-full" %>
+            <%= f.text_field :mothers_maiden_name, class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField"} %>
         </div>
     </div>
 </div>
@@ -57,25 +33,49 @@
     <div class="flex">
         <div class="flex-1 mr-2">
             <%= f.label :date_of_birth, "Date Of Birth" %>
-            <%= f.date_field :date_of_birth, placeholder: "MM/DD/YYYY", onChange:"calculateAge();", class: "w-full form-input" %>
+            <%= f.date_field :date_of_birth, placeholder: "MM/DD/YYYY", onChange:"calculateAge();", id: "patient_date_of_birth", class: "w-full form-input", data: {action: "keyup->inventory-new-entry#updateModalField change->inventory-new-entry#updateModalField"} %>
         </div>
         <div class="flex-1 mr-2">
             <%= f.label :age %>
-            <%= f.text_field :age, class: "w-full form-input" %>
+            <%= f.text_field :age, class: "w-full form-input", id: "patient_age", data: {action: "keyup->inventory-new-entry#updateModalField"} %>
         </div>
         <div class="flex-1">
             <%= f.label :sex, "Gender" %>
-            <%= f.select :sex, [["Male", "M"], ["Female", "F"], ["Other", "O"]], {}, class: "form-select w-full" %>
+            <%= f.select :sex, [["Male", "M"], ["Female", "F"], ["Other", "O"]], {}, {class: "form-select w-full", data: {action: "change->inventory-new-entry#updateModalField"}} %>
         </div>
     </div>
     <div class="flex">
         <div class="flex-1 mr-2">
             <%= f.label :race %>
-            <%= f.select :state, options_for_select(US_RACES, @patient.state), {}, class: "form-select w-full" %>
+            <%= f.select :race, options_for_select(US_RACES, @patient.race), {prompt: "--"}, {class: "form-select w-full", data: {action: "change->inventory-new-entry#updateModalField"}} %>
         </div>
         <div class="flex-1">
             <%= f.label :occupation %>
-            <%= f.select :occupation, options_for_select(PATIENT_OCCUPATIONS, @patient.occupation), {}, class: "form-select w-full" %>
+            <%= f.select :occupation, options_for_select(PATIENT_OCCUPATIONS, @patient.occupation), {prompt: "--"}, {class: "form-select w-full", data: {action: "change->inventory-new-entry#updateModalField"}} %>
+        </div>
+    </div>
+</div>
+
+<div class="field-side-by-side">
+    <div class="flex">
+        <div class="flex-1 mr-2">
+            <%= f.label :address %>
+            <%= f.text_field :address, id: "autocomplete", onFocus: "geolocate()", class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField"} %>
+            <%= render partial: "public/clinics/google_maps_script" %>
+        </div>
+        <div class="flex-1">
+            <%= f.label :city %>
+            <%= f.text_field :city, id: "locality", class: "form-input w-full" , data: {action: "keyup->inventory-new-entry#updateModalField"}%>
+        </div>
+    </div>
+    <div class="flex">
+        <div class="flex-1 mr-2">
+            <%= f.label :state %>
+            <%= f.select :state, options_for_select(US_STATES, @patient.state), {}, {id: "administrative_area_level_1", class: "form-select w-full", data: {action: "change->inventory-new-entry#updateModalField"}} %>
+        </div>
+        <div class="flex-1">
+            <%= f.label :zip_code, "Zip Code" %>
+            <%= f.text_field :zip_code, id: "postal_code", class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField"} %>
         </div>
     </div>
 </div>
@@ -87,7 +87,7 @@
     </div>
     <div>
         <%= f.label :phone_number, "Mobile or Daytime Number" %>
-        <%= f.text_field :phone_number, class: "form-input w-full" %>
+        <%= f.text_field :phone_number, class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField"} %>
     </div>
 </div>
 

@@ -191,6 +191,7 @@ PATIENT_COUNT.times.each do |i|
     state: address['state'],
     zip_code: address['postalCode'],
     county: COUNTIES.sample,
+    race: US_RACES.sample,
     access_code: Patient.generate_access_code,
     sex: %w(M F).sample,
     phone_number: Faker::PhoneNumber.cell_phone,
@@ -223,10 +224,10 @@ clinics = Clinic.all.to_a
 
 end
 
-Clinic.all.each do |clinic|
+# Clinic.all.each do |clinic|
   SUPPLY_INVENTORY_PER_CLINIC.times do
     SupplyInventory.create!(
-      clinic: clinic,
+      # clinic: clinic,
       received_at: Faker::Date.between(from: 30.days.ago, to:Date.today),
       item_type: INVENTORY_ITEM_TYPES.sample,
       item_name: Faker::Lorem.words(number: 2).collect(&:capitalize).join(" "),
@@ -237,6 +238,7 @@ Clinic.all.each do |clinic|
       quantity_used: Faker::Number.between(from: 1, to: 5),
       quantity_lost: Faker::Number.between(from: 1, to: 3),
       quantity_loaned: Faker::Number.between(from: 1, to: 3),
+      quantity_destroyed: Faker::Number.between(from: 1, to: 3),
       packaging: INVENTORY_PACKAGINGS.sample,
       source: INVENTORY_SOURCES.sample,
       product_name: Faker::Company.name,
@@ -246,7 +248,7 @@ Clinic.all.each do |clinic|
       event_date: Faker::Date.between(from: Date.today, to: 30.days.from_now)
     )
   end
-end
+# end
 
 Clinic.all.each do |clinic|
   TEST_KITS_PER_CLINIC.times do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_20_114457) do
+ActiveRecord::Schema.define(version: 2020_05_21_095749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -330,6 +330,7 @@ ActiveRecord::Schema.define(version: 2020_05_20_114457) do
     t.string "insured_last_name"
     t.string "appointment_time"
     t.string "occupation"
+    t.string "race"
   end
 
   create_table "provider_enrollments", force: :cascade do |t|
@@ -386,7 +387,6 @@ ActiveRecord::Schema.define(version: 2020_05_20_114457) do
     t.string "source"
     t.string "product_name"
     t.string "event_type"
-    t.bigint "clinic_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "quantity_used"
@@ -395,6 +395,7 @@ ActiveRecord::Schema.define(version: 2020_05_20_114457) do
     t.date "event_date"
     t.string "county"
     t.string "venue_name"
+    t.integer "quantity_destroyed"
   end
 
   create_table "test_kits", force: :cascade do |t|

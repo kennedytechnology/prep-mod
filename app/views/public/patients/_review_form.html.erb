@@ -1,0 +1,306 @@
+<div class="opacity-0 pointer-events-none fixed bottom-0 inset-x-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center" id="InventoryNewEntryModal">
+    <!--
+    Background overlay, show/hide based on modal state.
+
+    Entering: "ease-out duration-300"
+      From: "opacity-0"
+      To: "opacity-100"
+    Leaving: "ease-in duration-200"
+      From: "opacity-100"
+      To: "opacity-0"
+  -->
+    <div class="fixed inset-0 transition-opacity">
+        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+    </div>
+
+    <!--
+    Modal panel, show/hide based on modal state.
+
+    Entering: "ease-out duration-300"
+      From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+      To: "opacity-100 translate-y-0 sm:scale-100"
+    Leaving: "ease-in duration-200"
+      From: "opacity-100 translate-y-0 sm:scale-100"
+      To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+  -->
+    <div class="w-10/12 relative bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:p-6 overflow-y-scroll" style="max-height: 80vh;">
+        <div class="hidden sm:block absolute top-0 right-0 pt-4 pr-4">
+            <button data-action="click->inventory-new-entry#toggleModal" type="button"
+                class="text-gray-400 hover:text-gray-500 focus:outline-none focus:text-gray-500 transition ease-in-out duration-150">
+                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <div>
+            <!-- Personal Information -->
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                <h1 class="main-title pb-1 border-b text-brand-blue-600"> Personal Information </h1>
+                <div class="field-side-by-side">
+                    <div>
+                        <%= f.label :county %>
+                        <%= f.select :county, options_for_select(COUNTIES, @patient.county),{}, {class: "w-full form-select", disabled: true, id: "modal_patient_county"} %>
+                    </div>
+                    <div> </div>
+                </div>
+
+                <div class="field-side-by-side">
+                    <div class="flex">
+                        <div class="w-9/12 mr-2">
+                            <%= f.label :first_name, "First Name" %>
+                            <%= f.text_field :first_name, disabled: true, class: "form-input w-full", id: 'modal_patient_first_name' %>
+                        </div>
+                        <div class="flex-1">
+                            <%= f.label :middle_initial, "Middle Initial" %>
+                            <%= f.text_field :middle_initial, disabled: true, class: "form-input w-full", id: "modal_patient_middle_initial" %>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="flex-1 mr-2">
+                            <%= f.label :last_name, "Last Name" %>
+                            <%= f.text_field :last_name, disabled: true, class: "w-full form-input", id: "modal_patient_last_name" %>
+                        </div>
+                        <div class="flex-1">
+                            <%= f.label :mothers_maiden_name, "Mother's Maiden Name" %>
+                            <%= f.text_field :mothers_maiden_name, class: "form-input w-full", id: "modal_patient_mothers_maiden_name", disabled: true %>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field-side-by-side">
+                    <div class="flex">
+                        <div class="flex-1 mr-2">
+                            <%= f.label :date_of_birth, "Date Of Birth" %>
+                            <%= f.date_field :date_of_birth, placeholder: "MM/DD/YYYY", onChange:"calculateAge();", id: "modal_patient_date_of_birth", class: "w-full form-input", disabled: true %>
+                        </div>
+                        <div class="flex-1 mr-2">
+                            <%= f.label :age %>
+                            <%= f.text_field :age, class: "w-full form-input", id: "modal_patient_age", disabled: true %>
+                        </div>
+                        <div class="flex-1">
+                            <%= f.label :sex, "Gender" %>
+                            <%= f.select :sex, [["Male", "M"], ["Female", "F"], ["Other", "O"]], {}, {class: "form-select w-full", id:"modal_patient_sex", disabled: true} %>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="flex-1 mr-2">
+                            <%= f.label :race %>
+                            <%= f.select :race, options_for_select(US_RACES, @patient.race), {}, {class: "form-select w-full", id: "modal_patient_race", disabled: true} %>
+                        </div>
+                        <div class="flex-1">
+                            <%= f.label :occupation %>
+                            <%= f.select :occupation, options_for_select(PATIENT_OCCUPATIONS, @patient.occupation), {prompt: "--"}, {class: "form-select w-full", id: "modal_patient_occupation", disabled: true} %>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field-side-by-side">
+                    <div class="flex">
+                        <div class="flex-1 mr-2">
+                            <%= f.label :address %>
+                            <%= f.text_field :address, id: "autocomplete", onFocus: "geolocate()", class: "form-input w-full", id: "modal_address", disabled: true %>
+                        </div>
+                        <div class="flex-1">
+                            <%= f.label :city %>
+                            <%= f.text_field :city, id: "locality", class: "form-input w-full", id: "modal_locality", disabled: true %>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="flex-1 mr-2">
+                            <%= f.label :state %>
+                            <%= f.select :state, options_for_select(US_STATES, @patient.state), {}, {id: "modal_administrative_area_level_1", class: "form-select w-full", disabled: true} %>
+                        </div>
+                        <div class="flex-1">
+                            <%= f.label :zip_code, "Zip Code" %>
+                            <%= f.text_field :zip_code, id: "modal_postal_code", class: "form-input w-full", disabled: true %>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field-side-by-side">
+                    <div>
+                        <%= f.label :email, "Email Address" %>
+                        <%= f.text_field :email, disabled: true, class: "form-input w-full", id: "modal_patient_email" %>
+                    </div>
+                    <div>
+                        <%= f.label :phone_number, "Mobile or Daytime Number" %>
+                        <%= f.text_field :phone_number, class: "form-input w-full", id: "modal_patient_phone_number", disabled: true %>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Health Insurance -->
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                <h1 class="main-title pb-1 border-b text-brand-blue-600"> Health Insurance </h1>
+                <div class="field-side-by-side">
+                    <div>
+                        <%= f.label :insurance_type, "Type of Insurance", class: "block" %>
+                        <%= f.select :insurance_type, options_for_select(INSURANCE_TYPES, @patient.insurance_type),{}, {class: "w-full form-select", disabled: true, id: "modal_patient_insurance_type"} %>
+                    </div>
+                    <div>
+                        <%= f.label :insurance_company_name, "Insurance Company Name", class: "block" %>
+                        <%= f.text_field :insurance_company_name, class: "w-full form-input", disabled: true, id: "modal_patient_company_name" %>
+                    </div>
+                </div>
+
+                <div class="field-side-by-side">
+                    <div>
+                        <%= f.label :member_id_for_insurance, "Member ID Number", class: "block" %>
+                        <%= f.text_field :member_id_for_insurance, class: "w-full form-input", disabled: true, id: "modal_patient_member_id_for_insurance" %>
+                    </div>
+                    <div>
+                        <%= f.label :group_number_for_insurance, "Group Number", class: "block" %>
+                        <%= f.text_field :group_number_for_insurance, class: "w-full form-input", disabled: true, id: "modal_patient_group_number_for_insurance" %>
+                    </div>
+                </div>
+
+                <div class="field-side-by-side">
+                    <div>
+                        <%= f.label :card_number_for_insurance, "Medical Assistance Number, Recipient Number, or any other number on card", class: "block" %>
+                        <%= f.text_field :card_number_for_insurance, class: "w-full form-input", disabled: true, id: "modal_patient_card_number_for_insurance" %>
+                    </div>
+                    <div class="flex">
+                        <div class="flex-1 mr-2">
+                            <%= f.label :insured_first_name, "Insured Adult's First Name", class: "block" %>
+                            <%= f.text_field :insured_first_name, class: "w-11/12 form-input", disabled: true, id: "modal_patient_insured_first_name" %>
+                        </div>
+                        <div class="flex-1">
+                            <%= f.label :insured_last_name, "Insured Adult's Last Name", class: "block" %>
+                            <%= f.text_field :insured_last_name, class: "w-11/12 form-input", disabled: true, id: "modal_patient_insured_last_name" %>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field-side-by-side">
+                    <div>
+                        <%= f.label :insured_date_of_birth, "Insured Adult's Date Of Birth", class: "block" %>
+                        <%= f.date_field :insured_date_of_birth, class: "w-full form-input", disabled: true, id: "modal_patient_insured_date_of_birth" %>
+                    </div>
+                    <div>
+                        <%= f.label :relation_to_patient_for_consent, "Relationship To Patient", class: "block" %>
+                        <%= f.select :relation_to_patient_for_consent, options_for_select(RELATIONSHIP_TYPES, @patient.relation_to_patient_for_consent),{}, {class: "w-full form-select", disabled: true, id: "modal_patient_relation_to_patient_for_consent"} %>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Health Questions -->
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                <h1 class="main-title pb-1 border-b text-brand-blue-600"> Health Questions </h1>
+                <div class="field-side-by-side">
+                    <div>
+                        <h2 class="title"> Do you have: </h2>
+                        <%= f.check_box :has_fever_over, class: "form-checkbox", disabled: true, id: "modal_patient_has_fever_over" %>
+                        <%= f.label :has_fever_over, "A fever of 100.4 degrees Fahrenheit or higher" %>
+
+                        <br />
+                        <%= f.check_box :has_cough, class: "form-checkbox", disabled: true, id: "modal_patient_has_cough" %>
+                        <%= f.label :has_cough, "A cough" %>
+
+                        <br />
+                        <%= f.check_box :has_difficult_breathing, class: "form-checkbox", disabled: true, id: "modal_patient_has_difficult_breathing" %>
+                        <%= f.label :has_difficult_breathing, "Shortness of breath or difficulty breathing" %>
+                    </div>
+                    <div>
+                        <h2 class="title"> Have you traveled in the past 14 days to regions affected by COVID-19?<span class="field-required">*</span> </h2> 
+                        <%= f.radio_button :had_traveled_to_affected_place, true, class: "form-radio", disabled: true, id: "modal_patient_has_traveled_to_affected_place" %>
+                        <%= f.label :had_traveled_to_affected_place, "Yes", class: "mr-3" %>
+
+                        <%= f.radio_button :had_traveled_to_affected_place, false, class: "form-radio", disabled: true, id: "modal_patient_has_traveled_to_affected_place" %>
+                        <%= f.label :had_traveled_to_affected_place, "No" %>
+                    </div>
+                </div>
+
+                <div class="field-side-by-side">
+                    <div>
+                        <h2 class="title"> Have you been in close contact with anyone who has a confirmed COVID-19 diagnosis?<span class="field-required">*</span> </h2>
+                        <%= f.radio_button :had_contact_with_confirmed_case, true, class: "form-radio", disabled: true, id: "modal_patient_had_contact_with_confirmed_case" %>
+                        <%= f.label :had_contact_with_confirmed_case, "Yes", class: "mr-3" %>
+
+                        <%= f.radio_button :had_contact_with_confirmed_case, false, class: "form-radio", disabled: true, id: "modal_patient_had_contact_with_confirmed_case" %>
+                        <%= f.label :had_contact_with_confirmed_case, "No" %>
+                    </div>
+                    <div>
+                        <h2 class="title">Do you have heart disease, lung disease, kidney disease or diabetes?<span class="field-required">*</span></h2>
+                        <%= f.radio_button :has_risk_factor, true, class: "form-radio", disabled: true, id: "modal_patient_has_risk_factor" %>
+                        <%= f.label :has_risk_factor, "Yes", class: "mr-3" %>
+
+                        <%= f.radio_button :has_risk_factor, false, class: "form-radio", disabled: true, id: "modal_patient_has_risk_factor" %>
+                        <%= f.label :has_risk_factor, "No" %>
+                    </div>
+                </div>
+
+                <div class="field-side-by-side">
+                    <div>
+                        <h2 class="title">Are you 60 or older?<span class="field-required">*</span></h2>
+                        <%= f.radio_button :is_age_60_or_more, true, class: "form-radio", disabled: true, id: "modal_patient_is_age_60_or_more" %>
+                        <%= f.label :is_age_60_or_more, "Yes", class: "mr-3" %>
+
+                        <%= f.radio_button :is_age_60_or_more, false, class: "form-radio",  disabled: true, id: "modal_patient_is_age_60_or_more" %>
+                        <%= f.label :is_age_60_or_more, "No" %>
+                    </div>
+                    <div>
+                        <h2 class="title">Is there any other reason you think you should be tested for COVID-19? If "yes", explain<span class="field-required">*</span></h2>
+                        <%= f.radio_button :has_other_reason, true, class: "form-radio",  disabled: true, id: "modal_patient_has_other_reason" %>
+                        <%= f.label :has_other_reason, "Yes", class: "mr-3" %>
+
+                        <%= f.radio_button :has_other_reason, false, class: "form-radio", disabled: true, id: "modal_patient_has_other_reason" %>
+                        <%= f.label :has_other_reason, "No" %>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Consent Form -->
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                <h1 class="main-title pb-1 border-b text-brand-blue-600"> Consent for Services </h1>
+                <div class="field-fullwidth">
+                    <p class="label"> With who would you like to share your information? </p>
+                    <div class="grid grid-cols-4 gap-4">
+                        <%= collection_check_boxes(:patient, :employer_ids, Employer.all, :id, :company_name) do |b| %>
+                            <div class="relative flex items-start px-3" data-target="consent-form.searchableRow" data-search-content="<%= [b.object.company_name.downcase] %>">
+                                <div class="absolute flex items-center h-5">
+                                    <%= b.check_box(class: "form-checkbox cursor-pointer text-base", disabled: true, id: "modal_patient_employer_ids_#{b.object.id}") %> 
+                                </div>
+                                <div class="pl-6 text-sm leading-5">
+                                    <%= b.label(for: "", class: "cursor-not-allowed") %>
+                                </div>
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+                <div class="field-side-by-side">
+                    <div>
+                        <%= f.label :consent_date, "Date", class: "block" %>
+                        <%= f.text_field :consent_date, value: Date.today.strftime("%m/%d/%y"), disabled: true, class: "form-input w-4/12" %>
+                    </div>
+                    <div> </div>
+                </div>
+
+                <div class="field-fullwidth">
+                    <div class="flex items-center">
+                        <div class="w-8/12 mr-4">
+                            <p class="label"> Please type your first and last name <span class="field-required">*</span></p>
+                            <div class="flex">
+                                <%= f.text_field :signatory_first_name, placeholder: "First Name", class: "flex-1 mr-3 form-input", disabled: true, id: "modal_patient_signatory_first_name" %>
+                                <%= f.text_field :signatory_last_name, placeholder: "Last Name", class: "flex-1 form-input", disabled: true, id: "modal_patient_signatory_last_name" %>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <%= f.label :relation_to_patient_for_insurance, "Relationship to Patient", class: "block" %>
+                            <%= f.select :relation_to_patient_for_insurance, ["Self","Parent/Guardian","Other"], {}, {class: "form-select w-full", disabled: true, id: "modal_patient_relation_to_patient_for_insurance"} %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+            <span class="flex w-full sm:ml-3 sm:w-auto">
+                <button type="button" data-action="click->inventory-new-entry#toggleModal" class="button-primary">
+                    Close
+                </button>
+            </span>
+            <span class="mt-3 flex w-full sm:mt-0 sm:w-auto">
+                <%= submit_tag "Save and Continue →", class: "button-action" %>
+            </span>
+        </div>
+    </div>
+</div>
