@@ -289,10 +289,12 @@
             <div>
                 <h2 class="title"> What make and model refrigerator do you have? <span class="field-required">*</span> </h2>
                 <div class="mb-2">
-                    <%= f.check_box :refrigerator, {class: "form-checkbox"}, "no" %>
+                    <%= f.check_box :refrigerator, class: "form-checkbox", data: {action: "change->provider-enrollment-new-entry#updateField"}, value: "no" %>
                     <%= f.label :refrigerator, "I do not have a refrigerator" %> 
-                </div>  
-                <%= f.text_field :refrigerator, class: "form-input w-full" %>
+                </div>
+                <div class="" id="refrigerator">
+                <%= f.text_field :refrigerator, class: "form-input w-full", required: true %>
+                </div>
             </div>
 
             <div>
