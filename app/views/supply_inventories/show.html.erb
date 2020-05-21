@@ -1,15 +1,13 @@
-<h2 class="main-title"> <%= @supply_inventory.item_name %> </h2>
+<h2 class="main-title"> <%= @supply_inventory.product_name %> </h2>
 
 <%= form_with model: @supply_inventory, local: true, class: "py-5", data: {controller: "inventory-new-entry"} do |f| %>
-    <%= f.hidden_field :clinic_id, value: params[:clinic_id] %>
-
     <div class="sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 lg:gap-6">
         <div>
             <%= f.label :event_date do %>
                 <span class="text-gray-500"> Event Date </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.date_field :event_date, class: "form-input block w-full", placeholder: "MM/DD/YYYY", required: true, data: {action: "change->inventory-new-entry#updateModalField"} %>
+            <%= f.date_field :event_date, class: "form-input block w-full", placeholder: "MM/DD/YYYY", required: true, data: {action: "change->inventory-new-entry#updateModalField keyup->inventory-new-entry#updateModalField"} %>
         </div>
 
         <div>
@@ -21,11 +19,11 @@
         </div>
 
         <div>
-            <%= f.label :quantity_user do %>
+            <%= f.label :quantity_used do %>
                 <span class="text-gray-500"> Quantity Used </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.number_field :quantity_used, class: "form-input block w-full", required: true, data: {action: "keyup->inventory-new-entry#updateModalField"} %>
+            <%= f.number_field :quantity_used, class: "form-input block w-full", required: true, data: {action: "change->inventory-new-entry#updateModalField keyup->inventory-new-entry#updateModalField"} %>
         </div>
 
         <div>
@@ -33,7 +31,7 @@
                 <span class="text-gray-500"> Quantity Lost </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.number_field :quantity_lost, class: "form-input block w-full", required: true, data: {action: "keyup->inventory-new-entry#updateModalField"} %>
+            <%= f.number_field :quantity_lost, class: "form-input block w-full", required: true, data: {action: "change->inventory-new-entry#updateModalField keyup->inventory-new-entry#updateModalField"} %>
         </div>
 
         <div>
@@ -41,15 +39,15 @@
                 <span class="text-gray-500"> Quantity Loaned </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.number_field :quantity_loaned, class: "form-input block w-full", required: true, data: {action: "keyup->inventory-new-entry#updateModalField"} %>
+            <%= f.number_field :quantity_loaned, class: "form-input block w-full", required: true, data: {action: "change->inventory-new-entry#updateModalField keyup->inventory-new-entry#updateModalField"} %>
         </div>
 
         <div>
-            <%= f.label :quantity_lost do %>
+            <%= f.label :quantity_destroyed do %>
                 <span class="text-gray-500"> Quantity Destroyed/Returned </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.number_field :quantity_lost, class: "form-input block w-full", required: true, data: {action: "keyup->inventory-new-entry#updateModalField"} %>
+            <%= f.number_field :quantity_destroyed, class: "form-input block w-full", required: true, data: {action: "change->inventory-new-entry#updateModalField keyup->inventory-new-entry#updateModalField"} %>
         </div>
 
         <div>
