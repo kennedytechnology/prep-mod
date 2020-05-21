@@ -1,34 +1,7 @@
 import { Controller } from "stimulus";
 
 export default class extends Controller {
-  static targets = [
-    "locationsCheckboxes",
-    "form",
-    "firstNameError",
-    "lastNameError",
-    "positionError",
-    "address1Error",
-    "address2Error",
-    "cityError",
-    "stateError",
-    "zipCodeError",
-    "officePhoneError",
-    "mobilePhoneError",
-    "emailError",
-    "backupFirstNameError",
-    "backupLastNameError",
-    "backupPositionError",
-    "backupAddress1Error",
-    "backupAddress2Error",
-    "backupCityError",
-    "backupStateError",
-    "backupZipCodeError",
-    "backupOfficePhoneError",
-    "backupMobilePhoneError",
-    "backupEmailError",
-    "employeesNumberError",
-    "locationsNumberError",
-  ];
+  static targets = ["locationsCheckboxes", "form"];
 
   connect() {}
 
@@ -71,270 +44,366 @@ export default class extends Controller {
   }
 
   validateFirstName(event) {
+    let errorMessage = event.target.parentNode.getElementsByClassName(
+      "error-message"
+    )[0];
+
     if (event.target.value == "") {
       event.target.style.marginBottom = 0;
-      this.firstNameErrorTarget.classList.remove("hidden");
-      this.firstNameErrorTarget.innerText = "First name is required!";
+      errorMessage.classList.remove("hidden");
+      errorMessage.innerText = "First name is required!";
     } else {
       event.target.classList.remove("invalid");
-      this.firstNameErrorTarget.classList.add("hidden");
+      errorMessage.classList.add("hidden");
     }
   }
 
   validateLastName(event) {
+    let errorMessage = event.target.parentNode.getElementsByClassName(
+      "error-message"
+    )[0];
+
     if (event.target.value == "") {
       event.target.style.marginBottom = 0;
-      this.lastNameErrorTarget.classList.remove("hidden");
-      this.lastNameErrorTarget.innerText = "Last name is required!";
+      errorMessage.classList.remove("hidden");
+      errorMessage.innerText = "Last name is required!";
     } else {
       event.target.classList.remove("invalid");
-      this.lastNameErrorTarget.classList.add("hidden");
+      errorMessage.classList.add("hidden");
     }
   }
 
   validatePosition(event) {
+    let errorMessage = event.target.parentNode.getElementsByClassName(
+      "error-message"
+    )[0];
+
     if (event.target.value == "") {
       event.target.style.marginBottom = 0;
-      this.positionErrorTarget.classList.remove("hidden");
-      this.positionErrorTarget.innerText = "Position/title is required!";
+      errorMessage.classList.remove("hidden");
+      errorMessage.innerText = "Position/title is required!";
     } else {
       event.target.classList.remove("invalid");
-      this.positionErrorTarget.classList.add("hidden");
+      errorMessage.classList.add("hidden");
     }
   }
 
   validateAddress1(event) {
+    let errorMessage = event.target.parentNode.getElementsByClassName(
+      "error-message"
+    )[0];
+
     if (event.target.value == "") {
       event.target.style.marginBottom = 0;
-      this.address1ErrorTarget.classList.remove("hidden");
-      this.address1ErrorTarget.innerText = "Address is required!";
+      errorMessage.classList.remove("hidden");
+      errorMessage.innerText = "Address is required!";
     } else {
       event.target.classList.remove("invalid");
-      this.address1ErrorTarget.classList.add("hidden");
+      errorMessage.classList.add("hidden");
     }
   }
 
   validateAddress2(event) {
+    let errorMessage = event.target.parentNode.getElementsByClassName(
+      "error-message"
+    )[0];
+
     if (event.target.value == "") {
       event.target.style.marginBottom = 0;
-      this.address2ErrorTarget.classList.remove("hidden");
-      this.address2ErrorTarget.innerText = "Unit number/address required!";
+      errorMessage.classList.remove("hidden");
+      errorMessage.innerText = "Unit number/address required!";
     } else {
       event.target.classList.remove("invalid");
-      this.address2ErrorTarget.classList.add("hidden");
+      errorMessage.classList.add("hidden");
     }
   }
 
   validateCity(event) {
+    let errorMessage = event.target.parentNode.getElementsByClassName(
+      "error-message"
+    )[0];
+
     if (event.target.value == "") {
       event.target.style.marginBottom = 0;
-      this.cityErrorTarget.classList.remove("hidden");
-      this.cityErrorTarget.innerText = "City is required!";
+      errorMessage.classList.remove("hidden");
+      errorMessage.innerText = "City is required!";
     } else {
       event.target.classList.remove("invalid");
-      this.cityErrorTarget.classList.add("hidden");
+      errorMessage.classList.add("hidden");
     }
   }
 
   validateState(event) {
+    let errorMessage = event.target.parentNode.getElementsByClassName(
+      "error-message"
+    )[0];
+
     if (event.target.value == "") {
       event.target.style.marginBottom = 0;
-      this.stateErrorTarget.classList.remove("hidden");
-      this.stateErrorTarget.innerText = "State is required!";
+      errorMessage.classList.remove("hidden");
+      errorMessage.innerText = "State is required!";
     } else {
       event.target.classList.remove("invalid");
-      this.stateErrorTarget.classList.add("hidden");
+      errorMessage.classList.add("hidden");
     }
   }
 
   validateZipCode(event) {
+    let errorMessage = event.target.parentNode.getElementsByClassName(
+      "error-message"
+    )[0];
+
     if (event.target.value == "") {
       event.target.style.marginBottom = 0;
-      this.zipCodeErrorTarget.classList.remove("hidden");
-      this.zipCodeErrorTarget.innerText = "Zip Code is required!";
+      errorMessage.classList.remove("hidden");
+      errorMessage.innerText = "Zip Code is required!";
     } else {
       event.target.classList.remove("invalid");
-      this.zipCodeErrorTarget.classList.add("hidden");
+      errorMessage.classList.add("hidden");
     }
   }
 
   validateOfficePhone(event) {
+    let errorMessage = event.target.parentNode.getElementsByClassName(
+      "error-message"
+    )[0];
+
     if (event.target.value == "") {
       event.target.style.marginBottom = 0;
-      this.officePhoneErrorTarget.classList.remove("hidden");
-      this.officePhoneErrorTarget.innerText = "Office phone is required!";
+      errorMessage.classList.remove("hidden");
+      errorMessage.innerText = "Office phone is required!";
     } else {
       event.target.classList.remove("invalid");
-      this.officePhoneErrorTarget.classList.add("hidden");
+      errorMessage.classList.add("hidden");
     }
   }
 
   validateMobilePhone(event) {
+    let errorMessage = event.target.parentNode.getElementsByClassName(
+      "error-message"
+    )[0];
+
     if (event.target.value == "") {
       event.target.style.marginBottom = 0;
-      this.mobilePhoneErrorTarget.classList.remove("hidden");
-      this.mobilePhoneErrorTarget.innerText = "Mobile phone is required!";
+      errorMessage.classList.remove("hidden");
+      errorMessage.innerText = "Mobile phone is required!";
     } else {
       event.target.classList.remove("invalid");
-      this.mobilePhoneErrorTarget.classList.add("hidden");
+      errorMessage.classList.add("hidden");
     }
   }
 
   validateEmail(event) {
+    let errorMessage = event.target.parentNode.getElementsByClassName(
+      "error-message"
+    )[0];
+
     if (event.target.value == "") {
       event.target.style.marginBottom = 0;
-      this.emailErrorTarget.classList.remove("hidden");
-      this.emailErrorTarget.innerText = "Email address is required!";
+      errorMessage.classList.remove("hidden");
+      errorMessage.innerText = "Email address is required!";
     } else {
       event.target.classList.remove("invalid");
-      this.emailErrorTarget.classList.add("hidden");
+      errorMessage.classList.add("hidden");
     }
   }
 
   // Validate Backup Contact Inputs
   validateBackupFirstName(event) {
+    let errorMessage = event.target.parentNode.getElementsByClassName(
+      "error-message"
+    )[0];
+
     if (event.target.value == "") {
       event.target.style.marginBottom = 0;
-      this.backupFirstNameErrorTarget.classList.remove("hidden");
-      this.backupFirstNameErrorTarget.innerText = "First name is required!";
+      errorMessage.classList.remove("hidden");
+      errorMessage.innerText = "First name is required!";
     } else {
       event.target.classList.remove("invalid");
-      this.backupFirstNameErrorTarget.classList.add("hidden");
+      errorMessage.classList.add("hidden");
     }
   }
 
   validateBackupLastName(event) {
+    let errorMessage = event.target.parentNode.getElementsByClassName(
+      "error-message"
+    )[0];
+    
     if (event.target.value == "") {
       event.target.style.marginBottom = 0;
-      this.backupLastNameErrorTarget.classList.remove("hidden");
-      this.backupLastNameErrorTarget.innerText = "Last name is required!";
+      errorMessage.classList.remove("hidden");
+      errorMessage.innerText = "Last name is required!";
     } else {
       event.target.classList.remove("invalid");
-      this.backupLastNameErrorTarget.classList.add("hidden");
+      errorMessage.classList.add("hidden");
     }
   }
 
   validateBackupPosition(event) {
+    let errorMessage = event.target.parentNode.getElementsByClassName(
+      "error-message"
+    )[0];
+    
     if (event.target.value == "") {
       event.target.style.marginBottom = 0;
-      this.backupPositionErrorTarget.classList.remove("hidden");
-      this.backupPositionErrorTarget.innerText = "Position/title is required!";
+      errorMessage.classList.remove("hidden");
+      errorMessage.innerText = "Position/title is required!";
     } else {
       event.target.classList.remove("invalid");
-      this.backupPositionErrorTarget.classList.add("hidden");
+      errorMessage.classList.add("hidden");
     }
   }
 
   validateBackupAddress1(event) {
+    let errorMessage = event.target.parentNode.getElementsByClassName(
+      "error-message"
+    )[0];
+
     if (event.target.value == "") {
       event.target.style.marginBottom = 0;
-      this.backupAddress1ErrorTarget.classList.remove("hidden");
-      this.backupAddress1ErrorTarget.innerText = "Address is required!";
+      errorMessage.classList.remove("hidden");
+      errorMessage.innerText = "Address is required!";
     } else {
       event.target.classList.remove("invalid");
-      this.backupAddress1ErrorTarget.classList.add("hidden");
+      errorMessage.classList.add("hidden");
     }
   }
 
   validateBackupAddress2(event) {
+    let errorMessage = event.target.parentNode.getElementsByClassName(
+      "error-message"
+    )[0];
+
     if (event.target.value == "") {
       event.target.style.marginBottom = 0;
-      this.backupAddress2ErrorTarget.classList.remove("hidden");
-      this.backupAddress2ErrorTarget.innerText =
+      errorMessage.classList.remove("hidden");
+      errorMessage.innerText =
         "Unit number/address required!";
     } else {
       event.target.classList.remove("invalid");
-      this.backupAddress2ErrorTarget.classList.add("hidden");
+      errorMessage.classList.add("hidden");
     }
   }
 
   validateBackupCity(event) {
+    let errorMessage = event.target.parentNode.getElementsByClassName(
+      "error-message"
+    )[0];
+
     if (event.target.value == "") {
       event.target.style.marginBottom = 0;
-      this.backupCityErrorTarget.classList.remove("hidden");
-      this.backupCityErrorTarget.innerText = "City is required!";
+      errorMessage.classList.remove("hidden");
+      errorMessage.innerText = "City is required!";
     } else {
       event.target.classList.remove("invalid");
-      this.backupCityErrorTarget.classList.add("hidden");
+      errorMessage.classList.add("hidden");
     }
   }
 
   validateBackupState(event) {
+    let errorMessage = event.target.parentNode.getElementsByClassName(
+      "error-message"
+    )[0];
+
     if (event.target.value == "") {
       event.target.style.marginBottom = 0;
-      this.backupStateErrorTarget.classList.remove("hidden");
-      this.backupStateErrorTarget.innerText = "State is required!";
+      errorMessage.classList.remove("hidden");
+      errorMessage.innerText = "State is required!";
     } else {
       event.target.classList.remove("invalid");
-      this.backupStateErrorTarget.classList.add("hidden");
+      errorMessage.classList.add("hidden");
     }
   }
 
   validateBackupZipCode(event) {
+    let errorMessage = event.target.parentNode.getElementsByClassName(
+      "error-message"
+    )[0];
+
     if (event.target.value == "") {
       event.target.style.marginBottom = 0;
-      this.backupZipCodeErrorTarget.classList.remove("hidden");
-      this.backupZipCodeErrorTarget.innerText = "Zip Code is required!";
+      errorMessage.classList.remove("hidden");
+      errorMessage.innerText = "Zip Code is required!";
     } else {
       event.target.classList.remove("invalid");
-      this.backupZipCodeErrorTarget.classList.add("hidden");
+      errorMessage.classList.add("hidden");
     }
   }
 
   validateBackupOfficePhone(event) {
+    let errorMessage = event.target.parentNode.getElementsByClassName(
+      "error-message"
+    )[0];
+
     if (event.target.value == "") {
       event.target.style.marginBottom = 0;
-      this.backupOfficePhoneErrorTarget.classList.remove("hidden");
-      this.backupOfficePhoneErrorTarget.innerText = "Office phone is required!";
+      errorMessage.classList.remove("hidden");
+      errorMessage.innerText = "Office phone is required!";
     } else {
       event.target.classList.remove("invalid");
-      this.backupOfficePhoneErrorTarget.classList.add("hidden");
+      errorMessage.classList.add("hidden");
     }
   }
 
   validateBackupMobilePhone(event) {
+    let errorMessage = event.target.parentNode.getElementsByClassName(
+      "error-message"
+    )[0];
+
     if (event.target.value == "") {
       event.target.style.marginBottom = 0;
-      this.backupMobilePhoneErrorTarget.classList.remove("hidden");
-      this.backupMobilePhoneErrorTarget.innerText = "Mobile phone is required!";
+      errorMessage.classList.remove("hidden");
+      errorMessage.innerText = "Mobile phone is required!";
     } else {
       event.target.classList.remove("invalid");
-      this.backupMobilePhoneErrorTarget.classList.add("hidden");
+      errorMessage.classList.add("hidden");
     }
   }
 
   validateBackupEmail(event) {
+    let errorMessage = event.target.parentNode.getElementsByClassName(
+      "error-message"
+    )[0];
+
     if (event.target.value == "") {
       event.target.style.marginBottom = 0;
-      this.backupEmailErrorTarget.classList.remove("hidden");
-      this.backupEmailErrorTarget.innerText = "Email address is required!";
+      errorMessage.classList.remove("hidden");
+      errorMessage.innerText = "Email address is required!";
     } else {
       event.target.classList.remove("invalid");
-      this.backupEmailErrorTarget.classList.add("hidden");
+      errorMessage.classList.add("hidden");
     }
   }
 
   validateEmployeesNumber(event) {
+    let errorMessage = event.target.parentNode.getElementsByClassName(
+      "error-message"
+    )[0];
+
     if (event.target.value == "") {
       event.target.style.marginBottom = 0;
-      this.employeesNumberErrorTarget.classList.remove("hidden");
-      this.employeesNumberErrorTarget.innerText =
+      errorMessage.classList.remove("hidden");
+      errorMessage.innerText =
         "Total number of employees is required!";
     } else {
       event.target.classList.remove("invalid");
-      this.employeesNumberErrorTarget.classList.add("hidden");
+      errorMessage.classList.add("hidden");
     }
   }
 
   validateLocationsNumber(event) {
+    let errorMessage = event.target.parentNode.getElementsByClassName(
+      "error-message"
+    )[0];
+
     if (event.target.value == "") {
       event.target.style.marginBottom = 0;
-      this.locationsNumberErrorTarget.classList.remove("hidden");
-      this.locationsNumberErrorTarget.innerText =
+      errorMessage.classList.remove("hidden");
+      errorMessage.innerText =
         "Total number of locations is required!";
     } else {
       event.target.classList.remove("invalid");
-      this.locationsNumberErrorTarget.classList.add("hidden");
+      errorMessage.classList.add("hidden");
     }
   }
 }
