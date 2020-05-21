@@ -33,8 +33,9 @@
             </button>
         </div>
         <div>
+            <!-- Personal Information -->
             <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                <h1 class="main-title pb-4 border-b"> Review Information from Consent Form </h1>
+                <h1 class="main-title pb-1 border-b text-brand-blue-600"> Personal Information </h1>
                 <div class="field-side-by-side">
                     <div>
                         <%= f.label :county %>
@@ -126,7 +127,60 @@
                         <%= f.text_field :phone_number, class: "form-input w-full", id: "modal_patient_phone_number", disabled: true %>
                     </div>
                 </div>
+            </div>
 
+            <!-- Health Questions -->
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                <h1 class="main-title pb-1 border-b text-brand-blue-600"> Health Insurance </h1>
+                <div class="field-side-by-side">
+                    <div>
+                        <%= f.label :insurance_type, "Type of Insurance", class: "block" %>
+                        <%= f.select :insurance_type, options_for_select(INSURANCE_TYPES, @patient.insurance_type),{}, {class: "w-full form-select", disabled: true, id: "modal_patient_insurance_type"} %>
+                    </div>
+                    <div>
+                        <%= f.label :insurance_company_name, "Insurance Company Name", class: "block" %>
+                        <%= f.text_field :insurance_company_name, class: "w-full form-input", disabled: true, id: "modal_patient_company_name" %>
+                    </div>
+                </div>
+
+                <div class="field-side-by-side">
+                    <div>
+                        <%= f.label :member_id_for_insurance, "Member ID Number", class: "block" %>
+                        <%= f.text_field :member_id_for_insurance, class: "w-full form-input", disabled: true, id: "modal_patient_member_id_for_insurance" %>
+                    </div>
+                    <div>
+                        <%= f.label :group_number_for_insurance, "Group Number", class: "block" %>
+                        <%= f.text_field :group_number_for_insurance, class: "w-full form-input", disabled: true, id: "modal_patient_group_number_for_insurance" %>
+                    </div>
+                </div>
+
+                <div class="field-side-by-side">
+                    <div>
+                        <%= f.label :card_number_for_insurance, "Medical Assistance Number, Recipient Number, or any other number on card", class: "block" %>
+                        <%= f.text_field :card_number_for_insurance, class: "w-full form-input", disabled: true, id: "modal_patient_card_number_for_insurance" %>
+                    </div>
+                    <div class="flex">
+                        <div class="flex-1 mr-2">
+                            <%= f.label :insured_first_name, "Insured Adult's First Name", class: "block" %>
+                            <%= f.text_field :insured_first_name, class: "w-11/12 form-input", disabled: true, id: "modal_patient_insured_first_name" %>
+                        </div>
+                        <div class="flex-1">
+                            <%= f.label :insured_last_name, "Insured Adult's Last Name", class: "block" %>
+                            <%= f.text_field :insured_last_name, class: "w-11/12 form-input", disabled: true, id: "modal_patient_insured_last_name" %>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field-side-by-side">
+                    <div>
+                        <%= f.label :insured_date_of_birth, "Insured Adult's Date Of Birth", class: "block" %>
+                        <%= f.date_field :insured_date_of_birth, class: "w-full form-input", disabled: true, id: "modal_patient_insured_date_of_birth" %>
+                    </div>
+                    <div>
+                        <%= f.label :relation_to_patient_for_consent, "Relationship To Patient", class: "block" %>
+                        <%= f.select :relation_to_patient_for_consent, options_for_select(RELATIONSHIP_TYPES, @patient.relation_to_patient_for_consent),{}, {class: "w-full form-select", disabled: true, id: "modal_patient_relation_to_patient_for_consent"} %>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
