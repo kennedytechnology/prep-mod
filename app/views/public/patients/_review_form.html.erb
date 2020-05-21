@@ -183,7 +183,7 @@
                 </div>
             </div>
 
-                        <!-- Health Questions -->
+            <!-- Health Questions -->
             <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                 <h1 class="main-title pb-1 border-b text-brand-blue-600"> Health Questions </h1>
                 <div class="field-side-by-side">
@@ -245,6 +245,49 @@
 
                         <%= f.radio_button :has_other_reason, false, class: "form-radio", disabled: true, id: "modal_patient_has_other_reason" %>
                         <%= f.label :has_other_reason, "No" %>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Consent Form -->
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                <h1 class="main-title pb-1 border-b text-brand-blue-600"> Consent for Services </h1>
+                <div class="field-fullwidth">
+                    <p class="label"> With who would you like to share your information? </p>
+                    <div class="grid grid-cols-4 gap-4">
+                        <%= collection_check_boxes(:patient, :employer_ids, Employer.all, :id, :company_name) do |b| %>
+                            <div class="relative flex items-start px-3" data-target="consent-form.searchableRow" data-search-content="<%= [b.object.company_name.downcase] %>">
+                                <div class="absolute flex items-center h-5">
+                                    <%= b.check_box(class: "form-checkbox cursor-pointer text-base", disabled: true, id: "modal_patient_employer_ids_#{b.object.id}") %> 
+                                </div>
+                                <div class="pl-6 text-sm leading-5">
+                                    <%= b.label(for: "", class: "cursor-not-allowed") %>
+                                </div>
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+                <div class="field-side-by-side">
+                    <div>
+                        <%= f.label :consent_date, "Date", class: "block" %>
+                        <%= f.text_field :consent_date, value: Date.today.strftime("%m/%d/%y"), disabled: true, class: "form-input w-4/12" %>
+                    </div>
+                    <div> </div>
+                </div>
+
+                <div class="field-fullwidth">
+                    <div class="flex items-center">
+                        <div class="w-8/12 mr-4">
+                            <p class="label"> Please type your first and last name <span class="field-required">*</span></p>
+                            <div class="flex">
+                                <%= f.text_field :signatory_first_name, placeholder: "First Name", class: "flex-1 mr-3 form-input", disabled: true, id: "modal_patient_signatory_first_name" %>
+                                <%= f.text_field :signatory_last_name, placeholder: "Last Name", class: "flex-1 form-input", disabled: true, id: "modal_patient_signatory_last_name" %>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <%= f.label :relation_to_patient_for_insurance, "Relationship to Patient", class: "block" %>
+                            <%= f.select :relation_to_patient_for_insurance, ["Self","Parent/Guardian","Other"], {}, {class: "form-select w-full", disabled: true, id: "modal_patient_relation_to_patient_for_insurance"} %>
+                        </div>
                     </div>
                 </div>
             </div>
