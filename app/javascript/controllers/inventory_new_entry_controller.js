@@ -27,4 +27,14 @@ export default class extends Controller {
 
     document.getElementById("modal_" + currentFieldId).value = currentFieldValue;
   }
+
+  updateModalCheckboxField(e) {
+    let currentFieldId = e.currentTarget.id;
+
+    if (e.currentTarget.checked) {
+      document.getElementById("modal_" + currentFieldId).checked = true;
+    } else {
+      document.getElementById("modal_" + currentFieldId).checked = false;
+    }
+  }
 }
