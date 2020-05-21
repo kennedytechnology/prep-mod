@@ -8,7 +8,6 @@ class Clinic < ApplicationRecord
   has_and_belongs_to_many :services, class_name: "ClinicService"
   has_and_belongs_to_many :age_groups, class_name: "ClinicAgeGroup"
   has_and_belongs_to_many :primary_groups, class_name: "ClinicPrimaryGroup"
-  has_many :supply_inventories
   has_many :test_kits
   
   accepts_nested_attributes_for :clinic_personnel, allow_destroy: true, 

@@ -6,7 +6,7 @@ RSpec.describe SupplyInventoriesController, type: :controller do
 
   describe "GET #index" do
     it "returns http success" do
-      get :index, params: { clinic_id: supply_inventory.clinic.id }
+      get :index
       expect(response).to have_http_status(:success)
     end
   end
@@ -16,7 +16,6 @@ RSpec.describe SupplyInventoriesController, type: :controller do
       it "create new supply inventory" do
         expect {
           post :create, params: { supply_inventory: {
-            clinic: supply_inventory.clinic,
             received_at: Faker::Date.between(from: 30.days.ago, to:Date.today),
             item_type: INVENTORY_ITEM_TYPES.sample,
             item_name: Faker::Lorem.words(number: 2).collect(&:capitalize).join(" "),
@@ -44,7 +43,7 @@ RSpec.describe SupplyInventoriesController, type: :controller do
         supply_inventory.reload
       end
 
-      it { expect(response).to redirect_to supply_inventories_path(clinic_id: supply_inventory.clinic) }
+      it { expect(response).to redirect_to supply_inventories_path }
       it { expect(supply_inventory.received_at).to eq(Date.today) }
     end
   end
@@ -52,7 +51,6 @@ RSpec.describe SupplyInventoriesController, type: :controller do
   it do
     params = {
       supply_inventory: {
-        clinic: supply_inventory.clinic,
         received_at: Faker::Date.between(from: 30.days.ago, to:Date.today),
         item_type: INVENTORY_ITEM_TYPES.sample,
         item_name: Faker::Lorem.words(number: 2).collect(&:capitalize).join(" "),
@@ -73,7 +71,7 @@ RSpec.describe SupplyInventoriesController, type: :controller do
         :manufacturer, :lot_number, :expiration_date,
         :quantity, :quantity_used, :quantity_loaned,
         :quantity_lost, :packaging, :source, :product_name, 
-        :event_type, :clinic_id).
+        :event_type).
       for(:create, params: params).
       on(:supply_inventory)
   end
