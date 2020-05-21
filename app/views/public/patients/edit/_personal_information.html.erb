@@ -47,11 +47,11 @@
     <div class="flex">
         <div class="flex-1 mr-2">
             <%= f.label :race %>
-            <%= f.select :state, options_for_select(US_RACES, @patient.state), {}, class: "form-select w-full", data: {action: "change->inventory-new-entry#updateModalField"} %>
+            <%= f.select :race, options_for_select(US_RACES, @patient.race), {prompt: "--"}, {class: "form-select w-full", data: {action: "change->inventory-new-entry#updateModalField"}} %>
         </div>
         <div class="flex-1">
             <%= f.label :occupation %>
-            <%= f.select :occupation, options_for_select(PATIENT_OCCUPATIONS, @patient.occupation), {prompt: "--"}, class: "form-select w-full", data: {action: "change->inventory-new-entry#updateModalField"} %>
+            <%= f.select :occupation, options_for_select(PATIENT_OCCUPATIONS, @patient.occupation), {prompt: "--"}, {class: "form-select w-full", data: {action: "change->inventory-new-entry#updateModalField"}} %>
         </div>
     </div>
 </div>

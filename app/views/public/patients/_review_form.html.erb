@@ -85,7 +85,7 @@
                     <div class="flex">
                         <div class="flex-1 mr-2">
                             <%= f.label :race %>
-                            <%= f.select :state, options_for_select(US_RACES, @patient.state), {}, {class: "form-select w-full", id: "modal_patient_state"} %>
+                            <%= f.select :race, options_for_select(US_RACES, @patient.race), {}, {class: "form-select w-full", id: "modal_patient_race", disabled: true} %>
                         </div>
                         <div class="flex-1">
                             <%= f.label :occupation %>

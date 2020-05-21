@@ -191,6 +191,7 @@ PATIENT_COUNT.times.each do |i|
     state: address['state'],
     zip_code: address['postalCode'],
     county: COUNTIES.sample,
+    race: US_RACES.sample,
     access_code: Patient.generate_access_code,
     sex: %w(M F).sample,
     phone_number: Faker::PhoneNumber.cell_phone,

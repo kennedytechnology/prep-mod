@@ -65,7 +65,7 @@ class Public::PatientsController < ApplicationController
       :has_fever_over, :has_cough, :has_difficult_breathing, :had_contact_with_confirmed_case, :is_age_60_or_more, 
       :had_traveled_to_affected_place, :has_risk_factor, :has_other_reason, :other_reason_explanation, :consent_signature,
       :signatory_first_name, :signatory_last_name, :relation_to_patient_for_consent, :consent_date, :password, :password_confirmation,
-      :notify_via_sms, :notify_via_email, :appointment_time, :occupation, 
+      :notify_via_sms, :notify_via_email, :appointment_time, :occupation, :race,
       employer_ids: [])
   end
 
