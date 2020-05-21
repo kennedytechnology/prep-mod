@@ -309,6 +309,7 @@ ActiveRecord::Schema.define(version: 2020_05_21_095749) do
     t.string "insured_last_name"
     t.string "appointment_time"
     t.string "occupation"
+    t.string "race"
   end
 
   create_table "provider_enrollments", force: :cascade do |t|
