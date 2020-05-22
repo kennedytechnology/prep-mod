@@ -87,6 +87,10 @@ select {
     &:disabled {
         @apply bg-gray-50 text-gray-700 cursor-not-allowed;
     }
+
+    &.invalid {
+        @apply border-red-300 shadow-outline shadow-outline-red;
+    }
 }
 
 // Checkboxes group
