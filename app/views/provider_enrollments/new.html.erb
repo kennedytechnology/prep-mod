@@ -289,29 +289,41 @@
             <div class="refrigerator-freezer">
                 <h2 class="title"> What make and model refrigerator do you have? <span class="field-required">*</span> </h2>
                 <div class="mb-2">
-                    <%= f.check_box :refrigerator, class: "form-checkbox", data: {target: "provider-enrollment-new-entry.refrigerator", action: "provider-enrollment-new-entry#fillTextField"}, value: "no" %>
+                    <input type="checkbox" class="form-checkbox" id="provider_enrollment_refrigerator" 
+                    value="I do not have a refrigerator" 
+                    data-target="provider-enrollment-new-entry.refrigerator" 
+                    data-action="provider-enrollment-new-entry#fillTextField" 
+                    />
                     <%= f.label :refrigerator, "I do not have a refrigerator" %> 
                 </div>
 
-                <%= f.text_field :refrigerator, class: "form-input w-full", required: true, data: {target: "provider-enrollment-new-entry.refrigerator_text"} %>
+                <%= f.text_area :refrigerator, class: "form-input w-full", required: true, data: {target: "provider-enrollment-new-entry.refrigerator_text"} %>
             </div>
 
             <div>
                 <h2 class="title"> What make and model freezer do you have? <span class="field-required">*</span> </h2>    
                 <div class="mb-2">
-                    <%= f.check_box :freezer, class: "form-checkbox", data: {target: "provider-enrollment-new-entry.freezer", action: "provider-enrollment-new-entry#fillTextField"}, value: "no" %>
+                    <input type="checkbox" class="form-checkbox" id="provider_enrollment_freezer" 
+                    value="I do not have a freezer" 
+                    data-target="provider-enrollment-new-entry.freezer" 
+                    data-action="provider-enrollment-new-entry#fillTextField" 
+                    />                
                     <%= f.label :freezer, "I do not have a freezer" %>  
                 </div>
-                <%= f.text_field :freezer, class: "form-input w-full", required: true, data: {target: "provider-enrollment-new-entry.freezer_text"} %>
+                <%= f.text_area :freezer, class: "form-input w-full", required: true, data: {target: "provider-enrollment-new-entry.freezer_text"} %>
             </div>
 
             <div>
                 <h2 class="title"> What make and model data logger/refrigerator thermometer do you have? <span class="field-required">*</span> </h2>
                 <div class="mb-2">
-                    <%= f.check_box :refrigerator_thermometer, class: "form-checkbox", data: {target: "provider-enrollment-new-entry.refrigerator_thermometer", action: "provider-enrollment-new-entry#fillTextField"}, value: "no" %>
+                    <input type="checkbox" class="form-checkbox" id="provider_enrollment_refrigerator_thermometer" 
+                    value="I do not have a refrigerator thermometer" 
+                    data-target="provider-enrollment-new-entry.refrigerator_thermometer" 
+                    data-action="provider-enrollment-new-entry#fillTextField" 
+                    />                
                     <%= f.label :refrigerator_thermometer, "I do not have a refrigerator thermometer" %>    
                 </div>        
-                <%= f.text_field :refrigerator_thermometer, class: "form-input w-full", required: true, data: {
+                <%= f.text_area :refrigerator_thermometer, class: "form-input w-full", required: true, data: {
                     target: "provider-enrollment-new-entry.refrigerator_thermometer_text"} %>        
             </div>
         </div>
