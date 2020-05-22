@@ -1,6 +1,14 @@
 <h1 class="main-title"> Request to Receive COVID-19 Information About Your Employees or Students </h1>
 
-<%= form_with model: @employer, local: true, class: "block mt-10" do |f| %>
+<%= form_with model: @employer, remote: true, 
+                                html: { novalidate: true }, 
+                                data: { 
+                                    controller: "employer-form", 
+                                    target: "employer-form.form", 
+                                    action: "ajax:beforeSend->employer-form#submitForm"
+                                }, 
+                                class: "block mt-10" do |f| %>
+                                
     <div class="field-fullwidth">
         <p class="title">What information are you seeking about individuals affiliated with your organization? (Select all that apply) <span class="field-required">*</span></p>
         <div class="w-full checkboxes-container">
@@ -22,10 +30,11 @@
                 <%= f.text_area :other_info, placeholder: "Enter Details Here", class: "form-textarea w-full" %>
             </div>
         </div>
+        <p class="error-message mt-2 text-yellow-400 hidden" data-target="employer-form.checkboxErrors">Please select at least one option or enter other details!</p>
     </div>
 
     <div class="field-fullwidth" data-controller="employer-form">
-        <p class="title"> Business Location/Environment (Select all that apply) </p>
+        <p class="title"> Business Location/Environment (Select all that apply) <span class="field-required">*</span></p>
         <div class="multiselect-dropdown">
             <div class="selectBox"data-action="click->employer-form#showCheckboxes">
                 <select class="form-select w-1/3">
@@ -53,15 +62,24 @@
         <div class="grid grid-cols-3 gap-4">
             <div>
                 <%= f.label :first_name, "First Name", class: "block" %>
-                <%= f.text_field :first_name, class: "form-input w-full" %>
+                <%= f.text_field :first_name, required: true, 
+                                              data: { action: "blur->employer-form#validateInputField" }, 
+                                              class: "form-input w-full" %>
+                <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
             <div>
                 <%= f.label :last_name, "Last Name", class: "block" %>
-                <%= f.text_field :last_name, class: "form-input w-full" %>
+                <%= f.text_field :last_name, required: true, 
+                                             data: { action: "blur->employer-form#validateInputField" }, 
+                                             class: "form-input w-full" %>
+                <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
             <div>
                 <%= f.label :position, "Position/Title", class: "block" %>
-                <%= f.text_field :position, class: "form-input w-full" %>
+                <%= f.text_field :position, required: true, 
+                                            data: { action: "blur->employer-form#validateInputField" }, 
+                                            class: "form-input w-full" %>
+                <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
             <!-- <div>
                 <%# f.label :company_name, "Company Name", class: "block" %>
@@ -72,38 +90,62 @@
         <div class="flex">
             <div class="w-4/12 mr-4">
                 <%= f.label :address_1, "Address 1", class: "block" %>
-                <%= f.text_field :address_1, class: "form-input w-full" %>
+                <%= f.text_field :address_1, required: true, 
+                                             data: { action: "blur->employer-form#validateInputField" }, 
+                                             class: "form-input w-full" %>
+                <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
             <div class="w-4/12 mr-4">
                 <%= f.label :address_2, "Unit Number/Address 2", class: "block" %>
-                <%= f.text_field :address_2, class: "form-input w-full" %>
+                <%= f.text_field :address_2, required: true, 
+                                             data: { action: "blur->employer-form#validateInputField" }, 
+                                             class: "form-input w-full" %>
+                <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
             <div class="flex-1 mr-4">
                 <%= f.label :city, class: "block" %>
-                <%= f.text_field :city, class: "form-input w-full" %>
+                <%= f.text_field :city, required: true, 
+                                        data: { action: "blur->employer-form#validateInputField" },
+                                        class: "form-input w-full" %>
+                <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
             <div class="flex-1 mr-4">
                 <%= f.label :state, class: "block" %>
-                <%= f.text_field :state, class: "form-input w-full" %>
+                <%= f.text_field :state, required: true, 
+                                         data: { action: "blur->employer-form#validateInputField" },
+                                         class: "form-input w-full" %>
+                <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
             <div class="flex-1">
                 <%= f.label :zip_code, "Zip Code", class: "block" %>
-                <%= f.text_field :zip_code, class: "form-input w-full" %>
+                <%= f.text_field :zip_code, required: true, 
+                                            data: { action: "blur->employer-form#validateInputField" },
+                                            class: "form-input w-full" %>
+                <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
         </div>
 
         <div class="grid grid-cols-4 gap-4">
             <div>
                 <%= f.label :office_phone, "Office Phone Number", class: "block" %>
-                <%= f.text_field :office_phone, class: "form-input w-full" %>
+                <%= f.text_field :office_phone, required: true, 
+                                                data: { action: "blur->employer-form#validateInputField" }, 
+                                                class: "form-input w-full" %>
+                <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
             <div>
                 <%= f.label :mobile_phone, "Mobile Phone Name", class: "block" %>
-                <%= f.text_field :mobile_phone, class: "form-input w-full" %>
+                <%= f.text_field :mobile_phone, required: true, 
+                                                data: { action: "blur->employer-form#validateInputField" }, 
+                                                class: "form-input w-full" %>
+                <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
             <div>
                 <%= f.label :email, "Email Address", class: "block" %>
-                <%= f.email_field :email, class: "form-input w-full" %>
+                <%= f.email_field :email, required: true, 
+                                          data: { action: "blur->employer-form#validateInputField" }, 
+                                          class: "form-input w-full" %>
+                <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
             <div>
                 <%= f.label :website, "Website", class: "block" %>
@@ -118,15 +160,24 @@
         <div class="grid grid-cols-3 gap-4">
             <div>
                 <%= f.label :backup_first_name, "Back-Up Contact's First Name", class: "block" %>
-                <%= f.text_field :backup_first_name, class: "form-input w-full" %>
+                <%= f.text_field :backup_first_name, required: true, 
+                                                     data: { action: "blur->employer-form#validateInputField" }, 
+                                                     class: "form-input w-full" %>
+                <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
             <div>
                 <%= f.label :backup_last_name, "Back-Up Contact's Last Name", class: "block" %>
-                <%= f.text_field :backup_last_name, class: "form-input w-full" %>
+                <%= f.text_field :backup_last_name, required: true, 
+                                                    data: { action: "blur->employer-form#validateInputField" }, 
+                                                    class: "form-input w-full" %>
+                <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
             <div>
                 <%= f.label :backup_position, "Back-Up Contact's Position/Title", class: "block" %>
-                <%= f.text_field :backup_position, class: "form-input w-full" %>
+                <%= f.text_field :backup_position, required: true, 
+                                                   data: { action: "blur->employer-form#validateInputField" }, 
+                                                   class: "form-input w-full" %>
+                <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
         </div>
 
@@ -137,38 +188,62 @@
             </div>
             <div class="w-3/12 mr-4">
                 <%= f.label :backup_address_1, "Address 1", class: "block" %>
-                <%= f.text_field :backup_address_1, class: "form-input w-full" %>
+                <%= f.text_field :backup_address_1, required: true, 
+                                                    data: { action: "blur->employer-form#validateInputField" }, 
+                                                    class: "form-input w-full" %>
+                <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
             <div class="w-3/12 mr-4">
                 <%= f.label :backup_address_2, "Address 2", class: "block" %>
-                <%= f.text_field :backup_address_2, class: "form-input w-full" %>
+                <%= f.text_field :backup_address_2, required: true, 
+                                                    data: { action: "blur->employer-form#validateInputField" }, 
+                                                    class: "form-input w-full" %>
+                <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
             <div class="flex-1 mr-4">
                 <%= f.label :backup_city, "City", class: "block" %>
-                <%= f.text_field :backup_city, class: "form-input w-full" %>
+                <%= f.text_field :backup_city, required: true, 
+                                               data: { action: "blur->employer-form#validateInputField" }, 
+                                               class: "form-input w-full" %>
+                <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
             <div class="flex-1 mr-4">
                 <%= f.label :backup_state, "State", class: "block" %>
-                <%= f.text_field :backup_state, class: "form-input w-full" %>
+                <%= f.text_field :backup_state, required: true, 
+                                                data: { action: "blur->employer-form#validateInputField" }, 
+                                                class: "form-input w-full" %>
+                <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
             <div class="flex-1 mr-4">
                 <%= f.label :backup_zip_code, "Zip Code", class: "block" %>
-                <%= f.text_field :backup_zip_code, class: "form-input w-full" %>
+                <%= f.text_field :backup_zip_code, required: true, 
+                                                   data: { action: "blur->employer-form#validateInputField" }, 
+                                                   class: "form-input w-full" %>
+                <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
         </div>
 
         <div class="grid grid-cols-3 gap-4">
             <div>
                 <%= f.label :backup_office_phone, "Office Phone Number", class: "block" %>
-                <%= f.text_field :office_phone, class: "form-input w-full" %>
+                <%= f.text_field :office_phone, required: true, 
+                                                data: { action: "blur->employer-form#validateInputField" }, 
+                                                class: "form-input w-full" %>
+                <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
             <div>
                 <%= f.label :backup_mobile_phone, "Mobile Phone Name", class: "block" %>
-                <%= f.text_field :mobile_phone, class: "form-input w-full" %>
+                <%= f.text_field :mobile_phone, required: true, 
+                                                data: { action: "blur->employer-form#validateInputField" }, 
+                                                class: "form-input w-full" %>
+                <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
             <div>
                 <%= f.label :backup_email, "Email Address", class: "block" %>
-                <%= f.text_field :backup_email, class: "form-input w-full" %>
+                <%= f.text_field :backup_email, required: true, 
+                                                data: { action: "blur->employer-form#validateInputField" }, 
+                                                class: "form-input w-full" %>
+                <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
         </div>
     </div>
@@ -177,12 +252,18 @@
         <div>
             <p class="title">Employee Info </p>
             <%= f.label :total_employees, "Total Number of Employees", class: "block" %>
-            <%= f.text_field :total_employees, class: "form-input w-full" %>
+            <%= f.text_field :total_employees, required: true, 
+                                               data: { action: "blur->employer-form#validateInputField" }, 
+                                               class: "form-input w-full" %>
+                <p class="error-message mb-4 text-yellow-400 hidden"></p>
         </div>
         <div>
             <p class="title">Location Info </p>
             <%= f.label :total_locations, "Total Number of Locations", class: "block" %>
-            <%= f.text_field :total_locations, class: "form-input w-full" %>
+            <%= f.text_field :total_locations, required: true, 
+                                               data: { action: "blur->employer-form#validateInputField" }, 
+                                               class: "form-input w-full" %>
+                <p class="error-message mb-4 text-yellow-400 hidden"></p>
         </div>
     </div>
 
