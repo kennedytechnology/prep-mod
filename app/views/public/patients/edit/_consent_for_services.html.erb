@@ -19,7 +19,7 @@
                 <div class="relative flex items-start px-3 hover:bg-blue-50" data-target="consent-form.searchableRow" data-search-content="<%= [b.object.company_name.downcase] %>">
                     <div class="absolute flex items-center h-5">
                         <%= b.check_box(class: "form-checkbox cursor-pointer text-base", 
-                            data: {action: "click->inventory-new-entry#updateModalCheckboxField click->inventory-new-entry#displayLocations", 
+                            data: {action: "click->inventory-new-entry#updateModalCheckboxField click->consent-form#displayLocations", 
                             locations: "#{b.object.business_locations.join(", ")}",
                             employer: "#{b.object.company_name}"}) %> 
                     </div>
