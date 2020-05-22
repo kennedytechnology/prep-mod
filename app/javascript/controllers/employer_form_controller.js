@@ -27,6 +27,29 @@ export default class extends Controller {
       requiredFieldSelectors
     );
 
+    // Find checkboxes
+    let checkboxScreeningValue = document.getElementById(
+      "employer_screening_info"
+    ).value;
+    let checkboxTestingValue = document.getElementById("employer_testing_info")
+      .value;
+    let checkboxVaccinationValue = document.getElementById(
+      "employer_vacination_info"
+    ).value;
+    let textareaOtherInfoValue = document.getElementById("employer_other_info")
+      .value;
+
+    // If at least one checkbox is checked (value = 1) - form is valid
+    if (
+      checkboxScreeningValue ||
+      checkboxTestingValue ||
+      checkboxVaccinationValue ||
+      textareaOtherInfoValue
+    )
+      isValid = true;
+    // If none of the checkboxes has value 1 - form is not valid
+    else isValid = false;
+
     requiredFields.forEach((field) => {
       field.classList.remove("invalid");
       field.placeholder = "";
