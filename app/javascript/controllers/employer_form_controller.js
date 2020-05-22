@@ -137,8 +137,44 @@ export default class extends Controller {
       }
       // else - Validate the user input when input value is not empty
     } else {
-      // Validate email input field
+      // Validate zip code input field
       if (
+        event.target.name == "employer[zip_code]" ||
+        event.target.name == "employer[backup_zip_code]"
+      ) {
+        let zipCodeRe = /^\d{5}(-\d{4})?$/;
+        // Display error message if user's input is not valid
+        if (!zipCodeRe.test(event.target.value)) {
+          event.target.style.marginBottom = 0;
+          errorMessage.classList.remove("hidden");
+          errorMessage.innerText = "Incorrect zip code format!";
+        } else {
+          // Remove error message when the user's input is valid
+          event.target.classList.remove("invalid");
+          event.target.style.marginBottom = "16px";
+          errorMessage.innerText = "";
+          errorMessage.classList.add("hidden");
+        }
+        // Validate phone number input field
+      } else if (
+        event.target.name == "employer[office_phone]" ||
+        event.target.name == "employer[mobile_phone]"
+      ) {
+        let phoneRe = /^\(?[\d]{3}\)?[\s-]?[\d]{3}[\s-]?[\d]{4}$/;
+        // Display error message if user's input is not valid
+        if (!phoneRe.test(event.target.value)) {
+          event.target.style.marginBottom = 0;
+          errorMessage.classList.remove("hidden");
+          errorMessage.innerText = "Incorrect phone format!";
+        } else {
+          // Remove error message when the user's input is valid
+          event.target.classList.remove("invalid");
+          event.target.style.marginBottom = "16px";
+          errorMessage.innerText = "";
+          errorMessage.classList.add("hidden");
+        }
+        // Validate email input field
+      } else if (
         event.target.name == "employer[email]" ||
         event.target.name == "employer[backup_email]"
       ) {
@@ -147,7 +183,25 @@ export default class extends Controller {
         if (!emailRe.test(event.target.value)) {
           event.target.style.marginBottom = 0;
           errorMessage.classList.remove("hidden");
-          errorMessage.innerText = "You have entered incorrect email format!";
+          errorMessage.innerText = "Incorrect email format!";
+        } else {
+          // Remove error message when the user's input is valid
+          event.target.classList.remove("invalid");
+          event.target.style.marginBottom = "16px";
+          errorMessage.innerText = "";
+          errorMessage.classList.add("hidden");
+        }
+        // Validate number of employees and locations
+      } else if (
+        event.target.name == "employer[total_employees]" ||
+        event.target.name == "employer[total_locations]"
+      ) {
+        let numberRe = /^[1-9]+[0-9]*$/;
+        // Display error message if user's input is not valid
+        if (!numberRe.test(event.target.value)) {
+          event.target.style.marginBottom = 0;
+          errorMessage.classList.remove("hidden");
+          errorMessage.innerText = "Please enter a number!";
         } else {
           // Remove error message when the user's input is valid
           event.target.classList.remove("invalid");
