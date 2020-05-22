@@ -3,7 +3,7 @@ import {
 } from "stimulus"
 
 export default class extends Controller {
-  static targets = ["modal"]
+  static targets = ["modal", "employer", "locations"]
 
   connect() {
 
@@ -36,5 +36,20 @@ export default class extends Controller {
     } else {
       document.getElementById("modal_" + currentFieldId).checked = false;
     }
+  }
+
+  displayLocations(e) {
+
+    if (e.currentTarget.checked) {
+      this.toggleModal(e);
+      this.employerTarget.innerText = e.currentTarget.getAttribute("data-employer");
+      this.locationsTarget.innerText = e.currentTarget.getAttribute("data-locations");
+    }
+  }
+
+  toggleModal(event) {
+    let modal = document.getElementById("businessLocationsModal");
+    modal.classList.toggle('opacity-0')
+    modal.classList.toggle('pointer-events-none')
   }
 }
