@@ -88,22 +88,20 @@
                         end_time = Time.parse("12 PM").to_i
                         values = (start_time..end_time).step(15.minutes)
                     %>
-                    <select class="hour form-select" name="clinic[start_hour_minute]">
+                    <select class="hour form-select" name="clinic[start_hour_minute]" id="modal_clinic_start_hour_minute" disabled="disabled">
                         <%= options_for_select(values.map{ |t| Time.at(t).strftime("%I:%M") }, @clinic.start_time ? @clinic.start_time.strftime('%I:%M') : nil) %>
                     </select>
 
-                    <select class="meridiem form-select" name="clinic[start_meridiem]">
+                    <select class="meridiem form-select" name="clinic[start_meridiem]" id="modal_clinic_start_meridiem" disabled="disabled">
                         <%= options_for_select(['AM', 'PM'], @clinic.start_time ? @clinic.start_time.strftime("%p") : nil) %>
                     </select>
 
                     <p class="label">End Time <span class="field-required">*</span></p>
-                    <select class="hour form-select"
-                        name="clinic[end_hour_minute]">
+                    <select class="hour form-select" name="clinic[end_hour_minute]" id="modal_clinic_end_hour_minute" disabled="disabled">
                         <%= options_for_select(values.map{ |t| Time.at(t).strftime("%I:%M") }, @clinic.end_time ? @clinic.end_time.strftime('%I:%M') : nil) %>
                     </select>
 
-                    <select name="clinic[end_meridiem]"
-                        class="meridiem form-select">
+                    <select name="clinic[end_meridiem]" class="meridiem form-select" id="modal_clinic_end_meridiem" disabled="disabled">
                         <%= options_for_select(['AM', 'PM'], @clinic.end_time ? @clinic.end_time.strftime("%p") : nil) %>
                     </select>
                 </div>
