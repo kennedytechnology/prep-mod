@@ -44,14 +44,17 @@ export default class extends Controller {
   }
 
   validateInputField(event) {
+    // Find the error message element
     let errorMessage = event.target.parentNode.getElementsByClassName(
       "error-message"
     )[0];
 
+    // Display error message if value of the input is empty
     if (event.target.value == "") {
       event.target.style.marginBottom = 0;
       errorMessage.classList.remove("hidden");
 
+      // Match the error messages with the appropriate input fields base od input name
       if (
         event.target.name == "employer[first_name]" ||
         event.target.name == "employer[backup_first_name]"
@@ -107,6 +110,33 @@ export default class extends Controller {
         errorMessage.innerText = "Total number of locations is required!";
       } else {
         event.target.classList.remove("invalid");
+        errorMessage.classList.add("hidden");
+      }
+      // else - Validate the user input when input value is not empty
+    } else {
+      // Validate email input field
+      if (
+        event.target.name == "employer[email]" ||
+        event.target.name == "employer[backup_email]"
+      ) {
+        let emailRe = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+        // Display error message if user's input is not valid
+        if (!emailRe.test(event.target.value)) {
+          event.target.style.marginBottom = 0;
+          errorMessage.classList.remove("hidden");
+          errorMessage.innerText = "You have entered incorrect email format!";
+        } else {
+          // Remove error message when the user's input is valid
+          event.target.classList.remove("invalid");
+          event.target.style.marginBottom = "16px";
+          errorMessage.innerText = "";
+          errorMessage.classList.add("hidden");
+        }
+      } else {
+        // Remove error message when the input is valid
+        event.target.classList.remove("invalid");
+        event.target.style.marginBottom = "16px";
+        errorMessage.innerText = "";
         errorMessage.classList.add("hidden");
       }
     }
