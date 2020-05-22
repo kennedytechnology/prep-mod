@@ -161,21 +161,21 @@
             <div>
                 <%= f.label :backup_first_name, "Back-Up Contact's First Name", class: "block" %>
                 <%= f.text_field :backup_first_name, required: true, 
-                                                     data: { action: "blur->employer-form#validateBackupFirstName" }, 
+                                                     data: { action: "blur->employer-form#validateFirstName" }, 
                                                      class: "form-input w-full" %>
                 <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
             <div>
                 <%= f.label :backup_last_name, "Back-Up Contact's Last Name", class: "block" %>
                 <%= f.text_field :backup_last_name, required: true, 
-                                                    data: { action: "blur->employer-form#validateBackupLastName" }, 
+                                                    data: { action: "blur->employer-form#validateLastName" }, 
                                                     class: "form-input w-full" %>
                 <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
             <div>
                 <%= f.label :backup_position, "Back-Up Contact's Position/Title", class: "block" %>
                 <%= f.text_field :backup_position, required: true, 
-                                                   data: { action: "blur->employer-form#validateBackupPosition" }, 
+                                                   data: { action: "blur->employer-form#validatePosition" }, 
                                                    class: "form-input w-full" %>
                 <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
@@ -189,35 +189,35 @@
             <div class="w-3/12 mr-4">
                 <%= f.label :backup_address_1, "Address 1", class: "block" %>
                 <%= f.text_field :backup_address_1, required: true, 
-                                                    data: { action: "blur->employer-form#validateBackupAddress1" }, 
+                                                    data: { action: "blur->employer-form#validateAddress1" }, 
                                                     class: "form-input w-full" %>
                 <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
             <div class="w-3/12 mr-4">
                 <%= f.label :backup_address_2, "Address 2", class: "block" %>
                 <%= f.text_field :backup_address_2, required: true, 
-                                                    data: { action: "blur->employer-form#validateBackupAddress2" }, 
+                                                    data: { action: "blur->employer-form#validateAddress2" }, 
                                                     class: "form-input w-full" %>
                 <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
             <div class="flex-1 mr-4">
                 <%= f.label :backup_city, "City", class: "block" %>
                 <%= f.text_field :backup_city, required: true, 
-                                               data: { action: "blur->employer-form#validateBackupCity" }, 
+                                               data: { action: "blur->employer-form#validateCity" }, 
                                                class: "form-input w-full" %>
                 <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
             <div class="flex-1 mr-4">
                 <%= f.label :backup_state, "State", class: "block" %>
                 <%= f.text_field :backup_state, required: true, 
-                                                data: { action: "blur->employer-form#validateBackupState" }, 
+                                                data: { action: "blur->employer-form#validateState" }, 
                                                 class: "form-input w-full" %>
                 <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
             <div class="flex-1 mr-4">
                 <%= f.label :backup_zip_code, "Zip Code", class: "block" %>
                 <%= f.text_field :backup_zip_code, required: true, 
-                                                   data: { action: "blur->employer-form#validateBackupZipCode" }, 
+                                                   data: { action: "blur->employer-form#validateZipCode" }, 
                                                    class: "form-input w-full" %>
                 <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
@@ -227,21 +227,21 @@
             <div>
                 <%= f.label :backup_office_phone, "Office Phone Number", class: "block" %>
                 <%= f.text_field :office_phone, required: true, 
-                                                data: { action: "blur->employer-form#validateBackupOfficePhone" }, 
+                                                data: { action: "blur->employer-form#validateOfficePhone" }, 
                                                 class: "form-input w-full" %>
                 <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
             <div>
                 <%= f.label :backup_mobile_phone, "Mobile Phone Name", class: "block" %>
                 <%= f.text_field :mobile_phone, required: true, 
-                                                data: { action: "blur->employer-form#validateBackupMobilePhone" }, 
+                                                data: { action: "blur->employer-form#validateMobilePhone" }, 
                                                 class: "form-input w-full" %>
                 <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
             <div>
                 <%= f.label :backup_email, "Email Address", class: "block" %>
                 <%= f.text_field :backup_email, required: true, 
-                                                data: { action: "blur->employer-form#validateBackupEmail" }, 
+                                                data: { action: "blur->employer-form#validateEmail" }, 
                                                 class: "form-input w-full" %>
                 <p class="error-message mb-4 text-yellow-400 hidden"></p>
             </div>
