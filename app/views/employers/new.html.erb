@@ -9,7 +9,7 @@
                                 }, 
                                 class: "block mt-10" do |f| %>
                                 
-    <div class="field-fullwidth">
+    <div class="field-fullwidth" id="individualsInfo">
         <p class="title">What information are you seeking about individuals affiliated with your organization? (Select all that apply) <span class="field-required">*</span></p>
         <div class="w-full checkboxes-container">
             <div>
@@ -30,10 +30,10 @@
                 <%= f.text_area :other_info, placeholder: "Enter Details Here", class: "form-textarea w-full" %>
             </div>
         </div>
-        <p class="error-message mt-2 text-red-600 hidden" data-target="employer-form.checkboxErrors">Please select at least one option or enter other details!</p>
+        <p class="error-message mt-2 text-red-600 text-sm hidden checkboxErrors" data-target="employer-form.checkboxErrors">Please select at least one option or enter other details!</p>
     </div>
 
-    <div class="field-fullwidth" data-controller="employer-form">
+    <div class="field-fullwidth">
         <p class="title"> Business Location/Environment (Select all that apply) <span class="field-required">*</span></p>
         <div class="multiselect-dropdown">
             <div class="selectBox"data-action="click->employer-form#showCheckboxes">

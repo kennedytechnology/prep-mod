@@ -1,7 +1,7 @@
 import { Controller } from "stimulus";
 
 export default class extends Controller {
-  static targets = ["locationsCheckboxes", "form"];
+  static targets = ["locationsCheckboxes", "form", "checkboxErrors"];
 
   connect() {
     $(document).click(function(e) {
@@ -46,15 +46,14 @@ export default class extends Controller {
       .value;
 
     // If at least one checkbox is checked (value = 1) - form is valid
-    if (
-      checkboxScreeningValue ||
-      checkboxTestingValue ||
-      checkboxVaccinationValue ||
-      textareaOtherInfoValue
-    )
+    if ( $('#individualsInfo').find(':checked').length > 0 ) {
       isValid = true;
-    // If none of the checkboxes has value 1 - form is not valid
-    else isValid = false;
+      this.checkboxErrorsTarget.classList.add("hidden");
+    } else  {
+      isValid = false;
+      this.checkboxErrorsTarget.classList.remove("hidden");
+    }
+
 
     requiredFields.forEach((field) => {
       field.classList.remove("invalid");
