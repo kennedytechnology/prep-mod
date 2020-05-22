@@ -1,47 +1,22 @@
-import {
-  Controller
-} from "stimulus"
+import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = ["refrigerator", "refrigerator_text",
-    "refrigerator_thermometer", "refrigerator_thermometer_text",
-    "freezer", "freezer_text"
-  ]
+  static targets = [ ]
 
   connect() {}
 
-  fillTextField(e) {
-    if (e.currentTarget.id == "provider_enrollment_refrigerator") {
-      if (e.currentTarget.checked) {
-        this.refrigerator_textTarget.value = "I do not have a refrigerator"
-        $(this.refrigerator_textTarget).attr("disabled", true)
-        $(this.refrigerator_textTarget).toggleClass("form-textarea-disabled")
-      } else {
-        this.refrigerator_textTarget.value = ""
-        $(this.refrigerator_textTarget).removeAttr("disabled")
-        $(this.refrigerator_textTarget).toggleClass("form-textarea-disabled")
-      }
-    } else if (e.currentTarget.id == "provider_enrollment_refrigerator_thermometer") {
-      if (e.currentTarget.checked) {
-        this.refrigerator_thermometer_textTarget.value = "I do not have a refrigerator thermometer"
-        $(this.refrigerator_thermometer_textTarget).attr("disabled", true)
-        $(this.refrigerator_thermometer_textTarget).toggleClass("form-textarea-disabled")
-      } else {
-        this.refrigerator_thermometer_textTarget.value = ""
-        $(this.refrigerator_thermometer_textTarget).removeAttr("disabled")
-        $(this.refrigerator_thermometer_textTarget).toggleClass("form-textarea-disabled")
-      }
+  toggleTextArea(e) {
+    let currentCheckbox = e.currentTarget,
+        currentTextarea = $("[data-textarea='"+e.currentTarget.getAttribute("data-textarea")+"']")[1]
+    
+    if (e.currentTarget.checked) {
+        $(currentTextarea).val($(currentCheckbox).val());
+        $(currentTextarea).text($(currentCheckbox).val());
+        $(currentTextarea).attr("disabled", true);
     } else {
-      if (e.currentTarget.checked) {
-        this.freezer_textTarget.value = "I do not have a freezer"
-        $(this.freezer_textTarget).attr("disabled", true)
-        $(this.freezer_textTarget).toggleClass("form-textarea-disabled")
-      } else {
-        this.freezer_textTarget.value = ""
-        $(this.freezer_textTarget).removeAttr("disabled")
-        $(this.freezer_textTarget).toggleClass("form-textarea-disabled")
-      }
+        $(currentTextarea).val("");
+        $(currentTextarea).text("");
+        $(currentTextarea).removeAttr("disabled");
     }
   }
-
 }
