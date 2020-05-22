@@ -30,7 +30,7 @@
                 <%= f.text_area :other_info, placeholder: "Enter Details Here", class: "form-textarea w-full" %>
             </div>
         </div>
-        <p class="error-message mt-2 text-red-600 text-sm hidden checkboxErrors" data-target="employer-form.checkboxErrors">Please select at least one option or enter other details!</p>
+        <p class="error-message mt-2 text-red-600 text-sm hidden" data-target="employer-form.checkboxErrors">Please select at least one option or enter other details!</p>
     </div>
 
     <div class="field-fullwidth">
@@ -42,7 +42,7 @@
                 </select>
                 <div class="overSelect"></div>
             </div>
-            <div class="checkboxes-in-dropdown" data-target="employer-form.locationsCheckboxes">
+            <div class="checkboxes-in-dropdown" id="locationsCheckboxes" data-target="employer-form.locationsCheckboxes">
                 <% BUSINESS_LOCATIONS.each do |location| %>
                 <div class="relative flex items-start px-3 hover:bg-blue-50">
                     <div class="absolute flex items-center h-5">
@@ -53,6 +53,7 @@
                     </div>
                 </div>
                 <% end %>
+                <p class="error-message mt-2 text-red-600 text-sm hidden" data-target="employer-form.checkboxErrors">Please select at least one option or enter other details!</p>
             </div>
         </div>
     </div>

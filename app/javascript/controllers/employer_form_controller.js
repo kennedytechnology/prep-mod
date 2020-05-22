@@ -46,14 +46,13 @@ export default class extends Controller {
       .value;
 
     // If at least one checkbox is checked (value = 1) - form is valid
-    if ( $('#individualsInfo').find(':checked').length > 0 ) {
-      isValid = true;
-      this.checkboxErrorsTarget.classList.add("hidden");
-    } else  {
+    if ( ($('#individualsInfo').find(':checked').length == 0) && (textareaOtherInfoValue == "") ) {
       isValid = false;
       this.checkboxErrorsTarget.classList.remove("hidden");
+    } else  {
+      isValid = true;
+      this.checkboxErrorsTarget.classList.add("hidden");
     }
-
 
     requiredFields.forEach((field) => {
       field.classList.remove("invalid");
