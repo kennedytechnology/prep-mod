@@ -34,8 +34,14 @@ label,
 input {
     // for all inputs
     @apply bg-white border transition duration-150 ease-in-out;
-    &::placeholder { @apply text-gray-500; }
-    &:focus {  @apply outline-none; }
+
+    &::placeholder {
+        @apply text-gray-500;
+    }
+
+    &:focus {
+        @apply outline-none;
+    }
 
     // based on type
     &[type='text'],
@@ -49,7 +55,7 @@ input {
     }
 
     &.form-input,
-    &.form-select { 
+    &.form-select {
         @apply rounded-sm;
     }
 
@@ -59,8 +65,12 @@ input {
     }
 }
 
-.form-textarea { 
+.form-textarea {
     @apply rounded-sm transition duration-150 ease-in-out;
+
+    &-disabled {
+        background-color: rgba(128, 128, 128, 0.2);
+    }
 }
 
 select {
@@ -75,7 +85,7 @@ input,
 textarea,
 select {
     &:disabled {
-        @apply bg-gray-50 text-gray-500 cursor-not-allowed;
+        @apply bg-gray-50 text-gray-700 cursor-not-allowed;
     }
 }
 
@@ -83,7 +93,7 @@ select {
 .checkboxes-container {
     @apply grid grid-cols-3 gap-4;
 
-    > div {
+    >div {
         @apply flex items-center;
 
         span:first-child {
