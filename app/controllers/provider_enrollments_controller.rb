@@ -12,7 +12,7 @@ class ProviderEnrollmentsController < ApplicationController
 
   def create
     @provider_enrollment = ProviderEnrollment.new(provider_enrollment_params)
-    debugger
+    # debugger
 
     if @provider_enrollment.save
       ProviderEnrollmentMailer.request_confirmation(@provider_enrollment).deliver
