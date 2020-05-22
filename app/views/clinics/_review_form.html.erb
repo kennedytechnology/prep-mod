@@ -142,24 +142,18 @@
                 <p class="label"> Appointments available <span class="field-required">*</span> </p>
                 <div class="w-2/4 radio-buttons-container mb-4">
                     <div>
-                        <%= f.radio_button :appointments_available, "Yes, required", id: "modal_yes_required", disabled: true, class: "form-radio" %>
-                        <%= f.label :appointments_available, value: "yes_required", for: "" do %>
-                        <span> Yes, required </span>
-                        <% end %>
+                        <input type="radio" id="modal_yes_required" disabled="true" class="form-radio radio-clinic-appointments-available" />
+                        <label> Yes, required </label>
                     </div>
                     
                     <div>
-                        <%= f.radio_button :appointments_available, "Yes, optional", id: "modal_yes_optional", disabled: true, class: "form-radio" %>
-                        <%= f.label :appointments_available, value: "yes_required", for: "" do %>
-                        <span> Yes, optional </span>
-                        <% end %>
+                        <input type="radio" id="modal_yes_optional" disabled="true" class="form-radio radio-clinic-appointments-available" />
+                        <label> Yes, optional </label>
                     </div>
 
                     <div>
-                        <%= f.radio_button :appointments_available, "No (Walk-In)", id: "modal_no_walk_in", disabled: true, class: "form-radio" %>
-                        <%= f.label :appointments_available, value: "no_walk_in", for: "" do %>
-                        <span> No (Walk-In) </span>
-                        <% end %>
+                        <input type="radio" id="modal_no_walk_in" disabled="true" class="form-radio radio-clinic-appointments-available" />
+                        <label> No (Walk-In) </label>
                     </div>
                 </div>
 
