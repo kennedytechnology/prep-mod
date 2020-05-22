@@ -5,11 +5,11 @@
         <p class="title">Is clinic public or private? <span class="field-required">*</span> </p>
         <div class="w-3/12 radio-buttons-container">
             <div>
-                <%= f.radio_button :clinic_status, "public", id: "clinic_status_public", class: "form-radio", data: {action: "click->inventory-new-entry#updateModalCheckboxField"} %>
+                <%= f.radio_button :clinic_status, "public", id: "clinic_status_public", class: "form-radio", data: {action: "click->inventory-new-entry#updateModalRadioField", radio: "radio-clinic-status"} %>
                 <%= f.label :clinic_status, "Public", for: "clinic_status_public" %>
             </div>
             <div>
-                <%= f.radio_button :clinic_status, "private", id: "clinic_status_private", class: "form-radio", data: {action: "click->inventory-new-entry#updateModalCheckboxField"} %>
+                <%= f.radio_button :clinic_status, "private", id: "clinic_status_private", class: "form-radio", data: {action: "click->inventory-new-entry#updateModalRadioField", radio: "radio-clinic-status"} %>
                 <%= f.label :clinic_status, "Private", for: "clinic_status_private" %>
             </div>
         </div>

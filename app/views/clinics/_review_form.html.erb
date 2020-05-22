@@ -37,12 +37,12 @@
                 <p class="title">Is clinic public or private? <span class="field-required">*</span> </p>
                 <div class="w-3/12 radio-buttons-container">
                     <div>
-                        <%= f.radio_button :clinic_status, "public", id: "modal_clinic_status_public", disabled: true, class: "form-radio" %>
-                        <%= f.label :clinic_status, "Public", for: "modal_clinic_status_public" %>
+                        <input type="radio" id="modal_clinic_status_public" disabled="true" class="form-radio radio-clinic-status" />
+                        <label> Public </label>
                     </div>
                     <div>
-                        <%= f.radio_button :clinic_status, "private", id: "modal_clinic_status_private", disabled: true, class: "form-radio" %>
-                        <%= f.label :clinic_status, "Private", for: "modal_clinic_status_private" %>
+                        <input type="radio" id="modal_clinic_status_private" disabled="true" class="form-radio radio-clinic-status" />
+                        <label> Private </label>
                     </div>
                 </div>
             </div>
