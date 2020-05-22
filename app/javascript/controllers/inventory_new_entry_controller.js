@@ -37,4 +37,15 @@ export default class extends Controller {
       document.getElementById("modal_" + currentFieldId).checked = false;
     }
   }
+
+  updateModalRadioField(e) {
+    let currentFieldId = e.currentTarget.id,
+        radioButtons = document.getElementsByClassName(e.currentTarget.dataset.radio);
+
+    for(var i=0; i < radioButtons.length; i++) {
+        radioButtons[i].checked = false;
+    }
+
+    document.getElementById("modal_" + currentFieldId).checked = true;
+  }
 }

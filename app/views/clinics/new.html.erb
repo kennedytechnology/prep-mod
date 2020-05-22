@@ -1,20 +1,16 @@
 <h1 class="main-title"> Create Clinic </h1>
 
-<%= form_with model: @clinic, local: true do |f| %>
+<%= form_with model: @clinic, local: true, data: {controller: "inventory-new-entry"} do |f| %>
     <div class="field-fullwidth">
         <p class="title">Is clinic public or private? <span class="field-required">*</span> </p>
         <div class="w-3/12 radio-buttons-container">
             <div>
-                <%= f.radio_button :clinic_status, "public", id: "clinic_status_public", class: "form-radio" %>
-                <%= f.label :clinic_status, value: "public", for: "clinic_status_public" do %>
-                <span>Public</span>
-                <% end %>
+                <%= f.radio_button :clinic_status, "public", id: "clinic_status_public", class: "form-radio", data: {action: "click->inventory-new-entry#updateModalRadioField", radio: "radio-clinic-status"} %>
+                <%= f.label :clinic_status, "Public", for: "clinic_status_public" %>
             </div>
             <div>
-                <%= f.radio_button :clinic_status, "private", id: "clinic_status_private", class: "form-radio" %>
-                <%= f.label :clinic_status, value: "private", for: "clinic_status_private" do %>
-                <span>Private</span>
-                <% end %>
+                <%= f.radio_button :clinic_status, "private", id: "clinic_status_private", class: "form-radio", data: {action: "click->inventory-new-entry#updateModalRadioField", radio: "radio-clinic-status"} %>
+                <%= f.label :clinic_status, "Private", for: "clinic_status_private" %>
             </div>
         </div>
     </div>
@@ -25,7 +21,7 @@
             <div class="w-full checkboxes-container">
                 <%= collection_check_boxes(:clinic, :service_ids, ClinicService.all, :id, :name) do |b| %>
                 <div>
-                    <span> <%= b.check_box(class: "form-checkbox") %> </span>
+                    <span> <%= b.check_box(class: "form-checkbox", data: {action: "click->inventory-new-entry#updateModalCheckboxField"}) %> </span>
                     <span class="label"> <%= b.label %> </span>
                 </div>
                 <% end %>
@@ -37,7 +33,7 @@
             <div class="w-full checkboxes-container">
                 <%= collection_check_boxes(:clinic, :age_group_ids, ClinicAgeGroup.all, :id, :name) do |b| %>
                 <div>
-                    <span> <%= b.check_box(class: "form-checkbox") %> </span>
+                    <span> <%= b.check_box(class: "form-checkbox", data: {action: "click->inventory-new-entry#updateModalCheckboxField"}) %> </span>
                     <span class="label"> <%= b.label %> </span>
                 </div>
                 <% end %>
@@ -52,7 +48,7 @@
                 <span> Clinic Date </span>
                 <span class="field-required">*</span>
             <% end %>
-            <%= f.date_field :clinic_date, class: "form-input", placeholder: "MM/DD/YYYY" %>
+            <%= f.date_field :clinic_date, class: "form-input", placeholder: "MM/DD/YYYY", data: {action: "change->inventory-new-entry#updateModalField keyup->inventory-new-entry#updateModalField"} %>
 
             <p class="label">Start Time <span class="field-required">*</span></p>
             <% 
@@ -60,54 +56,51 @@
                 end_time = Time.parse("12 PM").to_i
                 values = (start_time..end_time).step(15.minutes)
             %>
-            <select class="hour form-select" name="clinic[start_hour_minute]">
+            <select class="hour form-select" name="clinic[start_hour_minute]" id="clinic_start_hour_minute" data-action="change->inventory-new-entry#updateModalField">
                 <%= options_for_select(values.map{ |t| Time.at(t).strftime("%I:%M") }, @clinic.start_time ? @clinic.start_time.strftime('%I:%M') : nil) %>
             </select>
 
-            <select class="meridiem form-select" name="clinic[start_meridiem]">
+            <select class="meridiem form-select" name="clinic[start_meridiem]" id="clinic_start_meridiem" data-action="change->inventory-new-entry#updateModalField">
                 <%= options_for_select(['AM', 'PM'], @clinic.start_time ? @clinic.start_time.strftime("%p") : nil) %>
             </select>
 
             <p class="label">End Time <span class="field-required">*</span></p>
-            <select class="hour form-select"
-                name="clinic[end_hour_minute]">
+            <select class="hour form-select" name="clinic[end_hour_minute]" id="clinic_end_hour_minute" data-action="change->inventory-new-entry#updateModalField">
                 <%= options_for_select(values.map{ |t| Time.at(t).strftime("%I:%M") }, @clinic.end_time ? @clinic.end_time.strftime('%I:%M') : nil) %>
             </select>
 
-            <select name="clinic[end_meridiem]"
-                class="meridiem form-select">
+            <select name="clinic[end_meridiem]" class="meridiem form-select" id="clinic_end_meridiem" data-action="change->inventory-new-entry#updateModalField">
                 <%= options_for_select(['AM', 'PM'], @clinic.end_time ? @clinic.end_time.strftime("%p") : nil) %>
             </select>
         </div>
 
         <div>
             <h1 class="title"> &nbsp; </h1>
-
             <%= f.label :county, class: "block" do %>
                 <span> County </span>
                 <span class="field-required">*</span>
             <% end %>
-            <%= f.select :county, COUNTIES, {prompt: "Select"}, {class: "form-select w-full"} %>
+            <%= f.select :county, COUNTIES, {prompt: "Select"}, {class: "form-select w-full", data: {action: "change->inventory-new-entry#updateModalField"}} %>
 
             <%= f.label :location, class: "block" %>
-            <%= f.text_field :location, placeholder: "Location", class: "form-input w-full" %>
+            <%= f.text_field :location, placeholder: "Location", class: "form-input w-full", data: {action: "change->inventory-new-entry#updateModalField keyup->inventory-new-entry#updateModalField"} %>
 
             <%= f.label :address, class: "block" %>
-            <%= f.text_field :address, id: "autocomplete", onFocus: "geolocate()", class: "form-input w-full", placeholder: "Address" %>
+            <%= f.text_field :address, id: "autocomplete", onFocus: "geolocate()", class: "form-input w-full", placeholder: "Address", data: {action: "change->inventory-new-entry#updateModalField keyup->inventory-new-entry#updateModalField"} %>
             <%= render partial: "public/clinics/google_maps_script" %>
 
             <div class="grid grid-cols-3 gap-4">
                 <div>
                     <%= f.label :zip, "Zip Code", class: "block" %>
-                    <%= f.text_field :zip, placeholder: "Zip", id: "postal_code", class: "form-input" %>
+                    <%= f.text_field :zip, placeholder: "Zip", id: "postal_code", class: "form-input", data: {action: "change->inventory-new-entry#updateModalField keyup->inventory-new-entry#updateModalField"} %>
                 </div>
                 <div>
                     <%= f.label :city, class: "block" %>
-                    <%= f.text_field :city, placeholder: "City", id: "locality", class: "form-input" %>
+                    <%= f.text_field :city, placeholder: "City", id: "locality", class: "form-input", data: {action: "change->inventory-new-entry#updateModalField keyup->inventory-new-entry#updateModalField"} %>
                 </div>
                 <div>
                     <%= f.label :state, class: "block" %>
-                    <%= f.text_field :state, placeholder: "State", id: "administrative_area_level_1", class: "form-input" %>
+                    <%= f.text_field :state, placeholder: "State", id: "administrative_area_level_1", class: "form-input", data: {action: "change->inventory-new-entry#updateModalField keyup->inventory-new-entry#updateModalField"} %>
                 </div>
             </div>
         </div>
@@ -118,22 +111,22 @@
         <p class="label"> Appointments available <span class="field-required">*</span> </p>
         <div class="w-2/4 radio-buttons-container mb-4">
             <div>
-                <%= f.radio_button :appointments_available, "Yes, required", id: "yes_required", class: "form-radio" %>
-                <%= f.label :clinic_status, value: "public", for: "yes_required" do %>
+                <%= f.radio_button :appointments_available, "Yes, required", id: "yes_required", class: "form-radio", data: {action: "click->inventory-new-entry#updateModalCheckboxField"} %>
+                <%= f.label :appointments_available, value: "yes_required", for: "yes_required" do %>
                 <span> Yes, required </span>
                 <% end %>
             </div>
             
             <div>
-                <%= f.radio_button :appointments_available, "Yes, optional", id: "yes_optional", class: "form-radio" %>
-                <%= f.label :clinic_status, value: "public", for: "yes_optional" do %>
+                <%= f.radio_button :appointments_available, "Yes, optional", id: "yes_optional", class: "form-radio", data: {action: "click->inventory-new-entry#updateModalCheckboxField"} %>
+                <%= f.label :appointments_available, value: "yes_optional", for: "yes_optional" do %>
                 <span> Yes, optional </span>
                 <% end %>
             </div>
 
             <div>
-                <%= f.radio_button :appointments_available, "No (Walk-In)", id: "no_walk_in", class: "form-radio" %>
-                <%= f.label :clinic_status, value: "public", for: "no_walk_in" do %>
+                <%= f.radio_button :appointments_available, "No (Walk-In)", id: "no_walk_in", class: "form-radio", data: {action: "click->inventory-new-entry#updateModalCheckboxField"} %>
+                <%= f.label :appointments_available, value: "no_walk_in", for: "no_walk_in" do %>
                 <span> No (Walk-In) </span>
                 <% end %>
             </div>
@@ -142,12 +135,12 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
                 <%= f.label :appointment_frequency_minutes, "Appointment Frequency: Every", class: "block" %>
-                <%= f.select :appointment_frequency_minutes, [5, 15], {prompt: "Minutes"}, {class: "form-select w-full"} %>
+                <%= f.select :appointment_frequency_minutes, [5, 15], {prompt: "Minutes"}, {class: "form-select w-full", data: {action: "change->inventory-new-entry#updateModalField"}} %>
             </div>
 
             <div>
                 <%= f.label :appointment_slots, "Appointment Slots", class: "block" %>
-                <%= f.select :appointment_slots, (1..50), {prompt: "Select"}, {class: "form-select w-full"} %>
+                <%= f.select :appointment_slots, (1..50), {prompt: "Select"}, {class: "form-select w-full", data: {action: "change->inventory-new-entry#updateModalField"}} %>
             </div>
         </div>
     </div>
@@ -159,13 +152,13 @@
                 <span> Contact Person </span>
                 <span class="field-required">*</span>
             <% end %>
-            <%= f.text_field :contact_person, placeholder: "Contact Person", class: "form-input w-full" %>
+            <%= f.text_field :contact_person, placeholder: "Contact Person", class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField data: change->inventory-new-entry#updateModalField"} %>
 
             <%= f.label :backup_contact_person do %>
                 <span> Back-Up Contact Person </span>
                 <span class="field-required">*</span>
             <% end %>
-            <%= f.text_field :backup_contact_person, placeholder: "Back-Up Contact Person", class: "form-input w-full" %>
+            <%= f.text_field :backup_contact_person, placeholder: "Back-Up Contact Person", class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField data: change->inventory-new-entry#updateModalField"} %>
         </div>
         <div>
             <h1 class="title"> &nbsp; </h1>
@@ -173,13 +166,13 @@
                 <span> Contact Phone Number </span>
                 <span class="field-required">*</span>
             <% end %>
-            <%= f.text_field :contact_phone_number, placeholder: "Contact Number", class: "form-input w-full" %>
+            <%= f.text_field :contact_phone_number, placeholder: "Contact Number", class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField data: change->inventory-new-entry#updateModalField"} %>
 
             <%= f.label :backup_contact_phone_number do %>
                 <span> Back-Up Contact Phone Number </span>
                 <span class="field-required">*</span>
             <% end %>
-            <%= f.text_field :backup_contact_phone_number, placeholder: "Back-Up Contact Number", class: "form-input w-full" %>
+            <%= f.text_field :backup_contact_phone_number, placeholder: "Back-Up Contact Number", class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField data: change->inventory-new-entry#updateModalField"} %>
         </div>
     </div>
 
@@ -188,17 +181,17 @@
         <div class="grid grid-cols-2 gap-4 items-start">
             <div class="col-span-2">
                 <%= f.label :incidents_comments, "Incidents Comments", class: "block" %>
-                <%= f.text_area :incidents_comments, placeholder: "Enter Details Here", class: "form-textarea w-1/2" %>
+                <%= f.text_area :incidents_comments, placeholder: "Enter Details Here", class: "form-textarea w-1/2", data: {action: "keyup->inventory-new-entry#updateModalField data: change->inventory-new-entry#updateModalField"} %>
             </div>
         </div>
-    </div>    
+    </div>
 
     <div class="field-fullwidth">
         <h3 class="title"> Registration and Staff </h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
                 <%= f.label :students_registered, "Number of Patients Registered", class: "block" %>
-                <%= f.number_field :students_registered, placeholder: "Number of Patients Registered", class: "form-input w-full" %>
+                <%= f.number_field :students_registered, placeholder: "Number of Patients Registered", class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField data: change->inventory-new-entry#updateModalField"} %>
             </div>
 
             <div>
@@ -206,7 +199,7 @@
                     <span> Lead Tester’s Name </span>
                     <span class="field-required">*</span>
                 <% end %>
-                <%= f.text_field :lead_vaccinator_name, placeholder: "Lead Tester's Name", class: "form-input w-full" %>
+                <%= f.text_field :lead_vaccinator_name, placeholder: "Lead Tester's Name", class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField data: change->inventory-new-entry#updateModalField"} %>
             </div>
         </div>
 
@@ -255,7 +248,9 @@
     </div>
 
     <div class="flex justify-end mt-8">
-        <%= f.button "Review & Submit", class: "button-primary" %>
+        <button type="button" class="button-primary" data-action="click->inventory-new-entry#toggleModal"> Review & Submit </button>
         <%= link_to "Cancel", clinics_path, class: "button-primary" %>
     </div>
+
+    <%= render "clinics/review_form", f: f %>
 <% end %>
