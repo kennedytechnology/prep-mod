@@ -4,9 +4,12 @@ export default class extends Controller {
   static targets = ["locationsCheckboxes", "form", "checkboxErrors"];
 
   connect() {
-    $(document).click(function(e) {
-      if (e.target.id != 'predict_company_name' && !$('#locationsCheckboxes').find(e.target).length) {
-          $("#locationsCheckboxes").removeClass("active");
+    $(document).click(function (e) {
+      if (
+        e.target.id != "predict_company_name" &&
+        !$("#locationsCheckboxes").find(e.target).length
+      ) {
+        $("#locationsCheckboxes").removeClass("active");
       }
     });
   }
@@ -33,23 +36,17 @@ export default class extends Controller {
       requiredFieldSelectors
     );
 
-    // Find checkboxes
-    let checkboxScreeningValue = document.getElementById(
-      "employer_screening_info"
-    ).value;
-    let checkboxTestingValue = document.getElementById("employer_testing_info")
-      .value;
-    let checkboxVaccinationValue = document.getElementById(
-      "employer_vacination_info"
-    ).value;
     let textareaOtherInfoValue = document.getElementById("employer_other_info")
       .value;
 
     // If at least one checkbox is checked (value = 1) - form is valid
-    if ( ($('#individualsInfo').find(':checked').length == 0) && (textareaOtherInfoValue == "") ) {
+    if (
+      $("#individualsInfo").find(":checked").length == 0 &&
+      textareaOtherInfoValue == ""
+    ) {
       isValid = false;
       this.checkboxErrorsTarget.classList.remove("hidden");
-    } else  {
+    } else {
       isValid = true;
       this.checkboxErrorsTarget.classList.add("hidden");
     }
