@@ -293,7 +293,7 @@
                     <%= f.label :refrigerator, "I do not have a refrigerator" %> 
                 </div>
 
-                <%= f.text_field :refrigerator, class: "form-input w-full", required: true, data: {target: "provider-enrollment-new-entry.refrigerator_text"} %>
+                <%= f.text_area :refrigerator, class: "form-input w-full", required: true, data: {target: "provider-enrollment-new-entry.refrigerator_text"} %>
             </div>
 
             <div>
@@ -302,7 +302,7 @@
                     <%= f.check_box :freezer, class: "form-checkbox", data: {target: "provider-enrollment-new-entry.freezer", action: "provider-enrollment-new-entry#fillTextField"}, value: "no" %>
                     <%= f.label :freezer, "I do not have a freezer" %>  
                 </div>
-                <%= f.text_field :freezer, class: "form-input w-full", required: true, data: {target: "provider-enrollment-new-entry.freezer_text"} %>
+                <%= f.text_area :freezer, class: "form-input w-full", required: true, data: {target: "provider-enrollment-new-entry.freezer_text"} %>
             </div>
 
             <div>
@@ -311,7 +311,7 @@
                     <%= f.check_box :refrigerator_thermometer, class: "form-checkbox", data: {target: "provider-enrollment-new-entry.refrigerator_thermometer", action: "provider-enrollment-new-entry#fillTextField"}, value: "no" %>
                     <%= f.label :refrigerator_thermometer, "I do not have a refrigerator thermometer" %>    
                 </div>        
-                <%= f.text_field :refrigerator_thermometer, class: "form-input w-full", required: true, data: {
+                <%= f.text_area :refrigerator_thermometer, class: "form-input w-full", required: true, data: {
                     target: "provider-enrollment-new-entry.refrigerator_thermometer_text"} %>        
             </div>
         </div>
