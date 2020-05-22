@@ -152,13 +152,13 @@
                 <span> Contact Person </span>
                 <span class="field-required">*</span>
             <% end %>
-            <%= f.text_field :contact_person, placeholder: "Contact Person", class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField data: change->inventory-new-entry#updateModalField"} %>
+            <%= f.text_field :contact_person, placeholder: "Contact Person", class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField change->inventory-new-entry#updateModalField"} %>
 
             <%= f.label :backup_contact_person do %>
                 <span> Back-Up Contact Person </span>
                 <span class="field-required">*</span>
             <% end %>
-            <%= f.text_field :backup_contact_person, placeholder: "Back-Up Contact Person", class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField data: change->inventory-new-entry#updateModalField"} %>
+            <%= f.text_field :backup_contact_person, placeholder: "Back-Up Contact Person", class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField change->inventory-new-entry#updateModalField"} %>
         </div>
         <div>
             <h1 class="title"> &nbsp; </h1>
@@ -166,13 +166,13 @@
                 <span> Contact Phone Number </span>
                 <span class="field-required">*</span>
             <% end %>
-            <%= f.text_field :contact_phone_number, placeholder: "Contact Number", class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField data: change->inventory-new-entry#updateModalField"} %>
+            <%= f.text_field :contact_phone_number, placeholder: "Contact Number", class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField change->inventory-new-entry#updateModalField"} %>
 
             <%= f.label :backup_contact_phone_number do %>
                 <span> Back-Up Contact Phone Number </span>
                 <span class="field-required">*</span>
             <% end %>
-            <%= f.text_field :backup_contact_phone_number, placeholder: "Back-Up Contact Number", class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField data: change->inventory-new-entry#updateModalField"} %>
+            <%= f.text_field :backup_contact_phone_number, placeholder: "Back-Up Contact Number", class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField change->inventory-new-entry#updateModalField"} %>
         </div>
     </div>
 
@@ -181,7 +181,7 @@
         <div class="grid grid-cols-2 gap-4 items-start">
             <div class="col-span-2">
                 <%= f.label :incidents_comments, "Incidents Comments", class: "block" %>
-                <%= f.text_area :incidents_comments, placeholder: "Enter Details Here", class: "form-textarea w-1/2", data: {action: "keyup->inventory-new-entry#updateModalField data: change->inventory-new-entry#updateModalField"} %>
+                <%= f.text_area :incidents_comments, placeholder: "Enter Details Here", class: "form-textarea w-1/2", data: {action: "keyup->inventory-new-entry#updateModalField change->inventory-new-entry#updateModalField"} %>
             </div>
         </div>
     </div>
@@ -191,7 +191,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
                 <%= f.label :students_registered, "Number of Patients Registered", class: "block" %>
-                <%= f.number_field :students_registered, placeholder: "Number of Patients Registered", class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField data: change->inventory-new-entry#updateModalField"} %>
+                <%= f.number_field :students_registered, placeholder: "Number of Patients Registered", class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField change->inventory-new-entry#updateModalField"} %>
             </div>
 
             <div>
@@ -199,7 +199,7 @@
                     <span> Lead Tester’s Name </span>
                     <span class="field-required">*</span>
                 <% end %>
-                <%= f.text_field :lead_vaccinator_name, placeholder: "Lead Tester's Name", class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField data: change->inventory-new-entry#updateModalField"} %>
+                <%= f.text_field :lead_vaccinator_name, placeholder: "Lead Tester's Name", class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField change->inventory-new-entry#updateModalField"} %>
             </div>
         </div>
 
