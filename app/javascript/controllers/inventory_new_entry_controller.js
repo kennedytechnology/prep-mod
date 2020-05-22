@@ -19,6 +19,7 @@ export default class extends Controller {
     }
 
     staffDuplicate() {
+        document.getElementById("clinicStaffFields").innerHTML = this.clinicStaffFieldsTarget.innerHTML;
         document.querySelectorAll('#clinicStaffFields input').forEach((element, index) => {
             element.disabled = true;
             element.nextElementSibling.style.display = 'none';
