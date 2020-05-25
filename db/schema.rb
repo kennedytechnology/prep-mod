@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_21_095749) do
+ActiveRecord::Schema.define(version: 2020_05_22_114012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -352,6 +352,7 @@ ActiveRecord::Schema.define(version: 2020_05_21_095749) do
     t.string "practice_backup_mobile_phone"
     t.string "status"
     t.string "county"
+    t.string "unique_number"
   end
 
   create_table "supply_inventories", force: :cascade do |t|
