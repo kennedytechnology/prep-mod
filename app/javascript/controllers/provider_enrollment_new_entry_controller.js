@@ -1,22 +1,24 @@
-import { Controller } from "stimulus"
+import {
+  Controller
+} from "stimulus"
 
 export default class extends Controller {
-  static targets = [ ]
+  static targets = []
 
   connect() {}
 
   toggleTextArea(e) {
     let currentCheckbox = e.currentTarget,
-        currentTextarea = $("[data-textarea='"+e.currentTarget.getAttribute("data-textarea")+"']")[1]
-    
+      currentTextarea = $("[data-textarea='" + e.currentTarget.getAttribute("data-textarea") + "']")[1]
+
     if (e.currentTarget.checked) {
-        $(currentTextarea).val($(currentCheckbox).val());
-        $(currentTextarea).text($(currentCheckbox).val());
-        $(currentTextarea).attr("disabled", true);
+      $(currentTextarea).val($(currentCheckbox).val());
+      $(currentTextarea).text($(currentCheckbox).val());
+      $(currentTextarea).addClass("hidden");
     } else {
-        $(currentTextarea).val("");
-        $(currentTextarea).text("");
-        $(currentTextarea).removeAttr("disabled");
+      $(currentTextarea).val("");
+      $(currentTextarea).text("");
+      $(currentTextarea).removeClass("hidden");
     }
   }
 }
