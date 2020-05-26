@@ -5,6 +5,7 @@ class PatientsController < ApplicationController
   before_action :patients_listing, only: [:index, :upload_record]
 
   def index
+    @page_title = "Patient Record Search"
   end
 
   def new

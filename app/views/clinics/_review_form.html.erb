@@ -160,7 +160,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <%= f.label :appointment_frequency_minutes, "Appointment Frequency: Every", class: "block" %>
-                        <%= f.select :appointment_frequency_minutes, [5, 15], {prompt: "Minutes"}, {class: "form-select w-full", disabled: true, id: "modal_clinic_appointment_frequency_minutes"} %>
+                        <%= f.select :appointment_frequency_minutes, CLINIC_APPOINTMENT_INTERVALS, {prompt: "Minutes"}, {class: "form-select w-full", disabled: true, id: "modal_clinic_appointment_frequency_minutes"} %>
                     </div>
 
                     <div>

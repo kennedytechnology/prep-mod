@@ -7,6 +7,8 @@ US_RACES = ["American Indian or Alaska Native", "Asian", "Black or African-Ameri
 INSURANCE_TYPES = ["Private Insurance", "Medicaid/Medical Assistance", "Medicare", "No Insurance"]
 RELATIONSHIP_TYPES = ["Self", "Spouse", "Other"]
 
+CLINIC_APPOINTMENT_INTERVALS = [5, 10, 15, 20, 30, 45, 60]
+
 CLINIC_EVENTS = [
   { name: "Tested",
     outcomes: %w(Pending Positive Negative Indeterminate)
@@ -68,3 +70,4 @@ CLINIC_EVENTS = [
     "Miscellaneous Services", "Other"]
 
   Date::DATE_FORMATS[:default] = "%A %B %e, %Y"
+

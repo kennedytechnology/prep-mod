@@ -9,7 +9,7 @@
     <td> <%= f.select :test_processing, ["Standard", "Rapid"], {prompt: "Select"}, {class: "block form-select w-full"} %> </td>
     <td> <%= f.date_field :test_expiration_date, class: "form-input w-full", placeholder: "MM/DD/YYYY" %> </td>
     <% end %>
-    <td> <%= f.number_field :test_kits_quantity, class: "form-input w-full" %> </td>
+    <td> <%= f.number_field :test_kits_quantity, class: "form-input w-full", min: 0 %> </td>
     <% if params[:controller] == "clinic_events" %>
     <td> <%= f.number_field :tests_administered, class: "form-input w-full" %> </td>
     <td> <%= f.number_field :unusable_tests, class: "form-input w-full" %> </td>

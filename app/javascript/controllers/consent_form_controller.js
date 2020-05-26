@@ -1,7 +1,7 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "searchableRow", "employer", "locations" ]
+  static targets = [ "searchableRow", "employer", "locations", "companyCheckbox", "companyInputField" ]
 
   search(event) {
     let searchTerm = event.target.value.toLowerCase()
@@ -17,6 +17,8 @@ export default class extends Controller {
       this.employerTarget.innerText = e.currentTarget.getAttribute("data-employer");
       this.locationsTarget.innerText = e.currentTarget.getAttribute("data-locations");
     }
+
+    this.companyInputFieldTarget.innerHTML = "Selected: " + this.companyCheckboxTargets.filter(e => e.checked).map(e => e.dataset.employer).join(", ")
   }
 
   toggleModal(event) {

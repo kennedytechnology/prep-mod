@@ -23,6 +23,15 @@ class Clinic < ApplicationRecord
   attr_accessor :start_hour, :start_minute, :start_meridiem,
     :end_hour, :end_minute, :end_meridiem
 
+  validates :public_or_private, presence: true
+  validates :clinic_date, presence: true
+  validates :location, presence: true
+  validates :county, presence: true
+  validates :address, presence: true
+  validates :lead_vaccinator_name, presence: true
+
+  
+
   def parse_time
     if start_hour && start_minute && start_meridiem
       self.start_time = Time.find_zone("UTC").parse("#{start_hour}:#{end_minute}#{start_meridiem}")
@@ -63,4 +72,13 @@ class Clinic < ApplicationRecord
   def search_string
     venue_name + clinic_date.to_s + county
   end
+
+  def public?
+    public_or_private == "Public"
+  end
+
+  def private?
+    public_or_private == "Private"
+  end
+
 end

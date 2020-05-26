@@ -40,6 +40,8 @@ RSpec.describe ClinicsController, type: :controller do
             address: "8117 Mountain View Circle, Pasadena, MD 21122",
             longitude: -76.567383,
             latitude: 39.133262,
+            location: "Nowhere",
+            public_or_private: "Public",
             appointment_frequency_minutes: [10, 15, 30, 60].sample,
             appointment_slots: (2..10).to_a.sample,
             appointments_available: 'required',
@@ -120,7 +122,7 @@ RSpec.describe ClinicsController, type: :controller do
     }
     should permit(:clinic_status, :start_time, :end_time,
       :address, :lead_vaccinator_name,
-      :clinic_date, :students_registered,
+      :clinic_date, :students_registered, :public_or_private,
       :incidents_comments, :county, :venue_name, :zip, 
       :city, :state, :appointment_frequency_minutes,
       :appointment_slots, :contact_person, :contact_phone_number,
@@ -135,7 +137,7 @@ RSpec.describe ClinicsController, type: :controller do
         :test_type, :test_processing, :category],
       test_kits_attributes: [:id, :test_name, :test_manufacturer,
         :test_lot_number, :test_type, :test_processing, 
-        :test_expiration_date, :test_kits_quantity, :tests_administered, 
+        :test_expiration_date, :test_kits_quantity, :tests_administered,
         :unusable_tests, :tests_returned, :_destroy]).
       for(:create, params: params).
       on(:clinic)
