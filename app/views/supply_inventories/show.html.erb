@@ -95,9 +95,7 @@
             <td> <%= event.quantity_used %> </td>
             <td> <%= event.quantity_lost %> </td>
             <td> <%= event.quantity_loaned %> </td>
-            <td> 10
-                <%# @supply_inventory.quantity - (@supply_inventory.quantity_used + @supply_inventory.quantity_lost + @supply_inventory.quantity_loaned) %>
-            </td>
+            <td> </td>
             <td> 
                 <%= link_to "Edit", edit_supply_inventory_event_path(event), class: "button-action mb-1" %> 
                 <%= link_to "Delete", supply_inventory_event_path(event), method: :delete, class: "button-action", data: {confirm: "Are you sure you want to delete this event?"} %>
@@ -107,12 +105,10 @@
         <tr class="font-bold">
             <td> TOTALS </td>
             <td>  </td>
-            <td> 10 </td>
-            <td> 10 </td>
-            <td> 10 </td>
-            <td> 10
-                <%# @supply_inventory.quantity - (@supply_inventory.quantity_used + @supply_inventory.quantity_lost + @supply_inventory.quantity_loaned) %>
-            </td>
+            <td> <%= @supply_inventory.quantity_used_sum %> </td>
+            <td> <%= @supply_inventory.quantity_lost_sum %> </td>
+            <td> <%= @supply_inventory.quantity_loaned_sum %> </td>
+            <td> <%= @supply_inventory.remaining_quantity_sum %> </td>
             <td> </td>
         </tr>
     </tbody>
