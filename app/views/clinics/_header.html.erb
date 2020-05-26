@@ -1,0 +1,21 @@
+<div id="clinic-header" class="bg-gray-100 p-4 -mt-2 mb-4">
+  <h1 class="text-3xl font-bold"><%= @clinic.name %></h1>
+    <% 
+        clinic_menu = {
+          "Registration List": clinic_patients_path(clinic_id: @clinic.id),
+          "Edit Clinic": edit_clinic_path(id: @clinic.id),
+          "Clinic Activity": clinic_activity_path(clinic_id: @clinic.id),
+          "Customized Report": new_customized_report_path(clinic_id: @clinic.id)
+        }
+      %>
+  <div class="flex justify-end mt-4">
+      <h2 class="text-2xl font-bold flex-grow"><%= @page_title || raise %></h2>
+      <% clinic_menu.each do |link_name, link_route| %>
+        <%
+        classes_for_link = "button-action"
+        classes_for_link << " font-bold" if current_page?(link_route)
+        %>
+        <%= link_to link_name, link_route, class: classes_for_link %>
+      <% end %>
+  </div>
+</div>

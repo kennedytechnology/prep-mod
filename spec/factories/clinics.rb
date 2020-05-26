@@ -5,6 +5,7 @@ FactoryBot.define do
     venue_name { Faker::University.unique.name }
     clinic_date { Faker::Date.between(from: 1.month.ago, to: 6.months.from_now) }
     lead_vaccinator_name { Faker::Name.unique.name }
+    public_or_private {%w(Public Private).sample}
     students_registered { Faker::Number.normal(mean: 100, standard_deviation: 50) }
     clinic_status { %w(Pending Completed Cancelled).sample }
     outcome_comments { Faker::Lorem.paragraph(sentence_count: 0, random_sentences_to_add: 9, supplemental: true) }
@@ -17,6 +18,7 @@ FactoryBot.define do
     address { "8117 Mountain View Circle, Pasadena, MD 21122"  }
     longitude { -76.567383 }
     latitude { 39.133262 }
+    location { "Nowhere" }
     appointment_frequency_minutes { [10, 15, 30, 60].sample }
     appointment_slots { (2..10).to_a.sample }
     appointments_available { 'required' }

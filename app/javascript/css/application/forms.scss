@@ -26,6 +26,10 @@
     }
 }
 
+.form-section-title {
+    @apply block w-full text-xl leading-5 text-gray-800 font-black mb-2;
+}
+
 label,
 .label {
     @apply text-gray-600 text-sm font-medium;
@@ -110,3 +114,15 @@ select {
 .radio-buttons-container {
     @apply grid grid-cols-3 gap-2;
 }
+
+.inline-field-wrapper{
+    @apply w-2/12 mr-2
+ }
+
+ .inline-field-wrapper-narrow{
+    @apply w-1/12
+ }
+
+ .inline-field-wrapper-normal{
+    @apply w-2/12
+ }

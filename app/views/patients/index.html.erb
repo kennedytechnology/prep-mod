@@ -1,15 +1,15 @@
+<%= render 'clinics/header' if @clinic %>
+
 <div class="clinic-patients-index-page">
   <div class="header-section">
-    <div class="header">
-      <h1 class="main-title">Patient Record Search
-        <% if @clinic %>
-          - <%= @clinic.name %>
-        <% end %>
-      </h1>
-      <% if @clinic %>
-        <h3>Total Registered: <%= @clinic.patients.size %></h3>
-      <% end %>
-    </div>
+    <% unless @clinic %>
+      <h1 class="main-title">Patient Record Search</h1>
+    <% end %>
+
+    <% if @clinic %>
+      <h3>Total Registered: <%= @clinic.patients.size %></h3>
+    <% end %>
+    
     <div class="flex justify-end my-4 search-inputs-container">
       <%= search_form_for @q, class: "flex items-center w-full" do |f| %>
         <%= f.search_field :first_name_cont, placeholder: "First Name", class: "form-input flex-1 mr-2" %>

@@ -45,7 +45,8 @@ RSpec.describe "/customized_reports", type: :request do
 
   describe "GET /new" do
     it "renders a successful response" do
-      get new_customized_report_url
+      clinic = create(:clinic)
+      get new_customized_report_url(clinic_id: clinic)
       expect(response).to be_successful
     end
   end

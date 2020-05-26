@@ -1,0 +1,57 @@
+<h2 class="main-title"> Edit Entry for <%= @supply_inventory_event.supply_inventory.product_name %> (Received <%= @supply_inventory_event.supply_inventory.received_at.strftime("%d-%m-%Y") %>) </h2>
+
+<%= form_with model: @supply_inventory_event, local: true, class: "py-5" do |f| %>
+    <div class="sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 lg:gap-6">
+        <div>
+            <%= f.label :event_date do %>
+                <span class="text-gray-500"> Event Date </span>
+                <span class="text-brand-red-500">*</span>
+            <% end %>
+            <%= f.date_field :event_date, class: "form-input block w-full", placeholder: "MM/DD/YYYY", required: true %>
+        </div>
+
+        <div>
+            <%= f.label :event_type do %>
+                <span class="text-gray-500"> Event Type </span>
+                <span class="text-brand-red-500">*</span>
+            <% end %>
+            <%= f.select :event_type, INVENTORY_EVENT_TYPES, {prompt: "Select"}, {class: "block form-select w-full", required: true} %>
+        </div>
+
+        <div>
+            <%= f.label :quantity_used do %>
+                <span class="text-gray-500"> Quantity Used </span>
+                <span class="text-brand-red-500">*</span>
+            <% end %>
+            <%= f.number_field :quantity_used, class: "form-input block w-full", required: true %>
+        </div>
+
+        <div>
+            <%= f.label :quantity_lost do %>
+                <span class="text-gray-500"> Quantity Lost </span>
+                <span class="text-brand-red-500">*</span>
+            <% end %>
+            <%= f.number_field :quantity_lost, class: "form-input block w-full", required: true %>
+        </div>
+
+        <div>
+            <%= f.label :quantity_loaned do %>
+                <span class="text-gray-500"> Quantity Loaned </span>
+                <span class="text-brand-red-500">*</span>
+            <% end %>
+            <%= f.number_field :quantity_loaned, class: "form-input block w-full", required: true %>
+        </div>
+
+        <div>
+            <%= f.label :quantity_destroyed do %>
+                <span class="text-gray-500"> Quantity Destroyed/Returned </span>
+                <span class="text-brand-red-500">*</span>
+            <% end %>
+            <%= f.number_field :quantity_destroyed, class: "form-input block w-full", required: true %>
+        </div>
+    </div>
+
+    <div class="flex justify-end items-end mt-2 mb-8">
+        <%= f.submit "Update Entry", class: "button-primary" %>
+    </div>
+<% end %>

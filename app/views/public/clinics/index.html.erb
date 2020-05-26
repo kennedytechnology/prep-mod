@@ -62,14 +62,14 @@
                     <h4><%= clinic.address %></h4>
                     <p><strong>Services available:</strong> <%= clinic.services.collect(&:name).join(", ") %></p>
                     <p><strong>Age groups served:</strong> <%= clinic.age_groups.collect(&:name).join(", ") %></p>
-                    <% if session[:patient_id] && clinic.services.include?(ClinicService.find_by_name("Testing")) %>
-                    <p class="w-9/12 my-3">
-                        <%= link_to "Select Testing Appointment Here", 
-                            "/client/registration?clinic_id=#{clinic.id}", class: "button-primary px-4 " %>
-                    </p>
+                    <% if clinic.services.include?(ClinicService.find_by_name("Testing")) && (session[:patient_id] || clinic.public?) %>
+                        <p class="w-5/12 my-3">
+                            <%= link_to "Select Testing Appointment Here", 
+                                "/client/registration?clinic_id=#{clinic.id}", class: "button-primary px-4 " %>
+                        </p>
                     <% end %>
                     <% if clinic.services.include?(ClinicService.find_by_name("Safety Kit Distribution")) %>
-                    <p class="w-9/12 my-3">
+                    <p class="w-5/12 my-3">
                         <%= link_to "Sign-Up For Safety Kit", "/kit/new", class: "button-primary" %>
                     </p>
                     <% end %>

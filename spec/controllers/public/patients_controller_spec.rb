@@ -15,7 +15,7 @@ RSpec.describe Public::PatientsController, type: :controller do
   describe "GET #edit" do
     it "returns http success" do
       get :edit
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(:redirect)
     end
   end
 
@@ -47,9 +47,9 @@ RSpec.describe Public::PatientsController, type: :controller do
         } }
         patient.reload
       end
-
-      it { expect(response).to have_http_status(:redirect) }
-      it { expect(response).to redirect_to "/client/registration" }
+      
+      it { expect(response).to have_http_status(:success) }
+      
     end
   end
 end

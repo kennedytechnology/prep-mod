@@ -15,7 +15,7 @@ PATIENT_COUNT = 1000
 CLINIC_EVENTS_PER_PATIENT = 3
 CLINIC_STAFF_PER_CLINIC = 3
 SUPPLY_INVENTORY_PER_CLINIC = 10
-TEST_KITS_PER_CLINIC = 10
+TEST_KITS_PER_CLINIC = 3
 VENUE_STATES = ["MD", "NY", "PA", "DC", "KY", "VT", "CA", "CO", "AL"]
 
 puts "Creating named places..."
@@ -44,7 +44,7 @@ addresses.shuffle!
 puts "Creating users..."
 USER_COUNT.times.each do |i|
   User.create!(
-    email: i == 5 ? "sam@test.com" : Faker::Internet.unique.email,
+    email: i == 5 ? "user@test.com" : Faker::Internet.unique.email,
     password: 'password',
     password_confirmation: 'password',
     role: USER_ROLES.sample,
@@ -135,7 +135,7 @@ end
 puts "Creating clinics..."
 CLINIC_COUNT.times.each do |i|
   address = addresses.pop
-  Clinic.create(
+  clinic = Clinic.create(
     user_id: User.take.id,
     provider_enrollment_id: ProviderEnrollment.take.id,
     venue_name: Faker::University.unique.name,
@@ -143,6 +143,7 @@ CLINIC_COUNT.times.each do |i|
     lead_vaccinator_name: Faker::Name.unique.name,
     students_registered: Faker::Number.normal(mean: 100, standard_deviation: 50),
     clinic_status: %w(Pending Completed Cancelled).sample,
+    public_or_private: %w(Public Private).sample,
     outcome_comments: Faker::Lorem.paragraph(sentence_count: 0, random_sentences_to_add: 9, supplemental: true),
     incidents_comments: Faker::Lorem.paragraph(sentence_count: 0, random_sentences_to_add: 9, supplemental: true),
     start_time: "#{(9..12).to_a.sample}:00",
@@ -153,6 +154,7 @@ CLINIC_COUNT.times.each do |i|
     address: "#{address['address1']}, #{address['city']}, #{address['state']} #{address['postalCode']}",
     longitude: address['coordinates']['lng'],
     latitude: address['coordinates']['lat'],
+    location: "Nowhere",
     appointment_frequency_minutes: [10, 15, 30, 60].sample,
     appointment_slots: (2..10).to_a.sample,
     appointments_available: 'required',
@@ -175,7 +177,6 @@ clinics = Clinic.all
 PATIENT_COUNT.times.each do |i|
   address = addresses.sample
   clinic = clinics.sample
-  # debugger
   patientEmail = Faker::Internet.email
   Patient.create!(
     clinic: clinic,
@@ -226,7 +227,7 @@ end
 
 # Clinic.all.each do |clinic|
   SUPPLY_INVENTORY_PER_CLINIC.times do
-    SupplyInventory.create!(
+    sp = SupplyInventory.create!(
       # clinic: clinic,
       received_at: Faker::Date.between(from: 30.days.ago, to:Date.today),
       item_type: INVENTORY_ITEM_TYPES.sample,
@@ -235,18 +236,23 @@ end
       lot_number: Faker::Code.asin,
       expiration_date: Faker::Date.between(from: Date.today, to: 30.days.from_now),
       quantity: Faker::Number.between(from: 10, to: 20),
-      quantity_used: Faker::Number.between(from: 1, to: 5),
-      quantity_lost: Faker::Number.between(from: 1, to: 3),
-      quantity_loaned: Faker::Number.between(from: 1, to: 3),
-      quantity_destroyed: Faker::Number.between(from: 1, to: 3),
       packaging: INVENTORY_PACKAGINGS.sample,
       source: INVENTORY_SOURCES.sample,
       product_name: Faker::Company.name,
-      event_type: INVENTORY_EVENT_TYPES.sample,
       county: COUNTIES.sample,
       venue_name: Clinic.pluck(:venue_name).sample,
-      event_date: Faker::Date.between(from: Date.today, to: 30.days.from_now)
     )
+
+    Faker::Number.between(from: 1, to: 5).times do 
+      sp.supply_inventory_events.create!(
+        quantity_used: Faker::Number.between(from: 1, to: 5),
+        quantity_lost: Faker::Number.between(from: 1, to: 3),
+        quantity_loaned: Faker::Number.between(from: 1, to: 3),
+        quantity_destroyed: Faker::Number.between(from: 1, to: 3),
+        event_type: INVENTORY_EVENT_TYPES.sample,
+        event_date: Faker::Date.between(from: Date.today, to: 30.days.from_now)
+      )
+    end
   end
 # end
 
@@ -260,7 +266,7 @@ Clinic.all.each do |clinic|
       test_type: %w(PCR Serological).sample,
       test_processing: %w(Standard Rapid).sample,
       test_expiration_date: Faker::Date.between(from: 30.days.from_now, to: 365.days.from_now),
-      test_kits_quantity: Faker::Number.between(from: 50, to: 1000)
+      test_kits_quantity: Faker::Number.between(from: 2, to: 50) * 25
     )
   end
 end

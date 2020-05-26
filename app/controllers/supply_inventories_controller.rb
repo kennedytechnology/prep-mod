@@ -19,25 +19,7 @@ class SupplyInventoriesController < InheritedResources::Base
 
   def show
     @supply_inventory = SupplyInventory.find(params[:id])
-  end
-
-  def edit
-    @supply_inventory = SupplyInventory.find(params[:id])
-  end
-
-  def update
-    @supply_inventory = SupplyInventory.find(params[:id])
-
-    if @supply_inventory.update(supply_inventory_params)
-      redirect_to supply_inventories_path, notice: "Successfully Updated Inventory Item"
-    else
-      redirect_back fallback_location: supply_inventories_path, alert: "Error!"
-    end
-  end
-
-  def destroy
-    SupplyInventory.destroy(params[:id])
-    redirect_back fallback_location: supply_inventories_path, alert: "The inventory was deleted."
+    @supply_inventory_event = SupplyInventoryEvent.new
   end
 
   private
@@ -46,9 +28,8 @@ class SupplyInventoriesController < InheritedResources::Base
       params.require(:supply_inventory).permit(
         :received_at, :item_type, :item_name, 
         :manufacturer, :lot_number, :expiration_date,
-        :quantity, :quantity_used, :quantity_loaned, :quantity_destroyed,
-        :quantity_lost, :packaging, :source, :product_name, 
-        :event_date, :event_type, :county, :venue_name
+        :quantity, :packaging, :source, :product_name,
+        :county, :venue_name
       )
     end
 

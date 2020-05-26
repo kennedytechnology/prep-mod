@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_22_114012) do
+ActiveRecord::Schema.define(version: 2020_05_26_090243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -185,6 +185,7 @@ ActiveRecord::Schema.define(version: 2020_05_22_114012) do
     t.time "end_hour_minute"
     t.string "location"
     t.integer "provider_enrollment_id"
+    t.string "public_or_private"
   end
 
   create_table "clinics_users", id: false, force: :cascade do |t|
@@ -273,6 +274,21 @@ ActiveRecord::Schema.define(version: 2020_05_22_114012) do
     t.string "topics"
     t.string "occupation"
     t.string "last_name"
+  end
+
+  create_table "patient_family_members", force: :cascade do |t|
+    t.string "first_name"
+    t.string "middle_initial"
+    t.string "last_name"
+    t.string "mothers_maiden_name"
+    t.string "race"
+    t.date "date_of_birth"
+    t.string "insurance_company_name"
+    t.string "member_id_for_insurance"
+    t.string "group_number_for_insurance"
+    t.integer "patient_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "patients", force: :cascade do |t|
@@ -387,16 +403,23 @@ ActiveRecord::Schema.define(version: 2020_05_22_114012) do
     t.string "packaging"
     t.string "source"
     t.string "product_name"
-    t.string "event_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "county"
+    t.string "venue_name"
+  end
+
+  create_table "supply_inventory_events", force: :cascade do |t|
+    t.date "event_date"
+    t.string "event_type"
     t.integer "quantity_used"
     t.integer "quantity_lost"
     t.integer "quantity_loaned"
-    t.date "event_date"
-    t.string "county"
-    t.string "venue_name"
     t.integer "quantity_destroyed"
+    t.bigint "supply_inventory_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["supply_inventory_id"], name: "index_supply_inventory_events_on_supply_inventory_id"
   end
 
   create_table "test_kits", force: :cascade do |t|
@@ -457,5 +480,6 @@ ActiveRecord::Schema.define(version: 2020_05_22_114012) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "supply_inventory_events", "supply_inventories"
   add_foreign_key "test_kits", "clinics"
 end
