@@ -22,25 +22,6 @@ class SupplyInventoriesController < InheritedResources::Base
     supply_inventory_event = SupplyInventoryEvent.new
   end
 
-  def edit
-    @supply_inventory = SupplyInventory.find(params[:id])
-  end
-
-  def update
-    @supply_inventory = SupplyInventory.find(params[:id])
-
-    if @supply_inventory.update(supply_inventory_params)
-      redirect_to supply_inventories_path, notice: "Successfully Updated Inventory Item"
-    else
-      redirect_back fallback_location: supply_inventories_path, alert: "Error!"
-    end
-  end
-
-  # def destroy
-  #   SupplyInventory.destroy(params[:id])
-  #   redirect_back fallback_location: supply_inventories_path, alert: "The inventory was deleted."
-  # end
-
   private
 
     def supply_inventory_params

@@ -17,10 +17,10 @@ class SupplyInventoryEventsController < InheritedResources::Base
   end
 
   def update
-    @supply_inventory_event = SupplyInventory.find(params[:id])
+    @supply_inventory_event = SupplyInventoryEvent.find(params[:id])
 
     if @supply_inventory_event.update(supply_inventory_event_params)
-      redirect_back fallback_location: supply_inventories_path, notice: "Successfully updated Event"
+      redirect_to supply_inventory_path(@supply_inventory_event.supply_inventory), notice: "Successfully updated Event"
     else
       redirect_back fallback_location: supply_inventories_path, alert: "Error!"
     end
