@@ -1,7 +1,7 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "modal", "searchableRow", "deleteModal", "deleteRecordButton" ]
+  static targets = [ "modal", "searchableRow", "deleteModal", "deleteRecordButton", "cancelModal", "cancelRecordButton" ]
 
   showModal(event) {
     let categorySelection = event.target.dataset.selection;
@@ -57,4 +57,11 @@ export default class extends Controller {
 
     this.deleteModalTarget.classList.toggle('hidden');
   }
+
+  onShowHideCancelModal(event) {
+    this.cancelModalTarget.classList.toggle('hidden')
+    this.cancelRecordButtonTarget.href = `/admin/clinics/${event.currentTarget.dataset.cancelid}`;
+  }
+
+
 }

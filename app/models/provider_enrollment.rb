@@ -11,6 +11,12 @@ class ProviderEnrollment < ApplicationRecord
     self.status = "pending"
   end
 
+  after_create do
+    # byebug
+    self.unique_number = "P#{self.id}"
+    self.save
+  end
+
   def set_status(status_name)
     case status_name
     when "Need Additional Information"

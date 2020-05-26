@@ -38,6 +38,5 @@ yarn-debug.log*
 spec/.DS_Store
 .idea/
 public/.DS_Store
-config/env_vars.yml
 coverage
 **/.DS_Store
