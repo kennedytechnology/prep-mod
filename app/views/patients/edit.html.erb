@@ -34,20 +34,20 @@
         <div class="grid grid-cols-5 gap-4">
             <div>
                 <%= f.label :address, class: "block" %>
-                <%= f.text_field :address, placeholder: "", id: "autocomplete", class: "w-full form-input" %>
+                <%= f.text_field :address, placeholder: "", id: "autocomplete", onFocus: "geolocate()", class: "w-full form-input" %>
                 <%= render partial: "public/clinics/google_maps_script" %>
             </div>
             <div>
                 <%= f.label :city, class: "block" %>
-                <%= f.text_field :city, class: "w-full form-input" %>
+                <%= f.text_field :city, class: "w-full form-input", id: "locality" %>
             </div>
             <div>
                 <%= f.label :state, class: "block" %>
-                <%= f.select :state, options_for_select(US_STATES, @patient.state), {prompt: "Select"}, class: "w-full form-select" %>
+                <%= f.select :state, options_for_select(US_STATES, @patient.state), {prompt: "Select"}, class: "w-full form-select", id: "administrative_area_level_1" %>
             </div>
             <div>
                 <%= f.label :zip_code, "Zip Code", class: "block" %>
-                <%= f.text_field :zip_code, class: "w-full form-input" %>
+                <%= f.text_field :zip_code, class: "w-full form-input", id: "postal_code" %>
             </div>
             <div>
                 <%= f.label :phone_number, "Mobile or Daytime Number", class: "block" %>

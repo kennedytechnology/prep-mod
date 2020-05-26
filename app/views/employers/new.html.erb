@@ -93,35 +93,34 @@
                 <%= f.label :address_1, "Address 1", class: "inline-block" %><span class="field-required">*</span>
                 <%= f.text_field :address_1, required: true, 
                                              data: { action: "blur->employer-form#validateInputField" }, 
-                                             class: "form-input w-full" %>
+                                             class: "form-input w-full", id: "autocomplete", onFocus: "geolocate()" %>
+                <%= render partial: "public/clinics/google_maps_script" %>
                 <p class="error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
             <div class="w-4/12 mr-4">
-                <%= f.label :address_2, "Unit Number/Address 2", class: "inline-block" %><span class="field-required">*</span>
-                <%= f.text_field :address_2, required: true, 
-                                             data: { action: "blur->employer-form#validateInputField" }, 
-                                             class: "form-input w-full" %>
+                <%= f.label :address_2, "Unit Number/Address 2", class: "inline-block" %>
+                <%= f.text_field :address_2, class: "form-input w-full" %>
                 <p class="error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
             <div class="flex-1 mr-4">
                 <%= f.label :city, class: "inline-block" %><span class="field-required">*</span>
                 <%= f.text_field :city, required: true, 
                                         data: { action: "blur->employer-form#validateInputField" },
-                                        class: "form-input w-full" %>
+                                        class: "form-input w-full", id: "locality" %>
                 <p class="error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
             <div class="flex-1 mr-4">
                 <%= f.label :state, class: "inline-block" %><span class="field-required">*</span>
                 <%= f.text_field :state, required: true, 
                                          data: { action: "blur->employer-form#validateInputField" },
-                                         class: "form-input w-full" %>
+                                         class: "form-input w-full", id: "administrative_area_level_1" %>
                 <p class="error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
             <div class="flex-1">
                 <%= f.label :zip_code, "Zip Code", class: "inline-block" %><span class="field-required">*</span>
                 <%= f.text_field :zip_code, required: true, 
                                             data: { action: "blur->employer-form#validateInputField" },
-                                            class: "form-input w-full" %>
+                                            class: "form-input w-full", id: "postal_code" %>
                 <p class="error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
         </div>
