@@ -43,7 +43,7 @@
                                 <span class="text-gray-500"> Event Date </span>
                                 <span class="text-brand-red-500">*</span>
                             <% end %>
-                            <%= f.date_field :event_date, class: "form-input block w-full", placeholder: "MM/DD/YYYY", required: true, disabled: true, id: "modal_supply_inventory_event_date" %>
+                            <%= f.date_field :event_date, class: "form-input block w-full", placeholder: "MM/DD/YYYY", required: true, disabled: true, id: "modal_supply_inventory_event_event_date" %>
                         </div>
 
                         <div>
@@ -51,7 +51,7 @@
                                 <span class="text-gray-500"> Event Type </span>
                                 <span class="text-brand-red-500">*</span>
                             <% end %>
-                            <%= f.select :event_type, ["s1", "s2"], {prompt: "Select"}, {class: "block form-select w-full", required: true, disabled: true, id: "modal_supply_inventory_event_type"} %>
+                            <%= f.select :event_type, ["s1", "s2"], {prompt: "Select"}, {class: "block form-select w-full", required: true, disabled: true, id: "modal_supply_inventory_event_event_type"} %>
                         </div>
 
                         <div>
@@ -59,7 +59,7 @@
                                 <span class="text-gray-500"> Quantity Used </span>
                                 <span class="text-brand-red-500">*</span>
                             <% end %>
-                            <%= f.number_field :quantity_used, class: "form-input block w-full", required: true, disabled: true, id: "modal_supply_inventory_quantity_used" %>
+                            <%= f.number_field :quantity_used, class: "form-input block w-full", required: true, disabled: true, id: "modal_supply_inventory_event_quantity_used" %>
                         </div>
 
                         <div>
@@ -67,7 +67,7 @@
                                 <span class="text-gray-500"> Quantity Lost </span>
                                 <span class="text-brand-red-500">*</span>
                             <% end %>
-                            <%= f.number_field :quantity_lost, class: "form-input block w-full", required: true, disabled: true, id: "modal_supply_inventory_quantity_lost" %>
+                            <%= f.number_field :quantity_lost, class: "form-input block w-full", required: true, disabled: true, id: "modal_supply_inventory_event_quantity_lost" %>
                         </div>
 
                         <div>
@@ -75,7 +75,7 @@
                                 <span class="text-gray-500"> Quantity Loaned </span>
                                 <span class="text-brand-red-500">*</span>
                             <% end %>
-                            <%= f.number_field :quantity_loaned, class: "form-input block w-full", required: true, disabled: true, id: "modal_supply_inventory_quantity_loaned" %>
+                            <%= f.number_field :quantity_loaned, class: "form-input block w-full", required: true, disabled: true, id: "modal_supply_inventory_event_quantity_loaned" %>
                         </div>
 
                         <div>
@@ -83,7 +83,7 @@
                                 <span class="text-gray-500"> Quantity Destroyed/Returned </span>
                                 <span class="text-brand-red-500">*</span>
                             <% end %>
-                            <%= f.number_field :quantity_destroyed, class: "form-input block w-full", required: true, disabled: true, id: "modal_supply_inventory_quantity_destroyed" %>
+                            <%= f.number_field :quantity_destroyed, class: "form-input block w-full", required: true, disabled: true, id: "modal_supply_inventory_event_quantity_destroyed" %>
                         </div>
 
                         <div>
@@ -91,7 +91,7 @@
                                 <span class="text-gray-500"> County </span>
                                 <span class="text-brand-red-500">*</span>
                             <% end %>
-                            <%= f.select :county, COUNTIES, {prompt: "Select"}, {class: "block form-select w-full", required: true, disabled: true, id: "modal_supply_inventory_county"} %>
+                            <%= f.select :county, COUNTIES, {prompt: "Select"}, {class: "block form-select w-full", required: true, disabled: true, id: "modal_supply_inventory_event_county"} %>
                         </div>
 
                         <div>
@@ -99,7 +99,7 @@
                                 <span class="text-gray-500"> Venue </span>
                                 <span class="text-brand-red-500">*</span>
                             <% end %>
-                            <%= f.select :venue_name, Clinic.pluck(:venue_name), {prompt: "Select"}, {class: "block form-select w-full", required: true, disabled: true, id: "modal_supply_inventory_venue_name"} %>
+                            <%= f.select :venue_name, Clinic.pluck(:venue_name), {prompt: "Select"}, {class: "block form-select w-full", required: true, disabled: true, id: "modal_supply_inventory_event_venue_name"} %>
                         </div>
                     </div>
                 </div>

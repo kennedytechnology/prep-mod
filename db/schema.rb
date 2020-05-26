@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_22_114012) do
+ActiveRecord::Schema.define(version: 2020_05_26_090243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -366,16 +366,23 @@ ActiveRecord::Schema.define(version: 2020_05_22_114012) do
     t.string "packaging"
     t.string "source"
     t.string "product_name"
-    t.string "event_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "supply_inventory_events", force: :cascade do |t|
+    t.date "event_date"
+    t.string "event_type"
     t.integer "quantity_used"
     t.integer "quantity_lost"
     t.integer "quantity_loaned"
-    t.date "event_date"
+    t.integer "quantity_destroyed"
     t.string "county"
     t.string "venue_name"
-    t.integer "quantity_destroyed"
+    t.bigint "supply_inventory_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["supply_inventory_id"], name: "index_supply_inventory_events_on_supply_inventory_id"
   end
 
   create_table "test_kits", force: :cascade do |t|
@@ -435,5 +442,6 @@ ActiveRecord::Schema.define(version: 2020_05_22_114012) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "supply_inventory_events", "supply_inventories"
   add_foreign_key "test_kits", "clinics"
 end
