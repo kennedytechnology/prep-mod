@@ -26,6 +26,8 @@ RSpec.describe SupplyInventoriesController, type: :controller do
             packaging: INVENTORY_PACKAGINGS.sample,
             source: INVENTORY_SOURCES.sample,
             product_name: Faker::Company.name,
+            county: COUNTIES.sample,
+            venue_name: Clinic.pluck(:venue_name).sample
           } }
         }.to change(SupplyInventory, :count).by(1)
       end
@@ -44,12 +46,15 @@ RSpec.describe SupplyInventoriesController, type: :controller do
         quantity: Faker::Number.between(from: 10, to: 20),
         packaging: INVENTORY_PACKAGINGS.sample,
         source: INVENTORY_SOURCES.sample,
-        product_name: Faker::Company.name
+        product_name: Faker::Company.name,
+        county: COUNTIES.sample,
+        venue_name: Clinic.pluck(:venue_name).sample
       }
     }
     should permit(:received_at, :item_type, :item_name, 
         :manufacturer, :lot_number, :expiration_date,
-        :quantity, :packaging, :source, :product_name).
+        :quantity, :packaging, :source, :product_name,
+        :county, :venue_name).
       for(:create, params: params).
       on(:supply_inventory)
   end
