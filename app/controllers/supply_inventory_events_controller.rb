@@ -28,7 +28,7 @@ class SupplyInventoryEventsController < InheritedResources::Base
 
   def destroy
     SupplyInventoryEvent.destroy(params[:id])
-    redirect_back fallback_location: supply_inventories_path, alert: "The inventory was deleted."
+    redirect_back fallback_location: supply_inventories_path, alert: "The event was deleted."
   end
 
   private

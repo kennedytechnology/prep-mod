@@ -19,7 +19,7 @@ class SupplyInventoriesController < InheritedResources::Base
 
   def show
     @supply_inventory = SupplyInventory.find(params[:id])
-    supply_inventory_event = SupplyInventoryEvent.new
+    @supply_inventory_event = SupplyInventoryEvent.new
   end
 
   private

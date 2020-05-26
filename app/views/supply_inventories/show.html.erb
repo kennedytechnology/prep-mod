@@ -1,6 +1,6 @@
 <h2 class="main-title"> New Entry for <%= @supply_inventory.product_name %> (Received <%= @supply_inventory.received_at.strftime("%d-%m-%Y") %>) </h2>
 
-<%= form_with model: @supply_inventory_event, url: supply_inventory_events_path, scope: :supply_inventory_event, local: true, class: "py-5", data: {controller: "inventory-new-entry"} do |f| %>
+<%= form_with model: @supply_inventory_event, local: true, class: "py-5", data: {controller: "inventory-new-entry"} do |f| %>
     <%= f.hidden_field :supply_inventory_id, value: params[:id] %>
     <div class="sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 lg:gap-6">
         <div>
