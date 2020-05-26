@@ -8,7 +8,7 @@ ActiveAdmin.register Patient do
   :group_number_for_insurance, :has_fever_over, :has_cough, :has_difficult_breathing, :had_contact_with_confirmed_case, 
   :has_other_reason, :other_reason_explanation, :is_age_60_or_more, :had_traveled_to_affected_place, :has_risk_factor, 
   :consent_signature, :relation_to_patient_for_consent, :consent_date, :school, :access_code, :venue_id, :venue,
-  :signatory_first_name, :signatory_last_name
+  :signatory_first_name, :signatory_last_name, :insurance_card_front, :insurance_card_back
   
   # filter :venues, as: :select, collection: proc { Venue.all.collect{|v| v.name}.uniq}
   filter :clinics, as: :select, collection: Clinic.all
@@ -85,6 +85,12 @@ ActiveAdmin.register Patient do
       row :card_number_for_insurance
       row :insurance_company_name
       row :group_number_for_insurance
+      row :insurance_card_front do |patient|
+        image_tag patient.insurance_card_front.variant(resize_to_limit: [500, 500]) if patient.insurance_card_front.attached?
+      end
+      row :insurance_card_back do |patient|
+        image_tag patient.insurance_card_back.variant(resize_to_limit: [500, 500]) if patient.insurance_card_back.attached?
+      end
     end
     
     attributes_table title: "Intake Questionnaire Responses" do
@@ -148,6 +154,12 @@ ActiveAdmin.register Patient do
           input :card_number_for_insurance
           input :insurance_company_name
           input :group_number_for_insurance
+          input :insurance_card_front, as: :file, direct_upload: true, hint: f.object.insurance_card_front.attached? \
+                ? image_tag(f.object.insurance_card_front.variant(resize_to_limit: [500, 500]))
+                : content_tag(:span, "Insurance Card FRONT hasn't been uploaded yet.")
+          input :insurance_card_back, as: :file, direct_upload: true, hint: f.object.insurance_card_back.attached? \
+                ? image_tag(f.object.insurance_card_back.variant(resize_to_limit: [500, 500]))
+                : content_tag(:span, "Insurance Card FRONT hasn't been uploaded yet.")
         end
       end
       
