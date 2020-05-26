@@ -3,22 +3,40 @@
 <%= form_for( @patient , url: "/client/registration" ,remote: false, data: {controller: "inventory-new-entry"}) do |f| %>
     <div class="min-w-full mb-12">
         <ul class="multistep-form-progressbar">
-            <% %w(personal_information health_insurance health_questions consent_for_services appointment).each do |step| %>
+            <% %w(personal_information health_insurance health_questions consent_for_services add_family appointment).each do |step| %>
                 <li class="<%= 'active' if step == @step %>"> <%= step.humanize.titleize %> </li>
             <% end %>
         </ul>
     </div>
 
-    <!-- <a href="/clear_session">&mdash;</a> <br/><br/> -->
+
+    <% if false # @patient.errors.any? %>
+        <div id="error_explanation" class="p-4 border-2 bg-red-100 border-red-500 mb-4"> 
+            <h2 class="text-lg font-bold"><%= pluralize(@patient.errors.count, "item") %> remaining to complete your application:</h2>
+        
+            <ul class="list-disc ml-8">
+            <% @patient.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+            <% end %>
+            </ul>
+        </div>
+    <% end %>
 
     <%= render '/public/patients/edit/' + @step, f: f %>
 
     <div class="flex justify-center items-center mt-6">
-    <% if @step != "consent_for_services" %>
-        <%= submit_tag "Save and Continue →", class: "button-action" %>
-    <% else %>
-        <button type="button" class="button-action" data-action="click->inventory-new-entry#toggleModal"> Review & Submit </button>
-    <% end %>
+        <% if last_step %>
+            <button type="submit" name="next_step" value="<%= last_step %>" class="button-action"> Back </button>    
+        <% end %>
+        <% if @step == "consent_for_services" %> 
+            <button type="submit" name="next_step" value="add_family" class="button-action"> Save and Add a Household Member </button>    
+            <button type="submit" name="next_step" value="appointment" class="button-action"> Review & Submit </button>    
+        <% elsif @step == "add_family" %> 
+            <button type="submit" name="next_step" value="add_another_family" class="button-action"> Save and Add Another Household Member </button>    
+            <button type="submit" name="next_step" value="appointment" class="button-action"> Save And Continue </button>    
+        <% else %>
+            <%= submit_tag "Save and Continue →", class: "button-action" %>
+        <% end %>
 
     <%# if @step == "consent_for_services" %>
         <%# submit_tag "Save and Add Family Member →", class: "button-action" %>

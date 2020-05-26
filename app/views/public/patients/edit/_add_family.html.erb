@@ -1,0 +1,58 @@
+<span class="text-xl font-bold">
+  You must be the parent or guardian of a minor or dependent child, or have
+  power of attorney for an adult.
+</span>
+
+<%= f.fields_for :patient_family_members do |fm| %>
+  <div class="family-member-form mt-6 border-b">
+    <div class="flex">
+      <div class="inline-field-wrapper">
+          <%= fm.label :first_name, "Patient's First Name" %>
+          <%= fm.text_field :first_name, class: "w-full form-input" %>
+      </div>
+      <div class="inline-field-wrapper inline-field-wrapper-narrow">
+          <%= fm.label :middle_initial %>
+          <%= fm.text_field :middle_initial, class: "w-full form-input" %>
+      </div>
+      <div class="inline-field-wrapper">
+          <%= fm.label :last_name, "Patient's Last Name" %>
+          <%= fm.text_field :last_name, class: "w-full form-input" %>
+      </div>
+      <div class="inline-field-wrapper">
+          <%= fm.label :mothers_maiden_name, "Mother's Maiden Name" %>
+          <%= fm.text_field :mothers_maiden_name, class: "w-full form-input" %>
+      </div>
+      <div class="inline-field-wrapper">
+        <%= fm.label :race %>
+        <%= fm.select :race, options_for_select(US_RACES, @patient.race), {prompt: "--"}, {class: "form-select w-full", data: {action: "change->inventory-new-entry#updateModalField"}} %>
+      </div>
+      <div class="inline-field-wrapper">
+        <%= fm.label :date_of_birth, "Date Of Birth" %>
+        <%= fm.date_field :date_of_birth, placeholder: "MM/DD/YYYY", onChange:"calculateAge();", id: "patient_date_of_birth", class: "w-full form-input", data: {action: "keyup->inventory-new-entry#updateModalField change->inventory-new-entry#updateModalField"} %>
+      </div>
+    </div>
+
+    <div class="flex" data-controller="same-as-parent">
+      <div class="inline-field-wrapper pt-7">
+      <label>
+        <input type="checkbox" data-action="change->same-as-parent#applyValues">
+        Same Insurance as Parent</label>
+      </div>
+
+      <div class="inline-field-wrapper">
+        <%= fm.label :insurance_company_name, "Insurance Company Name" %>
+        <%= fm.text_field :insurance_company_name, class: "w-full form-input", data: {parent_field: @patient.insurance_company_name, target: "same-as-parent.field" } %>
+      </div>
+
+      <div class="inline-field-wrapper">
+        <%= fm.label :member_id_for_insurance, "Policy Number" %>
+        <%= fm.text_field :member_id_for_insurance, class: "w-full form-input", data: {parent_field: @patient.member_id_for_insurance, target: "same-as-parent.field" } %>
+      </div>
+
+      <div class="inline-field-wrapper">
+        <%= fm.label :group_number_for_insurance, "Group Number" %>
+        <%= fm.text_field :group_number_for_insurance, class: "w-full form-input", data: {parent_field: @patient.group_number_for_insurance, target: "same-as-parent.field" } %>
+      </div>
+    </div>
+  </div>
+<% end %>

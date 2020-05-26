@@ -1,7 +1,7 @@
 <tr data-target="clinic-activity-patients.searchableRow" data-search-content="<%= clinic.venue_name.downcase %>">
-    <td class="w-1/4"> <%= clinic.clinic_date.to_datetime.strftime("%m-%d-%Y") %> </td>
-    <td class=""> <%= clinic.county %> </td>
-    <td class="w-1/4"> <%= clinic.venue_name %> </td>
+    <td class="w-2/12"> <%= clinic.clinic_date.to_datetime.strftime("%m-%d-%Y") %> </td>
+    <td class="w-2/12"> <%= clinic.county %> </td>
+    <td class="w-4/12"> <%= clinic.venue_name %> </td>
     <td class="flex flex-wrap text-right">
         <%= link_to clinic_patients_path(clinic_id: clinic.id), class: "clinic-action hover:text-brand-blue-600 mr-4 mb-2" do %>
             <span class="text-brand-blue-600"> &raquo; </span>

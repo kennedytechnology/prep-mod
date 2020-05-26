@@ -23,7 +23,7 @@ class ClinicsController < ClinicManagementController
 
   def create
     @clinic = Clinic.new(clinic_params)
-
+    
     if @clinic.save
       ClinicMailer.public_clinic_created(current_user, @clinic).deliver
       redirect_to  clinics_path(clinic_date: 'upcoming')
@@ -33,10 +33,12 @@ class ClinicsController < ClinicManagementController
   end
 
   def edit
+    @page_title = "Edit Clinic"
   end
 
   def activity
     @clinic = Clinic.find(params['clinic_id'])
+    @page_title = "Clinic Activity Form"
   end
 
   def update
@@ -73,7 +75,7 @@ class ClinicsController < ClinicManagementController
 
   def clinic_params
     params.require(:clinic).permit(
-      :clinic_status, :start_time, :end_time, :location,
+      :clinic_status, :start_time, :end_time, :location, :public_or_private,
       :address, :lead_vaccinator_name, :provider_enrollment_id,
       :clinic_date, :students_registered,
       :incidents_comments, :county, :venue_name, :zip, 

@@ -1,16 +1,28 @@
 <h1 class="main-title"> Create Clinic </h1>
 
+<% if @clinic.errors.any? %>
+  <div id="error_explanation" class="p-4 border-2 bg-red-100 border-red-500 mb-4"> 
+    <h2 class="text-lg font-bold"><%= pluralize(@clinic.errors.count, "error") %> prohibited this article from being saved:</h2>
+ 
+    <ul class="list-disc ml-8">
+    <% @clinic.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_with model: @clinic, local: true, data: {controller: "inventory-new-entry"} do |f| %>
     <div class="field-fullwidth">
         <p class="title">Is clinic public or private? <span class="field-required">*</span> </p>
         <div class="w-3/12 radio-buttons-container">
             <div>
-                <%= f.radio_button :clinic_status, "public", id: "clinic_status_public", class: "form-radio", data: {action: "click->inventory-new-entry#updateModalRadioField", radio: "radio-clinic-status"} %>
-                <%= f.label :clinic_status, "Public", for: "clinic_status_public" %>
+                <%= f.radio_button :public_or_private, "public", class: "form-radio", data: {action: "click->inventory-new-entry#updateModalRadioField", radio: "radio-clinic-status"} %>
+                <%= f.label :public_or_private, "Public", value: "public" %>
             </div>
             <div>
-                <%= f.radio_button :clinic_status, "private", id: "clinic_status_private", class: "form-radio", data: {action: "click->inventory-new-entry#updateModalRadioField", radio: "radio-clinic-status"} %>
-                <%= f.label :clinic_status, "Private", for: "clinic_status_private" %>
+                <%= f.radio_button :public_or_private, "private", class: "form-radio", data: {action: "click->inventory-new-entry#updateModalRadioField", radio: "radio-clinic-status"} %>
+                <%= f.label :public_or_private, "Private", value: "private" %>
             </div>
         </div>
     </div>
@@ -145,29 +157,30 @@
         </div>
     </div>
 
-    <div class="field-side-by-side">
-        <div>
-            <h1 class="title">Contact Information</h1>
+    <div class="pb-3 border-b border-gray-200 mb-6 flex flex-wrap">
+        <h1 class="form-section-title">Contact Information</h1>
+        <div class="w-5/12 mr-6">
             <%= f.label :contact_person do %>
                 <span> Contact Person </span>
                 <span class="field-required">*</span>
             <% end %>
             <%= f.text_field :contact_person, placeholder: "Contact Person", class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField change->inventory-new-entry#updateModalField"} %>
-
+        </div>
+        <div class="w-5/12 mr-6">
+            <%= f.label :contact_phone_number do %>
+                <span> Contact Phone Number </span>
+                <span class="field-required">*</span>
+            <% end %>
+            <%= f.text_field :contact_phone_number, placeholder: "Contact Number", class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField change->inventory-new-entry#updateModalField"} %>
+        </div>
+        <div class="w-5/12 mr-6">
             <%= f.label :backup_contact_person do %>
                 <span> Back-Up Contact Person </span>
                 <span class="field-required">*</span>
             <% end %>
             <%= f.text_field :backup_contact_person, placeholder: "Back-Up Contact Person", class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField change->inventory-new-entry#updateModalField"} %>
         </div>
-        <div>
-            <h1 class="title"> &nbsp; </h1>
-            <%= f.label :contact_phone_number do %>
-                <span> Contact Phone Number </span>
-                <span class="field-required">*</span>
-            <% end %>
-            <%= f.text_field :contact_phone_number, placeholder: "Contact Number", class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField change->inventory-new-entry#updateModalField"} %>
-
+        <div class="w-5/12 mr-6">
             <%= f.label :backup_contact_phone_number do %>
                 <span> Back-Up Contact Phone Number </span>
                 <span class="field-required">*</span>
@@ -248,7 +261,7 @@
     </div>
 
     <div class="flex justify-end mt-8">
-        <button type="button" class="button-primary" data-action="click->inventory-new-entry#toggleModal"> Review & Submit </button>
+        <button type="submit" class="button-primary"> Review & Submit </button>
         <%= link_to "Cancel", clinics_path, class: "button-primary" %>
     </div>
 

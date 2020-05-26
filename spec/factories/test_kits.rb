@@ -8,5 +8,6 @@ FactoryBot.define do
     test_type { "MyString" }
     test_processing { "MyString" }
     test_expiration_date { "2020-04-27" }
+    test_kits_quantity { 50 }
   end
 end

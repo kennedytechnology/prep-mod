@@ -62,6 +62,7 @@ export default class extends Controller {
     }
 
     updateModalRadioField(e) {
+        return;
         let currentFieldId = e.currentTarget.id,
             radioButtons = document.getElementsByClassName(e.currentTarget.dataset.radio);
 
