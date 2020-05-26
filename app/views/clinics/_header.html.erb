@@ -1,6 +1,5 @@
-<div id="clinic-header" class="border-2 bg-gray-100 border-gray-200 p-4 -mt-6 mb-4">
+<div id="clinic-header" class="bg-gray-100 p-4 -mt-2 mb-4">
   <h1 class="text-3xl font-bold"><%= @clinic.name %></h1>
-  
     <% 
         clinic_menu = {
           "Registration List": clinic_patients_path(clinic_id: @clinic.id),
