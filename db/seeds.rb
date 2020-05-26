@@ -238,7 +238,9 @@ end
       quantity: Faker::Number.between(from: 10, to: 20),
       packaging: INVENTORY_PACKAGINGS.sample,
       source: INVENTORY_SOURCES.sample,
-      product_name: Faker::Company.name
+      product_name: Faker::Company.name,
+      county: COUNTIES.sample,
+      venue_name: Clinic.pluck(:venue_name).sample,
     )
 
     Faker::Number.between(from: 1, to: 5).times do 
@@ -248,8 +250,6 @@ end
         quantity_loaned: Faker::Number.between(from: 1, to: 3),
         quantity_destroyed: Faker::Number.between(from: 1, to: 3),
         event_type: INVENTORY_EVENT_TYPES.sample,
-        county: COUNTIES.sample,
-        venue_name: Clinic.pluck(:venue_name).sample,
         event_date: Faker::Date.between(from: Date.today, to: 30.days.from_now)
       )
     end

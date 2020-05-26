@@ -384,6 +384,8 @@ ActiveRecord::Schema.define(version: 2020_05_26_090243) do
     t.string "product_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "county"
+    t.string "venue_name"
   end
 
   create_table "supply_inventory_events", force: :cascade do |t|
@@ -393,8 +395,6 @@ ActiveRecord::Schema.define(version: 2020_05_26_090243) do
     t.integer "quantity_lost"
     t.integer "quantity_loaned"
     t.integer "quantity_destroyed"
-    t.string "county"
-    t.string "venue_name"
     t.bigint "supply_inventory_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

@@ -7,8 +7,6 @@ class CreateSupplyInventoryEvents < ActiveRecord::Migration[6.0]
       t.integer :quantity_lost
       t.integer :quantity_loaned
       t.integer :quantity_destroyed
-      t.string :county
-      t.string :venue_name
       t.references :supply_inventory, null: false, foreign_key: true
 
       t.timestamps

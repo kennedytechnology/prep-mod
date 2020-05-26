@@ -12,9 +12,5 @@ class RemoveUnusedFieldsFromSupplyInventories < ActiveRecord::Migration[6.0]
     remove_column :supply_inventories, :event_date, :date
 
     remove_column :supply_inventories, :quantity_destroyed, :integer
-
-    remove_column :supply_inventories, :county, :string
-
-    remove_column :supply_inventories, :venue_name, :string
   end
 end

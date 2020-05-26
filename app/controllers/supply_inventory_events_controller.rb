@@ -37,7 +37,7 @@ class SupplyInventoryEventsController < InheritedResources::Base
       params.require(:supply_inventory_event).permit(
         :quantity_used, :quantity_loaned, :quantity_destroyed,
         :quantity_lost, :event_date, :event_type, 
-        :supply_inventory_id, :county, :venue_name)
+        :supply_inventory_id)
     end
 
 end
