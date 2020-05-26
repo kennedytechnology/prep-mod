@@ -179,7 +179,8 @@
                 <span> Address </span>
                 <span class="field-required">*</span>
                 <% end %>
-                <%= f.text_field :practice_address, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+                <%= f.text_field :practice_address, id: "autocomplete", onFocus: "geolocate()", class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+                          <%= render partial: "public/clinics/google_maps_script" %>
             </div>
 
             <div>
@@ -187,7 +188,7 @@
                 <span> City </span>
                 <span class="field-required">*</span>
                 <% end %>
-                <%= f.text_field :practice_city, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+                <%= f.text_field :practice_city, class: "form-input block w-full", id: "locality", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
             </div>
 
             <div>
@@ -195,7 +196,7 @@
                 <span> State </span>
                 <span class="field-required">*</span>
                 <% end %>
-                <%= f.select :practice_state, options_for_select(US_STATES), {prompt: "Select"}, class: "form-select w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+                <%= f.select :practice_state, options_for_select(US_STATES), {prompt: "Select"}, class: "form-select w-full", id: "administrative_area_level_1",  required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
             </div>
 
             <div>
@@ -203,7 +204,7 @@
                 <span> Zip code </span>
                 <span class="field-required">*</span>
                 <% end %>
-                <%= f.text_field :practice_zip_code, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+                <%= f.text_field :practice_zip_code, class: "form-input block w-full", id: "postal_code", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
             </div>
 
             <div>
