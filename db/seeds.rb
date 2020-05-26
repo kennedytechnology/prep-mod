@@ -227,7 +227,7 @@ end
 
 # Clinic.all.each do |clinic|
   SUPPLY_INVENTORY_PER_CLINIC.times do
-    SupplyInventory.create!(
+    sp = SupplyInventory.create!(
       # clinic: clinic,
       received_at: Faker::Date.between(from: 30.days.ago, to:Date.today),
       item_type: INVENTORY_ITEM_TYPES.sample,
@@ -236,18 +236,23 @@ end
       lot_number: Faker::Code.asin,
       expiration_date: Faker::Date.between(from: Date.today, to: 30.days.from_now),
       quantity: Faker::Number.between(from: 10, to: 20),
-      quantity_used: Faker::Number.between(from: 1, to: 5),
-      quantity_lost: Faker::Number.between(from: 1, to: 3),
-      quantity_loaned: Faker::Number.between(from: 1, to: 3),
-      quantity_destroyed: Faker::Number.between(from: 1, to: 3),
       packaging: INVENTORY_PACKAGINGS.sample,
       source: INVENTORY_SOURCES.sample,
       product_name: Faker::Company.name,
-      event_type: INVENTORY_EVENT_TYPES.sample,
       county: COUNTIES.sample,
       venue_name: Clinic.pluck(:venue_name).sample,
-      event_date: Faker::Date.between(from: Date.today, to: 30.days.from_now)
     )
+
+    Faker::Number.between(from: 1, to: 5).times do 
+      sp.supply_inventory_events.create!(
+        quantity_used: Faker::Number.between(from: 1, to: 5),
+        quantity_lost: Faker::Number.between(from: 1, to: 3),
+        quantity_loaned: Faker::Number.between(from: 1, to: 3),
+        quantity_destroyed: Faker::Number.between(from: 1, to: 3),
+        event_type: INVENTORY_EVENT_TYPES.sample,
+        event_date: Faker::Date.between(from: Date.today, to: 30.days.from_now)
+      )
+    end
   end
 # end
 

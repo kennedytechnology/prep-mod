@@ -32,7 +32,8 @@ Rails.application.routes.draw do
   end
   resources :customized_reports
   resources :clinic_events
-  resources :supply_inventories 
+  resources :supply_inventories
+  resources :supply_inventory_events
   resources :test_kits
   resources :provider_enrollments
   resources :messages, only: [:new, :create]
