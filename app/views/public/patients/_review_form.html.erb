@@ -181,6 +181,18 @@
                         <%= f.select :relation_to_patient_for_consent, options_for_select(RELATIONSHIP_TYPES, @patient.relation_to_patient_for_consent),{}, {class: "w-full form-select", disabled: true, id: "modal_patient_relation_to_patient_for_consent"} %>
                     </div>
                 </div>
+
+                <div class="field-side-by-side">
+                    <div>
+                        <%= f.label :insurance_card_front, "FRONT of your insurance card", class: "block" %>
+                        <%= image_tag f.object.insurance_card_front.variant(resize_to_limit: [300, 300]), class: "mb-3" if f.object.insurance_card_front.attached? %>
+                    </div>
+
+                    <div>
+                        <%= f.label :insurance_card_back, "BACK of your insurance card", class: "block" %>
+                        <%= image_tag f.object.insurance_card_back.variant(resize_to_limit: [300, 300]), class: "mb-3" if f.object.insurance_card_back.attached? %>
+                    </div>
+                </div>
             </div>
 
             <!-- Health Questions -->

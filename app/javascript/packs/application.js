@@ -8,6 +8,7 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require("jquery")
+require("@rails/activestorage")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -48,5 +49,8 @@ $(document).on('turbolinks:load', function() {
     return event.preventDefault();
   });
 });
+
+require("packs/direct_upload")
+
 import "controllers"
 require("typeface-roboto")

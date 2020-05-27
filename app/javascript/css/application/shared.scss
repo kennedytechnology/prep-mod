@@ -83,3 +83,23 @@
         @apply block;
     }
 }
+
+// Show progress for direct upload
+.direct-upload {
+    // display: inline-block;
+    @apply relative border border-brand-blue-300 rounded-sm text-sm mb-4 px-4;
+    min-height: 50px;
+}
+
+.direct-upload--pending { opacity: 0.6; }
+
+.direct-upload__progress {
+    @apply absolute top-0 left-0 bottom-0 bg-brand-blue-600 flex justify-center items-center;
+    opacity: 0.6;
+    transition: width 120ms ease-out, opacity 60ms 60ms ease-in;
+    transform: translate3d(0, 0, 0);
+}
+
+.direct-upload--complete .direct-upload__progress { opacity: 0.4; }
+.direct-upload--error { @apply border-red-600; }
+input[type=file][data-direct-upload-url][disabled] { @apply hidden; }

@@ -48,4 +48,19 @@
     </div>
 </div>
 
+<div class="field-side-by-side">
+    <div>
+        <%= f.label :insurance_card_front, "Upload the FRONT of your insurance card", class: "block" %>
+        <%= image_tag f.object.insurance_card_front.variant(resize_to_limit: [500, 500]), class: "mb-3" if f.object.insurance_card_front.attached? %>
+        <%= f.file_field :insurance_card_front, class: "form-input w-full text-gray-600", direct_upload: true %>
+        <p class="mt-1 text-xs text-gray-500"> or drag and drop </p>
+    </div>
+
+    <div>
+        <%= f.label :insurance_card_back, "Upload the BACK of your insurance card", class: "block" %>
+        <%= image_tag f.object.insurance_card_back.variant(resize_to_limit: [500, 500]), class: "mb-3" if f.object.insurance_card_back.attached? %>
+        <%= f.file_field :insurance_card_back, class: "form-input w-full text-gray-600", direct_upload: true %>
+        <p class="mt-1 text-xs text-gray-500"> or drag and drop </p>
+    </div>
+</div>
 <%= hidden_field_tag :next_step, "health_questions" %>
