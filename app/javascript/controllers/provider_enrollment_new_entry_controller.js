@@ -14,11 +14,11 @@ export default class extends Controller {
     if (e.currentTarget.checked) {
       $(currentTextarea).val($(currentCheckbox).val());
       $(currentTextarea).text($(currentCheckbox).val());
-      $(currentTextarea).addClass("hidden");
+      $(currentTextarea).addClass("invisible");
     } else {
       $(currentTextarea).val("");
       $(currentTextarea).text("");
-      $(currentTextarea).removeClass("hidden");
+      $(currentTextarea).removeClass("invisible");
     }
   }
 }
