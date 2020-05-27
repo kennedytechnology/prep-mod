@@ -50,8 +50,10 @@ export default class extends Controller {
 
       // Display error message if value of the input is empty
       if (event.target.value == "") {
+        event.target.classList.add("invalid");
         errorMessage.classList.remove("hidden");
       } else {
+        event.target.classList.remove("invalid");
         errorMessage.classList.add("hidden");
       }
     }

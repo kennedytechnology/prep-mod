@@ -1,6 +1,6 @@
 <h2 class="main-title"> New Entry for <%= @supply_inventory.product_name %> (Received <%= @supply_inventory.received_at.strftime("%d-%m-%Y") %>) </h2>
 
-<%= form_with model: @supply_inventory_event, local: true, class: "py-5", data: {controller: "inventory-new-entry"} do |f| %>
+<%= form_with model: @supply_inventory_event, local: true, class: "py-5", data: {controller: "inventory-new-entry", target: "inventory-new-entry.form"} do |f| %>
     <%= f.hidden_field :supply_inventory_id, value: params[:id] %>
     <div class="sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 lg:gap-6">
         <div>
@@ -8,7 +8,11 @@
                 <span class="text-gray-500"> Event Date </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.date_field :event_date, class: "form-input block w-full", placeholder: "MM/DD/YYYY", required: true, data: {action: "change->inventory-new-entry#updateModalField keyup->inventory-new-entry#updateModalField"} %>
+            <%= f.date_field :event_date, class: "form-input block w-full", placeholder: "MM/DD/YYYY", required: true, 
+                data: {action: "change->inventory-new-entry#updateModalField 
+                                keyup->inventory-new-entry#updateModalField
+                                blur->inventory-new-entry#validateInputField"} %>
+            <p class="error-message hidden"> This field is required! </p>
         </div>
 
         <div>
@@ -16,7 +20,10 @@
                 <span class="text-gray-500"> Event Type </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.select :event_type, INVENTORY_EVENT_TYPES, {prompt: "Select"}, {class: "block form-select w-full", required: true, data: {action: "change->inventory-new-entry#updateModalField"}} %>
+            <%= f.select :event_type, INVENTORY_EVENT_TYPES, {prompt: "Select"}, {class: "block form-select w-full", required: true,
+                data: {action: "change->inventory-new-entry#updateModalField
+                                blur->inventory-new-entry#validateInputField"}} %>
+            <p class="error-message hidden"> This field is required! </p>
         </div>
 
         <div>
@@ -24,7 +31,11 @@
                 <span class="text-gray-500"> Quantity Used </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.number_field :quantity_used, class: "form-input block w-full", required: true, data: {action: "change->inventory-new-entry#updateModalField keyup->inventory-new-entry#updateModalField"} %>
+            <%= f.number_field :quantity_used, class: "form-input block w-full", required: true, 
+                data: {action: "change->inventory-new-entry#updateModalField 
+                                keyup->inventory-new-entry#updateModalField
+                                blur->inventory-new-entry#validateInputField"} %>
+            <p class="error-message hidden"> This field is required! </p>
         </div>
 
         <div>
@@ -32,7 +43,11 @@
                 <span class="text-gray-500"> Quantity Lost </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.number_field :quantity_lost, class: "form-input block w-full", required: true, data: {action: "change->inventory-new-entry#updateModalField keyup->inventory-new-entry#updateModalField"} %>
+            <%= f.number_field :quantity_lost, class: "form-input block w-full", required: true, 
+                data: {action: "change->inventory-new-entry#updateModalField 
+                                keyup->inventory-new-entry#updateModalField
+                                blur->inventory-new-entry#validateInputField"} %>
+            <p class="error-message hidden"> This field is required! </p>
         </div>
 
         <div>
@@ -40,7 +55,11 @@
                 <span class="text-gray-500"> Quantity Loaned </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.number_field :quantity_loaned, class: "form-input block w-full", required: true, data: {action: "change->inventory-new-entry#updateModalField keyup->inventory-new-entry#updateModalField"} %>
+            <%= f.number_field :quantity_loaned, class: "form-input block w-full", required: true, 
+                data: {action: "change->inventory-new-entry#updateModalField 
+                                keyup->inventory-new-entry#updateModalField
+                                blur->inventory-new-entry#validateInputField"} %>
+            <p class="error-message hidden"> This field is required! </p>
         </div>
 
         <div>
@@ -48,12 +67,16 @@
                 <span class="text-gray-500"> Quantity Destroyed/Returned </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.number_field :quantity_destroyed, class: "form-input block w-full", required: true, data: {action: "change->inventory-new-entry#updateModalField keyup->inventory-new-entry#updateModalField"} %>
+            <%= f.number_field :quantity_destroyed, class: "form-input block w-full", required: true, 
+                data: {action: "change->inventory-new-entry#updateModalField 
+                                keyup->inventory-new-entry#updateModalField
+                                blur->inventory-new-entry#validateInputField"} %>
+            <p class="error-message hidden"> This field is required! </p>
         </div>
     </div>
 
     <div class="flex justify-end items-end mt-2 mb-8">
-        <p class="button-primary" data-action="click->inventory-new-entry#toggleUpdateModal"> Review & Confirm </p>
+        <p class="button-primary" data-action="click->inventory-new-entry#formValidity"> Review & Confirm </p>
     </div>
 
     <%= render partial: "supply_inventories/update_entry_review", locals: {f: f} %>
