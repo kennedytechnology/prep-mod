@@ -3,11 +3,59 @@ import {
 } from "stimulus"
 
 export default class extends Controller {
-    static targets = ["modal", "clinicStaffFields", "testKitsTable"]
+    static targets = ["modal", "clinicStaffFields", "testKitsTable", "form"]
 
     connect() {
 
     }
+
+    formValidity(e) {
+      let isValid = this.validateForm(this.formTarget);
+
+      // If the form is invalid, prevent default on the event
+      if (!isValid) {
+        event.preventDefault();
+      } else {
+        this.toggleModal();
+      }
+    }
+
+    validateForm() {
+      let isValid = true;
+
+       // Find required fields
+      let requiredFieldSelectors = ":required";
+      let requiredFields = this.formTarget.querySelectorAll(
+        requiredFieldSelectors
+      );
+
+      requiredFields.forEach((field) => {
+        field.classList.remove("invalid");
+
+        // For each required field, check to see if the value is empty
+        if (!field.disabled && !field.value.trim()) {
+          field.classList.add("invalid");
+          field.parentElement.querySelector(".error-message").classList.remove("hidden");
+
+          isValid = false;
+        }
+      });
+
+      return isValid;
+    }
+
+    validateInputField(event) {
+      // Find the error message element
+      let errorMessage = event.target.parentNode.getElementsByClassName("error-message")[0];
+
+      // Display error message if value of the input is empty
+      if (event.target.value == "") {
+        errorMessage.classList.remove("hidden");
+      } else {
+        errorMessage.classList.add("hidden");
+      }
+    }
+
 
     toggleModal(event) {
         let modal = document.getElementById("InventoryNewEntryModal");
