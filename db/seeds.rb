@@ -158,6 +158,7 @@ CLINIC_COUNT.times.each do |i|
     appointment_frequency_minutes: [10, 15, 30, 60].sample,
     appointment_slots: (2..10).to_a.sample,
     appointments_available: 'required',
+    venue_type: VENUE_TYPES.sample,
     county: COUNTIES.sample
   )
 end

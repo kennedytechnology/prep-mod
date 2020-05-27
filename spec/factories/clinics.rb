@@ -23,5 +23,6 @@ FactoryBot.define do
     appointment_slots { (2..10).to_a.sample }
     appointments_available { 'required' }
     county { COUNTIES.sample }
+    venue_type { VENUE_TYPES.sample }
   end
 end
