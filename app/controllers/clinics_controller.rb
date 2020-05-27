@@ -82,7 +82,7 @@ class ClinicsController < ClinicManagementController
       :city, :state, :appointment_frequency_minutes,
       :appointment_slots, :contact_person, :contact_phone_number,
       :backup_contact_person, :backup_contact_phone_number,
-      :start_hour_minute, :start_meridiem,
+      :start_hour_minute, :start_meridiem, :venue_type,
       :end_hour_minute, :end_meridiem, :start_hour, :start_minute, :end_hour, :end_minute,
       :appointments_available, users: [], :service_ids => [],
       :age_group_ids => [], :primary_group_ids => [],
