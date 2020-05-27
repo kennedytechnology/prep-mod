@@ -116,13 +116,18 @@ select {
 }
 
 .inline-field-wrapper{
-    @apply w-2/12 mr-2
+    @apply w-2/12 mr-2;
  }
 
  .inline-field-wrapper-narrow{
-    @apply w-1/12
+    @apply w-1/12;
  }
 
  .inline-field-wrapper-normal{
-    @apply w-2/12
+    @apply w-2/12;
  }
+
+// Error message
+.error-message {
+    @apply -mt-3 text-red-600 text-xs;
+}
