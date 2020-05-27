@@ -45,6 +45,16 @@
         </div>
     </div>
 
+    <div class="field-fullwidth">
+        <div class="w-full md:w-1/2">
+            <%= f.label :venue_type, class: "block" do %>
+                <span> Venue Type </span>
+                <span class="field-required">*</span>
+            <% end %>
+            <%= f.select :venue_type, VENUE_TYPES, {prompt: "Select"}, {class: "form-select w-full", data: {action: "change->inventory-new-entry#updateModalField"}} %>
+        </div>
+    </div>
+
     <div class="field-side-by-side">
         <div>
             <h1 class="title">Date, Time, Location</h1>
