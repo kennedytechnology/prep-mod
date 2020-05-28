@@ -1,34 +1,55 @@
 <h1 class="main-title">Enter a patient event</h1>
-<div class="container overflow-hidden">
-  <%= form_for(@clinic_event, remote: false, class: "bg-white p-8 md:-12 lg:p-16 rounded-lg shadow") do |f| %>
-      <h2 class="text-xl font-bold m-4">Patient: <%= @clinic_event.patient.full_name %> (<%= @clinic_event.patient.date_of_birth.strftime("%B %e, %Y") %>)
+    <%= form_for(@clinic_event, remote: false) do |f| %>
+        <div class="field-side-by-side">
+            <h2 class="title">Patient: <%= @clinic_event.patient.full_name %> (<%= @clinic_event.patient.date_of_birth.strftime("%B %e, %Y") %>)
+            <div class="my-4">
+                <p class="label block">Logged In User</p>
+                <input class="form-input w-full" value="<%= current_user.name %>" disabled="true" />
+            </div>
 
-      <div class="mt-4">
-        <div class="label">Logged In User</div>
-        <input class="w-11/12 form-input block" value="<%= current_user.name %>" disabled="true" />
-      </div>
+            <div>
+                <%= f.label :event_date, "Event Date", class: "block" %>
+                <%= f.date_field :event_date, class: "form-input w-full", placeholder: "MM/DD/YYYY" %>
+            </div>
 
-      <div class="mt-4">
-        <%= f.label :clinic_id, "Clinic" %>
-        <%= f.select :clinic_id, options_for_select(Clinic.all.collect{|c| [c.name, c.id]}, @clinic_event.clinic_id),{}, class: "w-11/12 form-select block" %>
-      </div>
+            <div>
+                <%= f.label :location, class: "block" %>
+                <%= f.text_field :location, class: "form-input w-full" %>
+            </div>
 
-      <div class="mt-4">
-        <%= f.label :category %>
-        <%= f.select :category, options_for_select(CLINIC_EVENTS.collect{|h| h[:name]}, @clinic_event.category),{}, class: "w-11/12 form-select block" %>
-      </div>
+            <div class="mb-4">
+                <p class="label"> Service Provided Options </p>
+                <div class="w-full checkboxes-container">
+                    <%= collection_check_boxes(:patient, :service_ids, ClinicService.all, :id, :name) do |b| %>
+                    <div>
+                        <span> <%= b.check_box(class: "form-checkbox") %> </span>
+                        <span class="label"> <%= b.label %> </span>
+                    </div>
+                    <% end %>
+                </div>
+            </div>
 
-      <div class="mt-4">
-        <%= f.label :outcome %>
-        <%= f.select :outcome, options_for_select(CLINIC_EVENTS.collect{|h| h[:outcomes]}.flatten.uniq, @clinic_event.outcome),{}, class: "w-11/12 form-select block" %>
-      </div>
-      <%= f.hidden_field :patient_id %>
-      <div class="mt-4">
-        <%= f.label :notes %>
-        <%= f.text_area :notes, class: "w-11/12 form-textarea block mb-4" %>
-      </div>
-      <div class="button-container">
-        <%= submit_tag "Save and Continue →", class: "button-primary" %>
-      </div>
-  <% end %>
+            <div>
+                <%= f.label :category, class: "block" %>
+                <%= f.select :category, options_for_select(CLINIC_EVENTS.collect{|h| h[:name]}, @clinic_event.category),{},{class: "w-full form-select"} %>
+            </div>
+
+            <div>
+                <%= f.label :outcome, class: "block" %>
+                <%= f.select :outcome, options_for_select(CLINIC_EVENTS.collect{|h| h[:outcomes]}.flatten.uniq, @clinic_event.outcome),{}, {class: "w-full form-select"} %>
+            </div>
+
+            <%= f.hidden_field :patient_id %>
+
+            <div>
+                <%= f.label :notes, class: "block" %>
+                <%= f.text_area :notes, class: "w-full form-textarea" %>
+            </div>
+
+            <div class="button-container flex justify-end my-4">
+                <%= submit_tag "Save and Continue →", class: "button-primary" %>
+            </div>
+        </div>
+        <div></div>
+    <% end %>
 </div>
