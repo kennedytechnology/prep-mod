@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'kit/new', to: 'public/kit#new'
   post 'kit/create', to: 'public/kit#create'
   get 'pages/landing_page'
+  get 'pages/boom'
   
   devise_for :users,
   controllers: {

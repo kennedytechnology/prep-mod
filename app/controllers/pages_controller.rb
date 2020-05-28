@@ -3,4 +3,8 @@ class PagesController < ApplicationController
 
   def landing_page
   end
+
+  def boom
+    raise "boom"
+  end
 end
