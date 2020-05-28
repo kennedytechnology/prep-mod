@@ -14,24 +14,28 @@
       <% end %>
     </div>
 
-    <div>
+    <div class="w-1/4">
       <%= link_to "All Students Report", "#", class: "block text-blue-600 text-sm underline mb-6" %>
       <%= link_to "View/Download Upload File Format", "#", class: "block text-blue-600 text-sm underline mb-6" %>
     </div>
     
-    <form>
-      <div class="sm:grid sm:grid-cols-2 lg:grid-cols-6 sm:gap-4 lg:gap-4 items-center mb-10">
-        <div>
+    <form data-controller="upload-records">
+      <div class="flex flex-row w-full items-center justify-start">
+        <div class="inline w-1/6 mr-2">
           <label class="text-gray-500 text-xl">Select County</label>
           <%= select_tag :county, options_for_select(COUNTIES, selected: 'Please Select'), {class: "block form-select w-full"} %>
         </div>
-        <div>
+        <div class="inline w-1/6 mr-2">
           <label class="text-gray-500 text-xl">Location</label>
           <%= select_tag :county, options_for_select(Clinic.find(params[:id]).clinic_personnel.select(:name), selected: 'Please Select'), {class: "block form-select w-full"} %>
         </div>
+        <%= file_field :file, "select-file", class: "mt-3 mr-2", data: {action: "change->upload-records#showRemoveButton", target: "upload-records.selectFileInput"} %>
 
-        <%= link_to "Select File", "#", class: "button-primary lg:min-w-full lg:max-w-full mt-3" %>
-        <%= link_to "Upload", "#", class: "button-primary lg:min-w-full lg:max-w-full mt-3" %>
+      <div class="flex w-1/6 mt-3 mr-2 hidden" data-target="upload-records.removeButton">
+        <%= link_to "Remove", "", class: "button-primary lg:min-w-full lg:max-w-full", data: { action: "click->upload-record#removeUploadedFile"} %>
+      </div>
+      <div class="flex w-1/6 mt-3 mr-2 hidden" data-target="upload-records.submitButton">
+        <%= link_to "Submit", "", class: "button-primary lg:min-w-full lg:max-w-full" %>
       </div>
     </form>
   </div>
