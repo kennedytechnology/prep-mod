@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_27_100825) do
+ActiveRecord::Schema.define(version: 2020_05_26_095135) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -437,6 +437,7 @@ ActiveRecord::Schema.define(version: 2020_05_27_100825) do
     t.integer "tests_administered"
     t.integer "unusable_tests"
     t.integer "tests_returned"
+    t.boolean "is_default"
     t.index ["clinic_id"], name: "index_test_kits_on_clinic_id"
   end
 

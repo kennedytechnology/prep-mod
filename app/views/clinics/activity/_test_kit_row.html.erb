@@ -12,11 +12,13 @@
         <% end %>
     </td>
     <td class="flex w-full">
-        <%= link_to '#', class: 'button-option-yes mb-6' do %>
-            <span class="text-xs"> Yes </span>
+        <%= f.radio_button :is_default, "Is Default" %>
+        <% if f.object.is_default? %>
+            <span class="button-option-yes p-2 mb-4 text-xs"> Yes </span>
+        <% else %>        
+            <span class="button-option-no p-2 text-xs"> Set </span>
         <% end %>
-        <%= link_to '#', class: 'button-option-no mb-6' do %>
-            <span class="text-xs"> No </span>
-        <% end %>
+        
+        
     </td>        
 </tr>

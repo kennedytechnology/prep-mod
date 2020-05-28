@@ -270,6 +270,8 @@ Clinic.all.each do |clinic|
       test_kits_quantity: Faker::Number.between(from: 2, to: 50) * 25
     )
   end
+  clinic.reload
+  clinic.test_kits.sample.update_attribute(:is_default, true)
 end
 
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
