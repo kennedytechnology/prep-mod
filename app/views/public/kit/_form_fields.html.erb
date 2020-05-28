@@ -72,9 +72,8 @@
         </div>
     </div>
     <div>
-        <%# TODO: There's not field in DB called race %>
-        <%= f.label :state, class: "block" %>
-        <%= f.select :state, options_for_select(US_RACES), {prompt: "Select"}, {class: "w-full form-select"} %>
+        <%= f.label :race, class: "block" %>
+        <%= f.select :race, options_for_select(US_RACES), {prompt: "Select"}, {class: "w-full form-select"} %>
     </div>
 </div>
 

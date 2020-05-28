@@ -1,7 +1,19 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "searchableRow", "employer", "locations", "companyCheckbox", "companyInputField" ]
+  static targets = [ "searchableRow", "employer", "locations", "companyCheckbox", "companyInputField", "locationsCheckboxes" ]
+
+  connect() {
+    $(document).click(function (e) {
+      if ( e.target.id != "predict_company_name" && !$("#locationsCheckboxes").find(e.target).length ) {
+        $("#locationsCheckboxes").removeClass("active");
+      }
+    });
+  }
+
+  showCheckboxes() {
+    this.locationsCheckboxesTarget.classList.toggle("active");
+  }
 
   search(event) {
     let searchTerm = event.target.value.toLowerCase()
