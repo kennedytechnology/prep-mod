@@ -8,10 +8,10 @@
         <input class="w-11/12 form-input block" value="<%= current_user.name %>" disabled="true" />
       </div>
 
-      <div class="mt-4">
-        <%= f.label :clinic_id, "Clinic" %>
-        <%= f.select :clinic_id, options_for_select(Clinic.all.collect{|c| [c.name, c.id]}, @clinic_event.clinic_id),{}, class: "w-11/12 form-select block" %>
-      </div>
+    <div class="mt-4">
+        <%= f.label :event_date, "Event Date", class: "block" %>
+        <%= f.date_field :event_date, class: "form-input", placeholder: "MM/DD/YYYY" %>
+    </div>
 
       <div class="mt-4">
         <%= f.label :category %>

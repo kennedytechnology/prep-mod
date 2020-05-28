@@ -14,7 +14,7 @@ class ClinicEventsController < ClinicManagementController
     @clinic_event = ClinicEvent.new(clinic_event_params)
     @clinic_event.user = current_user
     if @clinic_event.save
-      redirect_back fallback_location: clinic_events_path(clinic_id: @clinic_event.clinic)
+      redirect_to patients_path
     else
       render "new", alert: "Your entry was not saved."
     end
@@ -35,7 +35,8 @@ class ClinicEventsController < ClinicManagementController
     params.require(:clinic_event).permit(
       :clinic_id, :patient_id, :category, :outcome,
       :notes, :contact_type, :screening_outcome,
-      :test_name, :test_type, :test_processing, :clinic_staff_id
+      :test_name, :test_type, :test_processing, :clinic_staff_id,
+      :event_date
     )
   end
 end

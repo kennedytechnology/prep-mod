@@ -219,6 +219,7 @@ clinics = Clinic.all.to_a
     category: clinic_event[:name],
     clinic_staff_id: clinic.clinic_personnel.sample,
     outcome: clinic_event[:outcomes].sample,
+    event_date: Faker::Date.between(from: Date.today, to: 1.year.from_now),
     created_at: Faker::Date.between(from: 30.days.ago, to:Date.today),
     user: users.sample,
     notes: Faker::Lorem.paragraph(sentence_count: 0, random_sentences_to_add: 2, supplemental: true)
