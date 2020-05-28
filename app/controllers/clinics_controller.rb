@@ -22,10 +22,16 @@ class ClinicsController < ClinicManagementController
   end
 
   def create
-    params[:clinic][:clinic_date] = Chronic.parse(params[:clinic][:clinic_date]) #TODO: Fix this
     @clinic = Clinic.new(clinic_params)
     
-    if @clinic.save
+    if @clinic.valid?
+      params["clinic_dates"].reject(&:blank?).each do |clinic_date|
+        @clinic_dup = @clinic.dup
+        @clinic_dup.clinic_date = Chronic.parse(clinic_date)
+        @clinic_dup.save
+        ClinicMailer.public_clinic_created(current_user, @clinic_dup).deliver
+      end
+
       ClinicMailer.public_clinic_created(current_user, @clinic).deliver
       redirect_to  clinics_path(clinic_date: 'upcoming')
     else

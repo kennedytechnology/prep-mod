@@ -66,11 +66,16 @@
     <div class="field-side-by-side">
         <div>
             <h1 class="title">Date, Time, Location</h1>
-            <%= f.label :clinic_date, class: "block" do %>
-                <span> Clinic Date </span>
-                <span class="field-required">*</span>
-            <% end %>
-            <%= f.date_field :clinic_date, class: "form-input", placeholder: "MM/DD/YYYY", data: {action: "change->inventory-new-entry#updateModalField keyup->inventory-new-entry#updateModalField"} %>
+            <div data-controller='add-another'>
+                 <div data-target="add-another.fieldContainer">
+                        <%= render partial: 'clinic_date', collection: (params[:clinic_dates].reject(&:blank?) || [""]) %>
+                    <div data-target="add-another.blankFields" class="hidden">
+                        <%= render partial: 'clinic_date', locals: {clinic_date: ""} %>                    
+                    </div>
+                </div>
+                <a href="#" data-action="add-another#addAnother" class="button-action mb-2">Add Another Date</a>
+            </div>
+
 
             <p class="label">Start Time <span class="field-required">*</span></p>
             <% 
