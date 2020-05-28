@@ -56,14 +56,14 @@
 </div>
 
 <div class="field-side-by-side">
-    <div class="flex">
+    <div class="flex" data-controller="age-calculator">
         <div class="mr-3">
             <%= f.label :date_of_birth, "Date of Birth", class: "block" %>
-            <%= f.date_field :date_of_birth, class: "form-input w-full" %>
+            <%= f.date_field :date_of_birth, class: "form-input w-full", data: {action: "age-calculator#calculateAge", target: "age-calculator.dobField"} %>
         </div>
         <div class="mr-3">
             <%= f.label :age, class: "block" %>
-            <%= f.text_field :age, disabled: true, class: "form-input w-full" %>
+            <%= f.text_field :age, disabled: true, class: "form-input w-full", data: {target: "age-calculator.ageField"} %>
         </div>
 
         <div class="flex-1">
