@@ -5,14 +5,14 @@
         <p class="title">Is clinic public or private? <span class="field-required">*</span> </p>
         <div class="w-3/12 radio-buttons-container">
             <div>
-                <%= f.radio_button :clinic_status, "public", id: "clinic_status_public", class: "form-radio" %>
-                <%= f.label :clinic_status, value: "public", for: "clinic_status_public" do %>
+                <%= f.radio_button :public_or_private, "public", id: "clinic_status_public", class: "form-radio" %>
+                <%= f.label :public_or_private, value: "public", for: "clinic_status_public" do %>
                 <span>Public</span>
                 <% end %>
             </div>
             <div>
-                <%= f.radio_button :clinic_status, "private", id: "clinic_status_private", class: "form-radio" %>
-                <%= f.label :clinic_status, value: "private", for: "clinic_status_private" do %>
+                <%= f.radio_button :public_or_private, "private", id: "clinic_status_private", class: "form-radio" %>
+                <%= f.label :public_or_private, value: "private", for: "clinic_status_private" do %>
                 <span>Private</span>
                 <% end %>
             </div>
@@ -99,11 +99,12 @@
             <% end %>
             <%= f.select :county, COUNTIES, {prompt: "Select"}, {class: "form-select w-full"} %>
 
-            <%= f.label :location, class: "block" %>
-            <%= f.text_field :location, placeholder: "Location", class: "form-input w-full" %>
+            <%= f.label :venue_name, class: "block" %>
+            <%= f.text_field :venue_name, placeholder: "Location", class: "form-input w-full" %>
 
             <%= f.label :address, class: "block" %>
             <%= f.text_field :address, id: "autocomplete", onFocus: "geolocate()", class: "form-input w-full", placeholder: "Address" %>
+            
             <%= render partial: "public/clinics/google_maps_script" %>
 
             <div class="grid grid-cols-3 gap-4">
