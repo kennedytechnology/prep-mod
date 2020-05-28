@@ -68,7 +68,8 @@
             <h1 class="title">Date, Time, Location</h1>
             <div data-controller='add-another'>
                  <div data-target="add-another.fieldContainer">
-                        <%= render partial: 'clinic_date', collection: (params[:clinic_dates].reject(&:blank?) || [""]) %>
+                    <% params[:clinic_dates].reject!(&:blank?) if params[:clinic_dates] %>
+                    <%= render partial: 'clinic_date', collection: (params[:clinic_dates] || [""]) %>
                     <div data-target="add-another.blankFields" class="hidden">
                         <%= render partial: 'clinic_date', locals: {clinic_date: ""} %>                    
                     </div>
