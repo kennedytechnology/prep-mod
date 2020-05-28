@@ -5,10 +5,7 @@ export default class extends Controller {
 
   connect() {
     $(document).click(function (e) {
-      if (
-        e.target.id != "predict_company_name" &&
-        !$("#locationsCheckboxes").find(e.target).length
-      ) {
+      if ( e.target.id != "overSelect" && !$("#locationsCheckboxes").find(e.target).length ) {
         $("#locationsCheckboxes").removeClass("active");
       }
     });
