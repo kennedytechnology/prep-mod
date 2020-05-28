@@ -152,6 +152,7 @@
             <th> Qty<br>Lost </th>
             <th> Qty<br>Loaned </th>
             <th> Current<br>Qty </th>
+            <th> Select<br>Item</th>
         </tr>
     </thead>
     <tbody class="bg-white">
@@ -170,7 +171,13 @@
                 <td> <%= supply_inventory.quantity_lost_sum %> </td>
                 <td> <%= supply_inventory.quantity_loaned_sum %> </td>
                 <td> <%= supply_inventory.remaining_quantity_sum %> </td>
+                <td> 
+                   <div class="flex items-center h-5">
+                       <input id="providers" type="checkbox" class="form-checkbox">
+                   </div>
+                </td>
             </tr>
         <% end %>
     </tbody>
 </table>
+   
