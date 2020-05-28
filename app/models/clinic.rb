@@ -1,5 +1,5 @@
 class Clinic < ApplicationRecord
-  belongs_to :provider_enrollment
+  belongs_to :provider_enrollment, optional: true
   has_many :clinic_vaccines
   has_many :clinic_personnel, class_name: "ClinicStaff"
   has_many :clinic_events
@@ -20,12 +20,12 @@ class Clinic < ApplicationRecord
   after_validation :geocode, if: :should_geocode?
   after_validation :parse_time
 
-  attr_accessor :start_hour, :start_minute, :start_meridiem,
-    :end_hour, :end_minute, :end_meridiem
+  attr_accessor :start_hour_minute, :start_meridiem,
+    :end_hour_minute, :end_meridiem
 
   validates :public_or_private, presence: true
   validates :clinic_date, presence: true
-  validates :location, presence: true
+  validates :venue_name, presence: true
   validates :county, presence: true
   validates :address, presence: true
   validates :lead_vaccinator_name, presence: true
@@ -33,14 +33,19 @@ class Clinic < ApplicationRecord
   
 
   def parse_time
-    if start_hour && start_minute && start_meridiem
-      self.start_time = Time.find_zone("UTC").parse("#{start_hour}:#{end_minute}#{start_meridiem}")
+    if start_hour_minute && start_meridiem
+      self.start_time = Time.find_zone("UTC").parse("#{start_hour_minute}#{start_meridiem}")
     end
-    if end_hour && end_minute && end_meridiem 
-      self.end_time = Time.find_zone("UTC").parse("#{end_hour}:#{end_minute}#{end_meridiem}")
+    if end_hour_minute && end_meridiem 
+      self.end_time = Time.find_zone("UTC").parse("#{end_hour_minute}#{end_meridiem}")
     end
   end
+
   def clinic_staff; clinic_personnel; end
+  
+  def duration
+    (end_time - start_time) / 60
+  end
 
   def should_geocode?
     address_changed? && !latitude_changed?

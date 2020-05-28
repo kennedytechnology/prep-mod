@@ -22,6 +22,7 @@ class ClinicsController < ClinicManagementController
   end
 
   def create
+    params[:clinic][:clinic_date] = Chronic.parse(params[:clinic][:clinic_date]) #TODO: Fix this
     @clinic = Clinic.new(clinic_params)
     
     if @clinic.save

@@ -104,8 +104,8 @@
             <% end %>
             <%= f.select :county, COUNTIES, {prompt: "Select"}, {class: "form-select w-full", data: {action: "change->inventory-new-entry#updateModalField"}} %>
 
-            <%= f.label :location, class: "block" %>
-            <%= f.text_field :location, placeholder: "Location", class: "form-input w-full", data: {action: "change->inventory-new-entry#updateModalField keyup->inventory-new-entry#updateModalField"} %>
+            <%= f.label :venue_name, class: "block" %>
+            <%= f.text_field :venue_name, placeholder: "Venue Name", class: "form-input w-full", data: {action: "change->inventory-new-entry#updateModalField keyup->inventory-new-entry#updateModalField"} %>
 
             <%= f.label :address, class: "block" %>
             <%= f.text_field :address, id: "autocomplete", onFocus: "geolocate()", class: "form-input w-full", placeholder: "Address", data: {action: "change->inventory-new-entry#updateModalField keyup->inventory-new-entry#updateModalField"} %>
@@ -157,7 +157,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
                 <%= f.label :appointment_frequency_minutes, "Appointment Frequency: Every", class: "block" %>
-                <%= f.select :appointment_frequency_minutes, [5, 15], {prompt: "Minutes"}, {class: "form-select w-full", data: {action: "change->inventory-new-entry#updateModalField"}} %>
+                <%= f.select :appointment_frequency_minutes, CLINIC_APPOINTMENT_INTERVALS, {prompt: "Minutes"}, {class: "form-select w-full", data: {action: "change->inventory-new-entry#updateModalField"}} %>
             </div>
 
             <div>

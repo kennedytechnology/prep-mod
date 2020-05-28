@@ -1,4 +1,4 @@
-<tr data-target="clinic-activity-patients.searchableRow" data-search-content="<%= clinic.venue_name.downcase %>">
+<tr data-target="clinic-activity-patients.searchableRow" data-search-content="<%= clinic.venue_name.try(:downcase) %>">
     <td class="w-2/12"> <%= clinic.clinic_date.to_datetime.strftime("%m-%d-%Y") %> </td>
     <td class="w-2/12"> <%= clinic.county %> </td>
     <td class="w-4/12"> <%= clinic.venue_name %> </td>
