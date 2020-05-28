@@ -59,7 +59,7 @@
     <div class="flex">
         <div class="mr-3">
             <%= f.label :date_of_birth, "Date of Birth", class: "block" %>
-            <%= f.date_field :date_of_birth, class: "form-input w-full" %>
+            <%= f.date_field :date_of_birth, class: "form-input w-full", onChange:"calculateAge();" %>
         </div>
         <div class="mr-3">
             <%= f.label :age, class: "block" %>
@@ -138,3 +138,16 @@
         <%= f.select :relation_to_patient_for_insurance, ["Self","Parent/Guardian","Other"], {}, class: "form-select w-full" %>
     </div>
 </div>
+
+<script>
+    function calculateAge() {
+        var patientAge = document.getElementById("patient_age");
+        var patientDOB = document.getElementById("patient_date_of_birth");
+
+        dob = new Date(patientDOB.value);
+        var today = new Date();
+        var age = Math.floor((today-dob) / (365.25 * 24 * 60 * 60 * 1000));
+
+        patientAge.value = age.toString();
+    }
+</script>
