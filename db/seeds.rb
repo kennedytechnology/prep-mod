@@ -221,6 +221,7 @@ clinics = Clinic.all.to_a
     outcome: clinic_event[:outcomes].sample,
     event_date: Faker::Date.between(from: Date.today, to: 1.year.from_now),
     created_at: Faker::Date.between(from: 30.days.ago, to:Date.today),
+    location: Faker::Address.street_address,
     user: users.sample,
     notes: Faker::Lorem.paragraph(sentence_count: 0, random_sentences_to_add: 2, supplemental: true)
   )

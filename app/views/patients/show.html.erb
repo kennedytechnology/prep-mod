@@ -25,7 +25,7 @@
     <tbody>
         <% @patient_clinic_events.each do |clinic_event| %>
         <tr>
-            <td><%= clinic_event.clinic.name %></td>
+            <td><%= clinic_event.clinic ? clinic_event.clinic.name : "No Clinic Selected" %></td>
             <td><%= clinic_event.created_at.strftime("%m/%d/%Y") %></td>
             <td><%= clinic_event.category %></td>
             <td><%= clinic_event.outcome %></td>

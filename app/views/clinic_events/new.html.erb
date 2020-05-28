@@ -1,41 +1,43 @@
 <h1 class="main-title">Enter a patient event</h1>
-<div class="container overflow-hidden">
     <%= form_for(@clinic_event, remote: false) do |f| %>
         <div class="field-side-by-side">
             <h2 class="title">Patient: <%= @clinic_event.patient.full_name %> (<%= @clinic_event.patient.date_of_birth.strftime("%B %e, %Y") %>)
-            <div>
-                <div class="my-4">
-                    <p class="label block">Logged In User</p>
-                    <input class="form-input w-full" value="<%= current_user.name %>" disabled="true" />
-                </div>
-
-                <div>
-                    <%= f.label :event_date, "Event Date", class: "block" %>
-                    <%= f.date_field :event_date, class: "form-input w-full", placeholder: "MM/DD/YYYY" %>
-                </div>
-
-                <div>
-                    <%= f.label :category, class: "block" %>
-                    <%= f.select :category, options_for_select(CLINIC_EVENTS.collect{|h| h[:name]}, @clinic_event.category),{},{class: "w-full form-select"} %>
-                </div>
-
-                <div>
-                    <%= f.label :outcome, class: "block" %>
-                    <%= f.select :outcome, options_for_select(CLINIC_EVENTS.collect{|h| h[:outcomes]}.flatten.uniq, @clinic_event.outcome),{}, {class: "w-full form-select"} %>
-                </div>
-
-                <%= f.hidden_field :patient_id %>
-
-                <div>
-                    <%= f.label :notes, class: "block" %>
-                    <%= f.text_area :notes, class: "w-full form-textarea" %>
-                </div>
-
-                <div class="button-container flex justify-end my-4">
-                    <%= submit_tag "Save and Continue →", class: "button-primary" %>
-                </div>
+            <div class="my-4">
+                <p class="label block">Logged In User</p>
+                <input class="form-input w-full" value="<%= current_user.name %>" disabled="true" />
             </div>
-            <div></div>
+
+            <div>
+                <%= f.label :event_date, "Event Date", class: "block" %>
+                <%= f.date_field :event_date, class: "form-input w-full", placeholder: "MM/DD/YYYY" %>
+            </div>
+
+            <div>
+                <%= f.label :location, class: "block" %>
+                <%= f.text_field :location, class: "form-input w-full" %>
+            </div>
+
+            <div>
+                <%= f.label :category, class: "block" %>
+                <%= f.select :category, options_for_select(CLINIC_EVENTS.collect{|h| h[:name]}, @clinic_event.category),{},{class: "w-full form-select"} %>
+            </div>
+
+            <div>
+                <%= f.label :outcome, class: "block" %>
+                <%= f.select :outcome, options_for_select(CLINIC_EVENTS.collect{|h| h[:outcomes]}.flatten.uniq, @clinic_event.outcome),{}, {class: "w-full form-select"} %>
+            </div>
+
+            <%= f.hidden_field :patient_id %>
+
+            <div>
+                <%= f.label :notes, class: "block" %>
+                <%= f.text_area :notes, class: "w-full form-textarea" %>
+            </div>
+
+            <div class="button-container flex justify-end my-4">
+                <%= submit_tag "Save and Continue →", class: "button-primary" %>
+            </div>
         </div>
+        <div></div>
     <% end %>
 </div>
