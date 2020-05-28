@@ -275,32 +275,46 @@
 
     <div class="field-fullwidth">
         <div class="grid grid-cols-2 gap-4">
-            <div>
-                <h2 class="title"> What make and model refrigerator do you have? <span class="field-required">*</span> </h2>
-                <div class="mb-2">
-                    <%= f.check_box :refrigerator, {class: "form-checkbox"}, "no" %>
-                    <%= f.label :refrigerator, "I do not have a refrigerator" %> 
-                </div>  
-                <%= f.text_field :refrigerator, class: "form-input w-full" %>
+        <div>
+            <h2 class="title"> What make and model refrigerator do you have? <span class="field-required">*</span></h2>
+            <div class="mb-2">
+            <input type="checkbox" class="form-checkbox" id="refrigerator"
+                    value="I do not have a refrigerator"
+                    data-textArea="refrigerator"
+                    data-action="provider-enrollment-new-entry#toggleTextArea"
+                />
+            <label for="refrigerator"> I do not have a refrigerator </label>
             </div>
 
-            <div>
-                <h2 class="title"> What make and model freezer do you have? <span class="field-required">*</span> </h2>    
-                <div class="mb-2">
-                    <%= f.check_box :freezer, {class: "form-checkbox"}, "no" %>
-                    <%= f.label :freezer, "I do not have a freezer" %>  
-                </div>
-                <%= f.text_field :freezer, class: "form-input w-full" %>
-            </div>
+            <%= f.text_area :refrigerator, class: "form-input w-full", required: true, data: {textArea: "refrigerator"} %>
+        </div>
 
-            <div>
-                <h2 class="title">  What make and model data logger/refrigerator thermometer do you have? <span class="field-required">*</span> </h2>
-                <div class="mb-2">
-                    <%= f.check_box :refrigerator_thermometer, {class: "form-checkbox"}, "no" %>
-                    <%= f.label :refrigerator_thermometer, "I do not have a thermometer" %>    
-                </div>        
-                <%= f.text_field :refrigerator_thermometer, class: "form-input w-full" %>        
+        <div>
+            <h2 class="title"> What make and model freezer do you have? <span class="field-required">*</span></h2>
+            <div class="mb-2">
+            <input type="checkbox" class="form-checkbox" id="freezer"
+                    value="I do not have a freezer"
+                    data-textArea="freezer"
+                    data-action="provider-enrollment-new-entry#toggleTextArea"
+                />
+            <label for="freezer"> I do not have a freezer </label>
             </div>
+            <%= f.text_area :freezer, class: "form-input w-full", required: true, data: {textArea: "freezer"} %>
+        </div>
+
+        <div>
+            <h2 class="title"> What make and model data logger/refrigerator thermometer do you have?
+            <span class="field-required">*</span></h2>
+            <div class="mb-2">
+            <input type="checkbox" class="form-checkbox" id="thermometer"
+                    value="I do not have a refrigerator thermometer"
+                    data-textArea="thermometer"
+                    data-action="provider-enrollment-new-entry#toggleTextArea"
+                />
+            <label for="thermometer"> I do not have a refrigerator thermometer </label>
+            </div>
+            <%= f.text_area :refrigerator_thermometer, class: "form-input w-full", required: true, data: {textArea: "thermometer"} %>
+        </div>
         </div>
     </div>
 
