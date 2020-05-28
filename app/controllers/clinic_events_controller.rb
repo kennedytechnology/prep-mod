@@ -36,7 +36,7 @@ class ClinicEventsController < ClinicManagementController
       :clinic_id, :patient_id, :category, :outcome,
       :notes, :contact_type, :screening_outcome,
       :test_name, :test_type, :test_processing, :clinic_staff_id,
-      :event_date, :location
+      :event_date, :location, clinic_service_ids: []
     )
   end
 end

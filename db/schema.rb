@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_28_090152) do
+ActiveRecord::Schema.define(version: 2020_05_28_091242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,11 @@ ActiveRecord::Schema.define(version: 2020_05_28_090152) do
     t.boolean "safety_kit_received"
     t.date "event_date"
     t.string "location"
+  end
+
+  create_table "clinic_events_services", id: false, force: :cascade do |t|
+    t.bigint "clinic_event_id", null: false
+    t.bigint "clinic_service_id", null: false
   end
 
   create_table "clinic_primary_groups", force: :cascade do |t|
