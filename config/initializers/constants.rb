@@ -1,4 +1,4 @@
-USER_ROLES = ["Nurse", "Charge Nurse", "Supervisor"]
+USER_ROLES = ["Nurse", "Charge Nurse", "Supervisor", "Regional Administrator"]
 VENUE_CATEGORIES = ["University", "Doctor's Office", "Hospital"]
 VENUE_TYPES = [
   "Local Health Department", "Provider Office", "Hospital", "Church", 
