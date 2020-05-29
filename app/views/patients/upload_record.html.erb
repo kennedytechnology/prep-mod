@@ -27,7 +27,7 @@
         </div>
         <div class="inline w-1/6 mr-2">
           <label class="text-gray-500 text-xl">Location</label>
-          <%= select_tag :county, options_for_select(Clinic.find(params[:id]).clinic_personnel.select(:name), selected: 'Please Select'), {class: "block form-select w-full"} %>
+          <%= select_tag :clinic, options_for_select(Clinic.all.map(&:venue_name), selected: 'Please Select'), {class: "block form-select w-full"} %>
         </div>
         <%= file_field :file, "select-file", class: "mt-3 mr-2", data: {action: "change->upload-records#showRemoveButton", target: "upload-records.selectFileInput"} %>
 
