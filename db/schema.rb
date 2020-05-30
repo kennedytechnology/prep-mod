@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_28_091242) do
+ActiveRecord::Schema.define(version: 2020_05_30_021838) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -194,6 +194,8 @@ ActiveRecord::Schema.define(version: 2020_05_28_091242) do
     t.integer "provider_enrollment_id"
     t.string "public_or_private"
     t.string "venue_type"
+    t.string "open_state"
+    t.integer "active_queue_patients_count"
   end
 
   create_table "clinics_users", id: false, force: :cascade do |t|
@@ -355,6 +357,9 @@ ActiveRecord::Schema.define(version: 2020_05_28_091242) do
     t.string "appointment_time"
     t.string "occupation"
     t.string "race"
+    t.string "queue_state"
+    t.string "notification_preferences"
+    t.string "check_in_code"
   end
 
   create_table "provider_enrollments", force: :cascade do |t|

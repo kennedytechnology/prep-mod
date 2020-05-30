@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get '/client/registration(/:access_code)', to: 'public/patients#edit', as: :client_registration
   patch '/client/registration/(/:access_code)', to: 'public/patients#edit'
   post '/client/registration/(/:access_code)', to: 'public/patients#create'
+  get '/check_in/:check_in_code', to: 'public/patients#check_in', as: :check_in
   
   get "/clear_session", to: 'public/patients#clear_session'
   get '/clinics/:id/patients/upload_record', to: 'patients#upload_record'
@@ -30,6 +31,15 @@ Rails.application.routes.draw do
   resources :clinics, only: [:index, :new, :create, :edit, :update] do
     get :activity
     resources :patients
+    resources :queued_patients do
+      member do
+        post :update_status
+      end
+      collection do
+        post :send_check_in_reminders
+        post :update_clinic_status
+      end
+    end
   end
   resources :customized_reports
   resources :clinic_events

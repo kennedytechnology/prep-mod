@@ -1,4 +1,5 @@
 class Patient < ApplicationRecord
+  include AASM
   has_many :insurance_types
   has_many :clinic_events
   has_many :clinics, through: :clinic_events
@@ -13,6 +14,43 @@ class Patient < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
 
+  aasm column: :queue_state do
+    state :not_checked_in, initial: true
+    state :canceled, :checked_in, :invited, :at_clinic, :done
+
+    event :cancel do
+      transitions from: [:not_checked_in, :checked_in, :invited], to: :canceled
+    end
+
+    event :check_in do
+      transitions from: :not_checked_in, to: :checked_in, if: :clinic_can_check_in?
+    end
+
+    event :invite, after: :notify_invitation do
+      transitions from: :checked_in, to: :invited, if: :clinic_is_open?
+    end
+
+    event :mark_arrived do
+      transitions from: :invited, to: :at_clinic
+    end
+
+    event :finish do
+      transitions from: :at_clinic, to: :done
+    end
+  end
+
+  def notify_invitation
+    InviteQueuedPatientJob.perform_later self
+  end
+
+  def clinic_is_open?
+    clinic.opened?
+  end
+
+  def clinic_can_check_in?
+    clinic.can_check_in?
+  end
+
   def self.generate_access_code(size = 6)
     charset = %w{2 3 4 6 7 9 A C D E F G H J K M N P Q R T W X Y Z}
     charset.sample(size).join
@@ -26,12 +64,24 @@ class Patient < ApplicationRecord
     "#{address}, #{city}, #{state} #{zip_code}"
   end
 
+  def available_event_names
+    aasm.events(permitted: true).collect(&:name).collect(&:to_s)
+  end
+  
   def event_for_clinic(clinic)
     result = clinic_events.detect{|ce| ce.clinic == clinic}
     if result.nil?
       result = clinic_events.new(clinic: clinic)
     end
     return result
+  end
+
+  def check_in_code
+    if self[:check_in_code].blank?
+      self[:check_in_code] = Patient.generate_access_code(10)
+      save
+    end
+    self[:check_in_code]
   end
 
   def sms_invite

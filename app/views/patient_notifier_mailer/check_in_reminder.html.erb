@@ -1,0 +1,25 @@
+<h1>
+  Reminder: Your COVID-19 Clinic Appointment
+  <%= @patient.clinic.clinic_date %> at <%= @patient.clinic.location %>
+</h1>
+
+<p>
+This is a reminder about your upcoming COVID-19 appointment. To avoid contact
+with others waiting, use our Virtual Queue. When you arrive, use the link below
+to check in for your appointment. When the clinic is ready to see you, you will
+be notified by SMS.
+</p>
+
+<p>
+<strong>NOTE:</strong> Check in location will be verified, so please wait until
+you are at the clinic location.
+</p>
+
+<p>
+<%= link_to "Check In", check_in_url(check_in_code: @patient.check_in_code) %>
+</p>
+
+<p>
+Thank you, <br/>
+ClinicWizard
+</p>

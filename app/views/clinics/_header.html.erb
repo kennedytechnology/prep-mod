@@ -1,8 +1,9 @@
-<div id="clinic-header" class="bg-gray-100 p-4 -mt-2 mb-4">
+<div id="clinic-header" class="bg-gray-100 p-2 -mt-2 mb-4 -mx-4 border-b-2 border-black shadow">
   <h1 class="text-3xl font-bold"><%= @clinic.name %></h1>
     <% 
         clinic_menu = {
           "Registration List": clinic_patients_path(clinic_id: @clinic.id),
+          "Virtual Queue": clinic_queued_patients_path(clinic_id: @clinic.id),
           "Edit Clinic": edit_clinic_path(id: @clinic.id),
           "Clinic Activity": clinic_activity_path(clinic_id: @clinic.id),
           "Customized Report": new_customized_report_path(clinic_id: @clinic.id)

@@ -49,6 +49,16 @@ class Public::PatientsController < ApplicationController
     session[:patient_id] = nil
   end
 
+  def check_in
+    @patient = Patient.find_by_check_in_code(params[:check_in_code])
+    if @patient.nil?
+      render :not_found
+      return
+    end
+
+    @patient.check_in! if @patient.clinic.can_check_in?
+  end
+
   private
 
   def current_step_is_valid?

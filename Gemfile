@@ -80,3 +80,4 @@ gem "combined_time_select", "~> 2.0.0"
 gem 'exception_notification'
 gem 'slack-notifier'
 gem 'chronic'
+gem 'aasm'

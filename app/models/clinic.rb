@@ -1,4 +1,6 @@
 class Clinic < ApplicationRecord
+  include AASM
+
   belongs_to :provider_enrollment, optional: true
   has_many :clinic_vaccines
   has_many :clinic_personnel, class_name: "ClinicStaff"
@@ -30,7 +32,26 @@ class Clinic < ApplicationRecord
   validates :address, presence: true
   validates :lead_vaccinator_name, presence: true
 
-  
+  aasm column: :open_state do
+    state :upcoming, initial: :true
+    state :opened_for_check_in, :opened, :closed
+
+    event :open_for_check_in do
+      transitions from: :upcoming, to: :opened_for_check_in
+    end
+
+    event :open do
+      transitions from: :opened_for_check_in, to: :opened
+    end
+
+    event :close do
+      transitions from: :opened, to: :closed
+    end
+  end
+
+  def available_event_names
+    aasm.events(permitted: true).collect(&:name).collect(&:to_s)
+  end
 
   def parse_time
     if start_hour_minute && start_meridiem
@@ -38,6 +59,13 @@ class Clinic < ApplicationRecord
     end
     if end_hour_minute && end_meridiem 
       self.end_time = Time.find_zone("UTC").parse("#{end_hour_minute}#{end_meridiem}")
+    end
+  end
+
+  def send_reminders
+    patients.each do |p|
+      RemindQueuedPatientJob.perform_later p if p.notify_via_sms?
+      PatientNotifierMailer.with(patient: p).check_in_reminder.deliver_later if p.notify_via_email?
     end
   end
 
@@ -72,6 +100,10 @@ class Clinic < ApplicationRecord
       test_kit_names << t.test_name +  " (" + t.test_type + ")"
     end
     return test_kit_names
+  end
+
+  def can_check_in?
+    opened_for_check_in? || opened?
   end
 
   def search_string
