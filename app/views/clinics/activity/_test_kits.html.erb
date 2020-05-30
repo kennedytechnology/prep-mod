@@ -20,7 +20,7 @@
             </thead>
             <tbody id="testKits">
                 <%= f.fields_for :test_kits do |test_kit_fields| %>
-                    <%= render 'clinics/activity/test_kit_row', f: test_kit_fields %>
+                    <%= render 'clinics/activity/test_kit_row', {f: test_kit_fields, clinic_form: f} %>
                 <% end %>
             </tbody>
         </table>

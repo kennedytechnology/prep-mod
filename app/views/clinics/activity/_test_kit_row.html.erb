@@ -12,13 +12,9 @@
         <% end %>
     </td>
     <td class="flex w-full">
-        <%= f.radio_button :is_default, "Is Default" %>
-        <% if f.object.is_default? %>
-            <span class="button-option-yes p-2 mb-4 text-xs"> Yes </span>
-        <% else %>        
-            <span class="button-option-no p-2 text-xs"> Set </span>
-        <% end %>
-        
-        
+        <%= radio_button_tag "clinic[default_test_kit]", f.object.id, f.object.is_default, class: "radio-deluxe hidden", id: "test-kit-option-#{f.object.id}" %>
+        <label for="test-kit-option-<%= f.object.id %>" class="pt-4">
+            <span></span>
+        </label>
     </td>        
 </tr>

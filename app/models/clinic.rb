@@ -69,6 +69,13 @@ class Clinic < ApplicationRecord
     end
   end
 
+  def default_test_kit=(value)
+    test_kit = test_kits.find(value)
+    test_kits.each{|tk| tk.is_default = false; tk.save;}
+    test_kit.is_default = true
+    test_kit.save
+  end
+
   def clinic_staff; clinic_personnel; end
   
   def duration
@@ -97,7 +104,7 @@ class Clinic < ApplicationRecord
   def test_kits_names_types
     test_kit_names = []
     test_kits.each do |t|
-      test_kit_names << t.test_name +  " (" + t.test_type + ")"
+      test_kit_names << t.test_name +  " (" + t.test_type.to_s + ")"
     end
     return test_kit_names
   end

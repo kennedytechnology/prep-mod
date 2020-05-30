@@ -1,25 +1,44 @@
-<tr class="new_test_kit_row">
-    <td> <%= f.text_field :test_name, class: "form-input w-full" %> </td>
-    <% if params[:controller] == "clinics" %>
-    <td> <%= f.text_field :test_manufacturer, class: "form-input w-full" %> </td>
-    <% end %>
-    <td> <%= f.text_field :test_lot_number, class: "form-input w-full" %> </td>
-    <% if params[:controller] == "clinics" %>
-    <td> <%= f.select :test_type, ["PCR", "Serological"], {prompt: "Select"}, {class: "block form-select w-full"} %> </td>
-    <td> <%= f.select :test_processing, ["Standard", "Rapid"], {prompt: "Select"}, {class: "block form-select w-full"} %> </td>
-    <td> <%= f.date_field :test_expiration_date, class: "form-input w-full", placeholder: "MM/DD/YYYY" %> </td>
-    <% end %>
-    <td> <%= f.number_field :test_kits_quantity, class: "form-input w-full", min: 0 %> </td>
-    <% if params[:controller] == "clinic_events" %>
-    <td> <%= f.number_field :tests_administered, class: "form-input w-full" %> </td>
-    <td> <%= f.number_field :unusable_tests, class: "form-input w-full" %> </td>
-    <td> <%= f.number_field :tests_returned, class: "form-input w-full" %> </td>
-    <% end %>
-    <td>
-        <%= f.hidden_field :_destroy %>
-        <%= link_to '#', class: 'remove_test_kit_record button-action mb-4' do %>
-            Delete
-        <% end %>
-    </td>
-</tr>
+<% if action_name == "activity" %>
+    <tr class="new_test_kit_row">
+        <td> <%= f.text_field :test_name, class: "form-input w-full" %> </td>
+        <td> <%= f.text_field :test_lot_number, class: "form-input w-full" %> </td>
+        <td> <%= f.number_field :test_kits_quantity, class: "form-input w-full", min: 0 %> </td>
+        <td> <%= f.number_field :tests_administered, class: "form-input w-full" %> </td>
+        <td> <%= f.number_field :unusable_tests, class: "form-input w-full" %> </td>
+        <td> <%= f.number_field :tests_returned, class: "form-input w-full" %> </td>
+        <td>
+            <%= f.hidden_field :_destroy %>
+            <%= link_to '#', class: 'remove_test_kit_record button-action mb-4 text-xs' do %>
+                Delete
+            <% end %>
+        </td>
+    </tr>
 
+<% else %>
+
+    <tr class="new_test_kit_row">
+        <td> <%= f.text_field :test_name, class: "form-input w-full" %> </td>
+        <% if params[:controller] == "clinics" %>
+        <td> <%= f.text_field :test_manufacturer, class: "form-input w-full" %> </td>
+        <% end %>
+        <td> <%= f.text_field :test_lot_number, class: "form-input w-full" %> </td>
+        <% if params[:controller] == "clinics" %>
+        <td> <%= f.select :test_type, ["PCR", "Serological"], {prompt: "Select"}, {class: "block form-select w-full"} %> </td>
+        <td> <%= f.select :test_processing, ["Standard", "Rapid"], {prompt: "Select"}, {class: "block form-select w-full"} %> </td>
+        <td> <%= f.date_field :test_expiration_date, class: "form-input w-full", placeholder: "MM/DD/YYYY" %> </td>
+        <% end %>
+        <td> <%= f.number_field :test_kits_quantity, class: "form-input w-full", min: 0 %> </td>
+        <% if params[:controller] == "clinic_events" %>
+        <td> <%= f.number_field :tests_administered, class: "form-input w-full" %> </td>
+        <td> <%= f.number_field :unusable_tests, class: "form-input w-full" %> </td>
+        <td> <%= f.number_field :tests_returned, class: "form-input w-full" %> </td>
+        <% end %>
+        <td>
+            <%= f.hidden_field :_destroy %>
+            <%= link_to '#', class: 'remove_test_kit_record button-action mb-4' do %>
+                Delete
+            <% end %>
+        </td>
+    </tr>
+
+<% end %>
