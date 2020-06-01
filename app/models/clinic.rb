@@ -109,6 +109,11 @@ class Clinic < ApplicationRecord
     return test_kit_names
   end
 
+  def default_test_kit_name
+    t = test_kits.select(&:is_default).first
+    t.test_name +  " (" + t.test_type.to_s + ")"
+  end
+
   def can_check_in?
     opened_for_check_in? || opened?
   end
