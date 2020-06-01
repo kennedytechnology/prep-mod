@@ -59,7 +59,7 @@
     <div class="flex" data-controller="age-calculator">
         <div class="mr-3">
             <%= f.label :date_of_birth, "Date of Birth", class: "block" %>
-            <%= f.date_field :date_of_birth, class: "form-input w-full", data: {action: "age-calculator#calculateAge", target: "age-calculator.dobField"} %>
+            <%= f.date_field :date_of_birth, disabled: true, class: "form-input w-full", data: {action: "age-calculator#calculateAge", target: "age-calculator.dobField"} %>
         </div>
         <div class="mr-3">
             <%= f.label :age, class: "block" %>
@@ -73,7 +73,7 @@
     </div>
     <div>
         <%= f.label :race, class: "block" %>
-        <%= f.select :race, options_for_select(US_RACES), {prompt: "Select"}, {class: "w-full form-select"} %>
+        <%= f.select :race, options_for_select(US_RACES), {prompt: "Select"}, {disabled: true, class: "w-full form-select"} %>
     </div>
 </div>
 
@@ -108,12 +108,24 @@
 <p class="text-lg text-gray-800 font-medium">I certify that the information provided is correct.</p>
 
 <div class="border border-gray-400 mt-10 mb-4 w-1/2 h-40">
-    <canvas></canvas>
+    <canvas style="width:100%; height: 100%;"></canvas>
 </div>
+
 <%# TODO: Move this into the proper place. %>
 <script>
-    var canvas = document.querySelector("canvas");
-    var signaturePad = new SignaturePad(canvas);
+    
+        var canvas = document.querySelector("canvas");
+        var ratio =  Math.max(window.devicePixelRatio || 1, 1);
+        canvas.width = canvas.offsetWidth * ratio;
+        canvas.height = canvas.offsetHeight * ratio;
+        canvas.getContext("2d").scale(ratio, ratio);
+        var signaturePad = new SignaturePad(canvas);
+        var hidden_field = document.getElementById("hidden_signature_data")
+        var parent_form = canvas.closest('form')
+        parent_form.onsubmit = function() {
+            hidden_field.value = signaturePad.toDataURL()
+        }
+
 </script>
 
 <div class="field-side-by-side">

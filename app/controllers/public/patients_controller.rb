@@ -62,6 +62,7 @@ class Public::PatientsController < ApplicationController
   private
 
   def parse_dates
+    return unless params[:patient]
     params[:patient][:date_of_birth] = Chronic.parse(params[:patient][:date_of_birth]) if params[:patient][:date_of_birth]
     params[:patient][:insured_date_of_birth] = Chronic.parse(params[:patient][:insured_date_of_birth]) if params[:patient][:insured_date_of_birth]
   end
