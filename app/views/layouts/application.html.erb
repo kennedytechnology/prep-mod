@@ -14,7 +14,6 @@
   </head>
 
   <body data-controller="main">
-    <%= render partial: "layouts/header" unless (action_name == "index" && controller_name == "public_portal") %>
     <!-- These are from devise. This is to be better-handled elsewise -->
     <% if notice || alert %>
     <script>
@@ -23,6 +22,8 @@
     <% end %>
 
     <div class="main-container">
+        <a href="/"><%= image_tag "prep-mod.png", class: "mt-2 mb-2", style: "max-height: 60px;" %></a>
+        <hr class="mb-4">
         <%= yield %>
     </div>
 

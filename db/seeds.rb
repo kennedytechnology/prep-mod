@@ -196,13 +196,13 @@ PATIENT_COUNT.times.each do |i|
     race: US_RACES.sample,
     access_code: Patient.generate_access_code,
     sex: %w(M F).sample,
-    phone_number: Faker::PhoneNumber.cell_phone,
+    phone_number: "+14075366339",
     appointment_time: clinic.appointment_times.sample, 
     student_id: Faker::IDNumber.unique,
     user_id: Faker::IDNumber.unique,
     email_confirmation: patientEmail,
     notify_via_sms: Faker::Boolean.boolean,
-    notify_via_email: Faker::Boolean.boolean,
+    notify_via_email: Faker::Boolean.boolean
   )
 end
 

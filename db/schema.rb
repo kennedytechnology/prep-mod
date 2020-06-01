@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_30_021838) do
+ActiveRecord::Schema.define(version: 2020_06_01_063632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -360,6 +360,8 @@ ActiveRecord::Schema.define(version: 2020_05_30_021838) do
     t.string "queue_state"
     t.string "notification_preferences"
     t.string "check_in_code"
+    t.text "signature_data"
+    t.boolean "sharing_results_authorized"
   end
 
   create_table "provider_enrollments", force: :cascade do |t|

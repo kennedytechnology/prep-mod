@@ -81,3 +81,9 @@ gem 'exception_notification'
 gem 'slack-notifier'
 gem 'chronic'
 gem 'aasm'
+gem 'phonelib'
+
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary-edge', '~> 0.12.5.1', group: [:development, :test]
+gem 'wkhtmltopdf-heroku', '2.12.5.0', group: :production
+

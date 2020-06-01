@@ -25,8 +25,15 @@ class PatientsController < ApplicationController
   end
 
   def show
-    @patient = Patient.find(params[:id])
+    @patient = Patient.find(params[:id]).decorate
     @patient_clinic_events = @patient.clinic_events.order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 50)
+    @clinic = Clinic.find(params[:clinic_id]) if params[:clinic_id]
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "patient-#{@patient.id}", layout: "clinic-print", show_as_html: params.key?('debug')
+      end
+    end
   end
 
   def edit

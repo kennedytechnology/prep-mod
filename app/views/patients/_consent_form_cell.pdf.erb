@@ -1,0 +1,6 @@
+<% colspan = 1 if local_assigns[:colspan].nil? %>
+<% width = 1 if local_assigns[:width].nil? %>
+<td class="border-2 border-gray-300 align-top pl-4 pb-2 h-16" style="width: <%= width %>%" colspan=<%=colspan%>>
+  <span class="font-bold w-full text-xs"><%= label %></span><br/>
+  <div class="pt-2 pl-4 font-mono text-base font-bold text-gray-800 tracking-widest"><%= value %></div>
+</td> 

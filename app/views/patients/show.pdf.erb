@@ -1,0 +1,81 @@
+<h1 class="w-full text-center text-xl font-bold">2020 COVID-19 Test Clinic Consent Form</h1>
+<p class="text-sm my-2">
+  DEMO FORM: PrepMod is in testing mode. This is not a real consent for medical
+  services.
+</p>
+
+<div class="bg-gray-400 text-xs py-1 pl-4 font-bold">
+Please Print Clearly in Ink
+</div>
+
+<table class="w-full mt-2">
+  <tr>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "LAST Name", value: @patient.last_name} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "FIRST Name", value: @patient.first_name} %>
+    <%= render partial: 'consent_form_cell', locals: {width: "40px;", label: "MI", value: @patient.middle_initial} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 1, label: "DOB", value: @patient.date_of_birth.try(:strftime, "%m/%d/%y")} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 1, label: "Age", value: @patient.age} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 1, label: "Sex", value: @patient.sex} %>
+  </tr>
+  <tr>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, colspan: 2, label: "Address", value: @patient.address} %>
+    <%= render partial: 'consent_form_cell', locals: {colspan: 2, label: "City", value: @patient.city} %>
+    <%= render partial: 'consent_form_cell', locals: {label: "State", value: @patient.state} %>
+    <%= render partial: 'consent_form_cell', locals: {label: "ZIP Code", value: @patient.zip_code} %>
+  </tr>
+  <tr>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, colspan: 2, label: "Email Address", value: @patient.email} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, colspan: 2, label: "Phone Number", value: @patient.phone_number} %>
+  </tr>
+</table>
+
+<div class="bg-black text-white text-center mt-2 mb-2 p-1">
+  HEALTH INSURANCE INFORMATION &mdash; Please fill out COMPLETELY and ACCURATELY
+</div>
+
+<div class="bg-gray-400 text-xs text-center mt-2 mb-2 p-1">
+  Please write this information FROM YOUR INSURANCE CARD. We will bill your
+  insurance. <span class="underline">You will NOT be charged</span> for a co-pay or deductible.
+</div>
+
+<table class="w-full mt-2">
+  <tr>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Type of Insurance", value: @patient.insurance_type} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Insurance Company Name", value: @patient.insurance_company_name} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Insurance Member Number", value: @patient.member_id_for_insurance} %>
+  </tr>
+  <tr>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Insurance Group Number", value: @patient.group_number_for_insurance} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Other Insurance Number", value: @patient.card_number_for_insurance} %>
+  </tr>
+  <tr>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Insured Adult's Name", value: "#{@patient.insured_first_name} #{@patient.insured_last_name}"} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Relationship to Patient", value: @patient.relation_to_patient_for_insurance} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Insured Adult's Date of Birth", value: @patient.insured_date_of_birth} %>
+  </tr>
+</table>
+
+<div class="bg-gray-400 text-center font-bold mt-2 mb-2 p-1">
+  Do any of the following apply to you?
+</div>
+
+<div class="h-48 bg-gray-200">
+
+</div>
+
+<table class="w-full mt-10"><tr>
+  <td>
+    <% if @patient.signature_data.blank? %>
+      <span class="block h-20 pt-8">(no signature)</span>
+    <% else %>
+      <%= image_tag @patient.signature_data, style: "width: 450px;", class: "border-b-2 border-black" %>
+    <% end %>
+    <span class="font-bold">Signature of Patient or Parent/Guardian</span>
+  </td>
+  <td class="align-bottom">
+    <div class="border-b-2 px-8 border-black font-mono">
+      <%= @patient.consent_date %>
+    </div>
+    <span class="font-bold">Date</span>
+  </td>
+</tr></table>

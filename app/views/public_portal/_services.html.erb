@@ -37,10 +37,10 @@
                     <div class="mb-0">
                         <h5 class="tracking-tight lg:leading-8 xl:text-3xl lg:text-xl font-bold text-gray-700"> Testing - No Code </h5>
                         <p class="my-4 sm:text-lg lg:text-xl lg:leading-6 md:text-lg text-gray-500 text-justify">
-                            At this time, we are not testing the general public.  Fill out this form and we will notify you when testing is available
+                            If you don't have an access code, you can search for a clinic and make an appointment.
                         </p>
                     </div>
-                    <%= link_to new_news_signup_path, 
+                    <%= link_to "/clinic/search?service[]=Testing", 
                         class: "flex justify-center lg:w-2/4 md:w-full py-2 text px-8 mt-auto mb-0 xl:text-lg lg:text-base rounded-md bg-indigo-600 hover:bg-indigo-500 text-white border-2", 
                         style: "background-color:  #2699FB; border-color: #BCE0FD;" do %>
                         <span> Sign Up </span>

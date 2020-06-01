@@ -12,7 +12,7 @@
   <% @patients.select{|p| p.queue_state.to_s == queue_state.to_s}.each do |patient| %>
     <tr class="border-b-2">
       <td><%= patient.full_name %></td>
-      <td><%= patient.date_of_birth.strftime('%m/%d/%y') %></td>
+      <td><%= patient.date_of_birth.try(:strftime, '%m/%d/%y') %></td>
       <td class="text-center"><%= patient.appointment_time %></td>
       <td><%= patient.queue_state.titleize %></td>
       <td class="text-right">

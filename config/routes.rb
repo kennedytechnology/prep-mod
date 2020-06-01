@@ -18,9 +18,11 @@ Rails.application.routes.draw do
   get '/clinic/data_transfer', to: 'clinics#data_transfer'
   # get '/client/registration', to: 'public/patients#edit', as: :client_registration
   get '/client/access', to: 'public/patients#access'
+
   get '/client/registration(/:access_code)', to: 'public/patients#edit', as: :client_registration
   patch '/client/registration/(/:access_code)', to: 'public/patients#edit'
-  post '/client/registration/(/:access_code)', to: 'public/patients#create'
+  post '/client/registration/(/:access_code)', to: 'public/patients#update'
+
   get '/check_in/:check_in_code', to: 'public/patients#check_in', as: :check_in
   
   get "/clear_session", to: 'public/patients#clear_session'
