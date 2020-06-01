@@ -2,7 +2,9 @@
   data-target="clinic-activity-patients.modal"
   data-patient-id="<%= patient.id.nil? ? "addMorePatients" : patient.id %>"
   data-category-selection="<%= category_selection %>"
-  class="modal hidden fixed w-full h-full top-0 left-0 flex items-center justify-center <%= "z-50" if patient.id.nil? %>">
+  class="modal hidden fixed w-full h-full top-0 left-0 flex items-center justify-center <%= "z-50" if patient.id.nil? %>"
+  id="add_patient_modal"
+  >
 
   <div class="modal-overlay fixed w-full h-full bg-black opacity-25 top-0 left-0 cursor-pointer"></div>
   <div class="absolute p-8 bg-white rounded-lg shadow-lg flex <%= patient.id.nil? ? "overflow-y-scroll" : "" %>" style="<%= "top:50px; bottom: 50px;" if patient.id.nil? %>">

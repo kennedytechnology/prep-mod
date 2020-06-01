@@ -6,14 +6,16 @@ export default class extends Controller {
   showModal(event) {
     let categorySelection = event.target.dataset.selection;
     let modals = this.modalTargets;
-    let modal = modals.filter(function(el) {
-      if (categorySelection == 'AddPatient') {
-        return el.dataset['categorySelection'] == categorySelection
-      } else {
+    let modal = "";
+
+    if (categorySelection == 'AddPatient') {
+      modal = document.getElementById('add_patient_modal')
+    } else {
+      modal = modals.filter(function(el) {
         let patientId = event.target.closest("tr").dataset.patientId
         return (el.dataset['patientId'] == patientId && el.dataset['categorySelection'] == categorySelection )
-      }
-    })[0]
+      })[0]
+    } 
 
     modal.classList.toggle('hidden')
   }

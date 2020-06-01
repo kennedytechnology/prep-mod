@@ -111,6 +111,7 @@ class Clinic < ApplicationRecord
 
   def default_test_kit_name
     t = test_kits.select(&:is_default).first
+    t ||= test_kits.first
     t.test_name +  " (" + t.test_type.to_s + ")"
   end
 

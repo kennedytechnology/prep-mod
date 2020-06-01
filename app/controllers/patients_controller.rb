@@ -19,7 +19,7 @@ class PatientsController < ApplicationController
     if @patient.save
       PatientNotifierMailer.invitation(@patient).deliver if @patient.notify_via_email?
       @patient.sms_invite if @patient.notify_via_sms?
-      redirect_to "/patients", alert: "Your patient referral is created."
+      redirect_back fallback_location: "/patients", alert: "Your patient referral is created."
     else
       render "new", alert: "Your referral was not saved!"
     end
