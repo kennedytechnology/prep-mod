@@ -33,7 +33,7 @@ end
   ClinicAgeGroup.create!(name: name)
 end
 
-["Seniors", "African-Americans", "Hispanics", "Chronically Ill"].each do |name|
+["Seniors", "African-Americans", "Hispanics", "Chronically Ill (eg. asthma, diabetes, heart disease, hypertension, COPD)"].each do |name|
   ClinicPrimaryGroup.create!(name: name)
 end
 
