@@ -46,8 +46,8 @@
         </div>
         <div>
             <%# TODO: Check why this is state instead of race %>
-            <%= f.label :state, "Race", class: "block" %>
-            <%= f.select :state, options_for_select(US_RACES, @patient.state), {prompt: "Select"}, {class: "w-full form-select", data: {action: "keyup->testing-referral-review-form#updateModalField"}} %>
+            <%= f.label :race, "Race", class: "block" %>
+            <%= f.select :race, options_for_select(US_RACES, @patient.state), {prompt: "Select"}, {class: "w-full form-select", data: {action: "keyup->testing-referral-review-form#updateModalField"}} %>
         </div>
     </div>
 
@@ -96,7 +96,8 @@
                 </div>
             </div>
         </div>
-        <div></div>
+        <div>
+        </div>
     </div>
 
     <%# 
@@ -113,7 +114,7 @@
 
 
     <div class="flex justify-end my-4">
-        <button type="button" class="button-primary" data-action="click->testing-referral-review-form#toggleModal"> Submit </button>
+        <%= f.submit "Create", class: "button-primary" %>
     </div>
 
     <%= render partial: "patients/review_form", locals: {f: f} %>

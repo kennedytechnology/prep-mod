@@ -13,6 +13,7 @@ class PatientsController < ApplicationController
   end
 
   def create
+    params[:patient][:date_of_birth] = Chronic.parse(params[:patient][:date_of_birth]) if params[:patient][:date_of_birth]
     @patient = Patient.new(patient_params)
     @patient.access_code = Patient.generate_access_code
     if @patient.save

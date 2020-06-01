@@ -1,7 +1,7 @@
 class PatientDecorator < Draper::Decorator
   delegate_all
 
-  def phone_number
+  def formatted_phone_number
     Phonelib.parse(phone_number).national
   end
 end

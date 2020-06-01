@@ -11,6 +11,7 @@ class ClinicEventsController < ClinicManagementController
   end
 
   def create
+    params[:clinic_event][:event_date] = Chronic.parse(params[:clinic_event][:event_date]) if params[:clinic_event][:event_date]
     @clinic_event = ClinicEvent.new(clinic_event_params)
     @clinic_event.user = current_user
     if @clinic_event.save
@@ -21,13 +22,12 @@ class ClinicEventsController < ClinicManagementController
   end
 
   def update
+    params[:clinic_event][:event_date] = Chronic.parse(params[:clinic_event][:event_date]) if params[:clinic_event][:event_date]
     @clinic_event = ClinicEvent.find(params[:id])
     if @clinic_event.update(clinic_event_params)
-      
     else
       flash[:error] = "Oops something went wrong. Please, try again!"
     end
-
     redirect_back fallback_location: root_path
   end
 

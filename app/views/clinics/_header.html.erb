@@ -9,14 +9,14 @@
           "Customized Report": new_customized_report_path(clinic_id: @clinic.id)
         }
       %>
-  <div class="flex justify-end mt-4">
+  <div class="flex justify-end">
       <h2 class="text-2xl font-bold flex-grow"><%= @page_title || raise %></h2>
       <% clinic_menu.each do |link_name, link_route| %>
         <%
-        classes_for_link = "pr-4"
+        classes_for_link = "pr-4 pt-4"
         classes_for_link << " font-bold" if current_page?(link_route)
         %>
-        <%= link_to link_name, link_route, class: classes_for_link %>
+        <%= link_to ("» " + link_name.to_s), link_route, class: classes_for_link %>
       <% end %>
   </div>
 </div>

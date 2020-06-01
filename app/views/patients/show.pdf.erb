@@ -25,7 +25,7 @@ Please Print Clearly in Ink
   </tr>
   <tr>
     <%= render partial: 'consent_form_cell', locals: {width: 2, colspan: 2, label: "Email Address", value: @patient.email} %>
-    <%= render partial: 'consent_form_cell', locals: {width: 2, colspan: 2, label: "Phone Number", value: @patient.phone_number} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, colspan: 2, label: "Phone Number", value: @patient.formatted_phone_number} %>
   </tr>
 </table>
 
