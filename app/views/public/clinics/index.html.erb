@@ -6,7 +6,7 @@
         <div>
             <h2 class="title"> What service(s) are you seeking? <span class="field-required">*</span> </h2>
             <div class="checkboxes-container">
-                <% ClinicService.all.each do |service| %>
+                <% ClinicService.where(category: "clinics").each do |service| %>
                 <div>
                     <label>
                         <%= check_box_tag "service[]", service.name, params[:service].to_a.include?(service.name), class: "form-checkbox" %>

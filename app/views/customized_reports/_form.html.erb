@@ -12,23 +12,19 @@
   <% end %>
 
   <div class="flex justify-start mb-12">
-    <div class="block mr-5">
-      <%= form.label :county do %>
-          <span class="text-gray-500">Select County </span>
-      <% end %>
-      <%= form.select :county, COUNTIES, {prompt: "Select"}, {class: "block form-select", id: "county"} %>
-    </div>
-
-    <div class="block">
-      <%= form.label :county do %>
-          <span class="text-gray-500">School Name </span>
-      <% end %>
-      <%= form.select :county, COUNTIES, {prompt: "Select"}, {class: "block form-select", id: "county"} %> <%# This should be scools %>
-    </div>
+   
   </div>
 
     <h1 class="text-center text-lg text-gray-600 mb-4">Please select the data you would like in your customized report: </h1>
     <div class="w-full flex items-center mb-5">
+        <% unless @clinic %>
+            <div class="block mr-5">
+                <%= form.label :county do %>
+                    <span class="text-gray-500">Select County </span>
+                <% end %>
+                <%= form.select :county, COUNTIES, {prompt: "Select"}, {class: "block form-select", id: "county"} %>
+            </div>
+        <% end %>
         <div class="flex justify-between mx-auto">
           <div class="w-full mr-6">
               <div class="absolute flex items-center h-5">

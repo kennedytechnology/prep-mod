@@ -18,6 +18,12 @@ SUPPLY_INVENTORY_PER_CLINIC = 10
 TEST_KITS_PER_CLINIC = 3
 VENUE_STATES = ["MD", "NY", "PA", "DC", "KY", "VT", "CA", "CO", "AL"]
 
+def age(birthday, today)
+  diff = today.year - birthday.year
+  (birthday + diff.years > today ) ? (diff - 1) : diff
+end
+
+
 puts "Creating named places..."
 NAMED_PLACE_COUNT.times.each do |i|
   NamedPlace.create(
@@ -26,7 +32,12 @@ NAMED_PLACE_COUNT.times.each do |i|
 end
 
 ["Screening", "Testing", "Medication", "Safety Kit Distribution", "Other"].each do |name|
-  ClinicService.create!(name: name)
+  ClinicService.create!(name: name, category: "clinics")
+  ClinicService.create!(name: name, category: "provider_enrollments")
+end
+
+["Screened", "Tested - PCR", "Tested - Serology", "Temperature Check", "Safety Kit", "Other"].each do |name|
+  ClinicService.create!(name: name, category: "clinic_events")
 end
 
 ["All Ages", "Children", "Adults", "Seniors", "Other"].each do |name|
@@ -101,7 +112,7 @@ puts "Creating employers..."
     testing_info: Faker::Boolean.boolean,
     vacination_info: Faker::Boolean.boolean,
     other_info: Faker::Boolean.boolean,
-    business_locations: BUSINESS_LOCATIONS.sample(1 + rand(BUSINESS_LOCATIONS.count)),
+    business_locations: BUSINESS_LOCATIONS.sample(rand(4)),
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.first_name,
     position: "position #{i}",
@@ -150,7 +161,7 @@ CLINIC_COUNT.times.each do |i|
     end_time: "#{(13..17).to_a.sample}:00",
     duration: 180,
     age_groups: ClinicAgeGroup.all.sample(rand(ClinicAgeGroup.count) + 1),
-    services: ClinicService.all.sample(rand(ClinicService.count) + 1),
+    services: ClinicService.where(category: "clinics").sample(rand(ClinicService.count) + 1),
     address: "#{address['address1']}, #{address['city']}, #{address['state']} #{address['postalCode']}",
     longitude: address['coordinates']['lng'],
     latitude: address['coordinates']['lat'],
@@ -178,6 +189,7 @@ clinics = Clinic.all
 PATIENT_COUNT.times.each do |i|
   address = addresses.sample
   clinic = clinics.sample
+  birthday = Faker::Date.birthday
   patientEmail = Faker::Internet.email
   Patient.create!(
     clinic: clinic,
@@ -185,9 +197,9 @@ PATIENT_COUNT.times.each do |i|
     last_name: Faker::Name.last_name,
     middle_initial: ("A".."Z").to_a.sample,
     mothers_maiden_name: Faker::Name.last_name,
-    age: (3..80).to_a.sample,
+    age: age(birthday, Date.today),
     email: patientEmail,
-    date_of_birth: Faker::Date.birthday,
+    date_of_birth: birthday,
     address: address['address1'],
     city: address['city'],
     state: address['state'],
@@ -238,7 +250,7 @@ end
       manufacturer: INVENTORY_MANUFACTURERS.sample,
       lot_number: Faker::Code.asin,
       expiration_date: Faker::Date.between(from: Date.today, to: 30.days.from_now),
-      quantity: Faker::Number.between(from: 10, to: 20),
+      quantity: Faker::Number.between(from: 100, to: 200),
       packaging: INVENTORY_PACKAGINGS.sample,
       source: INVENTORY_SOURCES.sample,
       product_name: Faker::Company.name,
@@ -263,7 +275,7 @@ Clinic.all.each do |clinic|
   TEST_KITS_PER_CLINIC.times do
     TestKit.create!(
       clinic: clinic,
-      test_name: Faker::Lorem.words(number: 2).collect(&:capitalize).join(" "),
+      test_name: Faker::Dessert.topping,
       test_manufacturer: INVENTORY_MANUFACTURERS.sample,
       test_lot_number: Faker::Code.asin,
       test_type: %w(PCR Serological).sample,
@@ -279,3 +291,4 @@ end
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
 
 puts 'Done.'
+

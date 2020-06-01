@@ -36,7 +36,7 @@ RSpec.describe ClinicsController, type: :controller do
             end_time: "#{(13..17).to_a.sample}:00",
             duration: 180,
             age_groups: ClinicAgeGroup.all.sample(rand(ClinicAgeGroup.count) + 1),
-            services: ClinicService.all.sample(rand(ClinicService.count) + 1),
+            services: ClinicService.where(category: 'provider_enrollments').sample(rand(ClinicService.count) + 1),
             address: "8117 Mountain View Circle, Pasadena, MD 21122",
             longitude: -76.567383,
             latitude: 39.133262,

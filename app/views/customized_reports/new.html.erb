@@ -1,2 +1,6 @@
+<% if @clinic %>
 <%= render '/clinics/header' %>
+<% else %>
+  <h1 class="text-2xl font-bold">Customized Reports</h1>
+<% end %>
 <%= render 'form', customized_report: @customized_report %>

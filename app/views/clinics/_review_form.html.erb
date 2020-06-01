@@ -51,7 +51,7 @@
                 <div>
                     <p class="title">Services Provided <span class="field-required">*</span></p>
                     <div class="w-full checkboxes-container">
-                        <%= collection_check_boxes(:clinic, :service_ids, ClinicService.all, :id, :name) do |b| %>
+                        <%= collection_check_boxes(:clinic, :service_ids, ClinicService.where(category: "clinics"), :id, :name) do |b| %>
                         <div>
                             <span> <%= b.check_box(class: "form-checkbox", disabled: true, id: "modal_clinic_service_ids_#{b.object.id}") %> </span>
                             <span class="label"> <%= b.label(for: "") %> </span>

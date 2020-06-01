@@ -13,7 +13,7 @@
       <h2 class="text-2xl font-bold flex-grow"><%= @page_title || raise %></h2>
       <% clinic_menu.each do |link_name, link_route| %>
         <%
-        classes_for_link = "button-action"
+        classes_for_link = "pr-4"
         classes_for_link << " font-bold" if current_page?(link_route)
         %>
         <%= link_to link_name, link_route, class: classes_for_link %>

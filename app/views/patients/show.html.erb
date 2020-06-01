@@ -23,7 +23,8 @@
 <table class="table printable">
     <thead>
         <tr>
-            <th><%= sortable "clinic_id", "Clinic Id" %></th>
+            <th><%= sortable "clinic_date", "Clinic Date" %></th>
+            <th><%= sortable "location", "Location" %></th>
             <th><%= sortable "created_at" %></th>
             <th><%= sortable "category", "Service" %></th>
             <th><%= sortable "outcome", "Status" %></th>
@@ -34,7 +35,8 @@
     <tbody>
         <% @patient_clinic_events.each do |clinic_event| %>
         <tr>
-            <td><%= clinic_event.clinic ? clinic_event.clinic.name : "No Clinic Selected" %></td>
+            <td><%= clinic_event.clinic ? clinic_event.clinic.clinic_date.strftime("%m/%d/%Y") : "No Clinic Selected" %></td>
+            <td><%= clinic_event.clinic ? clinic_event.clinic.venue_name : "-" %></td>
             <td><%= clinic_event.created_at.strftime("%m/%d/%Y") %></td>
             <td><%= clinic_event.category %></td>
             <td><%= clinic_event.outcome %></td>

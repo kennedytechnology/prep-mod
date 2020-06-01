@@ -16,19 +16,19 @@ CLINIC_APPOINTMENT_INTERVALS = [5, 10, 15, 20, 30, 45, 60]
 
 CLINIC_EVENTS = [
   { name: "Tested",
-    outcomes: %w(Pending Positive Negative Indeterminate)
+    outcomes: %w(Pending Positive Negative Normal Elevated FollowUp Needed PickedUp Refused)
   },
   { name: "No Show",
-    outcomes: %w(Refused Cancelled)
+    outcomes: %w()
   },
   { name: "Cancelled",
-    outcomes: %w(Refused Cancelled)
+    outcomes: %w()
   },
   { name: "Safety Kit",
-    outcomes: %w(Pending Registered PickedUp Cancelled)
+    outcomes: %w()
   },
   { name: "Screened",
-    outcomes: %w(Pending Refused Cancelled Positive Negative Indeterminate)
+    outcomes: %w()
   }
   ]
 
