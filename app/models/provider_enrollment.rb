@@ -17,16 +17,16 @@ class ProviderEnrollment < ApplicationRecord
     self.save
   end
 
-  def set_status(status_name)
-    case status_name
-    when "Need Additional Information"
-      self.status = "need_additional_information"
-    when "Accepted"
-      self.status = "accepted"
-    when "Denied"
-      self.status = "denied"
-    else
-      self.status = "pending"
-    end
-  end
+  # def set_status(status_name)
+  #   case status_name
+  #   when "Need Additional Information"
+  #     self.status = "need_additional_information"
+  #   when "Accepted"
+  #     self.status = "accepted"
+  #   when "Denied"
+  #     self.status = "denied"
+  #   else
+  #     self.status = "pending"
+  #   end
+  # end
 end
