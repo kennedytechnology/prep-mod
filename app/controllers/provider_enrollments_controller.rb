@@ -55,7 +55,7 @@ class ProviderEnrollmentsController < ApplicationController
         :refrigerator_thermometer, :contact_office_phone, :contact_mobile_phone, 
         :contact_email, :practice_backup_office_phone, :practice_backup_mobile_phone,
         :additional_info, :freezer, :clinic_service_ids => [], 
-        :clinic_age_group_ids => [], :clinic_primary_group_ids => []
+        :clinic_age_group_ids => [], :clinic_primary_group_ids => [], :status
       )
     end
 
