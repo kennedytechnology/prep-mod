@@ -43,7 +43,7 @@ class ProviderEnrollmentsController < ApplicationController
 
     def provider_enrollment_params
       params.require(:provider_enrollment).permit(
-        :first_name, :last_name, :middle_initial, 
+        :first_name, :last_name, :middle_initial, :status, 
         :practice_address, :practice_office_phone, :practice_mobile_phone, 
         :practice_fax_number, :practice_email, :title, 
         :npi_number, :license_number, :license_type, 
@@ -55,8 +55,7 @@ class ProviderEnrollmentsController < ApplicationController
         :refrigerator_thermometer, :contact_office_phone, :contact_mobile_phone, 
         :contact_email, :practice_backup_office_phone, :practice_backup_mobile_phone,
         :additional_info, :freezer, :clinic_service_ids => [], 
-        :clinic_age_group_ids => [], :clinic_primary_group_ids => [], :status
-      )
+        :clinic_age_group_ids => [], :clinic_primary_group_ids => [])
     end
 
 end
