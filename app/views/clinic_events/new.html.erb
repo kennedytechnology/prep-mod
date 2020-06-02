@@ -1,4 +1,4 @@
-<h1 class="main-title">Enter a patient event</h1>
+<h1 class="main-title">Enter a Patient Event</h1>
     <%= form_for(@clinic_event, remote: false) do |f| %>
         <div class="field-side-by-side">
             <h2 class="title">Patient: <%= @clinic_event.patient.full_name %> (<%= @clinic_event.patient.date_of_birth.strftime("%B %e, %Y") %>)
@@ -27,11 +27,6 @@
                     </div>
                     <% end %>
                 </div>
-            </div>
-
-            <div>
-                <%= f.label :category, "Service Provided", class: "block" %>
-                <%= f.select :category, options_for_select(CLINIC_EVENTS.collect{|h| h[:name]}, @clinic_event.category),{},{class: "w-full form-select"} %>
             </div>
 
             <div>

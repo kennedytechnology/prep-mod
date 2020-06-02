@@ -25,7 +25,7 @@
         <tr>
             <th><%= sortable "event_date", "Event Date" %></th>
             <th><%= sortable "location", "Location" %></th>
-            <th><%= sortable "created_at" %></th>
+            
             <th><%= sortable "category", "Service" %></th>
             <th><%= sortable "outcome", "Status" %></th>
             <th><%= sortable "notes" %></th>
@@ -37,7 +37,7 @@
         <tr>
             <td><%= clinic_event.clinic ? clinic_event.clinic.clinic_date.strftime("%m/%d/%Y") : clinic_event.event_date.strftime("%m/%d/%Y") %></td>
             <td><%= clinic_event.clinic ? clinic_event.clinic.venue_name : clinic_event.location %></td>
-            <td><%= clinic_event.created_at.strftime("%m/%d/%Y") %></td>
+            
             <td><%= clinic_event.category %></td>
             <td><%= clinic_event.outcome %></td>
             <td><%= clinic_event.notes %></td>

@@ -2,13 +2,6 @@
 
 <%= form_for(@patient, remote: false, data: {controller: "testing-referral-review-form"}) do |f| %>
     <%= f.hidden_field :clinic_id, value: @clinic.id %>
-    <div class="field-side-by-side">
-        <div>
-            <%= f.label :county, class: "block" %>
-            <%= f.select :county, options_for_select(COUNTIES, @patient.county),{prompt: "Select"}, {class: "w-full form-select",  data: {action: "change->testing-referral-review-form#updateModalField"}} %>
-        </div>
-        <div></div>
-    </div>
 
     <div class="field-fullwidth">
         <div class="grid grid-cols-4 gap-4">
