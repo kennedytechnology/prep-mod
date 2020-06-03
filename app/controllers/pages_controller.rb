@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_action :authenticate_user!, only: [:landing_page]
+  before_action :authenticate_user!, only: [:landing_page, :reports_menu]
 
   def landing_page
   end
