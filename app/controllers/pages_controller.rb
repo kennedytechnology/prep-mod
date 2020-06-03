@@ -4,6 +4,9 @@ class PagesController < ApplicationController
   def landing_page
   end
 
+  def reports_menu
+  end
+
   def boom
     raise "boom"
   end
