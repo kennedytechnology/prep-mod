@@ -13,7 +13,7 @@ class Message < ApplicationRecord
     when send_to_all_users == true
       User.all.map{ |u| MessageMailer.message_approved(u.email, self).deliver }
     else
-      "Default behaviour"
+      "Default behavior"
     end
   end
 end

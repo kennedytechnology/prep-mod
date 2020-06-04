@@ -16,7 +16,8 @@
         <%= f.search_field :last_name_cont, placeholder: "Last Name", class: "form-input flex-1 mr-2" %>
         <%= f.search_field :mothers_maiden_name_cont, placeholder: "Mother's maiden name", class: "form-input flex-1 mr-2" %>
         <%= f.search_field :date_of_birth_equals, type: "date", placeholder: "Date of birth",
-                               class: "form-input flex-1 mr-2", style: "margin-bottom: 0; min-height: 42px; max-height: 42px;" %>
+                               class: "form-input flex-1 mr-2", style: "margin-bottom: 0; min-height: 42px; max-height: 42px;",
+                               data: {controller: "flatpickr"} %>
         <%= f.submit "Search", class: "button-action" %>
         <%= link_to "Reset", patients_path, class: "button-action" %>
       <% end %>

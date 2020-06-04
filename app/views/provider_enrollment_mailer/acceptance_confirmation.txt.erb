@@ -1,0 +1,7 @@
+ProviderEnrollment#acceptance_confirmation
+
+<%= @greeting %>,
+
+<%= @provider_enrollment.first_name + " " + @provider_enrollment.last_name %>, your request for <%= @provider_enrollment.practice_name %> practice with the unique ID <%= @provider_enrollment.unique_number %> was accepted. Your temporary password is <%= @temp_password %> (NOTE: This password is a temporary placeholder for the purpose of ClinicWizard2 development, and will be made to be dynamic in production.)
+
+Your Regional Administrator will be in touch shortly. To inquire about our request call your state health department.

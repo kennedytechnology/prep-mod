@@ -23,6 +23,7 @@ ActiveAdmin.register ProviderEnrollment do
   filter :practice_city
   filter :does_provide_vaccination
   filter :does_provide_vfc
+  filter :status
  
   index do
     selectable_column
@@ -35,11 +36,13 @@ ActiveAdmin.register ProviderEnrollment do
     column :practice_city
     column :does_provide_vaccination
     column :does_provide_vfc
+    column :status
     actions
   end
  
   show do |patient|
     attributes_table title: "Provider Personal Details" do
+      row :status
       row :id
       row :first_name
       row :last_name
@@ -47,7 +50,6 @@ ActiveAdmin.register ProviderEnrollment do
     end
 
     attributes_table title: "Vaccination Details" do
-      row :status
       row :does_provide_vaccination
       row :does_provide_vfc
     end
@@ -96,7 +98,7 @@ ActiveAdmin.register ProviderEnrollment do
     tabs do
       tab "Patient Personal Details" do
         f.inputs do
-        #  input :id
+          input :status, as: :select, collection: %w(pending accepted denied need_additional_information)
           input :first_name
           input :last_name
           input :middle_initial
@@ -105,7 +107,6 @@ ActiveAdmin.register ProviderEnrollment do
   
       tab "Vaccination Details" do
         f.inputs do
-          input :status
           input :does_provide_vaccination
           input :does_provide_vfc
         end

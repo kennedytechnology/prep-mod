@@ -11,6 +11,7 @@
     "jquery": "^3.5.0",
     "signature_pad": "^3.0.0-beta.3",
     "stimulus": "^1.1.1",
+    "stimulus-flatpickr": "^1.2.4",
     "tailwindcss": "^1.2.0",
     "turbolinks": "^5.2.0",
     "typeface-roboto": "^0.0.75"
