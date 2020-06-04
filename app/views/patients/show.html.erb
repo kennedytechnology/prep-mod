@@ -35,7 +35,7 @@
     <tbody>
         <% @patient_clinic_events.each do |clinic_event| %>
         <tr>
-            <td><%= clinic_event.clinic ? clinic_event.clinic.clinic_date.strftime("%m/%d/%Y") : clinic_event.event_date.strftime("%m/%d/%Y") %></td>
+            <td><%= clinic_event.clinic ? clinic_event.clinic.clinic_date.try(:strftime, "%m/%d/%Y") : clinic_event.event_date.try(:strftime, "%m/%d/%Y") %></td>
             <td><%= clinic_event.clinic ? clinic_event.clinic.venue_name : clinic_event.location %></td>
             
             <td><%= clinic_event.category %></td>
