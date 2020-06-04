@@ -28,10 +28,6 @@ class ProviderEnrollmentsController < ApplicationController
   def update
     @provider_enrollment = ProviderEnrollment.find(params[:id])
 
-    # if params[:commit] == "Need Additional Information" || params[:commit] == "Accepted" || params[:commit] == "Denied"
-    #   @provider_enrollment.set_status(params[:commit])
-    # end
-
     if @provider_enrollment.update(provider_enrollment_params)
       redirect_to provider_enrollments_path, notice: "Successfully Updated Provider"
     else
