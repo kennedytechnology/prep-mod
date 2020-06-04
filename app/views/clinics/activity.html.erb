@@ -52,7 +52,7 @@
                           <%= render partial: '/clinics/activity/remark_details', layout: "clinics/activity/clinic_event_modal", locals: {patient: patient, event_form: event_form, category_selection: 'Remark'} %>
                             <%= link_to patient.first_name + ' ' + patient.last_name, patient %> <br/>
                           </td>
-                          <td><%= patient.date_of_birth.strftime("%D") %></td>
+                          <td><%= patient.date_of_birth.try(:strftime, "%D") %></td>
                           
                           <td><%= event_form.radio_button :category, "Screened", data: {action: "clinic-activity-patients#showModal", selection: "Screened"}, class: "form-radio" %></td>
                           <td><%= event_form.radio_button :category, "Tested", data: {action: "clinic-activity-patients#showModal", selection: "Tested"}, class: "form-radio" %></td>
