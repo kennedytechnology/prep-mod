@@ -59,7 +59,7 @@
                                 <span class="text-gray-500"> Received Date </span>
                                 <span class="text-brand-red-500">*</span>
                             <% end %>
-                            <%= f.date_field :received_at, class: "form-input block w-full", placeholder: "MM/DD/YYYY", disabled: true, id: "modal_supply_inventory_received_at" %>
+                            <%= f.text_field :received_at, class: "form-input block w-full", placeholder: "MM/DD/YYYY", disabled: true, id: "modal_supply_inventory_received_at" %>
                         </div>
 
                         <div>
@@ -83,7 +83,7 @@
                                 <span class="text-gray-500"> Expiration Date </span>
                                 <span class="text-brand-red-500">*</span>
                             <% end %>
-                            <%= f.date_field :expiration_date, class: "form-input block w-full", placeholder: "MM/DD/YYYY", disabled: true, id: "modal_supply_inventory_expiration_date" %>
+                            <%= f.text_field :expiration_date, class: "form-input block w-full", placeholder: "MM/DD/YYYY", disabled: true, id: "modal_supply_inventory_expiration_date" %>
                         </div>
 
                         <div>

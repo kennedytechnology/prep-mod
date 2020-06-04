@@ -40,7 +40,8 @@
 <div class="field-side-by-side">
     <div>
         <%= f.label :insured_date_of_birth, "Insured Adult's Date Of Birth", class: "block" %>
-        <%= f.date_field :insured_date_of_birth, value: @patient.insured_date_of_birth.try(:strftime, "%m/%d/%Y"), class: "w-full form-input", data: {action: "keyup->inventory-new-entry#updateModalField change->inventory-new-entry#updateModalField"} %>
+        <%= f.text_field :insured_date_of_birth, value: @patient.insured_date_of_birth.try(:strftime, "%m/%d/%Y"), class: "w-full form-input",
+            data: {controller: "flatpickr", action: "keyup->inventory-new-entry#updateModalField change->inventory-new-entry#updateModalField"} %>
     </div>
     <div>
         <%= f.label :relation_to_patient_for_consent, "Relationship To Patient", class: "block" %>

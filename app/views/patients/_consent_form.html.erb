@@ -69,7 +69,7 @@ BOOM
         <div>
             <p>
               <%= form.label :date_of_birth %><br>
-              <%= form.date_field :date_of_birth %>
+              <%= form.text_field :date_of_birth, data: { controller: "flatpickr" } %>
             </p>
             <p>
               <%= form.label :age %><br>

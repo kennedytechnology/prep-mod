@@ -3,4 +3,4 @@
     <span class="field-required">*</span>
 <% end %>
 
-<%= date_field_tag "clinic_dates[]", clinic_date, class: "form-input", placeholder: "MM/DD/YYYY", data: {action: "change->inventory-new-entry#updateModalField keyup->inventory-new-entry#updateModalField"} %>
+<%= text_field_tag "clinic_dates[]", clinic_date, class: "form-input", data: {controller: "flatpickr", action: "change->inventory-new-entry#updateModalField keyup->inventory-new-entry#updateModalField"} %>

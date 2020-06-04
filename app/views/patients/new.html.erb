@@ -33,7 +33,11 @@
         <div class="flex">
             <div class="w-5/12 mr-2">
                 <%= f.label :date_of_birth, "Date of Birth", class: "block" %>
-                <%= f.date_field :date_of_birth, placeholder: "MM/DD/YYYY", class: "w-full form-input",  data: {action: "change->testing-referral-review-form#updateModalField keyup->testing-referral-review-form#updateModalField"} %>
+                <%= f.text_field :date_of_birth, placeholder: "MM/DD/YYYY", class: "w-full form-input",  
+                                    data: { controller: "flatpickr",
+                                            flatpickr_min_date: Date.today - 80.years,
+                                            flatpickr_max_date: Date.today,
+                                            action: "change->testing-referral-review-form#updateModalField keyup->testing-referral-review-form#updateModalField" } %>
             </div>
             <div class="w-3/12 mr-2">
                 <%= f.label :age, class: "block" %>

@@ -62,8 +62,12 @@
                 <span> Clinic Date </span>
                 <span class="field-required">*</span>
             <% end %>
-            <%= f.date_field :clinic_date, class: "form-input", placeholder: "MM/DD/YYYY" %>
-
+            <%= f.text_field :clinic_date, class: "form-input", placeholder: "MM/DD/YYYY",
+                        data: {
+                                controller: "flatpickr",
+                                flatpickr_default_date: @clinic.clinic_date.strftime("%Y-%m-%d")
+                                }
+            %>
             <p class="label">Start Time <span class="field-required">*</span></p>
             <% 
                 start_time = Time.parse("1 AM").to_i

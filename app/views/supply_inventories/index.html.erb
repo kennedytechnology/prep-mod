@@ -7,10 +7,11 @@
                 <span class="text-gray-500"> Received Date </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.date_field :received_at, class: "form-input block w-full", placeholder: "MM/DD/YYYY", required: true, 
-            data: {action: "change->inventory-new-entry#updateModalField 
-                            keyup->inventory-new-entry#updateModalField 
-                            blur->inventory-new-entry#validateInputField"} %>
+            <%= f.text_field :received_at, class: "form-input block w-full", placeholder: "MM/DD/YYYY", required: true, 
+                                data: { controller: "flatpickr",
+                                        action: "change->inventory-new-entry#updateModalField 
+                                                keyup->inventory-new-entry#updateModalField 
+                                                blur->inventory-new-entry#validateInputField" } %>
             <p class="error-message hidden"> This field is required! </p>
         </div>
 
@@ -66,9 +67,10 @@
                 <span class="text-brand-red-500">*</span>
             <% end %>
             <%= f.date_field :expiration_date, class: "form-input block w-full", placeholder: "MM/DD/YYYY", required: true, 
-            data: {action: "change->inventory-new-entry#updateModalField 
-                            keyup->inventory-new-entry#updateModalField
-                            blur->inventory-new-entry#validateInputField"} %>
+                                data: { controller: "flatpickr",
+                                        action: "change->inventory-new-entry#updateModalField 
+                                                keyup->inventory-new-entry#updateModalField
+                                                blur->inventory-new-entry#validateInputField" } %>
             <p class="error-message hidden"> This field is required! </p>
         </div>
 
