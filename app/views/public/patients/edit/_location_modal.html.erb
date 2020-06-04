@@ -1,0 +1,23 @@
+<div data-target="inventory-new-entry.locationModal"
+  class="modal hidden fixed w-full h-full top-0 left-0 flex items-center justify-center">
+
+  <div class="modal-overlay fixed w-full h-full bg-black opacity-25 top-0 left-0 cursor-pointer"></div>
+  <div class="absolute p-8 bg-white rounded-lg shadow-lg flex w-2/4">
+    <div class="w-full">
+      <p>Would you like to choose another location?</p>
+      <div class="mt-8 pt-5">
+        <div class="flex justify-end">
+          <span class="inline-flex rounded-md shadow-sm">
+            <%= link_to 'Another location', '/clinic/search?service[]=Testing', class: "button-primary" %>
+          </span>
+          <span class="inline-flex rounded-md shadow-sm">
+            <%= submit_tag "Save and Continue →", class: "button-primary" %>
+          </span>
+          <span class="inline-flex rounded-md shadow-sm">
+            <a data-action="click->inventory-new-entry#onLocationModal" data-value="close" class="button-primary sm:mr-0 md:mr-0">Cancel</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

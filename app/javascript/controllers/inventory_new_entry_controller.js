@@ -3,7 +3,7 @@ import {
 } from "stimulus"
 
 export default class extends Controller {
-    static targets = ["modal", "clinicStaffFields", "testKitsTable", "form"]
+    static targets = ["modal", "clinicStaffFields", "testKitsTable", "form", "locationModal"]
 
     connect() {
 
@@ -121,5 +121,10 @@ export default class extends Controller {
         }
 
         document.getElementById("modal_" + currentFieldId).checked = true;
+    }
+  
+    onLocationModal(e) {
+      if (e.currentTarget.dataset.value == 'open') this.locationModalTarget.classList.remove('hidden');
+      else this.locationModalTarget.classList.add('hidden');
     }
 }
