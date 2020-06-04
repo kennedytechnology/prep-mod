@@ -1,14 +1,12 @@
-<h2 class="main-title">Login</h2>
-<div class="flex">
-    <div class="mr-8"><%= image_tag 'clinicwizard_white_bg.png', style: "max-width: 600px;" %></div>
-    <div class="flex-1">
+<div class="flex mt-20">
+    <div class="mr-20 pt-32 w-1/2 pl-16"><%= image_tag 'prep-mod.png', style: "max-width: 400px;" %></div>
+    <div class="w-3/12">
+        <h2 class="main-title pb-6">Login</h2>
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
             <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-input w-full", placeholder: "Email Address" %>
             <%= f.password_field :password, autocomplete: "current-password", class: "form-input w-full", placeholder: "Password" %>
-            <div class="links-field flex justify-end px-3 my-3">
-                <%= link_to 'Forgot password?', new_user_password_path, class: "links" %>
-            </div>
-            <%= f.submit 'Login', class: "button-primary-fullwidth" %>
+            <%= f.submit 'Login', class: "button-primary text-xl mt-4 w-full" %>
+            <%= link_to 'Forgot Password?', new_user_password_path, class: "button-primary text-xl mt-4 w-full" %>
         <% end %>
     </div>
 </div>

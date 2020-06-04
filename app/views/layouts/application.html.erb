@@ -22,8 +22,11 @@
     <% end %>
 
     <div class="main-container">
-        <a href="/"><%= image_tag "prep-mod.png", class: "mt-2 mb-2", style: "max-height: 60px;" %></a>
-        <hr class="mb-4">
+        <% unless @hide_header %>
+          <a href="/"><%= image_tag "prep-mod.png", class: "mt-2 mb-2", style: "max-height: 60px;" %></a>
+          <hr class="mb-4">
+        <% end %>
+
         <%= yield %>
     </div>
 
