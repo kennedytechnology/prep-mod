@@ -7,26 +7,17 @@ class ProviderEnrollment < ApplicationRecord
   accepts_nested_attributes_for :clinic_services
   has_many :clinics
 
-  before_create do
-    self.status = "pending"
-  end
+  after_create :set_default_status_and_unique_number, if: lambda { unique_number == nil }
+  after_update :send_email, if: lambda { status == "accepted" }
 
-  after_create do
-    # byebug
+  def set_default_status_and_unique_number
+    self.status = "pending"
     self.unique_number = "P#{self.id}"
     self.save
   end
 
-  def set_status(status_name)
-    case status_name
-    when "Need Additional Information"
-      self.status = "need_additional_information"
-    when "Accepted"
-      self.status = "accepted"
-    when "Denied"
-      self.status = "denied"
-    else
-      self.status = "pending"
-    end
+  def send_email
+    ProviderEnrollmentMailer.acceptance_confirmation(self).deliver
   end
+
 end
