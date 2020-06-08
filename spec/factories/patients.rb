@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :patient do
-    association :clinic, factory: :clinic
+    # association :clinic, factory: :clinic
 
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
@@ -17,7 +17,7 @@ FactoryBot.define do
     access_code { Patient.generate_access_code }
     sex { %w(M F).sample }
     phone_number { Faker::PhoneNumber.cell_phone }
-    appointment_time { clinic.appointment_times.sample }
+    # appointment_time { clinic.appointment_times.sample }
     student_id { Faker::IDNumber.unique }
     user_id { Faker::IDNumber.unique }
     email_confirmation { "patient@example.com" }

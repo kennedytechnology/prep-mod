@@ -38,7 +38,7 @@ RSpec.describe Public::PatientsController, type: :controller do
           county: COUNTIES.sample,
           sex: %w(M F).sample,
           phone_number: Faker::PhoneNumber.cell_phone,
-          appointment_time: clinic.appointment_times.sample, 
+          # appointment_time: clinic.appointment_times.sample,
           student_id: Faker::IDNumber.unique,
           user_id: Faker::IDNumber.unique,
           email_confirmation: "patien@example.com",

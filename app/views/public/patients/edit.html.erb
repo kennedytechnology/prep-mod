@@ -36,15 +36,13 @@
             <button type="submit" name="next_step" value="appointment" class="button-action"> Save And Continue </button>    
         <% else %>
             <% if @step == "appointment" %>
-                <button type="button" class="button-action" data-value="open" data-action="click->inventory-new-entry#onLocationModal">Save and Continue →</button>
-                <%= render "/public/patients/edit/location_modal" %>
-            <% else %>
-                <%= submit_tag "Save and Continue →", class: "button-action" %>
-            <% end %>
+                <%= link_to 'Find Another Location', '/clinic/search?service[]=Testing', class: "button-action" %>
+            <% end %>    
+            <%= submit_tag "Save and Continue →", class: "button-action" %>
         <% end %>
-    <%# if @step == "consent_for_services" %>
-        <%# submit_tag "Save and Add Family Member →", class: "button-action" %>
-    <%# end %>
+        <%# if @step == "consent_for_services" %>
+            <%# submit_tag "Save and Add Family Member →", class: "button-action" %>
+        <%# end %>
 
     </div>
 

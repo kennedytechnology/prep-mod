@@ -191,8 +191,7 @@ PATIENT_COUNT.times.each do |i|
   clinic = clinics.sample
   birthday = Faker::Date.birthday
   patientEmail = Faker::Internet.email
-  Patient.create!(
-    clinic: clinic,
+  patient = Patient.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     middle_initial: ("A".."Z").to_a.sample,
@@ -209,12 +208,16 @@ PATIENT_COUNT.times.each do |i|
     access_code: Patient.generate_access_code,
     sex: %w(M F).sample,
     phone_number: "+14075366339",
-    appointment_time: clinic.appointment_times.sample, 
     student_id: Faker::IDNumber.unique,
     user_id: Faker::IDNumber.unique,
     email_confirmation: patientEmail,
     notify_via_sms: Faker::Boolean.boolean,
     notify_via_email: Faker::Boolean.boolean
+  )
+  Appointment.create!(
+    patient: patient,
+    clinic: clinic,
+    appointment_at: clinic.appointment_times.sample
   )
 end
 
