@@ -445,6 +445,7 @@ ActiveRecord::Schema.define(version: 2020_06_08_085520) do
     t.string "practice_backup_mobile_phone"
     t.string "county"
     t.string "unique_number"
+    t.string "license_state_of_issue"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

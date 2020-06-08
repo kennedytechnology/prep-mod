@@ -37,6 +37,7 @@ class CreateProviders < ActiveRecord::Migration[6.0]
       t.string :practice_backup_mobile_phone
       t.string :county
       t.string :unique_number
+      t.string :license_state_of_issue
 
       t.timestamps
     end

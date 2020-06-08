@@ -9,6 +9,7 @@ class ProviderEnrollment < ApplicationRecord
 
   after_create :set_default_status_and_unique_number, if: lambda { unique_number == nil }
   after_update :send_email, if: lambda { status == "accepted" }
+  after_update :create_provider, if: lambda { status == "accepted" }
 
   def set_default_status_and_unique_number
     self.status = "pending"
@@ -18,5 +19,9 @@ class ProviderEnrollment < ApplicationRecord
 
   def send_email
     ProviderEnrollmentMailer.acceptance_confirmation(self).deliver
+  end
+
+  def create_provider
+    Provider.create(self.attributes.except('id').except('status'))
   end
 end
