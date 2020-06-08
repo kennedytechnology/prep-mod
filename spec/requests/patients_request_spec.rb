@@ -66,13 +66,13 @@ RSpec.describe "Patients", type: :request do
     context "with invalid parameters" do
       it "does not create a new patient" do
         expect {
-          post patients_url, params: { patient: invalid_attributes }
+          post patients_url, params: { patient: attributes_for(:patient, first_name: "") }
         }.to change(Patient, :count).by(0)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
-        post patients_url, params: { patient: invalid_attributes }
-        expect(response).to be_successful
+        post patients_url, params: { patient: attributes_for(:patient) }
+        expect(response).to redirect_to(patients_url)
       end
     end
   end

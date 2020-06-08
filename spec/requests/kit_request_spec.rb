@@ -32,7 +32,19 @@ RSpec.describe "/kit", type: :request do
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      first_name: "",
+      last_name: "",
+      middle_initial: ("A".."Z").to_a.sample,
+      email: "new_kit@example.com",
+      date_of_birth: Faker::Date.birthday,
+      address: "3440 Brookhaven Road",
+      city: "Pasadena",
+      state: "MD",
+      zip_code: 21122,
+      county: COUNTIES.sample,
+      phone_number: Faker::PhoneNumber.cell_phone,
+    }
   }
 
   describe "GET /new" do
