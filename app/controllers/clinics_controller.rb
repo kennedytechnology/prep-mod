@@ -23,19 +23,25 @@ class ClinicsController < ClinicManagementController
 
   def create
     @clinic = Clinic.new(clinic_params)
-    
-    if @clinic.valid?
-      params["clinic_dates"].reject(&:blank?).each do |clinic_date|
-        @clinic_dup = @clinic.dup
-        @clinic_dup.clinic_date = Chronic.parse(clinic_date)
-        @clinic_dup.save
-        ClinicMailer.public_clinic_created(current_user, @clinic_dup).deliver
-      end
 
-      ClinicMailer.public_clinic_created(current_user, @clinic).deliver
-      redirect_to  clinics_path(clinic_date: 'upcoming')
-    else
-      render "new", alert: "Your clinic entry was not saved." + @clinic.errors.to_s
+    respond_to do |format|
+      if params[:reviewed] == "false"
+        format.js { render 'clinics/preview_form' }
+      else 
+        if @clinic.valid?
+          params["clinic_dates"].reject(&:blank?).each do |clinic_date|
+            @clinic_dup = @clinic.dup
+            @clinic_dup.clinic_date = Chronic.parse(clinic_date)
+            @clinic_dup.save
+            ClinicMailer.public_clinic_created(current_user, @clinic_dup).deliver
+          end
+
+          ClinicMailer.public_clinic_created(current_user, @clinic).deliver
+          format.html { redirect_to clinics_path(clinic_date: 'upcoming'), notice: "Successfully created clinic!" }
+        else
+          format.html { render :new }
+        end
+      end
     end
   end
 
@@ -49,16 +55,16 @@ class ClinicsController < ClinicManagementController
   end
 
   def update
-    if @clinic.update(clinic_params)
-      flash[:notice] = "Success. Clinic was updated successfully!"
-    else
-      flash[:error] = "Oops something went wrong. Please, try again!"
-    end
-
-    if params['save-submit']
-      redirect_to "/clinics"
-    else
-      redirect_back fallback_location: root_path
+    respond_to do |format|
+      if params[:reviewed] == "false"
+        format.js { render 'clinics/preview_form' }
+      else 
+        if @clinic.update(clinic_params)
+          format.html { redirect_to clinics_path(clinic_date: 'upcoming'), notice: "Successfully updated clinic!" }
+        else
+          format.html { render :new }
+        end
+      end
     end
   end
 

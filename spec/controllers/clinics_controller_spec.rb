@@ -69,8 +69,8 @@ RSpec.describe ClinicsController, type: :controller do
         clinic.reload
       end
 
-      it { expect(response).to redirect_to root_path }
-      it { expect(flash[:notice]).to match("Success. Clinic was updated successfully!") }
+      it { expect(response).to redirect_to clinics_path(clinic_date: 'upcoming') }
+      it { expect(flash[:notice]).to match("Successfully updated clinic!") }
       it { expect(clinic.clinic_date).to eq(Date.today) }
     end
   end
@@ -84,8 +84,8 @@ RSpec.describe ClinicsController, type: :controller do
         clinic.reload
       end
 
-      it { expect(response).to redirect_to clinics_path }
-      it { expect(flash[:notice]).to match("Success. Clinic was updated successfully!") }
+      it { expect(response).to redirect_to clinics_path(clinic_date: 'upcoming') }
+      it { expect(flash[:notice]).to match("Successfully updated clinic!") }
     end
   end
 
