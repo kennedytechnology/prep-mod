@@ -50,6 +50,7 @@ Rails.application.routes.draw do
   resources :supply_inventory_events
   resources :test_kits
   resources :provider_enrollments
+  resources :providers
   resources :messages, only: [:new, :create]
   resources :employers, only: [:index, :new, :create]
   devise_for :admin_users, ActiveAdmin::Devise.config
