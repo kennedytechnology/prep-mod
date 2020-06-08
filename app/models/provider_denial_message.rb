@@ -1,0 +1,2 @@
+class ProviderDenialMessage < ApplicationRecord
+end

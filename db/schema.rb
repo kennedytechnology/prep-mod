@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_01_105759) do
+ActiveRecord::Schema.define(version: 2020_06_08_104503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -363,6 +363,12 @@ ActiveRecord::Schema.define(version: 2020_06_01_105759) do
     t.string "check_in_code"
     t.text "signature_data"
     t.boolean "sharing_results_authorized"
+  end
+
+  create_table "provider_denial_messages", force: :cascade do |t|
+    t.text "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "provider_enrollments", force: :cascade do |t|
