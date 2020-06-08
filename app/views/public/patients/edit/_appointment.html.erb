@@ -10,14 +10,16 @@
                 </tr>
             </thead>
             <tbody>
-                <% @clinic.appointment_times.each do |time| %>
-                    <tr>
-                        <td>
-                            <%= f.radio_button(:appointment_time, time, class: "form-radio") %>
-                            <span class="ml-1"><%= time %></span>
-                        </td>
-                        <td> <p> <%= rand(10).to_i %> appointments available </p> </td>
-                    </tr>
+                <%= fields_for :appointment do |af| %>
+                    <% @clinic.appointment_times.each do |time| %>
+                        <tr>
+                            <td>
+                                <%= af.radio_button(:appointment_at, time, class: "form-radio") %>
+                                <span class="ml-1"><%= time %></span>
+                            </td>
+                            <td> <p> <%= rand(10).to_i %> appointments available </p> </td>
+                        </tr>
+                    <% end %>
                 <% end %>
             </tbody>
         </table>

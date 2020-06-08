@@ -31,9 +31,9 @@
 </div>
 <div class="mt-4">
   <%= link_to "All", clinic_queued_patients_path(clinic_id: @clinic.id), class: "p-2 mr-4 bg-blue-500 rounded text-white" %>
-  <% Patient.aasm.states.collect(&:name).each do |state| %>
+  <% Appointment.aasm.states.collect(&:name).each do |state| %>
     <%= link_to clinic_queued_patients_path(clinic_id: @clinic.id, state: state), class: "p-2 mr-4 bg-blue-500 rounded text-white" do %>
-      <%= state.to_s.titleize %> (<%= @clinic.patients.count{|p| p.queue_state == state.to_s }%>)
+      <%= state.to_s.titleize %> (<%= @clinic.appointments.count{|a| a.queue_state == state.to_s }%>)
     <% end %>
   <% end %>
 </div>
@@ -41,8 +41,8 @@
 <% if params[:state] %>
   <%= render partial: 'patient_table', locals: {queue_state: params[:state]} %>
 <% else %>
-  <% Patient.aasm.states.collect(&:name).each do |queue_state| %>
-    <% if @patients.select{|p| p.queue_state.to_s == queue_state.to_s}.any? %>
+  <% Appointment.aasm.states.collect(&:name).each do |queue_state| %>
+    <% if @clinic.appointments.select{|a| a.queue_state.to_s == queue_state.to_s}.any? %>
       <%= render partial: 'patient_table', locals: {queue_state: queue_state} %>
     <% end %>
   <% end %>

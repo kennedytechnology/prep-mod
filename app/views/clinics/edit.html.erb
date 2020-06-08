@@ -1,276 +1,294 @@
 <%= render '/clinics/header' %>
 
-<%= form_with model: @clinic, local: true do |f| %>
-    <div class="field-fullwidth">
-        <p class="title">Is clinic public or private? <span class="field-required">*</span> </p>
-        <div class="w-3/12 radio-buttons-container">
-            <div>
-                <%= f.radio_button :public_or_private, "public", id: "clinic_status_public", class: "form-radio" %>
-                <%= f.label :public_or_private, value: "public", for: "clinic_status_public" do %>
-                <span>Public</span>
-                <% end %>
-            </div>
-            <div>
-                <%= f.radio_button :public_or_private, "private", id: "clinic_status_private", class: "form-radio" %>
-                <%= f.label :public_or_private, value: "private", for: "clinic_status_private" do %>
-                <span>Private</span>
-                <% end %>
-            </div>
-        </div>
-    </div>
+<% if @clinic.errors.any? %>
+  <div id="error_explanation" class="p-4 border-2 bg-red-100 border-red-500 mb-4"> 
+    <h2 class="text-lg font-bold"><%= pluralize(@clinic.errors.count, "error") %> prohibited this article from being saved:</h2>
+ 
+    <ul class="list-disc ml-8">
+    <% @clinic.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
 
-    <div class="field-side-by-side">
-        <div>
-            <p class="title">Services Provided <span class="field-required">*</span></p>
-            <div class="w-full checkboxes-container">
-                <%= collection_check_boxes(:clinic, :service_ids, ClinicService.where(category: "clinics"), :id, :name) do |b| %>
+<div data-controller="review-form">
+    <%= form_with model: @clinic, remote: true, data: {target: "review-form.form"} do |f| %>
+        <div class="field-fullwidth">
+            <p class="title">Is clinic public or private? <span class="field-required">*</span> </p>
+            <div class="w-3/12 radio-buttons-container">
                 <div>
-                    <span> <%= b.check_box(class: "form-checkbox") %> </span>
-                    <span class="label"> <%= b.label %> </span>
-                </div>
-                <% end %>
-            </div>
-        </div>
-
-        <div>
-            <p class="title">Open to <span class="field-required">*</span></p>
-            <div class="w-full checkboxes-container">
-                <%= collection_check_boxes(:clinic, :age_group_ids, ClinicAgeGroup.all, :id, :name) do |b| %>
-                <div>
-                    <span> <%= b.check_box(class: "form-checkbox") %> </span>
-                    <span class="label"> <%= b.label %> </span>
-                </div>
-                <% end %>
-            </div>
-        </div>
-    </div>
-
-    <div class="field-fullwidth">
-        <div class="w-full md:w-1/2">
-            <%= f.label :venue_type, class: "block" do %>
-                <span> Venue Type </span>
-                <span class="field-required">*</span>
-            <% end %>
-            <%= f.select :venue_type, VENUE_TYPES, {prompt: "Select"}, {class: "form-select w-full", data: {action: "change->inventory-new-entry#updateModalField"}} %>
-        </div>
-    </div>
-
-    <div class="field-side-by-side">
-        <div>
-            <h1 class="title">Date, Time, Location</h1>
-            <%= f.label :clinic_date, class: "block" do %>
-                <span> Clinic Date </span>
-                <span class="field-required">*</span>
-            <% end %>
-            <%= f.text_field :clinic_date, class: "form-input", placeholder: "MM/DD/YYYY",
-                        data: {
-                                controller: "flatpickr",
-                                flatpickr_default_date: @clinic.clinic_date.strftime("%Y-%m-%d")
-                                }
-            %>
-            <p class="label">Start Time <span class="field-required">*</span></p>
-            <% 
-                start_time = Time.parse("1 AM").to_i
-                end_time = Time.parse("12 PM").to_i
-                values = (start_time..end_time).step(15.minutes)
-            %>
-            <select class="hour form-select" name="clinic[start_hour_minute]">
-                <%= options_for_select(values.map{ |t| Time.at(t).strftime("%I:%M") }, @clinic.start_time ? @clinic.start_time.strftime('%I:%M') : nil) %>
-            </select>
-
-            <select class="meridiem form-select" name="clinic[start_meridiem]">
-                <%= options_for_select(['AM', 'PM'], @clinic.start_time ? @clinic.start_time.strftime("%p") : nil) %>
-            </select>
-
-            <p class="label">End Time <span class="field-required">*</span></p>
-            <select class="hour form-select"
-                name="clinic[end_hour_minute]">
-                <%= options_for_select(values.map{ |t| Time.at(t).strftime("%I:%M") }, @clinic.end_time ? @clinic.end_time.strftime('%I:%M') : nil) %>
-            </select>
-
-            <select name="clinic[end_meridiem]"
-                class="meridiem form-select">
-                <%= options_for_select(['AM', 'PM'], @clinic.end_time ? @clinic.end_time.strftime("%p") : nil) %>
-            </select>
-        </div>
-
-        <div>
-            <h1 class="title"> &nbsp; </h1>
-
-            <%= f.label :county, class: "block" do %>
-                <span> County </span>
-                <span class="field-required">*</span>
-            <% end %>
-            <%= f.select :county, COUNTIES, {prompt: "Select"}, {class: "form-select w-full"} %>
-
-            <%= f.label :venue_name, class: "block" %>
-            <%= f.text_field :venue_name, placeholder: "Location", class: "form-input w-full" %>
-
-            <%= f.label :address, class: "block" %>
-            <%= f.text_field :address, id: "autocomplete", onFocus: "geolocate()", class: "form-input w-full", placeholder: "Address" %>
-            
-            <%= render partial: "public/clinics/google_maps_script" %>
-
-            <div class="grid grid-cols-3 gap-4">
-                <div>
-                    <%= f.label :zip, "Zip Code", class: "block" %>
-                    <%= f.text_field :zip, placeholder: "Zip", id: "postal_code", class: "form-input" %>
+                    <%= f.radio_button :public_or_private, "public", id: "clinic_status_public", class: "form-radio" %>
+                    <%= f.label :public_or_private, value: "public", for: "clinic_status_public" do %>
+                    <span>Public</span>
+                    <% end %>
                 </div>
                 <div>
-                    <%= f.label :city, class: "block" %>
-                    <%= f.text_field :city, placeholder: "City", id: "locality", class: "form-input" %>
-                </div>
-                <div>
-                    <%= f.label :state, class: "block" %>
-                    <%= f.text_field :state, placeholder: "State", id: "administrative_area_level_1", class: "form-input" %>
+                    <%= f.radio_button :public_or_private, "private", id: "clinic_status_private", class: "form-radio" %>
+                    <%= f.label :public_or_private, value: "private", for: "clinic_status_private" do %>
+                    <span>Private</span>
+                    <% end %>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="field-fullwidth">
-        <h1 class="title"> Appointments Information </h1>
-        <p class="label"> Appointments available <span class="field-required">*</span> </p>
-        <div class="w-2/4 radio-buttons-container mb-4">
+        <div class="field-side-by-side">
             <div>
-                <%= f.radio_button :appointments_available, "Yes, required", id: "yes_required", class: "form-radio" %>
-                <%= f.label :clinic_status, value: "public", for: "yes_required" do %>
-                <span> Yes, required </span>
-                <% end %>
-            </div>
-            
-            <div>
-                <%= f.radio_button :appointments_available, "Yes, optional", id: "yes_optional", class: "form-radio" %>
-                <%= f.label :clinic_status, value: "public", for: "yes_optional" do %>
-                <span> Yes, optional </span>
-                <% end %>
+                <p class="title">Services Provided <span class="field-required">*</span></p>
+                <div class="w-full checkboxes-container">
+                    <%= collection_check_boxes(:clinic, :service_ids, ClinicService.where(category: "clinics"), :id, :name) do |b| %>
+                    <div>
+                        <span> <%= b.check_box(class: "form-checkbox") %> </span>
+                        <span class="label"> <%= b.label %> </span>
+                    </div>
+                    <% end %>
+                </div>
             </div>
 
             <div>
-                <%= f.radio_button :appointments_available, "No (Walk-In)", id: "no_walk_in", class: "form-radio" %>
-                <%= f.label :clinic_status, value: "public", for: "no_walk_in" do %>
-                <span> No (Walk-In) </span>
-                <% end %>
-            </div>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-                <%= f.label :appointment_frequency_minutes, "Appointment Frequency: Every", class: "block" %>
-                <%= f.select :appointment_frequency_minutes, CLINIC_APPOINTMENT_INTERVALS, {prompt: "Minutes"}, {class: "form-select w-full"} %>
-            </div>
-
-            <div>
-                <%= f.label :appointment_slots, "Appointment Slots", class: "block" %>
-                <%= f.select :appointment_slots, (1..50), {prompt: "Select"}, {class: "form-select w-full"} %>
+                <p class="title">Open to <span class="field-required">*</span></p>
+                <div class="w-full checkboxes-container">
+                    <%= collection_check_boxes(:clinic, :age_group_ids, ClinicAgeGroup.all, :id, :name) do |b| %>
+                    <div>
+                        <span> <%= b.check_box(class: "form-checkbox") %> </span>
+                        <span class="label"> <%= b.label %> </span>
+                    </div>
+                    <% end %>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="field-side-by-side">
-        <div>
-            <h1 class="title">Contact Information</h1>
-            <%= f.label :contact_person do %>
-                <span> Contact Person </span>
-                <span class="field-required">*</span>
-            <% end %>
-            <%= f.text_field :contact_person, placeholder: "Contact Person", class: "form-input w-full" %>
-
-            <%= f.label :backup_contact_person do %>
-                <span> Back-Up Contact Person </span>
-                <span class="field-required">*</span>
-            <% end %>
-            <%= f.text_field :backup_contact_person, placeholder: "Back-Up Contact Person", class: "form-input w-full" %>
-        </div>
-        <div>
-            <h1 class="title"> &nbsp; </h1>
-            <%= f.label :contact_phone_number do %>
-                <span> Contact Phone Number </span>
-                <span class="field-required">*</span>
-            <% end %>
-            <%= f.text_field :contact_phone_number, placeholder: "Contact Number", class: "form-input w-full" %>
-
-            <%= f.label :backup_contact_phone_number do %>
-                <span> Back-Up Contact Phone Number </span>
-                <span class="field-required">*</span>
-            <% end %>
-            <%= f.text_field :backup_contact_phone_number, placeholder: "Back-Up Contact Number", class: "form-input w-full" %>
-        </div>
-    </div>
-
-    <div class="field-fullwidth">
-        <h3 class="title"> Additional Clinic Details </h3>
-        <div class="grid grid-cols-2 gap-4 items-start">
-            <div class="col-span-2">
-                <%= f.label :incidents_comments, "Incidents Comments", class: "block" %>
-                <%= f.text_area :incidents_comments, placeholder: "Enter Details Here", class: "form-textarea w-1/2" %>
-            </div>
-        </div>
-    </div>    
-
-    <div class="field-fullwidth">
-        <h3 class="title"> Registration and Staff </h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-                <%= f.label :students_registered, "Number of Patients Registered", class: "block" %>
-                <%= f.number_field :students_registered, placeholder: "Number of Patients Registered", class: "form-input w-full" %>
-            </div>
-
-            <div>
-                <%= f.label :lead_vaccinator_name, class: "block" do %>
-                    <span> Lead Tester’s Name </span>
+        <div class="field-fullwidth">
+            <div class="w-full md:w-1/2">
+                <%= f.label :venue_type, class: "block" do %>
+                    <span> Venue Type </span>
                     <span class="field-required">*</span>
                 <% end %>
-                <%= f.text_field :lead_vaccinator_name, placeholder: "Lead Tester's Name", class: "form-input w-full" %>
+                <%= f.select :venue_type, VENUE_TYPES, {prompt: "Select"}, {class: "form-select w-full"} %>
             </div>
         </div>
 
-        <h1 class="title"> &nbsp; </h1>
-        <p class="label w-full"> Clinic Staff </p>
-        <div class="fields grid grid-cols-2 gap-3">
-            <%= f.fields_for :clinic_personnel do |c| %>
-                <%= render 'clinics/clinic_personnel', f: c %>
-            <% end %>
-        </div>
-        <%= link_to_add_row('Add more staff', f, :clinic_personnel, class: 'button-add-more-staff') %>
-    </div>
+        <div class="field-side-by-side">
+            <div>
+                <h1 class="title">Date, Time, Location</h1>
+                <%= f.label :clinic_date, class: "block" do %>
+                    <span> Clinic Date </span>
+                    <span class="field-required">*</span>
+                <% end %>
+                <%= f.text_field :clinic_date, class: "form-input", placeholder: "MM/DD/YYYY",
+                            data: {
+                                    controller: "flatpickr",
+                                    flatpickr_default_date: @clinic.clinic_date.strftime("%Y-%m-%d")
+                                    }
+                %>
+                <p class="label">Start Time <span class="field-required">*</span></p>
+                <% 
+                    start_time = Time.parse("1 AM").to_i
+                    end_time = Time.parse("12 PM").to_i
+                    values = (start_time..end_time).step(15.minutes)
+                %>
+                <select class="hour form-select" name="clinic[start_hour_minute]">
+                    <%= options_for_select(values.map{ |t| Time.at(t).strftime("%I:%M") }, @clinic.start_time ? @clinic.start_time.strftime('%I:%M') : nil) %>
+                </select>
 
-    <div class="field-fullwidth">
-        <h1 class="title"> Test Kits </h1>
-        <div class="flex justify-end mb-4">
-            <%= link_to_add_test_kit('Add More Test Kits', f, :test_kits, class: 'button-primary') %>
-        </div>
-        <div class="flex flex-col">
-            <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-                <div class="align-middle inline-block min-w-full overflow-hidden border-b border-gray-200">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th> Test Name </th>
-                                <th> Manufacturer </th>
-                                <th> Lot Number </th>
-                                <th> Type </th>
-                                <th> Processing </th>
-                                <th> Expiration Date </th>
-                                <th> # of Test Kits </th>
-                                <th> Action </th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white" id="testKits">
-                            <% @clinic.test_kits.each do |test_kit| %>
-                                <%= f.fields_for :test_kits, test_kit do |test_kit_fields| %>
-                                    <%= render 'clinics/test_kit', f: test_kit_fields %>
-                                <% end %>
-                            <% end %>
-                        </tbody>
-                    </table>
+                <select class="meridiem form-select" name="clinic[start_meridiem]">
+                    <%= options_for_select(['AM', 'PM'], @clinic.start_time ? @clinic.start_time.strftime("%p") : nil) %>
+                </select>
+
+                <p class="label">End Time <span class="field-required">*</span></p>
+                <select class="hour form-select"
+                    name="clinic[end_hour_minute]">
+                    <%= options_for_select(values.map{ |t| Time.at(t).strftime("%I:%M") }, @clinic.end_time ? @clinic.end_time.strftime('%I:%M') : nil) %>
+                </select>
+
+                <select name="clinic[end_meridiem]"
+                    class="meridiem form-select">
+                    <%= options_for_select(['AM', 'PM'], @clinic.end_time ? @clinic.end_time.strftime("%p") : nil) %>
+                </select>
+            </div>
+
+            <div>
+                <h1 class="title"> &nbsp; </h1>
+
+                <%= f.label :county, class: "block" do %>
+                    <span> County </span>
+                    <span class="field-required">*</span>
+                <% end %>
+                <%= f.select :county, COUNTIES, {prompt: "Select"}, {class: "form-select w-full"} %>
+
+                <%= f.label :venue_name, class: "block" %>
+                <%= f.text_field :venue_name, placeholder: "Location", class: "form-input w-full" %>
+
+                <%= f.label :address, class: "block" %>
+                <%= f.text_field :address, id: "autocomplete", onFocus: "geolocate()", class: "form-input w-full", placeholder: "Address" %>
+                
+                <%= render partial: "public/clinics/google_maps_script" %>
+
+                <div class="grid grid-cols-3 gap-4">
+                    <div>
+                        <%= f.label :zip, "Zip Code", class: "block" %>
+                        <%= f.text_field :zip, placeholder: "Zip", id: "postal_code", class: "form-input" %>
+                    </div>
+                    <div>
+                        <%= f.label :city, class: "block" %>
+                        <%= f.text_field :city, placeholder: "City", id: "locality", class: "form-input" %>
+                    </div>
+                    <div>
+                        <%= f.label :state, class: "block" %>
+                        <%= f.text_field :state, placeholder: "State", id: "administrative_area_level_1", class: "form-input" %>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="flex justify-end mt-8">
-        <%= f.button "Review & Submit", class: "button-primary" %>
-        <%= link_to "Cancel", clinics_path, class: "button-primary" %>
-    </div>
-<% end %>
+        <div class="field-fullwidth">
+            <h1 class="title"> Appointments Information </h1>
+            <p class="label"> Appointments available <span class="field-required">*</span> </p>
+            <div class="w-2/4 radio-buttons-container mb-4">
+                <div>
+                    <%= f.radio_button :appointments_available, "Yes, required", id: "yes_required", class: "form-radio" %>
+                    <%= f.label :clinic_status, value: "public", for: "yes_required" do %>
+                    <span> Yes, required </span>
+                    <% end %>
+                </div>
+                
+                <div>
+                    <%= f.radio_button :appointments_available, "Yes, optional", id: "yes_optional", class: "form-radio" %>
+                    <%= f.label :clinic_status, value: "public", for: "yes_optional" do %>
+                    <span> Yes, optional </span>
+                    <% end %>
+                </div>
+
+                <div>
+                    <%= f.radio_button :appointments_available, "No (Walk-In)", id: "no_walk_in", class: "form-radio" %>
+                    <%= f.label :clinic_status, value: "public", for: "no_walk_in" do %>
+                    <span> No (Walk-In) </span>
+                    <% end %>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <%= f.label :appointment_frequency_minutes, "Appointment Frequency: Every", class: "block" %>
+                    <%= f.select :appointment_frequency_minutes, CLINIC_APPOINTMENT_INTERVALS, {prompt: "Minutes"}, {class: "form-select w-full"} %>
+                </div>
+
+                <div>
+                    <%= f.label :appointment_slots, "Appointment Slots", class: "block" %>
+                    <%= f.select :appointment_slots, (1..50), {prompt: "Select"}, {class: "form-select w-full"} %>
+                </div>
+            </div>
+        </div>
+
+        <div class="field-side-by-side">
+            <div>
+                <h1 class="title">Contact Information</h1>
+                <%= f.label :contact_person do %>
+                    <span> Contact Person </span>
+                    <span class="field-required">*</span>
+                <% end %>
+                <%= f.text_field :contact_person, placeholder: "Contact Person", class: "form-input w-full" %>
+
+                <%= f.label :backup_contact_person do %>
+                    <span> Back-Up Contact Person </span>
+                    <span class="field-required">*</span>
+                <% end %>
+                <%= f.text_field :backup_contact_person, placeholder: "Back-Up Contact Person", class: "form-input w-full" %>
+            </div>
+            <div>
+                <h1 class="title"> &nbsp; </h1>
+                <%= f.label :contact_phone_number do %>
+                    <span> Contact Phone Number </span>
+                    <span class="field-required">*</span>
+                <% end %>
+                <%= f.text_field :contact_phone_number, placeholder: "Contact Number", class: "form-input w-full" %>
+
+                <%= f.label :backup_contact_phone_number do %>
+                    <span> Back-Up Contact Phone Number </span>
+                    <span class="field-required">*</span>
+                <% end %>
+                <%= f.text_field :backup_contact_phone_number, placeholder: "Back-Up Contact Number", class: "form-input w-full" %>
+            </div>
+        </div>
+
+        <div class="field-fullwidth">
+            <h3 class="title"> Additional Clinic Details </h3>
+            <div class="grid grid-cols-2 gap-4 items-start">
+                <div class="col-span-2">
+                    <%= f.label :incidents_comments, "Incidents Comments", class: "block" %>
+                    <%= f.text_area :incidents_comments, placeholder: "Enter Details Here", class: "form-textarea w-1/2" %>
+                </div>
+            </div>
+        </div>    
+
+        <div class="field-fullwidth">
+            <h3 class="title"> Registration and Staff </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <%= f.label :students_registered, "Number of Patients Registered", class: "block" %>
+                    <%= f.number_field :students_registered, placeholder: "Number of Patients Registered", class: "form-input w-full" %>
+                </div>
+
+                <div>
+                    <%= f.label :lead_vaccinator_name, class: "block" do %>
+                        <span> Lead Tester’s Name </span>
+                        <span class="field-required">*</span>
+                    <% end %>
+                    <%= f.text_field :lead_vaccinator_name, placeholder: "Lead Tester's Name", class: "form-input w-full" %>
+                </div>
+            </div>
+
+            <h1 class="title"> &nbsp; </h1>
+            <p class="label w-full"> Clinic Staff </p>
+            <div class="fields grid grid-cols-2 gap-3">
+                <%= f.fields_for :clinic_personnel do |c| %>
+                    <%= render 'clinics/clinic_personnel', f: c %>
+                <% end %>
+            </div>
+            <%= link_to_add_row('Add more staff', f, :clinic_personnel, class: 'button-add-more-staff') %>
+        </div>
+
+        <div class="field-fullwidth">
+            <h1 class="title"> Test Kits </h1>
+            <div class="flex justify-end mb-4">
+                <%= link_to_add_test_kit('Add More Test Kits', f, :test_kits, class: 'button-primary') %>
+            </div>
+            <div class="flex flex-col">
+                <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+                    <div class="align-middle inline-block min-w-full overflow-hidden border-b border-gray-200">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th> Test Name </th>
+                                    <th> Manufacturer </th>
+                                    <th> Lot Number </th>
+                                    <th> Type </th>
+                                    <th> Processing </th>
+                                    <th> Expiration Date </th>
+                                    <th> # of Test Kits </th>
+                                    <th> Action </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white" id="testKits">
+                                <% @clinic.test_kits.each do |test_kit| %>
+                                    <%= f.fields_for :test_kits, test_kit do |test_kit_fields| %>
+                                        <%= render 'clinics/test_kit', f: test_kit_fields %>
+                                    <% end %>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <%= hidden_field_tag "reviewed", false, id: "reviewed_form_hidden_tag" %>
+
+        <div class="flex justify-end mt-8">
+            <%= submit_tag 'Preview & Submit', name: 'preview_button', class: "button-primary", data: {action: "click->review-form#openModal"} %>
+            <%= link_to "Cancel", clinics_path, class: "button-primary" %>
+        </div>
+    <% end %>
+
+    <%= render "clinics/preview_modal" %>
+</div>

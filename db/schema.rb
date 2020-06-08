@@ -62,6 +62,17 @@ ActiveRecord::Schema.define(version: 2020_06_08_104503) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "appointments", force: :cascade do |t|
+    t.bigint "clinic_id", null: false
+    t.bigint "patient_id", null: false
+    t.datetime "appointment_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "queue_state"
+    t.index ["clinic_id"], name: "index_appointments_on_clinic_id"
+    t.index ["patient_id"], name: "index_appointments_on_patient_id"
+  end
+
   create_table "clinic_age_groups", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -303,7 +314,6 @@ ActiveRecord::Schema.define(version: 2020_06_08_104503) do
   end
 
   create_table "patients", force: :cascade do |t|
-    t.integer "clinic_id"
     t.integer "student_id"
     t.string "vaccination_status"
     t.integer "clinic_vaccine_id"
@@ -355,10 +365,8 @@ ActiveRecord::Schema.define(version: 2020_06_08_104503) do
     t.string "signatory_last_name"
     t.string "insured_first_name"
     t.string "insured_last_name"
-    t.string "appointment_time"
     t.string "occupation"
     t.string "race"
-    t.string "queue_state"
     t.string "notification_preferences"
     t.string "check_in_code"
     t.text "signature_data"
@@ -545,6 +553,8 @@ ActiveRecord::Schema.define(version: 2020_06_08_104503) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "appointments", "clinics"
+  add_foreign_key "appointments", "patients"
   add_foreign_key "supply_inventory_events", "supply_inventories"
   add_foreign_key "test_kits", "clinics"
 end

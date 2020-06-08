@@ -14,11 +14,11 @@ class QueuedPatientsController < ClinicManagementController
   end
 
   def update_status
-    @patient = Patient.find(params[:id])
-    raise "Access denied" unless @patient.available_event_names.include?(params[:event])
-    @patient.send(params[:event])
-    @patient.save
-    redirect_back fallback_location: clinic_queued_patients_path(@patient.clinic)
+    @appointment = Appointment.find(params[:id])
+    raise "Access denied" unless @appointment.available_event_names.include?(params[:event])
+    @appointment.send(params[:event])
+    @appointment.save
+    redirect_back fallback_location: clinic_queued_patients_path(@appointment.clinic)
   end
 
   def update_clinic_status

@@ -61,6 +61,12 @@ input {
     &.form-input,
     &.form-select {
         @apply rounded-sm;
+
+        &:disabled {
+            @apply px-3 mb-4 text-gray-400;
+            min-height: 50px;
+            max-height: 50px;
+        }
     }
 
     &.form-radio,

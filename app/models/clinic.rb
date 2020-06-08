@@ -5,7 +5,8 @@ class Clinic < ApplicationRecord
   has_many :clinic_vaccines
   has_many :clinic_personnel, class_name: "ClinicStaff"
   has_many :clinic_events
-  has_many :patients #, through: :clinic_events
+  has_many :appointments
+  has_many :patients, through: :appointments
   has_and_belongs_to_many :users
   has_and_belongs_to_many :services, class_name: "ClinicService"
   has_and_belongs_to_many :age_groups, class_name: "ClinicAgeGroup"
@@ -26,7 +27,7 @@ class Clinic < ApplicationRecord
     :end_hour_minute, :end_meridiem
 
   validates :public_or_private, presence: true
-  validates :clinic_date, presence: true
+  # validates :clinic_date, presence: true
   validates :venue_name, presence: true
   validates :county, presence: true
   validates :address, presence: true

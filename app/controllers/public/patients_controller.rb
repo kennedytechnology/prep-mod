@@ -18,8 +18,16 @@ class Public::PatientsController < ApplicationController
     load_patient_and_clinic
     parse_dates
     @patient ||= Patient.new
+    
     @patient.update_attributes(patient_params) if params[:patient]
     @patient.save(validate: false)
+
+    if params[:appointment]
+      @appointment = Appointment.new(clinic: @clinic, patient: @patient)
+      @appointment.update_attributes(appointment_params) 
+      @appointment.update_attributes(appointment_params)
+    end
+
     session[:patient_id] = @patient.id
 
     @patient.patient_family_members.create if @patient.patient_family_members.empty? && @step == "add_family"
@@ -85,8 +93,8 @@ class Public::PatientsController < ApplicationController
       attributes = pfm.attributes
       attributes.delete('id')
       attributes.delete('patient_id')
-      attributes['appointment_time'] = pfm.patient.appointment_time
       patient = Patient.create(attributes)
+      Appointment.create(patient: patient, clinic: @clinic, appointment_at: @appointment.appointment_at)
     end
   end
 
@@ -131,6 +139,10 @@ class Public::PatientsController < ApplicationController
         :insurance_company_name, :group_number_for_insurance,
         :member_id_for_insurance, :patient_id]
     )
+  end
+
+  def appointment_params
+    params.require(:appointment).permit(:appointment_at)
   end
 
 end
