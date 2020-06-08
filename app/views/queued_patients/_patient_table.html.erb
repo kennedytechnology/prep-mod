@@ -1,6 +1,6 @@
 <h3 class="text-2xl font-bold mt-4 mb-2"><%= queue_state.to_s.titleize %> Patients</h3>
 
-<table class="table w-full text-center">
+<table class="table w-full">
   <thead><tr class="border-b-2">
     <th>Name</th>
     <th>Date of Birth</th>
@@ -9,22 +9,20 @@
     <th>Actions</th>
 
   </tr></thead>
-  <% @clinic.appointments.select{|a| a.queue_state.to_s == queue_state.to_s}.each do |appointment| %>
-    <% patient = appointment.patient %>
-    <tr class="border-b-2">
+  <% @patients.select{|p| p.queue_state.to_s == queue_state.to_s}.each do |patient| %>
+    <tr class="border-b-2" data-target="clinic-activity-patients.searchableRow" data-search-content="<%= patient.full_name.try(:downcase) %>">
       <td><%= patient.full_name %></td>
       <td><%= patient.date_of_birth.try(:strftime, '%m/%d/%y') %></td>
-      <td class="text-center"><%= patient.appointments.where(clinic: @clinic).last.appointment_at %></td>
-      <td><%= appointment.queue_state.titleize %></td>
-      <td class="text-right">
-        <% appointment.available_event_names.each do |event| %>
+      <td><%= patient.appointment_time %></td>
+      <td><%= patient.queue_state.titleize %></td>
+      <td>
+        <% patient.available_event_names.each do |event| %>
           <%= link_to event.titleize,
             update_status_clinic_queued_patient_path(appointment.id, clinic_id: @clinic.id, event: event),
             data: {confirm: "Are you sure you want to #{event.humanize(capitalize: false)} this patient's appointment at this clinic?"},
             class: "button-action",
             method: 'post'
           %>
-
         <% end %>
       </td>
     </tr>
