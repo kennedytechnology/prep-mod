@@ -12,5 +12,10 @@ FactoryBot.define do
     product_name { "Product Name" }
     county { COUNTIES.unshift("All").sample }
     venue_name { Clinic.pluck(:venue_name).unshift("All").sample }
+
+    factory :invalid_supply_inventory do
+      item_name {""}
+      item_type {""}
+    end
   end
 end

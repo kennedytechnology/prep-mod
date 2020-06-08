@@ -47,14 +47,14 @@ class Patient < ApplicationRecord
   end
 
   def sms_invite
-    client = Twilio::REST::Client.new
+    client = SmsClient.new
     to_number = phone_number
     to_number = "+14075366339" if Rails.env.development?
-    client.messages.create({
+    client.send_message(
       from: ENV['TWILIO_FROM_PHONE'],
       to: to_number,
       body: "Your registration is complete. To schedule your COVID-19 test, go to #{ENV['SITE_URL']}/client/registration/#{access_code}"
-    })
+    )
   end
 
   ransacker :date_of_birth_cont, type: :date do
