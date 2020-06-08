@@ -3,13 +3,10 @@ class QueuedPatientsController < ClinicManagementController
   before_action :find_clinic
 
   def index
-    @q = Patient.ransack(params[:q])
     @page_title = "Manage Virtual Queue"
     @patients = @clinic.patients
     @patient = Patient.new
-    if @q.result
-      @patients = @q.result.page(params[:page]).to_a.uniq
-    end
+    
   end
 
   def send_check_in_reminders
