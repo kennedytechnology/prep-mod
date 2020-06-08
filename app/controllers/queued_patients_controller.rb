@@ -6,6 +6,7 @@ class QueuedPatientsController < ClinicManagementController
     @page_title = "Manage Virtual Queue"
     @patients = @clinic.patients
     @patient = Patient.new
+    
   end
 
   def send_check_in_reminders
