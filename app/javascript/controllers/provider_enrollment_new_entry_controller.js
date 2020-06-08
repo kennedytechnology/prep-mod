@@ -1,7 +1,7 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = []
+  static targets = ["modal"]
 
   connect() {}
 
@@ -23,5 +23,15 @@ export default class extends Controller {
   setStatus(e) {
     let statusField = document.getElementById("provider_enrollment_status");
     statusField.value = e.target.value.split(' ').join('_').toLowerCase();
+  }
+
+  setDeniedStatus(e) {
+    let statusField = document.getElementById("provider_enrollment_status");
+    statusField.value = "denied";
+  }
+
+  toggleModal(e) {
+    this.modalTarget.classList.toggle('opacity-0');
+    this.modalTarget.classList.toggle('pointer-events-none');
   }
 }
