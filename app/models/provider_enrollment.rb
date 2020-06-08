@@ -19,5 +19,4 @@ class ProviderEnrollment < ApplicationRecord
   def send_email
     ProviderEnrollmentMailer.acceptance_confirmation(self).deliver
   end
-
 end

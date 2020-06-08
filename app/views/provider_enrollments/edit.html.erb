@@ -340,9 +340,11 @@
         <%= f.text_area :additional_info, class: "form-textarea w-full" %>
     </div>
 
+    <%= f.hidden_field :status, value: "" %>
+
     <div class="flex justify-end">
-        <%= f.submit "Accepted", class: "button-action" %>
-        <%= f.submit "Denied", class: "button-action" %>
-        <%= f.submit "Need Additional Information", class: "button-action" %>
+        <%= f.submit "Accepted", class: "button-action", data: {action: "click->provider-enrollment-new-entry#setStatus"} %>
+        <%= f.submit "Denied", class: "button-action", data: {action: "click->provider-enrollment-new-entry#setStatus"} %>
+        <%= f.submit "Need Additional Information", class: "button-action", data: {action: "click->provider-enrollment-new-entry#setStatus"} %>
     </div>
 <% end %>

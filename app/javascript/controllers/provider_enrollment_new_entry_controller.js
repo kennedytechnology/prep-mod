@@ -1,6 +1,4 @@
-import {
-  Controller
-} from "stimulus"
+import { Controller } from "stimulus"
 
 export default class extends Controller {
   static targets = []
@@ -20,5 +18,10 @@ export default class extends Controller {
       $(currentTextarea).text("");
       $(currentTextarea).removeClass("invisible");
     }
+  }
+
+  setStatus(e) {
+    let statusField = document.getElementById("provider_enrollment_status");
+    statusField.value = e.target.value.split(' ').join('_').toLowerCase();
   }
 }
