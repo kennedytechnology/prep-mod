@@ -1,65 +1,104 @@
 <h1 class="main-title"> COVID-19 Response Reports in Real-Time </h1>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-    <div class="shadow rounded-lg p-6 border"> 
-        <h1 class="uppercase text-brand-blue-600 mb-2 font-bold"> Snapshot </h1>
-        <p class="text-sm text-gray-500 leading-5 italic">
-            A quick look at metrics of interest by demographics, region, or county: 
-            number of people tested, positive results, negative results, evidence of immunity.
-        </p>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div class="rounded-sm border-2 p-8 flex items-stretch" style="min-height: 150px;">
+        <div class="pr-4 flex justify-center items-center"> 
+            <%= image_tag 'icons/snapshot.png', style: "max-width: 80px;" %>
+        </div>
+        <div class="pl-4 border-l-2 flex flex-col justify-center text-gray-600">
+            <h1 class="text-2xl uppercase mb-2 font-bold"> Customized </h1>
+            <p class="text-sm leading-5 italic"> 
+                Choose from a variety of data points to create your own report.
+            </p>
+        </div>
     </div>
 
-    <div class="shadow rounded-lg p-6 border"> 
-        <h1 class="uppercase text-brand-blue-600 mb-2 font-bold"> Capacity </h1>
-        <p class="text-sm text-gray-500 leading-5 italic"> 
-            A summary of resources and utilization by venue, county, or statewide.
-            Includes available testing appointments, scheduled appointments, pockets of need.
-        </p>
+    <div class="rounded-sm border-2 p-8 flex items-stretch" style="min-height: 200px;">
+        <div class="pr-4 flex justify-center items-center"> 
+            <%= image_tag 'icons/capacity.png', style: "max-width: 80px;" %>
+        </div>
+        <div class="pl-4 border-l-2 flex flex-col justify-center text-gray-600">
+            <h1 class="text-2xl uppercase mb-2 font-bold"> Capacity </h1>
+            <p class="text-sm leading-5 italic"> 
+                A summary of resources and utilization by venue, county, or statewide.
+                Includes available testing appointments, scheduled appointments, pockets of need.
+            </p>
+        </div>
     </div>
 
-    <div class="shadow rounded-lg p-6 border"> 
-        <h1 class="uppercase text-brand-blue-600 mb-2 font-bold"> Uptake </h1>
-        <p class="text-sm text-gray-500 leading-5 italic"> 
-            An overview of COVID-19 services utilized so far by demographics, 
-            ZIP Code, county, or region: number of available appointments, number of completed appointments.
-        </p>
+    <div class="rounded-sm border-2 p-8 flex items-stretch" style="min-height: 200px;">
+        <div class="pr-4 flex justify-center items-center"> 
+            <%= image_tag 'icons/uptake.png', style: "max-width: 80px;" %>
+        </div>
+        <div class="pl-4 border-l-2 flex flex-col justify-center text-gray-600">
+            <h1 class="text-2xl uppercase mb-2 font-bold"> Uptake </h1>
+            <p class="text-sm leading-5 italic"> 
+                An overview of COVID-19 services utilized so far by demographics, 
+                ZIP Code, county, or region: number of available appointments, number of completed appointments.
+            </p>
+        </div>
     </div>
 
-    <div class="shadow rounded-lg p-6 border"> 
-        <h1 class="uppercase text-brand-blue-600 mb-2 font-bold"> Locations </h1>
-        <p class="text-sm text-gray-500 leading-5 italic"> 
-            A summary of activities at testing sites: overall number, number of 
-            tests administered by location, ratio of available appointments to 
-            completed appointments, patient demographics.
-        </p>
+    <div class="rounded-sm border-2 p-8 flex items-stretch" style="min-height: 200px;">
+        <div class="pr-4 flex justify-center items-center"> 
+            <%= image_tag 'icons/locations.png', style: "max-width: 80px;" %>
+        </div>
+        <div class="pl-4 border-l-2 flex flex-col justify-center text-gray-600">
+            <h1 class="text-2xl uppercase mb-2 font-bold"> Locations </h1>
+            <p class="text-sm leading-5 italic"> 
+                A summary of activities at testing sites: overall number, number of 
+                tests administered by location, ratio of available appointments to 
+                completed appointments, patient demographics.
+            </p>
+        </div>
     </div>
 
-    <div class="shadow rounded-lg p-6 border"> 
-        <h1 class="uppercase text-brand-blue-600 mb-2 font-bold"> Providers </h1>
-        <p class="text-sm text-gray-500 leading-5 italic"> 
-            An accounting of providers engaged in the response by specialty, regions, 
-            number of patients tested, vaccine inventory.
-        </p>
+    <div class="rounded-sm border-2 p-8 flex items-stretch" style="min-height: 200px;">
+        <div class="pr-4 flex justify-center items-center"> 
+            <%= image_tag 'icons/providers.png', style: "max-width: 80px;" %>
+        </div>
+        <div class="pl-4 border-l-2 flex flex-col justify-center text-gray-600">
+            <h1 class="text-2xl uppercase mb-2 font-bold"> Providers </h1>
+            <p class="text-sm leading-5 italic"> 
+                An accounting of providers engaged in the response by specialty, regions, 
+                number of patients tested, vaccine inventory.
+            </p>
+        </div>
     </div>
 
-    <div class="shadow rounded-lg p-6 border"> 
-        <h1 class="uppercase text-brand-blue-600 mb-2 font-bold"> Employers </h1>
-        <p class="text-sm text-gray-500 leading-5 italic"> 
-            An accounting of employers engaged in the response by specialty, regions, 
-            number of patients tested, vaccine inventory.
-        </p>
+    <div class="rounded-sm border-2 p-8 flex items-stretch" style="min-height: 200px;">
+        <div class="pr-4 flex justify-center items-center"> 
+            <%= image_tag 'icons/employers.png', style: "max-width: 80px;" %>
+        </div>
+        <div class="pl-4 border-l-2 flex flex-col justify-center text-gray-600">
+            <h1 class="text-2xl uppercase mb-2 font-bold"> Employers </h1>
+            <p class="text-sm leading-5 italic"> 
+                An accounting of employers engaged in the response by specialty, regions, 
+                number of patients tested, vaccine inventory.
+            </p>
+        </div>
     </div>
 
-    <div class="shadow rounded-lg p-6 border"> 
-        <h1 class="uppercase text-brand-blue-600 mb-2 font-bold"> Supplies Inventory </h1>
-        <p class="text-sm text-gray-500 leading-5 italic"> 
-            An accounting of testing kits and other supplies by venue, county, or statewide.
-        </p>
+    <div class="rounded-sm border-2 p-8 flex items-stretch" style="min-height: 200px;">
+        <div class="pr-4 flex justify-center items-center"> 
+            <%= image_tag 'icons/employers.png', style: "max-width: 80px;" %>
+        </div>
+        <div class="pl-4 border-l-2 flex flex-col justify-center text-gray-600">
+            <h1 class="text-2xl uppercase mb-2 font-bold"> Supplies Inventory </h1>
+            <p class="text-sm leading-5 italic"> 
+                An accounting of testing kits and other supplies by venue, county, or statewide.
+            </p>
+        </div>
     </div>
 
-    <div class="shadow rounded-lg p-6 border"> 
-        <h1 class="uppercase text-brand-blue-600 mb-2 font-bold"> Customized </h1>
-        <p class="text-sm text-gray-500 leading-5 italic"> 
-            Choose from a variety of data points to create your own report.
-        </p>
+    <div class="rounded-sm border-2 p-8 flex items-stretch" style="min-height: 200px;">
+        <div class="pr-4 flex justify-center items-center"> 
+            <%= image_tag 'icons/customized.png', style: "max-width: 80px;" %>
+        </div>
+        <div class="pl-4 border-l-2 flex flex-col justify-center text-gray-600">
+            <h1 class="text-2xl uppercase mb-2 font-bold"> Customized </h1>
+            <p class="text-sm leading-5 italic"> 
+                Choose from a variety of data points to create your own report.
+            </p>
+        </div>
     </div>
 </div>
