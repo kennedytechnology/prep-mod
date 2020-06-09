@@ -16,8 +16,7 @@ FactoryBot.define do
     county { COUNTIES.sample }
     access_code { Patient.generate_access_code }
     sex { %w(M F).sample }
-    phone_number { Faker::PhoneNumber.cell_phone }
-    # appointment_time { clinic.appointment_times.sample }
+    phone_number { "+14075366339" }
     student_id { Faker::IDNumber.unique }
     user_id { Faker::IDNumber.unique }
     email_confirmation { "patient@example.com" }

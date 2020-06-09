@@ -1,4 +1,5 @@
 class SupplyInventory < ApplicationRecord
+  validates :item_type, :product_name, presence: true
   has_many :supply_inventory_events
 
   def quantity_lost_sum

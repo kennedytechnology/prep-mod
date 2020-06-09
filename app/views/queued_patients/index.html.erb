@@ -25,25 +25,30 @@
 
   </div>
 </div>
-<div class="flex justify-end mb-4 mt-4" data-controller="clinic-activity-patients">
-  <%= link_to sanitize("Add Patient &#43;"), "javascript:", class: "button-primary", "data-action": "click->clinic-activity-patients#onShowHideCancelModal" %>
-  <%= render "queued_patients/add_patient_modal" %>
-</div>
-<div class="mt-4">
-  <%= link_to "All", clinic_queued_patients_path(clinic_id: @clinic.id), class: "p-2 mr-4 bg-blue-500 rounded text-white" %>
-  <% Appointment.aasm.states.collect(&:name).each do |state| %>
-    <%= link_to clinic_queued_patients_path(clinic_id: @clinic.id, state: state), class: "p-2 mr-4 bg-blue-500 rounded text-white" do %>
-      <%= state.to_s.titleize %> (<%= @clinic.appointments.count{|a| a.queue_state == state.to_s }%>)
+<div data-controller="clinic-activity-patients">  
+  <div class="flex justify-between mb-6 mt-6">
+    <form class="flex items-center">
+      <label class="flex text-lg mr-3 align-middle text-gray-600 block mb-2" for="search"> Search: </label>
+      <input class="form-input" id="search" data-action="keyup->clinic-activity-patients#search" type="text">
+    </form> 
+    <%= link_to sanitize("Add Patient &#43;"), "javascript:", class: "button-primary", "data-action": "click->clinic-activity-patients#onShowHideCancelModal" %>
+    <%= render "queued_patients/add_patient_modal" %>
+  </div> 
+  <div class="mt-4">
+    <%= link_to "All", clinic_queued_patients_path(clinic_id: @clinic.id), class: "p-2 mr-4 bg-blue-500 rounded text-white" %>
+    <% Appointment.aasm.states.collect(&:name).each do |state| %>
+      <%= link_to clinic_queued_patients_path(clinic_id: @clinic.id, state: state), class: "p-2 mr-4 bg-blue-500 rounded text-white" do %>
+        <%= state.to_s.titleize %> (<%= @clinic.appointments.count{|a| a.queue_state == state.to_s }%>)
+      <% end %>
+    <% end %>
+  </div>
+  <% if params[:state] %>
+    <%= render partial: 'patient_table', locals: {queue_state: params[:state]} %>
+  <% else %>
+    <% Appointment.aasm.states.collect(&:name).each do |queue_state| %>
+      <% if @clinic.appointments.select{|a| a.queue_state.to_s == queue_state.to_s}.any? %>
+        <%= render partial: 'patient_table', locals: {queue_state: queue_state} %>
+      <% end %>
     <% end %>
   <% end %>
 </div>
-
-<% if params[:state] %>
-  <%= render partial: 'patient_table', locals: {queue_state: params[:state]} %>
-<% else %>
-  <% Appointment.aasm.states.collect(&:name).each do |queue_state| %>
-    <% if @clinic.appointments.select{|a| a.queue_state.to_s == queue_state.to_s}.any? %>
-      <%= render partial: 'patient_table', locals: {queue_state: queue_state} %>
-    <% end %>
-  <% end %>
-<% end %>

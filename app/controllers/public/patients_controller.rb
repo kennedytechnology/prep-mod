@@ -59,12 +59,13 @@ class Public::PatientsController < ApplicationController
 
   def check_in
     @patient = Patient.find_by_check_in_code(params[:check_in_code])
+    @appointment = @patient.appointments.last
     if @patient.nil?
       render :not_found
       return
     end
 
-    @patient.check_in! if @patient.clinic.can_check_in?
+    @appointment.check_in! if @appointment.clinic.can_check_in?
   end
 
   private
@@ -94,6 +95,7 @@ class Public::PatientsController < ApplicationController
       attributes.delete('id')
       attributes.delete('patient_id')
       patient = Patient.create(attributes)
+      patient.save(validate: false)
       Appointment.create(patient: patient, clinic: @clinic, appointment_at: @appointment.appointment_at)
     end
   end

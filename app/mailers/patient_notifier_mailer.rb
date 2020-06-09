@@ -11,8 +11,9 @@ class PatientNotifierMailer < ApplicationMailer
   end
 
   def check_in_reminder
-    @patient = params[:patient]
-    mail to: @patient.email, subject: "Reminder: Your COVID-19 Clinic Appointment #{@patient.clinic.clinic_date} at #{@patient.clinic.location}"
+    @appointment = params[:appointment]
+    @patient = @appointment.patient
+    mail to: @patient.email, subject: "Reminder: Your COVID-19 Clinic Appointment #{@appointment.clinic.clinic_date} at #{@appointment.clinic.location}"
   end
 
   def kit_created(patient)

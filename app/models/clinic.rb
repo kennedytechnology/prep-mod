@@ -64,9 +64,9 @@ class Clinic < ApplicationRecord
   end
 
   def send_reminders
-    patients.each do |p|
-      RemindQueuedPatientJob.perform_later p if p.notify_via_sms?
-      PatientNotifierMailer.with(patient: p).check_in_reminder.deliver_later if p.notify_via_email?
+    appointments.each do |a|
+      RemindQueuedPatientJob.perform_later a if a.patient.notify_via_sms?
+      PatientNotifierMailer.with(appointment: a).check_in_reminder.deliver_later if a.patient.notify_via_email?
     end
   end
 

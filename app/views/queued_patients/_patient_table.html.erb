@@ -1,22 +1,23 @@
-<h3 class="text-2xl font-bold mt-4 mb-2"><%= queue_state.to_s.titleize %> Patients</h3>
 
-<table class="table w-full text-center">
+<h3 class="text-2xl font-bold mt-4 mb-2 pt-12"><%= queue_state.to_s.titleize %> Patients</h3>
+
+<table class="table w-full">
   <thead><tr class="border-b-2">
+    <th>Appointment Time</th>
     <th>Name</th>
     <th>Date of Birth</th>
-    <th>Appointment Time</th>
     <th>Queue State</th>
     <th>Actions</th>
 
   </tr></thead>
   <% @clinic.appointments.select{|a| a.queue_state.to_s == queue_state.to_s}.each do |appointment| %>
     <% patient = appointment.patient %>
-    <tr class="border-b-2">
+    <tr class="border-b-2" data-target="clinic-activity-patients.searchableRow" data-search-content="<%= patient.full_name.try(:downcase) %>">
+      <td><%= appointment.appointment_at.strftime("%I:%H %p") %></td>
       <td><%= patient.full_name %></td>
       <td><%= patient.date_of_birth.try(:strftime, '%m/%d/%y') %></td>
-      <td class="text-center"><%= patient.appointments.where(clinic: @clinic).last.appointment_at %></td>
       <td><%= appointment.queue_state.titleize %></td>
-      <td class="text-right">
+      <td>
         <% appointment.available_event_names.each do |event| %>
           <%= link_to event.titleize,
             update_status_clinic_queued_patient_path(appointment.id, clinic_id: @clinic.id, event: event),
@@ -24,7 +25,6 @@
             class: "button-action",
             method: 'post'
           %>
-
         <% end %>
       </td>
     </tr>

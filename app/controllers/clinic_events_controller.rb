@@ -21,6 +21,13 @@ class ClinicEventsController < ClinicManagementController
     end
   end
 
+  def destroy
+    @clinic_event = ClinicEvent.find(params[:id])
+    @patient = @clinic_event.patient
+    @clinic_event.destroy
+    redirect_back fallback_location: @patient
+  end
+
   def update
     params[:clinic_event][:event_date] = Chronic.parse(params[:clinic_event][:event_date]) if params[:clinic_event][:event_date]
     @clinic_event = ClinicEvent.find(params[:id])

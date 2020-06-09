@@ -41,7 +41,7 @@
             <td><%= clinic_event.category %></td>
             <td><%= clinic_event.outcome %></td>
             <td><%= clinic_event.notes %></td>
-            <td class="table-action-buttons"><%= link_to "Delete", "#", class: "button-action" %>
+            <td class="table-action-buttons"><%= link_to "Delete", clinic_event, method: :delete, data: {confirm: "Are you sure?"}, class: "button-action" %>
             </td>
         </tr>
         <% end %>
