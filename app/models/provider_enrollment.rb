@@ -10,6 +10,7 @@ class ProviderEnrollment < ApplicationRecord
   after_create :set_default_status_and_unique_number, if: lambda { unique_number == nil }
   after_update :send_email, if: lambda { status == "accepted" }
   after_update :create_provider, if: lambda { status == "accepted" }
+  after_update :invite_user, if: lambda { status == "accepted" }
 
   def set_default_status_and_unique_number
     self.status = "pending"
@@ -23,5 +24,9 @@ class ProviderEnrollment < ApplicationRecord
 
   def create_provider
     Provider.create(self.attributes.except('id').except('status'))
+  end
+
+  def invite_user
+    User.invite!(email: self.practice_email, name: "#{self.first_name} #{self.last_name}", role: 'Regional Administrator')
   end
 end
