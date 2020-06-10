@@ -67,7 +67,7 @@ export default class extends Controller {
   validateInputField(event) {
     // Find the error message element
     let errorMessage = event.target.parentNode.getElementsByClassName(
-      "error-message"
+      "employer-error-message"
     )[0];
 
     // Display error message if value of the input is empty

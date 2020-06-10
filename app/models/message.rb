@@ -1,6 +1,6 @@
 class Message < ApplicationRecord
-  after_create :send_email, if: lambda { status == "approved" }
-  after_update :send_email, if: lambda { status == "approved" }
+  after_create :send_email, if: lambda { status == "approve" }
+  after_update :send_email, if: lambda { status == "approve" }
 
   validates_presence_of :subject, :body
 
