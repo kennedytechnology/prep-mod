@@ -1,19 +1,38 @@
-<h1> <%= @clinic.name %> </h1>
+<h1 class="text-2xl font-bold mb-6 text-gray-700"> <%= @clinic.name %> </h1>
 
-<h2> Tested </h2>
-<table class="table w-full">
+<% if @patients_screened %>
+<h2 class="font-bold text-gray-700 text-xl"> Screened </h2>
+<table class="w-full mb-6">
+    <thead>
+        <tr class="bg-blue-600">
+            <th class="pl-4 text-left text-white py-4"> Name </th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @patients_screened.each do |patient| %>
+            <tr>
+                <td class="pl-4 py-2"> <%= patient.full_name %> </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+<% end %>
+
+
+<% if @patients_tested %>
+<h2 class="font-bold text-gray-700 text-xl"> Tested </h2>
+<table class="w-full mb-6">
   <thead>
-    <tr class="border-b-2">
-        <th>Name</th>
-        <th>Date of Birth</th>
+    <tr class="bg-blue-600">
+        <th class="pl-4 text-left text-white py-4">Name</th>
     </tr>
   </thead>
   <tbody>
     <% @patients_screened.each do |patient| %>
-        <tr class="border-b-2">
-            <td><%= patient.full_name %></td>
-            <td><%= patient.date_of_birth.try(:strftime, '%m/%d/%y') %></td>
+        <tr>
+            <td class="pl-4 py-2"><%= patient.full_name %></td>
         </tr>
     <% end %>
   </tbody>
 </table>
+<% end %>

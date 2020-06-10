@@ -27,10 +27,13 @@ class CustomizedReportsController < InheritedResources::Base
   def create
     # @customized_report = CustomizedReport.new(customized_report_params)
     @clinic = Clinic.find(customized_report_params[:clinic_id])
+
+    # Name of patients screened
     if customized_report_params[:patient_screened]
       @patients_screened = Patient.limit(5)
     end
 
+    # Name of tested patients
     if customized_report_params[:patient_tested]
       @patients_tested = Patient.limit(5)
     end 
