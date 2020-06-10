@@ -33,7 +33,11 @@
     <div class="flex">
         <div class="flex-1 mr-2">
             <%= f.label :date_of_birth, "Date Of Birth" %> <% %>
-            <%= f.date_field :date_of_birth, value: @patient.date_of_birth.try(:strftime, "%m/%d/%Y"), placeholder: "MM/DD/YYYY", onChange:"calculateAge();", id: "patient_date_of_birth", class: "w-full form-input", data: {action: "keyup->inventory-new-entry#updateModalField change->inventory-new-entry#updateModalField"} %>
+            <%= f.text_field :date_of_birth, value: @patient.date_of_birth.try(:strftime, "%m/%d/%Y"), onChange:"calculateAge();", id: "patient_date_of_birth", class: "w-full form-input", 
+                                data: { controller: "flatpickr",
+                                        flatpickr_min_date: Date.today - 80.years,
+                                        flatpickr_max_date: Date.today,
+                                        action: "keyup->inventory-new-entry#updateModalField change->inventory-new-entry#updateModalField" } %>
         </div>
         <div class="flex-1 mr-2">
             <%= f.label :age %>
@@ -62,15 +66,6 @@
             <%= f.label :address %>
             <%= f.text_field :address, id: "autocomplete", onFocus: "geolocate()", class: "form-input w-full", data: {action: "keyup->inventory-new-entry#updateModalField"} %>
             <%= render partial: "public/clinics/google_maps_script" %>
-            <%= f.label :date_of_birth, "Date Of Birth" %>
-            <%= f.text_field :date_of_birth, placeholder: "MM/DD/YYYY", onChange:"calculateAge();", class: "w-full form-input",
-                                    data: { controller: "flatpickr",
-                                            flatpickr_min_date: Date.today - 80.years,
-                                            flatpickr_max_date: Date.today } %>
-        </div>
-        <div class="flex-1 mr-2">
-            <%= f.label :age %>
-            <%= f.text_field :age, class: "w-full form-input" %>
         </div>
         <div class="flex-1">
             <%= f.label :city %>
