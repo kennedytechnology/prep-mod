@@ -19,7 +19,7 @@ class Public::PatientsController < ApplicationController
     parse_dates
     @patient ||= Patient.new
     
-    @patient.update_attributes(patient_params) if params[:patient]
+    @patient.update(patient_params) if params[:patient]
     @patient.save(validate: false)
 
     if params[:appointment]
@@ -58,6 +58,7 @@ class Public::PatientsController < ApplicationController
   end
 
   def check_in
+    # TODO: The check in code should be an attribute of Apppointment, not Patient.
     @patient = Patient.find_by_check_in_code(params[:check_in_code])
     @appointment = @patient.appointments.last
     if @patient.nil?
@@ -72,11 +73,13 @@ class Public::PatientsController < ApplicationController
 
   def parse_dates
     return unless params[:patient]
+    # TODO: This conversion and parsing should be moved to the model.
     params[:patient][:date_of_birth] = Chronic.parse(params[:patient][:date_of_birth]) if params[:patient][:date_of_birth]
     params[:patient][:insured_date_of_birth] = Chronic.parse(params[:patient][:insured_date_of_birth]) if params[:patient][:insured_date_of_birth]
   end
 
   def current_step_is_valid?
+    # TODO: Validations should be enabled
     true
   end
 
@@ -111,36 +114,50 @@ class Public::PatientsController < ApplicationController
   end
 
   def edit_gate
+    # This condition checks if we have a clinic. If we do, it further checks if
+    # we can fill out the consent form for that clinic. We can do so if the
+    # clinic is public, or if we have a patient loaded from an access code.
     if @clinic && (@clinic.public? || @patient)
       @patient ||= Patient.new
       return
     end
 
+    # This condition checks if we should send the user to find a clinic.
+    # We should do so if we have a patient loaded from an access code, or if we
+    # don't have an access code.
     if @patient || (!params[:has_code] && params[:access_code].try(:empty?))
       redirect_to "/clinic/search?service[]=Testing"
       return
     end
 
+    # If the previous two conditions did not return, we should ask the user
+    # for an access code.
     redirect_to "/client/access"
   end
 
   def patient_params
-    params.require(:patient).permit(:clinic, :clinic_id, :user_id, :student_id, :access_code, :vaccination_status, :clinic_vaccine_id, 
-      :clinic_staff_id, :reaction_type, :downloaded_status, :state, :county, :city, :zip_code, :school, 
-      :first_name, :last_name, :mothers_maiden_name, :middle_initial, :age, :address, :email, :email_confirmation,
-      :date_of_birth, :sex, :phone_number, :relation_to_patient_for_insurance, :insurance_type, :sharing_results_authorized,
-      :insured_first_name, :insured_last_name, :insured_name, :insured_date_of_birth, :type_of_insurance,
-      :member_id_for_insurance, :card_number_for_insurance, :group_number_for_insurance, :insurance_company_name, 
-      :has_fever_over, :has_cough, :has_difficult_breathing, :had_contact_with_confirmed_case, :is_age_60_or_more, 
-      :had_traveled_to_affected_place, :has_risk_factor, :has_other_reason, :other_reason_explanation, :consent_signature,
-      :signatory_first_name, :signatory_last_name, :relation_to_patient_for_consent, :consent_date, :password, :password_confirmation,
-      :notify_via_sms, :notify_via_email, :appointment_time, :occupation, :race, :signature_data,
+    params.require(:patient).permit(:clinic, :clinic_id, :user_id, :student_id,
+      :access_code, :vaccination_status, :clinic_vaccine_id, :clinic_staff_id,
+      :reaction_type, :downloaded_status, :state, :county, :city, :zip_code,
+      :school, :first_name, :last_name, :mothers_maiden_name, :middle_initial,
+      :age, :address, :email, :email_confirmation, :date_of_birth, :sex,
+      :phone_number, :relation_to_patient_for_insurance, :insurance_type,
+      :sharing_results_authorized, :insured_first_name, :insured_last_name,
+      :insured_name, :insured_date_of_birth, :type_of_insurance,
+      :member_id_for_insurance, :card_number_for_insurance,
+      :group_number_for_insurance, :insurance_company_name, :has_fever_over,
+      :has_cough, :has_difficult_breathing, :had_contact_with_confirmed_case,
+      :is_age_60_or_more, :had_traveled_to_affected_place, :has_risk_factor,
+      :has_other_reason, :other_reason_explanation, :consent_signature,
+      :signatory_first_name, :signatory_last_name,
+      :relation_to_patient_for_consent, :consent_date, :password,
+      :password_confirmation, :notify_via_sms, :notify_via_email,
+      :appointment_time, :occupation, :race, :signature_data,
       :insurance_card_front, :insurance_card_back, employer_ids: [],
       patient_family_members_attributes: [:id, :first_name, :middle_initial,
         :last_name, :mothers_maiden_name, :race, :date_of_birth,
         :insurance_company_name, :group_number_for_insurance,
-        :member_id_for_insurance, :patient_id]
-    )
+        :member_id_for_insurance, :patient_id] )
   end
 
   def appointment_params

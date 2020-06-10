@@ -3,6 +3,9 @@ class ClinicsController < ClinicManagementController
   helper_method :sort_column, :sort_direction
 
   def index
+    # TODO: The details of the searching here should be moved to the model,
+    # probably using scopes for a lot of this.
+
     if params[:q].present?
       @clinics = Clinic.all.select{|c| c.search_string.downcase.include?(params[:q].downcase)}
     elsif sort_column && sort_direction
@@ -16,6 +19,7 @@ class ClinicsController < ClinicManagementController
   end
 
   def new
+    # TODO: Building the related records should be done in the model.
     @clinic = Clinic.new
     @clinic.clinic_personnel.build
     @clinic.test_kits.build

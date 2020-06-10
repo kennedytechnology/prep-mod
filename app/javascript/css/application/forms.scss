@@ -138,6 +138,11 @@ select {
     @apply -mt-3 text-red-600 text-xs;
 }
 
+//Employers error message 
+.employer-error-message {
+    @apply text-red-600 text-xs;
+}
+
 .radio-deluxe + label span{
     @apply w-6 h-6 inline-block mr-2 rounded-full border border-gray-300 flex-shrink-0;
     transition: background .2s, transform .2s;
