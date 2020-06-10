@@ -1,38 +1,16 @@
 <h1 class="text-2xl font-bold mb-6 text-gray-700"> <%= @clinic.name %> </h1>
 
 <% if @patients_screened %>
-<h2 class="font-bold text-gray-700 text-xl"> Screened </h2>
-<table class="w-full mb-6">
-    <thead>
-        <tr class="bg-blue-600">
-            <th class="pl-4 text-left text-white py-4"> Name </th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @patients_screened.each do |patient| %>
-            <tr>
-                <td class="pl-4 py-2"> <%= patient.full_name %> </td>
-            </tr>
-        <% end %>
-    </tbody>
-</table>
+    <h2 class="font-bold text-gray-700 text-xl"> Screened </h2>
+    <%= render partial: "customized_reports/table", locals: {patients: @patients_screened} %>
 <% end %>
 
-
 <% if @patients_tested %>
-<h2 class="font-bold text-gray-700 text-xl"> Tested </h2>
-<table class="w-full mb-6">
-  <thead>
-    <tr class="bg-blue-600">
-        <th class="pl-4 text-left text-white py-4">Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @patients_screened.each do |patient| %>
-        <tr>
-            <td class="pl-4 py-2"><%= patient.full_name %></td>
-        </tr>
-    <% end %>
-  </tbody>
-</table>
+    <h2 class="font-bold text-gray-700 text-xl"> Tested </h2>
+    <%= render partial: "customized_reports/table", locals: {patients: @patients_screened} %>
+<% end %>
+
+<% if @patients_safety_kit %>
+    <h2 class="font-bold text-gray-700 text-xl"> Safety Kit </h2>
+    <%= render partial: "customized_reports/table", locals: {patients: @patients_screened} %>
 <% end %>

@@ -28,15 +28,17 @@ class CustomizedReportsController < InheritedResources::Base
     # @customized_report = CustomizedReport.new(customized_report_params)
     @clinic = Clinic.find(customized_report_params[:clinic_id])
 
-    # Name of patients screened
-    if customized_report_params[:patient_screened]
-      @patients_screened = Patient.limit(5)
-    end
+    @patients_screened = Patient.limit(5) if customized_report_params[:patient_screened]
+    @patients_tested = Patient.limit(5) if customized_report_params[:patient_tested]
+    @patients_safety_kit = Patient.limit(5) if customized_report_params[:safety_kit]
 
-    # Name of tested patients
-    if customized_report_params[:patient_tested]
-      @patients_tested = Patient.limit(5)
-    end 
+    @age = true if customized_report_params[:age]
+    @gender = true if customized_report_params[:gender]
+    @race = true if customized_report_params[:race]
+    @zip_code = true if customized_report_params[:zip_code]
+    @insurance_type = true if customized_report_params[:insurance_type]
+    @date_of_birth = true if customized_report_params[:date_of_birth]
+    @vacine_name_and_lot_number = true if customized_report_params[:vacine_name_and_lot_number]
 
     respond_to do |format|
       format.pdf do
@@ -51,12 +53,17 @@ class CustomizedReportsController < InheritedResources::Base
                 encoding: 'utf8'
       end
     end
+
   end
 
   private
 
     def customized_report_params
-      params.require(:customized_report).permit(:patient_screened, :patient_tested, :clinic_id)
+      params.require(:customized_report).permit(
+        :patient_screened, :patient_tested, :safety_kit, 
+        :age, :gender, :race, :clinic_id, :zip_code,
+        :insurance_type, :date_of_birth, :vacine_name_and_lot_number,
+      )
     end
 
 end
