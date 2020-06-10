@@ -131,7 +131,7 @@
         </div>
     </div>
 
-    <%= hidden_field_tag "customized_report[clinic_id]", @clinic.id %>
+    <%= hidden_field_tag "customized_report[clinic_id]", @clinic.id if @clinic %>
 
     <div class="actions flex items-center justify-center">
         <%= form.submit 'Submit', formtarget: "_blank", class:'button-primary' %>
