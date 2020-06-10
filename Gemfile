@@ -82,6 +82,7 @@ gem 'slack-notifier'
 gem 'chronic'
 gem 'aasm'
 gem 'phonelib'
+gem "aws-sdk-s3", require: false
 
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary-edge', '~> 0.12.5.1', group: [:development, :test]
