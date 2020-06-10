@@ -291,6 +291,10 @@ Clinic.all.each do |clinic|
   clinic.test_kits.sample.update_attribute(:is_default, true)
 end
 
+ProviderDenialMessage.create!(
+  body: "Your request to Become a COVID-19 Service Provider has been denied. Please for further details contact us here: (xxx) xxx-xxx."
+)
+
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
 
 puts 'Done.'

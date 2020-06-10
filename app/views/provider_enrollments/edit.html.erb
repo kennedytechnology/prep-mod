@@ -344,7 +344,9 @@
 
     <div class="flex justify-end">
         <%= f.submit "Accepted", class: "button-action", data: {action: "click->provider-enrollment-new-entry#setStatus"} %>
-        <%= f.submit "Denied", class: "button-action", data: {action: "click->provider-enrollment-new-entry#setStatus"} %>
+        <button class="button-action" type="button" data-action="click->provider-enrollment-new-entry#toggleModal"> Denied </button>
         <%= f.submit "Need Additional Information", class: "button-action", data: {action: "click->provider-enrollment-new-entry#setStatus"} %>
     </div>
+
+    <%= render partial: "provider_enrollments/provider_denied_modal", locals: {f: f} %>
 <% end %>
