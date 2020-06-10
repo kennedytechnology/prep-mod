@@ -1,0 +1,19 @@
+<h1> <%= @clinic.name %> </h1>
+
+<h2> Tested </h2>
+<table class="table w-full">
+  <thead>
+    <tr class="border-b-2">
+        <th>Name</th>
+        <th>Date of Birth</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @patients_screened.each do |patient| %>
+        <tr class="border-b-2">
+            <td><%= patient.full_name %></td>
+            <td><%= patient.date_of_birth.try(:strftime, '%m/%d/%y') %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>

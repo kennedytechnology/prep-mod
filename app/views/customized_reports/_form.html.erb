@@ -1,19 +1,15 @@
-<%= form_with(model: customized_report, local: true) do |form| %>
-  <% if customized_report.errors.any? %>
+<%= form_with(model: @customized_report, local: true, url: customized_reports_path(format: :pdf)) do |form| %>
+  <% if @customized_report.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(customized_report.errors.count, "error") %> prohibited this customized_report from being saved:</h2>
+      <h2><%= pluralize(@customized_report.errors.count, "error") %> prohibited this customized_report from being saved:</h2>
 
       <ul>
-        <% customized_report.errors.full_messages.each do |message| %>
+        <% @customized_report.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
-
-  <div class="flex justify-start mb-12">
-   
-  </div>
 
     <h1 class="text-center text-lg text-gray-600 mb-4">Please select the data you would like in your customized report: </h1>
     <div class="w-full flex items-center mb-5">
@@ -25,52 +21,53 @@
                 <%= form.select :county, COUNTIES, {prompt: "Select"}, {class: "block form-select", id: "county"} %>
             </div>
         <% end %>
+
         <div class="flex justify-between mx-auto">
           <div class="w-full mr-6">
               <div class="absolute flex items-center h-5">
-                  <input class="form-checkbox" type="checkbox" name="patient_screened" value="1" />
+                  <input class="form-checkbox" type="checkbox" name="customized_report[patient_screened]" value="1" />
               </div>
               <div class="pl-7 text-sm leading-5 mb-5">
                   <label for="patient_screened">Patient Screened</label>
               </div>
 
               <div class="absolute flex items-center h-5">
-                  <input class="form-checkbox" type="checkbox" name="safety_kit" value="1" />
+                  <input class="form-checkbox" type="checkbox" name="customized_report[safety_kit]" value="1" />
               </div>
               <div class="pl-7 text-sm leading-5 mb-5">
                   <label for="safety_kit">Safety Kit</label>
               </div>
 
               <div class="absolute flex items-center h-5">
-                  <input class="form-checkbox" type="checkbox" name="gender" value="1" />
+                  <input class="form-checkbox" type="checkbox" name="customized_report[gender]" value="1" />
               </div>
               <div class="pl-7 text-sm leading-5 mb-5">
                   <label for="gender">Gender</label>
               </div>
 
               <div class="absolute flex items-center h-5">
-                  <input class="form-checkbox" type="checkbox" name="race" value="1" />
+                  <input class="form-checkbox" type="checkbox" name="customized_report[race]" value="1" />
               </div>
               <div class="pl-7 text-sm leading-5 mb-5">
                   <label for="race">Race</label>
               </div>
 
               <div class="absolute flex items-center h-5">
-                  <input class="form-checkbox" type="checkbox" name="zip_code" value="1" />
+                  <input class="form-checkbox" type="checkbox" name="customized_report[zip_code]" value="1" />
               </div>
               <div class="pl-7 text-sm leading-5 mb-5">
                   <label for="zip_code">Zip Code</label>
               </div>
 
               <div class="absolute flex items-center h-5">
-                  <input class="form-checkbox" type="checkbox" name="insurance_type" value="1" />
+                  <input class="form-checkbox" type="checkbox" name="customized_report[insurance_type]" value="1" />
               </div>
               <div class="pl-7 text-sm leading-5 mb-5">
                   <label for="insurance_type">Insurance Type</label>
               </div>
 
               <div class="absolute flex items-center h-5">
-                  <input class="form-checkbox" type="checkbox" name="tester" value="1" />
+                  <input class="form-checkbox" type="checkbox" name="customized_report[tester]" value="1" />
               </div>
               <div class="pl-7 text-sm leading-5">
                   <label for="tester">Tester (A person administering the vaccine)</label>
@@ -79,49 +76,49 @@
 
           <div class="w-full">
             <div class="absolute flex items-center h-5">
-                <input class="form-checkbox" type="checkbox" name="patient_tested" value="1" />
+                <input class="form-checkbox" type="checkbox" name="customized_report[patient_tested]" value="1" />
             </div>
             <div class="pl-7 text-sm leading-5 mb-5">
                 <label for="patient_tested">Patients Tested</label>
             </div>
 
             <div class="absolute flex items-center h-5">
-                <input class="form-checkbox" type="checkbox" name="pending_patients" value="1" />
+                <input class="form-checkbox" type="checkbox" name="customized_report[pending_patients]" value="1" />
             </div>
             <div class="pl-7 text-sm leading-5 mb-5">
                 <label for="pending_patients">Pending Patients</label>
             </div>
 
             <div class="absolute flex items-center h-5">
-                <input class="form-checkbox" type="checkbox" name="age" value="1" />
+                <input class="form-checkbox" type="checkbox" name="customized_report[age]" value="1" />
             </div>
             <div class="pl-7 text-sm leading-5 mb-5">
                 <label for="age">Age</label>
             </div>
 
             <div class="absolute flex items-center h-5">
-                <input class="form-checkbox" type="checkbox" name="date_of_birth" value="1" />
+                <input class="form-checkbox" type="checkbox" name="customized_report[date_of_birth]" value="1" />
             </div>
             <div class="pl-7 text-sm leading-5 mb-5">
                 <label for="date_of_birth">Date of Birth</label>
             </div>
 
             <div class="absolute flex items-center h-5">
-                <input class="form-checkbox" type="checkbox" name="vacine_name_and_lot_number" value="1" />
+                <input class="form-checkbox" type="checkbox" name="customized_report[vacine_name_and_lot_number]" value="1" />
             </div>
             <div class="pl-7 text-sm leading-5 mb-5">
                 <label for="vacine_name_and_lot_number">Vaccine Name and Lot number</label>
             </div>
 
             <div class="absolute flex items-center h-5">
-                <input class="form-checkbox" type="checkbox" name="lead_tester" value="1" />
+                <input class="form-checkbox" type="checkbox" name="customized_report[lead_tester]" value="1" />
             </div>
             <div class="pl-7 text-sm leading-5 mb-5">
                 <label for="lead_tester">Lead Tester</label>
             </div>
 
             <div class="absolute flex items-center h-5">
-                <input class="form-checkbox" type="checkbox" name="registration_date" value="1" />
+                <input class="form-checkbox" type="checkbox" name="customized_report[registration_date]" value="1" />
             </div>
             <div class="pl-7 text-sm leading-5">
                 <label for="registration_date">Registration Date</label>
@@ -130,7 +127,9 @@
         </div>
     </div>
 
+    <%= hidden_field_tag "customized_report[clinic_id]", @clinic.id %>
+
 <div class="actions flex items-center justify-center">
-  <%= form.submit 'Submit', class:'button-primary' %>
+  <%= form.submit 'Submit', formtarget: "_blank", class:'button-primary' %>
 </div>
 <% end %>
