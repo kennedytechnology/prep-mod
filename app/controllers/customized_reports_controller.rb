@@ -7,8 +7,8 @@ class CustomizedReportsController < InheritedResources::Base
 
     @patients_screened = Patient.joins(:clinic_events).where(clinic_events: {category: "Screened"}) if @customized_report.patients_screened
     @patients_tested = Patient.joins(:clinic_events).where(clinic_events: {category: "Tested"}) if @customized_report.patients_tested
-    @patients_safety_kit = Patient.joins(:clinic_events).where(clinic_events: {category: "Safety Kit"}) if @customized_report.patients_tested
-    @patients_by_county = Patient.where(county: @customized_report.county) if @customized_report.county
+    @patients_safety_kit = Patient.joins(:clinic_events).where(clinic_events: {category: "Safety Kit"}) if @customized_report.safety_kit
+    @patients_by_county = Patient.where(county: @customized_report.county) if !@customized_report.county.blank?
 
     respond_to do |format|
       format.pdf do

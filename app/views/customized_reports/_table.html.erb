@@ -2,7 +2,7 @@
     <thead>
         <tr class="bg-blue-600">
             <th class="px-4 text-left text-white py-4"> Name </th>
-            <% if @customized_report.county %>
+            <% if !@customized_report.county.blank? %>
                 <th class="px-4 text-left text-white py-4"> County </th>
             <% end %>
             <% if @customized_report.age %>
@@ -26,13 +26,16 @@
             <% if @customized_report.vaccine_name_and_lot_number %>
                 <th class="px-4 text-left text-white py-4"> Vacine Name and Lot Number </th>
             <% end %>
+            <% if @customized_report.registration_date %>
+                <th class="px-4 text-left text-white py-4"> Registration Date </th>
+            <% end %>
         </tr>
     </thead>
     <tbody>
         <% patients.each do |patient| %>
             <tr>
                 <td class="px-4 py-2"> <%= patient.full_name %> </td>
-                <% if @customized_report.county %>
+                <% if !@customized_report.county.blank? %>
                     <td class="px-4 py-2"><%= patient.county %></td>
                 <% end %>
                 <% if @customized_report.age %>
@@ -54,7 +57,10 @@
                     <td class="px-4 py-2"><%= patient.date_of_birth.strftime("%m/%d/%Y") %></td>
                 <% end %>
                 <% if @customized_report.vaccine_name_and_lot_number %>
-                    <td class="px-4 py-2"> Test </td>
+                    <td class="px-4 py-2"> Vaccine Name and Lot Number </td>
+                <% end %>
+                <% if @customized_report.registration_date %>
+                    <td class="px-4 py-2"> <%= patient.created_at.strftime("%m-%d-%Y") %> </td>
                 <% end %>
             </tr>
         <% end %>
