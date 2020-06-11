@@ -14,3 +14,8 @@
     <h2 class="font-bold text-gray-700 text-xl"> Safety Kit </h2>
     <%= render partial: "customized_reports/table", locals: {patients: @patients_screened} %>
 <% end %>
+
+<% if @patients_by_county %>
+    <h2 class="font-bold text-gray-700 text-xl"> County </h2>
+    <%= render partial: "customized_reports/table", locals: {patients: @patients_by_county} %>
+<% end %>
