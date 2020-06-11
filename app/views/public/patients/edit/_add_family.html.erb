@@ -28,7 +28,11 @@
       </div>
       <div class="inline-field-wrapper">
         <%= fm.label :date_of_birth, "Date Of Birth" %>
-        <%= fm.date_field :date_of_birth, placeholder: "MM/DD/YYYY", onChange:"calculateAge();", id: "patient_date_of_birth", class: "w-full form-input", data: {action: "keyup->inventory-new-entry#updateModalField change->inventory-new-entry#updateModalField"} %>
+        <%= fm.text_field :date_of_birth, onChange:"calculateAge();", id: "patient_date_of_birth", class: "w-full form-input", 
+                              data: { controller: "flatpickr",
+                                      flatpickr_min_date: Date.today - 80.years,
+                                      flatpickr_max_date: Date.today,
+                                      action: "keyup->inventory-new-entry#updateModalField change->inventory-new-entry#updateModalField" } %>
       </div>
     </div>
 

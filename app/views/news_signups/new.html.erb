@@ -12,10 +12,9 @@
             </div>
             <div class="flex-1 mr-2">
                 <%= f.label :date_of_birth, class: "block" %>
-                <%= f.text_field :date_of_birth, class: "form-input block w-full", placeholder: "MM/DD/YYYY", required: true,
-                             data: { controller: "flatpickr",
-                                    flatpickr_min_date: Date.today - 80.years,
-                                    flatpickr_max_date: Date.today } %>
+                <div class="flex">
+                    <%= f.date_select :date_of_birth, {order: [:month, :day, :year], start_year: Date.current.year - 99, end_year: Date.current.year, include_blank: true}, class: "form-select w-full" %>
+                </div>
             </div>
         </div>
     </div>

@@ -1,7 +1,7 @@
 <div class="field-side-by-side">
     <div>
         <%= f.label :county %>
-        <%= f.select :county, options_for_select(COUNTIES, @patient.county),{}, {class: "w-full form-select", data: {action: "change->inventory-new-entry#updateModalField"}}%>
+        <%= f.select :county, options_for_select(COUNTIES.sort, @patient.county),{include_blank: true}, {class: "w-full form-select", data: {action: "change->inventory-new-entry#updateModalField"}}%>
     </div>
     <div> </div>
 </div>
