@@ -1,7 +1,7 @@
 <%= form_with model: @customized_report, local: true do |form| %>
     <% if @customized_report.errors.any? %>
     <div id="error_explanation">
-        <h2><%= pluralize(@customized_report.errors.count, "error") %> prohibited this customized_report from being saved:</h2>
+        <h3><%= pluralize(@customized_report.errors.count, "error") %> prohibited this customized_report from being saved:</h3>
 
         <ul>
             <% @customized_report.errors.full_messages.each do |message| %>
@@ -11,134 +11,139 @@
     </div>
     <% end %>
 
-    <h1 class="text-center text-lg text-gray-600 mb-4">Please select the data you would like in your customized report: </h1>
+    <div class="w-3/4 flex mb-6">
+        <% unless @clinic %>
+            <div class="w-1/3 mr-6">
+                <%= form.label :county %>
+                <%= form.select :county, COUNTIES, {prompt: "Select"}, {class: "block form-select w-full"} %>
+            </div>
+        <% end %>
 
-    <div class="w-full flex items-center mb-5">
-        <div>
-            <% unless @clinic %>
-                <div>
-                    <%= form.label :county %>
-                    <%= form.select :county, COUNTIES, {prompt: "Select"}, {class: "block form-select w-1/2"} %>
-                </div>
-            <% end %>
-
-            <% if @clinic %>
-                <%= form.hidden_field :clinic_id, value: @clinic.id %>
-            <% else %>
+        <% if @clinic %>
+            <%= form.hidden_field :clinic_id, value: @clinic.id %>
+        <% else %>
+            <div class="w-1/3">
                 <%= form.label :clinic_id %>
-                <%= form.select :clinic_id, options_for_select(Clinic.all.collect { | clinic | [clinic.name, clinic.id] }), {prompt: "Select"}, {class: "block form-select w-1/2"} %>
-            <% end %>
-        </div>
+                <%= form.select :clinic_id, options_for_select(Clinic.all.collect { | clinic | [clinic.name, clinic.id] }), {prompt: "Select"}, {class: "block form-select w-full"} %>
+            </div>
+        <% end %>
+    </div>
 
-        <div class="flex justify-between mx-auto">
-            <div class="w-full mr-6">
-                <h3 class="label"> Please choose which patients do you want to include in the report</h3>
-                <div class="absolute flex items-center h-5">
-                    <%= form.check_box :patients_screened, class: "form-checkbox" %>
-                </div>
-                <div class="pl-7 text-sm leading-5 mb-5">
-                    <%= form.label :patients_screened, "Patients Screened" %>
-                </div>
-
-                <div class="absolute flex items-center h-5">
-                    <%= form.check_box :patients_tested, class: "form-checkbox" %>
-                </div>
-                <div class="pl-7 text-sm leading-5 mb-5">
-                    <%= form.label :patients_tested, "Patients Tested" %>
-                </div>
-
-                <div class="absolute flex items-center h-5">
-                    <%= form.check_box :pending_patients, class: "form-checkbox" %>
-                </div>
-                <div class="pl-7 text-sm leading-5 mb-5">
-                    <%= form.label :pending_patients, "Pending Patients" %>
-                </div>
-
-                <div class="absolute flex items-center h-5">
-                    <%= form.check_box :safety_kit, class: "form-checkbox"%>
-                </div>
-                <div class="pl-7 text-sm leading-5 mb-5">
-                    <%= form.label :safety_kit, "Safety Kit" %>
-                </div>
-
-                <div class="absolute flex items-center h-5">
-                    <input class="form-checkbox" type="checkbox" id="tester" name="customized_report[tester]" value="1" />
-                </div>
-                <div class="pl-7 text-sm leading-5">
-                    <label for="tester">Tester (A person administering the vaccine)</label>
-                </div>
+    <h2 class="text-center text-2xl text-gray-700 mb-6">Please select the data you would like in your customized report: </h2>
+    <div class="w-2/3 grid grid-cols-1 md:grid-cols-2 md:gap-4 mb-6 mx-auto">
+        <div class="w-full">
+            <h3 class="label mb-4"> Which patients do you want included in the report? </h3>
+            <div class="absolute flex items-center h-5">
+                <%= form.check_box :patients_screened, class: "form-checkbox" %>
+            </div>
+            <div class="pl-7 text-sm leading-5 mb-5">
+                <%= form.label :patients_screened, "Patients Screened" %>
             </div>
 
-            <div class="w-full">
-                <h3 class="label"> Please choose which data do you want to include in the report</h3>
-                <div class="absolute flex items-center h-5">
-                    <%= form.check_box :gender, class: "form-checkbox" %>
-                </div>
-                <div class="pl-7 text-sm leading-5 mb-5">
-                    <%= form.label :gender %>
-                </div>
+            <div class="absolute flex items-center h-5">
+                <%= form.check_box :patients_tested, class: "form-checkbox" %>
+            </div>
+            <div class="pl-7 text-sm leading-5 mb-5">
+                <%= form.label :patients_tested, "Patients Tested" %>
+            </div>
 
-                <div class="absolute flex items-center h-5">
-                    <%= form.check_box :race, class: "form-checkbox" %>
-                </div>
-                <div class="pl-7 text-sm leading-5 mb-5">
-                    <%= form.label :race %>
-                </div>
+            <div class="absolute flex items-center h-5">
+                <%= form.check_box :pending_patients, class: "form-checkbox" %>
+            </div>
+            <div class="pl-7 text-sm leading-5 mb-5">
+                <%= form.label :pending_patients, "Pending Patients" %>
+            </div>
 
-                <div class="absolute flex items-center h-5">
-                    <%= form.check_box :zip_code, class: "form-checkbox" %>
-                </div>
-                <div class="pl-7 text-sm leading-5 mb-5">
-                    <%= form.label :zip_code, "Zip Code" %>
-                </div>
+            <div class="absolute flex items-center h-5">
+                <%= form.check_box :safety_kit, class: "form-checkbox"%>
+            </div>
+            <div class="pl-7 text-sm leading-5 mb-5">
+                <%= form.label :safety_kit, "Safety Kit" %>
+            </div>
 
-                <div class="absolute flex items-center h-5">
-                    <input class="form-checkbox" type="checkbox" id="insurance_type" name="customized_report[insurance_type]" value="1" />
-                </div>
-                <div class="pl-7 text-sm leading-5 mb-5">
-                    <label for="insurance_type">Insurance Type</label>
-                </div>
+            <%# TODO: Ask more details %>
+            <!-- 
+            <div class="absolute flex items-center h-5">
+                <input class="form-checkbox" type="checkbox" id="tester" name="customized_report[tester]" value="1" />
+            </div>
+            <div class="pl-7 text-sm leading-5">
+                <label for="tester">Tester (A person administering the vaccine)</label>
+            </div>
+            -->
+        </div>
 
-                <div class="absolute flex items-center h-5">
-                    <input class="form-checkbox" type="checkbox" id="age" name="customized_report[age]" value="1" />
-                </div>
-                <div class="pl-7 text-sm leading-5 mb-5">
-                    <label for="age">Age</label>
-                </div>
+        <div>
+            <h3 class="label mb-4"> Which patients fields do you want included in the report? </h3>
+            <div class="absolute flex items-center h-5">
+                <%= form.check_box :gender, class: "form-checkbox" %>
+            </div>
+            <div class="pl-7 text-sm leading-5 mb-5">
+                <%= form.label :gender %>
+            </div>
 
-                <div class="absolute flex items-center h-5">
-                    <input class="form-checkbox" type="checkbox" id="date_of_birth" name="customized_report[date_of_birth]" value="1" />
-                </div>
-                <div class="pl-7 text-sm leading-5 mb-5">
-                    <label for="date_of_birth">Date of Birth</label>
-                </div>
+            <div class="absolute flex items-center h-5">
+                <%= form.check_box :race, class: "form-checkbox" %>
+            </div>
+            <div class="pl-7 text-sm leading-5 mb-5">
+                <%= form.label :race %>
+            </div>
 
-                <div class="absolute flex items-center h-5">
-                    <input class="form-checkbox" type="checkbox" id="vacine_name_and_lot_number"
-                    name="customized_report[vacine_name_and_lot_number]" value="1" />
-                </div>
-                <div class="pl-7 text-sm leading-5 mb-5">
-                    <label for="vacine_name_and_lot_number">Vaccine Name and Lot number</label>
-                </div>
+            <div class="absolute flex items-center h-5">
+                <%= form.check_box :zip_code, class: "form-checkbox" %>
+            </div>
+            <div class="pl-7 text-sm leading-5 mb-5">
+                <%= form.label :zip_code, "Zip Code" %>
+            </div>
 
-                <div class="absolute flex items-center h-5">
-                    <input class="form-checkbox" type="checkbox" id="leader_tester" name="customized_report[lead_tester]" value="1" />
-                </div>
-                <div class="pl-7 text-sm leading-5 mb-5">
-                    <label for="lead_tester">Lead Tester</label>
-                </div>
+            <div class="absolute flex items-center h-5">
+                <%= form.check_box :insurance_type, class: "form-checkbox" %>
+            </div>
+            <div class="pl-7 text-sm leading-5 mb-5">
+                <%= form.label :insurance_type, "Insurance Type" %>
+            </div>
 
-                <div class="absolute flex items-center h-5">
-                    <%= form.check_box :registration_date, class: "form-checkbox" %>
-                </div>
-                <div class="pl-7 text-sm leading-5">
-                    <%= form.label :registration_date, "Registration Date" %>
-                </div>
+            <div class="absolute flex items-center h-5">
+                <%= form.check_box :age, class: "form-checkbox" %>
+            </div>
+            <div class="pl-7 text-sm leading-5 mb-5">
+                <%= form.label :age %>
+            </div>
+
+            <div class="absolute flex items-center h-5">
+                <%= form.check_box :date_of_birth, class: "form-checkbox" %>
+            </div>
+            <div class="pl-7 text-sm leading-5 mb-5">
+                <%= form.label :date_of_birth, "Date of Birth" %>
+            </div>
+
+            <%# TODO: Ask for more details %>
+            <!-- 
+            <div class="absolute flex items-center h-5">
+                <input class="form-checkbox" type="checkbox" id="vacine_name_and_lot_number"
+                name="customized_report[vacine_name_and_lot_number]" value="1" />
+            </div>
+            <div class="pl-7 text-sm leading-5 mb-5">
+                <label for="vacine_name_and_lot_number">Vaccine Name and Lot number</label>
+            </div>
+
+            <div class="absolute flex items-center h-5">
+                <input class="form-checkbox" type="checkbox" id="leader_tester" name="customized_report[lead_tester]" value="1" />
+            </div>
+            <div class="pl-7 text-sm leading-5 mb-5">
+                <label for="lead_tester">Lead Tester</label>
+            </div>
+            -->
+
+            <div class="absolute flex items-center h-5">
+                <%= form.check_box :registration_date, class: "form-checkbox" %>
+            </div>
+            <div class="pl-7 text-sm leading-5">
+                <%= form.label :registration_date, "Registration Date" %>
             </div>
         </div>
     </div>
 
-    <div class="actions flex items-center justify-center">
+    <div class="flex items-center justify-center">
         <%= form.submit 'Submit', class:'button-primary' %>
     </div>
 <% end %>
