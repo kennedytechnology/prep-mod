@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_08_104503) do
+ActiveRecord::Schema.define(version: 2020_06_11_071811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -218,6 +218,21 @@ ActiveRecord::Schema.define(version: 2020_06_08_104503) do
   create_table "customized_reports", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "county"
+    t.boolean "patients_screened"
+    t.boolean "patients_tested"
+    t.boolean "pending_patients"
+    t.boolean "safety_kit"
+    t.boolean "gender"
+    t.boolean "race"
+    t.boolean "zip_code"
+    t.boolean "insurance_type"
+    t.boolean "age"
+    t.boolean "date_of_birth"
+    t.boolean "vaccine_name_and_lot_number"
+    t.boolean "registration_date"
+    t.bigint "user_id"
+    t.bigint "clinic_id"
   end
 
   create_table "employers", force: :cascade do |t|

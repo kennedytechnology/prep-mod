@@ -1,4 +1,4 @@
-<%= form_with(model: @customized_report, local: true, url: customized_reports_path(format: :pdf)) do |form| %>
+<%= form_with model: @customized_report, local: true do |form| %>
     <% if @customized_report.errors.any? %>
     <div id="error_explanation">
         <h2><%= pluralize(@customized_report.errors.count, "error") %> prohibited this customized_report from being saved:</h2>
@@ -27,31 +27,31 @@
             <div class="w-full mr-6">
                 <h3 class="label"> Please choose which patients do you want to include in the report</h3>
                 <div class="absolute flex items-center h-5">
-                    <input class="form-checkbox" type="checkbox" id="patients_screened" name="customized_report[patient_screened]" value="1" />
+                    <%= form.check_box :patients_screened, class: "form-checkbox" %>
                 </div>
                 <div class="pl-7 text-sm leading-5 mb-5">
-                    <label for="patients_screened">Patients Screened</label>
+                    <%= form.label :patients_screened, "Patients Screened" %>
                 </div>
 
                 <div class="absolute flex items-center h-5">
-                    <input class="form-checkbox" type="checkbox" id="patients_tested" name="customized_report[patient_tested]" value="1" />
+                    <%= form.check_box :patients_tested, class: "form-checkbox" %>
                 </div>
                 <div class="pl-7 text-sm leading-5 mb-5">
-                    <label for="patients_tested">Patients Tested</label>
+                    <%= form.label :patients_tested, "Patients Tested" %>
                 </div>
 
                 <div class="absolute flex items-center h-5">
-                    <input class="form-checkbox" type="checkbox" id="pending_patients" name="customized_report[pending_patients]" value="1" />
+                    <%= form.check_box :pending_patients, class: "form-checkbox" %>
                 </div>
                 <div class="pl-7 text-sm leading-5 mb-5">
-                    <label for="pending_patients">Pending Patients</label>
+                    <%= form.label :pending_patients, "Pending Patients" %>
                 </div>
 
                 <div class="absolute flex items-center h-5">
-                    <input class="form-checkbox" type="checkbox" id="safety_kit" name="customized_report[safety_kit]" value="1" />
+                    <%= form.check_box :safety_kit, class: "form-checkbox"%>
                 </div>
                 <div class="pl-7 text-sm leading-5 mb-5">
-                    <label for="safety_kit">Safety Kit</label>
+                    <%= form.label :safety_kit, "Safety Kit" %>
                 </div>
 
                 <div class="absolute flex items-center h-5">
@@ -65,24 +65,24 @@
             <div class="w-full">
                 <h3 class="label"> Please choose which data do you want to include in the report</h3>
                 <div class="absolute flex items-center h-5">
-                    <input class="form-checkbox" type="checkbox" id="gender" name="customized_report[gender]" value="1" />
+                    <%= form.check_box :gender, class: "form-checkbox" %>
                 </div>
                 <div class="pl-7 text-sm leading-5 mb-5">
-                    <label for="gender">Gender</label>
+                    <%= form.label :gender %>
                 </div>
 
                 <div class="absolute flex items-center h-5">
-                    <input class="form-checkbox" type="checkbox" id="race" name="customized_report[race]" value="1" />
+                    <%= form.check_box :race, class: "form-checkbox" %>
                 </div>
                 <div class="pl-7 text-sm leading-5 mb-5">
-                    <label for="race">Race</label>
+                    <%= form.label :race %>
                 </div>
 
                 <div class="absolute flex items-center h-5">
-                    <input class="form-checkbox" type="checkbox" id="zip_code" name="customized_report[zip_code]" value="1" />
+                    <%= form.check_box :zip_code, class: "form-checkbox" %>
                 </div>
                 <div class="pl-7 text-sm leading-5 mb-5">
-                    <label for="zip_code">Zip Code</label>
+                    <%= form.label :zip_code, "Zip Code" %>
                 </div>
 
                 <div class="absolute flex items-center h-5">
@@ -122,18 +122,18 @@
                 </div>
 
                 <div class="absolute flex items-center h-5">
-                    <input class="form-checkbox" type="checkbox" id="registration_date" name="customized_report[registration_date]" value="1" />
+                    <%= form.check_box :insurance_type, class: "form-checkbox" %>
                 </div>
                 <div class="pl-7 text-sm leading-5">
-                    <label for="registration_date">Registration Date</label>
+                    <%= form.label :registration_date, "Registration Date" %>
                 </div>
             </div>
         </div>
     </div>
 
-    <%= hidden_field_tag "customized_report[clinic_id]", @clinic.id if @clinic %>
+    <%= form.hidden_field :clinic_id, value: @clinic.id if @clinic %>
 
     <div class="actions flex items-center justify-center">
-        <%= form.submit 'Submit', formtarget: "_blank", class:'button-primary' %>
+        <%= form.submit 'Submit', class:'button-primary' %>
     </div>
 <% end %>
