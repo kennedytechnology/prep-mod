@@ -14,6 +14,7 @@ class PatientsController < ApplicationController
 
   def create
     params[:patient][:date_of_birth] = Chronic.parse(params[:patient][:date_of_birth]) if params[:patient][:date_of_birth]
+    @clinic = Clinic.find(params[:patient].delete(:clinic_id))
     @patient = Patient.new(patient_params)
     @patient.access_code = Patient.generate_access_code
     if @patient.save
@@ -42,7 +43,8 @@ class PatientsController < ApplicationController
   end
 
   def destroy
-    Patient.destroy(params[:id])
+    @patient = Patient.find(params[:id])
+    @patient.appointments.each(&:destroy)
     session[:alert] = "The patient was deleted."
     redirect_back fallback_location: "/clinics"
   end
