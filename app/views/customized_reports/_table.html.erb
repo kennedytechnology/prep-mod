@@ -2,6 +2,9 @@
     <thead>
         <tr class="bg-blue-600">
             <th class="px-4 text-left text-white py-4"> Name </th>
+            <% if @county %>
+                <th class="px-4 text-left text-white py-4"> County </th>
+            <% end %>
             <% if @age %>
                 <th class="px-4 text-left text-white py-4"> Age </th>
             <% end %>
@@ -29,6 +32,9 @@
         <% patients.each do |patient| %>
             <tr>
                 <td class="px-4 py-2"> <%= patient.full_name %> </td>
+                <% if @county %>
+                    <td class="px-4 py-2"><%= patient.county %></td>
+                <% end %>
                 <% if @age %>
                     <td class="px-4 py-2"><%= patient.age %></td>
                 <% end %>
