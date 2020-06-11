@@ -14,12 +14,21 @@
     <h1 class="text-center text-lg text-gray-600 mb-4">Please select the data you would like in your customized report: </h1>
 
     <div class="w-full flex items-center mb-5">
-        <% unless @clinic %>
-            <div class="block mr-5">
-                <%= form.label :county %>
-                <%= form.select :county, COUNTIES, {prompt: "Select"}, {class: "block form-select"} %>
-            </div>
-        <% end %>
+        <div>
+            <% unless @clinic %>
+                <div>
+                    <%= form.label :county %>
+                    <%= form.select :county, COUNTIES, {prompt: "Select"}, {class: "block form-select w-1/2"} %>
+                </div>
+            <% end %>
+
+            <% if @clinic %>
+                <%= form.hidden_field :clinic_id, value: @clinic.id %>
+            <% else %>
+                <%= form.label :clinic_id %>
+                <%= form.select :clinic_id, options_for_select(Clinic.all.collect { | clinic | [clinic.name, clinic.id] }), {prompt: "Select"}, {class: "block form-select w-1/2"} %>
+            <% end %>
+        </div>
 
         <div class="flex justify-between mx-auto">
             <div class="w-full mr-6">
@@ -128,8 +137,6 @@
             </div>
         </div>
     </div>
-
-    <%= form.hidden_field :clinic_id, value: @clinic.id if @clinic %>
 
     <div class="actions flex items-center justify-center">
         <%= form.submit 'Submit', class:'button-primary' %>
