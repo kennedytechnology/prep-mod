@@ -31,4 +31,25 @@ RSpec.describe PatientNotifierMailer, type: :mailer do
       expect(mail.body.encoded).to match(patient.email)
     end
   end
+
+  describe "Check-in Reminder" do
+    let(:appointment) { create(:appointment) }
+    let(:patient) { appointment.patient }
+    let(:mail) { PatientNotifierMailer.with(appointment: appointment).check_in_reminder }
+
+    before do
+      @appointment = appointment
+      @patient = @appointment.patient
+    end
+
+    it "renders the headers" do
+      expect(mail.subject).to eq("Reminder: Your COVID-19 Clinic Appointment #{@appointment.clinic.clinic_date} at #{@appointment.clinic.location}")
+      expect(mail.to).to eq([@patient.email])
+      expect(mail.from).to eq(["notifications@clinicwizard.com"])
+    end
+
+    it "renders the body" do
+      expect(mail.body.encoded).to match("Reminder: Your COVID-19 Clinic Appointment")
+    end
+  end
 end
