@@ -38,6 +38,13 @@ gem 'image_processing'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  case RUBY_PLATFORM
+  when /darwin/
+    gem 'wkhtmltopdf-binary-edge', '~> 0.12.5.1'
+  when /linux/
+    gem 'wkhtmltopdf-binary', '~> 0.12.6'
+  end
+
 end
 
 group :development do
@@ -83,8 +90,6 @@ gem 'chronic'
 gem 'aasm'
 gem 'phonelib'
 gem "aws-sdk-s3", require: false
-
 gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary-edge', '~> 0.12.5.1', group: [:development, :test]
 gem 'wkhtmltopdf-heroku', '2.12.5.0', group: :production
 gem 'rails-erd', group: :development
