@@ -12,9 +12,9 @@
                 <%= f.text_field :event_date, data: {controller: "flatpickr"}, class: "form-select w-full"%>
             </div>
 
-            <div class="mb-4">
+            <div>
                 <%= f.label :location, class: "block" %>
-                <%= f.select :location, options_for_select(ClinicEvent.available_locations), class: "form-input w-full text-xs" %>
+                <%= f.select :location, options_for_select(ClinicEvent.available_locations), {}, {class: "form-select w-full"} %>
             </div>
 
             <div class="mb-4">
