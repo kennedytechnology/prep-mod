@@ -69,7 +69,7 @@ BOOM
         <div>
             <p>
               <%= form.label :date_of_birth %><br>
-              <%= form.text_field :date_of_birth, data: { controller: "flatpickr" } %>
+              <%= form.date_select :date_of_birth, {order: [:month, :day, :year], start_year: Date.current.year - 99, end_year: Date.current.year, include_blank: true}, class: "form-select" %>
             </p>
             <p>
               <%= form.label :age %><br>

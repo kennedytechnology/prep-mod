@@ -9,7 +9,7 @@
 
             <div>
                 <%= f.label :event_date, "Event Date", class: "block" %>
-                <%= f.date_field :event_date, class: "form-input w-full", placeholder: "MM/DD/YYYY" %>
+                <%= f.text_field :event_date, data: {controller: "flatpickr"}, class: "form-select w-full"%>
             </div>
 
             <div class="mb-4">

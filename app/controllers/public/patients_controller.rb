@@ -24,7 +24,6 @@ class Public::PatientsController < ApplicationController
 
     if params[:appointment]
       @appointment = Appointment.new(clinic: @clinic, patient: @patient)
-      @appointment.update_attributes(appointment_params) 
       @appointment.update_attributes(appointment_params)
     end
 

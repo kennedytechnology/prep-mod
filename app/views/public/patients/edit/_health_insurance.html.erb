@@ -41,7 +41,10 @@
     <div>
         <%= f.label :insured_date_of_birth, "Insured Adult's Date Of Birth", class: "block" %>
         <%= f.text_field :insured_date_of_birth, value: @patient.insured_date_of_birth.try(:strftime, "%m/%d/%Y"), class: "w-full form-input",
-            data: {controller: "flatpickr", action: "keyup->inventory-new-entry#updateModalField change->inventory-new-entry#updateModalField"} %>
+                            data: { controller: "flatpickr",
+                                    flatpickr_min_date: Date.today - 80.years,
+                                    flatpickr_max_date: Date.today,
+                                    action: "keyup->inventory-new-entry#updateModalField change->inventory-new-entry#updateModalField" } %>
     </div>
     <div>
         <%= f.label :relation_to_patient_for_consent, "Relationship To Patient", class: "block" %>

@@ -1,7 +1,9 @@
+<h1 class="text-blue-400 font-bold text-lg p-2 mb-6">You'll have the opportunity to enroll your minor children...</h1>
+
 <div class="field-side-by-side">
     <div>
         <%= f.label :county %>
-        <%= f.select :county, options_for_select(COUNTIES, @patient.county),{}, {class: "w-full form-select", data: {action: "change->inventory-new-entry#updateModalField"}}%>
+        <%= f.select :county, options_for_select(COUNTIES.sort, @patient.county),{include_blank: true}, {class: "w-full form-select", data: {action: "change->inventory-new-entry#updateModalField"}}%>
     </div>
     <div> </div>
 </div>

@@ -1,5 +1,4 @@
 class QueuedPatientsController < ClinicManagementController
-
   before_action :find_clinic
 
   def index

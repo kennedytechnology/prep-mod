@@ -14,7 +14,9 @@ class PatientsController < ApplicationController
 
   def create
     params[:patient][:date_of_birth] = Chronic.parse(params[:patient][:date_of_birth]) if params[:patient][:date_of_birth]
-    @clinic = Clinic.find(params[:patient].delete(:clinic_id))
+    # The patients database table has no clinic_id at this point of development
+    # and the below @clinic variable is not used in this method:
+    # @clinic = Clinic.find(params[:patient].delete(:clinic_id))
     @patient = Patient.new(patient_params)
     @patient.access_code = Patient.generate_access_code
     if @patient.save
