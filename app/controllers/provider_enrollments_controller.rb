@@ -28,11 +28,22 @@ class ProviderEnrollmentsController < ApplicationController
   def update
     @provider_enrollment = ProviderEnrollment.find(params[:id])
 
-    if @provider_enrollment.update(provider_enrollment_params)
-      redirect_to provider_enrollments_path, notice: "Successfully Updated Provider"
-    else
-      redirect_back fallback_location: provider_enrollments_path, alert: "Error!"
+    respond_to do |format|
+      if params[:reviewed] == "false"
+        format.js { render 'provider_enrollments/preview_form' }
+      else 
+        if @provider_enrollment.update(provider_enrollment_params)
+          format.html { redirect_to provider_enrollments_path, notice: "Successfully updated provider enrollment!" }
+        else
+          format.html { render :new }
+        end
+      end
     end
+    # if @provider_enrollment.update(provider_enrollment_params)
+    #   redirect_to provider_enrollments_path, notice: "Successfully Updated Provider"
+    # else
+    #   redirect_back fallback_location: provider_enrollments_path, alert: "Error!"
+    # end
   end
 
   private
