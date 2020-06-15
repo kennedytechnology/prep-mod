@@ -49,12 +49,13 @@ export default class extends Controller {
     })
   }
 
-  connect() {}
+  connect() {
+  }
 
   showHideDeleteModal(e) {
     if (e.currentTarget.text === 'Delete') {
       this.deleteRecordButtonTarget.setAttribute('href', `/${e.currentTarget.dataset.recordis}/${e.currentTarget.dataset.recordid}`);
-      document.getElementsByClassName('recordName')[0].innerHTML = e.currentTarget.dataset.recordname;
+      if (e.currentTarget.dataset.recordis === 'patients') document.getElementsByClassName('recordName')[0].innerHTML = e.currentTarget.dataset.recordname;
     }
 
     this.deleteModalTarget.classList.toggle('hidden');

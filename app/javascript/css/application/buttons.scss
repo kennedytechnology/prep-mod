@@ -23,6 +23,13 @@
         &:hover { background-color: lighten(#2699FB, 5%); }
     }
 
+    &-danger {
+        @extend .button-base;
+        @apply bg-red-600 border-red-300 text-white text-lg;
+        
+        &:hover { background-color: lighten(#ff1a1a, 5%); }
+    }
+
     &-primary-fullwidth {
         @extend .button-base;
         @apply bg-brand-blue-600 text-white w-full;

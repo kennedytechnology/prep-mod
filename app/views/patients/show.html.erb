@@ -19,7 +19,7 @@
      data-action="click->main#printContent">Print</a>
 </div>
 
-
+<div data-controller="clinic-activity-patients">
 <table class="table printable">
     <thead>
         <tr>
@@ -41,12 +41,17 @@
             <td><%= clinic_event.category %></td>
             <td><%= clinic_event.outcome %></td>
             <td><%= clinic_event.notes %></td>
-            <td class="table-action-buttons"><%= link_to "Delete", clinic_event, method: :delete, data: {confirm: "Are you sure?"}, class: "button-action" %>
+            <td class="table-action-buttons">
+                <%= link_to "Delete", "javascript:", 
+                    data: {recordis: "clinic_events", recordid: clinic_event.id, 
+                        action: "click->clinic-activity-patients#showHideDeleteModal"}, class: "button-action" %>
             </td>
         </tr>
         <% end %>
     </tbody>
 </table>
+<%= render "patients/delete_record_modal" %>
+</div>
 
 <div class="pagination-section">
     <div class="pagination-container">

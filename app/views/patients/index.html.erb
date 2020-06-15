@@ -26,7 +26,7 @@
   
   <div class="flex flex-col printable">
     <div class="sorting-table-wrapper">
-      <div class="sorting-table-container">
+      <div class="sorting-table-container" data-controller="clinic-activity-patients">
         <table class="table">
           <thead>
           <tr>
@@ -49,12 +49,15 @@
               <td class="w-3/12 text-right table-action-buttons">
                 <%= link_to "Event Entry", new_clinic_event_path(clinic_id: @clinic, patient_id: patient.id),
                             class: "button-action" %>
-                <%= link_to "Delete", patient, method: :delete, class: "button-action" %>
+                <%= link_to "Delete", "javascript:", 
+                    data: {recordis: "patients", recordid: patient.id, recordname: patient.full_name, 
+                        action: "click->clinic-activity-patients#showHideDeleteModal"}, class: "button-action" %>
               </td> 
             </tr>
           <% end %>
           </tbody>
         </table>
+        <%= render "clinics/activity/delete_record_modal" %>
       </div>
     </div>
   </div>
