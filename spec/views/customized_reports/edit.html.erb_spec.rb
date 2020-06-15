@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "customized_reports/edit", type: :view do
+  let!(:user) { create(:user) }
   before(:each) do
-    @customized_report = assign(:customized_report, CustomizedReport.create!())
+    @customized_report = assign(:customized_report, CustomizedReport.create!(user: User.last))
   end
 
   it "renders the edit customized_report form" do
