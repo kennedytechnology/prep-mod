@@ -1,0 +1,68 @@
+<table class="w-full mb-6">
+    <thead>
+        <tr class="bg-blue-600">
+            <th class="px-4 text-left text-white py-4"> Name </th>
+            <% if !@customized_report.county.blank? %>
+                <th class="px-4 text-left text-white py-4"> County </th>
+            <% end %>
+            <% if @customized_report.age %>
+                <th class="px-4 text-left text-white py-4"> Age </th>
+            <% end %>
+            <% if @customized_report.gender %>
+                <th class="px-4 text-left text-white py-4"> Gender </th>
+            <% end %>
+            <% if @customized_report.race %>
+                <th class="px-4 text-left text-white py-4"> Race </th>
+            <% end %>
+            <% if @customized_report.zip_code %>
+                <th class="px-4 text-left text-white py-4"> Zip Code </th>
+            <% end %>
+            <% if @customized_report.insurance_type %>
+                <th class="px-4 text-left text-white py-4"> Insurance Type </th>
+            <% end %>
+            <% if @customized_report.date_of_birth %>
+                <th class="px-4 text-left text-white py-4"> Date of birth </th>
+            <% end %>
+            <% if @customized_report.vaccine_name_and_lot_number %>
+                <th class="px-4 text-left text-white py-4"> Vacine Name and Lot Number </th>
+            <% end %>
+            <% if @customized_report.registration_date %>
+                <th class="px-4 text-left text-white py-4"> Registration Date </th>
+            <% end %>
+        </tr>
+    </thead>
+    <tbody>
+        <% patients.each do |patient| %>
+            <tr>
+                <td class="px-4 py-2"> <%= patient.full_name %> </td>
+                <% if !@customized_report.county.blank? %>
+                    <td class="px-4 py-2"><%= patient.county %></td>
+                <% end %>
+                <% if @customized_report.age %>
+                    <td class="px-4 py-2"><%= patient.age %></td>
+                <% end %>
+                <% if @customized_report.gender %>
+                    <td class="px-4 py-2"><%= patient.sex %></td>
+                <% end %>
+                <% if @customized_report.race %>
+                    <td class="px-4 py-2"><%= patient.race %></td>
+                <% end %>
+                <% if @customized_report.zip_code %>
+                    <td class="px-4 py-2"><%= patient.zip_code %></td>
+                <% end %>
+                <% if @customized_report.insurance_type %>
+                    <td class="px-4 py-2"><%= patient.insurance_type %></td>
+                <% end %>
+                <% if @customized_report.date_of_birth %>
+                    <td class="px-4 py-2"><%= patient.date_of_birth.strftime("%m/%d/%Y") %></td>
+                <% end %>
+                <% if @customized_report.vaccine_name_and_lot_number %>
+                    <td class="px-4 py-2"> Vaccine Name and Lot Number </td>
+                <% end %>
+                <% if @customized_report.registration_date %>
+                    <td class="px-4 py-2"> <%= patient.created_at.strftime("%m-%d-%Y") %> </td>
+                <% end %>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
