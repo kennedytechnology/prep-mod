@@ -28,10 +28,12 @@ class ProviderEnrollment < ApplicationRecord
   end
 
   def create_provider
-    Provider.create(self.attributes.except('id').except('status'))
+    @provider = Provider.create(self.attributes.except('id').except('status'))
   end
 
   def invite_user
-    User.invite!(email: self.practice_email, name: "#{self.first_name} #{self.last_name}", role: 'Regional Administrator')
+    user = User.invite!(email: self.practice_email, name: "#{self.first_name} #{self.last_name}", role: 'Regional Administrator')
+    @provider.user = user
+    @provider.save
   end
 end
