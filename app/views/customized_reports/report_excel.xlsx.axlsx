@@ -1,19 +1,21 @@
 wb = xlsx_package.workbook
 
-if @patients_screened 
-  wb.add_worksheet(name: "Screened Patients") do |sheet|
-    @patients_screened.each do |patient|
-      custom_cells = [patient.first_name, patient.last_name]
-      custom_cells.push(patient.county) if !@customized_report.county.blank?
-      custom_cells.push(patient.age) if @customized_report.age
-      custom_cells.push(patient.sex) if @customized_report.gender
-      custom_cells.push(patient.race) if @customized_report.race
-      custom_cells.push(patient.zip_code) if @customized_report.zip_code
-      custom_cells.push(patient.insurance_type) if @customized_report.insurance_type
-      custom_cells.push(patient.date_of_birth) if @customized_report.date_of_birth
-      custom_cells.push(patient.created_at) if @customized_report.registration_date
+if @patients_screened
+  render partial: 'customized_reports/table', 
+    locals: {wb: wb, patients: @patients_screened, name: "Screened Patients"}
+end
 
-      sheet.add_row custom_cells
-    end
-  end
+if @patients_tested
+  render partial: 'customized_reports/table', 
+    locals: {wb: wb, patients: @patients_tested, name: "Tested Patients"}
+end
+
+if @patients_safety_kit
+  render partial: 'customized_reports/table', 
+    locals: {wb: wb, patients: @patients_safety_kit, name: "Safety Kit"}
+end
+
+if @patients_by_county
+  render partial: 'customized_reports/table', 
+    locals: {wb: wb, patients: @patients_by_county, name: "Patients by county"}
 end
