@@ -5,6 +5,7 @@ class User < ApplicationRecord
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :customized_reports
+  has_many :patients
 
   validates_presence_of :email, :name, :role
   validates_uniqueness_of :email
