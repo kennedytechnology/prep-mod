@@ -22,6 +22,12 @@ class CustomizedReportsController < InheritedResources::Base
                 dpi: 75,
                 encoding: 'utf8'
       end
+
+      format.xlsx do
+        render xlsx: 'customized_report', template: 'customized_reports/report_excel', 
+                disposition: 'inline', filename: "customized_report_#{Date.today.strftime("%d_%m_%Y")}.xlsx",
+                xlsx_author: @customized_report.user.name
+      end
     end
   end
 
@@ -34,9 +40,10 @@ class CustomizedReportsController < InheritedResources::Base
   def create
     @customized_report = CustomizedReport.new(customized_report_params)
     @customized_report.user = current_user
+    format_name = params[:pdf_file] ? :pdf : :xlsx
 
     if @customized_report.save
-      redirect_to customized_report_path(id: @customized_report.id, format: :pdf)
+      redirect_to customized_report_path(id: @customized_report.id, format: format_name)
     else
       render :new
     end

@@ -141,6 +141,7 @@
     </div>
 
     <div class="flex items-center justify-center">
-        <%= form.submit 'Submit', class:'button-primary' %>
+        <%= form.submit "Submit PDF", name: "pdf_file", class: "button-primary" %>
+        <%= form.submit "Submit Excel", name: "excel_file", class: "button-primary" %>
     </div>
 <% end %>
