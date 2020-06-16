@@ -7,7 +7,7 @@ RSpec.describe EmployerMailer, type: :mailer do
 
     it "renders the headers" do
       expect(mail.subject).to eq("Confirmation for your request to access information about your workplace")
-      expect(mail.to).to eq([employer.mail])
+      expect(mail.to).to eq([employer.email])
       expect(mail.from).to eq(["notifications@clinicwizard.com"])
     end
 
