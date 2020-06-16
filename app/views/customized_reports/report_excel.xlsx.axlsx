@@ -1,0 +1,21 @@
+wb = xlsx_package.workbook
+
+if @patients_screened
+  render partial: 'customized_reports/table', 
+    locals: {wb: wb, patients: @patients_screened, name: "Screened Patients"}
+end
+
+if @patients_tested
+  render partial: 'customized_reports/table', 
+    locals: {wb: wb, patients: @patients_tested, name: "Tested Patients"}
+end
+
+if @patients_safety_kit
+  render partial: 'customized_reports/table', 
+    locals: {wb: wb, patients: @patients_safety_kit, name: "Safety Kit"}
+end
+
+if @patients_by_county
+  render partial: 'customized_reports/table', 
+    locals: {wb: wb, patients: @patients_by_county, name: "Patients by county"}
+end
