@@ -25,7 +25,10 @@ class CustomizedReportsController < InheritedResources::Base
 
       format.xlsx do
         render xlsx: 'customized_report', template: 'customized_reports/report_excel', 
-                disposition: 'inline', filename: "customized_report_#{Date.today.strftime("%d_%m_%Y")}.xlsx",
+                disposition: 'inline', 
+                filename: @customized_report.clinic ? 
+                            "report_#{@clinic.name.downcase.parameterize.underscore}.xlsx"
+                          : "customized_report_#{Date.today.strftime("%d_%m_%Y")}.xlsx",
                 xlsx_author: @customized_report.user.name
       end
     end
