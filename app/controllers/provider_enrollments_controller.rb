@@ -39,11 +39,6 @@ class ProviderEnrollmentsController < ApplicationController
         end
       end
     end
-    # if @provider_enrollment.update(provider_enrollment_params)
-    #   redirect_to provider_enrollments_path, notice: "Successfully Updated Provider"
-    # else
-    #   redirect_back fallback_location: provider_enrollments_path, alert: "Error!"
-    # end
   end
 
   private

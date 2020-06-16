@@ -183,7 +183,7 @@
             <div class="grid grid-cols-6 gap-4">
                 <div>
                     <%= f.label :practice_name, class: "block" do %>
-                    <span> Name </span>
+                    <span> Practice Name </span>
                     <span class="field-required">*</span>
                     <% end %>
                     <%= f.text_field :practice_name, class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
@@ -341,9 +341,8 @@
             <%= f.text_area :additional_info, class: "form-textarea w-full" %>
         </div>
 
-        <%= f.hidden_field :status, value: "" %>
-
-        <%= hidden_field_tag "reviewed", false, id: "reviewed_form_hidden_tag" %>
+        <%= hidden_field_tag :reviewed, "false", id: "reviewed_form_hidden_tag" %>
+        <%= f.hidden_field :status, value: "pending", id: "provider_enrollment_status" %>
 
         <div class="flex justify-end mt-8">
             <%= submit_tag 'Preview & Submit', name: 'preview_button', class: "button-primary", data: {action: "click->review-form#openModal"} %>
