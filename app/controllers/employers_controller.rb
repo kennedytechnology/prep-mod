@@ -14,7 +14,7 @@ class EmployersController < InheritedResources::Base
     @employer = Employer.new(employer_params)
 
     if @employer.save
-      EmployerMailer.request_confirmation.(@employer).deliver
+      EmployerMailer.request_confirmation(@employer).deliver
       redirect_to root_path, notice: "Successfully sent request for Employer Enrollment"
     else
       redirect_to root_path, alert: "Error!"
