@@ -3,7 +3,17 @@ wb = xlsx_package.workbook
 if @patients_screened 
   wb.add_worksheet(name: "Screened Patients") do |sheet|
     @patients_screened.each do |patient|
-      sheet.add_row [patient.first_name, patient.last_name]
+      custom_cells = [patient.first_name, patient.last_name]
+      custom_cells.push(patient.county) if !@customized_report.county.blank?
+      custom_cells.push(patient.age) if @customized_report.age
+      custom_cells.push(patient.sex) if @customized_report.gender
+      custom_cells.push(patient.race) if @customized_report.race
+      custom_cells.push(patient.zip_code) if @customized_report.zip_code
+      custom_cells.push(patient.insurance_type) if @customized_report.insurance_type
+      custom_cells.push(patient.date_of_birth) if @customized_report.date_of_birth
+      custom_cells.push(patient.created_at) if @customized_report.registration_date
+
+      sheet.add_row custom_cells
     end
   end
 end
