@@ -19,7 +19,7 @@ class PatientsController < ApplicationController
     # @clinic = Clinic.find(params[:patient].delete(:clinic_id))
     @patient = Patient.new(patient_params)
     @patient.access_code = Patient.generate_access_code
-    @patient.user = current_user
+    @patient.user = current_user if current_user
     if @patient.save
       PatientNotifierMailer.invitation(@patient).deliver if @patient.notify_via_email?
       @patient.sms_invite if @patient.notify_via_sms?
