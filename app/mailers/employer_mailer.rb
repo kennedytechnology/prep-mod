@@ -1,8 +1,6 @@
 class EmployerMailer < ApplicationMailer
-    def request_confirmation
-        @greeting = "Hi"
+    def request_confirmation(employer)
         @employer = employer
-
-        mail to: employer.email, subject: "Request confirmation"
+        mail to: employer.email, subject: "Confirmation for your request to access information about your workplace"
     end
 end
