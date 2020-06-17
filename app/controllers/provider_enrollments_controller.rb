@@ -33,11 +33,7 @@ class ProviderEnrollmentsController < ApplicationController
         format.js { render 'provider_enrollments/preview_form' }
       else 
         if @provider_enrollment.update(provider_enrollment_params)
-          if params[:status] == "denied"
-            format.html { render 'provider_enrollments/provider_denied_modal' }
-          else
-            format.html { redirect_to provider_enrollments_path, notice: "Successfully updated provider enrollment!" }
-          end
+          format.html { redirect_to provider_enrollments_path, notice: "Successfully updated provider enrollment!" }
         else
           format.html { render :new }
         end

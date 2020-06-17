@@ -25,13 +25,22 @@ export default class extends Controller {
     this.modalForDeniedTarget.classList.remove('pointer-events-none');
   }
 
+  closeDeniedModal(event) {
+    this.modalForDeniedTarget.classList.add('opacity-0');
+    this.modalForDeniedTarget.classList.add('pointer-events-none');
+  }
+
   submitForm(event) {
     let reviewedField = document.getElementById("reviewed_form_hidden_tag");
     let statusField = document.getElementById("provider_enrollment_status");
     reviewedField.value = true;
     statusField.value = event.currentTarget.value || "pending";
     this.closeModal();
-    this.formTarget.submit();
+    if (statusField.value == "denied") {
+      this.openDeniedModal();
+    } else {
+      this.formTarget.submit();
+    }
   }
 
 }
