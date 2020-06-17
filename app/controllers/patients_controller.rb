@@ -52,7 +52,7 @@ class PatientsController < ApplicationController
     redirect_back fallback_location: "/clinics"
   end
 
-  def upload_record 
+  def upload_records 
     case
     when params[:county] == "" && params[:clinic] == ""
       @patients = Patient.all
