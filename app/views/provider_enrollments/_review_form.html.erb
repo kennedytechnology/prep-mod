@@ -1,0 +1,266 @@
+<h2 class="main-title"> COVID-19 Service Provider Request from <%= @provider_enrollment.first_name %> <%= @provider_enrollment.last_name %> </h2>
+
+<div class="field-fullwidth">
+    <h2 class="title"> What services would you like to provide? </h2>    
+    <div class="checkboxes-container">
+        <% ClinicService.where(category: "provider_enrollments").each do |service| %>
+            <div>
+                <span> <input type="checkbox" class="form-checkbox" disabled="disabled" <%= "checked" if @provider_enrollment.clinic_services.include?(service) %> /> </span>
+                <span class="label"> <%= service.name %> </span>
+            </div>
+        <% end %>        
+    </div>
+</div>
+
+<div class="field-fullwidth">
+    <h2 class="title mb-4"> Population(s) Served <span class="field-required">*</span> </h2>
+    <div class="checkboxes-container">
+        <% ClinicAgeGroup.all.each do |age_group| %>
+            <div>
+                <span> <input type="checkbox" class="form-checkbox" disabled="disabled" <%= "checked" if @provider_enrollment.clinic_age_groups.include?(age_group) %> /> </span>
+                <span class="label"> <%= age_group.name %> </span>
+            </div>
+        <% end %>        
+    </div>
+</div>
+
+<div class="field-fullwidth">
+    <h2 class="title"> What high-risk or under-served groups are largely represented in your practice?
+    <span class="field-required">*</span></h2>
+    <div class="checkboxes-container">
+        <% ClinicPrimaryGroup.all.each do |primary_group| %>
+            <div>
+                <span> <input type="checkbox" class="form-checkbox" disabled="disabled" <%= "checked" if @provider_enrollment.clinic_age_groups.include?(primary_group) %> /> </span>
+                <span class="label"> <%= primary_group.name %> </span>
+            </div>
+        <% end %>      
+    </div>
+</div>
+
+<div class="field-fullwidth">
+    <h2 class="title"> Provider Contact's Information </h2> 
+    <div class="grid grid-cols-5 gap-4">
+        <div>
+            <%# f.label :first_name, class: "block" do %>
+                <%# <span> First Name </span> %>
+                <%# <span class="field-required">*</span> %>
+            <%# end %>
+            <%# f.text_field :first_name, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+            <p class="label"> First Name </p>
+            <input value="<%= @provider_enrollment.first_name %>" placeholder="First Name" class="form-input w-full" disabled="disabled" />            
+        </div>
+        <div>
+            <p class="label"> Middle Initial </p>
+            <input value="<%= @provider_enrollment.middle_initial %>" placeholder="Middle Initial" class="form-input w-full" disabled="disabled" />            
+        </div>
+        <div>
+            <p class="label"> Middle Initial </p>
+            <input value="<%= @provider_enrollment.last_name %>" placeholder="Last Name" class="form-input w-full" disabled="disabled" />
+        </div>
+        <div>
+            <p class="label"> County <span class="field-required">*</span></p>
+            <select class="form-select" disabled="true">
+                <option value="" selected="selected"> <%= @provider_enrollment.professional_license ? @provider_enrollment.professional_license : "PharmaD/RPh" %> </option>
+            </select>             
+        </div>
+
+        <div>
+            <p class="label"> Title </p>
+            <input value="<%= @provider_enrollment.title %>" placeholder="Title" class="form-input w-full" disabled="disabled" />           
+        </div>
+    </div>
+
+    <div class="grid grid-cols-4 gap-4">
+        <div>
+            <p class="label"> Office Phone Number </p>
+            <input value="<%= @provider_enrollment.contact_office_phone %>" placeholder="Office Phone Number" class="form-input w-full" disabled="disabled" />                 
+        </div>
+        <div>
+            <p class="label"> Mobile Phone Number </p>
+            <input value="<%= @provider_enrollment.contact_mobile_phone %>" placeholder="Mobile Phone Number" class="form-input w-full" disabled="disabled" />              
+        </div>
+        <div>
+            <p class="label"> Email Address </p>
+            <input value="<%= @provider_enrollment.contact_email %>" placeholder="Email Address" class="form-input w-full" disabled="disabled" />               
+        </div>
+        <div>
+            <p class="label"> County <span class="field-required">*</span></p>
+            <select class="form-select" disabled="true">
+                <option value="" selected="selected"> <%= @provider_enrollment.county ? @provider_enrollment.county : "Jefferson" %> </option>
+            </select>            
+        </div>
+    </div>
+</div>
+
+<div class="field-fullwidth">
+    <h2 class="title"> Practice Information </h2>
+    <div class="sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-4">
+        <div>
+            <p class="label"> NPI Number </p>
+            <input value="<%= @provider_enrollment.npi_number %>" placeholder="NPI Number" class="form-input w-full" disabled="disabled" />            
+        </div>
+
+        <div>
+            <p class="label"> License Number </p>
+            <input value="<%= @provider_enrollment.license_number %>" placeholder="License Number" class="form-input w-full" disabled="disabled" />             
+        </div>
+
+        <div>
+            <p class="label"> State of Issue </p>
+            <input value="<%= @provider_enrollment.license_state_of_issue %>" placeholder="State of Issue" class="form-input w-full" disabled="disabled" />             
+        </div>
+
+        <div>
+            <p class="label"> Date of Issue </p>
+            <input value="<%= @provider_enrollment.license_date_of_issue %>" placeholder="MM/DD/YYYY" class="form-input w-full" disabled="disabled" />             
+        </div>
+
+        <div>
+            <%# f.label :medical_specialty, class: "block" do %>
+                <%# <span> Specialty </span> %>
+                <%# <span class="field-required">*</span> %>
+            <%# end %>
+            <%# f.select :medical_specialty, MEDICAL_SPECIALTY, {prompt: "Select"}, {class: "form-select w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"}} %>
+
+            <p class="label"> Specialty <span class="field-required">*</span></p>
+            <select class="form-select" disabled="true">
+                <option value="" selected="selected"> <%= @provider_enrollment.medical_specialty ? @provider_enrollment.medical_specialty : "Endocrinology" %> </option>
+            </select>               
+        </div>
+
+        <div class="max-w-md">
+            <p class="label"> Practice Type <span class="field-required">*</span></p>
+            <select class="form-select" disabled="true">
+                <option value="" selected="selected"> <%= @provider_enrollment.practice_type ? @provider_enrollment.practice_type : "Endocrinology" %> </option>
+            </select>             
+        </div>
+
+        <div>
+            <p class="label"> Mobile Phone Number </p>
+            <input value="<%= @provider_enrollment.practice_mobile_phone %>" placeholder="Mobile Phone Number" class="form-input w-full" disabled="disabled" />             
+        </div>
+
+        <div>
+            <p class="label"> Email Address </p>
+            <input value="<%= @provider_enrollment.practice_email %>" placeholder="Email Address" class="form-input w-full" disabled="disabled" />             
+        </div>
+    </div>
+
+    <div class="grid grid-cols-6 gap-4">
+        <div>
+            <p class="label"> Practice Name </p>
+            <input value="<%= @provider_enrollment.practice_name %>" placeholder="Practice Name" class="form-input w-full" disabled="disabled" /> 
+        </div>
+        <div>
+            <%# f.label :practice_address, class: "block" do %>
+            <%# <span> Address </span> %>
+            <%# <span class="field-required">*</span> %>
+            <%# end %>
+            <%# f.text_field :practice_address, id: "autocomplete", onFocus: "geolocate()", class: "form-input block w-full", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+
+            <p class="label"> Address </p>
+            <input value="<%= @provider_enrollment.practice_address %>" placeholder="Address" class="form-input w-full" disabled="disabled" />             
+            
+            <%= render partial: "public/clinics/google_maps_script" %>
+        </div>
+
+        <div>
+            <p class="label"> City </p>
+            <input value="<%= @provider_enrollment.practice_city %>" placeholder="City" class="form-input w-full" disabled="disabled" />            
+        </div>
+
+        <div>
+            <p class="label"> State </p>
+            <input value="<%= @provider_enrollment.practice_state %>" placeholder="State" class="form-input w-full" disabled="disabled" />            
+        </div>
+
+        <div>
+            <p class="label"> Zip code </p>
+            <input value="<%= @provider_enrollment.practice_zip_code %>" placeholder="Zip code" class="form-input w-full" disabled="disabled" />           
+        </div>
+
+        <div>
+            <p class="label"> Office Phone Number </p>
+            <input value="<%= @provider_enrollment.practice_office_phone %>" placeholder="Office Phone Number" class="form-input w-full" disabled="disabled" />            
+        </div>
+    </div>
+</div>
+
+<div class="field-fullwidth">
+    <h2 class="title"> Back-Up Contact Information </h2>
+    <div class="grid grid-cols-4 gap-4">
+        <div>
+            <p class="label"> Name </p>
+            <input value="<%= @provider_enrollment.practice_backup_contact %>" placeholder="Name" class="form-input w-full" disabled="disabled" />            
+        </div>
+
+        <div>
+            <p class="label"> Office Phone </p>
+            <input value="<%= @provider_enrollment.practice_backup_office_phone %>" placeholder="Office Phone" class="form-input w-full" disabled="disabled" />            
+        </div>
+        
+        <div>
+            <p class="label"> Email Address </p>
+            <input value="<%= @provider_enrollment.practice_backup_email %>" placeholder="Email Address" class="form-input w-full" disabled="disabled" />            
+        </div>
+
+        <div>
+            <p class="label"> Mobile Phone </p>
+            <input value="<%= @provider_enrollment.practice_backup_mobile_phone %>" placeholder="Mobile Phone" class="form-input w-full" disabled="disabled" />        
+        </div>
+    </div>
+</div>
+
+<div class="field-side-by-side">
+    <div>
+        <h2 class="title"> Do you currently provide vaccinations?<span class="field-required">*</span> </h2>     
+        <div>
+            <input type="radio" class="form-radio" disabled="disabled" <%= 'checked' if @provider_enrollment.does_provide_vaccination == "true" %> />
+            <span class="label mr-4"> Yes </span>
+        </div>
+        <div>
+            <input type="radio" class="form-radio" disabled="disabled" <%= 'checked' if @provider_enrollment.does_provide_vaccination == "false" %> />
+            <span class="label"> No </span>
+        </div>                
+    </div>
+    
+    <div>
+        <h2 class="title"> Are you a Vaccines for Children (VFC) Provider?<span class="field-required">*</span> </h2> 
+
+        <input type="radio" class="form-radio" disabled="disabled" <%= 'checked' if @provider_enrollment.does_provide_vfc == "true" %> />
+        <span class="label mr-4"> Yes </span>
+
+        <input type="radio" class="form-radio" disabled="disabled" <%= 'checked' if @provider_enrollment.does_provide_vfc == "false" %> />
+        <span class="label"> No </span>        
+    </div>
+</div>
+
+<div class="field-fullwidth">
+    <div class="grid grid-cols-2 gap-4">
+    <div>
+        <h2 class="title"> What make and model refrigerator do you have? <span class="field-required">*</span></h2>
+        <input value="<%= @provider_enrollment.refrigerator %>" placeholder="What make and model refrigerator do you have?" class="form-input w-full" disabled="disabled" />        
+    </div>
+
+    <div>
+        <h2 class="title"> What make and model freezer do you have? <span class="field-required">*</span></h2>
+        <input value="<%= @provider_enrollment.freezer %>" placeholder="What make and model freezer do you have?" class="form-input w-full" disabled="disabled" />        
+    </div>
+
+    <div>
+        <h2 class="title"> What make and model data logger/refrigerator thermometer do you have? <span class="field-required">*</span></h2>
+        <input value="<%= @provider_enrollment.refrigerator_thermometer %>" placeholder="What make and model data logger/refrigerator thermometer do you have?" class="form-input w-full" disabled="disabled" />         
+    </div>
+    </div>
+</div>
+
+<div class="field-fullwidth">
+    <h2 class="title"> Additional Information </h2>
+    <input value="<%= @provider_enrollment.additional_info %>" placeholder="Please provide any additional information you would like to share about your interest or relevant experience." class="form-input w-full" disabled="disabled" />    
+</div>
+
+<div class="flex justify-end">
+    <button class="button-action" type="button" value="accepted" data-action="click->review-form#submitForm"> Accepted </button>
+    <button class="button-action" type="button" value="denied" data-action="click->review-form#submitForm"> Denied </button>
+    <button class="button-action" type="button" value="need_additional_information" data-action="click->review-form#submitForm"> Need Additional Information </button>
+</div>
