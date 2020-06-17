@@ -24,7 +24,7 @@
         </div>
         <div class="checkboxes-in-dropdown w-1/3" id="locationsCheckboxes" data-target="consent-form.locationsCheckboxes">
             <%= collection_check_boxes(:patient, :employer_ids, Employer.all, :id, :company_name) do |b| %>
-                <div class="relative flex items-start px-3 hover:bg-blue-50" data-target="consent-form.searchableRow" data-search-content="<%= [b.object.company_name.downcase] %>">
+                <div class="relative flex items-start px-3 hover:bg-blue-50" data-target="consent-form.searchableRow" data-search-content="<%= [b.object.company_name.try(:downcase)] %>">
                     <div class="absolute flex items-center h-5">
                         <%= b.check_box(class: "form-checkbox cursor-pointer text-base", 
                             data: {action: "click->consent-form#displayLocations", 
