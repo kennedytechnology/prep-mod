@@ -52,21 +52,7 @@ class PatientsController < ApplicationController
     redirect_back fallback_location: "/clinics"
   end
 
-  def upload_records 
-    case
-    when params[:county] == "" && params[:clinic] == ""
-      @patients = Patient.all
-    when params[:county] && (params[:clinic] == "")
-      @patients = Patient.where(county: params[:county])
-    when params[:clinic] && (params[:county] == "")
-      @patients = Clinic.find_by_venue_name(params[:clinic]).patients
-    else
-      @patients = Patient.all
-    end    
-    respond_to do |format|
-      format.html
-      format.csv { send_data @patients.to_csv, filename: "patients-#{Date.today}.csv" }
-    end
+  def upload_records
   end
 
   def download_records
