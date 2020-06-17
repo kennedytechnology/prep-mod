@@ -39,9 +39,3 @@
     <% end %>  
   </div>
 </div>
-
-<h1 class="main-title">Upload Records</h1>
-
-<%= file_field :file, "select-file", class: "mt-3 mr-2", data: {action: "change->upload-records#showRemoveButton", target: "upload-records.selectFileInput"} %>
-<br/><br/>
-<%= submit_tag "Upload", class: "button-primary" %>

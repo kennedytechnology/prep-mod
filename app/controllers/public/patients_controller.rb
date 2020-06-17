@@ -43,6 +43,7 @@ class Public::PatientsController < ApplicationController
         render "edit", alert: "Success: This step of updating your patient request was saved."
       else
         create_family_patients
+        PublicPatientMailer.request_confirmation(@patient).deliver
         redirect_to root_path, alert: "Success: Your update patient request was fully saved."
       end
     else

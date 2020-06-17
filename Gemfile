@@ -34,6 +34,8 @@ gem 'devise_invitable', '~> 2.0.0'
 # Ransack
 gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'image_processing'
+gem 'caxlsx'
+gem 'caxlsx_rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -27,8 +27,10 @@ Rails.application.routes.draw do
   get '/check_in/:check_in_code', to: 'public/patients#check_in', as: :check_in
   
   get "/clear_session", to: 'public/patients#clear_session'
-  get '/clinics/:id/patients/upload_record', to: 'patients#upload_record'
-  post '/clinics/:id/patients/upload_record', to: 'patients#upload_record'
+  get 'patients/upload_records', to: 'patients#upload_records'
+  post 'patients/upload_records', to: 'patients#upload_records'
+  get 'patients/download_records', to: 'patients#download_records'
+  post 'patients/download_records', to: 'patients#download_records'
 
   resources :news_signups, only: [:new, :create]
   resources :patients

@@ -19,6 +19,7 @@ class PatientsController < ApplicationController
     # @clinic = Clinic.find(params[:patient].delete(:clinic_id))
     @patient = Patient.new(patient_params)
     @patient.access_code = Patient.generate_access_code
+    @patient.user = current_user if current_user
     if @patient.save
       PatientNotifierMailer.invitation(@patient).deliver if @patient.notify_via_email?
       @patient.sms_invite if @patient.notify_via_sms?
@@ -51,7 +52,10 @@ class PatientsController < ApplicationController
     redirect_back fallback_location: "/clinics"
   end
 
-  def upload_record 
+  def upload_records
+  end
+
+  def download_records
     case
     when params[:county] == "" && params[:clinic] == ""
       @patients = Patient.all

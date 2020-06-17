@@ -7,6 +7,7 @@ class Patient < ApplicationRecord
   has_and_belongs_to_many :employers
   has_one_attached :insurance_card_front
   has_one_attached :insurance_card_back
+  belongs_to :user, optional: true
 
   accepts_nested_attributes_for :patient_family_members
 

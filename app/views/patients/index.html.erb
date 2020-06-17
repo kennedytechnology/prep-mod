@@ -1,6 +1,6 @@
 <%= render 'clinics/header' if @clinic %>
 
-<div class="clinic-patients-index-page" data-controller="patients">
+<div class="clinic-patients-index-page">
   <div class="header-section">
     <% unless @clinic %>
       <h1 class="main-title">Patient Record Search</h1>
@@ -9,19 +9,25 @@
     <% if @clinic %>
       <h3>Total Registered: <%= @clinic.patients.size %></h3>
     <% end %>
-
-    <div class="w-full flex justify-between items-center mt-8">
-        <div class="flex items-center w-6/12">
-            <label class="text-lg mr-3 text-gray-600" for="search"> Search here: </label>
-            <input class="form-input w-7/12" id="search" data-action="keyup->patients#search" type="text">
-        </div>
-
-        <a href="javascript:" class="button-primary" data-action="click->main#printContent">Print</a>
+    
+    <div class="flex justify-end my-4 search-inputs-container">
+      <%= search_form_for @q, class: "flex items-center w-full" do |f| %>
+        <%= f.search_field :first_name_cont, placeholder: "First Name", class: "form-input flex-1 mr-2" %>
+        <%= f.search_field :last_name_cont, placeholder: "Last Name", class: "form-input flex-1 mr-2" %>
+        <%= f.search_field :mothers_maiden_name_cont, placeholder: "Mother's maiden name", class: "form-input flex-1 mr-2" %>
+        <%= f.search_field :date_of_birth_equals, type: "date", placeholder: "Date of birth",
+                               class: "form-input flex-1 mr-2", style: "margin-bottom: 0; min-height: 42px; max-height: 42px;",
+                               data: {controller: "flatpickr"} %>
+        <%= f.submit "Search", class: "button-action" %>
+        <%= link_to "Reset", patients_path, class: "button-action" %>
+      <% end %>
     </div>
     
   </div>
   <div class="flex justify-end mb-3">
-    
+    <a href="javascript:"
+       class="button-primary"
+       data-action="click->main#printContent">Print</a>
   </div>
   
   <div class="flex flex-col printable">
@@ -40,12 +46,12 @@
           </thead>
           <tbody>
           <% @patients.each do |patient| %>
-            <tr data-target="patients.searchableRow" data-search-content="<%= [patient.first_name.downcase, patient.last_name.downcase, patient.date_of_birth.strftime("%m/%d/%y")].join(" ") %>" data-patient-id="<%= patient.id %>">
+            <tr>
               <td class="underline"><%= link_to patient.full_name, [@clinic, patient]  %></td>
               <td><%= patient.date_of_birth.strftime("%m/%d/%y") if patient.date_of_birth %></td>
               <td><%= ((Date.today.to_time - patient.date_of_birth.to_time) / 1.year.seconds).floor if patient.date_of_birth %></td>
               <td><%= patient.sex == "F" ? "Female" : "Male" %></td>
-              <td><%= patient.county %></td>           
+              <td><%= patient.county %></td>              
               <td class="w-3/12 text-right table-action-buttons">
                 <%= link_to "Event Entry", new_clinic_event_path(clinic_id: @clinic, patient_id: patient.id),
                             class: "button-action" %>

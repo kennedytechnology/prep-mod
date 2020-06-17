@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_11_071811) do
+ActiveRecord::Schema.define(version: 2020_06_16_134245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -477,6 +477,8 @@ ActiveRecord::Schema.define(version: 2020_06_11_071811) do
     t.string "license_state_of_issue"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_providers_on_user_id"
   end
 
   create_table "supply_inventories", force: :cascade do |t|
@@ -570,6 +572,7 @@ ActiveRecord::Schema.define(version: 2020_06_11_071811) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "appointments", "clinics"
   add_foreign_key "appointments", "patients"
+  add_foreign_key "providers", "users"
   add_foreign_key "supply_inventory_events", "supply_inventories"
   add_foreign_key "test_kits", "clinics"
 end
