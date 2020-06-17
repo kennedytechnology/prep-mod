@@ -3,7 +3,7 @@ import {
 } from "stimulus"
 
 export default class extends Controller {
-  static targets = ["form", "modal", "modalForDeniedProviderEnrollment", "modalContent"]
+  static targets = ["form", "modal", "modalForDenied", "modalContent"]
 
   connect() {
 
@@ -18,6 +18,11 @@ export default class extends Controller {
     this.modalTarget.classList.add('opacity-0');
     this.modalTarget.classList.add('pointer-events-none');
     this.modalContentTarget.innerHTML = "";
+  }
+
+  openDeniedModal(event) {
+    this.modalForDeniedTarget.classList.remove('opacity-0');
+    this.modalForDeniedTarget.classList.remove('pointer-events-none');
   }
 
   submitForm(event) {
