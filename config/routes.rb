@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   get "/clear_session", to: 'public/patients#clear_session'
   get '/clinics/:id/patients/upload_record', to: 'patients#upload_record'
   post '/clinics/:id/patients/upload_record', to: 'patients#upload_record'
+  get '/clinics/:id/patients/download_records', to: 'patients#download_records'
 
   resources :news_signups, only: [:new, :create]
   resources :patients
