@@ -7,14 +7,13 @@ class ProviderEnrollment < ApplicationRecord
   accepts_nested_attributes_for :clinic_services
   has_many :clinics
 
-  after_create :set_default_status_and_unique_number, if: lambda { unique_number == nil }
+  after_create :set_default_unique_number, if: lambda { unique_number == nil }
   after_update :send_email, if: lambda { status == "accepted" }
   after_update :email_provider_denial, if: lambda { status == "denied" }
   after_update :create_provider, if: lambda { status == "accepted" }
   after_update :invite_user, if: lambda { status == "accepted" }
 
-  def set_default_status_and_unique_number
-    self.status = "pending"
+  def set_default_unique_number
     self.unique_number = "P#{self.id}"
     self.save
   end
