@@ -67,12 +67,12 @@ RSpec.describe ProviderEnrollmentsController, type: :controller do
   describe "POST #update" do
     context "success" do
       before do
-        put :update, params: { id: provider_enrollment.id, provider_enrollment: { license_number: "New License Number 2" } }
+        put :update, params: { id: provider_enrollment.id, reviewed: true, status: "pending", provider_enrollment: { license_number: "New License Number 2" } }
         provider_enrollment.reload
       end
 
       it { expect(response).to redirect_to provider_enrollments_path }
-      it { expect(flash[:notice]).to match("Successfully Updated Provider") }
+      it { expect(flash[:notice]).to match("Successfully updated provider enrollment!") }
       it { expect(provider_enrollment.license_number).to eq("New License Number 2") }
     end
   end
