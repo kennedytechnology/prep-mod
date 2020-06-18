@@ -23,7 +23,6 @@ export default class extends Controller {
   }
 
   setStatus(e) {
-    debugger;
     let statusField = document.getElementById("provider_enrollment_status");
     statusField.value = e.target.value.split(' ').join('_').toLowerCase();
   }
