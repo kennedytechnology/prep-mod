@@ -386,8 +386,6 @@ ActiveRecord::Schema.define(version: 2020_06_18_130525) do
     t.string "check_in_code"
     t.text "signature_data"
     t.boolean "sharing_results_authorized"
-    t.string "signature_first_name"
-    t.string "signature_last_name"
     t.text "has_other_reason_explanation"
   end
 
