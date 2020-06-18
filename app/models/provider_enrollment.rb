@@ -13,6 +13,8 @@ class ProviderEnrollment < ApplicationRecord
   after_update :create_provider, if: lambda { status == "accepted" }
   after_update :invite_user, if: lambda { status == "accepted" }
 
+  validates_presence_of :first_name
+
   def set_default_unique_number
     self.unique_number = "P#{self.id}"
     self.save

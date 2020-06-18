@@ -1,4 +1,4 @@
-<h2 class="main-title"> COVID-19 Service Provider Request from <%= @provider_enrollment.first_name %> <%= @provider_enrollment.last_name %> </h2>
+<h2 class="main-title"> <%= @title %> </h2>
 
 <div class="field-fullwidth">
     <h2 class="title"> What services would you like to provide? </h2>    
@@ -214,23 +214,20 @@
 <div class="field-side-by-side">
     <div>
         <h2 class="title"> Do you currently provide vaccinations?<span class="field-required">*</span> </h2>     
-        <div>
-            <input type="radio" class="form-radio" disabled="disabled" <%= 'checked' if @provider_enrollment.does_provide_vaccination == "true" %> />
-            <span class="label mr-4"> Yes </span>
-        </div>
-        <div>
-            <input type="radio" class="form-radio" disabled="disabled" <%= 'checked' if @provider_enrollment.does_provide_vaccination == "false" %> />
-            <span class="label"> No </span>
-        </div>                
+        <input type="radio" class="form-radio" disabled="disabled" <%= 'checked' if @provider_enrollment.does_provide_vaccination == true %> />
+        <span class="label mr-4"> Yes </span>
+
+        <input type="radio" class="form-radio" disabled="disabled" <%= 'checked' if @provider_enrollment.does_provide_vaccination == false %> />
+        <span class="label"> No </span>               
     </div>
     
     <div>
         <h2 class="title"> Are you a Vaccines for Children (VFC) Provider?<span class="field-required">*</span> </h2> 
 
-        <input type="radio" class="form-radio" disabled="disabled" <%= 'checked' if @provider_enrollment.does_provide_vfc == "true" %> />
+        <input type="radio" class="form-radio" disabled="disabled" <%= 'checked' if @provider_enrollment.does_provide_vfc == true %> />
         <span class="label mr-4"> Yes </span>
 
-        <input type="radio" class="form-radio" disabled="disabled" <%= 'checked' if @provider_enrollment.does_provide_vfc == "false" %> />
+        <input type="radio" class="form-radio" disabled="disabled" <%= 'checked' if @provider_enrollment.does_provide_vfc == false %> />
         <span class="label"> No </span>        
     </div>
 </div>
@@ -239,28 +236,26 @@
     <div class="grid grid-cols-2 gap-4">
     <div>
         <h2 class="title"> What make and model refrigerator do you have? <span class="field-required">*</span></h2>
-        <input value="<%= @provider_enrollment.refrigerator %>" placeholder="What make and model refrigerator do you have?" class="form-input w-full" disabled="disabled" />        
+        <textarea placeholder="What make and model refrigerator do you have?" 
+            class="form-input w-full" disabled="disabled"><%= @provider_enrollment.refrigerator %></textarea>    
     </div>
 
     <div>
         <h2 class="title"> What make and model freezer do you have? <span class="field-required">*</span></h2>
-        <input value="<%= @provider_enrollment.freezer %>" placeholder="What make and model freezer do you have?" class="form-input w-full" disabled="disabled" />        
+        <textarea placeholder="What make and model freezer do you have?" 
+            class="form-input w-full" disabled="disabled"><%= @provider_enrollment.freezer %></textarea>  
     </div>
 
     <div>
         <h2 class="title"> What make and model data logger/refrigerator thermometer do you have? <span class="field-required">*</span></h2>
-        <input value="<%= @provider_enrollment.refrigerator_thermometer %>" placeholder="What make and model data logger/refrigerator thermometer do you have?" class="form-input w-full" disabled="disabled" />         
+        <textarea placeholder="What make and model data logger/refrigerator thermometer do you have?" 
+            class="form-input w-full" disabled="disabled"><%= @provider_enrollment.refrigerator_thermometer %></textarea>      
     </div>
     </div>
 </div>
 
 <div class="field-fullwidth">
     <h2 class="title"> Additional Information </h2>
-    <input value="<%= @provider_enrollment.additional_info %>" placeholder="Please provide any additional information you would like to share about your interest or relevant experience." class="form-input w-full" disabled="disabled" />    
-</div>
-
-<div class="flex justify-end">
-    <button class="button-action" type="button" value="accepted" data-action="click->review-form#submitForm"> Accepted </button>
-    <button class="button-action" type="button" value="denied" data-action="click->review-form#submitForm"> Denied </button>
-    <button class="button-action" type="button" value="need_additional_information" data-action="click->review-form#submitForm"> Need Additional Information </button>
+    <textarea placeholder="Please provide any additional information you would like to share about your interest or relevant experience." 
+            class="form-input w-full" disabled="disabled"><%= @provider_enrollment.additional_info %></textarea>  
 </div>

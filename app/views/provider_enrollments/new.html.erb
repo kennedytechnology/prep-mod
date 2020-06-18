@@ -1,8 +1,20 @@
-<h2 class="main-title">Request to Become a COVID-19 Service Provider</h2>
+<h2 class="main-title"> <%= @title %> </h2>
 
 <div data-controller="review-form">
   <div data-controller="provider-enrollment-new-entry">
     <%= form_with model: @provider_enrollment, remote: true, class: "py-5", data: { target: "review-form.form"} do |f| %>
+        <% if @provider_enrollment.errors.any? %>
+            <div id="error_explanation" class="p-4 border-2 bg-red-100 border-red-500 mb-4"> 
+                <h2 class="text-lg font-bold"><%= pluralize(@provider_enrollment.errors.count, "error") %> prohibited this article from being saved:</h2>
+            
+                <ul class="list-disc ml-8">
+                <% @provider_enrollment.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+                <% end %>
+                </ul>
+            </div>
+        <% end %>
+
       <div class="field-fullwidth">
         <h2 class="title"> What services would you like to provide? </h2>
         <div class="checkboxes-container">
@@ -350,8 +362,6 @@
           <%= submit_tag 'Preview & Submit', name: 'preview_button', class: "button-primary", data: {action: "click->review-form#openModal"} %>
           <%= link_to "Cancel", provider_enrollments_path, class: "button-primary" %>
       </div>
-
-      <%= render partial: "provider_enrollments/provider_denied_modal", locals: {f: f} %>
 
       <% end %>
 

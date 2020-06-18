@@ -1,4 +1,4 @@
-<h2 class="main-title"> COVID-19 Service Provider Request from <%= @provider_enrollment.first_name %> <%= @provider_enrollment.last_name %> </h2>
+<h2 class="main-title"> <%= @title %> </h2>
 
 <div data-controller="review-form">
     <%= form_with model: @provider_enrollment, remote: true, class: "py-5", data: {target: "review-form.form"} do |f| %>
@@ -354,5 +354,4 @@
     <% end %>
 
     <%= render partial: "provider_enrollments/preview_modal" %>
-
 </div>

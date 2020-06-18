@@ -8,36 +8,35 @@ class ProviderEnrollmentsController < ApplicationController
 
   def new
     @provider_enrollment = ProviderEnrollment.new
+    @title = "Request to Become a COVID-19 Service Provider"
   end
 
   def create
     @provider_enrollment = ProviderEnrollment.new(provider_enrollment_params)
+    @title = "Request to Become a COVID-19 Service Provider"
 
     respond_to do |format|
       if params[:reviewed] == "false"
         format.js { render 'provider_enrollments/preview_form' }
       else 
         if @provider_enrollment.update(provider_enrollment_params)
-          format.html { redirect_to provider_enrollments_path, notice: "Successfully created a provider enrollment!" }
+          ProviderEnrollmentMailer.request_confirmation(@provider_enrollment).deliver
+          format.html { redirect_to root_path, notice: "Your Request to Become a COVID-19 Service Provider is successfully submitted!" }
         else
           format.html { render :new }
         end
       end
     end
-    # if @provider_enrollment.save
-    #   ProviderEnrollmentMailer.request_confirmation(@provider_enrollment).deliver
-    #   redirect_to root_path, notice: "Your Request to Become a COVID-19 Service Provider is successfully submitted!"
-    # else
-    #   redirect_back fallback_location: new_provider_enrollments_path, alert: "Error!"
-    # end
   end
 
   def edit
     @provider_enrollment = ProviderEnrollment.find(params[:id])
+    @title = "COVID-19 Service Provider Request from #{@provider_enrollment.first_name} #{@provider_enrollment.last_name}"
   end
 
   def update
     @provider_enrollment = ProviderEnrollment.find(params[:id])
+    @title = "COVID-19 Service Provider Request from #{@provider_enrollment.first_name} #{@provider_enrollment.last_name}"
 
     respond_to do |format|
       if params[:reviewed] == "false"

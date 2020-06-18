@@ -17,12 +17,18 @@
         <div id="modalContent" data-target="review-form.modalContent"> </div>
 
         <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+            <% if params[:action] == "new" %>
             <span class="flex w-full sm:ml-3 sm:w-auto">
-                <button type="button" data-action="click->review-form#closeModal" class="button-primary"> Close </button>
+                <button type="button" data-action="click->review-form#submitForm" class="button-primary"> Submit </button>
             </span>
             <span class="mt-3 flex w-full sm:mt-0 sm:w-auto">
-                <button type="button" data-action="click->review-form#submitForm" class="button-primary"> Submit as "pending" </button>
+                <button type="button" data-action="click->review-form#closeModal" class="button-primary"> Close </button>
             </span>
+            <% else %>
+                <button class="button-action" type="button" value="need_additional_information" data-action="click->review-form#submitForm"> Need Additional Information </button>
+                <button class="button-action" type="button" value="denied" data-action="click->review-form#submitForm"> Deny </button>
+                <button class="button-action" type="button" value="accepted" data-action="click->review-form#submitForm"> Accept </button>
+            <% end %>
         </div>
     </div>
 </div>
