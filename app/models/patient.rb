@@ -11,8 +11,8 @@ class Patient < ApplicationRecord
 
   accepts_nested_attributes_for :patient_family_members
 
-  validates :first_name, presence: true
-  validates :last_name, presence: true
+  # validates :first_name, presence: true
+  # validates :last_name, presence: true
 
   def current_clinic
     appointments.last.clinic
