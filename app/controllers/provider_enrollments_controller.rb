@@ -43,7 +43,7 @@ class ProviderEnrollmentsController < ApplicationController
         format.js { render 'provider_enrollments/preview_form' }
       else 
         if @provider_enrollment.update(provider_enrollment_params)
-          format.html { redirect_to provider_enrollments_path, notice: "Your Request to Become a COVID-19 Service Provider is successfully submitted!" }
+          format.html { redirect_to provider_enrollments_path, notice: "Successfully update provider enrollment!" }
         else
           format.html { render :new }
         end

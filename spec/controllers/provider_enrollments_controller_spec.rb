@@ -72,7 +72,7 @@ RSpec.describe ProviderEnrollmentsController, type: :controller do
       end
 
       it { expect(response).to redirect_to provider_enrollments_path }
-      it { expect(flash[:notice]).to match("Your Request to Become a COVID-19 Service Provider is successfully submitted!") }
+      it { expect(flash[:notice]).to match("Successfully update provider enrollment!") }
       it { expect(provider_enrollment.license_number).to eq("New License Number 2") }
     end
   end
