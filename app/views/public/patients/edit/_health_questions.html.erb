@@ -54,10 +54,10 @@
     </div>
     <div>
         <h2 class="title">Is there any other reason you think you should be tested for COVID-19? If "yes", explain<span class="field-required">*</span></h2>
-        <%= f.radio_button :has_other_reason, true, class: "form-radio", data: {action: "click->inventory-new-entry#updateModalCheckboxField click->consent-form#showOtherReasonExplanation"} %>
+        <%= f.radio_button :has_other_reason, true, class: "form-radio", data: {action: "click->consent-form#showOtherReasonExplanation"} %>
         <%= f.label :has_other_reason, "Yes", class: "mr-3" %>
 
-        <%= f.radio_button :has_other_reason, false, class: "form-radio", data: {action: "click->inventory-new-entry#updateModalCheckboxField click->consent-form#hideOtherReasonExplanation"} %>
+        <%= f.radio_button :has_other_reason, false, class: "form-radio", data: {action: "click->consent-form#hideOtherReasonExplanation"} %>
         <%= f.label :has_other_reason, "No" %>
 
         <div class="hidden" data-target="consent-form.otherReasonExplanation">

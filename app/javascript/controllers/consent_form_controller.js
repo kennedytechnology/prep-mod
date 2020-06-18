@@ -9,6 +9,10 @@ export default class extends Controller {
         $("#locationsCheckboxes").removeClass("active");
       }
     });
+
+    if ((this.hasOtherReasonExplanationTarget) && (document.getElementById("patient_has_other_reason_true").checked)) {
+      this.otherReasonExplanationTarget.classList.remove("hidden");
+    }
   }
 
   showCheckboxes() {
