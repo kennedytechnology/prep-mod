@@ -15,7 +15,7 @@ class Appointment < ApplicationRecord
     event :check_in do
       after do
         AppointmentMailer.patient_checked_in(self).deliver
-        # sms_patient_checked_in(self.patient.phone_number)
+        sms_patient_checked_in(self.patient.phone_number)
       end
 
       transitions from: :not_checked_in, to: :checked_in, if: :clinic_can_check_in?
@@ -51,14 +51,14 @@ class Appointment < ApplicationRecord
   end
 
   # TODO: Check if SMS should be sent check patient checked in
-  # def sms_patient_checked_in(phone_number)
-  #   client = SmsClient.new
-  #   to_number = phone_number
-  #   to_number = "+14075366339" if Rails.env.development?
-  #   client.send_message(
-  #     from: ENV['TWILIO_FROM_PHONE'],
-  #     to: to_number,
-  #     body: "You're Checked In! We will text and/or email you when we're ready for you. Clinic Wizard"
-  #   )
-  # end
+  def sms_patient_checked_in(phone_number)
+    client = SmsClient.new
+    to_number = phone_number
+    to_number = "+14075366339" if Rails.env.development?
+    client.send_message(
+      from: ENV['TWILIO_FROM_PHONE'],
+      to: to_number,
+      body: "You're Checked In! We will text and/or email you when we're ready for you. Clinic Wizard"
+    )
+  end
 end
