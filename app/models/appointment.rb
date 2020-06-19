@@ -68,13 +68,7 @@ class Appointment < ApplicationRecord
     client.send_message(
       from: ENV['TWILIO_FROM_PHONE'],
       to: to_number,
-      body: "We look forward to seeing you at your upcoming appointment.
-            To help with social distancing, you can check in on your mobile device.
-            When you get to the clinic location, click the button below.
-            We will text or email you when we're ready for you.
-            You must be on-site to check in so only check in when you are in the area.
-            Check In here: #{ENV['SITE_URL']}/check_in/#{patient.check_in_code}
-            Thank you!"
+      body: "We look forward to seeing you at your upcoming appointment. Instructions on how to check in are sent to your email. Thank you!"
     )
   end
 end
