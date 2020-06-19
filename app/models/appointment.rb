@@ -60,4 +60,15 @@ class Appointment < ApplicationRecord
       body: "You're Checked In! We will text and/or email you when we're ready for you. Clinic Wizard"
     )
   end
+
+  def send_sms_reminder(phone_number)
+    client = SmsClient.new
+    to_number = phone_number
+    to_number = "+14075366339" if Rails.env.development?
+    client.send_message(
+      from: ENV['TWILIO_FROM_PHONE'],
+      to: to_number,
+      body: "We look forward to seeing you at your upcoming appointment. Instructions on how to check in are sent to your email. Thank you!"
+    )
+  end
 end
