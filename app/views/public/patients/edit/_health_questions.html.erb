@@ -43,7 +43,7 @@
     </div>
 </div>
 
-<div class="field-side-by-side">
+<div class="field-side-by-side" data-controller="consent-form">
     <div>
         <h2 class="title">Are you 60 or older?<span class="field-required">*</span></h2>
         <%= f.radio_button :is_age_60_or_more, true, class: "form-radio", data: {action: "click->inventory-new-entry#updateModalCheckboxField"} %>
@@ -54,11 +54,16 @@
     </div>
     <div>
         <h2 class="title">Is there any other reason you think you should be tested for COVID-19? If "yes", explain<span class="field-required">*</span></h2>
-        <%= f.radio_button :has_other_reason, true, class: "form-radio", data: {action: "click->inventory-new-entry#updateModalCheckboxField"} %>
+        <%= f.radio_button :has_other_reason, true, class: "form-radio", data: {action: "click->consent-form#showOtherReasonExplanation"} %>
         <%= f.label :has_other_reason, "Yes", class: "mr-3" %>
 
-        <%= f.radio_button :has_other_reason, false, class: "form-radio", data: {action: "click->inventory-new-entry#updateModalCheckboxField"} %>
+        <%= f.radio_button :has_other_reason, false, class: "form-radio", data: {action: "click->consent-form#hideOtherReasonExplanation"} %>
         <%= f.label :has_other_reason, "No" %>
+
+        <div class="hidden" data-target="consent-form.otherReasonExplanation">
+            <%= f.label :has_other_reason_explanation, "Explain here:", class: "block w-full" %>
+            <%= f.text_area :has_other_reason_explanation, class: "form-textarea w-full" %>
+        </div>
     </div>
 </div>
 

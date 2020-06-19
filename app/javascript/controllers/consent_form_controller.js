@@ -1,7 +1,7 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "searchableRow", "employer", "locations", "companyCheckbox", "companyInputField", "locationsCheckboxes" ]
+  static targets = [ "searchableRow", "employer", "locations", "companyCheckbox", "companyInputField", "locationsCheckboxes", "otherReasonExplanation" ]
 
   connect() {
     $(document).click(function (e) {
@@ -9,6 +9,10 @@ export default class extends Controller {
         $("#locationsCheckboxes").removeClass("active");
       }
     });
+
+    if ((this.hasOtherReasonExplanationTarget) && (document.getElementById("patient_has_other_reason_true").checked)) {
+      this.otherReasonExplanationTarget.classList.remove("hidden");
+    }
   }
 
   showCheckboxes() {
@@ -37,5 +41,14 @@ export default class extends Controller {
     let modal = document.getElementById("businessLocationsModal");
     modal.classList.toggle('opacity-0')
     modal.classList.toggle('pointer-events-none')
+  }
+
+  showOtherReasonExplanation() {
+    this.otherReasonExplanationTarget.classList.remove("hidden");
+  }
+
+  hideOtherReasonExplanation() {
+    this.otherReasonExplanationTarget.classList.add("hidden");
+    document.getElementById("patient_has_other_reason_explanation").value = "";
   }
 }
