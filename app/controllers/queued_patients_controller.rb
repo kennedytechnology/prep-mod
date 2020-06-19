@@ -16,7 +16,7 @@ class QueuedPatientsController < ClinicManagementController
   def send_check_in_reminder
     @appointment = @clinic.appointments.find(params[:appointment_id])
     AppointmentMailer.send_reminder(@appointment).deliver
-    # @clinic.send_sms_reminder
+    @appointment.send_sms_reminder(@appointment.patient.phone_number)
     redirect_to clinic_queued_patients_path(@clinic.id), notice: "Successfully sent reminder!"
   end
 
