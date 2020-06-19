@@ -50,7 +50,6 @@ class Appointment < ApplicationRecord
     InviteQueuedPatientJob.perform_later patient
   end
 
-  # TODO: Check if SMS should be sent check patient checked in
   def sms_patient_checked_in(phone_number)
     client = SmsClient.new
     to_number = phone_number
