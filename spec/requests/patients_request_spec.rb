@@ -66,7 +66,7 @@ RSpec.describe "Patients", type: :request do
     end
 
     context "with invalid parameters" do
-      pending "does not create a new patient" do
+      it "does not create a new patient" do
         expect {
           post patients_url, params: { patient: attributes_for(:patient, first_name: "") }
         }.to change(Patient, :count).by(0)
