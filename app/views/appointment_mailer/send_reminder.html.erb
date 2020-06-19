@@ -1,0 +1,14 @@
+<h1> Upcoming appointment reminder </h1>
+
+<p> We look forward to seeing you at your upcoming appointment.</p>
+
+<p> To help with social distancing, you can check in on your mobile device.</p>
+
+<p> When you get to the clinic location, click the button below.  
+We will text or email you when we're ready for you. </p>
+
+<p> You must be on-site to check in so only check in when you are in the area. </p>
+
+<%= link_to "Click Here to Check In", "#{ENV['SITE_URL']}/check_in/#{@appointment.patient.check_in_code}" %>
+
+<p> Thank you! </p>
