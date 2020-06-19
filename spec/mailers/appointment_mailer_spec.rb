@@ -1,0 +1,18 @@
+require "rails_helper"
+
+RSpec.describe AppointmentMailer, type: :mailer do
+  describe "patient_checked_in" do
+    let(:appointment) {create(:appointment)}
+    let(:mail) { AppointmentMailer.patient_checked_in(appointment) }
+
+    it "renders the headers" do
+      expect(mail.subject).to eq("You're Checked In!")
+      expect(mail.to).to eq([appointment.patient.email])
+      expect(mail.from).to eq(["notifications@clinicwizard.com"])
+    end
+
+    it "renders the body" do
+      expect(mail.body.encoded).to match("We will text and/or email you when we're ready for you.")
+    end
+  end
+end
