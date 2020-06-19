@@ -26,6 +26,9 @@
             method: 'post'
           %>
         <% end %>
+        <% if appointment.queue_state == "not_checked_in" %>
+            <%= link_to "Send Reminder", send_check_in_reminder_clinic_queued_patients_path(clinic_id: @clinic.id, appointment_id: appointment.id), method: "post", class: "button-action" %>
+        <% end %>
       </td>
     </tr>
   <% end %>
