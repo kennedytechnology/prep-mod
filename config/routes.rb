@@ -46,7 +46,6 @@ Rails.application.routes.draw do
         post :send_check_in_reminder
         post :update_clinic_status
       end
-      # get "/send_reminder", to: "queued_patients#send_check_in_reminder"
     end
   end
   resources :customized_reports
