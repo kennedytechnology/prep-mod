@@ -22,6 +22,10 @@ class Appointment < ApplicationRecord
     end
 
     event :invite, after: :notify_invitation do
+      after do
+        AppointmentMailer.patient_invited(self).deliver
+      end
+
       transitions from: :checked_in, to: :invited, if: :clinic_is_open?
     end
 

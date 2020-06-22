@@ -7,4 +7,8 @@ class AppointmentMailer < ApplicationMailer
     @appointment = appointment
     mail(to: appointment.patient.email, subject: "Upcoming appointment reminder")
   end
+
+  def patient_invited(appointment)
+    mail(to: appointment.patient.email, subject: "You're Invited!")
+  end
 end

@@ -7,4 +7,9 @@ class AppointmentMailerPreview < ActionMailer::Preview
   def send_reminder
     AppointmentMailer.send_reminder(Appointment.first)
   end
+
+  def send_invitation
+    AppointmentMailer.patient_invited(Appointment.first)
+  end
+
 end
