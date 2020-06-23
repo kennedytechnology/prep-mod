@@ -15,6 +15,7 @@ class ClinicEventsController < ClinicManagementController
     @clinic_event = ClinicEvent.new(clinic_event_params)
     @clinic_event.user = current_user
     if @clinic_event.save
+      ClinicEventMailer.registration_confirmed(@clinic_event).deliver_now
       redirect_to patients_path
     else
       render "new", alert: "Your entry was not saved."
