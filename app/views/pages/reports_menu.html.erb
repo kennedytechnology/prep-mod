@@ -1,6 +1,6 @@
 <h1 class="main-title"> COVID-19 Response Reports in Real-Time </h1>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-    <div class="rounded-sm border-2 p-8 flex items-stretch" style="min-height: 150px;">
+    <%= link_to reports_snapshot_path, class: "rounded-sm border-2 p-8 flex items-stretch", style: "min-height: 150px;" do %>
         <div class="pr-4 flex justify-center items-center"> 
             <%= image_tag 'icons/snapshot.png', style: "max-width: 80px;" %>
         </div>
@@ -11,9 +11,9 @@
                 number of people tested, positive results, negative results, evidence of immunity.
             </p>
         </div>
-    </div>
+    <% end %>
 
-    <div class="rounded-sm border-2 p-8 flex items-stretch" style="min-height: 200px;">
+    <%= link_to reports_capacity_path, class: "rounded-sm border-2 p-8 flex items-stretch", style: "min-height: 200px;" do %>
         <div class="pr-4 flex justify-center items-center"> 
             <%= image_tag 'icons/capacity.png', style: "max-width: 80px;" %>
         </div>
@@ -24,9 +24,9 @@
                 Includes available testing appointments, scheduled appointments, pockets of need.
             </p>
         </div>
-    </div>
+    <% end %>
 
-    <div class="rounded-sm border-2 p-8 flex items-stretch" style="min-height: 200px;">
+    <%= link_to reports_uptake_path, class: "rounded-sm border-2 p-8 flex items-stretch", style: "min-height: 200px;" do %>
         <div class="pr-4 flex justify-center items-center"> 
             <%= image_tag 'icons/uptake.png', style: "max-width: 80px;" %>
         </div>
@@ -37,9 +37,9 @@
                 ZIP Code, county, or region: number of available appointments, number of completed appointments.
             </p>
         </div>
-    </div>
+    <% end %>
 
-    <div class="rounded-sm border-2 p-8 flex items-stretch" style="min-height: 200px;">
+    <%= link_to reports_locations_path, class: "rounded-sm border-2 p-8 flex items-stretch", style: "min-height: 200px;" do %>
         <div class="pr-4 flex justify-center items-center"> 
             <%= image_tag 'icons/locations.png', style: "max-width: 80px;" %>
         </div>
@@ -51,9 +51,9 @@
                 completed appointments, patient demographics.
             </p>
         </div>
-    </div>
+    <% end %>
 
-    <div class="rounded-sm border-2 p-8 flex items-stretch" style="min-height: 200px;">
+    <%= link_to reports_providers_path, class: "rounded-sm border-2 p-8 flex items-stretch", style: "min-height: 200px;" do %>
         <div class="pr-4 flex justify-center items-center"> 
             <%= image_tag 'icons/providers.png', style: "max-width: 80px;" %>
         </div>
@@ -64,9 +64,9 @@
                 number of patients tested, vaccine inventory.
             </p>
         </div>
-    </div>
+    <% end %>
 
-    <div class="rounded-sm border-2 p-8 flex items-stretch" style="min-height: 200px;">
+    <%= link_to reports_employers_path, class: "rounded-sm border-2 p-8 flex items-stretch", style: "min-height: 200px;" do %>
         <div class="pr-4 flex justify-center items-center"> 
             <%= image_tag 'icons/employers.png', style: "max-width: 80px;" %>
         </div>
@@ -77,9 +77,9 @@
                 number of patients tested, vaccine inventory.
             </p>
         </div>
-    </div>
+    <% end %>
 
-    <div class="rounded-sm border-2 p-8 flex items-stretch" style="min-height: 200px;">
+    <%= link_to reports_supply_inventories_path, class: "rounded-sm border-2 p-8 flex items-stretch", style: "min-height: 200px;" do %>
         <div class="pr-4 flex justify-center items-center"> 
             <%= image_tag 'icons/inventory.png', style: "max-width: 80px;" %>
         </div>
@@ -89,9 +89,9 @@
                 An accounting of testing kits and other supplies by venue, county, or statewide.
             </p>
         </div>
-    </div>
+    <% end %>
 
-    <div class="rounded-sm border-2 p-8 flex items-stretch" style="min-height: 200px;">
+    <%= link_to reports_customized_path, class: "rounded-sm border-2 p-8 flex items-stretch", style: "min-height: 200px;" do %>
         <div class="pr-4 flex justify-center items-center"> 
             <%= image_tag 'icons/customized.png', style: "max-width: 80px;" %>
         </div>
@@ -101,5 +101,5 @@
                 Choose from a variety of data points to create your own report.
             </p>
         </div>
-    </div>
+    <% end %>
 </div>

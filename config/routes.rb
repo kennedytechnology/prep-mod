@@ -32,6 +32,22 @@ Rails.application.routes.draw do
   get 'patients/download_records', to: 'patients#download_records'
   post 'patients/download_records', to: 'patients#download_records'
 
+  get "/reports/providers", to: "reports#providers"
+  get "/reports/snapshot", to: "reports#snapshot"
+  get "/reports/capacity", to: "reports#capacity"
+  get "/reports/uptake", to: "reports#uptake"
+  get "/reports/locations", to: "reports#locations"
+  get "/reports/employers", to: "reports#employers"
+  get "/reports/supply_inventories", to: "reports#supply_inventories"
+  get "/reports/customized", to: "reports#customized"
+
+  namespace :reports do
+    get "providers_by_county"
+    get "providers_by_specialty"
+    get "uptake_by_zip_code"
+    get "available_and_completed_appointments"
+  end
+
   resources :news_signups, only: [:new, :create]
   resources :patients
   resources :clinics, only: [:index, :new, :create, :edit, :update] do
