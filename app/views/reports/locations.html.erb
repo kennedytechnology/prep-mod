@@ -1,4 +1,8 @@
 <h1 class="main-title"> Locations </h1>
-<p> A summary of activities at testing sites: overall number, number of 
+<p class="mb-12"> A summary of activities at testing sites: overall number, number of 
     tests administered by location, ratio of available appointments to 
     completed appointments, patient demographics. </p>
+
+<div class="w-6/12">
+    <%= pie_chart reports_available_and_completed_appointments_path, donut: true, title: "Total appointments - #{Appointment.count}" %>
+</div>

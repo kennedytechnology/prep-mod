@@ -24,6 +24,8 @@ class ReportsController < ApplicationController
 
   def locations; end
 
+  def 
+
   def employers; end
 
   def supply_inventories; end
