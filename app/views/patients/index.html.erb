@@ -46,6 +46,7 @@
           </thead>
           <tbody>
           <% @patients.each do |patient| %>
+            <% unless patient.appointments.empty? %>
             <tr>
               <td class="underline"><%= link_to patient.full_name, [@clinic, patient]  %></td>
               <td><%= patient.date_of_birth.strftime("%m/%d/%y") if patient.date_of_birth %></td>
@@ -60,6 +61,7 @@
                         action: "click->clinic-activity-patients#showHideDeleteModal"}, class: "button-action" %>
               </td> 
             </tr>
+            <% end %>
           <% end %>
           </tbody>
         </table>

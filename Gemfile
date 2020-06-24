@@ -36,17 +36,12 @@ gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'image_processing'
 gem 'caxlsx'
 gem 'caxlsx_rails'
+gem "chartkick"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  case RUBY_PLATFORM
-  when /darwin/
-    gem 'wkhtmltopdf-binary-edge', '~> 0.12.5.1'
-  when /linux/
-    gem 'wkhtmltopdf-binary', '~> 0.12.6'
-  end
-
+  gem 'wkhtmltopdf-binary-edge'
 end
 
 group :development do
