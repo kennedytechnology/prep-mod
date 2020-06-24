@@ -18,8 +18,13 @@
             height: "200px",
             discrete: true,
             legend: false,
-            library: { scales: { yAxes: [{ gridLines: { display: true }, 
-                                                 ticks: { maxTicksLimit: 5 } }]}},
+            library: { scales: { 
+                xAxes: [{
+                    ticks: {
+                        stepSize: 1
+                    }
+                }]
+            }},
             dataset: { 
                 barThickness: "flex",
                 borderWidth: 0
