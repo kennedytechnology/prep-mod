@@ -13,7 +13,9 @@ class ReportsController < ApplicationController
     render json: ProviderEnrollment.group(:medical_specialty).count
   end
 
-  def snapshot; end
+  def snapshot_tested
+    render json: ClinicEvent.where(outcome: ["Positive", "Negative"]).group(:outcome).count
+  end
 
   def capacity; end 
 
