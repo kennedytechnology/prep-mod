@@ -1,3 +1,29 @@
-<h1 class="main-title"> Inventories </h1>
-<p> An accounting of employers engaged in the response by specialty, regions, 
-    number of patients tested, vaccine inventory. </p>
+<h1 class="main-title"> Supply Inventories </h1>
+<p class="mb-12"> An accounting of testing kits and other supplies by venue, county, or statewide. </p>
+
+<div class="grid grid-cols-1 md:grid-cols-2 md:gap-4">
+    <div class="p-4 shadow border border-gray-50 rounded-lg ">
+        <%= column_chart reports_supply_inventories_by_county_path, title: "Supply Inventories by county",
+            height: "200px",
+            discrete: true,
+            legend: false,
+            dataset: { 
+                barPercentage: 0.6,
+                borderWidth: 0,
+            }
+        %>
+    </div>
+    <div class="p-4 shadow border border-gray-50 rounded-lg ">
+        <%= bar_chart reports_supply_inventories_by_venue_name_path, title: "Supply Inventories by venue",
+            height: "200px",
+            discrete: true,
+            legend: false,
+            library: { scales: { yAxes: [{ gridLines: { display: true }, 
+                                                 ticks: { maxTicksLimit: 5 } }]}},
+            dataset: { 
+                barThickness: "flex",
+                borderWidth: 0
+            }
+        %>
+    </div>
+</div>

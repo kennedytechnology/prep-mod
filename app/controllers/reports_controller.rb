@@ -1,4 +1,5 @@
 class ReportsController < ApplicationController
+  include ReportHelper
   layout "clinic_management"
   before_action :authenticate_user!
 
@@ -26,6 +27,18 @@ class ReportsController < ApplicationController
   def employers; end
 
   def supply_inventories; end
+
+  def supply_inventories_by_county
+    chart_data = SupplyInventory.group(:county).count
+    render json: [{ data: parse_chart_data(chart_data),
+                    library: column_chart_background_colors }].chart_json
+  end
+
+  def supply_inventories_by_venue_name
+    chart_data = SupplyInventory.group(:venue_name).count
+    render json: [{ data: parse_chart_data(chart_data),
+                    library: column_chart_background_colors }].chart_json
+  end
 
   def customized; end
 
