@@ -30,7 +30,7 @@ module ReportHelper
         'rgba(153, 102, 255)',
         'rgba(201, 203, 207)'
       ],
-      borderWidth: 1
+      borderWidth: 0
     }
   end
 end
