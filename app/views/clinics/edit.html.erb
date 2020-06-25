@@ -18,16 +18,12 @@
             <p class="title">Is clinic public or private? <span class="field-required">*</span> </p>
             <div class="w-3/12 radio-buttons-container">
                 <div>
-                    <%= f.radio_button :public_or_private, "public", id: "clinic_status_public", class: "form-radio" %>
-                    <%= f.label :public_or_private, value: "public", for: "clinic_status_public" do %>
-                    <span>Public</span>
-                    <% end %>
+                    <%= f.radio_button :public_or_private, "Public", class: "form-radio" %>
+                    <%= f.label :public_or_private, "Public", for: "clinic_public_or_private_public" %>
                 </div>
                 <div>
-                    <%= f.radio_button :public_or_private, "private", id: "clinic_status_private", class: "form-radio" %>
-                    <%= f.label :public_or_private, value: "private", for: "clinic_status_private" do %>
-                    <span>Private</span>
-                    <% end %>
+                    <%= f.radio_button :public_or_private, "Private", class: "form-radio" %>
+                    <%= f.label :public_or_private, "Private", for: "clinic_public_or_private_private" %>
                 </div>
             </div>
         </div>
