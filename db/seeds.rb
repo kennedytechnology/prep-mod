@@ -168,7 +168,7 @@ CLINIC_COUNT.times.each do |i|
     location: "Nowhere",
     appointment_frequency_minutes: [10, 15, 30, 60].sample,
     appointment_slots: (2..10).to_a.sample,
-    appointments_available: 'required',
+    appointments_available: ["yes_required", "yes_optional", "no_walk_in"].sample,
     venue_type: VENUE_TYPES.sample,
     county: COUNTIES.sample
   )
