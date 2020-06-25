@@ -7,7 +7,8 @@
                 <span class="text-gray-500"> Event Date </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.date_field :event_date, class: "form-input block w-full", placeholder: "MM/DD/YYYY", required: true %>
+            <%= f.text_field :event_date, class: "form-input block w-full", required: true,
+                        data: { controller: 'flatpickr'} %>
         </div>
 
         <div>
@@ -23,7 +24,7 @@
                 <span class="text-gray-500"> Quantity Used </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.number_field :quantity_used, class: "form-input block w-full", required: true %>
+            <%= f.number_field :quantity_used, class: "form-input block w-full", min: 0, required: true %>
         </div>
 
         <div>
@@ -31,7 +32,7 @@
                 <span class="text-gray-500"> Quantity Lost </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.number_field :quantity_lost, class: "form-input block w-full", required: true %>
+            <%= f.number_field :quantity_lost, class: "form-input block w-full", min: 0, required: true %>
         </div>
 
         <div>
@@ -39,7 +40,7 @@
                 <span class="text-gray-500"> Quantity Loaned </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.number_field :quantity_loaned, class: "form-input block w-full", required: true %>
+            <%= f.number_field :quantity_loaned, class: "form-input block w-full", min: 0, required: true %>
         </div>
 
         <div>
@@ -47,7 +48,7 @@
                 <span class="text-gray-500"> Quantity Destroyed/Returned </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.number_field :quantity_destroyed, class: "form-input block w-full", required: true %>
+            <%= f.number_field :quantity_destroyed, class: "form-input block w-full", min: 0, required: true %>
         </div>
     </div>
 

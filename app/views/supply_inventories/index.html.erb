@@ -7,11 +7,12 @@
                 <span class="text-gray-500"> Received Date </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.text_field :received_at, class: "form-input block w-full", placeholder: "MM/DD/YYYY", required: true, 
-                                data: { controller: "flatpickr",
-                                        action: "change->inventory-new-entry#updateModalField 
-                                                keyup->inventory-new-entry#updateModalField 
-                                                blur->inventory-new-entry#validateInputField" } %>
+            <%= f.text_field :received_at, class: "form-input block w-full", placeholder: "MM/DD/YYYY", required: true,
+                    data: { controller: "flatpickr",
+                            flatpickr_max_date: Date.today,
+                            action: "change->inventory-new-entry#updateModalField
+                                    keyup->inventory-new-entry#updateModalField
+                                    blur->inventory-new-entry#validateInputField" } %>
             <p class="error-message hidden"> This field is required! </p>
         </div>
 
@@ -20,8 +21,8 @@
                 <span class="text-gray-500"> Item Type </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.select :item_type, INVENTORY_ITEM_TYPES, {prompt: "Select"}, {class: "block form-select w-full", required: true, 
-                data: {action: "change->inventory-new-entry#updateModalField 
+            <%= f.select :item_type, INVENTORY_ITEM_TYPES, {prompt: "Select"}, {class: "block form-select w-full", required: true,
+                data: {action: "change->inventory-new-entry#updateModalField
                                 blur->inventory-new-entry#validateInputField"}} %>
                 <p class="error-message hidden"> This field is required! </p>
         </div>
@@ -31,10 +32,10 @@
                 <span class="text-gray-500"> Product Name </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.text_field :product_name, class: "form-input block w-full", required: true, 
-                data: {action: "change->inventory-new-entry#updateModalField 
-                                keyup->inventory-new-entry#updateModalField
-                                blur->inventory-new-entry#validateInputField"} %>
+            <%= f.text_field :product_name, class: "form-input block w-full", required: true,
+                    data: {action: "change->inventory-new-entry#updateModalField
+                                    keyup->inventory-new-entry#updateModalField
+                                    blur->inventory-new-entry#validateInputField"} %>
                 <p class="error-message hidden"> This field is required! </p>
         </div>
 
@@ -43,7 +44,7 @@
                 <span class="text-gray-500"> Manufacturer </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.select :manufacturer, INVENTORY_MANUFACTURERS, {prompt: "Select"}, {class: "block form-select w-full", required: true, 
+            <%= f.select :manufacturer, INVENTORY_MANUFACTURERS, {prompt: "Select"}, {class: "block form-select w-full", required: true,
             data: {action: "change->inventory-new-entry#updateModalField
                             blur->inventory-new-entry#validateInputField"}} %>
             <p class="error-message hidden"> This field is required! </p>
@@ -54,10 +55,10 @@
                 <span class="text-gray-500"> Lot Number </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.text_field :lot_number, class: "form-input block w-full", required: true, 
-            data: {action: "change->inventory-new-entry#updateModalField 
-                            keyup->inventory-new-entry#updateModalField
-                            blur->inventory-new-entry#validateInputField"} %>
+            <%= f.text_field :lot_number, class: "form-input block w-full", required: true,
+                    data: {action: "change->inventory-new-entry#updateModalField
+                                    keyup->inventory-new-entry#updateModalField
+                                    blur->inventory-new-entry#validateInputField"} %>
             <p class="error-message hidden"> This field is required! </p>
         </div>
 
@@ -66,11 +67,12 @@
                 <span class="text-gray-500"> Expiration Date </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.date_field :expiration_date, class: "form-input block w-full", placeholder: "MM/DD/YYYY", required: true, 
-                                data: { controller: "flatpickr",
-                                        action: "change->inventory-new-entry#updateModalField 
-                                                keyup->inventory-new-entry#updateModalField
-                                                blur->inventory-new-entry#validateInputField" } %>
+            <%= f.text_field :expiration_date, class: "form-input block w-full", placeholder: "MM/DD/YYYY", required: true,
+                    data: { controller: "flatpickr",
+                            flatpickr_min_date: Date.today,
+                            action: "change->inventory-new-entry#updateModalField
+                                    keyup->inventory-new-entry#updateModalField
+                                    blur->inventory-new-entry#validateInputField" } %>
             <p class="error-message hidden"> This field is required! </p>
         </div>
 
@@ -79,10 +81,10 @@
                 <span class="text-gray-500"> Number of Items </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.number_field :quantity, class: "form-input block w-full", required: true, 
-            data: {action: "change->inventory-new-entry#updateModalField 
-                            keyup->inventory-new-entry#updateModalField
-                            blur->inventory-new-entry#validateInputField"} %>
+            <%= f.number_field :quantity, class: "form-input block w-full", min: 1, required: true,
+                    data: {action: "change->inventory-new-entry#updateModalField
+                                    keyup->inventory-new-entry#updateModalField
+                                    blur->inventory-new-entry#validateInputField"} %>
             <p class="error-message hidden"> This field is required! </p>
         </div>
 
@@ -91,7 +93,7 @@
                 <span class="text-gray-500"> Inventory Packaging </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.select :packaging, INVENTORY_PACKAGINGS, {prompt: "Select"}, {class: "block form-select w-full", required: true, 
+            <%= f.select :packaging, INVENTORY_PACKAGINGS, {prompt: "Select"}, {class: "block form-select w-full", required: true,
                 data: {action: "change->inventory-new-entry#updateModalField
                                 blur->inventory-new-entry#validateInputField"}} %>
             <p class="error-message hidden"> This field is required! </p>
@@ -102,7 +104,7 @@
                 <span class="text-gray-500"> Source of Items </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.select :source, INVENTORY_SOURCES, {prompt: "Select"}, {class: "block form-select w-full", required: true, 
+            <%= f.select :source, INVENTORY_SOURCES, {prompt: "Select"}, {class: "block form-select w-full", required: true,
                 data: {action: "change->inventory-new-entry#updateModalField
                                 blur->inventory-new-entry#validateInputField"}} %>
             <p class="error-message hidden"> This field is required! </p>
@@ -113,7 +115,7 @@
                 <span class="text-gray-500"> County </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.select :county, COUNTIES, {prompt: "Select"}, {class: "block form-select w-full", required: true,  
+            <%= f.select :county, COUNTIES, {prompt: "Select"}, {class: "block form-select w-full", required: true,
             data: {action: "change->inventory-new-entry#updateModalField
                             blur->inventory-new-entry#validateInputField"}} %>
             <p class="error-message hidden"> This field is required! </p>
@@ -124,9 +126,9 @@
                 <span class="text-gray-500"> Venue </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.select :venue_name, Clinic.pluck(:venue_name), {prompt: "Select"}, {class: "block form-select w-full", required: true,  
-            data: {action: "change->inventory-new-entry#updateModalField
-                            blur->inventory-new-entry#validateInputField"}} %>
+            <%= f.select :venue_name, Clinic.pluck(:venue_name), {prompt: "Select"}, {class: "block form-select w-full", required: true,
+                    data: {action: "change->inventory-new-entry#updateModalField
+                                    blur->inventory-new-entry#validateInputField"}} %>
             <p class="error-message hidden"> This field is required! </p>
         </div>
     </div>
