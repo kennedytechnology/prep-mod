@@ -36,7 +36,7 @@ class ReportsController < ApplicationController
     # Patient.where(county: c).joins(:appointments).where("appointments.queue_state = ? OR appointments.queue_state = ? ", *["not_checked_in", "done"]).group("appointments.queue_state").count
     
     
-    render json: Patient.joins(:appointments).where("appointments.queue_state = ? OR appointments.queue_state = ? ", *["not_checked_in", "done"]).group(:county).group("appointments.queue_state").count
+    render json: Patient.joins(:appointments).where("appointments.queue_state = ? OR appointments.queue_state = ? ", *["not_checked_in", "done"]).group(:county).group("appointments.queue_state").count.chart_json
   end 
 
   def employers; end
