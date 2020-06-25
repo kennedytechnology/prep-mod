@@ -25,9 +25,10 @@
                 <button type="button" data-action="click->review-form#submitForm" class="button-primary"> Submit </button>
             </span>
             <% else %>
+                <button type="button" data-action="click->review-form#closeModal" class="button-action"> Close </button>
                 <button class="button-action" type="button" value="need_additional_information" data-action="click->review-form#submitForm"> Need Additional Information </button>
                 <button class="button-action" type="button" value="denied" data-action="click->review-form#submitForm"> Deny </button>
-                <button class="button-action" type="button" value="accepted" data-action="click->review-form#submitForm"> Accept </button>
+                <button class="button-action" type="button" value="accepted" data-action="click->review-form#submitForm"> Accept </button>                
             <% end %>
         </div>
     </div>
