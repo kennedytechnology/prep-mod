@@ -24,7 +24,20 @@ class ReportsController < ApplicationController
 
   def locations; end
 
-  def 
+  def appointments_by_county
+    render json: Patient.joins(:appointments).group(:county).count
+  end 
+
+  def available_and_completed_appointments_by_county
+    # render json: Patient.joins(:appointments).where("appointments.queue_state = ? OR appointments.queue_state = ? ", *["not_checked_in", "done"]).group("appointments.queue_state").count
+    # render json: Patient.joins(:appointments).where("queue_state = ? OR queue_state = ? ", *["not_checked_in", "done"]).group(:county).group("appointments.queue_state").count
+    
+
+    # Patient.where(county: c).joins(:appointments).where("appointments.queue_state = ? OR appointments.queue_state = ? ", *["not_checked_in", "done"]).group("appointments.queue_state").count
+    
+    
+    render json: Patient.joins(:appointments).where("appointments.queue_state = ? OR appointments.queue_state = ? ", *["not_checked_in", "done"]).group(:county).group("appointments.queue_state").count
+  end 
 
   def employers; end
 

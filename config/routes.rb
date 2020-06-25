@@ -48,6 +48,8 @@ Rails.application.routes.draw do
     get "available_and_completed_appointments"
     get "supply_inventories_by_county"
     get "supply_inventories_by_venue_name"
+    get "appointments_by_county"
+    get "available_and_completed_appointments_by_county"
   end
 
   resources :news_signups, only: [:new, :create]
