@@ -26,7 +26,7 @@ class SupplyInventoriesController < InheritedResources::Base
 
     def supply_inventory_params
       params.require(:supply_inventory).permit(
-        :received_at, :item_type, :item_name, 
+        :received_at, :item_type, 
         :manufacturer, :lot_number, :expiration_date,
         :quantity, :packaging, :source, :product_name,
         :county, :venue_name
