@@ -1,5 +1,18 @@
 <h1 class="main-title">Enter a Patient Event</h1>
     <%= form_for(@clinic_event, remote: false) do |f| %>
+
+        <% if @clinic_event.errors.any? %>
+        <div id="error_explanation" class="p-4 border-2 bg-red-100 border-red-500 mb-4"> 
+            <h2 class="text-lg font-bold"><%= pluralize(@clinic_event.errors.count, "error") %> prohibited this article from being saved:</h2>
+        
+            <ul class="list-disc ml-8">
+            <% @clinic_event.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+            <% end %>
+            </ul>
+        </div>
+        <% end %>
+
         <div class="field-side-by-side">
             <h2 class="title">Patient: <%= @clinic_event.patient.full_name %> (<%= @clinic_event.patient.date_of_birth.strftime("%B %e, %Y") %>)
             <div class="my-4">
@@ -9,7 +22,7 @@
 
             <div>
                 <%= f.label :event_date, "Event Date", class: "block" %>
-                <%= f.text_field :event_date, data: {controller: "flatpickr"}, class: "form-select w-full"%>
+                <%= f.text_field :event_date, data: {controller: "flatpickr"}, class: "form-select w-full", required: "true" %>
             </div>
 
             <div>
