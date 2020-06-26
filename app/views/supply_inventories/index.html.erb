@@ -84,7 +84,8 @@
             <%= f.number_field :quantity, class: "form-input block w-full", min: 1, required: true,
                     data: {action: "change->inventory-new-entry#updateModalField
                                     keyup->inventory-new-entry#updateModalField
-                                    blur->inventory-new-entry#validateInputField"} %>
+                                    blur->inventory-new-entry#validateInputField
+                                    keypress->inventory-new-entry#preventNegativeNumber"} %>
             <p class="error-message hidden"> This field is required! </p>
         </div>
 

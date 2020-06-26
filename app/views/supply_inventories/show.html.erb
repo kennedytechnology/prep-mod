@@ -35,7 +35,8 @@
             <%= f.number_field :quantity_used, class: "form-input block w-full", min: 0, required: true,
                 data: {action: "change->inventory-new-entry#updateModalField
                                 keyup->inventory-new-entry#updateModalField
-                                blur->inventory-new-entry#validateInputField"} %>
+                                blur->inventory-new-entry#validateInputField
+                                keypress->inventory-new-entry#preventNegativeNumber"} %>
             <p class="error-message hidden"> This field is required! </p>
         </div>
 
@@ -47,7 +48,8 @@
             <%= f.number_field :quantity_lost, class: "form-input block w-full", min: 0, required: true,
                 data: {action: "change->inventory-new-entry#updateModalField
                                 keyup->inventory-new-entry#updateModalField
-                                blur->inventory-new-entry#validateInputField"} %>
+                                blur->inventory-new-entry#validateInputField
+                                keypress->inventory-new-entry#preventNegativeNumber"} %>
             <p class="error-message hidden"> This field is required! </p>
         </div>
 
@@ -59,7 +61,8 @@
             <%= f.number_field :quantity_loaned, class: "form-input block w-full", min: 0, required: true,
                 data: {action: "change->inventory-new-entry#updateModalField
                                 keyup->inventory-new-entry#updateModalField
-                                blur->inventory-new-entry#validateInputField"} %>
+                                blur->inventory-new-entry#validateInputField
+                                keypress->inventory-new-entry#preventNegativeNumber"} %>
             <p class="error-message hidden"> This field is required! </p>
         </div>
 
@@ -71,7 +74,8 @@
             <%= f.number_field :quantity_destroyed, class: "form-input block w-full", min: 0, required: true,
                 data: {action: "change->inventory-new-entry#updateModalField
                                 keyup->inventory-new-entry#updateModalField
-                                blur->inventory-new-entry#validateInputField"} %>
+                                blur->inventory-new-entry#validateInputField
+                                keypress->inventory-new-entry#preventNegativeNumber"} %>
             <p class="error-message hidden"> This field is required! </p>
         </div>
     </div>

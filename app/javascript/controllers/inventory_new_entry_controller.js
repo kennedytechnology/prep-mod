@@ -9,6 +9,13 @@ export default class extends Controller {
 
     }
 
+    preventNegativeNumber(e) {
+      if ((event.key == "-") || (event.key == "+") || (event.key == ".") || (event.key == "e")) {
+        event.preventDefault();
+        return false;
+      }
+    }
+
     formValidity(e) {
       let isValid = this.validateForm(this.formTarget);
 

@@ -51,9 +51,9 @@ RSpec.describe "/supply_inventories", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       it "updates the requested supply_inventory" do
-        patch supply_inventory_url(@supply_inventory), params: { supply_inventory: attributes_for(:supply_inventory, item_name: "Updated Test Name") }
+        patch supply_inventory_url(@supply_inventory), params: { supply_inventory: attributes_for(:supply_inventory, product_name: "Updated Product Name") }
         @supply_inventory.reload
-        expect(@supply_inventory.item_name).to eq("Updated Test Name")
+        expect(@supply_inventory.product_name).to eq("Updated Product Name")
       end
 
       it "redirects to the supply_inventory" do
