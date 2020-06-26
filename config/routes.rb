@@ -49,6 +49,10 @@ Rails.application.routes.draw do
     get "snapshot_tested"
     get "supply_inventories_by_county"
     get "supply_inventories_by_venue_name"
+    get "capacity_available_testing_appointments"
+    get "capacity_scheduled_appointments"
+    get "capacity_available_testing_appointments_by_county"
+    get "capacity_scheduled_appointments_by_county"
   end
 
   resources :news_signups, only: [:new, :create]
