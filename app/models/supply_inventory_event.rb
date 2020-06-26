@@ -5,4 +5,5 @@ class SupplyInventoryEvent < ApplicationRecord
             :quantity_destroyed, :quantity_loaned,
             numericality: {only_integer: true, greater_than: 0, message: "Only number greater than 0 allowed"},
             allow_blank: true
+  validates_presence_of :event_date, :event_type
 end
