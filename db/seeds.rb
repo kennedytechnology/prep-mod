@@ -247,18 +247,17 @@ end
   SUPPLY_INVENTORY_PER_CLINIC.times do
     sp = SupplyInventory.create!(
       # clinic: clinic,
-      received_at: Faker::Date.between(from: 30.days.ago, to:Date.today),
+      received_at: Faker::Date.between(from: Date.today, to: 30.days.from_now),
       item_type: INVENTORY_ITEM_TYPES.sample,
-      item_name: Faker::Lorem.words(number: 2).collect(&:capitalize).join(" "),
       manufacturer: INVENTORY_MANUFACTURERS.sample,
       lot_number: Faker::Code.asin,
-      expiration_date: Faker::Date.between(from: Date.today, to: 30.days.from_now),
+      expiration_date: Faker::Date.between(from: 30.days.ago, to: Date.today),
       quantity: Faker::Number.between(from: 100, to: 200),
       packaging: INVENTORY_PACKAGINGS.sample,
       source: INVENTORY_SOURCES.sample,
       product_name: Faker::Company.name,
       county: COUNTIES.sample,
-      venue_name: Clinic.pluck(:venue_name).sample,
+      venue_name: Faker::University.unique.name,
     )
 
     Faker::Number.between(from: 1, to: 5).times do 
