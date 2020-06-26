@@ -1,5 +1,17 @@
 <h2 class="main-title"> Inventory Management </h2>
 
+<% if @supply_inventory.errors.any? %>
+  <div id="error_explanation" class="p-4 border-2 bg-red-100 border-red-500 mb-4"> 
+    <h2 class="text-lg font-bold"><%= pluralize(@supply_inventory.errors.count, "error") %> prohibited this article from being saved:</h2>
+ 
+    <ul class="list-disc ml-8">
+    <% @supply_inventory.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_with model: @supply_inventory, local: true, class: "py-5", data: {controller: "inventory-new-entry", target: "inventory-new-entry.form"} do |f| %>
     <div class="sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 lg:gap-6">
         <div>
