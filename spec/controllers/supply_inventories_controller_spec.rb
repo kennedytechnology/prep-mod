@@ -16,18 +16,17 @@ RSpec.describe SupplyInventoriesController, type: :controller do
       it "create new supply inventory" do
         expect {
           post :create, params: { supply_inventory: {
-            received_at: Faker::Date.between(from: 30.days.ago, to:Date.today),
+            received_at: Faker::Date.between(from: Date.today, to: 30.days.from_now),
             item_type: INVENTORY_ITEM_TYPES.sample,
-            item_name: Faker::Lorem.words(number: 2).collect(&:capitalize).join(" "),
             manufacturer: INVENTORY_MANUFACTURERS.sample,
             lot_number: Faker::Code.asin,
             expiration_date: Faker::Date.between(from: Date.today, to: 30.days.from_now),
-            quantity: Faker::Number.between(from: 10, to: 20),
+            quantity: Faker::Number.between(from: 100, to: 200),
             packaging: INVENTORY_PACKAGINGS.sample,
             source: INVENTORY_SOURCES.sample,
             product_name: Faker::Company.name,
             county: COUNTIES.sample,
-            venue_name: Clinic.pluck(:venue_name).sample
+            venue_name: Faker::University.unique.name,
           } }
         }.to change(SupplyInventory, :count).by(1)
       end
@@ -39,7 +38,6 @@ RSpec.describe SupplyInventoriesController, type: :controller do
       supply_inventory: {
         received_at: Faker::Date.between(from: 30.days.ago, to:Date.today),
         item_type: INVENTORY_ITEM_TYPES.sample,
-        item_name: Faker::Lorem.words(number: 2).collect(&:capitalize).join(" "),
         manufacturer: INVENTORY_MANUFACTURERS.sample,
         lot_number: Faker::Code.asin,
         expiration_date: Faker::Date.between(from: Date.today, to: 30.days.from_now),
@@ -51,7 +49,7 @@ RSpec.describe SupplyInventoriesController, type: :controller do
         venue_name: Clinic.pluck(:venue_name).sample
       }
     }
-    should permit(:received_at, :item_type, :item_name, 
+    should permit(:received_at, :item_type, 
         :manufacturer, :lot_number, :expiration_date,
         :quantity, :packaging, :source, :product_name,
         :county, :venue_name).
