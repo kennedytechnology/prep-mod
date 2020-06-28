@@ -23,14 +23,16 @@ class ClinicsController < ClinicManagementController
     @clinic = Clinic.new
     @clinic.clinic_personnel.build
     @clinic.test_kits.build
+    @page_title = "Create clinic"
   end
 
   def create
     @clinic = Clinic.new(clinic_params)
+    @page_title = "Create clinic"
 
     respond_to do |format|
       if params[:reviewed] == "false"
-        format.js { render 'clinics/preview_form' }
+        format.js { render 'clinics/preview_form', locals: {clinic_params: clinic_params} }
       else 
         if @clinic.valid?
           params["clinic_dates"].reject(&:blank?).each do |clinic_date|
@@ -51,6 +53,7 @@ class ClinicsController < ClinicManagementController
 
   def edit
     @page_title = "Edit Clinic"
+    @title = "Edit clinic"
   end
 
   def activity
@@ -59,9 +62,10 @@ class ClinicsController < ClinicManagementController
   end
 
   def update
+    @page_title = "Edit clinic"
     respond_to do |format|
       if params[:reviewed] == "false"
-        format.js { render 'clinics/preview_form' }
+        format.js { render 'clinics/preview_form', locals: {clinic_params: clinic_params} }
       else 
         if @clinic.update(clinic_params)
           format.html { redirect_to clinics_path(clinic_date: 'upcoming'), notice: "Successfully updated clinic!" }
