@@ -20,15 +20,6 @@
         }
     }
 
-    &-disabled {
-        @extend .button-base;
-        cursor: default;
-        @apply p-2 inline-block bg-gray-100 text-gray-800;
-        min-height: auto;
-        min-width: auto;
-        width: auto;
-    }
-
     &-primary {
         @extend .button-base;
         @apply bg-brand-blue-600 border-brand-blue-300 text-white text-lg;
@@ -114,5 +105,14 @@
         &:hover {
             @apply text-white bg-brand-blue-300;
         }
+    }
+
+    &-disabled {
+        @extend .button-base;
+        cursor: default;
+        @apply p-2 inline-block bg-gray-100 text-gray-800;
+        min-height: auto;
+        min-width: auto;
+        width: auto;
     }
 }
