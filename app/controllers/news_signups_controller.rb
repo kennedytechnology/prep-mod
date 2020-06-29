@@ -1,21 +1,9 @@
-class NewsSignupsController < InheritedResources::Base
-  def new
-    @news_signup = NewsSignup.new()
-  end
+class NewsSignupsController < ApplicationController
 
-  def create
-    @news_signup = NewsSignup.new(news_signup_params)
-
-    if @news_signup.save
-      NewsSignupMailer.successful_signup(@news_signup).deliver
-      redirect_to root_path, notice: "Successfully signed up!"
-    else
-      render :new
+  def index
+    respond_to do |format|
+      format.csv { send_data NewsSignup.all.to_csv, filename: "news_signups-#{Date.today}.csv" }
     end
   end
 
-  private
-    def news_signup_params
-      params.require(:news_signup).permit(:first_name, :last_name, :email, :date_of_birth, :zip_code, :occupation, topics: [])
-    end
 end

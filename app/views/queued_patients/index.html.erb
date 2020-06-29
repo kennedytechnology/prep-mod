@@ -3,6 +3,8 @@
 <div class="flex justify-between">
   <div>
     <span class="font-bold">Clinic Status:</span> <%= @clinic.open_state.titleize %>
+    <span class="font-bold ml-8">Social Distancing Capacity:</span> <%= @clinic.active_queue_patients_count %>
+    <%= link_to "(update)", clinic_edit_queue_path(clinic_id: @clinic), class: "underline text-blue-500" %>
   </div>
   <div>
     <% if @clinic.upcoming? %>
@@ -15,7 +17,10 @@
     <% end %>
 
     <% @clinic.available_event_names.each do |event| %>
-      <%= link_to event.titleize,
+      <%# TODO: Extract to helper %>
+        <% button_label = event.titleize %>
+        <% button_label = "Close Clinic" if event == "close" %>
+      <%= link_to button_label,
         update_clinic_status_clinic_queued_patients_path(clinic_id: @clinic, event: event),
         data: {confirm: "Are you sure you want to #{event.humanize(capitalize: false)} this clinic?"},
         class: "button-action",
@@ -35,6 +40,7 @@
     <%= render "queued_patients/add_patient_modal" %>
   </div> 
   <div class="mt-4">
+    <span class="font-bold mr-4">Filter: </span>
     <%= link_to "All", clinic_queued_patients_path(clinic_id: @clinic.id), class: "p-2 mr-4 bg-blue-500 rounded text-white" %>
     <% Appointment.aasm.states.collect(&:name).each do |state| %>
       <%= link_to clinic_queued_patients_path(clinic_id: @clinic.id, state: state), class: "p-2 mr-4 bg-blue-500 rounded text-white" do %>

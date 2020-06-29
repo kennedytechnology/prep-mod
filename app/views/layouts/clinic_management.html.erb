@@ -19,25 +19,41 @@
       </script>
     <% end %>
     <div class="main-container">
-        <a href="/clinics"><%= image_tag "prep-mod.png", class: "mt-2 mb-2", style: "max-height: 60px;" %></a>
-        <hr class="mb-4">
-        <div class="flex flex-wrap justify-center items-center text-gray-600 my-6 lg:mx-24 main-links-container">
-          <% 
-            cms_menu = {
-              "Home": pages_landing_page_path,
-              "Create Clinic": new_clinic_path,
-              "Upcoming Clinics": clinics_path(clinic_date: 'upcoming'),
-              "Past Clinics": clinics_path(clinic_date: 'past'),
-              "Records Search": patients_path,
-              "Data Transfer": "/clinic/data_transfer",
-              "Upload Records": '/patients/upload_records',
-              "Download Records": '/patients/download_records',
-              "Inventory Management": supply_inventories_path,
-              "Generate Reports": new_customized_report_path,
-              "Message Board": new_message_path,
-              "Create New User": new_user_invitation_path,
-              "Change Password": edit_user_registration_path
-            }
+        <a href="/clinics"><%= image_tag (ENV['SITE_LOGO'] || 'prep-mod.png'), class: "mt-2 mb-2", style: "max-height: 60px;" %></a>
+        <div class="flex flex-wrap justify-center items-center text-gray-600 my-6 lg:mx-6 main-links-container">
+          <%
+            if ENV['OPEN_MARYLAND'] 
+              cms_menu = {
+                "Home": pages_landing_page_path,
+                "Records Search": patients_path,
+                "Employer Listing": employers_path,
+                "Data Transfer": "/clinic/data_transfer",
+                "Upload Records": '/patients/upload_records',
+                "Download Records": '/patients/download_records',
+                "Inventory Management": supply_inventories_path,
+                "Generate Reports": new_customized_report_path,
+                "Message Board": new_message_path,
+                "Create New User": new_user_invitation_path,
+                "Change Password": edit_user_registration_path
+              }
+            else
+              cms_menu = {
+                "Home": pages_landing_page_path,
+                "Create Clinic": new_clinic_path,
+                "Upcoming Clinics": clinics_path(clinic_date: 'upcoming'),
+                "Past Clinics": clinics_path(clinic_date: 'past'),
+                "Records Search": patients_path,
+                "Employer Listing": employers_path,
+                "Data Transfer": "/clinic/data_transfer",
+                "Upload Records": '/patients/upload_records',
+                "Download Records": '/patients/download_records',
+                "Inventory Management": supply_inventories_path,
+                "Generate Reports": new_customized_report_path,
+                "Message Board": new_message_path,
+                "Create New User": new_user_invitation_path,
+                "Change Password": edit_user_registration_path
+              }
+            end
           %>
           <% cms_menu.each do |link_name, link_route| %>
             <%

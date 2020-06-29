@@ -1,0 +1,7 @@
+<%= render '/clinics/header' %>
+<p class="mb-4">To start this clinic with a virtual queue, please enter the number of patients the clinic can see at a time.</p>
+<%= form_with(model: @clinic, url: clinic_update_queue_path(@clinic)) do |f| %>
+  <span class="font-bold mr-4">Social Distancing Capacity:</span><%= f.text_field :active_queue_patients_count %>
+  <br/>
+  <%= f.submit "Start Virtual Queue", class: "button-primary" %>
+<% end %>

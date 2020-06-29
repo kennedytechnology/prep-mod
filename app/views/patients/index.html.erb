@@ -1,34 +1,43 @@
 <%= render 'clinics/header' if @clinic %>
 
-<div class="clinic-patients-index-page">
+<div class="clinic-patients-index-page" data-controller="patients">
   <div class="header-section">
     <% unless @clinic %>
       <h1 class="main-title">Patient Record Search</h1>
     <% end %>
 
+    
     <% if @clinic %>
-      <h3>Total Registered: <%= @clinic.patients.size %></h3>
-    <% end %>
-    
-    <div class="flex justify-end my-4 search-inputs-container">
-      <%= search_form_for @q, class: "flex items-center w-full" do |f| %>
-        <%= f.search_field :first_name_cont, placeholder: "First Name", class: "form-input flex-1 mr-2" %>
-        <%= f.search_field :last_name_cont, placeholder: "Last Name", class: "form-input flex-1 mr-2" %>
-        <%= f.search_field :mothers_maiden_name_cont, placeholder: "Mother's maiden name", class: "form-input flex-1 mr-2" %>
-        <%= f.search_field :date_of_birth_equals, type: "date", placeholder: "Date of birth",
-                               class: "form-input flex-1 mr-2", style: "margin-bottom: 0; min-height: 42px; max-height: 42px;",
+      <div class="w-full flex justify-between items-center mt-8">
+        <div class="flex items-center w-6/12">
+          <label class="text-lg mr-3 text-gray-600" for="search"> Search: </label>
+          <input class="form-input flex-1" id="search" data-action="keyup->patients#search" type="text">
+        </div>
+        <div class="flex items-end">
+          <%= link_to "Download Spreadsheet", clinic_patients_path(clinic_id: @clinic.id, format: :csv), class: "button-primary" %><br/>
+          <a href="javascript:" class="button-primary" data-action="click->main#printContent">Print</a>
+        </div>
+        
+      </div>
+    <% else %>
+      <div class="flex justify-start my-4 search-inputs-container">
+        <%= search_form_for @q, class: "flex items-start" do |f| %>
+          <%= f.search_field :first_name_cont, placeholder: "First Name", class: "form-input mr-2 w-2/12" %>
+          <%= f.search_field :last_name_cont, placeholder: "Last Name", class: "form-input w-2/12 mr-2" %>
+          <%= f.search_field :mothers_maiden_name_cont, placeholder: "Mother's maiden name", class: "form-input w-2/12 mr-2" %>
+          <%= f.search_field :date_of_birth_equals, type: "date", placeholder: "Date of birth",
+                               class: "form-input w-2/12 mr-2", style: "margin-bottom: 0; min-height: 42px; max-height: 42px;",
                                data: {controller: "flatpickr"} %>
-        <%= f.submit "Search", class: "button-action" %>
-        <%= link_to "Reset", patients_path, class: "button-action" %>
-      <% end %>
-    </div>
-    
+          <%= f.submit "Search", class: "button-action" %>
+          <%= link_to "Reset", patients_path, class: "button-action" %>
+        <% end %>
+        <a href="javascript:"
+          class="button-primary"
+          data-action="click->main#printContent">Print</a>
+      </div>
+    <% end %>
   </div>
-  <div class="flex justify-end mb-3">
-    <a href="javascript:"
-       class="button-primary"
-       data-action="click->main#printContent">Print</a>
-  </div>
+
   
   <div class="flex flex-col printable">
     <div class="sorting-table-wrapper">
@@ -40,6 +49,7 @@
             <th><%= sort_link(@q, :date_of_birth, 'Date of Birth', default_order: :desc) %></th>
             <th><%= sort_link(@q, :date_of_birth, 'Age', default_order: :desc) %></th>
             <th><%= sort_link(@q, :sex, 'Gender', default_order: :desc) %></th>
+            <th><%= sort_link(@q, :appointment_at, 'Appointment', default_order: :desc) %></th>
             <th><%= sort_link(@q, :county, 'County', default_order: :desc) %></th>
             <th>&nbsp;</th>
           </tr>
@@ -47,20 +57,25 @@
           <tbody>
           <% @patients.each do |patient| %>
             <% unless patient.appointments.empty? %>
-            <tr>
-              <td class="underline"><%= link_to patient.full_name, [@clinic, patient]  %></td>
-              <td><%= patient.date_of_birth.strftime("%m/%d/%y") if patient.date_of_birth %></td>
-              <td><%= ((Date.today.to_time - patient.date_of_birth.to_time) / 1.year.seconds).floor if patient.date_of_birth %></td>
-              <td><%= patient.sex == "F" ? "Female" : "Male" %></td>
-              <td><%= patient.county %></td>              
-              <td class="w-3/12 text-right table-action-buttons">
-                <%= link_to "Event Entry", new_clinic_event_path(clinic_id: @clinic, patient_id: patient.id),
-                            class: "button-action" %>
-                <%= link_to "Delete", "javascript:", 
-                    data: {recordis: "patients", recordid: patient.id, recordname: patient.full_name, 
-                        action: "click->clinic-activity-patients#showHideDeleteModal"}, class: "button-action" %>
-              </td> 
-            </tr>
+              <tr data-target="patients.searchableRow" data-search-content="<%= [patient.first_name.downcase, patient.last_name.downcase, patient.county, patient.date_of_birth.strftime("%m/%d/%y")].join(" ") %>" data-patient-id="<%= patient.id %>">
+                <td class="underline"><%= link_to patient.full_name, [@clinic, patient]  %></td>
+                <td><%= patient.date_of_birth.strftime("%m/%d/%y") if patient.date_of_birth %></td>
+                <td><%= ((Date.today.to_time - patient.date_of_birth.to_time) / 1.year.seconds).floor if patient.date_of_birth %></td>
+                <td><%= patient.sex == "F" ? "Female" : "Male" %></td>
+                <td><%= patient.appointments.last.on_waiting_list? ? "Waiting List" : patient.appointments.last.appointment_at %></td>
+                <td><%= patient.county %></td>              
+                <td class="w-3/12 text-right table-action-buttons">
+                  <% if @clinic %>
+                    <%= link_to "Signature Form", clinic_patient_path(@clinic, patient, format: :pdf), class: "button-action" %>
+                  <% else %>
+                    <%= link_to "Enter Encounter", new_clinic_event_path(clinic_id: @clinic, patient_id: patient.id),
+                                class: "button-action" %>
+                  <% end %>
+                  <%= link_to "Delete", "javascript:", 
+                      data: {recordis: "patients", recordid: patient.id, recordname: patient.full_name, 
+                          action: "click->clinic-activity-patients#showHideDeleteModal"}, class: "button-action" %>
+                </td> 
+              </tr>
             <% end %>
           <% end %>
           </tbody>

@@ -2,8 +2,9 @@ USER_ROLES = ["Nurse", "Charge Nurse", "Supervisor", "Regional Administrator"]
 VENUE_CATEGORIES = ["University", "Doctor's Office", "Hospital"]
 VENUE_TYPES = [
   "Local Health Department", "Provider Office", "Hospital", "Church", 
-  "College/University", "Primary School", "Business/Workplace", "Community Center",
-  "Residential/Housing Building", "Senior Center", "Long Term Care Facility", "Government", "Other"
+  "College/University", "Primary School", "Business/Workplace",
+  "Community Center", "Residential/Housing Building", "Senior Center",
+  "Long Term Care Facility", "Government", "Retail", "Pharmacy", "Other"
 ]
 COUNTIES = %w(Washington Jefferson Franklin Jackson Grant Wayne Lake Lee Marshall Polk Marion Clay Union)
 
@@ -12,7 +13,7 @@ US_RACES = ["American Indian or Alaska Native", "Asian", "Black or African-Ameri
 INSURANCE_TYPES = ["Private Insurance", "Medicaid/Medical Assistance", "Medicare", "No Insurance"]
 RELATIONSHIP_TYPES = ["Self", "Spouse", "Other"]
 
-CLINIC_APPOINTMENT_INTERVALS = [5, 10, 15, 20, 30, 45, 60]
+CLINIC_APPOINTMENT_INTERVALS = [1, 2, 3, 5, 7, 10, 12, 15, 5, 10, 15, 20, 30, 45, 60]
 
 CLINIC_EVENTS = [
   { name: "Tested",
@@ -76,3 +77,4 @@ CLINIC_EVENTS = [
 
   Date::DATE_FORMATS[:default] = "%A %B %e, %Y"
 
+  NEWS_TOPICS = ["COVID-19 Testing", "Flu Vaccinations", "Back-to-School Vaccinations", "COVID-19 Vaccine Development"]

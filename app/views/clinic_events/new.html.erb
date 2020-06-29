@@ -1,4 +1,4 @@
-<h1 class="main-title">Enter a Patient Event</h1>
+<h1 class="main-title">Enter a Patient Encounter</h1>
     <%= form_for(@clinic_event, remote: false) do |f| %>
 
         <% if @clinic_event.errors.any? %>
@@ -13,25 +13,25 @@
         </div>
         <% end %>
 
-        <div class="field-side-by-side">
+        <div>
             <h2 class="title">Patient: <%= @clinic_event.patient.full_name %> (<%= @clinic_event.patient.date_of_birth.strftime("%B %e, %Y") %>)
-            <div class="my-4">
+            <div class="my-4 w-3/12">
                 <p class="label block">Logged In User</p>
                 <input class="form-input w-full" value="<%= current_user.name %>" disabled="true" />
             </div>
 
-            <div>
-                <%= f.label :event_date, "Event Date", class: "block" %>
+            <div class="w-3/12">
+                <%= f.label :event_date, "Date of Encounter", class: "block" %>
                 <%= f.text_field :event_date, data: {controller: "flatpickr"}, class: "form-select w-full", required: "true" %>
             </div>
 
-            <div>
+            <div class="w-3/12">
                 <%= f.label :location, class: "block" %>
                 <%= f.select :location, options_for_select(ClinicEvent.available_locations), {}, {class: "form-select w-full"} %>
             </div>
 
-            <div class="mb-4">
-                <p class="label"> Service Provided Options </p>
+            <div class="mb-4 w-5/12">
+                <p class="label mb-2"> Encounter Type </p>
                 <div class="w-full checkboxes-container">
                     <%= collection_check_boxes(:patient, :service_ids, ClinicService.where(category: "clinic_events"), :id, :name) do |b| %>
                     <div>
@@ -42,19 +42,19 @@
                 </div>
             </div>
 
-            <div>
+            <div class="w-3/12">
                 <%= f.label :outcome, class: "block" %>
                 <%= f.select :outcome, options_for_select(CLINIC_EVENTS.collect{|h| h[:outcomes]}.flatten.uniq, @clinic_event.outcome),{}, {class: "w-full form-select"} %>
             </div>
 
             <%= f.hidden_field :patient_id %>
 
-            <div>
+            <div class="w-5/12">
                 <%= f.label :notes, class: "block" %>
                 <%= f.text_area :notes, class: "w-full form-textarea" %>
             </div>
 
-            <div class="button-container flex justify-end my-4">
+            <div class="flex justify-end w-6/12 mt-4">
                 <%= submit_tag "Save and Continue →", class: "button-primary" %>
             </div>
         </div>

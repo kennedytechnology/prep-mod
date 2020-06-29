@@ -1,0 +1,120 @@
+<h1 class="main-title font-bold"> Sign Up for News and Notifications About COVID-19 </h1>
+<%= form_with model: @news_signup, url: public_news_signups_path, local: true do |f| %>
+    <div class="field-fullwidth">
+        <div class="grid grid-cols-4 gap-4">
+            <div>
+                <%= f.label :first_name, "First Name", class: "block" %>
+                <%= f.text_field :first_name, class: "form-input w-full", required: true %>
+            </div>
+            <div>
+                <%= f.label :last_name, "Last Name", class: "block" %>
+                <%= f.text_field :last_name, class: "form-input w-full", required: true %>
+            </div>
+            <div class="flex-1 mr-2">
+                <%= f.label :date_of_birth, class: "block" %>
+                <div class="flex">
+                    <%= f.date_select :date_of_birth, {order: [:month, :day, :year], start_year: Date.current.year - 99, end_year: Date.current.year, include_blank: true}, class: "form-select w-full" %>
+                </div>
+            </div>
+            <div>
+                <%= f.label :zip_code, class: "block" %>
+                <%= f.text_field :zip_code, class: "form-input w-full", required: true %>
+            </div>
+        </div>
+    </div>
+
+    <div class="field-fullwidth">
+        <div class="grid grid-cols-4 gap-4">
+            <div>
+                <%= f.label :email, "Email Address", class: "block" %>
+                <%= f.email_field :email, class: "form-input w-full", required: true %>
+            </div>
+            <div>
+                <%= f.label :occupation, "Choose Occupation", class: "block" %>
+                <%= f.select :occupation, PATIENT_OCCUPATIONS, {prompt: "Select"}, {class: "block form-select w-full", required: true} %>
+            </div>
+        </div>
+    </div>
+
+    <div class="field-fullwidth">
+        <div>
+            <%= f.label "Please keep me informed about:", class: "block text-xl mb-4" %>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 lg:gap-2">
+                <% NEWS_TOPICS.each do |topic|%>
+                    <div class="relative flex items-start mb-4">
+                        <div class="absolute flex items-center h-5">
+                            <%= f.check_box(:topics, {multiple: true, id: "topic_#{topic}", class: "form-checkbox"}, topic) %>
+                        </div>
+                        <div class="pl-2 ml-4 text-sm leading-5">
+                            <label for="topic_<%=topic%>"> <%= topic %> </label>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+
+    <div class="p-4">
+        <span>Do you or anyone in your household have a chronic health condition (Example: diabetes, heart disease, high blood pressure, COPD, asthma)?</span><br/>
+        <div class="mt-4 p-4">
+            <label class="text-xl"><%= f.radio_button :chronic_health_condition, "1" %> <span>Yes</span></label>
+            <label class="text-xl ml-8"><%= f.radio_button :chronic_health_condition, "0" %> <span>No</span></label>
+        </div>        
+    </div>
+
+    <div class="border-2 p-8 w-8/12 bg-blue-100">
+        <span>
+            I give permission to be contacted about the topics selected and 
+            other health and wellness services and programs.  I understand that
+            I may opt out of receiving these communications at any time by
+            contacting the health department in my county, calling 888-503-0515,
+            or emailing info@prepmod.com.
+        </span>
+    </div>
+
+
+
+    <div class="flex w-full mb-5" data-controller="consent-form-signature">
+        <div class="w-10/12">
+            <p class="mt-10 font-semibold" data-target="consent-form-signature.title"> Please sign here with your finger or mouse </p>
+            <div class="border border-gray-400 mt-2 mb-4 w-1/2 h-40" data-target="consent-form-signature.signatureInput">
+                <canvas style="width:100%; height: 100%;"></canvas>
+            </div>
+            <%= f.hidden_field :signature_data, id: "hidden_signature_data" %>
+
+            <div class="hidden w-8/12 mt-2 mb-4" data-target="consent-form-signature.fullName">
+                <div class="h-40">
+                    <%= f.text_field :signatory_first_name, placeholder: "First Name", class: "w-10/12 form-input" %>
+                    <%= f.text_field :signatory_last_name, placeholder: "Last Name", class: "w-10/12 form-input" %>
+                </div>
+            </div>
+
+            <div class="w-1/2 flex flex-col justify-end items-end">
+                <div class="button-primary" 
+                    data-action="click->consent-form-signature#toggleSignature"
+                    data-target="consent-form-signature.buttonTitle"> Sign by typing my full name </div>
+            </div>
+        </div>
+    </div>
+
+    <%# TODO: Move this into the proper place. %>
+    <script>
+        var canvas = document.querySelector("canvas");
+        var ratio =  Math.max(window.devicePixelRatio || 1, 1);
+        canvas.width = canvas.offsetWidth * ratio;
+        canvas.height = canvas.offsetHeight * ratio;
+        canvas.getContext("2d").scale(ratio, ratio);
+        var signaturePad = new SignaturePad(canvas);
+        var hidden_field = document.getElementById("hidden_signature_data")
+        var parent_form = canvas.closest('form')
+        parent_form.onsubmit = function() {
+            hidden_field.value = signaturePad.toDataURL()
+        }
+        
+        
+    </script>
+
+    <div class="mt-10 flex justify-end">
+        <%= f.submit "Sign Up", class: "button-primary" %>
+    </div>
+<% end %>

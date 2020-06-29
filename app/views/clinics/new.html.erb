@@ -136,7 +136,7 @@
         </div>
 
         <div class="field-fullwidth">
-            <h1 class="title"> Appointments Information </h1>
+            <h1 class="title"> Appointment Information </h1>
             <p class="label"> Appointments available <span class="field-required">*</span> </p>
             <div class="w-2/4 radio-buttons-container mb-4">
                 <div>
@@ -152,6 +152,10 @@
                 <div>
                     <%= f.radio_button :appointments_available, "no_walk_in", class: "form-radio" %>
                     <%= f.label :appointments_available, "No (Walk-In)", for: "clinic_appointments_available_no_walk_in" %>
+                </div>
+                <div>
+                    <%= f.label :active_queue_patients_count, "Social Distancing Capacity" %>
+                    <%= f.select :active_queue_patients_count, (0..100).to_a %>
                 </div>
             </div>
 

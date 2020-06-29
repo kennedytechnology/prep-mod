@@ -23,7 +23,7 @@
 <table class="table printable">
     <thead>
         <tr>
-            <th><%= sortable "event_date", "Event Date" %></th>
+            <th><%= sortable "event_date", "Date" %></th>
             <th><%= sortable "location", "Location" %></th>
             
             <th><%= sortable "category", "Service" %></th>
@@ -51,16 +51,4 @@
     </tbody>
 </table>
 <%= render "patients/delete_record_modal" %>
-</div>
-
-<div class="pagination-section">
-    <div class="pagination-container">
-        <div class="pagination-info">
-            <p><%= page_entries_info @patient_clinic_events %></p>
-        </div>
-        <div class="pagination-buttons">
-            <span class="lg-buttons"><%= will_paginate @patient_clinic_events %></span>
-            <span class="sm-buttons"><%= will_paginate @patient_clinic_events, page_links: false %></span>
-        </div>
-    </div>
 </div>
