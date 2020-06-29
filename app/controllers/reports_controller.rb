@@ -13,9 +13,30 @@ class ReportsController < ApplicationController
     render json: ProviderEnrollment.group(:medical_specialty).count
   end
 
-  def snapshot; end
+  def snapshot_tested
+    render json: ClinicEvent.where(outcome: ["Positive", "Negative"]).group(:outcome).count
+  end
 
-  def capacity; end 
+  def capacity_available_testing_appointments
+    render json:  Clinic.joins(:appointments).all.group(:venue_name).count
+  end 
+
+  def capacity_scheduled_appointments
+    render json: Clinic.joins(:appointments).where("appointments.queue_state = ?", "not_checked_in").group(:venue_name).count
+  end
+
+  def capacity_available_testing_appointments_by_county
+    chart_data = Clinic.joins(:appointments).all.group(:county).count
+    render json: [{ data: parse_chart_data(chart_data),
+                    library: column_chart_background_colors }].chart_json
+  end
+
+  def capacity_scheduled_appointments_by_county
+    chart_data = Clinic.joins(:appointments).where("appointments.queue_state = ?", "not_checked_in").group(:county).count
+    render json: [{ data: parse_chart_data(chart_data),
+                    library: column_chart_background_colors }].chart_json
+  end
+
 
   def uptake; end
 

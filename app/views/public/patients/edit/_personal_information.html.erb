@@ -1,4 +1,4 @@
-<h1 class="text-blue-400 font-bold text-lg p-2 mb-6">You'll have the opportunity to enroll your minor children...</h1>
+<h1 class="text-blue-400 font-bold text-lg p-2 mb-6">You'll have the opportunity to enroll your minor children at a future step.</h1>
 
 <div class="field-side-by-side">
     <div>
@@ -35,7 +35,7 @@
     <div class="flex">
         <div class="flex-1 mr-2">
             <%= f.label :date_of_birth, "Date Of Birth" %> <% %>
-            <%= f.text_field :date_of_birth, value: @patient.date_of_birth.try(:strftime, "%m/%d/%Y"), class: "w-full form-input", 
+            <%= f.text_field :date_of_birth, value: @patient.date_of_birth.try(:strftime, "%Y/%m/%d"), class: "w-full form-input",
                                 data: { controller: "flatpickr",
                                         flatpickr_min_date: Date.today - 80.years,
                                         flatpickr_max_date: Date.today,

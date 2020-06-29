@@ -1,10 +1,17 @@
-<%= render "clinics/header" %>
+<% @clinic = Clinic.first %>
+<div id="clinic-header" class="bg-gray-100 p-2 -mt-2 mb-4 -mx-4 border-b-2 border-gray-500 shadow">
+  <h1 class="text-2xl font-bold"><%= @employer.company_name %>: <%= Date.today.strftime("%a %B %e, %Y")%></h1>
+  
+  <div class="flex justify-end">
+      <h2 class="text-xl font-bold flex-grow">Daily Employer Activity Report</h2>
+      <span class="pr-4 pt-5">Total Employees Registered: <%= @employer.patients.size %></span>
+  </div>
+</div>
 <div class="clinic-events-page">
     <div class="card-wrapper">
-      <%= render 'clinics/activity/header' %>
+
       <div class="card-content">
         <%= form_with(model: @clinic, url: clinic_path(@clinic), method: :put) do |f| %>
-          <%= render partial: 'clinics/activity/details', locals: {f: f} %>
 
           <%= render partial: 'clinics/activity/test_kits', locals: {f: f} %>
 
@@ -26,7 +33,7 @@
                   <table class="table">
                     <thead>
                     <tr>
-                      <th>Patient Name</th>
+                      <th>Employee Name</th>
                       <th>DOB</th>
                       <th>Screened</th>
                       <th>Tested</th>
@@ -38,7 +45,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <% @clinic.patients.each do |patient| %>
+                    <% @employer.patients.each do |patient| %>
                       <%= f.fields_for :clinic_events, patient.event_for_clinic(@clinic) do |event_form| %>
                         <tr data-target="clinic-activity-patients.searchableRow" data-event-category="<%= event_form.object.category %>" data-search-content="<%= [patient.first_name.downcase, patient.last_name.downcase].join(" ") %>" data-patient-id="<%= patient.id %>">
                           <td>

@@ -13,7 +13,8 @@ class Public::PatientsController < ApplicationController
 
 
   def update
-    @step = params[:next_step] || "personal_information"
+    @step = params[:next_step]
+    @step = "personal_information" if @step.blank?
 
     load_patient_and_clinic
     parse_dates
@@ -161,7 +162,7 @@ class Public::PatientsController < ApplicationController
   end
 
   def appointment_params
-    params.require(:appointment).permit(:appointment_at)
+    params.require(:appointment).permit(:appointment_at, :on_waiting_list)
   end
 
 end

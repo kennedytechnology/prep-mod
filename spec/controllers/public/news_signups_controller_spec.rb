@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe NewsSignupsController, type: :controller do
+RSpec.describe Public::NewsSignupsController, type: :controller do
   describe "GET #new" do
     it "returns http success" do
       get :new
@@ -18,7 +18,7 @@ RSpec.describe NewsSignupsController, type: :controller do
             email: Faker::Internet.email,
             date_of_birth: Faker::Date.birthday,
             zip_code: Faker::Address.zip_code,
-            topics: ["Testing", "Screening", "Safety Kit", "Medication", "Other"],
+            topics: NEWS_TOPICS,
             occupation: PATIENT_OCCUPATIONS.sample
           } }
         }.to change(NewsSignup, :count).by(1)
@@ -33,7 +33,7 @@ RSpec.describe NewsSignupsController, type: :controller do
         email: Faker::Internet.email,
         date_of_birth: Faker::Date.birthday,
         zip_code: Faker::Address.zip_code,
-        topics: ["Testing", "Screening", "Safety Kit", "Medication", "Other"],
+        topics: NEWS_TOPICS,
         occupation: PATIENT_OCCUPATIONS.sample
       }
     }

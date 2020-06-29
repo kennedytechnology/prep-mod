@@ -1,4 +1,4 @@
-<h1 class="main-title"> Employer Enrollments </h1>
+<h1 class="main-title"> Business Enrollments </h1>
 
 <div class="flex justify-end mb-6">
     <%= link_to "Add new Employer", new_employer_path, class: "button-primary" %>
@@ -12,7 +12,7 @@
             <th> Address </th>
             <th> Total Employees </th>
             <th> Total Locations </th>
-            <th> Website </th>
+            <th> Actions </th>
         </tr>
     </thead>
     <tbody>
@@ -21,9 +21,9 @@
                 <td> <%= employer.first_name %> <%= employer.last_name %> </td>
                 <td> <%= employer.company_name %> </td>
                 <td> <%= employer.address_1 %> </td>
-                <td> <%= employer.total_employees %> </td>
+                <td> <%= employer.patients.size %> </td>
                 <td> <%= employer.total_locations %> </td>
-                <td> <%= link_to employer.website, employer.website if employer.website %> </td>
+                <td> <%= link_to "Daily Activity", activity_employer_path(employer), class: "button-action" %> </td>
             </tr>
         <% end %>
     </tbody>

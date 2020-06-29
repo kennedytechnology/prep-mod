@@ -1,20 +1,28 @@
 <div class="clinics-index-page" data-controller="clinic-activity-patients">
     <div class="page-header">
-        <h3 class="main-title">Clinics Listing</h3>
+        <h3 class="main-title">
+            <% if params[:clinic_display] == "virtual" %>
+                Activate Virtual Queue
+            <% else %>
+                Clinics Listing
+            <% end %>
+        </h3>
     </div>
 
 
-    <form class="flex justify-end items-center mt-12">
+    <form class="flex justify-start items-center mt-12">
         <label class="flex text-lg mr-3 align-middle text-gray-600 block mb-2" for="search"> Search: </label>
         <input class="form-input w-2/12" id="search" data-action="keyup->clinic-activity-patients#search" type="text">
     </form>
-
+    
     <table class="table">
         <thead>
             <tr>
                 <th><%= sortable "clinic_date", "Date" %></th>
                 <th><%= sortable "county", "County" %></th>
                 <th><%= sortable "venue_name", "Venue Name" %></th>
+                <th># Reg'd</th>
+                <% if params[:clinic_display] == "virtual" %><th>Soc. Dist. Capacity</th><% end %>
                 <% unless params[:clinic_display] == "virtual" %>
                 <th><%= sortable "links", "Links" %></th>
                 <% end %>
@@ -25,6 +33,7 @@
             <%= render @clinics %>
         </tbody>
     </table>
+    
 
     <!--    <div class="pagination-section">
         <div class="pagination-container">

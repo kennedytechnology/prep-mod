@@ -13,7 +13,7 @@ export default class extends Controller {
       this.fullNameTarget.classList.remove("hidden");
     } else {
       this.titleTarget.innerText = "Please sign here with your finger or mouse";
-      this.buttonTitleTarget.innerText = "Type my full name";
+      this.buttonTitleTarget.innerText = "Sign by typing my full name";
       this.fullNameTarget.classList.add("hidden");
       this.signatureInputTarget.classList.remove("hidden");
     }

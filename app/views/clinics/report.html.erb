@@ -1,0 +1,32 @@
+<%= render "clinics/header" %>
+
+<div class="flex flex-wrap">
+  <span class="m-4 p-2"><span class="font-bold">Clinic Date</span><br/><%= @clinic.clinic_date %></span>
+  <span class="m-4 p-2"><span class="font-bold">Venue Name</span><br/><%= @clinic.venue_name %></span>
+  <span class="m-4 p-2"><span class="font-bold">County</span><br/><%= @clinic.county %></span>
+  <span class="m-4 p-2"><span class="font-bold">Lead Vaccinator</span><br/><%= @clinic.lead_vaccinator_name %></span>
+  <span class="m-4 p-2"><span class="font-bold">Number of Patients Seen</span><br/><%= @clinic.clinic_events.size %></span>
+  <span class="m-4 p-2"><span class="font-bold">Clinic Staff</span><br/><%= @clinic.clinic_personnel.size + 1 %></span>
+</div>
+
+<% @clinic.clinic_events.group_by(&:outcome).each do |outcome, events| %>
+  <h3 class="font-bold text-2xl mt-8"><%= outcome %></h3>
+  <table class="table mt-4">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Date of Birth</th>
+      </tr>
+    </thead>
+
+    <% events.each do |event| %>
+      <tr>
+        <td><%= event.patient.full_name %></td>
+        <td><%= event.patient.date_of_birth %></td>
+      </tr>
+    <% end %>
+  </table>
+
+
+<% end %>
+

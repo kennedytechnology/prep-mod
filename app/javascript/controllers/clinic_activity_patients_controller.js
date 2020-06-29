@@ -22,6 +22,7 @@ export default class extends Controller {
 
   okModal(event) {
     event.target.closest("tr").setAttribute('data-event-category', event.target.dataset.eventCategory)
+    // debugger
     event.target.closest('.modal').classList.toggle('hidden');
   }
 

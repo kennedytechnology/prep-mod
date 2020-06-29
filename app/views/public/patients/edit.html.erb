@@ -36,7 +36,7 @@
             <button type="submit" name="next_step" value="appointment" class="button-action"> Save And Continue </button>    
         <% else %>
             <% if @step == "appointment" %>
-                <%= link_to 'Find Another Location', '/clinic/search?service[]=Testing', class: "button-action" %>
+                <%= link_to 'Find Another Location', '/clinic/search?service[]=Testing&next_step=appointment', class: "button-action" %>
             <% end %>    
             <%= submit_tag "Save and Continue →", class: "button-action" %>
         <% end %>

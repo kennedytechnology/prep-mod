@@ -23,14 +23,16 @@ class ClinicsController < ClinicManagementController
     @clinic = Clinic.new
     @clinic.clinic_personnel.build
     @clinic.test_kits.build
+    @page_title = "Create clinic"
   end
 
   def create
     @clinic = Clinic.new(clinic_params)
+    @page_title = "Create clinic"
 
     respond_to do |format|
       if params[:reviewed] == "false"
-        format.js { render 'clinics/preview_form' }
+        format.js { render 'clinics/preview_form', locals: {clinic_params: clinic_params} }
       else 
         if @clinic.valid?
           params["clinic_dates"].reject(&:blank?).each do |clinic_date|
@@ -50,7 +52,20 @@ class ClinicsController < ClinicManagementController
   end
 
   def edit
-    @page_title = "Edit Clinic"
+    @page_title = "View/Edit Clinic"
+    @title = "View/Edit clinic"
+  end
+
+  def edit_queue
+    @clinic = Clinic.find(params[:clinic_id])
+    @page_title = "Start Virtual Queue"
+  end
+
+  def update_queue
+    @clinic = Clinic.find(params[:clinic_id])
+    @clinic.active_queue_patients_count = params[:clinic][:active_queue_patients_count]
+    @clinic.save
+    redirect_to clinic_queued_patients_path(@clinic)
   end
 
   def activity
@@ -58,12 +73,19 @@ class ClinicsController < ClinicManagementController
     @page_title = "Clinic Activity Form"
   end
 
+  def report
+    @clinic = Clinic.find(params['clinic_id'])
+    @page_title = "Clinic Activity Report"
+  end
+
   def update
+    @page_title = "View/Edit clinic"
     respond_to do |format|
       if params[:reviewed] == "false"
-        format.js { render 'clinics/preview_form' }
+        format.js { render 'clinics/preview_form', locals: {clinic_params: clinic_params} }
       else 
         if @clinic.update(clinic_params)
+          finish_patients_in_queue
           format.html { redirect_to clinics_path(clinic_date: 'upcoming'), notice: "Successfully updated clinic!" }
         else
           format.html { render :new }
@@ -77,6 +99,12 @@ class ClinicsController < ClinicManagementController
   end
 
   private
+
+  def finish_patients_in_queue
+    return unless clinic_params[:clinic_events_attributes]
+    patients_to_finish = clinic_params[:clinic_events_attributes].values.select{|h| h[:category]}.collect{|h| h[:patient_id].to_i}
+    @clinic.appointments.where(patient_id: patients_to_finish, queue_state: 'at_clinic').each{|a| a.finish!}
+  end
 
   def sort_column
     Clinic.where(id: params[:id]).column_names.include?(params[:sort]) ? params[:sort] : nil
@@ -93,10 +121,10 @@ class ClinicsController < ClinicManagementController
   def clinic_params
     params.require(:clinic).permit(
       :clinic_status, :start_time, :end_time, :location, :public_or_private,
-      :address, :lead_vaccinator_name, :provider_enrollment_id,
+      :address, :lead_vaccinator_name, :social_distancing, :provider_enrollment_id,
       :clinic_date, :students_registered, :default_test_kit,
       :incidents_comments, :county, :venue_name, :zip, 
-      :city, :state, :appointment_frequency_minutes,
+      :city, :state, :appointment_frequency_minutes, :active_queue_patients_count,
       :appointment_slots, :contact_person, :contact_phone_number,
       :backup_contact_person, :backup_contact_phone_number,
       :start_hour_minute, :start_meridiem, :venue_type,

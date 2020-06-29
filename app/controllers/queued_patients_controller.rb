@@ -3,11 +3,12 @@ class QueuedPatientsController < ClinicManagementController
 
   def index
     @page_title = "Manage Virtual Queue"
+    auto_invite
+    @clinic.reload
     @patients = @clinic.patients
     @patient = Patient.new
-    
   end
-
+  
   def send_check_in_reminders
     @clinic.send_reminders
     redirect_to clinic_queued_patients_path(@clinic.id)
@@ -39,7 +40,11 @@ class QueuedPatientsController < ClinicManagementController
 
   private
 
+  def auto_invite
+    @clinic.appointments_to_invite.each(&:invite!) if @clinic.opened?
+  end
+
   def find_clinic
-    @clinic = Clinic.find(params[:clinic_id])
+    @clinic = Clinic.includes(appointments: :patient).find(params[:clinic_id])
   end
 end

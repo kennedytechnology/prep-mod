@@ -1,5 +1,5 @@
 <div class="flex mt-20">
-    <div class="mr-20 pt-32 w-1/2 pl-16"><%= image_tag 'prep-mod.png', style: "max-width: 400px;" %></div>
+    <div class="mr-20 pt-32 w-1/2 pl-16"><%= image_tag (ENV['SITE_LOGO'] || 'prep-mod.png'), style: "max-width: 400px;" %></div>
     <div class="w-3/12">
         <h2 class="main-title pb-6">Login</h2>
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
