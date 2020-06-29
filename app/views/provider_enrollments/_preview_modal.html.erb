@@ -25,10 +25,14 @@
                 <button type="button" data-action="click->review-form#submitInventoryForm" class="button-primary"> Submit </button>
             </span>
             <% else %>
-                <button class="button-action" type="button" data-action="click->review-form#closeModal"> Close </button>
+                <button class="button-cancel" type="button" data-action="click->review-form#closeModal"> Cancel </button>
                 <button class="button-action" type="button" value="need_additional_information" data-action="click->review-form#submitForm"> Need Additional Information </button>
                 <button class="button-action" type="button" value="denied" data-action="click->review-form#submitForm"> Deny </button>
-                <button class="button-action" type="button" value="accepted" data-action="click->review-form#submitForm"> Accept </button>                
+                <% if @provider_enrollment.status == "accepted"%>
+                    <button class="button-disabled" type="button" disabled="disabled"> Already Accepted </button>                
+                <% else %>
+                    <button class="button-action" type="button" value="accepted" data-action="click->review-form#submitForm"> Accept </button>
+                <% end%>               
             <% end %>
         </div>
     </div>
