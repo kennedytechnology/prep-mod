@@ -1,3 +1,18 @@
 <h1 class="main-title"> Employers </h1>
 <p> An accounting of employers engaged in the response by specialty, regions, 
     number of patients tested, vaccine inventory.</p>
+
+<div class="grid grid-cols-2 gap-4 mt-8">
+    <div class="pr-4 border-r border-gray-100 mr-4">
+        <%= pie_chart reports_employers_speciality_path, donut: true, title: "Response by specialty" %>
+    </div>
+    <div>
+        <%= pie_chart reports_employers_regions_path, donut: true, title: "Employers by regions" %>
+    </div>
+    <div class="pr-4 border-r border-gray-100 mr-4 mt-8">
+        <%= column_chart reports_employers_patients_tested_path, donut: true, title: "Number of patients tested" %>
+    </div>
+    <div class="mt-8">
+        <%= column_chart reports_employers_vacine_inventory_path, title: "Supply inventory"%>
+    </div>
+</div>

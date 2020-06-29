@@ -23,7 +23,20 @@ class ReportsController < ApplicationController
 
   def locations; end
 
-  def employers; end
+  def employers_speciality
+    render json:  ProviderEnrollment.group(:medical_specialty).count
+  end 
+
+  def employers_regions
+    render json: ProviderEnrollment.group(:practice_city).count
+  end
+
+  def employers_patients_tested
+  end
+
+  def employers_vacine_inventory
+    render json: SupplyInventory.group(:item_type).count
+  end
 
   def supply_inventories; end
 
