@@ -17,25 +17,21 @@ class ReportsController < ApplicationController
   def capacity; end 
 
   def uptake; end
-
   def uptake_by_zip_code
   end
 
   def locations; end
 
-  def employers_speciality
-    render json:  ProviderEnrollment.group(:medical_specialty).count
+  def employers_state
+    render json: Employer.group(:state).count
   end 
 
-  def employers_regions
-    render json: ProviderEnrollment.group(:practice_city).count
+  def employers_patients_tested_company_name
+    render json: Employer.joins(:patients).group(:company_name).count
   end
 
-  def employers_patients_tested
-  end
-
-  def employers_vacine_inventory
-    render json: SupplyInventory.group(:item_type).count
+  def employers_patients_tested_city
+    render json: Employer.joins(:patients).group(:city).count
   end
 
   def supply_inventories; end

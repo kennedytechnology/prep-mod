@@ -46,10 +46,9 @@ Rails.application.routes.draw do
     get "providers_by_specialty"
     get "uptake_by_zip_code"
     get "available_and_completed_appointments"
-    get "employers_speciality"
-    get "employers_regions"
-    get "employers_patients_tested"
-    get "employers_vacine_inventory"
+    get "employers_state"
+    get "employers_patients_tested_company_name"
+    get "employers_patients_tested_city"
   end
 
   resources :news_signups, only: [:new, :create]

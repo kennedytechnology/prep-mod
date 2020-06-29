@@ -4,15 +4,12 @@
 
 <div class="grid grid-cols-2 gap-4 mt-8">
     <div class="pr-4 border-r border-gray-100 mr-4">
-        <%= pie_chart reports_employers_speciality_path, donut: true, title: "Response by specialty" %>
+        <%= pie_chart reports_employers_state_path, donut: true, title: "Employers by state" %>
     </div>
     <div>
-        <%= pie_chart reports_employers_regions_path, donut: true, title: "Employers by regions" %>
+        <%= pie_chart reports_employers_patients_tested_company_name_path, donut: true, title: "Patients tested by company name" %>
     </div>
-    <div class="pr-4 border-r border-gray-100 mr-4 mt-8">
-        <%= column_chart reports_employers_patients_tested_path, donut: true, title: "Number of patients tested" %>
-    </div>
-    <div class="mt-8">
-        <%= column_chart reports_employers_vacine_inventory_path, title: "Supply inventory"%>
-    </div>
+</div>
+<div class="w-full mt-8">
+    <%= column_chart reports_employers_patients_tested_city_path, donut: true, title: "Patients tested by city" %>
 </div>
