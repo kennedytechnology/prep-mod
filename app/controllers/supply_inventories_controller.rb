@@ -11,9 +11,9 @@ class SupplyInventoriesController < InheritedResources::Base
     @supply_inventory = SupplyInventory.new(supply_inventory_params)
 
     if @supply_inventory.save
-      redirect_to supply_inventories_path, notice: "Successfully Added Inventory Item"
+      redirect_to supply_inventories_path, notice: "Successfully Added Inventory"
     else
-      redirect_back fallback_location: supply_inventories_path, alert: "Error!"
+      redirect_back fallback_location: supply_inventories_path, alert: "Error! #{@supply_inventory.errors.full_messages.join(", ")}"
     end
   end
 

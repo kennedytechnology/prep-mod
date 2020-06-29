@@ -169,6 +169,11 @@
                     <%= f.label :appointment_slots, "Appointment Slots", class: "block" %>
                     <%= f.select :appointment_slots, (1..50), {prompt: "Select"}, {class: "form-select w-full"} %>
                 </div>
+
+                <div>
+                    <%= f.label :social_distancing, "Social Distancing Maximum", class: "block" %>
+                    <%= f.select :social_distancing, (1..100), {prompt: "Select"}, {class: "form-select w-full"} %>
+                </div>
             </div>
         </div>
 

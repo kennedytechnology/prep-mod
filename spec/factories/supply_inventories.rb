@@ -5,7 +5,7 @@ FactoryBot.define do
     item_name { "Item Name" }
     manufacturer { INVENTORY_MANUFACTURERS.sample }
     lot_number { "x34RghY" }
-    expiration_date { Faker::Date.between(from: Date.today, to: 1.year.from_now) }
+    expiration_date { Faker::Date.between(from: Date.today, to: 30.days.from_now) }
     quantity { 1 }
     packaging { INVENTORY_PACKAGINGS.sample }
     source { INVENTORY_SOURCES.sample }
