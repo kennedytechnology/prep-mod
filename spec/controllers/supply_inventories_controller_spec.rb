@@ -16,11 +16,11 @@ RSpec.describe SupplyInventoriesController, type: :controller do
       it "create new supply inventory" do
         expect {
           post :create, params: { supply_inventory: {
-            received_at: Faker::Date.between(from: Date.today, to: 30.days.from_now),
+            received_at: Faker::Date.between(from: 30.days.ago, to: Date.today),
             item_type: INVENTORY_ITEM_TYPES.sample,
             manufacturer: INVENTORY_MANUFACTURERS.sample,
             lot_number: Faker::Code.asin,
-            expiration_date: Faker::Date.between(from: 30.days.ago, to: Date.today),
+            expiration_date: Faker::Date.between(from: Date.today, to: 30.days.from_now),
             quantity: Faker::Number.between(from: 100, to: 200),
             packaging: INVENTORY_PACKAGINGS.sample,
             source: INVENTORY_SOURCES.sample,
