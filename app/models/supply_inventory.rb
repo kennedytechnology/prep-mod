@@ -7,6 +7,17 @@ class SupplyInventory < ApplicationRecord
   
   validates :quantity, numericality: {only_integer: true, greater_than: 0, message: "Only number greater than 0 allowed"}
 
+  validate :received_at_date_cannot_be_in_the_future
+  validate :expiration_date_cannot_be_in_the_past
+
+  def received_at_date_cannot_be_in_the_future
+    errors.add(:base, "Received date is invalid") if received_at > Date.tomorrow
+  end
+
+  def expiration_date_cannot_be_in_the_past
+    errors.add(:expiration_date, "is invalid") if expiration_date < Date.yesterday
+  end
+
   def quantity_lost_sum
     supply_inventory_events.sum(:quantity_lost)
   end
