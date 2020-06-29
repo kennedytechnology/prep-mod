@@ -45,6 +45,22 @@ class ReportsController < ApplicationController
 
   def locations; end
 
+  def appointments_by_county
+    render json: Patient.joins(:appointments).group(:county).count
+  end 
+
+  def available_appointments_by_county
+    chart_data = Patient.joins(:appointments).where("appointments.queue_state = ?", "not_checked_in").group(:county).count
+    render json: [{ data: parse_chart_data(chart_data),
+                    library: column_chart_background_colors }].chart_json
+  end 
+
+  def completed_appointments_by_county
+    chart_data = Patient.joins(:appointments).where("appointments.queue_state = ?", "done").group(:county).count
+    render json: [{ data: parse_chart_data(chart_data),
+                    library: column_chart_background_colors }].chart_json
+  end 
+
   def employers; end
 
   def supply_inventories; end
