@@ -7,30 +7,58 @@
     <%= pie_chart reports_appointments_by_county_path, donut: true, title: "Total appointments by county" %>
 </div>
 
-<div class="p-4 border border-gray-50 shadow rounded-lg">
-    <%= column_chart reports_available_and_completed_appointments_by_county_path, title: "Completed/Available by county"
-            # ,
-            # height: "200px",
-            # discrete: true,
-            # legend: false,
-            # library: {
-            #     scales: {
-            #         xAxes: [{
-            #             gridLines: {
-            #                 drawOnChartArea: true,
-            #                 color: "#f4f5f7"
-            #             }
-            #         }],
-            #         yAxes: [{
-            #             gridLines: {
-            #                 drawOnChartArea: true,
-            #                 color: "#f4f5f7"
-            #             }
-            #         }]
-            #     }
-            # },
-            # dataset: { 
-            #     barPercentage: 0.6,
-            # }
+<div class="grid grid-cols-1 md:grid-cols-2 md:gap-4">
+    <div class="p-4 border border-gray-50 rounded-lg">
+        <%= column_chart reports_available_appointments_by_county_path, title: "Available appointments by county",
+            height: "200px",
+            discrete: true,
+            legend: false,
+            library: {
+                scales: {
+                    xAxes: [{
+                        gridLines: {
+                            drawOnChartArea: true,
+                            color: "#f4f5f7"
+                        }
+                    }],
+                    yAxes: [{
+                        gridLines: {
+                            drawOnChartArea: true,
+                            color: "#f4f5f7"
+                        }
+                    }]
+                }
+            },
+            dataset: { 
+                barPercentage: 0.6,
+            }
         %>
+    </div>
+
+    <div class="p-4 border border-gray-50 rounded-lg">
+        <%= column_chart reports_completed_appointments_by_county_path, title: "Completed appointments by county",
+            height: "200px",
+            discrete: true,
+            legend: false,
+            library: {
+                scales: {
+                    xAxes: [{
+                        gridLines: {
+                            drawOnChartArea: true,
+                            color: "#f4f5f7"
+                        }
+                    }],
+                    yAxes: [{
+                        gridLines: {
+                            drawOnChartArea: true,
+                            color: "#f4f5f7"
+                        }
+                    }]
+                }
+            },
+            dataset: { 
+                barPercentage: 0.6,
+            }
+        %>
+    </div>
 </div>

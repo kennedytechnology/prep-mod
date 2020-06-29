@@ -49,15 +49,16 @@ class ReportsController < ApplicationController
     render json: Patient.joins(:appointments).group(:county).count
   end 
 
-  def available_and_completed_appointments_by_county
-    # render json: Patient.joins(:appointments).where("appointments.queue_state = ? OR appointments.queue_state = ? ", *["not_checked_in", "done"]).group("appointments.queue_state").count
-    # render json: Patient.joins(:appointments).where("queue_state = ? OR queue_state = ? ", *["not_checked_in", "done"]).group(:county).group("appointments.queue_state").count
-    
+  def available_appointments_by_county
+    chart_data = Patient.joins(:appointments).where("appointments.queue_state = ?", "not_checked_in").group(:county).count
+    render json: [{ data: parse_chart_data(chart_data),
+                    library: column_chart_background_colors }].chart_json
+  end 
 
-    # Patient.where(county: c).joins(:appointments).where("appointments.queue_state = ? OR appointments.queue_state = ? ", *["not_checked_in", "done"]).group("appointments.queue_state").count
-    
-    
-    render json: Patient.joins(:appointments).where("appointments.queue_state = ? OR appointments.queue_state = ? ", *["not_checked_in", "done"]).group(:county).group("appointments.queue_state").count.chart_json
+  def completed_appointments_by_county
+    chart_data = Patient.joins(:appointments).where("appointments.queue_state = ?", "done").group(:county).count
+    render json: [{ data: parse_chart_data(chart_data),
+                    library: column_chart_background_colors }].chart_json
   end 
 
   def employers; end

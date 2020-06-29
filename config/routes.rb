@@ -46,6 +46,8 @@ Rails.application.routes.draw do
     get "providers_by_specialty"
     get "uptake_by_zip_code"
     get "available_and_completed_appointments"
+    get "available_appointments_by_county"
+    get "completed_appointments_by_county"
     get "snapshot_tested"
     get "supply_inventories_by_county"
     get "supply_inventories_by_venue_name"
