@@ -14,6 +14,10 @@
       <% end %>
     </div>
 
+    <h3 class="text-2xl">Download News and Notifications Signups</h3>
+    <%= link_to "CSV Download", news_signups_path(format: "csv"), class: "button-primary w-2/12 m-8" %>
+
+    <h3 class="text-2xl mb-4">Download Clinic Results</h3>
     <%= form_with url: {format: :csv}, method: :get, data: {controller: "upload-records", remote: false} do %>
       <div class="flex flex-row w-full items-center justify-start">
         <div class="inline w-1/6 mr-2">

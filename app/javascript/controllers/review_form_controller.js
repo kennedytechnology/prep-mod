@@ -32,10 +32,22 @@ export default class extends Controller {
 
   submitForm(event) {
     let reviewedField = document.getElementById("reviewed_form_hidden_tag");
-    let statusField = document.getElementById("provider_enrollment_status");
+
+    reviewedField.value = true;
+
+    this.formTarget.submit();
+    this.closeModal();
+  }
+
+  submitInventoryForm(event) {
+    let reviewedField = document.getElementById("reviewed_form_hidden_tag"),
+        statusField = document.getElementById("provider_enrollment_status");
+
     reviewedField.value = true;
     statusField.value = event.currentTarget.value || "pending";
+
     this.closeModal();
+
     if (statusField.value == "denied") {
       this.openDeniedModal();
     } else {

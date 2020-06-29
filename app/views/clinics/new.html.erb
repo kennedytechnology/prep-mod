@@ -1,4 +1,4 @@
-<h1 class="main-title"> Create Clinic </h1>
+<h1 class="main-title"> <%= @page_title %> </h1>
 
 <% if @clinic.errors.any? %>
   <div id="error_explanation" class="p-4 border-2 bg-red-100 border-red-500 mb-4"> 
@@ -18,12 +18,12 @@
             <p class="title">Is clinic public or private? <span class="field-required">*</span> </p>
             <div class="w-3/12 radio-buttons-container">
                 <div>
-                    <%= f.radio_button :public_or_private, "public", class: "form-radio" %>
-                    <%= f.label :public_or_private, "Public", value: "public" %>
+                    <%= f.radio_button :public_or_private, "Public", class: "form-radio" %>
+                    <%= f.label :public_or_private, "Public", for: "clinic_public_or_private_public" %>
                 </div>
                 <div>
-                    <%= f.radio_button :public_or_private, "private", class: "form-radio" %>
-                    <%= f.label :public_or_private, "Private", value: "private" %>
+                    <%= f.radio_button :public_or_private, "Private", class: "form-radio" %>
+                    <%= f.label :public_or_private, "Private", for: "clinic_public_or_private_private" %>
                 </div>
             </div>
         </div>
@@ -136,31 +136,29 @@
         </div>
 
         <div class="field-fullwidth">
-            <h1 class="title"> Appointments Information </h1>
+            <h1 class="title"> Appointment Information </h1>
             <p class="label"> Appointments available <span class="field-required">*</span> </p>
             <div class="w-2/4 radio-buttons-container mb-4">
                 <div>
-                    <%= f.radio_button :appointments_available, "Yes, required", id: "yes_required", class: "form-radio" %>
-                    <%= f.label :appointments_available, value: "yes_required", for: "yes_required" do %>
-                    <span> Yes, required </span>
-                    <% end %>
+                    <%= f.radio_button :appointments_available, "yes_required", class: "form-radio" %>
+                    <%= f.label :appointments_available, "Yes, required", for: "clinic_appointments_available_yes_required" %>
                 </div>
                 
                 <div>
-                    <%= f.radio_button :appointments_available, "Yes, optional", id: "yes_optional", class: "form-radio" %>
-                    <%= f.label :appointments_available, value: "yes_optional", for: "yes_optional" do %>
-                    <span> Yes, optional </span>
-                    <% end %>
+                    <%= f.radio_button :appointments_available, "yes_optional", class: "form-radio" %>
+                    <%= f.label :appointments_available, "Yes, optional", for: "clinic_appointments_available_yes_optional" %>
                 </div>
 
                 <div>
-                    <%= f.radio_button :appointments_available, "No (Walk-In)", id: "no_walk_in", class: "form-radio" %>
-                    <%= f.label :appointments_available, value: "no_walk_in", for: "no_walk_in" do %>
-                    <span> No (Walk-In) </span>
-                    <% end %>
+                    <%= f.radio_button :appointments_available, "no_walk_in", class: "form-radio" %>
+                    <%= f.label :appointments_available, "No (Walk-In)", for: "clinic_appointments_available_no_walk_in" %>
+                </div>
+                <div>
+                    <%= f.label :active_queue_patients_count, "Social Distancing Capacity" %>
+                    <%= f.select :active_queue_patients_count, (0..100).to_a %>
                 </div>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <%= f.label :appointment_frequency_minutes, "Appointment Frequency: Every", class: "block" %>
@@ -170,6 +168,11 @@
                 <div>
                     <%= f.label :appointment_slots, "Appointment Slots", class: "block" %>
                     <%= f.select :appointment_slots, (1..50), {prompt: "Select"}, {class: "form-select w-full"} %>
+                </div>
+
+                <div>
+                    <%= f.label :social_distancing, "Social Distancing Maximum", class: "block" %>
+                    <%= f.select :social_distancing, (1..100), {prompt: "Select"}, {class: "form-select w-full"} %>
                 </div>
             </div>
         </div>

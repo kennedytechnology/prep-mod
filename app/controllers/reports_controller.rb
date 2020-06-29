@@ -1,4 +1,5 @@
 class ReportsController < ApplicationController
+  include ReportHelper
   layout "clinic_management"
   before_action :authenticate_user!
 
@@ -12,9 +13,30 @@ class ReportsController < ApplicationController
     render json: ProviderEnrollment.group(:medical_specialty).count
   end
 
-  def snapshot; end
+  def snapshot_tested
+    render json: ClinicEvent.where(outcome: ["Positive", "Negative"]).group(:outcome).count
+  end
 
-  def capacity; end 
+  def capacity_available_testing_appointments
+    render json:  Clinic.joins(:appointments).all.group(:venue_name).count
+  end 
+
+  def capacity_scheduled_appointments
+    render json: Clinic.joins(:appointments).where("appointments.queue_state = ?", "not_checked_in").group(:venue_name).count
+  end
+
+  def capacity_available_testing_appointments_by_county
+    chart_data = Clinic.joins(:appointments).all.group(:county).count
+    render json: [{ data: parse_chart_data(chart_data),
+                    library: column_chart_background_colors }].chart_json
+  end
+
+  def capacity_scheduled_appointments_by_county
+    chart_data = Clinic.joins(:appointments).where("appointments.queue_state = ?", "not_checked_in").group(:county).count
+    render json: [{ data: parse_chart_data(chart_data),
+                    library: column_chart_background_colors }].chart_json
+  end
+
 
   def uptake; end
   def uptake_by_zip_code
@@ -33,8 +55,36 @@ class ReportsController < ApplicationController
   def employers_patients_tested_city
     render json: Employer.joins(:patients).group(:city).count
   end
+  
+  def appointments_by_county
+    render json: Patient.joins(:appointments).group(:county).count
+  end 
+
+  def available_appointments_by_county
+    chart_data = Patient.joins(:appointments).where("appointments.queue_state = ?", "not_checked_in").group(:county).count
+    render json: [{ data: parse_chart_data(chart_data),
+                    library: column_chart_background_colors }].chart_json
+  end 
+
+  def completed_appointments_by_county
+    chart_data = Patient.joins(:appointments).where("appointments.queue_state = ?", "done").group(:county).count
+    render json: [{ data: parse_chart_data(chart_data),
+                    library: column_chart_background_colors }].chart_json
+  end 
 
   def supply_inventories; end
+
+  def supply_inventories_by_county
+    chart_data = SupplyInventory.group(:county).count
+    render json: [{ data: parse_chart_data(chart_data),
+                    library: column_chart_background_colors }].chart_json
+  end
+
+  def supply_inventories_by_venue_name
+    chart_data = SupplyInventory.group(:venue_name).count
+    render json: [{ data: parse_chart_data(chart_data),
+                    library: column_chart_background_colors }].chart_json
+  end
 
   def customized; end
 

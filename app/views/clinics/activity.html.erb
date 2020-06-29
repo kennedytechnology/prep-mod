@@ -40,20 +40,15 @@
                     <tbody>
                     <% @clinic.patients.each do |patient| %>
                       <%= f.fields_for :clinic_events, patient.event_for_clinic(@clinic) do |event_form| %>
-                        <%= event_form.hidden_field :patient_id %>
-                        
-
-                        
                         <tr data-target="clinic-activity-patients.searchableRow" data-event-category="<%= event_form.object.category %>" data-search-content="<%= [patient.first_name.downcase, patient.last_name.downcase].join(" ") %>" data-patient-id="<%= patient.id %>">
-                          
                           <td>
+                          <%= event_form.hidden_field :patient_id %>
                           <%= render partial: '/clinics/activity/screened_details', layout: "clinics/activity/clinic_event_modal", locals: {patient: patient, event_form: event_form, category_selection: 'Screened'} %>
                           <%= render partial: '/clinics/activity/tested_details', layout: "clinics/activity/clinic_event_modal", locals: {patient: patient, event_form: event_form, category_selection: 'Tested'} %>
                           <%= render partial: '/clinics/activity/remark_details', layout: "clinics/activity/clinic_event_modal", locals: {patient: patient, event_form: event_form, category_selection: 'Remark'} %>
                             <%= link_to patient.first_name + ' ' + patient.last_name, patient %> <br/>
                           </td>
                           <td><%= patient.date_of_birth.try(:strftime, "%D") %></td>
-                          
                           <td><%= event_form.radio_button :category, "Screened", data: {action: "clinic-activity-patients#showModal", selection: "Screened"}, class: "form-radio" %></td>
                           <td><%= event_form.radio_button :category, "Tested", data: {action: "clinic-activity-patients#showModal", selection: "Tested"}, class: "form-radio" %></td>
                           <td><%= event_form.check_box :safety_kit_received, class: "form-checkbox" %></td>

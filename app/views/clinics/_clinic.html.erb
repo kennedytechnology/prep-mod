@@ -1,7 +1,9 @@
 <tr data-target="clinic-activity-patients.searchableRow" data-search-content="<%= clinic.venue_name.try(:downcase) %>">
-    <td class="w-2/12"> <%= clinic.clinic_date.to_datetime.strftime("%m-%d-%Y") %> </td>
-    <td class="w-2/12"> <%= clinic.county %> </td>
-    <td class="w-4/12"> <%= clinic.venue_name %> </td>
+    <td class="w-1/12"> <%= clinic.clinic_date.to_datetime.strftime("%m-%d-%Y") %> </td>
+    <td class="w-1/12"> <%= clinic.county %> </td>
+    <td class="w-2/12"> <%= clinic.venue_name %> </td>
+    <td class="w-1/12"> <%= clinic.appointments.size %> </td>
+    <% if params[:clinic_display] == "virtual" %><td class="w-1/12"> <%= clinic.active_queue_patients_count %> </td><% end %>
     <% unless params[:clinic_display] == "virtual" %>
     <td class="flex flex-wrap text-right">
         <%= link_to clinic_patients_path(clinic_id: clinic.id), class: "clinic-action hover:text-brand-blue-600 mr-4 mb-2" do %>
@@ -10,7 +12,7 @@
         <% end %>
         <%= link_to edit_clinic_path(id: clinic.id), class: "clinic-action hover:text-brand-blue-600 mr-4 mb-2" do %>
             <span class="text-brand-blue-600"> &raquo; </span>
-            <span> Edit Clinic </span>
+            <span> View/Edit Clinic </span>
         <% end %>
         <%= link_to clinic_activity_path(clinic_id: clinic.id), class: "clinic-action hover:text-brand-blue-600 mr-4 mb-2" do %>
             <span class="text-brand-blue-600"> &raquo; </span>
@@ -22,12 +24,12 @@
         <% end %>
     </td>
     <% end %>
-    <td>
+    <td class="w-1/12"> 
         <% unless params[:clinic_display] == "virtual" %>
-            <button class="button-cancel" data-cancelid="<%= clinic.id %>" 
+            <button class="button-primary" data-cancelid="<%= clinic.id %>" 
                 data-action="click->clinic-activity-patients#onShowHideCancelModal">Cancel</button>
         <% else %>
-            <%= link_to "Start", clinic_queued_patients_path(clinic_id: clinic.id), class: "button-cancel" %>
+            <%= link_to "Start", clinic_edit_queue_path(clinic.id), class: "button-primary" %>
         <% end %>
     </td>
 </tr>

@@ -1,64 +1,71 @@
 <div class="px-4 my-4 md:my-6 lg:my-8">
     <div class="sm:flex sm:flex-wrap sm:justify-center sm:items-stretch -mx-4">
-        <div class="w-full sm:w-1/2 md:w-1/3 md:w-1/3 lg:w-1/5 px-4 mb-4 md:mb-6  lg:mb-10">
-            <%= link_to clinics_path(clinic_date: 'upcoming'), class: "p-6 text-center flex flex-col justify-center items-center border-2 hover:bg-gray-50 min-h-full" do %>
-                <h1 class="text-gray-600 pb-1 border-b w-full mb-6 flex flex-col justify-center items-center" style="min-height: 55px;"> Manage Clinics and Users </h1>
-                <%= image_tag 'icons/users.png', class: "w-3/12 sm:w-1/2 h-auto m-auto" %>
-            <% end %>
-        </div>
-        <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 px-4 mb-4 md:mb-6  lg:mb-10">
-            <%= link_to clinics_path(clinic_display: "virtual"), class: "p-6 text-center flex flex-col justify-center items-center border-2 hover:bg-gray-50 min-h-full" do %>
-                <h1 class="text-gray-600 pb-1 border-b w-full mb-6 flex flex-col justify-center items-center" style="min-height: 55px;"> Start Clinic <br /> <span class="font-bold">Virtual Queue</span> </h1>
-                <%= image_tag 'icons/virtual_queue.png', class: "w-3/12 sm:w-1/2 h-auto m-auto" %>
-            <% end %>
-        </div>
-        <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 px-4 mb-4 md:mb-6  lg:mb-10">
-            <%= link_to clinics_path, class: "p-6 text-center flex flex-col justify-center items-center border-2 hover:bg-gray-50 min-h-full" do %>
-                <h1 class="text-gray-600 pb-1 border-b w-full mb-6 flex flex-col justify-center items-center" style="min-height: 55px;"> Start Clinic <br /> <span class="font-bold">Standard </span> </h1>
-                <%= image_tag 'icons/standard_clinic.png', class: "w-2/12 sm:w-1/3 h-auto m-auto" %>
-            <% end %>
-        </div>
-        <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 px-4 mb-4 md:mb-6  lg:mb-10">
-            <%= link_to patients_path, class: "p-6 text-center flex flex-col justify-center items-center border-2 hover:bg-gray-50 min-h-full" do %>
-                <h1 class="text-gray-600 pb-1 border-b w-full mb-6 flex flex-col justify-center items-center" style="min-height: 55px;"> Find a Record </h1>
-                <%= image_tag 'icons/find_record.png', class: "w-3/12 sm:w-1/2 h-auto m-auto" %>
-            <% end %>
-        </div>
-        <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 px-4 mb-4 md:mb-6  lg:mb-10">
-            <%= link_to new_patient_path, class: "p-6 text-center flex flex-col justify-center items-center border-2 hover:bg-gray-50 min-h-full" do %>
-                <h1 class="text-gray-600 pb-1 border-b w-full mb-6 flex flex-col justify-center items-center" style="min-height: 55px;"> Refer Patient for Services </h1>
-                <%= image_tag 'icons/export_refer.png', class: "w-3/12 sm:w-1/2 h-auto m-auto" %>
-            <% end %>
-        </div>
-        <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 px-4 mb-4 md:mb-6  lg:mb-10">
-            <%= link_to provider_enrollments_path, class: "p-6 text-center flex flex-col justify-center items-center border-2 hover:bg-gray-50 min-h-full" do %>
-                <h1 class="text-gray-600 pb-1 border-b w-full mb-6 flex flex-col justify-center items-center" style="min-height: 55px;"> Enroll Provider or Employer </h1>
-                <%= image_tag 'icons/enroll_provider.png', class: "w-3/12 sm:w-1/2 h-auto m-auto" %>
-            <% end %>
-        </div>
-        <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 px-4 mb-4 md:mb-6  lg:mb-10">
-            <%= link_to supply_inventories_path, class: "p-6 text-center flex flex-col justify-center items-center border-2 hover:bg-gray-50 min-h-full" do %>
-                <h1 class="text-gray-600 pb-1 border-b w-full mb-6 flex flex-col justify-center items-center" style="min-height: 55px;"> Inventory Management </h1>
-                <%= image_tag 'icons/inventory_management.png', class: "w-2/12 sm:w-1/3 h-auto m-auto" %>
-            <% end %>
-        </div>
-        <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 px-4 mb-4 md:mb-6  lg:mb-10">
-            <%= link_to pages_reports_menu_path, class: "p-6 text-center flex flex-col justify-center items-start border-2 hover:bg-gray-50 min-h-full" do %>
-                <h1 class="text-gray-600 pb-1 border-b w-full mb-6 flex flex-col justify-center items-center" style="min-height: 55px;"> Generate Reports </h1>
-                <%= image_tag 'icons/customized_report.png', class: "w-2/12 sm:w-1/3 h-auto m-auto" %>
-            <% end %>
-        </div>
-        <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 px-4 mb-4 md:mb-6  lg:mb-10">
-            <%= link_to new_message_path, class: "p-6 text-center flex flex-col justify-center items-start border-2 hover:bg-gray-50 min-h-full" do %>
-                <h1 class="text-gray-600 pb-1 border-b w-full mb-6 flex flex-col justify-center items-center" style="min-height: 55px;"> Send a Message </h1>
-                <%= image_tag 'icons/message.png', class: "w-3/12 sm:w-1/2 h-auto m-auto" %>
-            <% end %>
-        </div>
-        <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 px-4 mb-4 md:mb-6  lg:mb-10">
-            <%= link_to destroy_user_session_path, method: :delete, class: "p-6 text-center flex flex-col justify-center items-center border-2 hover:bg-gray-50 min-h-full" do %>
-                <h1 class="text-gray-600 pb-1 border-b w-full mb-6 flex flex-col justify-center items-center" style="min-height: 55px;"> Logout </h1>
-                <%= image_tag 'icons/logout.png', class: "w-3/12 sm:w-1/3 h-auto m-auto" %>
-            <% end %>
-        </div>
+        <%= render partial: 'menu_button',
+            locals: {
+                url: clinics_path(clinic_date: 'upcoming'),
+                name: "Manage Clinics and Users",
+                image: 'users' } unless ENV['OPEN_MARYLAND']
+        %>
+        <%= render partial: 'menu_button',
+            locals: {
+                url: clinics_path(clinic_display: "virtual"),
+                name: "Start Clinic",
+                subtitle: "Virtual Queue",
+                image: 'virtual_queue' } unless ENV['OPEN_MARYLAND']
+        %>
+        <%= render partial: 'menu_button',
+            locals: {
+                url: clinics_path,
+                name: "Start Clinic",
+                subtitle: "Standard",
+                image: 'standard_clinic' } unless ENV['OPEN_MARYLAND']
+        %>
+        <%= render partial: 'menu_button',
+            locals: {
+                url: patients_path,
+                name: "Find a Record",
+                image: 'find_record' } 
+        %>
+
+        <%= render partial: 'menu_button',
+            locals: {
+                url: new_patient_path,
+                name: "Refer Patient for Services",
+                image: 'export_refer' } 
+        %>
+
+        <%= render partial: 'menu_button',
+            locals: {
+                url: provider_enrollments_path,
+                name: "Enroll Provider or Business",
+                image: 'enroll_provider' } unless ENV['OPEN_MARYLAND']
+        %>
+
+        <%= render partial: 'menu_button',
+            locals: {
+                url: supply_inventories_path,
+                name: "Inventory Management",
+                image: 'inventory_management' } 
+        %>
+
+        <%= render partial: 'menu_button',
+            locals: {
+                url: pages_reports_menu_path,
+                name: "Generate Reports",
+                image: 'customized_report' } 
+        %>
+        <%= render partial: 'menu_button',
+            locals: {
+                url: new_message_path,
+                name: "Send a Message",
+                image: 'message' } 
+        %>
+
+        <%= render partial: 'menu_button',
+            locals: {
+                url: destroy_user_session_path,
+                name: "Logout",
+                image: 'logout' } 
+        %>
     </div>
 </div>

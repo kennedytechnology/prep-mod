@@ -36,7 +36,7 @@ class Clinic < ApplicationRecord
 
   aasm column: :open_state do
     state :upcoming, initial: :true
-    state :opened_for_check_in, :opened, :closed
+    state :opened_for_check_in, :opened, :opened_automation_paused, :closed
 
     event :open_for_check_in do
       transitions from: :upcoming, to: :opened_for_check_in
@@ -44,6 +44,14 @@ class Clinic < ApplicationRecord
 
     event :open do
       transitions from: :opened_for_check_in, to: :opened
+    end
+
+    event :pause_automation do
+      transitions from: :opened, to: :opened_automation_paused
+    end
+
+    event :resume_automation do
+      transitions from: :opened_automation_paused, to: :opened
     end
 
     event :close do
@@ -68,6 +76,22 @@ class Clinic < ApplicationRecord
     appointments.each do |a|
       RemindQueuedPatientJob.perform_later a if a.patient.notify_via_sms?
       PatientNotifierMailer.with(appointment: a).check_in_reminder.deliver_later if a.patient.notify_via_email?
+    end
+  end
+
+  def patients_at_clinic_count
+    appointments.where(queue_state: ["invited", "at_clinic"]).count
+  end
+
+  def patient_capacity_available
+    active_queue_patients_count.to_i - patients_at_clinic_count
+  end
+
+  def appointments_to_invite
+    if patient_capacity_available > 0
+      appointments.where(queue_state: "checked_in").take(patient_capacity_available)
+    else
+      []
     end
   end
 
@@ -118,7 +142,7 @@ class Clinic < ApplicationRecord
   end
 
   def can_check_in?
-    opened_for_check_in? || opened?
+    opened_for_check_in? || opened? || opened_automation_paused?
   end
 
   def search_string

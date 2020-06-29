@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_18_130525) do
+ActiveRecord::Schema.define(version: 2020_06_28_224651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2020_06_18_130525) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "queue_state"
+    t.boolean "on_waiting_list"
     t.index ["clinic_id"], name: "index_appointments_on_clinic_id"
     t.index ["patient_id"], name: "index_appointments_on_patient_id"
   end
@@ -303,6 +304,7 @@ ActiveRecord::Schema.define(version: 2020_06_18_130525) do
 
   create_table "news_signups", force: :cascade do |t|
     t.string "first_name"
+    t.string "last_name"
     t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -310,7 +312,7 @@ ActiveRecord::Schema.define(version: 2020_06_18_130525) do
     t.date "date_of_birth"
     t.string "topics"
     t.string "occupation"
-    t.string "last_name"
+    t.boolean "chronic_health_condition"
   end
 
   create_table "patient_family_members", force: :cascade do |t|

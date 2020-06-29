@@ -1,3 +1,9 @@
 <h1 class="main-title"> Snapshot </h1>
 <p> A quick look at metrics of interest by demographics, region, or county: 
     number of people tested, positive results, negative results, evidence of immunity. </p>
+
+    <div class="mt-8">
+    <div>
+        <%= column_chart reports_snapshot_tested_path, donut: true, title: "Total number of people tested" %>
+    </div>
+</div>

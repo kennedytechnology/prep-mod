@@ -43,7 +43,7 @@ class Appointment < ApplicationRecord
   end
 
   def clinic_is_open?
-    clinic.opened?
+    clinic.opened? || clinic.opened_automation_paused?
   end
 
   def clinic_can_check_in?

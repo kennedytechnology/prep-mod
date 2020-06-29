@@ -9,13 +9,14 @@
 puts 'Seeding...'
 
 NAMED_PLACE_COUNT = 50
-CLINIC_COUNT = 5
+CLINIC_COUNT = 10
 USER_COUNT = 100
-PATIENT_COUNT = CLINIC_COUNT * 20
+PATIENT_COUNT = CLINIC_COUNT * 50
 CLINIC_EVENTS_PER_PATIENT = 3
 CLINIC_STAFF_PER_CLINIC = 3
 SUPPLY_INVENTORY_PER_CLINIC = 10
 TEST_KITS_PER_CLINIC = 3
+NEWS_SIGNUP_COUNT = 100
 VENUE_STATES = ["MD", "NY", "PA", "DC", "KY", "VT", "CA", "CO", "AL"]
 
 def age(birthday, today)
@@ -31,12 +32,15 @@ NAMED_PLACE_COUNT.times.each do |i|
   )
 end
 
-["Screening", "Testing", "Medication", "Safety Kit Distribution", "Other"].each do |name|
+["Testing", "Vaccination", "Screening", "Anti-Viral Distribution"].each do |name|
   ClinicService.create!(name: name, category: "clinics")
+end
+
+["Screening", "Testing", "Medication", "Safety Kit Distribution", "Other"].each do |name|
   ClinicService.create!(name: name, category: "provider_enrollments")
 end
 
-["Screened", "Tested - PCR", "Tested - Serology", "Temperature Check", "Safety Kit", "Other"].each do |name|
+["Tested - PCR", "Tested - Serology", "Temperature Check", "Vaccination", "Other"].each do |name|
   ClinicService.create!(name: name, category: "clinic_events")
 end
 
@@ -68,7 +72,7 @@ puts "Creating providers..."
 10.times do |i|
   ProviderEnrollment.create!(
     first_name: Faker::Name.first_name,
-    last_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
     middle_initial: Faker::Name.middle_name,
     professional_license: PROFESSIONAL_LICENSES.sample,
     title: "Title #{i}",
@@ -168,7 +172,8 @@ CLINIC_COUNT.times.each do |i|
     location: "Nowhere",
     appointment_frequency_minutes: [10, 15, 30, 60].sample,
     appointment_slots: (2..10).to_a.sample,
-    appointments_available: 'required',
+    appointments_available: ["yes_required", "yes_optional", "no_walk_in"].sample,
+    active_queue_patients_count: rand(6),
     venue_type: VENUE_TYPES.sample,
     county: COUNTIES.sample
   )
@@ -212,13 +217,24 @@ PATIENT_COUNT.times.each do |i|
     user_id: Faker::IDNumber.unique,
     email_confirmation: patientEmail,
     notify_via_sms: Faker::Boolean.boolean,
-    notify_via_email: Faker::Boolean.boolean
+    notify_via_email: Faker::Boolean.boolean,
+    consent_date: Faker::Date.between(from: 6.months.ago, to: 1.day.ago),
+    employers: Employer.all.sample(rand(3))
   )
-  Appointment.create!(
-    patient: patient,
-    clinic: clinic,
-    appointment_at: clinic.appointment_times.sample
-  )
+  
+  if rand(3) == 0
+    Appointment.create!(
+      patient: patient,
+      clinic: clinic,
+      on_waiting_list: true
+    )
+  else
+    Appointment.create!(
+      patient: patient,
+      clinic: clinic,
+      appointment_at: clinic.appointment_times.sample
+    )
+  end
 end
 
 puts "Creating clinic events..."
@@ -247,9 +263,8 @@ end
   SUPPLY_INVENTORY_PER_CLINIC.times do
     sp = SupplyInventory.create!(
       # clinic: clinic,
-      received_at: Faker::Date.between(from: 30.days.ago, to:Date.today),
+      received_at: Faker::Date.between(from: 30.days.ago, to: Date.today),
       item_type: INVENTORY_ITEM_TYPES.sample,
-      item_name: Faker::Lorem.words(number: 2).collect(&:capitalize).join(" "),
       manufacturer: INVENTORY_MANUFACTURERS.sample,
       lot_number: Faker::Code.asin,
       expiration_date: Faker::Date.between(from: Date.today, to: 30.days.from_now),
@@ -258,7 +273,7 @@ end
       source: INVENTORY_SOURCES.sample,
       product_name: Faker::Company.name,
       county: COUNTIES.sample,
-      venue_name: Clinic.pluck(:venue_name).sample,
+      venue_name: Faker::University.unique.name,
     )
 
     Faker::Number.between(from: 1, to: 5).times do 
@@ -289,6 +304,19 @@ Clinic.all.each do |clinic|
   end
   clinic.reload
   clinic.test_kits.sample.update_attribute(:is_default, true)
+end
+
+NEWS_SIGNUP_COUNT.times.each do |i|
+  NewsSignup.create!(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    email: Faker::Internet.email,
+    zip_code: Faker::Address.zip_code,
+    occupation: PATIENT_OCCUPATIONS.sample,
+    topics: NEWS_TOPICS.sample(2),
+    date_of_birth: Faker::Date.birthday,
+    chronic_health_condition: [true, false].sample
+  )
 end
 
 ProviderDenialMessage.create!(

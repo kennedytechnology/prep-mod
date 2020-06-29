@@ -6,6 +6,12 @@ class PatientsController < ApplicationController
 
   def index
     @page_title = "Patient Record Search"
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @clinic.patients.to_csv, filename: "news_signups-#{Date.today}.csv" }
+    end
+
   end
 
   def new
@@ -31,7 +37,7 @@ class PatientsController < ApplicationController
 
   def show
     @patient = Patient.find(params[:id]).decorate
-    @patient_clinic_events = @patient.clinic_events.order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 50)
+    @patient_clinic_events = @patient.clinic_events.order(event_date: :desc)
     @clinic = Clinic.find(params[:clinic_id]) if params[:clinic_id]
     respond_to do |format|
       format.html
@@ -87,8 +93,9 @@ class PatientsController < ApplicationController
 
     case
     when params[:clinic_id]
-      @clinic = Clinic.find(params[:clinic_id])
-      @patients = @clinic.patients.order(params[:sort]).paginate(page: params[:page], per_page: 50)
+      @clinic = Clinic.includes(appointments: :patient).find(params[:clinic_id])
+      
+      @patients = @clinic.patients.order(params.dig(:q, :s)).paginate(page: params[:page], per_page: 250)
     when params[:direction]
       @patients = Patient.order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 50)
     when @q.result

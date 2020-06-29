@@ -1,1 +1,1 @@
-document.getElementById("modalContent").innerHTML = "<%= j render(partial: 'clinics/review_form') %>";
+document.getElementById("modalContent").innerHTML = "<%= j render(partial: 'clinics/review_form', locals: {clinic_params: clinic_params }) %>";

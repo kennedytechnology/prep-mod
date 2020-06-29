@@ -49,12 +49,29 @@ Rails.application.routes.draw do
     get "employers_state"
     get "employers_patients_tested_company_name"
     get "employers_patients_tested_city"
+    get "available_appointments_by_county"
+    get "completed_appointments_by_county"
+    get "snapshot_tested"
+    get "supply_inventories_by_county"
+    get "supply_inventories_by_venue_name"
+    get "appointments_by_county"
+    get "available_and_completed_appointments_by_county"
+    get "capacity_available_testing_appointments"
+    get "capacity_scheduled_appointments"
+    get "capacity_available_testing_appointments_by_county"
+    get "capacity_scheduled_appointments_by_county"
   end
 
-  resources :news_signups, only: [:new, :create]
+  namespace :public do
+    resources :news_signups, only: [:new, :create]
+  end
+  
   resources :patients
   resources :clinics, only: [:index, :new, :create, :edit, :update] do
     get :activity
+    get :report
+    get :edit_queue
+    patch :update_queue
     resources :patients
     resources :queued_patients do
       member do
@@ -74,8 +91,13 @@ Rails.application.routes.draw do
   resources :test_kits
   resources :provider_enrollments
   resources :providers
+  resources :news_signups
   resources :messages, only: [:new, :create]
-  resources :employers, only: [:index, :new, :create]
+  resources :employers, only: [:index, :new, :create] do
+    member do
+      get :activity
+    end
+  end
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

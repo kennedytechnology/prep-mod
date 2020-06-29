@@ -103,3 +103,10 @@
 .direct-upload--complete .direct-upload__progress { opacity: 0.4; }
 .direct-upload--error { @apply border-red-600; }
 input[type=file][data-direct-upload-url][disabled] { @apply hidden; }
+
+// Clinic Personnel - Hide close button for first input
+.fields {
+    .clinic_new_personnel:first-child { 
+        .remove_record { @apply hidden; }
+    }
+}

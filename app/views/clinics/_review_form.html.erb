@@ -1,14 +1,14 @@
-<h1 class="main-title"> Create Clinic </h1>
+<h1 class="main-title"> <%= @page_title %> </h1>
 
 <div class="field-fullwidth">
     <p class="title">Is clinic public or private? <span class="field-required">*</span> </p>
     <div class="w-3/12 radio-buttons-container">
         <div>
-            <input type="radio" class="form-radio" disabled="disabled" <%= 'checked' if @clinic.public_or_private == "public" %> />
+            <input type="radio" class="form-radio" disabled="disabled" <%= 'checked' if clinic_params[:public_or_private] == "Public" %> />
             <span class="label"> Public </span>
         </div>
         <div>
-            <input type="radio" class="form-radio" disabled="disabled" <%= 'checked' if @clinic.public_or_private == "private" %> />
+            <input type="radio" class="form-radio" disabled="disabled" <%= 'checked' if clinic_params[:public_or_private] == "Private" %> />
             <span class="label"> Private </span>
         </div>
     </div>
@@ -20,7 +20,7 @@
         <div class="w-full checkboxes-container">
         <% ClinicService.where(category: "clinics").each do |service| %>
             <div>
-                <span> <input type="checkbox" class="form-checkbox" disabled="disabled" <%= "checked" if @clinic.services.include?(service) %> /> </span>
+                <span> <input type="checkbox" class="form-checkbox" disabled="disabled" <%= "checked" if clinic_params[:service_ids].include?("#{service.id}") %> /> </span>
                 <span class="label"> <%= service.name %> </span>
             </div>
         <% end %>
@@ -32,7 +32,7 @@
         <div class="w-full checkboxes-container">
             <% ClinicAgeGroup.all.each do |age_group| %>
                 <div>
-                    <span> <input type="checkbox" class="form-checkbox" disabled="disabled" <%= "checked" if @clinic.age_groups.include?(age_group) %> /> </span>
+                    <span> <input type="checkbox" class="form-checkbox" disabled="disabled" <%= "checked" if clinic_params[:age_group_ids].include?("#{age_group.id}") %> /> </span>
                     <span class="label"> <%= age_group.name %> </span>
                 </div>
             <% end %>
@@ -44,7 +44,7 @@
     <div class="w-full md:w-1/2">
         <p class="label"> Venue Type <span class="field-required">*</span> </p>
         <select class="form-select w-full" disabled>
-            <option value="" selected="selected"> <%= @clinic.venue_type.blank? ? "Select" : @clinic.venue_type %> </option>
+            <option value="" selected="selected"> <%= clinic_params[:venue_type].blank? ? "Select" : clinic_params[:venue_type] %> </option>
         </select>
     </div>
 </div>
@@ -66,20 +66,20 @@
             values = (start_time..end_time).step(15.minutes)
         %>
         <select class="form-select" disabled="disabled">
-            <option value="" selected="selected"> <%= @clinic.start_hour_minute ? @clinic.start_hour_minute : "01:00" %> </option>
+            <option value="" selected="selected"> <%= clinic_params[:start_hour_minute] ? clinic_params[:start_hour_minute] : "01:00" %> </option>
         </select>
 
         <select class="form-select" disabled="true">
-            <option value="" selected="selected"> <%= @clinic.start_meridiem ? @clinic.start_meridiem : "AM" %> </option>
+            <option value="" selected="selected"> <%= clinic_params[:start_meridiem] ? clinic_params[:start_meridiem] : "AM" %> </option>
         </select>
 
         <p class="label">End Time <span class="field-required">*</span></p>
         <select class="form-select" disabled="true">
-            <option value="" selected="selected"> <%= @clinic.end_hour_minute ? @clinic.end_hour_minute : "01:00" %> </option>
+            <option value="" selected="selected"> <%= clinic_params[:end_hour_minute] ? clinic_params[:end_hour_minute] : "01:00" %> </option>
         </select>
 
         <select class="form-select" disabled="disabled">
-            <option value="" selected="selected"> <%= @clinic.end_meridiem ? @clinic.end_meridiem : "AM" %> </option>
+            <option value="" selected="selected"> <%= clinic_params[:end_meridiem] ? clinic_params[:end_meridiem] : "AM" %> </option>
         </select>
     </div>
 
@@ -87,48 +87,48 @@
         <h1 class="title"> &nbsp; </h1>
         <p class="label"> County <span class="field-required">*</span></p>
         <select class="form-select w-full" disabled="disabled">
-            <option value="" selected="selected"> <%= @clinic.county.blank? ? "Select" : @clinic.county %> </option>
+            <option value="" selected="selected"> <%= clinic_params[:county].blank? ? "Select" : clinic_params[:county] %> </option>
         </select>
 
         <p class="label"> Venue Name </p>
-        <input value="<%=@clinic.venue_name%>" placeholder="Venue Name" class="form-input w-full" disabled="disabled" />
+        <input value="<%=clinic_params[:venue_name] %>" placeholder="Venue Name" class="form-input w-full" disabled="disabled" />
 
         <p class="label"> Address </p>
-        <input value="<%=@clinic.address%>" placeholder="Address" class="form-input w-full" disabled="disabled" />
+        <input value="<%=clinic_params[:address] %>" placeholder="Address" class="form-input w-full" disabled="disabled" />
 
         <div class="grid grid-cols-3 gap-4">
             <div>
                 <p class="label"> Zip Code</p>
-                <input value="<%=@clinic.zip%>" placeholder="Zip Code" class="form-input w-full" disabled="disabled" />
+                <input value="<%= clinic_params[:zip] %>" placeholder="Zip Code" class="form-input w-full" disabled="disabled" />
             </div>
             <div>
                 <p class="label"> City </p>
-                <input value="<%=@clinic.city%>" placeholder="City" class="form-input w-full" disabled="disabled" />
+                <input value="<%= clinic_params[:city] %>" placeholder="City" class="form-input w-full" disabled="disabled" />
             </div>
             <div>
                 <p class="label"> State </p>
-                <input value="<%=@clinic.state%>" placeholder="State" class="form-input w-full" disabled="disabled" />
+                <input value="<%= clinic_params[:state] %>" placeholder="State" class="form-input w-full" disabled="disabled" />
             </div>
         </div>
     </div>
 </div>
 
 <div class="field-fullwidth">
-    <h1 class="title"> Appointments Information </h1>
+    <h1 class="title"> Appointment Information </h1>
     <p class="label"> Appointments available <span class="field-required">*</span> </p>
     <div class="w-2/4 radio-buttons-container mb-4">
         <div>
-            <input type="radio" class="form-radio" disabled="disabled" <%= 'checked' if @clinic.appointments_available == "Yes, required" %> />
+            <input type="radio" class="form-radio" disabled="disabled" <%= 'checked' if clinic_params[:appointments_available] == "yes_required" %> />
             <span class="label"> Yes, required </span>
         </div>
         
         <div>
-            <input type="radio" class="form-radio" disabled="disabled" <%= 'checked' if @clinic.appointments_available == "Yes, optional" %> />
+            <input type="radio" class="form-radio" disabled="disabled" <%= 'checked' if clinic_params[:appointments_available] == "yes_optional" %> />
             <span class="label"> Yes, optional </span>
         </div>
 
         <div>
-            <input type="radio" class="form-radio" disabled="disabled" <%= 'checked' if @clinic.appointments_available == "No (Walk-In)" %> />
+            <input type="radio" class="form-radio" disabled="disabled" <%= 'checked' if clinic_params[:appointments_available] == "no_walk_in" %> />
             <span class="label"> No (Walk-In) </span>
         </div>
     </div>
@@ -137,14 +137,14 @@
         <div>
             <p class="label"> Appointment Frequency: Every </p>
             <select class="form-select w-full" disabled="disabled">
-                <option value="" selected="selected"> <%= @clinic.appointment_frequency_minutes.blank? ? "Select" : @clinic.appointment_frequency_minutes %> </option>
+                <option value="" selected="selected"> <%= clinic_params[:appointment_frequency_minutes].blank? ? "Select" : clinic_params[:appointment_frequency_minutes] %> </option>
             </select>
         </div>
 
         <div>
             <p class="label"> Appointment Slots </p>
             <select class="form-select w-full" disabled="disabled">
-                <option value="" selected="selected"> <%= @clinic.appointment_slots.blank? ? "Select" : @clinic.appointment_slots %> </option>
+                <option value="" selected="selected"> <%= clinic_params[:appointment_slots].blank? ? "Select" : clinic_params[:appointment_slots] %> </option>
             </select>
         </div>
     </div>
@@ -154,19 +154,19 @@
     <h1 class="form-section-title">Contact Information</h1>
     <div class="w-5/12 mr-6">
         <p class="label"> Contact Person </p>
-        <input value="<%=@clinic.contact_person%>" placeholder="Contact Person" class="form-input w-full" disabled="disabled" />
+        <input value="<%=clinic_params[:contact_person]%>" placeholder="Contact Person" class="form-input w-full" disabled="disabled" />
     </div>
     <div class="w-5/12 mr-6">
         <p class="label"> Contact Phone Number </p>
-        <input value="<%=@clinic.contact_phone_number%>" placeholder="Contact Phone Number" class="form-input w-full" disabled="disabled" />
+        <input value="<%=clinic_params[:contact_phone_number]%>" placeholder="Contact Phone Number" class="form-input w-full" disabled="disabled" />
     </div>
     <div class="w-5/12 mr-6">
         <p class="label"> Back-Up Contact Person </p>
-        <input value="<%=@clinic.backup_contact_person%>" placeholder="Back-Up Contact Person" class="form-input w-full" disabled="disabled" />
+        <input value="<%=clinic_params[:backup_contact_person]%>" placeholder="Back-Up Contact Person" class="form-input w-full" disabled="disabled" />
     </div>
     <div class="w-5/12 mr-6">
         <p class="label"> Back-Up Contact Phone Number </p>
-        <input value="<%=@clinic.backup_contact_phone_number%>" placeholder="Back-Up Contact Phone Number" class="form-input w-full" disabled="disabled" />
+        <input value="<%=clinic_params[:backup_contact_phone_number]%>" placeholder="Back-Up Contact Phone Number" class="form-input w-full" disabled="disabled" />
     </div>
 </div>
 
@@ -175,7 +175,7 @@
     <div class="grid grid-cols-2 gap-4 items-start">
         <div class="col-span-2">
             <p class="label"> Incidents Comments </p>
-            <textarea placeholder="Enter Details Here" class="form-input w-full" disabled="disabled"> <%=@clinic.incidents_comments%> </textarea>
+            <textarea placeholder="Enter Details Here" class="form-input w-full" disabled="disabled"> <%=clinic_params[:incidents_comments]%> </textarea>
         </div>
     </div>
 </div>
@@ -185,24 +185,24 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
             <p class="label"> Number of Patients Registered </p>
-            <input value="<%=@clinic.students_registered%>" placeholder="Number of Patients Registered" class="form-input w-full" disabled="disabled" />
+            <input value="<%=clinic_params[:students_registered]%>" placeholder="Number of Patients Registered" class="form-input w-full" disabled="disabled" />
         </div>
 
         <div>
             <p class="label"> Lead Tester’s Name <span class="field-required">*</span></p>
-            <input value="<%=@clinic.lead_vaccinator_name%>" placeholder="Lead Tester’s Name" class="form-input w-full" disabled="disabled" />
+            <input value="<%=clinic_params[:lead_vaccinator_name]%>" placeholder="Lead Tester’s Name" class="form-input w-full" disabled="disabled" />
         </div>
     </div>
 
     <h1 class="title"> &nbsp; </h1>
     <p class="label w-full"> Clinic Staff </p>
     <div class="grid grid-cols-2 gap-4">
-    <% if @clinic.clinic_personnel.empty? %>
+    <% if clinic_params[:clinic_personnel_attributes].empty? %>
         <input value="" placeholder="Clinic Staff Person's Name" class="form-input w-full" disabled="disabled" />
     <% else %>
-        <% @clinic.clinic_personnel.each do |person| %>
+        <% clinic_params[:clinic_personnel_attributes].each do |person| %>
             <div>
-                <input value="<%=person.name%>" placeholder="Clinic Staff Person's Name" class="form-input w-full" disabled="disabled" />
+                <input value="<%=person[1]["name"]%>" placeholder="Clinic Staff Person's Name" class="form-input w-full" disabled="disabled" />
             </div>
         <% end %>
     <% end %>
@@ -225,23 +225,23 @@
             </tr>
         </thead>
         <tbody class="bg-white" id="testKits">
-            <% @clinic.test_kits.each do |test_kit| %>
+            <% clinic_params[:test_kits_attributes].each do |test_kit| %>
             <tr>
-                <td> <input value="<%= test_kit.test_name %>" class="form-input w-full" disabled="disabled" /> </td>
-                <td> <input value="<%= test_kit.test_manufacturer %>" class="form-input w-full" disabled="disabled" /> </td>
-                <td> <input value="<%= test_kit.test_lot_number %>" class="form-input w-full" disabled="disabled" /> </td>
+                <td> <input value="<%= test_kit[1]["test_name"] %>" class="form-input w-full" disabled="disabled" /> </td>
+                <td> <input value="<%= test_kit[1]["test_manufacturer"] %>" class="form-input w-full" disabled="disabled" /> </td>
+                <td> <input value="<%= test_kit[1]["test_lot_number"] %>" class="form-input w-full" disabled="disabled" /> </td>
                 <td> 
                     <select class="form-select w-full" disabled="disabled">
-                        <option value="" selected="selected"> <%= test_kit.test_type.blank? ? "" : test_kit.test_type %> </option>
+                        <option value="" selected="selected"> <%= test_kit[1]["test_type"].blank? ? "" : test_kit[1]["test_type"] %> </option>
                     </select>
                 </td>
                 <td>
                     <select class="form-select w-full" disabled="disabled">
-                        <option value="" selected="selected"> <%= test_kit.test_processing.blank? ? "" : test_kit.test_processing %> </option>
+                        <option value="" selected="selected"> <%= test_kit[1]["test_processing"].blank? ? "" : test_kit[1]["test_processing"] %> </option>
                     </select>
                 </td>
-                <td> <input value="<%= test_kit.test_expiration_date %>" class="form-input w-full" disabled="disabled" /> </td>
-                <td> <input value="<%= test_kit.test_kits_quantity %>" class="form-input w-full" disabled="disabled" /> </td>
+                <td> <input value="<%= test_kit[1]["test_expiration_date"] %>" class="form-input w-full" disabled="disabled" /> </td>
+                <td> <input value="<%= test_kit[1]["test_kits_quantity"] %>" class="form-input w-full" disabled="disabled" /> </td>
                 <td> </td>
             </tr>
             <% end %>

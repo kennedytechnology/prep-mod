@@ -12,7 +12,7 @@
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe "/news_signups", type: :request do
+RSpec.describe "/public/news_signups", type: :request do
   # NewsSignup. As you add validations to NewsSignup, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
@@ -21,7 +21,7 @@ RSpec.describe "/news_signups", type: :request do
     email: Faker::Internet.email,
     date_of_birth: Faker::Date.birthday,
     zip_code: Faker::Address.zip_code,
-    topics: ["Testing", "Screening", "Safety Kit", "Medication", "Other"],
+    topics: NEWS_TOPICS,
     occupation: PATIENT_OCCUPATIONS.sample}
   }
 
@@ -31,13 +31,13 @@ RSpec.describe "/news_signups", type: :request do
       email: "",
       date_of_birth: Faker::Date.birthday,
       zip_code: Faker::Address.zip_code,
-      topics: ["Testing", "Screening", "Safety Kit", "Medication", "Other"],
+      topics: NEWS_TOPICS,
       occupation: PATIENT_OCCUPATIONS.sample}
   }
 
   describe "GET /new" do
     it "renders a successful response" do
-      get new_news_signup_url
+      get new_public_news_signup_url
       expect(response).to be_successful
     end
   end
@@ -46,12 +46,12 @@ RSpec.describe "/news_signups", type: :request do
     context "with valid parameters" do
       it "creates a new NewsSignup" do
         expect {
-          post news_signups_url, params: { news_signup: valid_attributes }
+          post public_news_signups_url, params: { news_signup: valid_attributes }
         }.to change(NewsSignup, :count).by(1)
       end
 
       it "redirects to the created news_signup" do
-        post news_signups_url, params: { news_signup: valid_attributes }
+        post public_news_signups_url, params: { news_signup: valid_attributes }
         expect(response).to redirect_to(root_url)
       end
     end
@@ -59,12 +59,12 @@ RSpec.describe "/news_signups", type: :request do
     context "with invalid parameters" do
       it "does not create a new NewsSignup" do
         expect {
-          post news_signups_url, params: { news_signup: invalid_attributes }
+          post public_news_signups_url, params: { news_signup: invalid_attributes }
         }.to change(NewsSignup, :count).by(0)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
-        post news_signups_url, params: { news_signup: invalid_attributes }
+        post public_news_signups_url, params: { news_signup: invalid_attributes }
         expect(response).to be_successful
       end
     end

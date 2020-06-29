@@ -1,0 +1,102 @@
+<% @clinic = Clinic.first %>
+<div id="clinic-header" class="bg-gray-100 p-2 -mt-2 mb-4 -mx-4 border-b-2 border-gray-500 shadow">
+  <h1 class="text-2xl font-bold"><%= @employer.company_name %>: <%= Date.today.strftime("%a %B %e, %Y")%></h1>
+  
+  <div class="flex justify-end">
+      <h2 class="text-xl font-bold flex-grow">Daily Employer Activity Report</h2>
+      <span class="pr-4 pt-5">Total Employees Registered: <%= @employer.patients.size %></span>
+  </div>
+</div>
+<div class="clinic-events-page">
+    <div class="card-wrapper">
+
+      <div class="card-content">
+        <%= form_with(model: @clinic, url: clinic_path(@clinic), method: :put) do |f| %>
+
+          <%= render partial: 'clinics/activity/test_kits', locals: {f: f} %>
+
+          <div class="patients-table-section" data-controller="clinic-activity-patients">
+            <div class="patients-table-header">
+              <div class="mt-12">
+                  <div class="flex w-2/4">
+                      <label class="flex items-center text-lg mr-3 text-gray-600 block" for="search"> Search here: </label>
+                      <input class="form-input w-2/3" id="search" data-action="keyup->clinic-activity-patients#search" type="text">
+                  </div>
+              </div>
+              <div class="flex justify-end mb-3">
+                  <%= link_to sanitize("Add More Patients &#43;"), "javascript:", data: {action: "clinic-activity-patients#showModal", selection: "AddPatient"}, class: "button-primary" %>
+              </div>
+            </div>
+            <div class="patients-table-outer">
+              <div class="patients-table-wrapper">
+                <div class="patients-table-container">
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th>Employee Name</th>
+                      <th>DOB</th>
+                      <th>Screened</th>
+                      <th>Tested</th>
+                      <th>Safety Kit</th>
+                      <th>Cancelled</th>
+                      <th>No Show</th>
+                      <th>Follow Up</th>
+                      <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% @employer.patients.each do |patient| %>
+                      <%= f.fields_for :clinic_events, patient.event_for_clinic(@clinic) do |event_form| %>
+                        <tr data-target="clinic-activity-patients.searchableRow" data-event-category="<%= event_form.object.category %>" data-search-content="<%= [patient.first_name.downcase, patient.last_name.downcase].join(" ") %>" data-patient-id="<%= patient.id %>">
+                          <td>
+                          <%= event_form.hidden_field :patient_id %>
+                          <%= render partial: '/clinics/activity/screened_details', layout: "clinics/activity/clinic_event_modal", locals: {patient: patient, event_form: event_form, category_selection: 'Screened'} %>
+                          <%= render partial: '/clinics/activity/tested_details', layout: "clinics/activity/clinic_event_modal", locals: {patient: patient, event_form: event_form, category_selection: 'Tested'} %>
+                          <%= render partial: '/clinics/activity/remark_details', layout: "clinics/activity/clinic_event_modal", locals: {patient: patient, event_form: event_form, category_selection: 'Remark'} %>
+                            <%= link_to patient.first_name + ' ' + patient.last_name, patient %> <br/>
+                          </td>
+                          <td><%= patient.date_of_birth.try(:strftime, "%D") %></td>
+                          <td><%= event_form.radio_button :category, "Screened", data: {action: "clinic-activity-patients#showModal", selection: "Screened"}, class: "form-radio" %></td>
+                          <td><%= event_form.radio_button :category, "Tested", data: {action: "clinic-activity-patients#showModal", selection: "Tested"}, class: "form-radio" %></td>
+                          <td><%= event_form.check_box :safety_kit_received, class: "form-checkbox" %></td>
+                          <td><%= event_form.radio_button :category, "Cancelled", class: "form-radio"  %></td>
+                          <td><%= event_form.radio_button :category, "No Show", class: "form-radio"  %></td>
+                          <td><%= link_to "Remark", "javascript:", data: {action: "clinic-activity-patients#showModal", selection: "Remark"}, class: "form-text" %></td>
+                          <td>
+                            <div class="flex">
+                              <%= link_to "Delete", "javascript:",
+                                          data: { recordIs: "patients", recordId: patient.id,
+                                                  recordName: patient.full_name,
+                                                  action: "click->clinic-activity-patients#showHideDeleteModal" },
+                                          class: "button-action mb-0" %>
+                            </div>
+                          </td>
+                        </tr>
+                      <% end %>
+                    <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="button-container flex justify-end">
+              <input type="submit" name="save" value="Save" class="button-primary mr-2 mt-10">
+              <input type="submit" name="save-submit" value="Save and Submit" class="button-primary ml-2 bg-blue-500 text-white mt-10">
+            </div>
+
+            
+            <%= render "clinics/activity/delete_record_modal" %>
+          </div>
+          
+        <% end %>
+      </div>
+    </div>
+</div>
+
+
+<% @clinic.patients.each do |patient| %>
+
+
+<% end %>
+<%= render partial: '/clinics/activity/add_more_patients', layout: "clinics/activity/add_patient_modal", locals: {patient: @patient = Patient.new, event_form: nil, category_selection: 'AddPatient'} %>
