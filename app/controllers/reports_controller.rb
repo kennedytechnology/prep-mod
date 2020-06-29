@@ -39,12 +39,23 @@ class ReportsController < ApplicationController
 
 
   def uptake; end
-
   def uptake_by_zip_code
   end
 
   def locations; end
 
+  def employers_state
+    render json: Employer.group(:state).count
+  end 
+
+  def employers_patients_tested_company_name
+    render json: Employer.joins(:patients).group(:company_name).count
+  end
+
+  def employers_patients_tested_city
+    render json: Employer.joins(:patients).group(:city).count
+  end
+  
   def appointments_by_county
     render json: Patient.joins(:appointments).group(:county).count
   end 
@@ -60,8 +71,6 @@ class ReportsController < ApplicationController
     render json: [{ data: parse_chart_data(chart_data),
                     library: column_chart_background_colors }].chart_json
   end 
-
-  def employers; end
 
   def supply_inventories; end
 
