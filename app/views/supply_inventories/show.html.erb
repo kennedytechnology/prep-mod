@@ -67,8 +67,21 @@
         </div>
 
         <div>
+            <%= f.label :quantity_returned do %>
+                <span class="text-gray-500"> Quantity Returned </span>
+                <span class="text-brand-red-500">*</span>
+            <% end %>
+            <%= f.number_field :quantity_returned, class: "form-input block w-full", min: 0, required: true,
+                data: {action: "change->inventory-new-entry#updateModalField
+                                keyup->inventory-new-entry#updateModalField
+                                blur->inventory-new-entry#validateInputField
+                                keypress->inventory-new-entry#preventNegativeNumber"} %>
+            <p class="error-message hidden"> This field is required! </p>
+        </div>
+
+        <div>
             <%= f.label :quantity_destroyed do %>
-                <span class="text-gray-500"> Quantity Destroyed/Returned </span>
+                <span class="text-gray-500"> Quantity Destroyed </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
             <%= f.number_field :quantity_destroyed, class: "form-input block w-full", min: 0, required: true,

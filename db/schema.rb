@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_28_224651) do
+ActiveRecord::Schema.define(version: 2020_06_29_095030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -304,7 +304,6 @@ ActiveRecord::Schema.define(version: 2020_06_28_224651) do
 
   create_table "news_signups", force: :cascade do |t|
     t.string "first_name"
-    t.string "last_name"
     t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -312,6 +311,7 @@ ActiveRecord::Schema.define(version: 2020_06_28_224651) do
     t.date "date_of_birth"
     t.string "topics"
     t.string "occupation"
+    t.string "last_name"
     t.boolean "chronic_health_condition"
   end
 
@@ -499,6 +499,7 @@ ActiveRecord::Schema.define(version: 2020_06_28_224651) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "county"
     t.string "venue_name"
+    t.integer "quantity_returned"
   end
 
   create_table "supply_inventory_events", force: :cascade do |t|
