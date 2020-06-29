@@ -92,6 +92,7 @@
         <tr>
             <th> Event Date </th>
             <th> Event Type </th>
+            <th> Total Qty </th>
             <th> Qty Used </th>
             <th> Qty Lost </th>
             <th> Qty Loaned </th>
@@ -104,6 +105,7 @@
         <tr class="hover:bg-gray-50">
             <td> <%= event.event_date.strftime("%m-%d-%Y") if event.event_date %> </td>
             <td> <%= event.event_type %> </td>
+            <td> </td>
             <td> <%= event.quantity_used %> </td>
             <td> <%= event.quantity_lost %> </td>
             <td> <%= event.quantity_loaned %> </td>
@@ -117,6 +119,7 @@
         <tr class="font-bold">
             <td> TOTALS </td>
             <td>  </td>
+            <td> <%= @supply_inventory.quantity %> </td>
             <td> <%= @supply_inventory.quantity_used_sum %> </td>
             <td> <%= @supply_inventory.quantity_lost_sum %> </td>
             <td> <%= @supply_inventory.quantity_loaned_sum %> </td>
