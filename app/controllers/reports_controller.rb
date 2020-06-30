@@ -91,4 +91,16 @@ class ReportsController < ApplicationController
   def available_and_completed_appointments
     render json: Appointment.where("queue_state = ? OR queue_state = ? ", *["not_checked_in", "done"]).group(:queue_state).count
   end
+
+  def news_and_notifications; end
+
+  def news_signups_by_occupation
+    chart_data = NewsSignup.group(:occupation).count
+    render json: [{ data: parse_chart_data(chart_data),
+                    library: column_chart_background_colors }].chart_json
+  end
+
+  def news_signups_with_chronic_health_condition
+    render json: NewsSignup.group(:chronic_health_condition).count
+  end
 end
