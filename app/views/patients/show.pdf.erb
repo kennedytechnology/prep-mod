@@ -89,6 +89,35 @@ Please Print Clearly in Ink
     </tr>
 </table>
 
+<% if @patient.clinic_events.exists? %>
+    <div class="bg-black text-white text-center mt-2 mb-2 p-1">
+        INFORMATION ABOUT PATIENT ENCOUNTERS
+    </div>
+
+    <table class="w-full mt-2">
+        <thead>
+            <tr>
+                <th> Clinic Name </th>
+                <th> Encounter Date </th>
+                <th> Encounter Type </th>
+                <th> Outcome </th>
+                <th> Location </th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @patient.clinic_events.each do |clinic_event| %>
+            <tr>
+                <%= render partial: 'consent_form_cell', locals: {width: 2, label: " ", value: clinic_event.clinic.name} %>
+                <%= render partial: 'consent_form_cell', locals: {width: 2, label: " ", value: clinic_event.event_date} %>
+                <%= render partial: 'consent_form_cell', locals: {width: 2, label: " ", value: clinic_event.category} %>
+                <%= render partial: 'consent_form_cell', locals: {width: 2, label: " ", value: clinic_event.outcome} %>
+                <%= render partial: 'consent_form_cell', locals: {width: 2, label: " ", value: clinic_event.location} %>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+<% end %>
+
 <table class="w-full mt-10"><tr>
   <td>
     <% if @patient.signature_data.blank? %>
