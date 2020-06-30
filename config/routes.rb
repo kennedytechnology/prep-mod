@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   get "/reports/employers", to: "reports#employers"
   get "/reports/supply_inventories", to: "reports#supply_inventories"
   get "/reports/customized", to: "reports#customized"
+  get "/reports/news_and_notifications", to: "reports#news_and_notifications"
 
   namespace :reports do
     get "providers_by_county"
@@ -60,6 +61,8 @@ Rails.application.routes.draw do
     get "capacity_scheduled_appointments"
     get "capacity_available_testing_appointments_by_county"
     get "capacity_scheduled_appointments_by_county"
+    get "news_signups_by_occupation"
+    get "news_signups_with_chronic_health_condition"
   end
 
   namespace :public do
