@@ -1,5 +1,10 @@
-<h1 class="main-title">News and Notifications</h1>
-<p class="mb-12"> News and Notification Contact List </p>
+<h1 class="main-title ">News and Notifications</h1>
+
+<div class="my-12">
+    <p class="mb-2"> News and Notification Contact List </p>
+    <%= link_to "Generate Contact List in PDF", reports_news_and_notifications_path(format: :pdf), class: "button-action", target: "_blank" %>
+    <%= link_to "Generate Contact List in Excel", reports_news_and_notifications_path(format: :xlsx), class: "button-action", target: "_blank" %>
+</div>
 
 <div class="grid grid-cols-1 md:grid-cols-2 md:gap-4">
     <div class="p-4 border border-gray-50 rounded-lg ">

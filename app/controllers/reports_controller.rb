@@ -92,7 +92,31 @@ class ReportsController < ApplicationController
     render json: Appointment.where("queue_state = ? OR queue_state = ? ", *["not_checked_in", "done"]).group(:queue_state).count
   end
 
-  def news_and_notifications; end
+  def news_and_notifications
+    @news_signups = NewsSignup.all
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "Customized report",
+                page_size: 'A4',
+                template: "reports/news_and_notifications.pdf.erb",
+                layout: "clinic-print.pdf.erb",
+                orientation: "Landscape",
+                lowquality: true,
+                zoom: 1,
+                dpi: 75,
+                encoding: 'utf8'
+      end
+
+      format.xlsx do
+        render xlsx: 'New and Notifications Contact List', template: 'reports/news_and_notifications', 
+                disposition: 'inline', 
+                filename: "news_and_notifications_contact_list_#{Date.today.strftime("%d_%m_%Y")}.xlsx",
+                xlsx_author: current_user.name
+      end
+    end
+  end
 
   def news_signups_by_occupation
     chart_data = NewsSignup.group(:occupation).count

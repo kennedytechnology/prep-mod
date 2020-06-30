@@ -1,0 +1,9 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "News Contact List") do |sheet|
+  sheet.add_row ["First Name", "Last Name", "Email"]
+  # Create entries for each item
+  @news_signups.each do |news_signup|
+    sheet.add_row [news_signup.first_name, news_signup.last_name, news_signup.email]
+  end
+end
