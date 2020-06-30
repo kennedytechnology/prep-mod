@@ -1,4 +1,5 @@
 class ClinicsController < ClinicManagementController
+  load_and_authorize_resource except: [:index]
   before_action :get_clinic, only: [:edit, :update]
   helper_method :sort_column, :sort_direction
 
@@ -13,7 +14,7 @@ class ClinicsController < ClinicManagementController
     elsif params[:clinic_date]
       params[:clinic_date] == 'past' ? @clinics = Clinic.all.where("clinic_date < ?", Date.current)
           : @clinics = @clinics = Clinic.all.where("clinic_date >= ?", Date.current)
-    else 
+    else
       @clinics = Clinic.all.paginate(page: params[:page], per_page: 50)
     end
   end
@@ -66,6 +67,7 @@ class ClinicsController < ClinicManagementController
   end
 
   def activity
+    raise CanCan::AccessDenied if current_user.has_roles?(:government, :school_nurse)
     @clinic = Clinic.find(params['clinic_id'])
     @page_title = "Clinic Activity Form"
   end
@@ -77,13 +79,12 @@ class ClinicsController < ClinicManagementController
 
   def update
     @page_title = "View/Edit clinic"
-    
-      if @clinic.update(clinic_params)
-        finish_patients_in_queue
-        redirect_to clinics_path(clinic_date: 'upcoming'), notice: "Successfully updated clinic!" 
-      else
-        render :new
-      end
+    if @clinic.update(clinic_params)
+      finish_patients_in_queue
+      redirect_to clinics_path(clinic_date: 'upcoming'), notice: "Successfully updated clinic!"
+    else
+      render :new
+    end
   end
 
   def data_transfer
@@ -115,7 +116,7 @@ class ClinicsController < ClinicManagementController
       :clinic_status, :start_time, :end_time, :location, :public_or_private,
       :address, :lead_vaccinator_name, :social_distancing, :provider_enrollment_id,
       :clinic_date, :students_registered, :default_test_kit,
-      :incidents_comments, :county, :venue_name, :zip, 
+      :incidents_comments, :county, :venue_name, :zip,
       :city, :state, :appointment_frequency_minutes, :active_queue_patients_count,
       :appointment_slots, :contact_person, :contact_phone_number,
       :backup_contact_person, :backup_contact_phone_number,
@@ -128,8 +129,8 @@ class ClinicsController < ClinicManagementController
         :contact_type, :screening_outcome, :clinic_staff_id, :notes, :test_name,
         :test_type, :test_processing, :category],
       test_kits_attributes: [:id, :test_name, :test_manufacturer,
-        :test_lot_number, :test_type, :test_processing, 
-        :test_expiration_date, :test_kits_quantity, :tests_administered, 
+        :test_lot_number, :test_type, :test_processing,
+        :test_expiration_date, :test_kits_quantity, :tests_administered,
         :unusable_tests, :tests_returned, :_destroy],
     )
   end

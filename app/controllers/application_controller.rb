@@ -1,5 +1,9 @@
 class ApplicationController < ActionController::Base
   before_action :set_cache_headers
+  rescue_from CanCan::AccessDenied do |exception|
+    logger.debug exception.inspect
+    render file: 'public/401.html', status: :unauthorized
+  end
 
   private
 

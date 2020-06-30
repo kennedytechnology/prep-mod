@@ -3,7 +3,7 @@ FactoryBot.define do
     email { Faker::Internet.unique.email }
     password { 'password' }
     password_confirmation { 'password' }
-    role { USER_ROLES.sample }
+    role { 'super_admin' }
     venues { VENUE_TYPES.sample(7) }
     first_name { Faker::Name.unique.first_name }
     last_name { Faker::Name.unique.last_name }
