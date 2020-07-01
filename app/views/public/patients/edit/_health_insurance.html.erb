@@ -1,38 +1,38 @@
 <div class="field-side-by-side">
     <div>
         <%= f.label :insurance_type, "Type of Insurance", class: "block" %>
-        <%= f.select :insurance_type, options_for_select(INSURANCE_TYPES, @patient.insurance_type),{}, {class: "w-full form-select", data: {action: "change->inventory-new-entry#updateModalField"}} %>
+        <%= f.select :insurance_type, options_for_select(INSURANCE_TYPES, @patient.insurance_type),{}, {class: "w-full form-select"} %>
     </div>
     <div>
         <%= f.label :insurance_company_name, "Insurance Company Name", class: "block" %>
-        <%= f.text_field :insurance_company_name, class: "w-full form-input", data: {action: "keyup->inventory-new-entry#updateModalField"} %>
+        <%= f.text_field :insurance_company_name, class: "w-full form-input" %>
     </div>
 </div>
 
 <div class="field-side-by-side">
     <div>
         <%= f.label :member_id_for_insurance, "Member ID Number", class: "block" %>
-        <%= f.text_field :member_id_for_insurance, class: "w-full form-input", data: {action: "keyup->inventory-new-entry#updateModalField"} %>
+        <%= f.text_field :member_id_for_insurance, class: "w-full form-input" %>
     </div>
     <div>
         <%= f.label :group_number_for_insurance, "Group Number", class: "block" %>
-        <%= f.text_field :group_number_for_insurance, class: "w-full form-input", data: {action: "keyup->inventory-new-entry#updateModalField"} %>
+        <%= f.text_field :group_number_for_insurance, class: "w-full form-input" %>
     </div>
 </div>
 
 <div class="field-side-by-side">
     <div>
         <%= f.label :card_number_for_insurance, "Medical Assistance Number, Recipient Number, or any other number on card", class: "block" %>
-        <%= f.text_field :card_number_for_insurance, class: "w-full form-input", data: {action: "keyup->inventory-new-entry#updateModalField"} %>
+        <%= f.text_field :card_number_for_insurance, class: "w-full form-input" %>
     </div>
     <div class="flex">
         <div class="flex-1 mr-2">
             <%= f.label :insured_first_name, "Insured Adult's First Name", class: "block" %>
-            <%= f.text_field :insured_first_name, class: "w-11/12 form-input", data: {action: "keyup->inventory-new-entry#updateModalField"} %>
+            <%= f.text_field :insured_first_name, class: "w-11/12 form-input" %>
         </div>
         <div class="flex-1">
             <%= f.label :insured_last_name, "Insured Adult's Last Name", class: "block" %>
-            <%= f.text_field :insured_last_name, class: "w-11/12 form-input", data: {action: "keyup->inventory-new-entry#updateModalField"} %>
+            <%= f.text_field :insured_last_name, class: "w-11/12 form-input" %>
         </div>
     </div>
 </div>
@@ -43,12 +43,11 @@
         <%= f.text_field :insured_date_of_birth, value: @patient.insured_date_of_birth.try(:strftime, "%Y/%m/%d"), class: "w-full form-input",
                             data: { controller: "flatpickr",
                                     flatpickr_min_date: Date.today - 80.years,
-                                    flatpickr_max_date: Date.today,
-                                    action: "keyup->inventory-new-entry#updateModalField change->inventory-new-entry#updateModalField" } %>
+                                    flatpickr_max_date: Date.today} %>
     </div>
     <div>
         <%= f.label :relation_to_patient_for_consent, "Relationship To Patient", class: "block" %>
-        <%= f.select :relation_to_patient_for_consent, options_for_select(RELATIONSHIP_TYPES, @patient.relation_to_patient_for_consent),{}, {class: "w-full form-select", data: {action: "change->inventory-new-entry#updateModalField"}} %>
+        <%= f.select :relation_to_patient_for_consent, options_for_select(RELATIONSHIP_TYPES, @patient.relation_to_patient_for_consent),{}, {class: "w-full form-select"} %>
     </div>
 </div>
 

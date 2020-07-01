@@ -24,15 +24,14 @@
       </div>
       <div class="inline-field-wrapper">
         <%= fm.label :race %>
-        <%= fm.select :race, options_for_select(US_RACES, @patient.race), {prompt: "--"}, {class: "form-select w-full", data: {action: "change->inventory-new-entry#updateModalField"}} %>
+        <%= fm.select :race, options_for_select(US_RACES, @patient.race), {prompt: "--"}, {class: "form-select w-full"} %>
       </div>
       <div class="inline-field-wrapper">
         <%= fm.label :date_of_birth, "Date Of Birth" %>
-        <%= fm.text_field :date_of_birth, onChange:"calculateAge();", id: "patient_date_of_birth", class: "w-full form-input", 
+        <%= fm.text_field :date_of_birth, class: "w-full form-input", 
                               data: { controller: "flatpickr",
                                       flatpickr_min_date: Date.today - 80.years,
-                                      flatpickr_max_date: Date.today,
-                                      action: "keyup->inventory-new-entry#updateModalField change->inventory-new-entry#updateModalField" } %>
+                                      flatpickr_max_date: Date.today} %>
       </div>
     </div>
 
@@ -64,23 +63,23 @@
 <div class="field-side-by-side">
     <div>
         <h2 class="title"> Do you have: </h2>
-        <%= f.check_box :has_fever_over, class: "form-checkbox", data: {action: "click->inventory-new-entry#updateModalCheckboxField"} %>
+        <%= f.check_box :has_fever_over, class: "form-checkbox" %>
         <%= f.label :has_fever_over, "A fever of 100.4 degrees Fahrenheit or higher" %>
 
         <br />
-        <%= f.check_box :has_cough, class: "form-checkbox", data: {action: "click->inventory-new-entry#updateModalCheckboxField"} %>
+        <%= f.check_box :has_cough, class: "form-checkbox" %>
         <%= f.label :has_cough, "A cough" %>
 
         <br />
-        <%= f.check_box :has_difficult_breathing, class: "form-checkbox", data: {action: "click->inventory-new-entry#updateModalCheckboxField"} %>
+        <%= f.check_box :has_difficult_breathing, class: "form-checkbox" %>
         <%= f.label :has_difficult_breathing, "Shortness of breath or difficulty breathing" %>
     </div>
     <div>
         <h2 class="title"> Have you traveled in the past 14 days to regions affected by COVID-19?<span class="field-required">*</span> </h2> 
-        <%= f.radio_button :had_traveled_to_affected_place, true, class: "form-radio ", data: {action: "click->inventory-new-entry#updateModalCheckboxField"} %>
+        <%= f.radio_button :had_traveled_to_affected_place, true, class: "form-radio " %>
         <%= f.label :had_traveled_to_affected_place, "Yes", class: "mr-3" %>
 
-        <%= f.radio_button :had_traveled_to_affected_place, false, class: "form-radio", data: {action: "click->inventory-new-entry#updateModalCheckboxField"} %>
+        <%= f.radio_button :had_traveled_to_affected_place, false, class: "form-radio" %>
         <%= f.label :had_traveled_to_affected_place, "No" %>
     </div>
 </div>
@@ -88,18 +87,18 @@
 <div class="field-side-by-side">
     <div>
         <h2 class="title"> Have you been in close contact with anyone who has a confirmed COVID-19 diagnosis?<span class="field-required">*</span> </h2>
-        <%= f.radio_button :had_contact_with_confirmed_case, true, class: "form-radio", data: {action: "click->inventory-new-entry#updateModalCheckboxField"} %>
+        <%= f.radio_button :had_contact_with_confirmed_case, true, class: "form-radio" %>
         <%= f.label :had_contact_with_confirmed_case, "Yes", class: "mr-3" %>
 
-        <%= f.radio_button :had_contact_with_confirmed_case, false, class: "form-radio", data: {action: "click->inventory-new-entry#updateModalCheckboxField"} %>
+        <%= f.radio_button :had_contact_with_confirmed_case, false, class: "form-radio" %>
         <%= f.label :had_contact_with_confirmed_case, "No" %>
     </div>
     <div>
         <h2 class="title">Do you have heart disease, lung disease, kidney disease or diabetes?<span class="field-required">*</span></h2>
-        <%= f.radio_button :has_risk_factor, true, class: "form-radio", data: {action: "click->inventory-new-entry#updateModalCheckboxField"} %>
+        <%= f.radio_button :has_risk_factor, true, class: "form-radio" %>
         <%= f.label :has_risk_factor, "Yes", class: "mr-3" %>
 
-        <%= f.radio_button :has_risk_factor, false, class: "form-radio", data: {action: "click->inventory-new-entry#updateModalCheckboxField"} %>
+        <%= f.radio_button :has_risk_factor, false, class: "form-radio" %>
         <%= f.label :has_risk_factor, "No" %>
     </div>
 </div>
@@ -107,18 +106,18 @@
   <div class="field-side-by-side">
       <div>
           <h2 class="title">Are you 60 or older?<span class="field-required">*</span></h2>
-          <%= f.radio_button :is_age_60_or_more, true, class: "form-radio", data: {action: "click->inventory-new-entry#updateModalCheckboxField"} %>
+          <%= f.radio_button :is_age_60_or_more, true, class: "form-radio" %>
           <%= f.label :is_age_60_or_more, "Yes", class: "mr-3" %>
 
-          <%= f.radio_button :is_age_60_or_more, false, class: "form-radio", data: {action: "click->inventory-new-entry#updateModalCheckboxField"} %>
+          <%= f.radio_button :is_age_60_or_more, false, class: "form-radio" %>
           <%= f.label :is_age_60_or_more, "No" %>
       </div>
       <div>
           <h2 class="title">Is there any other reason you think you should be tested for COVID-19? If "yes", explain<span class="field-required">*</span></h2>
-          <%= f.radio_button :has_other_reason, true, class: "form-radio", data: {action: "click->inventory-new-entry#updateModalCheckboxField"} %>
+          <%= f.radio_button :has_other_reason, true, class: "form-radio" %>
           <%= f.label :has_other_reason, "Yes", class: "mr-3" %>
 
-          <%= f.radio_button :has_other_reason, false, class: "form-radio", data: {action: "click->inventory-new-entry#updateModalCheckboxField"} %>
+          <%= f.radio_button :has_other_reason, false, class: "form-radio" %>
           <%= f.label :has_other_reason, "No" %>
       </div>
   </div>
