@@ -10,13 +10,13 @@
 
     &-action {
         @extend .button-base;
-        @apply p-2 inline-block bg-gray-100 text-gray-800;
+        @apply p-2 inline-block bg-brand-blue-600 border-brand-blue-300 text-white;
         min-height: auto;
         min-width: auto;
         width: auto;
 
         &:hover {
-            @apply bg-brand-blue-600 border-brand-blue-300 text-white
+            background-color: lighten(#2699FB, 5%);
         }
     }
 
