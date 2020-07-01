@@ -1,7 +1,7 @@
 ActiveAdmin.register User do
 
   permit_params do
-    permitted = [:email, :password, :password_confirmation, :name, :role, {clinic_ids: []}]
+    permitted = [:email, :password, :password_confirmation, :first_name, :role, {clinic_ids: []}]
     if params[:user] && params[:user][:password].blank? && params[:user][:password_confirmation].blank?
       params[:user].delete(:password)
       params[:user].delete(:password_confirmation)
@@ -10,14 +10,16 @@ ActiveAdmin.register User do
   end
   
   filter :email
-  filter :name
+  filter :first_name
+  filter :last_name
   filter :role, as: :select, collection: USER_ROLES
   
   index do
     selectable_column
     id_column
     column :email
-    column :name
+    column :first_name
+    column :last_name
     column :role
     column :sign_in_count
     column :current_sign_in_at
@@ -30,7 +32,8 @@ ActiveAdmin.register User do
     attributes_table do
       row :id
       row :email
-      row :name
+      row :first_name
+      row :last_name
       row :role
       row :created_at
       row :updated_at
@@ -63,7 +66,8 @@ ActiveAdmin.register User do
         f.inputs do
           f.inputs "User Details" do
             f.input :email
-            f.input :name
+            f.input :first_name
+            f.input :last_name
             f.input :role, as: :select, collection: USER_ROLES
           end
           f.inputs "Change Password (leave blank to leave password unchanged)" do

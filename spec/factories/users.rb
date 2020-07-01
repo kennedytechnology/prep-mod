@@ -4,7 +4,9 @@ FactoryBot.define do
     password { 'password' }
     password_confirmation { 'password' }
     role { USER_ROLES.sample }
-    name { Faker::Name.unique.name }
+    venues { VENUE_TYPES.sample(7) }
+    first_name { Faker::Name.unique.first_name }
+    last_name { Faker::Name.unique.last_name }
     clinics { Clinic.all.sample(5) }
   end
 end

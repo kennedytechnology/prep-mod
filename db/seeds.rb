@@ -63,7 +63,9 @@ USER_COUNT.times.each do |i|
     password: 'password',
     password_confirmation: 'password',
     role: USER_ROLES.sample,
-    name: i == 5 ? "Sam Kennedy" : Faker::Name.unique.name,
+    venues: VENUE_TYPES.sample(7),
+    first_name: i == 5 ? "Sam" : Faker::Name.unique.first_name,
+    last_name: i == 5 ? "Kennedy" : Faker::Name.unique.last_name,
     clinics: Clinic.all.sample(5)
   )
 end

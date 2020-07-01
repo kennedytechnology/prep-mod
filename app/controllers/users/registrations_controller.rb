@@ -10,7 +10,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def configure_sign_up_params    
-    added_attribs = [:name, :email, :password, :password_confirmation, :remember_me]
+    added_attribs = [:first_name, :last_name, :email, :password, :password_confirmation, :remember_me]
     devise_parameter_sanitizer.permit :sign_in, keys: added_attribs
     devise_parameter_sanitizer.permit :sign_up, keys: added_attribs
     devise_parameter_sanitizer.permit :account_update, keys: added_attribs

@@ -8,6 +8,10 @@ class User < ApplicationRecord
   has_many :patients
   has_one :provider
 
-  validates_presence_of :email, :name, :role
+  validates_presence_of :email, :first_name, :last_name, :venues, :role
   validates_uniqueness_of :email
+
+  def name
+    first_name + " " + last_name
+  end
 end

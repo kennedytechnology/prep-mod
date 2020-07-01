@@ -6,17 +6,30 @@
     <%# resource.class.invite_key_fields.each do |field| -%>
         <div class="field-side-by-side">
             <div>
+                <%= f.label :first_name, class: "block" do %>
+                    <span> First Name </span>
+                    <span class="field-required">*</span>
+                <% end %>
+                <%= f.text_field :first_name, class: "form-input w-full", required: true %>
+
+                <%= f.label :last_name, class: "block" do %>
+                    <span> Last Name </span>
+                    <span class="field-required">*</span>
+                <% end %>
+                <%= f.text_field :last_name, class: "form-input w-full", required: true %>
+
                 <%= f.label :email, class: "block" do %>
                     <span> Email </span>
                     <span class="field-required">*</span>
                 <% end %>
                 <%= f.email_field :email, class: "form-input w-full", required: true %>
 
-                <%= f.label :name, class: "block" do %>
-                    <span> Name </span>
+                
+                <%= f.label :venues, class: "block" do %>
+                    <span> Assigned Venue </span>
                     <span class="field-required">*</span>
                 <% end %>
-                <%= f.text_field :name, class: "form-input w-full", required: true %>
+                <%= f.select :venues, VENUE_TYPES, {prompt: "Select"}, {class: "form-select w-full", required: true} %>
 
                 <%= f.label :role, class: "block" do %>
                     <span> Role </span>
