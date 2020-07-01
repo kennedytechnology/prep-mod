@@ -30,7 +30,15 @@ class SupplyInventory < ApplicationRecord
     supply_inventory_events.sum(:quantity_loaned)
   end
 
+  def quantity_returned_sum
+    supply_inventory_events.sum(:quantity_returned)
+  end
+
+  def quantity_destroyed_sum
+    supply_inventory_events.sum(:quantity_destroyed)
+  end
+
   def remaining_quantity_sum
-    quantity - (quantity_lost_sum + quantity_used_sum + quantity_loaned_sum)
+    quantity - (quantity_lost_sum + quantity_used_sum + quantity_loaned_sum + quantity_returned_sum + quantity_destroyed_sum)
   end
 end

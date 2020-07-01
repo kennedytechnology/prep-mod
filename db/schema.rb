@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_29_095030) do
+ActiveRecord::Schema.define(version: 2020_07_01_100204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -499,7 +499,6 @@ ActiveRecord::Schema.define(version: 2020_06_29_095030) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "county"
     t.string "venue_name"
-    t.integer "quantity_returned"
   end
 
   create_table "supply_inventory_events", force: :cascade do |t|
@@ -512,6 +511,7 @@ ActiveRecord::Schema.define(version: 2020_06_29_095030) do
     t.bigint "supply_inventory_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "quantity_returned"
     t.index ["supply_inventory_id"], name: "index_supply_inventory_events_on_supply_inventory_id"
   end
 

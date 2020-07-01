@@ -109,6 +109,8 @@
             <th> Qty Used </th>
             <th> Qty Lost </th>
             <th> Qty Loaned </th>
+            <th> Qty Returned </th>
+            <th> Qty Destroyed </th>
             <th> Quantity Remaining </th>
             <th> Action </th>
         </tr>
@@ -122,6 +124,8 @@
             <td> <%= event.quantity_used %> </td>
             <td> <%= event.quantity_lost %> </td>
             <td> <%= event.quantity_loaned %> </td>
+            <td> <%= event.quantity_returned %> </td>
+            <td> <%= event.quantity_destroyed %> </td>
             <td> </td>
             <td> 
                 <%= link_to "Edit", edit_supply_inventory_event_path(event), class: "button-action mb-1" %> 
@@ -136,6 +140,8 @@
             <td> <%= @supply_inventory.quantity_used_sum %> </td>
             <td> <%= @supply_inventory.quantity_lost_sum %> </td>
             <td> <%= @supply_inventory.quantity_loaned_sum %> </td>
+            <td> <%= @supply_inventory.quantity_returned_sum %> </td>
+            <td> <%= @supply_inventory.quantity_destroyed_sum %> </td>
             <td> <%= @supply_inventory.remaining_quantity_sum %> </td>
             <td> </td>
         </tr>
