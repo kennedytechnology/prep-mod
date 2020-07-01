@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_01_100204) do
+ActiveRecord::Schema.define(version: 2020_07_01_134212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -209,6 +209,7 @@ ActiveRecord::Schema.define(version: 2020_07_01_100204) do
     t.string "venue_type"
     t.string "open_state"
     t.integer "active_queue_patients_count"
+    t.integer "social_distancing"
   end
 
   create_table "clinics_users", id: false, force: :cascade do |t|
@@ -563,6 +564,9 @@ ActiveRecord::Schema.define(version: 2020_07_01_100204) do
     t.string "invited_by_type"
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
+    t.string "first_name"
+    t.string "last_name"
+    t.string "venues", default: [], array: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true

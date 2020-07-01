@@ -3,15 +3,29 @@ import {
 } from "stimulus"
 
 export default class extends Controller {
-  static targets = ["form", "modal", "modalForDenied", "modalContent"]
+  static targets = ["form", "modal", "modalForDenied", "modalContent", "submitButton", "validates"]
 
   connect() {
-
+    this.onDisableFormPage();
   }
 
   openModal(event) {
     this.modalTarget.classList.remove('opacity-0');
     this.modalTarget.classList.remove('pointer-events-none');
+  }
+
+  onDisableFormPage() {	
+    let isValid = true;	
+
+    this.validatesTargets.forEach((e) => {	
+      if (e.value === "") {	
+        isValid = false;	
+        return isValid;	
+      }	
+    });	
+
+    if (isValid) this.submitButtonTarget.removeAttribute('disabled');	
+    else this.submitButtonTarget.setAttribute('disabled', true);	
   }
 
   closeModal(event) {
