@@ -47,8 +47,17 @@
         </div>
 
         <div>
+            <%= f.label :quantity_returned do %>
+                <span class="text-gray-500"> Quantity Returned </span>
+                <span class="text-brand-red-500">*</span>
+            <% end %>
+            <%= f.number_field :quantity_returned, class: "form-input block w-full", min: 0, required: true,
+                data: {action: "keypress->inventory-new-entry#preventNegativeNumber"} %>
+        </div>
+
+        <div>
             <%= f.label :quantity_destroyed do %>
-                <span class="text-gray-500"> Quantity Destroyed/Returned </span>
+                <span class="text-gray-500"> Quantity Destroyed </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
             <%= f.number_field :quantity_destroyed, class: "form-input block w-full", min: 0, required: true,

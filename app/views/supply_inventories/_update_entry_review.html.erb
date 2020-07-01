@@ -51,7 +51,7 @@
                                 <span class="text-gray-500"> Event Type </span>
                                 <span class="text-brand-red-500">*</span>
                             <% end %>
-                            <%= f.select :event_type, ["s1", "s2"], {prompt: "Select"}, {class: "block form-select w-full", required: true, disabled: true, id: "modal_supply_inventory_event_event_type"} %>
+                            <%= f.select :event_type, INVENTORY_EVENT_TYPES, {prompt: "Select"}, {class: "block form-select w-full", required: true, disabled: true, id: "modal_supply_inventory_event_event_type"} %>
                         </div>
 
                         <div>
@@ -79,8 +79,16 @@
                         </div>
 
                         <div>
+                            <%= f.label :quantity_returned do %>
+                                <span class="text-gray-500"> Quantity Returned </span>
+                                <span class="text-brand-red-500">*</span>
+                            <% end %>
+                            <%= f.number_field :quantity_returned, class: "form-input block w-full", required: true, disabled: true, id: "modal_supply_inventory_event_quantity_returned" %>
+                        </div>
+
+                        <div>
                             <%= f.label :quantity_destroyed do %>
-                                <span class="text-gray-500"> Quantity Destroyed/Returned </span>
+                                <span class="text-gray-500"> Quantity Destroyed </span>
                                 <span class="text-brand-red-500">*</span>
                             <% end %>
                             <%= f.number_field :quantity_destroyed, class: "form-input block w-full", required: true, disabled: true, id: "modal_supply_inventory_event_quantity_destroyed" %>
