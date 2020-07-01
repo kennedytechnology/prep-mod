@@ -13,7 +13,7 @@ US_RACES = ["American Indian or Alaska Native", "Asian", "Black or African-Ameri
 INSURANCE_TYPES = ["Private Insurance", "Medicaid/Medical Assistance", "Medicare", "No Insurance"]
 RELATIONSHIP_TYPES = ["Self", "Spouse", "Other"]
 
-CLINIC_APPOINTMENT_INTERVALS = [1, 2, 3, 5, 7, 10, 12, 15, 5, 10, 15, 20, 30, 45, 60]
+CLINIC_APPOINTMENT_INTERVALS = [1, 2, 3, 5, 7, 10, 12, 15, 20, 30, 45, 60]
 
 CLINIC_EVENTS = [
   { name: "Tested",

@@ -145,7 +145,10 @@
                         <span> Date of Issue </span>
                         <span class="field-required">*</span>
                         <% end %>
-                        <%= f.date_field :license_date_of_issue, class: "form-input w-full", placeholder: "MM/DD/YYYY", required: true, data: {action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
+                        <%= f.text_field :license_date_of_issue, value: @provider_enrollment.license_date_of_issue.try(:strftime, "%Y/%m/%d"), class: "form-input w-full", required: true,
+                                    data: { controller: "flatpickr",
+                                            flatpickr_max_date: Date.today,
+                                            action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
                     </div>
 
                     <div>

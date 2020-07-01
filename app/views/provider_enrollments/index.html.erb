@@ -1,31 +1,29 @@
-<h2 class="main-title"> Provider Enrollment Requests </h2>
+<h2 class="main-title"> Provider and Business Enrollment </h2>
 
 <div class="flex justify-end mb-6">
-    <%= link_to "New Provider Enrollment", new_provider_enrollment_path, class: "button-primary" %>
+    <%= link_to "Add New Provider/Business", new_provider_enrollment_path, class: "button-primary" %>
 </div>
 
 <table class="table">
     <thead>
         <tr>
-            <th> Name </th>
-            <th> Date of Request </th>
-            <th> Practice Name </th>
-            <th> Specialty </th>
+            <th> Request date </th>
+            <th> Entity Name </th>
+            <th> Entity Type </th>
             <th> County </th>
-            <th> Vaccinator </th>
+            <th> Requested Service </th>
             <th> Action </th>
         </tr>
     </thead>
     <tbody>
         <% @provider_enrollments.each do |provider| %>
         <tr>
-            <td> <%= provider.first_name %> <%= provider.last_name %> </td>
             <td> <%= provider.created_at.strftime("%m-%d-%Y") %> </td>
             <td> <%= provider.practice_name %> </td>
-            <td> <%= provider.medical_specialty %> </td>
+            <td> Provider </td>
             <td> <%= provider.county %> </td>
-            <td> <%= provider.does_provide_vaccination %> </td>
-            <td> <%= link_to "Check Request", edit_provider_enrollment_path(provider), class: "button-action" %> </td>
+            <td> <%= provider.clinic_services.pluck(:name).join(", ") %> </td>
+            <td> <%= link_to "Review Request", edit_provider_enrollment_path(provider), class: "button-action" %> </td>
         </tr>
         <% end %>
     </tbody>

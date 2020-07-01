@@ -40,19 +40,29 @@ Rails.application.routes.draw do
   get "/reports/employers", to: "reports#employers"
   get "/reports/supply_inventories", to: "reports#supply_inventories"
   get "/reports/customized", to: "reports#customized"
+  get "/reports/news_and_notifications", to: "reports#news_and_notifications"
 
   namespace :reports do
     get "providers_by_county"
     get "providers_by_specialty"
     get "uptake_by_zip_code"
     get "available_and_completed_appointments"
+    get "employers_state"
+    get "employers_patients_tested_company_name"
+    get "employers_patients_tested_city"
+    get "available_appointments_by_county"
+    get "completed_appointments_by_county"
     get "snapshot_tested"
     get "supply_inventories_by_county"
     get "supply_inventories_by_venue_name"
+    get "appointments_by_county"
+    get "available_and_completed_appointments_by_county"
     get "capacity_available_testing_appointments"
     get "capacity_scheduled_appointments"
     get "capacity_available_testing_appointments_by_county"
     get "capacity_scheduled_appointments_by_county"
+    get "news_signups_by_occupation"
+    get "news_signups_with_chronic_health_condition"
   end
 
   namespace :public do
