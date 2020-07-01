@@ -40,7 +40,6 @@ class ProviderEnrollmentsController < ApplicationController
 
     respond_to do |format|
       if params[:reviewed] == "false"
-        @provider_enrollment.update(provider_enrollment_params)
         format.js { render 'provider_enrollments/preview_form', locals: {provider_enrollment_params: provider_enrollment_params} }
       else 
         if @provider_enrollment.update(provider_enrollment_params)
