@@ -13,7 +13,9 @@
 <% end %>
 
 <div data-controller="review-form">
-    <%= form_with model: @clinic, remote: true, data: {target: "review-form.form"} do |f| %>
+    <%= form_with model: @clinic, remote: true, 
+        data: {action: "change->review-form#onDisableFormPage keyup->review-form#onDisableFormPage",
+               target: "review-form.form"} do |f| %>
         <div class="field-fullwidth">
             <p class="title">Is clinic public or private? <span class="field-required">*</span> </p>
             <div class="w-3/12 radio-buttons-container">
@@ -60,7 +62,7 @@
                     <span> Venue Type </span>
                     <span class="field-required">*</span>
                 <% end %>
-                <%= f.select :venue_type, VENUE_TYPES, {prompt: "Select"}, {class: "form-select w-full"} %>
+                <%= f.select :venue_type, VENUE_TYPES, {prompt: "Select"}, {class: "form-select w-full", required: true, "data-target": "review-form.validates" } %>
             </div>
         </div>
 
@@ -71,8 +73,8 @@
                     <span> Clinic Date </span>
                     <span class="field-required">*</span>
                 <% end %>
-                <%= f.text_field :clinic_date, class: "form-input", placeholder: "MM/DD/YYYY",
-                            data: {
+                <%= f.text_field :clinic_date, class: "form-input", placeholder: "MM/DD/YYYY", required: true,
+                            data: { target: "review-form.validates",
                                     controller: "flatpickr",
                                     flatpickr_default_date: @clinic.clinic_date.strftime("%Y-%m-%d")
                                     }
@@ -110,28 +112,28 @@
                     <span> County </span>
                     <span class="field-required">*</span>
                 <% end %>
-                <%= f.select :county, COUNTIES, {prompt: "Select"}, {class: "form-select w-full"} %>
+                <%= f.select :county, COUNTIES, {prompt: "Select"}, {class: "form-select w-full", required: true, "data-target": "review-form.validates"} %>
 
                 <%= f.label :venue_name, class: "block" %>
-                <%= f.text_field :venue_name, placeholder: "Location", class: "form-input w-full" %>
+                <%= f.text_field :venue_name, placeholder: "Location", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
 
                 <%= f.label :address, class: "block" %>
-                <%= f.text_field :address, id: "autocomplete", onFocus: "geolocate()", class: "form-input w-full", placeholder: "Address" %>
+                <%= f.text_field :address, id: "autocomplete", onFocus: "geolocate()", class: "form-input w-full", placeholder: "Address", required: true, "data-target": "review-form.validates" %>
                 
                 <%= render partial: "public/clinics/google_maps_script" %>
 
                 <div class="grid grid-cols-3 gap-4">
                     <div>
                         <%= f.label :zip, "Zip Code", class: "block" %>
-                        <%= f.text_field :zip, placeholder: "Zip", id: "postal_code", class: "form-input" %>
+                        <%= f.text_field :zip, placeholder: "Zip", id: "postal_code", class: "form-input", required: true, "data-target": "review-form.validates" %>
                     </div>
                     <div>
                         <%= f.label :city, class: "block" %>
-                        <%= f.text_field :city, placeholder: "City", id: "locality", class: "form-input" %>
+                        <%= f.text_field :city, placeholder: "City", id: "locality", class: "form-input", required: true, "data-target": "review-form.validates" %>
                     </div>
                     <div>
                         <%= f.label :state, class: "block" %>
-                        <%= f.text_field :state, placeholder: "State", id: "administrative_area_level_1", class: "form-input" %>
+                        <%= f.text_field :state, placeholder: "State", id: "administrative_area_level_1", class: "form-input", required: true, "data-target": "review-form.validates" %>
                     </div>
                 </div>
             </div>
@@ -142,29 +144,29 @@
             <p class="label"> Appointments available <span class="field-required">*</span> </p>
             <div class="w-2/4 radio-buttons-container mb-4">
                 <div>
-                    <%= f.radio_button :appointments_available, "yes_required", class: "form-radio" %>
+                    <%= f.radio_button :appointments_available, "yes_required", class: "form-radio", required: true, "data-target": "review-form.validates" %>
                     <%= f.label :appointments_available, "Yes, required", for: "clinic_appointments_available_yes_required" %>
                 </div>
                 
                 <div>
-                    <%= f.radio_button :appointments_available, "yes_optional", class: "form-radio" %>
+                    <%= f.radio_button :appointments_available, "yes_optional", class: "form-radio", required: true, "data-target": "review-form.validates" %>
                     <%= f.label :appointments_available, "Yes, optional", for: "clinic_appointments_available_yes_optional" %>
                 </div>
 
                 <div>
-                    <%= f.radio_button :appointments_available, "no_walk_in", class: "form-radio" %>
+                    <%= f.radio_button :appointments_available, "no_walk_in", class: "form-radio", required: true, "data-target": "review-form.validates" %>
                     <%= f.label :appointments_available, "No (Walk-In)", for: "clinic_appointments_available_no_walk_in" %>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <%= f.label :appointment_frequency_minutes, "Appointment Frequency: Every", class: "block" %>
+                    <%= f.label :appointment_frequency_minutes, "Appointment Frequency: Every", class: "block", required: true, "data-target": "review-form.validates" %>
                     <%= f.select :appointment_frequency_minutes, CLINIC_APPOINTMENT_INTERVALS, {prompt: "Minutes"}, {class: "form-select w-full"} %>
                 </div>
 
                 <div>
-                    <%= f.label :appointment_slots, "Appointment Slots", class: "block" %>
+                    <%= f.label :appointment_slots, "Appointment Slots", class: "block", required: true, "data-target": "review-form.validates" %>
                     <%= f.select :appointment_slots, (1..50), {prompt: "Select"}, {class: "form-select w-full"} %>
                 </div>
             </div>
@@ -177,13 +179,13 @@
                     <span> Contact Person </span>
                     <span class="field-required">*</span>
                 <% end %>
-                <%= f.text_field :contact_person, placeholder: "Contact Person", class: "form-input w-full" %>
+                <%= f.text_field :contact_person, placeholder: "Contact Person", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
 
                 <%= f.label :backup_contact_person do %>
                     <span> Back-Up Contact Person </span>
                     <span class="field-required">*</span>
                 <% end %>
-                <%= f.text_field :backup_contact_person, placeholder: "Back-Up Contact Person", class: "form-input w-full" %>
+                <%= f.text_field :backup_contact_person, placeholder: "Back-Up Contact Person", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
             </div>
             <div>
                 <h1 class="title"> &nbsp; </h1>
@@ -191,13 +193,13 @@
                     <span> Contact Phone Number </span>
                     <span class="field-required">*</span>
                 <% end %>
-                <%= f.text_field :contact_phone_number, placeholder: "Contact Number", class: "form-input w-full" %>
+                <%= f.text_field :contact_phone_number, placeholder: "Contact Number", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
 
                 <%= f.label :backup_contact_phone_number do %>
                     <span> Back-Up Contact Phone Number </span>
                     <span class="field-required">*</span>
                 <% end %>
-                <%= f.text_field :backup_contact_phone_number, placeholder: "Back-Up Contact Number", class: "form-input w-full" %>
+                <%= f.text_field :backup_contact_phone_number, placeholder: "Back-Up Contact Number", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
             </div>
         </div>
 
@@ -206,7 +208,7 @@
             <div class="grid grid-cols-2 gap-4 items-start">
                 <div class="col-span-2">
                     <%= f.label :incidents_comments, "Incidents Comments", class: "block" %>
-                    <%= f.text_area :incidents_comments, placeholder: "Enter Details Here", class: "form-textarea w-1/2" %>
+                    <%= f.text_area :incidents_comments, placeholder: "Enter Details Here", class: "form-textarea w-1/2", required: true, "data-target": "review-form.validates" %>
                 </div>
             </div>
         </div>    
@@ -216,7 +218,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <%= f.label :students_registered, "Number of Patients Registered", class: "block" %>
-                    <%= f.number_field :students_registered, placeholder: "Number of Patients Registered", class: "form-input w-full" %>
+                    <%= f.number_field :students_registered, placeholder: "Number of Patients Registered", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
                 </div>
 
                 <div>
@@ -224,7 +226,7 @@
                         <span> Lead Tester’s Name </span>
                         <span class="field-required">*</span>
                     <% end %>
-                    <%= f.text_field :lead_vaccinator_name, placeholder: "Lead Tester's Name", class: "form-input w-full" %>
+                    <%= f.text_field :lead_vaccinator_name, placeholder: "Lead Tester's Name", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
                 </div>
             </div>
 
@@ -275,7 +277,7 @@
         <%= hidden_field_tag "reviewed", false, id: "reviewed_form_hidden_tag" %>
 
         <div class="flex justify-end mt-8">
-            <%= submit_tag 'Preview & Submit', name: 'preview_button', class: "button-primary", data: {action: "click->review-form#openModal"} %>
+            <%= submit_tag 'Preview & Submit', name: 'preview_button', class: "button-primary", data: {action: "click->review-form#openModal", target: "review-form.submitButton"} %>
             <%= link_to "Cancel", clinics_path, class: "button-primary" %>
         </div>
     <% end %>
