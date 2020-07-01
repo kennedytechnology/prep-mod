@@ -1,1 +1,1 @@
-document.getElementById("modalContent").innerHTML = "<%= j render(partial: 'provider_enrollments/review_form') %>";
+document.getElementById("modalContent").innerHTML = "<%= j render(partial: 'provider_enrollments/review_form', locals: {provider_enrollment_params: provider_enrollment_params }) %>";
