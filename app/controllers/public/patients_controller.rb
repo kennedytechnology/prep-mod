@@ -153,7 +153,7 @@ class Public::PatientsController < ApplicationController
       :signatory_first_name, :signatory_last_name,
       :relation_to_patient_for_consent, :consent_date, :password,
       :password_confirmation, :notify_via_sms, :notify_via_email,
-      :appointment_time, :occupation, :race, :signature_data,
+      :appointment_time, :occupation, :race, :signature_data, :has_other_reason_explanation,
       :insurance_card_front, :insurance_card_back, employer_ids: [],
       patient_family_members_attributes: [:id, :first_name, :middle_initial,
         :last_name, :mothers_maiden_name, :race, :date_of_birth,

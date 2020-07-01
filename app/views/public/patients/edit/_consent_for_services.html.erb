@@ -107,7 +107,7 @@
 <div class="field-fullwidth">
     <div class="w-3/12">
         <%= f.label :relation_to_patient_for_insurance, "Relationship to Patient", class: "block" %>
-        <%= f.select :relation_to_patient_for_insurance, ["Self","Parent/Guardian","Other"], {}, {class: "form-select w-full", data: {action: "change->inventory-new-entry#updateModalField"}} %>
+        <%= f.select :relation_to_patient_for_insurance, ["Self","Parent/Guardian","Other"], {}, {class: "form-select w-full"} %>
     </div>
 </div>
 
