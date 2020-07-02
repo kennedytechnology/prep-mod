@@ -26,6 +26,13 @@ class EmployersController < InheritedResources::Base
     end
   end
 
+  def destroy
+    @patient = Patient.find(params[:id])
+    @patient.appointments.each(&:destroy)
+    session[:alert] = "The patient was deleted."
+    redirect_back fallback_location: "/employers/#{params[:id]}/activity"
+  end
+
   private
 
     def employer_params

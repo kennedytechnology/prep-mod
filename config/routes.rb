@@ -96,7 +96,7 @@ Rails.application.routes.draw do
   resources :providers
   resources :news_signups
   resources :messages, only: [:new, :create]
-  resources :employers, only: [:index, :new, :create] do
+  resources :employers, only: [:index, :new, :create, :destroy] do
     member do
       get :activity
     end
