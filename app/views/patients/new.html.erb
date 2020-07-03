@@ -1,10 +1,13 @@
 <h1 class="main-title">Create a COVID-19 Testing Referral</h1>
 
-<%= form_for(@patient, remote: false, data: {controller: "testing-referral-review-form"}) do |f| %>
+<%= form_for(@patient, remote: false) do |f| %>
     <div class="field-side-by-side">
         <div>
-            <%= f.label :county, class: "block" %>
-            <%= f.select :county, options_for_select(COUNTIES, @patient.county),{prompt: "Select"}, {class: "w-full form-select",  data: {action: "change->testing-referral-review-form#updateModalField"}} %>
+            <%= f.label :county, class: "block" do %>
+                <span> County </span>
+                <span class="field-required"> * </span>
+            <% end %>
+            <%= f.select :county, options_for_select(COUNTIES, @patient.county),{prompt: "Select"}, {class: "w-full form-select" ,required: true} %>
         </div>
         <div></div>
     </div>
@@ -12,73 +15,108 @@
     <div class="field-fullwidth">
         <div class="grid grid-cols-4 gap-4">
             <div>
-                <%= f.label :first_name, "Patient's First Name", class: "block" %>
-                <%= f.text_field :first_name, class: "w-full form-input", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
+                <%= f.label :first_name, class: "block" do %>
+                    <span> Patient's First Name </span>
+                    <span class="field-required"> * </span>
+                <% end %>
+                <%= f.text_field :first_name, class: "w-full form-input" , required: true %>
             </div>
             <div>
                 <%= f.label :middle_initial, class: "block" %>
-                <%= f.text_field :middle_initial, class: "w-full form-input", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
+                <%= f.text_field :middle_initial, class: "w-full form-input" %>
             </div>
             <div>
-                <%= f.label :last_name, "Patient's Last Name", class: "block" %>
-                <%= f.text_field :last_name, class: "w-full form-input", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
+                <%= f.label :last_name, class: "block" do %>
+                    <span> Patient's Last Name </span>
+                    <span class="field-required"> * </span>
+                <% end %>
+                <%= f.text_field :last_name, class: "w-full form-input", required: true %>
             </div>
             <div>
-                <%= f.label :mothers_maiden_name, "Mother's Maiden Name", class: "block" %>
-                <%= f.text_field :mothers_maiden_name, class: "w-full form-input", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
+                <%= f.label :mothers_maiden_name, class: "block" do %>
+                    <span> Mother's Maiden Name </span>
+                    <span class="field-required"> * </span>
+                <% end %>
+                <%= f.text_field :mothers_maiden_name, class: "w-full form-input", required: true %>
             </div>
         </div>
     </div>
-     <div class="field-side-by-side">
+    <div class="field-side-by-side">
         <div class="flex">
             <div class="w-7/12 mr-2">
-                <%= f.label :date_of_birth, "Date of Birth", class: "block" %>
-                <%= f.date_select :date_of_birth, {order: [:month, :day, :year], start_year: Date.current.year - 99, end_year: Date.current.year, include_blank: true}, class: "form-select",
-                                    data: { action: "change->testing-referral-review-form#updateModalField keyup->testing-referral-review-form#updateModalField" } %>
+                <%= f.label :date_of_birth, class: "block" do %>
+                    <span> Date of birth </span>
+                    <span class="field-required"> * </span>
+                <% end %>
+                <%= f.date_select :date_of_birth, {order: [:month, :day, :year], start_year: Date.current.year - 99, end_year: Date.current.year, include_blank: true}, class: "form-select", required: true %>
             </div>
             <div class="w-2/12 mr-2">
                 <%= f.label :age, class: "block" %>
-                <%= f.number_field :age, class: "w-full form-input", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
+                <%= f.number_field :age, class: "w-full form-input" %>
             </div>
             <div class="flex-1">
-                <%= f.label :sex, "Gender", class: "block" %>
-                <%= f.select :sex, [["Male", "M"], ["Female", "F"], ["Other", "O"]], {}, {class: "w-full form-select", data: {action: "keyup->testing-referral-review-form#updateModalField"}} %>
+                <%= f.label :sex, class: "block" do %>
+                    <span> Gender </span>
+                    <span class="field-required"> * </span>
+                <% end %>
+                <%= f.select :sex, [["Male", "M"], ["Female", "F"], ["Other", "O"]], {}, {class: "w-full form-select", required: true} %>
             </div>
         </div>
         <div>
             <%# TODO: Check why this is state instead of race %>
-            <%= f.label :race, "Race", class: "block" %>
-            <%= f.select :race, options_for_select(US_RACES, @patient.state), {prompt: "Select"}, {class: "w-full form-select", data: {action: "keyup->testing-referral-review-form#updateModalField"}} %>
+            <%= f.label :race, class: "block" do %>
+                    <span> Race </span>
+                    <span class="field-required"> * </span>
+                <% end %>
+            <%= f.select :race, options_for_select(US_RACES, @patient.state), {prompt: "Select"}, {class: "w-full form-select", required: true} %>
         </div>
     </div>
 
     <div class="field-fullwidth">
         <div class="grid grid-cols-5 gap-4">
             <div>
-                <%= f.label :address, class: "block" %>
-                <%= f.text_field :address, placeholder: "", id: "autocomplete", onFocus: "geolocate()", class: "w-full form-input", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
+                <%= f.label :address, class: "block" do %>
+                    <span> Address </span>
+                    <span class="field-required"> * </span>
+                <% end %>
+                <%= f.text_field :address, placeholder: "", id: "autocomplete", onFocus: "geolocate()", class: "w-full form-input", required: true %>
                 <%= render partial: "public/clinics/google_maps_script" %>
             </div>
             <div>
-                <%= f.label :city, class: "block" %>
-                <%= f.text_field :city, class: "w-full form-input", id: "locality", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
+                <%= f.label :city, class: "block" do %>
+                    <span> City </span>
+                    <span class="field-required"> * </span>
+                <% end %>
+                <%= f.text_field :city, class: "w-full form-input", id: "locality" %>
             </div>
             <div>
-                <%= f.label :state, class: "block" %>
-                <%= f.select :state, options_for_select(US_STATES, @patient.state), {prompt: "Select"}, {class: "w-full form-select", id: "administrative_area_level_1", data: {action: "change->testing-referral-review-form#updateModalField"}} %>
+                <%= f.label :state, class: "block" do %>
+                    <span> State </span>
+                    <span class="field-required"> * </span>
+                <% end %>
+                <%= f.select :state, options_for_select(US_STATES, @patient.state), {prompt: "Select"}, {class: "w-full form-select", id: "administrative_area_level_1", required: true} %>
             </div>
             <div>
-                <%= f.label :zip_code, "Zip Code", class: "block" %>
-                <%= f.text_field :zip_code, class: "w-full form-input", id: "postal_code", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
+                <%= f.label :zip_code, class: "block" do %>
+                    <span> Zip Code </span>
+                    <span class="field-required"> * </span>
+                <% end %>
+                <%= f.text_field :zip_code, class: "w-full form-input", id: "postal_code", required: true %>
             </div>
             <div>
-                <%= f.label :phone_number, "Mobile or Daytime Number", class: "block" %>
-                <%= f.text_field :phone_number, class: "w-full form-input", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
+                <%= f.label :phone_number, class: "block" do %>
+                    <span> Mobile or Daytime Number </span>
+                    <span class="field-required"> * </span>
+                <% end %>
+                <%= f.text_field :phone_number, class: "w-full form-input", required: true %>
             </div>
         </div>
         <div class="w-4/12">
-            <%= f.label :email, "Email Address", class: "block" %>
-            <%= f.email_field :email, class: "w-full form-input", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
+            <%= f.label :email, class: "block" do %>
+                <span> Email Address </span>
+                <span class="field-required"> * </span>
+            <% end %>
+            <%= f.email_field :email, class: "w-full form-input", required: true %>
         </div>
     </div>
 
@@ -87,12 +125,12 @@
             <h1 class="title">Send Patient Invitation Via</h1>
             <div class="flex">
                 <div class="mr-6">
-                    <%= f.check_box :notify_via_sms, class: "form-checkbox", data: {action: "click->testing-referral-review-form#updateModalCheckboxField"} %> 
+                    <%= f.check_box :notify_via_sms, class: "form-checkbox" %> 
                     <%= f.label :notify_via_sms, "SMS" %>
                 </div>
 
                 <div>
-                    <%= f.check_box :notify_via_email, class: "form-checkbox", data: {action: "click->testing-referral-review-form#updateModalCheckboxField"} %> 
+                    <%= f.check_box :notify_via_email, class: "form-checkbox" %> 
                     <%= f.label :notify_via_email, "Email" %>
                 </div>
             </div>
@@ -117,6 +155,4 @@
     <div class="flex justify-end my-4">
         <%= f.submit "Create", class: "button-primary" %>
     </div>
-
-    <%= render partial: "patients/review_form", locals: {f: f} %>
 <% end %>
