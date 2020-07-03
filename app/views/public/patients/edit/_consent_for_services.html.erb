@@ -2,7 +2,7 @@
     <h2 class="text-lg mb-1 font-bold"> Share Your COVID-19 Results With Your Provider, School, or Employer </h2>
     <p class="mb-2 ml-2">
         <label class="text-base text-black">
-            <%= f.check_box :sharing_results_authorized %>
+            <%= f.check_box :sharing_results_authorized, required: true %>
             I authorize the following to access the results of ONLY my COVID-19 screening, testing, or vaccination services.
         </label>
     </p>
@@ -106,7 +106,10 @@
 
 <div class="field-fullwidth">
     <div class="w-3/12">
-        <%= f.label :relation_to_patient_for_insurance, "Relationship to Patient", class: "block" %>
+        <%= f.label :relation_to_patient_for_insurance, class: "block" do %>
+            <span> Relationship to Patient </span>
+            <span class="field-required">*</span>
+        <% end %>
         <%= f.select :relation_to_patient_for_insurance, ["Self","Parent/Guardian","Other"], {}, {class: "form-select w-full"} %>
     </div>
 </div>
