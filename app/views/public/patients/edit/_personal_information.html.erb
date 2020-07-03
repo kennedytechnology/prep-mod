@@ -2,8 +2,11 @@
 
 <div class="field-side-by-side">
     <div>
-        <%= f.label :county %>
-        <%= f.select :county, options_for_select(COUNTIES.sort, @patient.county),{include_blank: true}, {class: "w-full form-select"}%>
+        <%= f.label :county do %>
+            <span> County </span>
+            <span class="field-required">*</span>
+        <% end %>
+        <%= f.select :county, options_for_select(COUNTIES.sort, @patient.county),{include_blank: true}, {class: "w-full form-select", required: true} %>
     </div>
     <div> </div>
 </div>
@@ -11,8 +14,11 @@
 <div class="field-side-by-side">
     <div class="flex">
         <div class="w-9/12 mr-2">
-            <%= f.label :first_name, "First Name" %>
-            <%= f.text_field :first_name, disabled: @patient.access_code.present?, class: "form-input w-full" %>
+            <%= f.label :first_name do %>
+                <span> First Name </span>
+                <span class="field-required">*</span>
+            <% end %>
+            <%= f.text_field :first_name, disabled: @patient.access_code.present?, class: "form-input w-full", required: true %>
         </div>
         <div class="flex-1">
             <%= f.label :middle_initial, "Middle Initial" %>
@@ -21,12 +27,18 @@
     </div>
     <div class="flex">
         <div class="flex-1 mr-2">
-            <%= f.label :last_name, "Last Name" %>
-            <%= f.text_field :last_name, disabled: @patient.access_code.present?, class: "w-full form-input" %>
+            <%= f.label :last_name do %>
+                <span> Last Name </span>
+                <span class="field-required">*</span>
+            <% end %>
+            <%= f.text_field :last_name, disabled: @patient.access_code.present?, class: "w-full form-input", required: true %>
         </div>
         <div class="flex-1">
-            <%= f.label :mothers_maiden_name, "Mother's Maiden Name" %>
-            <%= f.text_field :mothers_maiden_name, class: "form-input w-full" %>
+            <%= f.label :mothers_maiden_name do %>
+                <span> Mother's maiden name </span>
+                <span class="field-required">*</span>
+            <% end %>
+            <%= f.text_field :mothers_maiden_name, class: "form-input w-full", required: true %>
         </div>
     </div>
 </div>
@@ -34,8 +46,11 @@
 <div class="field-side-by-side" data-controller="age-calculator">
     <div class="flex">
         <div class="flex-1 mr-2">
-            <%= f.label :date_of_birth, "Date Of Birth" %> <% %>
-            <%= f.text_field :date_of_birth, value: @patient.date_of_birth.try(:strftime, "%Y/%m/%d"), class: "w-full form-input",
+            <%= f.label :date_of_birth do %> 
+                <span> Date of Birth </span>
+                <span class="field-required">*</span>
+            <% end %>
+            <%= f.text_field :date_of_birth, value: @patient.date_of_birth.try(:strftime, "%Y/%m/%d"), class: "w-full form-input", required: true,
                                 data: { controller: "flatpickr",
                                         flatpickr_min_date: Date.today - 80.years,
                                         flatpickr_max_date: Date.today,
@@ -43,22 +58,34 @@
                                         target: "age-calculator.dobField"} %>
         </div>
         <div class="flex-1 mr-2">
-            <%= f.label :age %>
-            <%= f.text_field :age, class: "w-full form-input", data: {target: "age-calculator.ageField"} %>
+            <%= f.label :age do %>
+                <span> Age </span>
+                <span class="field-required">*</span>
+            <% end %>
+            <%= f.text_field :age, class: "w-full form-input", data: {target: "age-calculator.ageField"}, required: true %>
         </div>
         <div class="flex-1">
-            <%= f.label :sex, "Gender" %>
-            <%= f.select :sex, [["Male", "M"], ["Female", "F"], ["Other", "O"]], {}, {class: "form-select w-full"} %>
+            <%= f.label :sex do %>
+                <span> Gender </span>
+                <span class="field-required">*</span>
+            <% end %>
+            <%= f.select :sex, [["Male", "M"], ["Female", "F"], ["Other", "O"]], {include_blank: true}, {class: "form-select w-full", required: true} %>
         </div>
     </div>
     <div class="flex">
         <div class="flex-1 mr-2">
-            <%= f.label :race %>
-            <%= f.select :race, options_for_select(US_RACES, @patient.race), {prompt: "--"}, {class: "form-select w-full"} %>
+            <%= f.label :race do %>
+                <span> Race </span>
+                <span class="field-required">*</span>
+            <% end %>
+            <%= f.select :race, options_for_select(US_RACES, @patient.race), {prompt: "--"}, {class: "form-select w-full", required: true} %>
         </div>
         <div class="flex-1">
-            <%= f.label :occupation %>
-            <%= f.select :occupation, options_for_select(PATIENT_OCCUPATIONS, @patient.occupation), {prompt: "--"}, {class: "form-select w-full"} %>
+            <%= f.label :occupation do %>
+                <span> Occupation </span>
+                <span class="field-required">*</span>
+            <% end %>
+            <%= f.select :occupation, options_for_select(PATIENT_OCCUPATIONS, @patient.occupation), {prompt: "--"}, {class: "form-select w-full", required: true} %>
         </div>
     </div>
 </div>
@@ -66,35 +93,53 @@
 <div class="field-side-by-side">
     <div class="flex">
         <div class="flex-1 mr-2">
-            <%= f.label :address %>
-            <%= f.text_field :address, id: "autocomplete", onFocus: "geolocate()", class: "form-input w-full" %>
+            <%= f.label :address do %>
+                <span> Address </span>
+                <span class="field-required">*</span>
+            <% end %>
+            <%= f.text_field :address, id: "autocomplete", onFocus: "geolocate()", class: "form-input w-full", required: true %>
             <%= render partial: "public/clinics/google_maps_script" %>
         </div>
         <div class="flex-1">
-            <%= f.label :city %>
-            <%= f.text_field :city, id: "locality", class: "form-input w-full" %>
+            <%= f.label :city do %>
+                <span> City </span>
+                <span class="field-required">*</span>
+            <% end %>
+            <%= f.text_field :city, id: "locality", class: "form-input w-full", required: true %>
         </div>
     </div>
     <div class="flex">
         <div class="flex-1 mr-2">
-            <%= f.label :state %>
-            <%= f.select :state, options_for_select(US_STATES, @patient.state), {}, {id: "administrative_area_level_1", class: "form-select w-full"} %>
+            <%= f.label :state do %>
+                <span> State </span>
+                <span class="field-required">*</span>
+            <% end %>
+            <%= f.select :state, options_for_select(US_STATES, @patient.state), {include_blank: true}, {id: "administrative_area_level_1", class: "form-select w-full", required: true} %>
         </div>
         <div class="flex-1">
-            <%= f.label :zip_code, "Zip Code" %>
-            <%= f.text_field :zip_code, id: "postal_code", class: "form-input w-full" %>
+            <%= f.label :zip_code do %>
+                <span> Zip Code </span>
+                <span class="field-required">*</span>
+            <% end %>
+            <%= f.text_field :zip_code, id: "postal_code", class: "form-input w-full", required: true %>
         </div>
     </div>
 </div>
 
 <div class="field-side-by-side">
     <div>
-        <%= f.label :email, "Email Address" %>
-        <%= f.text_field :email, disabled: @patient.access_code.present?, class: "form-input w-full" %>
+        <%= f.label :email do %>
+            <span> Email Address </span>
+            <span class="field-required">*</span>
+        <% end %>
+        <%= f.text_field :email, disabled: @patient.access_code.present?, class: "form-input w-full", required: true %>
     </div>
     <div>
-        <%= f.label :phone_number, "Mobile or Daytime Number" %>
-        <%= f.text_field :phone_number, class: "form-input w-full" %>
+        <%= f.label :phone_number do %>
+            <span> Mobile or Daytime Number </span>
+            <span class="field-required">*</span>
+        <% end %>
+        <%= f.text_field :phone_number, class: "form-input w-full", required: true %>
     </div>
 </div>
 
