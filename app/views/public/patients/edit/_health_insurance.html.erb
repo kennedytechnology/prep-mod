@@ -46,8 +46,11 @@
                                     flatpickr_max_date: Date.today} %>
     </div>
     <div>
-        <%= f.label :relation_to_patient_for_consent, "Relationship To Patient", class: "block" %>
-        <%= f.select :relation_to_patient_for_consent, options_for_select(RELATIONSHIP_TYPES, @patient.relation_to_patient_for_consent),{}, {class: "w-full form-select"} %>
+        <%= f.label :relation_to_patient_for_consent, class: "block" do %>
+            <span> Relationship To Patient </span>
+            <span class="field-required">*</span>
+        <% end %>
+        <%= f.select :relation_to_patient_for_consent, options_for_select(RELATIONSHIP_TYPES, @patient.relation_to_patient_for_consent),{}, {class: "w-full form-select", required: true} %>
     </div>
 </div>
 

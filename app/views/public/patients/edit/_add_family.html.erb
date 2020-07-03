@@ -7,28 +7,43 @@
   <div class="family-member-form mt-6 border-b">
     <div class="flex">
       <div class="inline-field-wrapper">
-          <%= fm.label :first_name, "Patient's First Name" %>
-          <%= fm.text_field :first_name, class: "w-full form-input" %>
+          <%= fm.label :first_name do %>
+            <span> Patient's First Name </span>
+            <span class="field-required">*</span>
+          <% end %>
+          <%= fm.text_field :first_name, class: "w-full form-input", required: true %>
       </div>
       <div class="inline-field-wrapper inline-field-wrapper-narrow">
           <%= fm.label :middle_initial %>
           <%= fm.text_field :middle_initial, class: "w-full form-input" %>
       </div>
       <div class="inline-field-wrapper">
-          <%= fm.label :last_name, "Patient's Last Name" %>
-          <%= fm.text_field :last_name, class: "w-full form-input" %>
+          <%= fm.label :last_name do %>
+            <span> Patient's Last Name </span>
+            <span class="field-required">*</span>
+          <% end %>
+          <%= fm.text_field :last_name, class: "w-full form-input", required: true %>
       </div>
       <div class="inline-field-wrapper">
-          <%= fm.label :mothers_maiden_name, "Mother's Maiden Name" %>
-          <%= fm.text_field :mothers_maiden_name, class: "w-full form-input" %>
+          <%= fm.label :mothers_maiden_name do %>
+            <span> Mother's Maiden Name </span>
+            <span class="field-required">*</span>
+          <% end %>
+          <%= fm.text_field :mothers_maiden_name, class: "w-full form-input", required: true %>
       </div>
       <div class="inline-field-wrapper">
-        <%= fm.label :race %>
-        <%= fm.select :race, options_for_select(US_RACES, @patient.race), {prompt: "--"}, {class: "form-select w-full"} %>
+        <%= fm.label :race do %>
+            <span> Race </span>
+            <span class="field-required">*</span>
+        <% end %>
+        <%= fm.select :race, options_for_select(US_RACES, @patient.race), {prompt: "--"}, {class: "form-select w-full", required: true} %>
       </div>
       <div class="inline-field-wrapper">
-        <%= fm.label :date_of_birth, "Date Of Birth" %>
-        <%= fm.text_field :date_of_birth, class: "w-full form-input", 
+        <%= fm.label :date_of_birth do %>
+            <span> Date of Birth </span>
+            <span class="field-required">*</span>
+        <% end %>
+        <%= fm.text_field :date_of_birth, class: "w-full form-input", required: true,
                               data: { controller: "flatpickr",
                                       flatpickr_min_date: Date.today - 80.years,
                                       flatpickr_max_date: Date.today} %>
