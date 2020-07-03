@@ -1,4 +1,17 @@
 <h1 class="main-title font-bold"> Sign Up for News and Notifications About COVID-19 </h1>
+
+<% if @news_signup.errors.any? %>
+  <div id="error_explanation" class="p-4 border-2 bg-red-100 border-red-500 mb-4"> 
+    <h2 class="text-lg font-bold"><%= pluralize(@news_signup.errors.count, "error") %> prohibited this article from being saved:</h2>
+ 
+    <ul class="list-disc ml-8">
+    <% @news_signup.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_with model: @news_signup, url: public_news_signups_path, local: true do |f| %>
     <div class="field-fullwidth">
         <div class="grid grid-cols-4 gap-4">
@@ -110,8 +123,6 @@
         parent_form.onsubmit = function() {
             hidden_field.value = signaturePad.toDataURL()
         }
-        
-        
     </script>
 
     <div class="mt-10 flex justify-end">
