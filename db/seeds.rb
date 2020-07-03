@@ -309,6 +309,7 @@ Clinic.all.each do |clinic|
 end
 
 NEWS_SIGNUP_COUNT.times.each do |i|
+  # byebug
   NewsSignup.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -317,7 +318,7 @@ NEWS_SIGNUP_COUNT.times.each do |i|
     occupation: PATIENT_OCCUPATIONS.sample,
     topics: NEWS_TOPICS.sample(2),
     date_of_birth: Faker::Date.birthday,
-    chronic_health_condition: [true, false].sample
+    chronic_health_condition: Faker::Boolean.boolean
   )
 end
 

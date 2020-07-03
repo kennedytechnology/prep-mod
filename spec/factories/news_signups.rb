@@ -7,5 +7,6 @@ FactoryBot.define do
     zip_code { Faker::Address.zip_code }
     topics { NEWS_TOPICS }
     occupation {PATIENT_OCCUPATIONS.sample }
+    chronic_health_condition {  Faker::Boolean.boolean }
   end
 end

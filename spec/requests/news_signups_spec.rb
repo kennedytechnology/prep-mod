@@ -22,7 +22,8 @@ RSpec.describe "/public/news_signups", type: :request do
     date_of_birth: Faker::Date.birthday,
     zip_code: Faker::Address.zip_code,
     topics: NEWS_TOPICS,
-    occupation: PATIENT_OCCUPATIONS.sample}
+    occupation: PATIENT_OCCUPATIONS.sample,
+    chronic_health_condition: Faker::Boolean.boolean}
   }
 
   let(:invalid_attributes) {
@@ -32,7 +33,8 @@ RSpec.describe "/public/news_signups", type: :request do
       date_of_birth: Faker::Date.birthday,
       zip_code: Faker::Address.zip_code,
       topics: NEWS_TOPICS,
-      occupation: PATIENT_OCCUPATIONS.sample}
+      occupation: PATIENT_OCCUPATIONS.sample,
+      chronic_health_condition: Faker::Boolean.boolean}
   }
 
   describe "GET /new" do

@@ -19,7 +19,8 @@ RSpec.describe Public::NewsSignupsController, type: :controller do
             date_of_birth: Faker::Date.birthday,
             zip_code: Faker::Address.zip_code,
             topics: NEWS_TOPICS,
-            occupation: PATIENT_OCCUPATIONS.sample
+            occupation: PATIENT_OCCUPATIONS.sample,
+            chronic_health_condition: Faker::Boolean.boolean
           } }
         }.to change(NewsSignup, :count).by(1)
       end
@@ -34,7 +35,8 @@ RSpec.describe Public::NewsSignupsController, type: :controller do
         date_of_birth: Faker::Date.birthday,
         zip_code: Faker::Address.zip_code,
         topics: NEWS_TOPICS,
-        occupation: PATIENT_OCCUPATIONS.sample
+        occupation: PATIENT_OCCUPATIONS.sample,
+        chronic_health_condition: Faker::Boolean.boolean
       }
     }
     should permit(:first_name, :last_name, :email, :date_of_birth, :zip_code, :occupation, topics: []).
