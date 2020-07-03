@@ -17,11 +17,11 @@
         <div class="grid grid-cols-4 gap-4">
             <div>
                 <%= f.label :first_name, "First Name", class: "block" %>
-                <%= f.text_field :first_name, class: "form-input w-full" %>
+                <%= f.text_field :first_name, class: "form-input w-full", required: true %>
             </div>
             <div>
                 <%= f.label :last_name, "Last Name", class: "block" %>
-                <%= f.text_field :last_name, class: "form-input w-full" %>
+                <%= f.text_field :last_name, class: "form-input w-full", required: true %>
             </div>
             <div class="flex-1 mr-2">
                 <%= f.label :date_of_birth, class: "block" %>
@@ -31,7 +31,7 @@
             </div>
             <div>
                 <%= f.label :zip_code, class: "block" %>
-                <%= f.text_field :zip_code, class: "form-input w-full" %>
+                <%= f.text_field :zip_code, class: "form-input w-full", required: true %>
             </div>
         </div>
     </div>
@@ -40,11 +40,11 @@
         <div class="grid grid-cols-4 gap-4">
             <div>
                 <%= f.label :email, "Email Address", class: "block" %>
-                <%= f.email_field :email, class: "form-input w-full" %>
+                <%= f.email_field :email, class: "form-input w-full", required: true %>
             </div>
             <div>
                 <%= f.label :occupation, "Choose Occupation", class: "block" %>
-                <%= f.select :occupation, PATIENT_OCCUPATIONS, {prompt: "Select"}, {class: "block form-select w-full"} %>
+                <%= f.select :occupation, PATIENT_OCCUPATIONS, {prompt: "Select"}, {class: "block form-select w-full", required: true} %>
             </div>
         </div>
     </div>
