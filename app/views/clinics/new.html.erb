@@ -279,7 +279,8 @@
         <%= hidden_field_tag "reviewed", false, id: "reviewed_form_hidden_tag" %>
 
         <div class="flex justify-end mt-8">
-            <%= submit_tag 'Preview & Submit', name: 'preview_button', class: "button-primary" %>
+            <%# submit_tag 'Preview & Submit', name: 'preview_button', class: "button-primary" %>
+            <%= f.submit 'Preview & Submit', class: "button-primary" %>
             <%= link_to "Cancel", clinics_path, class: "button-primary" %>
         </div>
     <% end %>
