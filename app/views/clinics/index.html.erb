@@ -21,10 +21,10 @@
                 <th><%= sortable "clinic_date", "Date" %></th>
                 <th><%= sortable "county", "County" %></th>
                 <th><%= sortable "venue_name", "Venue Name" %></th>
-                <th># Reg'd</th>
+                <th>Registered</th>
                 <% if params[:clinic_display] == "virtual" %><th>Soc. Dist. Capacity</th><% end %>
                 <% unless params[:clinic_display] == "virtual" %>
-                <th><%= sortable "links", "Links" %></th>
+                <th><%= sortable "links", "Menu" %></th>
                 <% end %>
                 <th> Action </th>
             </tr>
