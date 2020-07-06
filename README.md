@@ -11,20 +11,36 @@
 * An account with Google Maps API
 * A Twilio developer account
 
-## Installation
+## Installation: Native
 
 * First, configure the application according to your local environment (See "Configuration"). 
 * In the application directory, run:
   * `bundle` to install Ruby dependencies
   * `yarn install` to install Javascript dependencies
-  * `rails db:schema:load` to set up the database structure
-  * `rails db:seed` to load the sample data for the app
+  * `rails db:setup` to set up the database structure and load the sample data for the app
+
+## Installation: Docker
+
+  * First make sure that you have the latest version of Docker installed.
+  * In the project root, run `docker-compose up`.
+  * In a separate terminal, run `docker-compose run web rake db:reset` to set up the database structure and load the sample data for the app
+
+## Installation: Docker w/ Visual Studio Code
+
+  * Requirements:
+    * The latest version of Visual Studio Code
+    * The "Remote - Containers" extension for Visual Studio Code
+    * The latest version of Docker
+
+If you open the project in Visual Studio Code when the "Remote - Containers" extension is installed, an option to open the project in a container will be offered. This will automatically set up the app to run in Docker while open in Visual Studio Code.
+
+In the terminal, run `rails db:setup` to set up the database structure and load the sample data for the app. Check the "Remote Explorer" sidebar for container status and port forwarding.
 
 ## Getting Started
 
 Once the application is set up, you can:
 
-* `rails server` • Run the web server
+* `rails server` • Run the web server (under Docker, the server may automatically be running)
 * `rails spec` • Run automated tests
 * `rails console` • Access the console
 
