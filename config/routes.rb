@@ -82,7 +82,7 @@ Rails.application.routes.draw do
       end
       collection do
         post :send_check_in_reminders
-        post :send_check_in_reminder
+        # post :send_check_in_reminder
         post :update_clinic_status
       end
     end
