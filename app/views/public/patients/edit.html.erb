@@ -38,7 +38,7 @@
             <% if @step == "appointment" %>
                 <%= link_to 'Find Another Location', '/clinic/search?service[]=Testing&next_step=appointment', class: "button-action" %>
             <% end %>    
-            <%= submit_tag "Save and Continue →", class: "button-action" %>
+            <%= submit_tag "Save and Continue →", class: "button-action", id: "submitButton" %>
         <% end %>
         <%# if @step == "consent_for_services" %>
             <%# submit_tag "Save and Add Family Member →", class: "button-action" %>

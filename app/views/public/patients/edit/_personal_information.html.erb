@@ -125,14 +125,25 @@
     </div>
 </div>
 
-<div class="field-side-by-side">
+<div class="field-side-by-side" data-controller="consent-form">
     <div>
         <%= f.label :email do %>
             <span> Email Address </span>
             <span class="field-required">*</span>
         <% end %>
-        <%= f.text_field :email, disabled: @patient.access_code.present?, class: "form-input w-full", required: true %>
+        <%= f.text_field :email, disabled: @patient.access_code.present?, class: "form-input w-full", 
+            data: {action: "keyup->consent-form#emailConfirmation", target: "consent-form.emailField"}, required: true %>
     </div>
+    <div>
+        <label> Retype Email Address <span class="field-required">*</span> </label>
+        <input type="email" class="form-input w-full" required="required" 
+            data-action="keyup->consent-form#emailConfirmation"
+            data-target="consent-form.confirmEmailField" />
+        <p class="text-red-600 -mt-2" data-target="consent-form.confirmEmailError"> </p>
+    </div>
+</div>
+
+<div class="field-side-by-side">
     <div>
         <%= f.label :phone_number do %>
             <span> Mobile or Daytime Number </span>
@@ -140,6 +151,7 @@
         <% end %>
         <%= f.text_field :phone_number, class: "form-input w-full", required: true %>
     </div>
+    <div> </div>
 </div>
 
 <%= hidden_field_tag :next_step, "health_insurance" %>
