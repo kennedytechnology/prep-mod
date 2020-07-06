@@ -12,12 +12,14 @@
     <%= yield :google_maps_script if content_for?(:google_maps_script) %>
   </head>
 
+  <% if notice || alert %>
+    <script>
+      alert("<%= notice.to_s + " " + alert.to_s %>")
+    </script>
+  <% end %>
+  
   <body data-controller="main">
-    <% if notice || alert %>
-      <script>
-        alert("<%= notice.to_s + " " + alert.to_s %>")
-      </script>
-    <% end %>
+
     <div class="main-container">
         <div class="flex justify-between content-end">
           <a href="/clinics"><%= image_tag (ENV['SITE_LOGO'] || 'prep-mod.png'), class: "mt-2 mb-2", style: "max-height: 60px;" %></a>
