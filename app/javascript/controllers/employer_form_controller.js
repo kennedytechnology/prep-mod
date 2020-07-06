@@ -1,7 +1,7 @@
 import { Controller } from "stimulus";
 
 export default class extends Controller {
-  static targets = ["locationsCheckboxes", "form", "checkboxErrors"];
+  static targets = ["locationsCheckboxes", "form", "checkboxErrors", "selectedLocations", "companyCheckbox"];
 
   connect() {
     $(document).click(function (e) {
@@ -9,6 +9,10 @@ export default class extends Controller {
         $("#locationsCheckboxes").removeClass("active");
       }
     });
+  }
+
+  toggleLocation(e) {
+    this.selectedLocationsTarget.innerHTML = "Selected Locations: <br/>" + this.companyCheckboxTargets.filter(e => e.checked).map(e => e.dataset.employer).join("<br/> ")
   }
 
   showCheckboxes() {
