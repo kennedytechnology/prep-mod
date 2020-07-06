@@ -13,7 +13,7 @@
 <% end %>
 
 <div data-controller="review-form">
-    <%= form_with model: @clinic, remote: true, data: {action: "change->review-form#onDisableFormPage keyup->review-form#onDisableFormPage", 
+    <%= form_with model: @clinic, local: true, data: {action: "change->review-form#onDisableFormPage keyup->review-form#onDisableFormPage", 
                                                        target: "review-form.form"} do |f| %>
         <div class="field-fullwidth">
             <p class="title">Is clinic public or private? <span class="field-required">*</span> </p>
@@ -218,7 +218,10 @@
         <div class="field-fullwidth">
             <h3 class="title"> Registration and Staff </h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                
+                <div>
+                    <%= f.label :students_registered, "Number of Patients Registered", class: "block" %>
+                    <%= f.number_field :students_registered, placeholder: "Number of Patients Registered", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
+                </div>
 
                 <div>
                     <%= f.label :lead_vaccinator_name, class: "block" do %>
@@ -261,10 +264,8 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white" id="testKits">
-                                <% @clinic.test_kits.each do |test_kit| %>
-                                    <%= f.fields_for :test_kits, test_kit do |test_kit_fields| %>
-                                        <%= render 'clinics/test_kit', f: test_kit_fields %>
-                                    <% end %>
+                                <%= f.fields_for :test_kits do |test_kit_fields| %>
+                                    <%= render 'clinics/test_kit', f: test_kit_fields %>
                                 <% end %>
                             </tbody>
                         </table>
@@ -276,7 +277,8 @@
         <%= hidden_field_tag "reviewed", false, id: "reviewed_form_hidden_tag" %>
 
         <div class="flex justify-end mt-8">
-            <%= submit_tag 'Preview & Submit', name: 'preview_button', class: "button-primary" %>
+            <%# submit_tag 'Preview & Submit', name: 'preview_button', class: "button-primary" %>
+            <%= f.submit 'Preview & Submit', class: "button-primary" %>
             <%= link_to "Cancel", clinics_path, class: "button-primary" %>
         </div>
     <% end %>

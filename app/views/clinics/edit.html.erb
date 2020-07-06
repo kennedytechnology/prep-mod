@@ -13,7 +13,7 @@
 <% end %>
 
 <div data-controller="review-form">
-    <%= form_with model: @clinic, remote: true, 
+    <%= form_with model: @clinic, local: true, 
         data: {action: "change->review-form#onDisableFormPage keyup->review-form#onDisableFormPage",
                target: "review-form.form"} do |f| %>
         <div class="field-fullwidth">
@@ -76,7 +76,7 @@
                 <%= f.text_field :clinic_date, class: "form-input", placeholder: "MM/DD/YYYY", required: true,
                             data: { target: "review-form.validates",
                                     controller: "flatpickr",
-                                    flatpickr_default_date: @clinic.clinic_date.strftime("%Y-%m-%d")
+                                    flatpickr_default_date: @clinic.clinic_date ? @clinic.clinic_date.strftime("%Y-%m-%d") : nil
                                     }
                 %>
                 <p class="label">Start Time <span class="field-required">*</span></p>
@@ -156,6 +156,10 @@
                 <div>
                     <%= f.radio_button :appointments_available, "no_walk_in", class: "form-radio", required: true, "data-target": "review-form.validates" %>
                     <%= f.label :appointments_available, "No (Walk-In)", for: "clinic_appointments_available_no_walk_in" %>
+                </div>
+                <div>
+                    <%= f.label :active_queue_patients_count, "Social Distancing Capacity" %>
+                    <%= f.select :active_queue_patients_count, (0..100).to_a, {prompt: "Select"}, {class: "form-select w-full"} %>
                 </div>
             </div>
 
@@ -238,6 +242,7 @@
                 <% end %>
             </div>
             <%= link_to_add_row('Add more staff', f, :clinic_personnel, class: 'button-add-more-staff') %>
+
         </div>
 
         <div class="field-fullwidth">
@@ -277,7 +282,8 @@
         <%= hidden_field_tag "reviewed", false, id: "reviewed_form_hidden_tag" %>
 
         <div class="flex justify-end mt-8">
-            <%= submit_tag 'Preview & Submit', name: 'preview_button', class: "button-primary", data: {action: "click->review-form#onDisableFormPage click->review-form#openModal", target: "review-form.submitButton"} %>
+            <%# submit_tag 'Preview & Submit', name: 'preview_button', class: "button-primary", data: {action: "click->review-form#onDisableFormPage click->review-form#openModal", target: "review-form.submitButton"} %>
+            <%= f.submit "Review & Submit", class: "button-primary" %>
             <%= link_to "Cancel", clinics_path, class: "button-primary" %>
         </div>
     <% end %>
