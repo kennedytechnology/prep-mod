@@ -1,4 +1,6 @@
 class PatientsController < ApplicationController
+  load_and_authorize_resource except: [:anonymized_index]
+
   layout "clinic_management"
   before_action :authenticate_user!
   helper_method :sort_column, :sort_direction
@@ -14,8 +16,13 @@ class PatientsController < ApplicationController
 
   end
 
+  def anonymized_index
+    raise CanCan::AccessDenied unless user.has_role?(:government)
+    #TODO Added here for role development
+  end
+
   def new
-    @patient = Patient.new  
+    @patient = Patient.new
   end
 
   def create
@@ -59,6 +66,7 @@ class PatientsController < ApplicationController
   end
 
   def upload_records
+    raise CanCan::AccessDenied if current_user.has_roles?(:staff, :lead_staff, :school_nurse, :government)
   end
 
   def download_records
@@ -71,7 +79,7 @@ class PatientsController < ApplicationController
       @patients = Clinic.find_by_venue_name(params[:clinic]).patients
     else
       @patients = Patient.all
-    end    
+    end
     respond_to do |format|
       format.html
       format.csv { send_data @patients.to_csv, filename: "patients-#{Date.today}.csv" }
@@ -94,7 +102,7 @@ class PatientsController < ApplicationController
     case
     when params[:clinic_id]
       @clinic = Clinic.includes(appointments: :patient).find(params[:clinic_id])
-      
+
       @patients = @clinic.patients.order(params.dig(:q, :s)).paginate(page: params[:page], per_page: 250)
     when params[:direction]
       @patients = Patient.order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 50)

@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   layout "clinic_management"
+  load_and_authorize_resource
 
   def new
     @message = Message.new
