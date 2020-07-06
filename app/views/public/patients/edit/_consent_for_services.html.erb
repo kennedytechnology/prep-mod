@@ -17,8 +17,8 @@
 
 
 <div class="field-fullwidth mt-8" data-controller="consent-form">
-    <p class="label"> With who would you like to share your information? (Select all that apply) </p>
-    <p data-target="consent-form.companyInputField" class="text-xl">Selected: <%= @patient.employers.collect(&:company_name).join(", ")%></p>
+    <p class="label"> With who would you like to share your information? </p>
+    <p data-target="consent-form.companyInputField" class="text-xl">Selected Entity: <%= @patient.employers.collect(&:company_name).join(", ")%></p>
     <div class="multiselect-dropdown">
         <div class="selectBox" data-action="click->consent-form#showCheckboxes">
             <input type="text" id="predict_company_name" data-action="keyup->consent-form#search" placeholder="Search company name" class="form-input w-1/3" style="height: 50px;" />
@@ -27,7 +27,7 @@
             <%= collection_check_boxes(:patient, :employer_ids, Employer.all, :id, :company_name) do |b| %>
                 <div class="relative flex items-start px-3 hover:bg-blue-50" data-target="consent-form.searchableRow" data-search-content="<%= [b.object.company_name.try(:downcase)] %>">
                     <div class="absolute flex items-center h-5">
-                        <%= b.check_box(class: "form-checkbox cursor-pointer text-base", 
+                        <%= b.check_box(class: "form-checkbox cursor-pointer text-base font-bold", 
                             data: {action: "click->consent-form#displayLocations", 
                             locations: "#{b.object.business_locations.join(", ")}",
                             employer: "#{b.object.company_name}",
