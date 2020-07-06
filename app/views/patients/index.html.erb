@@ -49,7 +49,9 @@
             <th><%= sort_link(@q, :date_of_birth, 'Date of Birth', default_order: :desc) %></th>
             <th><%= sort_link(@q, :date_of_birth, 'Age', default_order: :desc) %></th>
             <th><%= sort_link(@q, :sex, 'Gender', default_order: :desc) %></th>
+            <% if @clinic %>
             <th><%= sort_link(@q, :appointment_at, 'Appointment', default_order: :desc) %></th>
+            <% end %>
             <th>&nbsp;</th>
           </tr>
           </thead>
@@ -61,7 +63,9 @@
                 <td><%= patient.date_of_birth.strftime("%m/%d/%y") if patient.date_of_birth %></td>
                 <td><%= ((Date.today.to_time - patient.date_of_birth.to_time) / 1.year.seconds).floor if patient.date_of_birth %></td>
                 <td><%= patient.sex == "F" ? "Female" : "Male" %></td>
-                <td><%= patient.appointments.last.on_waiting_list? ? "Waiting List" : patient.appointments.last.appointment_at.strftime("%I:%M %p") %></td>            
+                <% if @clinic %>
+                <td><%= patient.appointments.last.on_waiting_list? ? "Waiting List" : patient.appointments.last.appointment_at.strftime("%I:%M %p") %></td> 
+                <% end %>           
                 <td class="w-3/12 text-right table-action-buttons">
                   <% if @clinic %>
                     <%= link_to "View Consent", clinic_patient_path(@clinic, patient, format: :pdf), class: "button-action" %>
