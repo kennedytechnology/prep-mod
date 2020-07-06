@@ -1,5 +1,5 @@
 class EmployersController < InheritedResources::Base
-  before_action :authenticate_user!, only: [:index]
+  before_action :authenticate_user!, only: [:index, :activity, :destroy]
   layout "clinic_management", only: [:index, :activity]
 
   def index
@@ -20,7 +20,7 @@ class EmployersController < InheritedResources::Base
 
     if @employer.save
       EmployerMailer.request_confirmation(@employer).deliver
-      redirect_to root_path, notice: "Successfully sent request for Employer Enrollment"
+      redirect_to root_path, notice: "Your request to receive COVID-19 information about your constituents or employees has been submitted successfully."
     else
       redirect_to root_path, alert: "Error!"
     end
