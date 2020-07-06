@@ -7,7 +7,6 @@
     <%= link_to "(update)", clinic_edit_queue_path(clinic_id: @clinic), class: "underline text-blue-500" %>
   </div>
   <div>
-  <!--
     <% if @clinic.upcoming? %>
       <%= link_to "Send Reminder Messages",
         send_check_in_reminders_clinic_queued_patients_path(clinic_id: @clinic),
@@ -16,7 +15,7 @@
         method: 'post'
       %>
     <% end %>
-  -->
+
     <% @clinic.available_event_names.each do |event| %>
       <%# TODO: Extract to helper %>
         <% button_label = event.titleize %>
