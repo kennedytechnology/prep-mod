@@ -157,6 +157,10 @@
                     <%= f.radio_button :appointments_available, "no_walk_in", class: "form-radio", required: true, "data-target": "review-form.validates" %>
                     <%= f.label :appointments_available, "No (Walk-In)", for: "clinic_appointments_available_no_walk_in" %>
                 </div>
+                <div>
+                    <%= f.label :active_queue_patients_count, "Social Distancing Capacity" %>
+                    <%= f.select :active_queue_patients_count, (0..100).to_a, {prompt: "Select"}, {class: "form-select w-full"} %>
+                </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
