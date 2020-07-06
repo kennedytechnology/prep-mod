@@ -3,18 +3,18 @@
 <div class="clinic-patients-index-page" data-controller="patients">
   <div class="header-section">
     <% unless @clinic %>
-      <h1 class="main-title">Patient Record Search</h1>
+      <h1 class="main-title">Registration List</h1>
     <% end %>
 
     
     <% if @clinic %>
       <div class="w-full flex justify-between items-center mt-8">
-        <div class="flex items-center w-6/12">
+        <div class="flex items-center w-3/12">
           <label class="text-lg mr-3 text-gray-600" for="search"> Search: </label>
           <input class="form-input flex-1" id="search" data-action="keyup->patients#search" type="text">
         </div>
         <div class="flex items-end">
-          <%= link_to "Download Spreadsheet", clinic_patients_path(clinic_id: @clinic.id, format: :csv), class: "button-primary" %><br/>
+          <%= link_to "Download Registration List", clinic_patients_path(clinic_id: @clinic.id, format: :csv), class: "button-primary" %><br/>
           <a href="javascript:" class="button-primary" data-action="click->main#printContent">Print</a>
         </div>
         
@@ -39,7 +39,7 @@
   </div>
 
   
-  <div class="flex flex-col printable">
+  <div class="flex flex-col printable mt-8">
     <div class="sorting-table-wrapper">
       <div class="sorting-table-container" data-controller="clinic-activity-patients">
         <table class="table">
@@ -50,7 +50,6 @@
             <th><%= sort_link(@q, :date_of_birth, 'Age', default_order: :desc) %></th>
             <th><%= sort_link(@q, :sex, 'Gender', default_order: :desc) %></th>
             <th><%= sort_link(@q, :appointment_at, 'Appointment', default_order: :desc) %></th>
-            <th><%= sort_link(@q, :county, 'County', default_order: :desc) %></th>
             <th>&nbsp;</th>
           </tr>
           </thead>
@@ -62,11 +61,10 @@
                 <td><%= patient.date_of_birth.strftime("%m/%d/%y") if patient.date_of_birth %></td>
                 <td><%= ((Date.today.to_time - patient.date_of_birth.to_time) / 1.year.seconds).floor if patient.date_of_birth %></td>
                 <td><%= patient.sex == "F" ? "Female" : "Male" %></td>
-                <td><%= patient.appointments.last.on_waiting_list? ? "Waiting List" : patient.appointments.last.appointment_at %></td>
-                <td><%= patient.county %></td>              
+                <td><%= patient.appointments.last.on_waiting_list? ? "Waiting List" : patient.appointments.last.appointment_at.strftime("%I:%M %p") %></td>            
                 <td class="w-3/12 text-right table-action-buttons">
                   <% if @clinic %>
-                    <%= link_to "Signature Form", clinic_patient_path(@clinic, patient, format: :pdf), class: "button-action" %>
+                    <%= link_to "View Consent", clinic_patient_path(@clinic, patient, format: :pdf), class: "button-action" %>
                   <% else %>
                     <%= link_to "Enter Encounter", new_clinic_event_path(clinic_id: @clinic, patient_id: patient.id),
                                 class: "button-action" %>

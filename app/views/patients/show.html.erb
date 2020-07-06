@@ -8,7 +8,7 @@
     <div>
         <%= link_to "Back to records", clinic_patients_path(@clinic), class: "button-action" %>
         <% if @patient.consent_date %>
-            <%= link_to "Signature Form", clinic_patient_path(@clinic, @patient, format: :pdf), class: "button-action" %>
+            <%= link_to "View Consent", clinic_patient_path(@clinic, @patient, format: :pdf), class: "button-action" %>
         <% end %>
     </div>
   <% else %>
