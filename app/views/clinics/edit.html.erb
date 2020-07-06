@@ -13,7 +13,7 @@
 <% end %>
 
 <div data-controller="review-form">
-    <%= form_with model: @clinic, remote: true, 
+    <%= form_with model: @clinic, local: true, 
         data: {action: "change->review-form#onDisableFormPage keyup->review-form#onDisableFormPage",
                target: "review-form.form"} do |f| %>
         <div class="field-fullwidth">
@@ -282,7 +282,8 @@
         <%= hidden_field_tag "reviewed", false, id: "reviewed_form_hidden_tag" %>
 
         <div class="flex justify-end mt-8">
-            <%= submit_tag 'Preview & Submit', name: 'preview_button', class: "button-primary", data: {action: "click->review-form#onDisableFormPage click->review-form#openModal", target: "review-form.submitButton"} %>
+            <%# submit_tag 'Preview & Submit', name: 'preview_button', class: "button-primary", data: {action: "click->review-form#onDisableFormPage click->review-form#openModal", target: "review-form.submitButton"} %>
+            <%= f.submit "Review & Submit", class: "button-primary" %>
             <%= link_to "Cancel", clinics_path, class: "button-primary" %>
         </div>
     <% end %>

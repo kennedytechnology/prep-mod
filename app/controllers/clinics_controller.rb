@@ -77,18 +77,13 @@ class ClinicsController < ClinicManagementController
 
   def update
     @page_title = "View/Edit clinic"
-    respond_to do |format|
-      if params[:reviewed] == "false"
-        format.js { render 'clinics/preview_form', locals: {clinic_params: clinic_params} }
-      else 
-        if @clinic.update(clinic_params)
-          finish_patients_in_queue
-          format.html { redirect_to clinics_path(clinic_date: 'upcoming'), notice: "Successfully updated clinic!" }
-        else
-          format.html { render :new }
-        end
+    
+      if @clinic.update(clinic_params)
+        finish_patients_in_queue
+        redirect_to clinics_path(clinic_date: 'upcoming'), notice: "Successfully updated clinic!" 
+      else
+        render :new
       end
-    end
   end
 
   def data_transfer
