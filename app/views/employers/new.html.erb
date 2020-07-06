@@ -194,10 +194,8 @@
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
             <div class="w-3/12 mr-4">
-                <%= f.label :backup_address_2, "Address 2", class: "inline-block" %><span class="field-required">*</span>
-                <%= f.text_field :backup_address_2, required: true, 
-                                                    data: { action: "blur->employer-form#validateInputField" }, 
-                                                    class: "form-input w-full" %>
+                <%= f.label :backup_address_2, "Address 2", class: "inline-block" %>
+                <%= f.text_field :backup_address_2, class: "form-input w-full" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
             <div class="flex-1 mr-4">
