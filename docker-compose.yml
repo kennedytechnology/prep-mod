@@ -10,6 +10,10 @@ services:
       - "./:/app"
     stdin_open: true
     command: bash -c "rm -f tmp/pids/server.pid && rails server -p 3000 -b '0.0.0.0'"
+    environment:
+      - "DATABASE_HOST=db"
+      - "DATABASE_USER=user123"
+      - "DATABASE_PASSWORD=password123"
   db:
     image: postgres:10.1
     ports:

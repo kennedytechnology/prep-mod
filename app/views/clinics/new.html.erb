@@ -170,11 +170,6 @@
                     <%= f.label :appointment_slots, "Appointment Slots", class: "block" %>
                     <%= f.select :appointment_slots, (1..50), {prompt: "Select"}, {class: "form-select w-full"} %>
                 </div>
-
-                <div>
-                    <%= f.label :social_distancing, "Social Distancing Maximum", class: "block" %>
-                    <%= f.select :social_distancing, (1..100), {prompt: "Select"}, {class: "form-select w-full"} %>
-                </div>
             </div>
         </div>
 
@@ -223,11 +218,7 @@
         <div class="field-fullwidth">
             <h3 class="title"> Registration and Staff </h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <%= f.label :students_registered, "Number of Patients Registered", class: "block" %>
-                    <%= f.number_field :students_registered, placeholder: "Number of Patients Registered", 
-                        onkeypress: "return event.charCode >= 48", min:"1", class: "form-input w-full" %>
-                </div>
+                
 
                 <div>
                     <%= f.label :lead_vaccinator_name, class: "block" do %>
@@ -285,10 +276,8 @@
         <%= hidden_field_tag "reviewed", false, id: "reviewed_form_hidden_tag" %>
 
         <div class="flex justify-end mt-8">
-            <%= submit_tag 'Preview & Submit', name: 'preview_button', class: "button-primary", data: {action: "click->review-form#onDisableFormPage click->review-form#openModal", target: "review-form.submitButton"} %>
+            <%= submit_tag 'Preview & Submit', name: 'preview_button', class: "button-primary" %>
             <%= link_to "Cancel", clinics_path, class: "button-primary" %>
         </div>
     <% end %>
-
-    <%= render "clinics/preview_modal" %>
 </div>

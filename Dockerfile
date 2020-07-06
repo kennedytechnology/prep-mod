@@ -78,7 +78,9 @@ WORKDIR /app
 COPY Gemfile .
 COPY Gemfile.lock .
 RUN bundle
-# RUN yarn install
+
+COPY package.json yarn.lock ./
+RUN yarn install
 
 # Switch back to dialog for any ad-hoc use of apt-get
 ENV DEBIAN_FRONTEND=dialog
@@ -95,7 +97,7 @@ ENV DEBIAN_FRONTEND=dialog
 # # Add a script to be executed every time the container starts.
 # COPY entrypoint.sh /usr/bin/
 # RUN chmod +x /usr/bin/entrypoint.sh
-ENTRYPOINT "/app/bin/entrypoint.sh"
+# ENTRYPOINT "/app/bin/entrypoint.sh"
 # EXPOSE 3000
 
 # # Start the main process.

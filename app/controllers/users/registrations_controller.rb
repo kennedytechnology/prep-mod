@@ -6,7 +6,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
 
   def redirect_to_root
-    redirect_to root_path
+    redirect_to "/pages/landing_page"
   end
 
   def configure_sign_up_params    

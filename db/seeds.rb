@@ -111,6 +111,46 @@ puts "Creating providers..."
   )
 end
 
+10.times do |i|
+  Provider.create!(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    middle_initial: Faker::Name.middle_name,
+    professional_license: PROFESSIONAL_LICENSES.sample,
+    title: "Title #{i}",
+    contact_office_phone: Faker::PhoneNumber.cell_phone,
+    contact_mobile_phone: Faker::PhoneNumber.cell_phone,
+    contact_email: Faker::Internet.email,
+    county: COUNTIES.sample,
+    license_state_of_issue: US_STATES.sample,
+    license_date_of_issue: Faker::Date.between(from: 30.days.from_now, to: 365.days.from_now),
+    practice_office_phone: Faker::PhoneNumber.cell_phone,
+    practice_fax_number: "fax #{i}",
+    practice_mobile_phone: Faker::PhoneNumber.cell_phone,
+    practice_email: Faker::Internet.email,
+    practice_type: PRACTICE_TYPES.sample,
+    practice_name: Faker::Company.name + " " + Faker::Company.suffix,
+    practice_address: Faker::Address.full_address,
+    practice_city: Faker::Address.city,
+    practice_state: US_STATES.sample,
+    practice_zip_code: Faker::Address.zip_code,
+    practice_backup_contact: Faker::Name.name,
+    practice_backup_office_phone: Faker::PhoneNumber.cell_phone,
+    practice_backup_email: Faker::Internet.email,
+    practice_backup_mobile_phone: Faker::PhoneNumber.cell_phone,
+    does_provide_vaccination:Faker::Boolean.boolean,
+    does_provide_vfc: Faker::Boolean.boolean,
+    refrigerator: Faker::Boolean.boolean,
+    freezer: Faker::Boolean.boolean,
+    refrigerator_thermometer: Faker::Boolean.boolean,
+    additional_info: Faker::Lorem.paragraph,
+    npi_number: "npi number #{i}",
+    license_number: "license number #{i}",
+    license_type: "license type #{i}",
+    medical_specialty: MEDICAL_SPECIALTY.sample
+  )
+end
+
 puts "Creating employers..."
 10.times do |i|
   Employer.create!(

@@ -29,24 +29,21 @@ class ClinicsController < ClinicManagementController
   def create
     @clinic = Clinic.new(clinic_params)
     @page_title = "Create clinic"
-
     respond_to do |format|
-      if params[:reviewed] == "false"
-        format.js { render 'clinics/preview_form', locals: {clinic_params: clinic_params} }
-      else 
-        if @clinic.valid?
-          params["clinic_dates"].reject(&:blank?).each do |clinic_date|
-            @clinic_dup = @clinic.dup
-            @clinic_dup.clinic_date = Chronic.parse(clinic_date)
-            @clinic_dup.save
-            ClinicMailer.public_clinic_created(current_user, @clinic_dup).deliver
-          end
-
-          ClinicMailer.public_clinic_created(current_user, @clinic).deliver
-          format.html { redirect_to clinics_path(clinic_date: 'upcoming'), notice: "Successfully created clinic!" }
-        else
-          format.html { render :new }
+      if @clinic.valid?
+        params["clinic_dates"].reject(&:blank?).each do |clinic_date|
+          @clinic_dup = @clinic.dup
+          @clinic_dup.age_groups = @clinic.age_groups
+          @clinic_dup.services = @clinic.services
+          @clinic_dup.clinic_date = Chronic.parse(clinic_date)
+          @clinic_dup.save
+          ClinicMailer.public_clinic_created(current_user, @clinic_dup).deliver
         end
+
+        ClinicMailer.public_clinic_created(current_user, @clinic).deliver
+        format.html { redirect_to clinics_path(clinic_date: 'upcoming'), notice: "Successfully created clinic!" }
+      else
+        format.html { render :new }
       end
     end
   end

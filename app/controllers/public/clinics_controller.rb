@@ -1,7 +1,6 @@
 class Public::ClinicsController < ApplicationController
   def index
     @clinics = Clinic.all
-
     if params[:location].present?
       params[:search_radius] = 999 if params[:search_radius] == "All"
       @clinics = @clinics.near(params[:location], params[:search_radius].to_i, order: :distance)

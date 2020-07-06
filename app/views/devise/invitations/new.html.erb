@@ -24,21 +24,9 @@
                 <% end %>
                 <%= f.email_field :email, class: "form-input w-full", required: true %>
 
-                <%= f.label :venues, class: "block" do %>
-                    <span> Assigned Venue </span>
-                    <span class="field-required">*</span>
-                <% end %>
-                <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 lg:gap-2">
-                    <% VENUE_TYPES.each do |venue| %>
-                        <div class="relative flex items-start mb-4">
-                            <div class="absolute flex items-center h-5">
-                                <%= f.check_box(:venues, {multiple: true, id: "venue_#{venue}", class: "form-checkbox"}, venue) %>
-                            </div>
-                            <div class="pl-2 ml-4 text-sm leading-5">
-                                <label for="venue_<%=venue%>"> <%= venue %> </label>
-                            </div>
-                        </div>
-                    <% end %>
+                <div class="pt-4 pb-4">
+                    <%= f.label :provider_id, "Provider:", class: "mr-2" %>
+                    <%= f.collection_select(:provider_id, Provider.all, :id, :practice_name, {include_blank: "(none)"}, {class: "form-select w-full"}) %>
                 </div>
 
                 <%= f.label :role, class: "block" do %>
