@@ -18,7 +18,7 @@
       <td><%= patient.date_of_birth.try(:strftime, '%m/%d/%y') %></td>
       <td><%= appointment.queue_state.titleize %></td>
       <td>
-        <% if appointment.queue_state == "not_checked_in" %>
+        <% if appointment.queue_state != "not_checked_in" %>
           <%= link_to "Send Reminder", send_check_in_reminder_clinic_queued_patients_path(clinic_id: @clinic.id, appointment_id: appointment.id), method: "post", class: "button-action" %>
         <% end %>
 
