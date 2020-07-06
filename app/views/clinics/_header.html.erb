@@ -6,6 +6,7 @@
           "Virtual Queue": clinic_queued_patients_path(clinic_id: @clinic.id),
           "View/Edit Clinic": edit_clinic_path(id: @clinic.id),
           "Activity Form": clinic_activity_path(clinic_id: @clinic.id),
+          "Activity Report": clinic_report_path(clinic_id: @clinic.id),
           "Customized Report": new_customized_report_path(clinic_id: @clinic.id)
         }
         clinic_menu["Activity Report"] = clinic_report_path(clinic_id: @clinic.id) if @clinic.open_state == "closed"
