@@ -37,7 +37,7 @@
     </div>
 
     <div class="field-fullwidth">
-        <div class="grid grid-cols-4 gap-4">
+        <div class="grid grid-cols-3 gap-4">
             <div>
                 <%= f.label :email, "Email Address", class: "block" %>
                 <%= f.email_field :email, class: "form-input w-full", required: true %>
@@ -46,9 +46,17 @@
                 <%= f.label :occupation, "Choose Occupation", class: "block" %>
                 <%= f.select :occupation, PATIENT_OCCUPATIONS, {prompt: "Select"}, {class: "block form-select w-full", required: true} %>
             </div>
+        <div>
+                <span class="text-sm">Do you or anyone in your household have a chronic health condition (Example: diabetes, heart disease, high blood pressure, COPD, asthma)?</span><br/>
+            <div class="mt-4 p-4">
+                <label class="text-xl"><%= f.radio_button :chronic_health_condition, true %> <span>Yes</span></label>
+                <label class="text-xl ml-8"><%= f.radio_button :chronic_health_condition, false %> <span>No</span></label>
+            </div>        
+        </div>
+
         </div>
     </div>
-
+    
     <div class="field-fullwidth">
         <div>
             <%= f.label "Please keep me informed about:", class: "block text-xl mb-4" %>
