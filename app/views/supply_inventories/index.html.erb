@@ -21,7 +21,7 @@
             <% end %>
             <%= f.text_field :received_at, class: "form-input block w-full", placeholder: "MM/DD/YYYY", required: true,
                     data: { controller: "flatpickr",
-                            flatpickr_max_date: Date.today,
+                            flatpickr_max_date: "today",
                             action: "change->inventory-new-entry#updateModalField
                                     keyup->inventory-new-entry#updateModalField
                                     blur->inventory-new-entry#validateInputField" } %>
@@ -81,7 +81,7 @@
             <% end %>
             <%= f.text_field :expiration_date, class: "form-input block w-full", placeholder: "MM/DD/YYYY", required: true,
                     data: { controller: "flatpickr",
-                            flatpickr_min_date: Date.today,
+                            flatpickr_min_date: "today",
                             action: "change->inventory-new-entry#updateModalField
                                     keyup->inventory-new-entry#updateModalField
                                     blur->inventory-new-entry#validateInputField" } %>

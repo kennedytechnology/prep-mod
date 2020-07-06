@@ -41,9 +41,7 @@
     <div>
         <%= f.label :insured_date_of_birth, "Insured Adult's Date Of Birth", class: "block" %>
         <%= f.text_field :insured_date_of_birth, value: @patient.insured_date_of_birth.try(:strftime, "%Y/%m/%d"), class: "w-full form-input",
-                            data: { controller: "flatpickr",
-                                    flatpickr_min_date: Date.today - 80.years,
-                                    flatpickr_max_date: Date.today} %>
+                            data: { controller: "flatpickr", flatpickr_max_date: "today" } %>
     </div>
     <div>
         <%= f.label :relation_to_patient_for_consent, class: "block" do %>

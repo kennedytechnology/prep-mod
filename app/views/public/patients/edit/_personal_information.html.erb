@@ -52,8 +52,7 @@
             <% end %>
             <%= f.text_field :date_of_birth, value: @patient.date_of_birth.try(:strftime, "%Y/%m/%d"), class: "w-full form-input", required: true,
                                 data: { controller: "flatpickr",
-                                        flatpickr_min_date: Date.today - 80.years,
-                                        flatpickr_max_date: Date.today,
+                                        flatpickr_max_date: "today",
                                         action: "age-calculator#calculateAge",
                                         target: "age-calculator.dobField"} %>
         </div>

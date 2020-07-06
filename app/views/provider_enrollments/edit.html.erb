@@ -147,7 +147,7 @@
                         <% end %>
                         <%= f.text_field :license_date_of_issue, value: @provider_enrollment.license_date_of_issue.try(:strftime, "%Y/%m/%d"), class: "form-input w-full", required: true,
                                     data: { controller: "flatpickr",
-                                            flatpickr_max_date: Date.today,
+                                            flatpickr_max_date: "today",
                                             action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
                     </div>
 

@@ -44,9 +44,7 @@
             <span class="field-required">*</span>
         <% end %>
         <%= fm.text_field :date_of_birth, class: "w-full form-input", required: true,
-                              data: { controller: "flatpickr",
-                                      flatpickr_min_date: Date.today - 80.years,
-                                      flatpickr_max_date: Date.today} %>
+                              data: { controller: "flatpickr", flatpickr_max_date: "today" } %>
       </div>
     </div>
 
