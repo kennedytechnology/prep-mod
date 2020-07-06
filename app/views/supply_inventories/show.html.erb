@@ -92,9 +92,14 @@
             <p class="error-message hidden"> This field is required! </p>
         </div>
     </div>
-
-    <div class="flex justify-end items-end mt-2 mb-8">
-        <p class="button-primary" data-action="click->inventory-new-entry#formValidity"> Review & Confirm </p>
+    
+    <div class="flex w-full justify-between mt-2 mb-8">
+        <div class="flex">
+            <%= link_to "Main Inventory", supply_inventories_path, class: "button-primary"  %>
+        </div>
+        <div class="flex">
+            <p class="button-primary" data-action="click->inventory-new-entry#formValidity"> Review & Confirm </p>
+        </div>
     </div>
 
     <%= render partial: "supply_inventories/update_entry_review", locals: {f: f} %>
