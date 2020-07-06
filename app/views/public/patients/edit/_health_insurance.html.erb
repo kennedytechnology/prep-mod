@@ -46,9 +46,8 @@
     <div>
         <%= f.label :relation_to_patient_for_consent, class: "block" do %>
             <span> Relationship To Patient </span>
-            <span class="field-required">*</span>
         <% end %>
-        <%= f.select :relation_to_patient_for_consent, options_for_select(RELATIONSHIP_TYPES, @patient.relation_to_patient_for_consent),{}, {class: "w-full form-select", required: true} %>
+        <%= f.select :relation_to_patient_for_consent, options_for_select(RELATIONSHIP_TYPES, @patient.relation_to_patient_for_consent),{}, {class: "w-full form-select"} %>
     </div>
 </div>
 
