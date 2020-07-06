@@ -76,7 +76,7 @@
                 <%= f.text_field :clinic_date, class: "form-input", placeholder: "MM/DD/YYYY", required: true,
                             data: { target: "review-form.validates",
                                     controller: "flatpickr",
-                                    flatpickr_default_date: @clinic.clinic_date.strftime("%Y-%m-%d")
+                                    flatpickr_default_date: @clinic.clinic_date ? @clinic.clinic_date.strftime("%Y-%m-%d") : nil
                                     }
                 %>
                 <p class="label">Start Time <span class="field-required">*</span></p>
@@ -242,6 +242,7 @@
                 <% end %>
             </div>
             <%= link_to_add_row('Add more staff', f, :clinic_personnel, class: 'button-add-more-staff') %>
+
         </div>
 
         <div class="field-fullwidth">

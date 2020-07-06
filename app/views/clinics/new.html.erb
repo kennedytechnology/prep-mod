@@ -13,7 +13,7 @@
 <% end %>
 
 <div data-controller="review-form">
-    <%= form_with model: @clinic, remote: true, data: {action: "change->review-form#onDisableFormPage keyup->review-form#onDisableFormPage", 
+    <%= form_with model: @clinic, local: true, data: {action: "change->review-form#onDisableFormPage keyup->review-form#onDisableFormPage", 
                                                        target: "review-form.form"} do |f| %>
         <div class="field-fullwidth">
             <p class="title">Is clinic public or private? <span class="field-required">*</span> </p>
@@ -264,10 +264,8 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white" id="testKits">
-                                <% @clinic.test_kits.each do |test_kit| %>
-                                    <%= f.fields_for :test_kits, test_kit do |test_kit_fields| %>
-                                        <%= render 'clinics/test_kit', f: test_kit_fields %>
-                                    <% end %>
+                                <%= f.fields_for :test_kits do |test_kit_fields| %>
+                                    <%= render 'clinics/test_kit', f: test_kit_fields %>
                                 <% end %>
                             </tbody>
                         </table>
