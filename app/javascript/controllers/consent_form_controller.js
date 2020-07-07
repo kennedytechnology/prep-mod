@@ -19,8 +19,6 @@ export default class extends Controller {
     if ('<%= Session["ConfirmationEmail"] %>') {
       this.confirmEmailFieldTarget.value = this.emailFieldTarget.value;
     }
-
-    this.emailConfirmation();
   }
 
   showCheckboxes() {
