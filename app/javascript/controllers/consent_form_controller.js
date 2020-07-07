@@ -15,6 +15,12 @@ export default class extends Controller {
     if ((this.hasOtherReasonExplanationTarget) && (document.getElementById("patient_has_other_reason_true").checked)) {
       this.otherReasonExplanationTarget.classList.remove("hidden");
     }
+
+    if ('<%= Session["ConfirmationEmail"] %>') {
+      this.confirmEmailFieldTarget.value = this.emailFieldTarget.value;
+    }
+
+    this.emailConfirmation();
   }
 
   showCheckboxes() {
@@ -54,12 +60,14 @@ export default class extends Controller {
     document.getElementById("patient_has_other_reason_explanation").value = "";
   }
 
-  emailConfirmation(e) {
-    if (this.emailFieldTarget.value != this.confirmEmailFieldTarget.value) {
+  emailConfirmation() {
+    if ((this.emailFieldTarget.value != this.confirmEmailFieldTarget.value)
+      || this.emailFieldTarget.value == "" || this.confirmEmailFieldTarget.value == "") {
       this.confirmEmailErrorTarget.innerText = "Emails don't match!";
       document.getElementById("submitButton").setAttribute("disabled", "true");
     } else {
       this.confirmEmailErrorTarget.innerText = "";
+      '<%Session["ConfirmationEmail"] = "' + this.emailFieldTarget.value + '"; %>';
       document.getElementById("submitButton").removeAttribute("disabled");
     }
   }
