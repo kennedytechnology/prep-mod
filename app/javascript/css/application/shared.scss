@@ -16,12 +16,12 @@
             margin: 0 auto 10px auto;
         }
 
-        &:after {
+        &:after { 
             @apply w-full absolute bg-gray-600;
             height: 2px;
             content: '';
             top: 15px;
-            left: -50%;
+            left: calc((-50%) + (-6px));
             z-index: -1;
         }
 
@@ -33,7 +33,11 @@
     // When li is active
     li {
         &.active {
-            @apply text-brand-blue-600;
+            @apply text-brand-blue-600 text-xs;
+
+            @screen md {
+                @apply text-sm;
+            }
 
             &:before {
                 @apply border-brand-blue-600;

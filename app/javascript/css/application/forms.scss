@@ -10,7 +10,11 @@
 
     &-side-by-side {
         @extend .field-base;
-        @apply grid grid-cols-2 gap-4;
+        @apply grid gap-4;
+
+        @screen md {
+            @apply grid grid-cols-2 gap-4;
+        }
     }
 
     &-required {
@@ -21,7 +25,11 @@
     &-fullwidth,
     &-side-by-side {
         .title {
-            @apply block w-full text-xl leading-5 text-gray-800 font-black mb-2;
+            @apply block w-full text-lg leading-5 text-gray-800 font-black mb-2;
+
+            @screen md {
+                @apply block w-full text-xl leading-5 text-gray-800 font-black mb-2;
+            }
         }
     }
 }
@@ -122,11 +130,19 @@ select {
 }
 
 .inline-field-wrapper{
-    @apply w-2/12 mr-2;
+    @apply w-full;
+
+    @screen md {
+        @apply w-2/12 mr-2;
+    }
  }
 
  .inline-field-wrapper-narrow{
-    @apply w-1/12;
+    @apply w-full;
+
+    @screen md {
+      @apply w-1/12;  
+    }
  }
 
  .inline-field-wrapper-normal{

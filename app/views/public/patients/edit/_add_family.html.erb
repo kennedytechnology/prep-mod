@@ -5,7 +5,7 @@
 
 <%= f.fields_for :patient_family_members do |fm| %>
   <div class="family-member-form mt-6 border-b">
-    <div class="flex">
+    <div class="w-full md:flex">
       <div class="inline-field-wrapper">
           <%= fm.label :first_name do %>
             <span> Patient's First Name </span>
@@ -48,7 +48,7 @@
       </div>
     </div>
 
-    <div class="flex" data-controller="same-as-parent">
+    <div class="md:flex" data-controller="same-as-parent">
       <div class="inline-field-wrapper pt-7">
       <label>
         <input type="checkbox" data-action="change->same-as-parent#applyValues">
