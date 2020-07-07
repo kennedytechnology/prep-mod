@@ -1,5 +1,5 @@
 class PatientsController < ApplicationController
-  # load_and_authorize_resource except: [:anonymized_index]
+  load_and_authorize_resource except: [:anonymized_index]
 
   layout "clinic_management"
   before_action :authenticate_user!
