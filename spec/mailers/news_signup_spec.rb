@@ -12,7 +12,7 @@ RSpec.describe NewsSignupMailer, type: :mailer do
     end
 
     it "renders the body" do
-      expect(mail.body.encoded).to match(news_signup.last_name)
+      expect(mail.body.encoded).to match("We will be in touch when we have something new to share.")
     end
   end
 end
