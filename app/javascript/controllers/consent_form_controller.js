@@ -1,7 +1,9 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "searchableRow", "employer", "locations", "companyCheckbox", "companyInputField", "locationsCheckboxes", "otherReasonExplanation" ]
+  static targets = [ "searchableRow", "employer", "locations", 
+      "companyCheckbox", "companyInputField", "locationsCheckboxes", "otherReasonExplanation",
+      "emailField", "confirmEmailField", "confirmEmailError" ]
 
   connect() {
     $(document).click(function (e) {
@@ -12,6 +14,10 @@ export default class extends Controller {
 
     if ((this.hasOtherReasonExplanationTarget) && (document.getElementById("patient_has_other_reason_true").checked)) {
       this.otherReasonExplanationTarget.classList.remove("hidden");
+    }
+
+    if ('<%= Session["ConfirmationEmail"] %>') {
+      this.confirmEmailFieldTarget.value = this.emailFieldTarget.value;
     }
   }
 
@@ -50,5 +56,17 @@ export default class extends Controller {
   hideOtherReasonExplanation() {
     this.otherReasonExplanationTarget.classList.add("hidden");
     document.getElementById("patient_has_other_reason_explanation").value = "";
+  }
+
+  emailConfirmation() {
+    if ((this.emailFieldTarget.value != this.confirmEmailFieldTarget.value)
+      || this.emailFieldTarget.value == "" || this.confirmEmailFieldTarget.value == "") {
+      this.confirmEmailErrorTarget.innerText = "Emails don't match!";
+      document.getElementById("submitButton").setAttribute("disabled", "true");
+    } else {
+      this.confirmEmailErrorTarget.innerText = "";
+      '<%Session["ConfirmationEmail"] = true; %>';
+      document.getElementById("submitButton").removeAttribute("disabled");
+    }
   }
 }
