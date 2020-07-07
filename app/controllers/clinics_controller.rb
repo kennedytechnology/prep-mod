@@ -81,7 +81,7 @@ class ClinicsController < ClinicManagementController
     @page_title = "View/Edit clinic"
     if @clinic.update(clinic_params)
       finish_patients_in_queue
-      redirect_to clinics_path(clinic_date: 'upcoming'), notice: "Successfully updated clinic!"
+      redirect_back fallback_location: clinics_path(clinic_date: 'upcoming')
     else
       render :new
     end
