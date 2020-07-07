@@ -1,6 +1,4 @@
 class ReportsController < ApplicationController
-  load_and_authorize_resource #TODO: create anon reports for government role
-
   include ReportHelper
   layout "clinic_management"
   before_action :authenticate_user!
