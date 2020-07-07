@@ -67,7 +67,7 @@ export default class extends Controller {
       document.getElementById("submitButton").setAttribute("disabled", "true");
     } else {
       this.confirmEmailErrorTarget.innerText = "";
-      '<%Session["ConfirmationEmail"] = "' + this.emailFieldTarget.value + '"; %>';
+      '<%Session["ConfirmationEmail"] = true; %>';
       document.getElementById("submitButton").removeAttribute("disabled");
     }
   }
