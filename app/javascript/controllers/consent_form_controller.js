@@ -15,10 +15,6 @@ export default class extends Controller {
     if ((this.hasOtherReasonExplanationTarget) && (document.getElementById("patient_has_other_reason_true").checked)) {
       this.otherReasonExplanationTarget.classList.remove("hidden");
     }
-
-    if ('<%= Session["ConfirmationEmail"] %>') {
-      this.confirmEmailFieldTarget.value = this.emailFieldTarget.value;
-    }
   }
 
   showCheckboxes() {
@@ -65,7 +61,6 @@ export default class extends Controller {
       document.getElementById("submitButton").setAttribute("disabled", "true");
     } else {
       this.confirmEmailErrorTarget.innerText = "";
-      '<%Session["ConfirmationEmail"] = true; %>';
       document.getElementById("submitButton").removeAttribute("disabled");
     }
   }
