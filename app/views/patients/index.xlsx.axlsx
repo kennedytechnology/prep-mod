@@ -1,0 +1,7 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Patients on Waiting List") do |sheet|
+  @patients.each do |patient|
+    sheet.add_row [patient.first_name, patient.last_name]
+  end
+end
