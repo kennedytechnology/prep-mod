@@ -136,7 +136,7 @@
     </div>
     <div>
         <label> Retype Email Address <span class="field-required">*</span> </label>
-        <input type="email" class="form-input w-full" required="required" 
+        <input type="email" class="form-input w-full" required="required" value="<%= @patient.email %>"
             data-action="keyup->consent-form#emailConfirmation change->consent-form#emailConfirmation"
             data-target="consent-form.confirmEmailField" />
         <p class="text-red-600 -mt-2" data-target="consent-form.confirmEmailError"> </p>
