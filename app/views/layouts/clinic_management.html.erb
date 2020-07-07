@@ -12,13 +12,8 @@
     <%= yield :google_maps_script if content_for?(:google_maps_script) %>
   </head>
 
-  <% if notice || alert %>
-    <script>
-      alert("<%= notice.to_s + " " + alert.to_s %>")
-    </script>
-  <% end %>
-  
   <body data-controller="main">
+    <%= render partial: "layouts/flash_message", locals: {message: alert ? "alert" : "notice", flash_message: (alert || notice)} if alert || notice %>
 
     <div class="main-container">
         <div class="flex justify-between content-end">

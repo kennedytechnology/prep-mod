@@ -114,3 +114,22 @@ input[type=file][data-direct-upload-url][disabled] { @apply hidden; }
         .remove_record { @apply hidden; }
     }
 }
+
+// Flash Message 2
+.flash-message-modal {
+    @apply fixed w-full h-full top-0 left-0 items-center justify-center;
+    @apply hidden;
+
+    &.flash-message-modal-active {
+        @apply flex;
+    }
+}
+
+.flash-message-overlay {
+    @apply fixed w-full h-full bg-black opacity-25 top-0 left-0 cursor-pointer;
+}
+
+.flash-message-container {
+    @apply absolute p-8 bg-white rounded-lg shadow-lg flex w-2/4;
+}
+

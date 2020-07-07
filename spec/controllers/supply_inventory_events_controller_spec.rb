@@ -38,7 +38,6 @@ RSpec.describe SupplyInventoryEventsController, type: :controller do
       end
 
       it { expect(response).to redirect_to supply_inventory_path(supply_inventory_event.supply_inventory) }
-      it { expect(flash[:notice]).to match("Successfully updated Event") }
       it { expect(supply_inventory_event.quantity_loaned).to eq(20) }
     end
   end

@@ -6,7 +6,7 @@ class SupplyInventoryEventsController < InheritedResources::Base
     @supply_inventory_event = SupplyInventoryEvent.new(supply_inventory_event_params)
 
     if @supply_inventory_event.save
-      redirect_back fallback_location: supply_inventories_path, notice: "Successfully added Event"
+      redirect_back fallback_location: supply_inventories_path
     else
       redirect_back fallback_location: supply_inventories_path, alert: "Error! #{@supply_inventory_event.errors.full_messages.join(", ")}"
     end
@@ -20,7 +20,7 @@ class SupplyInventoryEventsController < InheritedResources::Base
     @supply_inventory_event = SupplyInventoryEvent.find(params[:id])
 
     if @supply_inventory_event.update(supply_inventory_event_params)
-      redirect_to supply_inventory_path(@supply_inventory_event.supply_inventory), notice: "Successfully updated Event"
+      redirect_to supply_inventory_path(@supply_inventory_event.supply_inventory)
     else
       redirect_back fallback_location: supply_inventories_path, alert: "Error! #{@supply_inventory_event.errors.full_messages.join(", ")}"
     end
