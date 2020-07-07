@@ -1,11 +1,16 @@
-<div class="flash-message-container" id="flashMessage" data-controller="flash-message">
-    <div class="flash-message <%= message %>">
-        <div>
-            <h1 class="text-2xl mb-2"> <%= flash_message %>  </h1>
-            <p class="text-base"> <%= flash_message %> </p>
-        </div>
-        <div class="button-container">
-            <button type="button" data-action="click->flash-message#disconnect"> Okay </button>
+<div class="flash-message-modal modal" id="flashMessage" data-controller="flash-message">
+    <div class="flash-message-overlay modal-overlay"></div>
+    <div class="flash-message-container">
+        <div class="w-full">
+            <p class="text-xl font-bold"> <%= flash_message %> </p>
+
+            <div class="mt-8">
+                <div class="flex justify-end">
+                    <span class="inline-flex rounded-md shadow-sm">
+                        <a data-action="click->flash-message#disconnect" class="button-primary"> Okay </a>
+                    </span>
+                </div>
+            </div>
         </div>
     </div>
 </div>
