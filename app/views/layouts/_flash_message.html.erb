@@ -1,0 +1,11 @@
+<div class="flash-message-container" id="flashMessage" data-controller="flash-message">
+    <div class="flash-message <%= message %>">
+        <div>
+            <h1 class="text-2xl mb-2"> <%= flash_message %>  </h1>
+            <p class="text-base"> <%= flash_message %> </p>
+        </div>
+        <div class="button-container">
+            <button type="button" data-action="click->flash-message#disconnect"> Okay </button>
+        </div>
+    </div>
+</div>

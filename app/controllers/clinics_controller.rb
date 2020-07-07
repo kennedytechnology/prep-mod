@@ -1,5 +1,5 @@
 class ClinicsController < ClinicManagementController
-  load_and_authorize_resource except: [:index]
+  # load_and_authorize_resource except: [:index]
   before_action :get_clinic, only: [:edit, :update]
   helper_method :sort_column, :sort_direction
 
