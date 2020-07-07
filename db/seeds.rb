@@ -36,7 +36,7 @@ end
   ClinicService.create!(name: name, category: "clinics")
 end
 
-["Screening", "Testing", "Medication", "Safety Kit Distribution", "Other"].each do |name|
+["Screening", "Testing", "Anti-Virals/Medication", "Safety Kit Distribution", "Vaccinations", "Other"].each do |name|
   ClinicService.create!(name: name, category: "provider_enrollments")
 end
 
