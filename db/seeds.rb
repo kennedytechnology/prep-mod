@@ -36,7 +36,7 @@ end
   ClinicService.create!(name: name, category: "clinics")
 end
 
-["Screening", "Testing", "Medication", "Safety Kit Distribution", "Other"].each do |name|
+["Screening", "Testing", "Anti-Virals/Medication", "Safety Kit Distribution", "Vaccinations", "Other"].each do |name|
   ClinicService.create!(name: name, category: "provider_enrollments")
 end
 
@@ -59,10 +59,10 @@ addresses.shuffle!
 puts "Creating users..."
 USER_COUNT.times.each do |i|
   User.create!(
-    email: i == 5 ? "user@test.com" : Faker::Internet.unique.email,
+    email: i == 1 ? "user@test.com" : Faker::Internet.unique.email,
     password: 'password',
     password_confirmation: 'password',
-    role: USER_ROLES.sample,
+    role: i == 1 ? "super_admin" : USER_ROLES.sample,
     venues: VENUE_TYPES.sample(7),
     first_name: i == 5 ? "Sam" : Faker::Name.unique.first_name,
     last_name: i == 5 ? "Kennedy" : Faker::Name.unique.last_name,

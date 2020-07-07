@@ -1,10 +1,18 @@
-<h1 class="main-title">Register for COVID-19 Testing: <%= @clinic.name %></h1>
+<h1 class="main-title mt-8 md:mt-0">Register for COVID-19 Testing: <%= @clinic.name %></h1>
 
 <%= form_for( @patient , url: "/client/registration" ,remote: false, data: {controller: "inventory-new-entry"}) do |f| %>
-    <div class="min-w-full mb-12">
+    <div class="min-w-full mb-12 hidden md:block">
         <ul class="multistep-form-progressbar">
             <% %w(personal_information health_insurance health_questions consent_for_services add_family appointment).each do |step| %>
                 <li class="<%= 'active' if step == @step %>"> <%= step.humanize.titleize %> </li>
+            <% end %>
+        </ul>
+    </div>
+
+    <div class="min-w-full mb-12 block md:hidden">
+        <ul class="multistep-form-progressbar">
+            <% %w(personal_information health_insurance health_questions consent_for_services add_family appointment).each do |step| %>
+                <li class="<%= 'active' if step == @step %>"> <%= step.humanize.titleize if step == @step %> </li>
             <% end %>
         </ul>
     </div>
@@ -24,15 +32,15 @@
 
     <%= render '/public/patients/edit/' + @step, f: f %>
 
-    <div class="flex justify-center items-center mt-6">
+    <div class="md:flex justify-center items-center mt-6">
         <% if last_step %>
-            <button type="submit" name="next_step" value="<%= last_step %>" class="button-action"> Back </button>    
+            <button type="submit" name="next_step" value="<%= last_step %>" class="button-action mb-4 md:mb-0"> Back </button>    
         <% end %>
         <% if @step == "consent_for_services" %> 
-            <button type="submit" name="next_step" value="add_family" class="button-action"> Save and Add a Household Member </button>    
-            <button type="submit" name="next_step" value="appointment" class="button-action"> Review & Submit </button>    
+            <button type="submit" name="next_step" value="add_family" class="button-action mb-4 md:mb-0"> Save and Add a Household Member </button>    
+            <button type="submit" name="next_step" value="appointment" class="button-action mb-4 md:mb-0"> Review & Submit </button>    
         <% elsif @step == "add_family" %> 
-            <button type="submit" name="next_step" value="add_another_family" class="button-action"> Save and Add Another Household Member </button>    
+            <button type="submit" name="next_step" value="add_another_family" class="button-action mb-4 md:mb-0"> Save and Add Another Household Member </button>    
             <button type="submit" name="next_step" value="appointment" class="button-action"> Save And Continue </button>    
         <% else %>
             <% if @step == "appointment" %>
