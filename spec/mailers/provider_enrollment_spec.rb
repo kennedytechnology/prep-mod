@@ -12,7 +12,7 @@ RSpec.describe ProviderEnrollmentMailer, type: :mailer do
     end
 
     it "renders the body" do
-      expect(mail.body.encoded).to match("Hi")
+      expect(mail.body.encoded).to match("#{provider_enrollment.first_name} #{provider_enrollment.last_name}")
     end
   end
 
