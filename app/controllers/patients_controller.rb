@@ -12,6 +12,14 @@ class PatientsController < ApplicationController
     respond_to do |format|
       format.html
       format.csv { send_data @clinic.patients.to_csv, filename: "news_signups-#{Date.today}.csv" }
+      format.xlsx do
+        @patients = Patient.joins(:appointments).where("appointments.on_waiting_list")
+        render  template: 'patients/index',
+                disposition: 'inline',
+                xlsx: 'patients_waiting_list_#{Date.today.strftime("%d_%m_%Y")}.xlsx',
+                filename: "patients_waiting_list_#{Date.today.strftime("%d_%m_%Y")}.xlsx",
+                xlsx_author: current_user.name
+      end
     end
 
   end

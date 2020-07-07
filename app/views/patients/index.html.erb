@@ -14,6 +14,9 @@
           <input class="form-input flex-1" id="search" data-action="keyup->patients#search" type="text">
         </div>
         <div class="flex items-end">
+          <% if @clinic %>
+            <%= link_to "Download Waiting List", patients_path(format: :xlsx), class: "button-primary" %>
+          <% end %>
           <%= link_to "Download Registration List", clinic_patients_path(clinic_id: @clinic.id, format: :csv), class: "button-primary" %><br/>
           <a href="javascript:" class="button-primary" data-action="click->main#printContent">Print</a>
         </div>
