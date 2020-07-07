@@ -33,7 +33,7 @@
 <div data-controller="clinic-activity-patients">  
   <div class="flex justify-between mb-6 mt-6">
     <form class="flex items-center">
-      <label class="flex text-lg mr-3 align-middle text-gray-600 block mb-2" for="search"> Search: </label>
+      <label class="flex text-lg mr-3 align-middle text-gray-600 mb-2" for="search"> Search: </label>
       <input class="form-input" id="search" data-action="keyup->clinic-activity-patients#search" type="text">
     </form> 
     <%= link_to sanitize("Add Patient &#43;"), "javascript:", class: "button-primary", "data-action": "click->clinic-activity-patients#onShowHideCancelModal" %>
