@@ -6,6 +6,7 @@
     <% if params[:clinic_display] == "virtual" %><td class="w-1/12"> <%= clinic.active_queue_patients_count %> </td><% end %>
     <% unless params[:clinic_display] == "virtual" %>
     <td class="w-9/12 grid grid-cols-2 gap-3">
+      <% if !current_user.has_role?(:government) %>
         <%= link_to clinic_patients_path(clinic_id: clinic.id), class: "clinic-action hover:text-brand-blue-600" do %>
             <span class="text-brand-blue-600"> &raquo; </span>
             <span> Registration List </span>
@@ -22,11 +23,17 @@
             <span class="text-brand-blue-600"> &raquo; </span>
             <span> Customized Report </span>
         <% end %>
+      <% else %>
+        <%= link_to "#", class: 'clinic-action hover:text-brand-blue-600 mb-2' do %>
+            <span class="text-brand-blue-600"> &raquo; </span>
+            <span> Anon Reports </span>
+        <% end %>
+      <% end %>
     </td>
     <% end %>
-    <td class="w-1/12"> 
+    <td class="w-1/12">
         <% unless params[:clinic_display] == "virtual" %>
-            <button class="button-primary" data-cancelid="<%= clinic.id %>" 
+            <button class="button-primary" data-cancelid="<%= clinic.id %>"
                 data-action="click->clinic-activity-patients#onShowHideCancelModal">Cancel</button>
         <% else %>
             <%= link_to "Start", clinic_edit_queue_path(clinic.id), class: "button-primary" %>

@@ -1,6 +1,7 @@
 class SupplyInventoriesController < InheritedResources::Base
   before_action :authenticate_user!
   layout "clinic_management"
+  load_and_authorize_resource
 
   def index
     @supply_inventories = SupplyInventory.all
@@ -26,7 +27,7 @@ class SupplyInventoriesController < InheritedResources::Base
 
     def supply_inventory_params
       params.require(:supply_inventory).permit(
-        :received_at, :item_type, 
+        :received_at, :item_type,
         :manufacturer, :lot_number, :expiration_date,
         :quantity, :packaging, :source, :product_name,
         :county, :venue_name

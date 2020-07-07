@@ -1,6 +1,7 @@
 class EmployersController < InheritedResources::Base
   before_action :authenticate_user!, only: [:index, :activity, :destroy]
   layout "clinic_management", only: [:index, :activity]
+  load_and_authorize_resource
 
   def index
     @employers = Employer.all
@@ -10,7 +11,7 @@ class EmployersController < InheritedResources::Base
     @page_title = "Employer Activity"
     @employer = Employer.find(params[:id])
   end
-  
+
   def new
     @employer = Employer.new
   end

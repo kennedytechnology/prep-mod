@@ -1,4 +1,6 @@
 class ReportsController < ApplicationController
+  load_and_authorize_resource #TODO: create anon reports for government role
+
   include ReportHelper
   layout "clinic_management"
   before_action :authenticate_user!
@@ -19,7 +21,7 @@ class ReportsController < ApplicationController
 
   def capacity_available_testing_appointments
     render json:  Clinic.joins(:appointments).all.group(:venue_name).count
-  end 
+  end
 
   def capacity_scheduled_appointments
     render json: Clinic.joins(:appointments).where("appointments.queue_state = ?", "not_checked_in").group(:venue_name).count
@@ -46,7 +48,7 @@ class ReportsController < ApplicationController
 
   def employers_state
     render json: Employer.group(:state).count
-  end 
+  end
 
   def employers_patients_tested_company_name
     render json: Employer.joins(:patients).group(:company_name).count
@@ -55,22 +57,22 @@ class ReportsController < ApplicationController
   def employers_patients_tested_city
     render json: Employer.joins(:patients).group(:city).count
   end
-  
+
   def appointments_by_county
     render json: Patient.joins(:appointments).group(:county).count
-  end 
+  end
 
   def available_appointments_by_county
     chart_data = Patient.joins(:appointments).where("appointments.queue_state = ?", "not_checked_in").group(:county).count
     render json: [{ data: parse_chart_data(chart_data),
                     library: column_chart_background_colors }].chart_json
-  end 
+  end
 
   def completed_appointments_by_county
     chart_data = Patient.joins(:appointments).where("appointments.queue_state = ?", "done").group(:county).count
     render json: [{ data: parse_chart_data(chart_data),
                     library: column_chart_background_colors }].chart_json
-  end 
+  end
 
   def supply_inventories; end
 
@@ -92,6 +94,7 @@ class ReportsController < ApplicationController
     render json: Appointment.where("queue_state = ? OR queue_state = ? ", *["not_checked_in", "done"]).group(:queue_state).count
   end
 
+
   def news_and_notifications
     @news_signups = NewsSignup.all
 
@@ -110,8 +113,8 @@ class ReportsController < ApplicationController
       end
 
       format.xlsx do
-        render xlsx: 'New and Notifications Contact List', template: 'reports/news_and_notifications', 
-                disposition: 'inline', 
+        render xlsx: 'New and Notifications Contact List', template: 'reports/news_and_notifications',
+                disposition: 'inline',
                 filename: "news_and_notifications_contact_list_#{Date.today.strftime("%d_%m_%Y")}.xlsx",
                 xlsx_author: current_user.name
       end

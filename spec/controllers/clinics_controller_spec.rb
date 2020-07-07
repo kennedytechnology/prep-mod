@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe ClinicsController, type: :controller do
   let(:clinic) { create(:clinic) }
-  before { sign_in create(:user) }
+  let(:user) { create(:user) }
+  before { sign_in user }
 
   describe "GET #index" do
     it "returns http success" do
@@ -78,8 +79,8 @@ RSpec.describe ClinicsController, type: :controller do
   describe "POST #update" do
     context "success" do
       before do
-        put :update, params: { id: clinic.id, "save-submit": "Save and Submit", clinic: { 
-          clinic_date: Date.today 
+        put :update, params: { id: clinic.id, "save-submit": "Save and Submit", clinic: {
+          clinic_date: Date.today
         } }
         clinic.reload
       end
@@ -123,7 +124,7 @@ RSpec.describe ClinicsController, type: :controller do
     should permit(:clinic_status, :start_time, :end_time,
       :address, :lead_vaccinator_name,
       :clinic_date, :students_registered, :public_or_private,
-      :incidents_comments, :county, :venue_name, :zip, 
+      :incidents_comments, :county, :venue_name, :zip,
       :city, :state, :appointment_frequency_minutes,
       :appointment_slots, :contact_person, :contact_phone_number,
       :backup_contact_person, :backup_contact_phone_number,
@@ -136,7 +137,7 @@ RSpec.describe ClinicsController, type: :controller do
         :contact_type, :screening_outcome, :clinic_staff_id, :notes, :test_name,
         :test_type, :test_processing, :category],
       test_kits_attributes: [:id, :test_name, :test_manufacturer,
-        :test_lot_number, :test_type, :test_processing, 
+        :test_lot_number, :test_type, :test_processing,
         :test_expiration_date, :test_kits_quantity, :tests_administered,
         :unusable_tests, :tests_returned, :_destroy]).
       for(:create, params: params).

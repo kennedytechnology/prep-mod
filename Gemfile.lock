@@ -293,6 +293,7 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     rexml (3.2.4)
+    role_model (0.8.2)
     rspec-core (3.9.2)
       rspec-support (~> 3.9.3)
     rspec-expectations (3.9.2)
@@ -420,6 +421,7 @@ DEPENDENCIES
   rails (~> 6.0.2, >= 6.0.2.1)
   rails-erd
   ransack!
+  role_model
   rspec-rails (~> 4.0.0)
   sass-rails (>= 6)
   selenium-webdriver

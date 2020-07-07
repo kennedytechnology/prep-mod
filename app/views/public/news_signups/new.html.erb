@@ -1,4 +1,4 @@
-<h1 class="main-title font-bold"> Sign Up for News and Notifications About COVID-19 </h1>
+<h1 class="main-title font-bold pt-20"> Sign Up for News and Notifications About COVID-19 </h1>
 
 <% if @news_signup.errors.any? %>
   <div id="error_explanation" class="p-4 border-2 bg-red-100 border-red-500 mb-4"> 
@@ -24,7 +24,7 @@
                 <%= f.text_field :last_name, class: "form-input w-full", required: true %>
             </div>
             <div class="flex-1 mr-2">
-                <%= f.label :date_of_birth, class: "block" %>
+                <%= f.label :date_of_birth, "Date of Birth", class: "block" %>
                 <div class="flex">
                     <%= f.date_select :date_of_birth, {order: [:month, :day, :year], start_year: Date.current.year - 99, end_year: Date.current.year, include_blank: true}, class: "form-select w-full" %>
                 </div>
@@ -37,7 +37,7 @@
     </div>
 
     <div class="field-fullwidth">
-        <div class="grid grid-cols-4 gap-4">
+        <div class="grid grid-cols-3 gap-4">
             <div>
                 <%= f.label :email, "Email Address", class: "block" %>
                 <%= f.email_field :email, class: "form-input w-full", required: true %>
@@ -46,9 +46,17 @@
                 <%= f.label :occupation, "Choose Occupation", class: "block" %>
                 <%= f.select :occupation, PATIENT_OCCUPATIONS, {prompt: "Select"}, {class: "block form-select w-full", required: true} %>
             </div>
+        <div>
+                <span class="text-sm">Do you or anyone in your household have a chronic health condition (Example: diabetes, heart disease, high blood pressure, COPD, asthma)?</span><br/>
+            <div class="mt-4 p-4">
+                <label class="text-xl"><%= f.radio_button :chronic_health_condition, true %> <span>Yes</span></label>
+                <label class="text-xl ml-8"><%= f.radio_button :chronic_health_condition, false %> <span>No</span></label>
+            </div>        
+        </div>
+
         </div>
     </div>
-
+    
     <div class="field-fullwidth">
         <div>
             <%= f.label "Please keep me informed about:", class: "block text-xl mb-4" %>
@@ -125,7 +133,7 @@
         }
     </script>
 
-    <div class="mt-10 flex justify-end">
+    <div class="mt-10 flex justify-left">
         <%= f.submit "Sign Up", class: "button-primary" %>
     </div>
 <% end %>

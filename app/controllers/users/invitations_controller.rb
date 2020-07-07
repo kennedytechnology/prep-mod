@@ -12,7 +12,7 @@ class Users::InvitationsController < Devise::InvitationsController
 
   protected
 
-  def configure_permitted_parameters    
+  def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:invite, keys: [:first_name, :last_name, :role, :provider_id ])
   end
 end

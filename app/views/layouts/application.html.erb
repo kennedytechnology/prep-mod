@@ -14,12 +14,6 @@
   </head>
 
   <body data-controller="main">
-    <!-- These are from devise. This is to be better-handled elsewise -->
-    <% if notice || alert %>
-    <script>
-      alert("<%= notice.to_s + " " + alert.to_s %>")
-    </script>
-    <% end %>
 
     <div class="main-container">
         <% unless @hide_header %>

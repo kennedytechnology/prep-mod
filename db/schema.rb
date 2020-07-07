@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2020_07_06_040553) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "roles_mask"
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
@@ -566,6 +567,7 @@ ActiveRecord::Schema.define(version: 2020_07_06_040553) do
     t.string "invited_by_type"
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
+    t.integer "roles_mask"
     t.string "first_name"
     t.string "last_name"
     t.string "venues", default: [], array: true
