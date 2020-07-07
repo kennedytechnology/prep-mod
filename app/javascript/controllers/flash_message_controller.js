@@ -7,9 +7,9 @@ export default class extends Controller {
       let flashMessage = document.getElementById("flashMessage");
 
       flashMessage.classList.add("flash-message-modal-active");
-      // setTimeout(function() { 
-      //     flashMessage.classList.remove("flash-message-modal-active");
-      // }, 3000);
+      setTimeout(function() { 
+          flashMessage.classList.remove("flash-message-modal-active");
+      }, 3000);
     }
 
     disconnect() {
