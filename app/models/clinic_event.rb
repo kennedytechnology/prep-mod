@@ -4,8 +4,6 @@ class ClinicEvent < ApplicationRecord
   belongs_to :user, optional: true
   has_and_belongs_to_many :clinic_services
 
-  validates_presence_of :event_date, :location, :outcome, :patient_id
-
   def self.available_locations
     locations = []
     locations << Clinic.all.collect(&:venue_name)
