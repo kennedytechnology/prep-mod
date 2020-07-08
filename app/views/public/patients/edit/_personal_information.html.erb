@@ -125,21 +125,24 @@
     </div>
 </div>
 
-<div class="field-side-by-side" data-controller="consent-form">
+<div class="field-side-by-side" data-controller="email-confirmation">
     <div>
         <%= f.label :email do %>
             <span> Email Address </span>
             <span class="field-required">*</span>
         <% end %>
         <%= f.text_field :email, disabled: @patient.access_code.present?, class: "form-input w-full", 
-            data: {action: "keyup->consent-form#emailConfirmation change->consent-form#emailConfirmation", target: "consent-form.emailField"}, required: true %>
+            data: {
+                action: "keyup->email-confirmation#emailConfirmation
+                         change->email-confirmation#emailConfirmation",
+                target: "email-confirmation.emailField"}, required: true %>
     </div>
     <div>
         <label> Retype Email Address <span class="field-required">*</span> </label>
         <input type="email" class="form-input w-full" required="required" value="<%= @patient.email %>"
-            data-action="keyup->consent-form#emailConfirmation change->consent-form#emailConfirmation"
-            data-target="consent-form.confirmEmailField" />
-        <p class="text-red-600 -mt-2" data-target="consent-form.confirmEmailError"> </p>
+            data-action="keyup->email-confirmation#emailConfirmation change->email-confirmation#emailConfirmation"
+            data-target="email-confirmation.confirmEmailField" />
+        <p class="text-red-600 -mt-2" data-target="email-confirmation.confirmEmailError"> </p>
     </div>
 </div>
 

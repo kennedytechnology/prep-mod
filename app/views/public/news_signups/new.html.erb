@@ -36,29 +36,41 @@
         </div>
     </div>
 
-    <div class="field-fullwidth">
+    <div class="field-fullwidth" data-controller="email-confirmation">
         <div class="grid grid-cols-3 gap-4">
-            <div>
-                <%= f.label :email, "Email Address", class: "block" %>
-                <%= f.email_field :email, class: "form-input w-full", required: true %>
-            </div>
             <div>
                 <%= f.label :occupation, "Choose Occupation", class: "block" %>
                 <%= f.select :occupation, PATIENT_OCCUPATIONS, {prompt: "Select"}, {class: "block form-select w-full", required: true} %>
+            </div>    
+            <div>
+                <%= f.label :email, "Email Address", class: "block" %>
+                <%= f.email_field :email, class: "form-input w-full", required: true, 
+                    data: {action: "keyup->email-confirmation#emailConfirmation
+                                    change->email-confirmation#emailConfirmation",
+                            target: "email-confirmation.emailField"} %>
             </div>
-        <div>
-                <span class="text-sm">Do you or anyone in your household have a chronic health condition (Example: diabetes, heart disease, high blood pressure, COPD, asthma)?</span><br/>
+            <div>
+                <label class="block"> Re-Type Email Address </label>
+                <input type="email" class="form-input w-full" required="true"
+                    data-action="keyup->email-confirmation#emailConfirmation change->email-confirmation#emailConfirmation"
+                    data-target="email-confirmation.confirmEmailField" />
+                <p class="text-red-600 -mt-2" data-target="email-confirmation.confirmEmailError"> </p>
+            </div>
+        </div>
+    </div>
+    <div class="field-fullwidth">
+        <div class="grid grid-cols-1 gap-4">
+        <div class="py-4">
+                <span class="text-base">Do you or anyone in your household have a chronic health condition (Example: diabetes, heart disease, high blood pressure, COPD, asthma)?</span><br/>
             <div class="mt-4 p-4">
                 <label class="text-xl"><%= f.radio_button :chronic_health_condition, true %> <span>Yes</span></label>
                 <label class="text-xl ml-8"><%= f.radio_button :chronic_health_condition, false %> <span>No</span></label>
             </div>        
         </div>
-
-        </div>
     </div>
-    
+
     <div class="field-fullwidth">
-        <div>
+        <div class="py-4">
             <%= f.label "Please keep me informed about:", class: "block text-xl mb-4" %>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 lg:gap-2">
                 <% NEWS_TOPICS.each do |topic|%>
@@ -126,6 +138,6 @@
     </script>
 
     <div class="mt-10 flex justify-left">
-        <%= f.submit "Sign Up", class: "button-primary" %>
+        <%= f.submit "Sign Up", id: "submitButton", class: "button-primary" %>
     </div>
 <% end %>
