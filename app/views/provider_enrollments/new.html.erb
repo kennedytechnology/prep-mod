@@ -2,7 +2,7 @@
 
 <div data-controller="review-form">
   <div data-controller="provider-enrollment-new-entry">
-    <%= form_with model: @provider_enrollment, remote: true, class: "py-5", data: { target: "review-form.form"} do |f| %>
+    <%= form_with model: @provider_enrollment, remote: true, class: "py-5", data: {action: "change->review-form#onDisableFormPage keyup->review-form#onDisableFormPage", target: "review-form.form"} do |f| %>
         <% if @provider_enrollment.errors.any? %>
             <div id="error_explanation" class="p-4 border-2 bg-red-100 border-red-500 mb-4"> 
                 <h2 class="text-lg font-bold"><%= pluralize(@provider_enrollment.errors.count, "error") %> prohibited this article from being saved:</h2>
@@ -314,7 +314,7 @@
               <label for="refrigerator"> I do not have a refrigerator </label>
             </div>
 
-            <%= f.text_area :refrigerator, class: "form-input w-full", required: true, data: {textArea: "refrigerator"} %>
+            <%= f.text_area :refrigerator, class: "form-input w-full", required: true, data: {textArea: "refrigerator", target: "review-form.validates"} %>
           </div>
 
           <div>
@@ -327,7 +327,7 @@
                 />
               <label for="freezer"> I do not have a freezer </label>
             </div>
-            <%= f.text_area :freezer, class: "form-input w-full", required: true, data: {textArea: "freezer"} %>
+            <%= f.text_area :freezer, class: "form-input w-full", required: true, data: {textArea: "freezer", target: "review-form.validates"} %>
           </div>
 
           <div>
@@ -341,7 +341,7 @@
                 />
               <label for="thermometer"> I do not have a refrigerator thermometer </label>
             </div>
-            <%= f.text_area :refrigerator_thermometer, class: "form-input w-full", required: true, data: {textArea: "thermometer"} %>
+            <%= f.text_area :refrigerator_thermometer, class: "form-input w-full", required: true, data: {textArea: "thermometer", target: "review-form.validates"} %>
           </div>
         </div>
       </div>
