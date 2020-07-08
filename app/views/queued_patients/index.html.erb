@@ -2,8 +2,8 @@
 
 <div class="flex justify-between">
   <div>
-    <span class="font-bold">Clinic Status:</span> <%= @clinic.open_state.titleize %>
-    <span class="font-bold ml-8">Social Distancing Capacity:</span> <%= @clinic.active_queue_patients_count %>
+    <span class=" pt-16 font-bold text-xl">Total Registered:</span> <span class="mr-8 text-xl"><%= @clinic.patients.size %> </span>
+    <span class="font-bold ml-8 text-xl">Social Distancing Capacity:</span> <span class="text-xl"> <%= @clinic.active_queue_patients_count %> </span>
     <%= link_to "(update)", clinic_edit_queue_path(clinic_id: @clinic), class: "underline text-blue-500" %>
   </div>
   <div>
@@ -39,7 +39,7 @@
     <%= link_to sanitize("Add Patient &#43;"), "javascript:", class: "button-primary", "data-action": "click->clinic-activity-patients#onShowHideCancelModal" %>
     <%= render "queued_patients/add_patient_modal" %>
   </div> 
-  <div class="mt-4">
+  <div class="mt-4 pt-12 pb-8">
     <span class="font-bold mr-4">Filter: </span>
     <%= link_to "All", clinic_queued_patients_path(clinic_id: @clinic.id), class: "p-2 mr-4 bg-blue-500 rounded text-white" %>
     <% Appointment.aasm.states.collect(&:name).each do |state| %>
