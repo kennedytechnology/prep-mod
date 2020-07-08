@@ -17,7 +17,7 @@
 
 
 <div class="field-fullwidth mt-8" data-controller="consent-form">
-    <p class="label"> With who would you like to share your information? </p>
+    <p class="label"> With whom would you like to share your information? </p>
     <p data-target="consent-form.companyInputField" class="text-lg md:text-xl lg:text-xl">Selected Entity: <%= @patient.employers.collect(&:company_name).join(", ")%></p>
     <div class="multiselect-dropdown">
         <div class="selectBox" data-action="click->consent-form#showCheckboxes">
