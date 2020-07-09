@@ -79,8 +79,18 @@ class ClinicsController < ClinicManagementController
 
   def update
     @page_title = "View/Edit clinic"
+
     if @clinic.update(clinic_params)
       finish_patients_in_queue
+
+      clinic_params[:clinic_events_attributes].each do |clinic_event|
+        clinic_event = clinic_event[1]
+        find_clinic_event = ClinicEvent.find(clinic_event["id"])
+        if find_clinic_event.test_processing != clinic_event["id"]
+          ClinicMailer.send_vaccinated_confirmation(clinic_event)
+        end
+      end
+
       redirect_back fallback_location: clinics_path(clinic_date: 'upcoming')
     else
       render :new
