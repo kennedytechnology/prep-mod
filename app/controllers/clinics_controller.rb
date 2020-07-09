@@ -82,15 +82,7 @@ class ClinicsController < ClinicManagementController
 
     if @clinic.update(clinic_params)
       finish_patients_in_queue
-
-      clinic_params[:clinic_events_attributes].each do |clinic_event|
-        clinic_event = clinic_event[1]
-        find_clinic_event = ClinicEvent.find(clinic_event["id"])
-        if find_clinic_event.test_processing != clinic_event["id"]
-          ClinicMailer.send_vaccinated_confirmation(clinic_event)
-        end
-      end
-
+      send_vaccinated_patients_confirmation
       redirect_back fallback_location: clinics_path(clinic_date: 'upcoming')
     else
       render :new
@@ -102,6 +94,12 @@ class ClinicsController < ClinicManagementController
   end
 
   private
+
+  def send_vaccinated_patients_confirmation
+    return unless clinic_params[:clinic_events_attributes]s
+    events_vaccination_confirmated = clinic_params[:clinic_events_attributes].values.select{|h| h[:test_processing] if h[:test_processing] == "Negative" || h[:test_processing] == "Positive"}.collect{|h| h[:id].to_i}
+    ClinicEvent.where(id: events_vaccination_confirmated).each{|ce| ClinicMailer.send_vaccinated_confirmation(ce).deliver }
+  end
 
   def finish_patients_in_queue
     return unless clinic_params[:clinic_events_attributes]
