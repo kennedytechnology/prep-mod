@@ -30,7 +30,13 @@ class QueuedPatientsController < ClinicManagementController
     raise CanCan::AccessDenied unless @appointment.available_event_names.include?(params[:event])
     @appointment.send(params[:event])
     @appointment.save
-    redirect_back fallback_location: clinic_queued_patients_path(@appointment.clinic)
+    auto_invite
+    @appointment.reload
+    respond_to do |format|
+      format.html { redirect_back fallback_location: clinic_queued_patients_path(@appointment.clinic) }
+      format.js
+    end
+    
   end
 
   def update_clinic_status

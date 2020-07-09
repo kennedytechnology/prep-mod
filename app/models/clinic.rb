@@ -102,7 +102,7 @@ class Clinic < ApplicationRecord
   end
 
   def patient_capacity_available
-    active_queue_patients_count.to_i - patients_at_clinic_count
+    (active_queue_patients_count.to_i - patients_at_clinic_count) + 2
   end
 
   def appointments_to_invite
