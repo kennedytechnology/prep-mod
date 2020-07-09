@@ -8,22 +8,19 @@ class ClinicsController < ClinicManagementController
     # probably using scopes for a lot of this.
 
     if params[:q].present?
-      @clinics = Clinic.all.select{|c| c.search_string.downcase.include?(params[:q].downcase)}
+      @clinics = Clinic.search_for(params[:q])
     elsif sort_column && sort_direction
       @clinics = Clinic.order(sort_column + " " + sort_direction)
     elsif params[:clinic_date]
-      params[:clinic_date] == 'past' ? @clinics = Clinic.all.where("clinic_date < ?", Date.current)
-          : @clinics = @clinics = Clinic.all.where("clinic_date >= ?", Date.current)
+      @clinics = Clinic.past_or_upcoming(params[:clinic_date])
     else
       @clinics = Clinic.all.paginate(page: params[:page], per_page: 50)
     end
   end
 
   def new
-    # TODO: Building the related records should be done in the model.
     @clinic = Clinic.new
-    @clinic.clinic_personnel.build
-    @clinic.test_kits.build
+    @clinic.initial_set_up!
     @page_title = "Create clinic"
   end
 

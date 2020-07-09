@@ -13,7 +13,7 @@ class PatientsController < ApplicationController
       format.html
       format.csv { send_data @clinic.patients.to_csv, filename: "news_signups-#{Date.today}.csv" }
       format.xlsx do
-        @patients = Patient.joins(:appointments).where("appointments.on_waiting_list")
+        @patients = Patient.with_appointments
         render  template: 'patients/index',
                 disposition: 'inline',
                 xlsx: 'patients_waiting_list_#{Date.today.strftime("%d_%m_%Y")}.xlsx',
@@ -46,7 +46,7 @@ class PatientsController < ApplicationController
       @patient.sms_invite if @patient.notify_via_sms?
       redirect_back fallback_location: "/patients", notice: "Your patient referral is created."
     else
-      render "new", alert: "Your referral was not saved!"
+      render :new, alert: "Your referral was not saved!. Please try again."
     end
   end
 
@@ -68,7 +68,9 @@ class PatientsController < ApplicationController
 
   def destroy
     @patient = Patient.find(params[:id])
-    @patient.appointments.each(&:destroy)
+    @patient.transaction do
+      @patient.appointments.each(&:destroy)
+    end
     session[:alert] = "The patient was deleted."
     redirect_back fallback_location: "/clinics"
   end

@@ -14,6 +14,10 @@ class Patient < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
 
+  scope :with_appointments, -> {
+    joins(:appointments).where("appointments.on_waiting_list")
+  }
+
   def current_clinic
     appointments.last.clinic
   end
@@ -30,7 +34,7 @@ class Patient < ApplicationRecord
   def full_address
     "#{address}, #{city}, #{state} #{zip_code}"
   end
-  
+
   def event_for_clinic(clinic)
     result = clinic_events.detect{|ce| ce.clinic == clinic}
     if result.nil?

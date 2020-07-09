@@ -27,7 +27,7 @@ class QueuedPatientsController < ClinicManagementController
   def update_status
     @appointment = Appointment.find(params[:id])
     raise CanCan::AccessDenied if current_user.has_roles?(:government, :school_nurse)
-    raise "Access denied" unless @appointment.available_event_names.include?(params[:event])
+    raise CanCan::AccessDenied unless @appointment.available_event_names.include?(params[:event])
     @appointment.send(params[:event])
     @appointment.save
     redirect_back fallback_location: clinic_queued_patients_path(@appointment.clinic)
@@ -35,8 +35,7 @@ class QueuedPatientsController < ClinicManagementController
 
   def update_clinic_status
     raise CanCan::AccessDenied if current_user.has_roles?(:government, :school_nurse)
-    # This ensures that the desired state is present in the list of states.
-    raise "Access denied" unless @clinic.available_event_names.include?(params[:event])
+    raise CanCan::AccessDenied unless @clinic.available_event_names.include?(params[:event])
 
     @clinic.send(params[:event])
     @clinic.save
