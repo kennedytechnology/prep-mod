@@ -190,6 +190,13 @@
                 <%= f.text_field :contact_phone_number, placeholder: "Contact Number", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
             </div>
             <div class="w-5/12 mr-6">
+                <%= f.label :contact_email do %>
+                    <span> Contact E-mail </span>
+                    <span class="field-required">*</span>
+                <% end %>
+                <%= f.text_field :contact_email, placeholder: "Contact Email Address", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
+            </div>
+            <div class="w-5/12 mr-6">
                 <%= f.label :backup_contact_person do %>
                     <span> Back-Up Contact Person </span>
                     <span class="field-required">*</span>
@@ -202,6 +209,13 @@
                     <span class="field-required">*</span>
                 <% end %>
                 <%= f.text_field :backup_contact_phone_number, placeholder: "Back-Up Contact Number", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
+            </div>
+            <div class="w-5/12 mr-6">
+                <%= f.label :backup_contact_email do %>
+                    <span> Back-Up Contact E-mail </span>
+                    <span class="field-required">*</span>
+                <% end %>
+                <%= f.text_field :backup_contact_email, placeholder: "Back-Up Contact Email Address", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
             </div>
         </div>
 
