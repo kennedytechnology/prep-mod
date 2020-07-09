@@ -1,17 +1,18 @@
-<p>
-    Dear <%= @patient.full_name %>,
+<p> Thank you for registering for <b><%= @clinic.services.pluck(:name).join(", ") %></b>. </p>
+
+<p> 
+    <%= @patient.full_name %>, 
+    <%= @patient.patient_family_members.select([:first_name, :last_name]).map{ |m| "#{m.first_name} #{m.last_name}" }.join(", ") %>
+    are scheduled for:
+    <br />
+    <br />
+    <b>Date:</b> <%= @appointment.appointment_at.strftime("%m-%d-%Y") %>,
+    <br />
+    <b>Time:</b> <%= @appointment.appointment_at.strftime("%H:%M %p") %>,
+    <br />
+    <b>Location:</b> <%= @clinic.address %>.
 </p>
 
-<p>
-    your request for registration for COVID-19 testing has been submitted successfully.
-</p>
+<p> If you cannot, make this appointment, click <%= link_to "here", "" %> to cancel. </p>
 
-<p>
-    Your regional administrator will be in touch shortly. To inquire about our request call your state health
-    department.
-</p>
-
-<p>
-    Thank you, <br/>
-    Clinic Wizard
-</p>
+<p> Thank you</p>
