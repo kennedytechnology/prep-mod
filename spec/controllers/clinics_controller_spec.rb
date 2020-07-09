@@ -27,7 +27,9 @@ RSpec.describe ClinicsController, type: :controller do
           post :create, params: { clinic: {
             provider_enrollment_id: provider_enrollment.id,
             venue_name: Faker::University.unique.name,
-            clinic_date: Faker::Date.between(from: 1.month.ago, to: 6.months.from_now),
+            clinic_dates_attributes: [{
+              date_of_clinic: Faker::Date.between(from: 1.month.ago, to: 6.months.from_now)
+              }],
             lead_vaccinator_name: Faker::Name.unique.name,
             students_registered: Faker::Number.normal(mean: 100, standard_deviation: 50),
             clinic_status: %w(Pending Completed Cancelled).sample,
@@ -50,7 +52,7 @@ RSpec.describe ClinicsController, type: :controller do
             clinic_primary_groups: ClinicPrimaryGroup.all.sample,
             clinic_age_groups: ClinicAgeGroup.all.sample,
             clinic_services: ClinicService.all.sample,
-          }, clinic_dates: ['10/16/2020'] }
+          }, }
         }.to change(Clinic, :count).by(2)
       end
     end
@@ -130,6 +132,7 @@ RSpec.describe ClinicsController, type: :controller do
       :end_hour_minute, :end_meridiem, :start_hour, :start_minute, :end_hour, :end_minute,
       :appointments_available, users: [], :service_ids => [],
       :age_group_ids => [], :primary_group_ids => [],
+      clinic_dates_attributes: [:id, :date_of_clinic, :_destroy],
       clinic_personnel_attributes: [:id, :name, :_destroy],
       clinic_events_attributes: [:id, :patient_id, :outcome, :safety_kit_received,
         :contact_type, :screening_outcome, :clinic_staff_id, :notes, :test_name,

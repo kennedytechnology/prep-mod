@@ -1,6 +1,17 @@
-<%= label_tag "clinic_dates[]", class: "block" do %>
-    <span> Clinic Date </span>
-    <span class="field-required">*</span>
-<% end %>
+<div class="relative nestedClinicDate">
+  <%= f.hidden_field :_destroy %>
+  <div>
+    <%= f.label :date_of_clinic, class: "block" do %>
+      <span> Clinic Date </span>
+      <span class="field-required">*</span>
+    <% end %>
+    <%= f.date_field :date_of_clinic, class: "form-input", data: {controller: "flatpickr"}, placeholder: "MM/DD/YYYY" %>
+  </div>
 
-<%= text_field_tag "clinic_dates[]", clinic_date, class: "form-input", data: {controller: "flatpickr", action: "change->inventory-new-entry#updateModalField keyup->inventory-new-entry#updateModalField"} %>
+  <%= link_to '#',
+              class: 'removeClinicDatefield absolute rounded-full shadow flex justify-center items-center bg-brand-blue-600 text-white',
+              style: "width: 22px; height: 22px; left: 178px; top: 10px;" do %>
+    <span class="text-xs"> &#10005; </span>
+  <% end %>
+
+</div>

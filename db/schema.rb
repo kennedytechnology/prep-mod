@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_08_090419) do
+ActiveRecord::Schema.define(version: 2020_07_09_092130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,6 +89,14 @@ ActiveRecord::Schema.define(version: 2020_07_08_090419) do
   create_table "clinic_age_groups_provider_enrollments", id: false, force: :cascade do |t|
     t.bigint "clinic_age_group_id", null: false
     t.bigint "provider_enrollment_id", null: false
+  end
+
+  create_table "clinic_dates", force: :cascade do |t|
+    t.bigint "clinic_id", null: false
+    t.date "date_of_clinic"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["clinic_id"], name: "index_clinic_dates_on_clinic_id"
   end
 
   create_table "clinic_events", force: :cascade do |t|
@@ -211,6 +219,8 @@ ActiveRecord::Schema.define(version: 2020_07_08_090419) do
     t.string "open_state"
     t.integer "active_queue_patients_count"
     t.integer "social_distancing"
+    t.string "contact_email"
+    t.string "backup_contact_email"
   end
 
   create_table "clinics_users", id: false, force: :cascade do |t|
@@ -593,6 +603,7 @@ ActiveRecord::Schema.define(version: 2020_07_08_090419) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "appointments", "clinics"
   add_foreign_key "appointments", "patients"
+  add_foreign_key "clinic_dates", "clinics"
   add_foreign_key "providers", "users"
   add_foreign_key "supply_inventory_events", "supply_inventories"
   add_foreign_key "test_kits", "clinics"

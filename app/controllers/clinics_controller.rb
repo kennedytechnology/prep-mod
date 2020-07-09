@@ -32,7 +32,7 @@ class ClinicsController < ClinicManagementController
     @page_title = "Create clinic"
 
     if @clinic.valid?
-      params["clinic_dates"].reject(&:blank?).each do |clinic_date|
+      params[:clinic]["clinic_dates_attributes"].each do |clinic_date|
         @clinic_dup = @clinic.dup
         @clinic_dup.age_groups = @clinic.age_groups
         @clinic_dup.services = @clinic.services
@@ -133,6 +133,7 @@ class ClinicsController < ClinicManagementController
       :appointments_available, users: [], :service_ids => [],
       :age_group_ids => [], :primary_group_ids => [],
       clinic_personnel_attributes: [:id, :name, :_destroy],
+      clinic_dates_attributes: [:id, :date_of_clinic, :_destroy],
       clinic_events_attributes: [:id, :patient_id, :outcome, :safety_kit_received,
         :contact_type, :screening_outcome, :clinic_staff_id, :notes, :test_name,
         :test_type, :test_processing, :category],
