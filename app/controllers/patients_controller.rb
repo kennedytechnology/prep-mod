@@ -73,6 +73,12 @@ class PatientsController < ApplicationController
     redirect_back fallback_location: "/clinics"
   end
 
+  def invite_patient_to_register
+    @patient = Patient.find(params[:patient_id])
+    PatientNotifierMailer.invitation(@patient).deliver
+    redirect_back fallback_location: root_path, notice: "Successfully sent invitation!"
+  end
+
   def upload_records
     raise CanCan::AccessDenied if current_user.has_roles?(:staff, :lead_staff, :school_nurse, :government)
   end
