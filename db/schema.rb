@@ -91,6 +91,14 @@ ActiveRecord::Schema.define(version: 2020_07_09_092130) do
     t.bigint "provider_enrollment_id", null: false
   end
 
+  create_table "clinic_dates", force: :cascade do |t|
+    t.bigint "clinic_id", null: false
+    t.date "date_of_clinic"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["clinic_id"], name: "index_clinic_dates_on_clinic_id"
+  end
+
   create_table "clinic_events", force: :cascade do |t|
     t.integer "clinic_id"
     t.integer "patient_id"
@@ -595,6 +603,7 @@ ActiveRecord::Schema.define(version: 2020_07_09_092130) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "appointments", "clinics"
   add_foreign_key "appointments", "patients"
+  add_foreign_key "clinic_dates", "clinics"
   add_foreign_key "providers", "users"
   add_foreign_key "supply_inventory_events", "supply_inventories"
   add_foreign_key "test_kits", "clinics"

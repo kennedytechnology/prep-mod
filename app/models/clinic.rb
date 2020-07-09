@@ -12,13 +12,15 @@ class Clinic < ApplicationRecord
   has_and_belongs_to_many :age_groups, class_name: "ClinicAgeGroup"
   has_and_belongs_to_many :primary_groups, class_name: "ClinicPrimaryGroup"
   has_many :test_kits
-  has_many :customized_reports
+  has_many :customized_report
+  has_many :clinic_dates
   
   accepts_nested_attributes_for :clinic_personnel, allow_destroy: true, 
     reject_if: lambda {|attributes| attributes['name'].blank?}
 
   accepts_nested_attributes_for :clinic_events, reject_if: lambda {|attributes| attributes['category'].blank?}
   accepts_nested_attributes_for :test_kits, allow_destroy: true, reject_if: :all_blank
+  accepts_nested_attributes_for :clinic_dates, allow_destroy: true, reject_if: proc { |att| att['date_of_clinic'].blank? }
 
   geocoded_by :address
   after_validation :geocode, if: :should_geocode?
