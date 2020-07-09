@@ -67,10 +67,11 @@
                 <td><%= ((Date.today.to_time - patient.date_of_birth.to_time) / 1.year.seconds).floor if patient.date_of_birth %></td>
                 <td><%= patient.sex == "F" ? "Female" : "Male" %></td>
                 <% if @clinic %>
-                <td><%= patient.appointments.last.on_waiting_list? ? "Waiting List" : patient.appointments.last.appointment_at.strftime("%I:%M %p") %></td> 
+                    <td><%= patient.appointments.last.on_waiting_list? ? "Waiting List" : patient.appointments.last.appointment_at.strftime("%I:%M %p") %></td> 
                 <% end %>           
-                <td class="w-3/12 text-right table-action-buttons">
+                <td class="w-4/12 text-right table-action-buttons">
                   <% if @clinic %>
+                    <%= link_to "Invite", invite_patient_to_register_path(patient_id: patient.id), class: "button-action" if patient.appointments.last.on_waiting_list? %>
                     <%= link_to "View Consent", clinic_patient_path(@clinic, patient, format: :pdf), class: "button-action" %>
                   <% else %>
                     <%= link_to "Enter Encounter", new_clinic_event_path(clinic_id: @clinic, patient_id: patient.id),
