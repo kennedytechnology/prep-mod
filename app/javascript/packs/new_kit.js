@@ -28,4 +28,24 @@ $(document).on('turbolinks:load', function () {
         return event.preventDefault();
     });
 
+    addFormField('.addClinicDate', '.clinicFieldsContainer');
+    removeFormField('.removeClinicDatefield', '.nestedClinicDate');
 });
+
+function addFormField(klassContainer, fieldsContainer) {
+    $('form').on('click', klassContainer, function (event) {
+        var regexp, time;
+        time = new Date().getTime();
+        regexp = new RegExp($(this).data('id'), 'g');
+        $(fieldsContainer).append($(this).data('fields').replace(regexp, time));
+        return event.preventDefault();
+    });
+}
+
+function removeFormField(buttonKlass, fieldContainer) {
+    $('form').on('click', buttonKlass, function (event) {
+        $(this).prev('input[type=hidden]').val('1');
+        $(this).closest(fieldContainer).hide();
+        return event.preventDefault();
+    });
+}
