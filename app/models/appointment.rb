@@ -6,7 +6,7 @@ class Appointment < ApplicationRecord
 
   aasm column: :queue_state do
     state :not_checked_in, initial: true
-    state :canceled, :checked_in, :invited, :at_clinic, :done
+    state :canceled, :checked_in, :invited, :at_clinic, :completed, :pending
 
     event :cancel do
       transitions from: [:not_checked_in, :checked_in, :invited], to: :canceled
@@ -34,7 +34,15 @@ class Appointment < ApplicationRecord
     end
 
     event :finish do
-      transitions from: :at_clinic, to: :done
+      transitions from: :at_clinic, to: :completed
+    end
+
+    event :reinstate do
+      transitions from: [:canceled, :pending], to: :checked_in 
+    end
+
+    event :move_to_pending do
+      transitions from: :invited, to: :pending
     end
   end
 

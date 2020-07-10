@@ -1,0 +1,19 @@
+<tr id="queued-patient-<%= patient.id %>" class="border-b-2" data-target="clinic-activity-patients.searchableRow" data-search-content="<%= patient.full_name.try(:downcase) %>">
+  <td>
+    <%= appointment.appointment_at.strftime("%I:%H %p") if appointment.appointment_at %>
+    <%= "Waiting List" if appointment.on_waiting_list %>
+  </td>
+  <td><%= patient.full_name %></td>
+  <td><%= patient.date_of_birth.try(:strftime, '%m/%d/%y') %></td>
+  <td><%= appointment.queue_state.titleize %></td>
+  <td>
+    <% appointment.available_event_names.reverse.each do |event| %>
+      <%= link_to event.titleize,
+        update_status_clinic_queued_patient_path(appointment.id, clinic_id: @clinic.id, event: event),
+        data: {remote: true},
+        class: "button-action",
+        method: 'post'
+      %>
+    <% end %>
+  </td>
+</tr>

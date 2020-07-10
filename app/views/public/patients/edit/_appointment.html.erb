@@ -14,19 +14,23 @@
                     <% @clinic.appointment_times.each do |time| %>
                         <tr>
                             <td class="flex">
-                                <%= af.radio_button(:appointment_at, time, class: "form-radio", onclick: "var elements = document.getElementsByName('appointment[on_waiting_list]'); for(var i=0; i < elements.length; i++) elements[i].checked = false;") %>
+                                <% if @clinic.appointment_slots.to_i >= (@patient.patient_family_members.count + 1) %>
+                                    <%= af.radio_button(:appointment_at, time, class: "form-radio", onclick: "var elements = document.getElementsByName('appointment[on_waiting_list]'); for(var i=0; i < elements.length; i++) elements[i].checked = false;") %>
+                                <% else %>
+                                    <%= af.radio_button(:appointment_at, time, class: "form-radio", disabled: "true") %>
+                                <% end %>
                                 <span class="ml-2"><%= time %></span>
                             </td>
-                            <td> <p> <%= rand(10).to_i %> appointments available </p> </td>
+                            <td> <p> <%= @clinic.appointment_slots.to_i %> appointments available </p> </td>
                         </tr>
                     <% end %>
-                        <tr class="border-t-4 border-gray-600">
-                            <td>
-                                <%= af.radio_button(:on_waiting_list, "1", class: "form-radio", onclick: "var elements = document.getElementsByName('appointment[appointment_at]'); for(var i=0; i < elements.length; i++) elements[i].checked = false;") %>
-                                <span class="ml-1">Add To Waiting List</span>
-                            </td>
-                            <td> <p>Someone will contact you about your appointment.</p> </td>
-                        </tr>
+                    <tr class="border-t-4 border-gray-600">
+                        <td>
+                            <%= af.radio_button(:on_waiting_list, "1", class: "form-radio", onclick: "var elements = document.getElementsByName('appointment[appointment_at]'); for(var i=0; i < elements.length; i++) elements[i].checked = false;") %>
+                            <span class="ml-1">Add To Waiting List</span>
+                        </td>
+                        <td> <p>Someone will contact you about your appointment.</p> </td>
+                    </tr>
                 <% end %>
             </tbody>
         </table>

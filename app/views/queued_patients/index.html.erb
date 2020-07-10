@@ -20,6 +20,7 @@
       <%# TODO: Extract to helper %>
         <% button_label = event.titleize %>
         <% button_label = "Close Clinic" if event == "close" %>
+        <% button_label = "Open Clinic" if event == "open" %>
       <%= link_to button_label,
         update_clinic_status_clinic_queued_patients_path(clinic_id: @clinic, event: event),
         data: {confirm: "Are you sure you want to #{event.humanize(capitalize: false)} this clinic?"},
@@ -38,23 +39,19 @@
     </form> 
     <%= link_to sanitize("Add Patient &#43;"), "javascript:", class: "button-primary", "data-action": "click->clinic-activity-patients#onShowHideCancelModal" %>
     <%= render "queued_patients/add_patient_modal" %>
-  </div> 
-  <div class="mt-4 pt-12 pb-8">
-    <span class="font-bold mr-4">Filter: </span>
-    <%= link_to "All", clinic_queued_patients_path(clinic_id: @clinic.id), class: "p-2 mr-4 bg-blue-500 rounded text-white" %>
-    <% Appointment.aasm.states.collect(&:name).each do |state| %>
-      <%= link_to clinic_queued_patients_path(clinic_id: @clinic.id, state: state), class: "p-2 mr-4 bg-blue-500 rounded text-white" do %>
-        <%= state.to_s.titleize %> (<%= @clinic.appointments.count{|a| a.queue_state == state.to_s }%>)
+  </div>
+
+  <%= render partial: 'filters' %>
+
+  <div id="patient-tables">
+    <% if params[:state] %>
+      <%= render partial: 'patient_table', locals: {queue_state: params[:state]} %>
+    <% else %>
+      <% Appointment.aasm.states.collect(&:name).each do |queue_state| %>
+        <% if @clinic.appointments.select{|a| a.queue_state.to_s == queue_state.to_s}.any? %>
+          <%= render partial: 'patient_table', locals: {queue_state: queue_state} %>
+        <% end %>
       <% end %>
     <% end %>
   </div>
-  <% if params[:state] %>
-    <%= render partial: 'patient_table', locals: {queue_state: params[:state]} %>
-  <% else %>
-    <% Appointment.aasm.states.collect(&:name).each do |queue_state| %>
-      <% if @clinic.appointments.select{|a| a.queue_state.to_s == queue_state.to_s}.any? %>
-        <%= render partial: 'patient_table', locals: {queue_state: queue_state} %>
-      <% end %>
-    <% end %>
-  <% end %>
 </div>

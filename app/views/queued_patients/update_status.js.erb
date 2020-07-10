@@ -1,0 +1,17 @@
+document.getElementById("queued-patient-<%= @appointment.id %>").remove();
+
+if(document.getElementById("queued-patient-section-<%= @appointment.queue_state %>")){
+    document.getElementById('queued-patient-section-<%= @appointment.queue_state %>').querySelector('table').innerHTML += "<%= j(render partial: 'queued_patient_row', locals: {appointment: @appointment, patient: @appointment.patient}) %>"
+} else {
+    document.getElementById('patient-tables').innerHTML += "<%= j(render partial: 'patient_table', locals: {queue_state: @appointment.queue_state}) %>"
+}
+
+<% empty_sections = Appointment.aasm.states.collect(&:name).select{|s| @clinic.appointments.where(queue_state: s).empty?} %>
+
+<% empty_sections.each do |qstate| %>
+  if(document.getElementById('queued-patient-section-<%= qstate %>')){
+    document.getElementById('queued-patient-section-<%= qstate %>').remove();
+  }
+<% end %>
+
+document.getElementById('queued-patient-filters').outerHTML = "<%= j(render partial: 'filters')%>"

@@ -1,32 +1,16 @@
-<h3 class="text-2xl font-bold mt-4 mb-2 pt-12"><%= queue_state.to_s.titleize %></h3>
-<table class="table w-full">
-  <thead><tr class="border-b-2">
-    <th>Appointment Time</th>
-    <th>Name</th>
-    <th>Date of Birth</th>
-    <th>Queue State</th>
-    <th>Actions</th>
-  </tr></thead>
-  <% @clinic.appointments.select{|a| a.queue_state.to_s == queue_state.to_s}.sort_by{|a| a.on_waiting_list? ? 15000000000 : a.appointment_at.to_i}.each do |appointment| %>
-    <% patient = appointment.patient %>
-    <tr class="border-b-2" data-target="clinic-activity-patients.searchableRow" data-search-content="<%= patient.full_name.try(:downcase) %>">
-      <td>
-        <%= appointment.appointment_at.strftime("%I:%H %p") if appointment.appointment_at %>
-        <%= "Waiting List" if appointment.on_waiting_list %>
-      </td>
-      <td><%= patient.full_name %></td>
-      <td><%= patient.date_of_birth.try(:strftime, '%m/%d/%y') %></td>
-      <td><%= appointment.queue_state.titleize %></td>
-      <td>
-        <% appointment.available_event_names.reverse.each do |event| %>
-          <%= link_to event.titleize,
-            update_status_clinic_queued_patient_path(appointment.id, clinic_id: @clinic.id, event: event),
-            # data: {confirm: "Are you sure you want to #{event.humanize(capitalize: false)} this patient's appointment at this clinic?"},
-            class: "button-action",
-            method: 'post'
-          %>
-        <% end %>
-      </td>
-    </tr>
-  <% end %>
-</table>
+<% @clinic.reload %>
+<div id="queued-patient-section-<%= queue_state %>">
+  <h3 class="text-2xl font-bold mt-4 mb-2 pt-12"><%= queue_state.to_s.titleize %></h3>
+  <table class="table w-full">
+    <thead><tr class="border-b-2">
+      <th>Appointment Time</th>
+      <th>Name</th>
+      <th>Date of Birth</th>
+      <th>Queue State</th>
+      <th>Actions</th>
+    </tr></thead>
+    <% @clinic.appointments.select{|a| a.queue_state.to_s == queue_state.to_s}.sort_by{|a| a.on_waiting_list? ? 15000000000 : a.appointment_at.to_i}.each do |appointment| %>
+      <%= render partial: 'queued_patient_row', locals: {appointment: appointment, patient: appointment.patient} %>
+    <% end %>
+  </table>
+</div>

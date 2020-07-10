@@ -13,7 +13,7 @@
   </head>
 
   <body data-controller="main">
-    <%= render partial: "layouts/flash_message", locals: {message: alert ? "alert" : "notice", flash_message: (alert || notice)} if alert || notice %>
+    <%# render partial: "layouts/flash_message", locals: {message: alert ? "alert" : "notice", flash_message: (alert || notice)} if alert || notice %>
 
     <div class="main-container">
         <div class="flex justify-between content-end">
@@ -22,7 +22,7 @@
           <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "text-blue-500 underline" %>
           </span>
         </div>
-        <div class="flex flex-wrap justify-center items-center text-gray-600 my-6 lg:mx-6 main-links-container">
+        <div class="flex flex-wrap justify-center items-center text-gray-600 my-12 lg:mx-6 main-links-container">
           <%
             if ENV['OPEN_MARYLAND'] 
               cms_menu = {

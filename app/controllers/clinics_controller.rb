@@ -8,22 +8,19 @@ class ClinicsController < ClinicManagementController
     # probably using scopes for a lot of this.
 
     if params[:q].present?
-      @clinics = Clinic.all.select{|c| c.search_string.downcase.include?(params[:q].downcase)}
+      @clinics = Clinic.search_for(params[:q])
     elsif sort_column && sort_direction
       @clinics = Clinic.order(sort_column + " " + sort_direction)
     elsif params[:clinic_date]
-      params[:clinic_date] == 'past' ? @clinics = Clinic.all.where("clinic_date < ?", Date.current)
-          : @clinics = @clinics = Clinic.all.where("clinic_date >= ?", Date.current)
+      @clinics = Clinic.past_or_upcoming(params[:clinic_date])
     else
       @clinics = Clinic.all.paginate(page: params[:page], per_page: 50)
     end
   end
 
   def new
-    # TODO: Building the related records should be done in the model.
     @clinic = Clinic.new
-    @clinic.clinic_personnel.build
-    @clinic.test_kits.build
+    @clinic.initial_set_up!
     @page_title = "Create clinic"
   end
 
@@ -32,7 +29,7 @@ class ClinicsController < ClinicManagementController
     @page_title = "Create clinic"
 
     if @clinic.valid?
-      params[:clinic]["clinic_dates_attributes"].each do |clinic_date|
+      params["clinic_dates"].reject(&:blank?).each do |clinic_date|
         @clinic_dup = @clinic.dup
         @clinic_dup.age_groups = @clinic.age_groups
         @clinic_dup.services = @clinic.services
@@ -126,14 +123,13 @@ class ClinicsController < ClinicManagementController
       :clinic_date, :students_registered, :default_test_kit,
       :incidents_comments, :county, :venue_name, :zip,
       :city, :state, :appointment_frequency_minutes, :active_queue_patients_count,
-      :appointment_slots, :contact_person, :contact_phone_number,
-      :backup_contact_person, :backup_contact_phone_number,
+      :appointment_slots, :contact_person, :contact_phone_number, :contact_email,
+      :backup_contact_email, :backup_contact_person, :backup_contact_phone_number,
       :start_hour_minute, :start_meridiem, :venue_type,
       :end_hour_minute, :end_meridiem, :start_hour, :start_minute, :end_hour, :end_minute,
       :appointments_available, users: [], :service_ids => [],
       :age_group_ids => [], :primary_group_ids => [],
       clinic_personnel_attributes: [:id, :name, :_destroy],
-      clinic_dates_attributes: [:id, :date_of_clinic, :_destroy],
       clinic_events_attributes: [:id, :patient_id, :outcome, :safety_kit_received,
         :contact_type, :screening_outcome, :clinic_staff_id, :notes, :test_name,
         :test_type, :test_processing, :category],

@@ -12,15 +12,13 @@ class Clinic < ApplicationRecord
   has_and_belongs_to_many :age_groups, class_name: "ClinicAgeGroup"
   has_and_belongs_to_many :primary_groups, class_name: "ClinicPrimaryGroup"
   has_many :test_kits
-  has_many :customized_report
-  has_many :clinic_dates
-  
-  accepts_nested_attributes_for :clinic_personnel, allow_destroy: true, 
+  has_many :customized_reports
+
+  accepts_nested_attributes_for :clinic_personnel, allow_destroy: true,
     reject_if: lambda {|attributes| attributes['name'].blank?}
 
   accepts_nested_attributes_for :clinic_events, reject_if: lambda {|attributes| attributes['category'].blank?}
   accepts_nested_attributes_for :test_kits, allow_destroy: true, reject_if: :all_blank
-  accepts_nested_attributes_for :clinic_dates, allow_destroy: true, reject_if: proc { |att| att['date_of_clinic'].blank? }
 
   geocoded_by :address
   after_validation :geocode, if: :should_geocode?
@@ -35,6 +33,19 @@ class Clinic < ApplicationRecord
   validates :county, presence: true
   validates :address, presence: true
   validates :lead_vaccinator_name, presence: true
+
+  scope :search_for, ->(search_string) {
+    all.select{ |c| c.search_string.downcase.include?(search_string.downcase) }
+  }
+
+  scope :past_or_upcoming, ->(date) {
+    if date == 'past'
+      all.where("clinic_date < ?", Date.current)
+    else
+      all.where("clinic_date >= ?", Date.current)
+    end
+  }
+
 
   aasm column: :open_state do
     state :upcoming, initial: :true
@@ -61,6 +72,11 @@ class Clinic < ApplicationRecord
     end
   end
 
+  def initial_set_up!
+    clinic_personnel.build
+    test_kits.build
+  end
+
   def available_event_names
     aasm.events(permitted: true).collect(&:name).collect(&:to_s)
   end
@@ -69,7 +85,7 @@ class Clinic < ApplicationRecord
     if start_hour_minute && start_meridiem
       self.start_time = Time.find_zone("UTC").parse("#{start_hour_minute}#{start_meridiem}")
     end
-    if end_hour_minute && end_meridiem 
+    if end_hour_minute && end_meridiem
       self.end_time = Time.find_zone("UTC").parse("#{end_hour_minute}#{end_meridiem}")
     end
   end
@@ -86,7 +102,7 @@ class Clinic < ApplicationRecord
   end
 
   def patient_capacity_available
-    active_queue_patients_count.to_i - patients_at_clinic_count
+    (active_queue_patients_count.to_i - patients_at_clinic_count) + 2
   end
 
   def appointments_to_invite
@@ -105,7 +121,7 @@ class Clinic < ApplicationRecord
   end
 
   def clinic_staff; clinic_personnel; end
-  
+
   def duration
     (end_time - start_time) / 60
   end
