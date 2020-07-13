@@ -11,7 +11,7 @@ FactoryBot.define do
     npi_number { "npi number 1" }
     license_type { "License Type" }
     license_number { "license number 1" }
-    license_state_of_issue { US_STATES.sample }
+    license_state_of_issue { "#{US_STATES.sample}" }
     license_date_of_issue { Date.today }
     medical_specialty { MEDICAL_SPECIALTY.sample }
     practice_type { PRACTICE_TYPES.sample }
@@ -21,7 +21,7 @@ FactoryBot.define do
     practice_name { "Practice Name 1" }
     practice_address { Faker::Address.full_address }
     practice_city { Faker::Address.city }
-    practice_state { US_STATES.sample }
+    practice_state { "#{US_STATES.sample}" }
     practice_zip_code { Faker::Address.zip_code }
     practice_fax_number { "Fax Number"}
     practice_backup_contact { Faker::Name.name }
@@ -37,16 +37,16 @@ FactoryBot.define do
     additional_info { "Additional info" }
     status { "pending" }
 
-    clinic_age_groups_attributes { [{name:"Adults"}] }
-    clinic_primary_groups_attributes { [{name:"Hispanics"}] }
-    clinic_services_attributes { [{name:"Vaccination"}] }
+    # clinic_age_groups_attributes { [{name:"Adults"}] }
+    # clinic_primary_groups_attributes { [{name:"Hispanics"}] }
+    # clinic_services_attributes { [{name:"Vaccination"}] }
 
     # clinic_services { ClinicService.where(category: "provider_enrollments").sample(rand(1..ClinicService.count)) }
     # clinic_age_groups { ClinicAgeGroup.all.sample(rand(1..ClinicAgeGroup.count)) }
     # clinic_primary_groups { ClinicPrimaryGroup.all.sample(rand(1..ClinicPrimaryGroup.count)) }
 
-    # before(:create) { |object| object.clinic_services.build() }
-    # before(:create) { |object| object.clinic_age_groups.build("") }
-    # before(:create) { |object| object.clinic_primary_groups.build() }
+    before(:create) { |object| object.clinic_services.build() }
+    before(:create) { |object| object.clinic_age_groups.build() }
+    before(:create) { |object| object.clinic_primary_groups.build() }
   end
 end

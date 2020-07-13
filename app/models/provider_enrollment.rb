@@ -9,9 +9,9 @@ class ProviderEnrollment < ApplicationRecord
   accepts_nested_attributes_for :clinic_primary_groups
   accepts_nested_attributes_for :clinic_services
 
-  # validates_presence_of :clinic_age_groups, message: '- Please select: Population(s) Served?'
-  # validates_presence_of :clinic_primary_groups, message: '- Please select: What high-risk or under-served groups are largely represented in your practice?'
-  # validates_presence_of :clinic_services, message: '- Please select: What services would you like to provide?'
+  validates_presence_of :clinic_age_groups, message: '- Please select: Population(s) Served?'
+  validates_presence_of :clinic_primary_groups, message: '- Please select: What high-risk or under-served groups are largely represented in your practice?'
+  validates_presence_of :clinic_services, message: '- Please select: What services would you like to provide?'
 
   validates_presence_of :first_name, :middle_initial, :last_name,
                         :title, :contact_office_phone, :contact_mobile_phone,
