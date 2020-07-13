@@ -2,7 +2,7 @@
 
 <div data-controller="provider-enrollment-new-entry">
     <div data-controller="review-form">
-        <%= form_with model: @provider_enrollment, remote: true, class: "py-5", data: {target: "review-form.form"} do |f| %>
+        <%= form_with model: @provider_enrollment, local: true, class: "py-5", data: {target: "review-form.form"} do |f| %>
             <div class="field-fullwidth">
                 <h2 class="title"> What services would you like to provide? </h2>    
                 <div class="checkboxes-container">
@@ -350,13 +350,14 @@
             <%= hidden_field_tag "reviewed", false, id: "reviewed_form_hidden_tag" %>
 
             <div class="flex justify-end mt-8">
-                <%= submit_tag 'Preview & Submit', name: 'preview_button', class: "button-primary", data: {action: "click->review-form#openModal"} %>
+                <%# submit_tag 'Preview & Submit', name: 'preview_button', class: "button-primary", data: {action: "click->review-form#openModal"} %>
+                <%= f.submit "Save", class: "button-action" %>
                 <%= link_to "Cancel", provider_enrollments_path, class: "button-primary" %>
             </div>
 
-            <%= render partial: "provider_enrollments/provider_denied_modal", locals: {f: f} %>
+            <%# render partial: "provider_enrollments/provider_denied_modal", locals: {f: f} %>
 
-            <%= render partial: "provider_enrollments/preview_modal" %>
+            <%# render partial: "provider_enrollments/preview_modal" %>
 
         <% end %>
 

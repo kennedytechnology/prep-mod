@@ -70,9 +70,12 @@ USER_COUNT.times.each do |i|
   )
 end
 
-puts "Creating providers..."
+puts "Creating provider enrollments..."
 10.times do |i|
   ProviderEnrollment.create!(
+    clinic_services: ClinicService.where(category: "provider_enrollments").sample(rand(1..ClinicService.count)),
+    clinic_age_groups: ClinicAgeGroup.all.sample(rand(1..ClinicAgeGroup.count)),
+    clinic_primary_groups: ClinicPrimaryGroup.all.sample(rand(1..ClinicPrimaryGroup.count)),
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     middle_initial: Faker::Name.middle_name,
