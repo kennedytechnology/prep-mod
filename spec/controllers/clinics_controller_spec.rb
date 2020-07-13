@@ -53,7 +53,7 @@ RSpec.describe ClinicsController, type: :controller do
             clinic_age_groups: ClinicAgeGroup.all.sample,
             clinic_services: ClinicService.all.sample,
           }, }
-        }.to change(Clinic, :count).by(2)
+        }.to change(Clinic, :count).by(1)
       end
     end
   end

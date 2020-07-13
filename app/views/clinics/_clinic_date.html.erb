@@ -5,7 +5,7 @@
       <span> Clinic Date </span>
       <span class="field-required">*</span>
     <% end %>
-    <%= f.date_field :date_of_clinic, class: "form-input", data: {controller: "flatpickr"}, placeholder: "MM/DD/YYYY" %>
+    <%= f.text_field :date_of_clinic, class: "form-input", data: {controller: "flatpickr"}, placeholder: "MM/DD/YYYY" %>
   </div>
 
   <%= link_to '#',
