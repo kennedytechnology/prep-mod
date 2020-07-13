@@ -4,12 +4,7 @@ A new public clinic has been created. Here are the details:
 <p>
 <ul>
     <li> Venue Name: <%= @clinic.venue_name %> </li>
-    <li>Clinic Date:</li>
-    <ul>
-        <% @clinic.clinic_dates.each do |date| %>
-            <li><%= date.date_of_clinic %></li>
-        <% end %>
-    </ul>
+    <li> Clinic Date: <%= @clinic.clinic_date %></li>
     <li> Lead Vaccinator Name <%= @clinic.lead_vaccinator_name %> </li>
     <li> Students Registered: <%= @clinic.students_registered %> </li>
     <li> Clinic Status: <%= @clinic.clinic_status %> </li>

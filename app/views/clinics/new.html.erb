@@ -70,7 +70,7 @@
                 <h1 class="title">Date, Time, Location</h1>
                 <% params[:clinic_dates_attributes].reject!(&:blank?) if params[:clinic_dates_attributes] %>
                 <div class="clinicFieldsContainer">
-                    <%= f.fields_for :clinic_dates, ClinicDate.new do |c| %>
+                    <%= f.fields_for :clinic_dates, @clinic_dates do |c| %>
                         <%= render 'clinics/clinic_date', f: c %>
                     <% end %>
                 </div>
