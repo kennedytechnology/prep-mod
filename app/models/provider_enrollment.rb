@@ -9,9 +9,9 @@ class ProviderEnrollment < ApplicationRecord
   accepts_nested_attributes_for :clinic_primary_groups
   accepts_nested_attributes_for :clinic_services
 
-  validates_presence_of :clinic_age_groups, message: '- Please select: Population(s) Served?'
-  validates_presence_of :clinic_primary_groups, message: '- Please select: What high-risk or under-served groups are largely represented in your practice?'
-  validates_presence_of :clinic_services, message: '- Please select: What services would you like to provide?'
+  # validates_presence_of :clinic_age_groups, message: '- Please select: Population(s) Served?'
+  # validates_presence_of :clinic_primary_groups, message: '- Please select: What high-risk or under-served groups are largely represented in your practice?'
+  # validates_presence_of :clinic_services, message: '- Please select: What services would you like to provide?'
 
   validates_presence_of :first_name, :middle_initial, :last_name,
                         :title, :contact_office_phone, :contact_mobile_phone,
@@ -28,10 +28,10 @@ class ProviderEnrollment < ApplicationRecord
   validates :does_provide_vfc, inclusion: [true, false]
 
   # after_create :set_default_unique_number, if: lambda { unique_number == nil }
-  after_update :send_email, if: lambda { status == "accepted" }
-  after_update :email_provider_denial, if: lambda { status == "denied" }
-  after_update :create_provider, if: lambda { status == "accepted" }
-  after_update :invite_user, if: lambda { status == "accepted" }
+  # after_update :send_email, if: lambda { status == "accepted" }
+  # after_update :email_provider_denial, if: lambda { status == "denied" }
+  # after_update :create_provider, if: lambda { status == "accepted" }
+  # after_update :invite_user, if: lambda { status == "accepted" }
 
   # def set_default_unique_number 
   #   self.unique_number = "P#{self.id}"

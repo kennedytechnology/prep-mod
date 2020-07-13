@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ProviderEnrollmentsController, type: :controller do
+  let(:valid_attributes) { attributes_for(:provider_enrollment) }
   let(:provider_enrollment) { create(:provider_enrollment) }
   before { sign_in create(:user) }
 
@@ -21,7 +22,7 @@ RSpec.describe ProviderEnrollmentsController, type: :controller do
   describe "POST #create" do
     context "with valid attributes" do
       #TODO: create working spec for post
-      pending "create new provider enrollment" do
+      it "creates new provider enrollment" do
         expect {
           post :create, params: { provider_enrollment: {
             first_name: Faker::Name.first_name,
@@ -33,7 +34,7 @@ RSpec.describe ProviderEnrollmentsController, type: :controller do
             contact_mobile_phone: Faker::PhoneNumber.cell_phone,
             contact_email: Faker::Internet.email,
             county: COUNTIES.sample,
-            license_state_of_issue: US_STATES.sample,
+            license_state_of_issue: "#{US_STATES.sample}",
             license_date_of_issue: Faker::Date.between(from: 30.days.from_now, to: 365.days.from_now),
             practice_office_phone: Faker::PhoneNumber.cell_phone,
             practice_fax_number: "fax 1",
@@ -43,7 +44,7 @@ RSpec.describe ProviderEnrollmentsController, type: :controller do
             practice_name: "Practice Name 1",
             practice_address: Faker::Address.full_address,
             practice_city: Faker::Address.city,
-            practice_state: US_STATES.sample,
+            practice_state: "#{US_STATES.sample}",
             practice_zip_code: Faker::Address.zip_code,
             practice_backup_contact: Faker::Name.name,
             practice_backup_office_phone: Faker::PhoneNumber.cell_phone,
@@ -58,7 +59,10 @@ RSpec.describe ProviderEnrollmentsController, type: :controller do
             npi_number: "npi number 1",
             license_number: "license number 1",
             license_type: "license type 1",
-            medical_specialty: MEDICAL_SPECIALTY.sample
+            medical_specialty: "#{MEDICAL_SPECIALTY.sample}",
+            clinic_age_groups: [name:"Adults"],
+            clinic_primary_groups: [name:"Hispanics"],
+            clinic_services: { category: "provider_enrollments", name:"Vaccination" }
           } }
         }.to change(ProviderEnrollment, :count).by(1)
       end
