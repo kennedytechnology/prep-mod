@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :provider_enrollment do
-    first_name { "A" }
+    first_name { "first_name" }
     middle_initial { Faker::Name.middle_name }
     last_name { Faker::Name.first_name }
     title { "Title 1" }
@@ -36,15 +36,6 @@ FactoryBot.define do
     does_provide_vfc { Faker::Boolean.boolean }
     additional_info { "Additional info" }
     status { "pending" }
-
-    # clinic_age_groups_attributes { [{name:"Adults"}] }
-    # clinic_primary_groups_attributes { [{name:"Hispanics"}] }
-    # clinic_services_attributes { [{name:"Vaccination"}] }
-
-    # clinic_services { ClinicService.where(category: "provider_enrollments").sample(rand(1..ClinicService.count)) }
-    # clinic_age_groups { ClinicAgeGroup.all.sample(rand(1..ClinicAgeGroup.count)) }
-    # clinic_primary_groups { ClinicPrimaryGroup.all.sample(rand(1..ClinicPrimaryGroup.count)) }
-
     before(:create) { |object| object.clinic_services.build() }
     before(:create) { |object| object.clinic_age_groups.build() }
     before(:create) { |object| object.clinic_primary_groups.build() }
