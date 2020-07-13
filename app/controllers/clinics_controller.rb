@@ -30,7 +30,7 @@ class ClinicsController < ClinicManagementController
     @page_title = "Create clinic"
 
     if @clinic.valid?
-      @clinic.clinic_dates.map(&:date_of_clinic).each do |clinic_date|
+      params[:clinic_dates].reject!(&:blank?).each do |clinic_date|
         @clinic_dup = Clinic.new(clinic_params)
         @clinic_dup.clinic_date = Chronic.parse(clinic_date)
         @clinic_dup.save
