@@ -24,7 +24,7 @@ RSpec.describe ProviderEnrollmentsController, type: :controller do
     context "with valid attributes" do
       it "creates new provider enrollment" do
         expect {
-          # Passing provider_enorllment_id is necessary for getting the nested attributes
+          # Passing provider_enorllment_id is necessary for receiving the nested attributes
           post :create, params: { provider_enrollment: valid_attributes, provider_enrollment_id: provider_enrollment.id }
         }.to change(ProviderEnrollment, :count).by(1)
       end
