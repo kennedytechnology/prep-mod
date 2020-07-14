@@ -1,4 +1,5 @@
 class QueuedPatientsController < ClinicManagementController
+  skip_before_action :authenticate_user!, only: [:cancel_appointment]
   before_action :find_clinic
 
   def index
@@ -46,6 +47,22 @@ class QueuedPatientsController < ClinicManagementController
     @clinic.send(params[:event])
     @clinic.save
     redirect_back fallback_location: clinic_queued_patients_path(@clinic.id)
+  end
+
+  def cancel_appointment
+    @appointment = Appointment.find(params[:appointment_id])
+
+    if @appointment.queue_state == "canceled"
+      flash[:alert] = "Your appointment is already canceled."
+    elsif @appointment.send("cancel")
+      @appointment.save
+      AppointmentMailer.appointment_canceled(@appointment).deliver
+      flash[:notice] = "Your appointment is successfully cancelled."
+    else
+      flash[:alert] = "Error! Your appointment wasn't cancelled. Please try again or contact our regional administrator."
+    end
+
+    redirect_to root_path
   end
 
   private

@@ -12,8 +12,8 @@ class Clinic < ApplicationRecord
   has_and_belongs_to_many :age_groups, class_name: "ClinicAgeGroup"
   has_and_belongs_to_many :primary_groups, class_name: "ClinicPrimaryGroup"
   has_many :test_kits
-  has_many :customized_reports
-
+  has_many :customized_report
+  
   accepts_nested_attributes_for :clinic_personnel, allow_destroy: true,
     reject_if: lambda {|attributes| attributes['name'].blank?}
 

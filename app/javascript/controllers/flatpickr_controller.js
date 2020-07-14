@@ -7,8 +7,7 @@ export default class extends Flatpickr {
         this.config = {
             defaultDate: this.data.get('default-date'),
             altInput: true,
-            altFormat: "F j, Y",
-            dateFormat: "M-d-Y",
+            altFormat: "F j, Y"
         }
     }
 }

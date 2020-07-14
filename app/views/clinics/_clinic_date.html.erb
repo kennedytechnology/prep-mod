@@ -1,6 +1,9 @@
-<%= label_tag "clinic_dates[]", class: "block" do %>
-    <span> Clinic Date </span>
-    <span class="field-required">*</span>
-<% end %>
-
-<%= text_field_tag "clinic_dates[]", clinic_date, class: "form-input", data: {controller: "flatpickr", action: "change->inventory-new-entry#updateModalField keyup->inventory-new-entry#updateModalField"} %>
+<div class="relative nestedClinicDate">
+    <div>
+        <%= label_tag "clinic_dates[]", class: "block" do %>
+            <span> Clinic Date </span>
+            <span class="field-required">*</span>
+        <% end %>
+        <%= text_field_tag "clinic_dates[]", clinic_date, class: "form-input", data: {controller: "flatpickr", flatpickr_min_date: Time.zone.now} %>
+    </div>
+</div>

@@ -2,7 +2,7 @@
 
 <div data-controller="review-form">
   <div data-controller="provider-enrollment-new-entry">
-    <%= form_with model: @provider_enrollment, remote: true, class: "py-5", data: {action: "change->review-form#onDisableFormPage keyup->review-form#onDisableFormPage", target: "review-form.form"} do |f| %>
+    <%= form_with model: @provider_enrollment, local: true, class: "py-5", data: {action: "change->review-form#onDisableFormPage keyup->review-form#onDisableFormPage", target: "review-form.form"} do |f| %>
         <% if @provider_enrollment.errors.any? %>
             <div id="error_explanation" class="p-4 border-2 bg-red-100 border-red-500 mb-4"> 
                 <h2 class="text-lg font-bold"><%= pluralize(@provider_enrollment.errors.count, "error") %> prohibited this article from being saved:</h2>
@@ -157,7 +157,7 @@
               <span> Date of Issue </span>
               <span class="field-required">*</span>
             <% end %>
-            <%= f.text_field :license_date_of_issue, class: "form-select w-full", required: true, 
+            <%= f.text_field :license_date_of_issue, class: "form-input w-full", required: true, 
                                 data: {controller: "flatpickr", action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
           </div>
 
@@ -359,8 +359,8 @@
       <%= f.hidden_field :status, value: "pending", id: "provider_enrollment_status" %>
 
       <div class="flex justify-end mt-8">
-          <%= submit_tag 'Preview & Submit', name: 'preview_button', class: "button-primary", data: {action: "click->review-form#openModal"} %>
-          <%= link_to "Cancel", provider_enrollments_path, class: "button-primary" %>
+            <%= f.submit "Submit Request", class: "button-action" %>
+            <%= link_to "Cancel", root_path, class: "button-primary" %>
       </div>
 
       <% end %>

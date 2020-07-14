@@ -54,8 +54,8 @@
         <h1 class="title">Date, Time, Location</h1>
         <p class="label"> Clinic Date </p>
         <% if params[:clinic_dates] %>
-            <% params[:clinic_dates].reject!(&:blank?).each do |clinic_date| %>
-                <input type="date" value="<%= clinic_date %>" placeholder="MM/DD/YYYY" class="form-input" disabled="disabled">
+            <% params[:clinic_dates_attributes].reject!(&:blank?).each do |clinic_date| %>
+                <input type="date" value="<%= clinic_date.date_of_clinic %>" placeholder="MM/DD/YYYY" class="form-input" disabled="disabled">
             <% end %>
         <% end %>
 

@@ -11,4 +11,8 @@ class AppointmentMailer < ApplicationMailer
   def patient_invited(appointment)
     mail(to: appointment.patient.email, subject: "You're Invited!")
   end
+
+  def appointment_canceled(appointment)
+    mail(to: appointment.patient.email, subject: "Your appointment is canceled")
+  end
 end

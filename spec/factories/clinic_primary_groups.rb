@@ -1,8 +1,5 @@
 FactoryBot.define do
   factory :clinic_primary_group do
-    seniors { "MyString" }
-    african_americans { "MyString" }
-    hispanics { "MyString" }
-    chronically_ill { "MyString" }
+    name { ["Seniors", "African-Americans", "Hispanics", "Chronically Ill (eg. asthma, diabetes, heart disease, hypertension, COPD)"].sample }
   end
 end

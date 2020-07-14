@@ -1,7 +1,7 @@
 class EmployersController < InheritedResources::Base
   before_action :authenticate_user!, only: [:index, :activity, :destroy]
+  load_and_authorize_resource except: [:new, :create]
   layout "clinic_management", only: [:index, :activity]
-  load_and_authorize_resource
 
   def index
     @employers = Employer.all

@@ -29,17 +29,13 @@ class ClinicsController < ClinicManagementController
     @page_title = "Create clinic"
 
     if @clinic.valid?
-      params["clinic_dates"].reject(&:blank?).each do |clinic_date|
-        @clinic_dup = @clinic.dup
-        @clinic_dup.age_groups = @clinic.age_groups
-        @clinic_dup.services = @clinic.services
+      params[:clinic_dates].reject!(&:blank?).each do |clinic_date|
+        @clinic_dup = Clinic.new(clinic_params)
         @clinic_dup.clinic_date = Chronic.parse(clinic_date)
         @clinic_dup.save
         ClinicMailer.public_clinic_created(current_user, @clinic_dup).deliver
       end
 
-      @clinic.save
-      ClinicMailer.public_clinic_created(current_user, @clinic).deliver
       redirect_to clinics_path(clinic_date: 'upcoming'), notice: "Successfully created clinic!"
     else
       render :new
@@ -123,10 +119,11 @@ class ClinicsController < ClinicManagementController
       :clinic_date, :students_registered, :default_test_kit,
       :incidents_comments, :county, :venue_name, :zip,
       :city, :state, :appointment_frequency_minutes, :active_queue_patients_count,
-      :appointment_slots, :contact_person, :contact_phone_number, :contact_email,
-      :backup_contact_email, :backup_contact_person, :backup_contact_phone_number,
+      :appointment_slots, :contact_person, :contact_phone_number,
+      :backup_contact_person, :backup_contact_phone_number,
       :start_hour_minute, :start_meridiem, :venue_type,
       :end_hour_minute, :end_meridiem, :start_hour, :start_minute, :end_hour, :end_minute,
+      :contact_email, :backup_contact_email,
       :appointments_available, users: [], :service_ids => [],
       :age_group_ids => [], :primary_group_ids => [],
       clinic_personnel_attributes: [:id, :name, :_destroy],
