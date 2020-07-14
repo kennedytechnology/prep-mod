@@ -1,8 +1,12 @@
 FactoryBot.define do
   factory :provider_enrollment do
-    first_name { "first_name" }
+    before(:create) { |provider_enrollment| provider_enrollment.clinic_services << create(:clinic_service) }
+    before(:create) { |provider_enrollment| provider_enrollment.clinic_age_groups << create(:clinic_age_group) }
+    before(:create) { |provider_enrollment| provider_enrollment.clinic_primary_groups << create(:clinic_primary_group) }
+  
+    first_name { Faker::Name.first_name }
     middle_initial { Faker::Name.middle_name }
-    last_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
     title { "Title 1" }
     contact_office_phone { Faker::PhoneNumber.cell_phone }
     contact_mobile_phone { Faker::PhoneNumber.cell_phone }
@@ -36,8 +40,5 @@ FactoryBot.define do
     does_provide_vfc { Faker::Boolean.boolean }
     additional_info { "Additional info" }
     status { "pending" }
-    before(:create) { |object| object.clinic_services.build() }
-    before(:create) { |object| object.clinic_age_groups.build() }
-    before(:create) { |object| object.clinic_primary_groups.build() }
   end
 end
