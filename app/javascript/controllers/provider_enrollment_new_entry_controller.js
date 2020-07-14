@@ -3,7 +3,7 @@ import {
 } from "stimulus"
 
 export default class extends Controller {
-  static targets = ["modal"]
+  static targets = ["modal", "openCheckinModal", "eventModalButton"]
 
   connect() {}
 
@@ -34,5 +34,14 @@ export default class extends Controller {
   toggleModal(e) {
     this.modalTarget.classList.toggle('opacity-0');
     this.modalTarget.classList.toggle('pointer-events-none');
+  }
+
+  toggleOpenCheckinModal(e) {
+    this.openCheckinModalTarget.classList.toggle('hidden');
+    if (e.currentTarget.hasAttribute('data-event') && e.currentTarget.hasAttribute('data-btnlabel')) {
+      this.eventModalButtonTarget.setAttribute('href', `/clinics/${e.currentTarget.dataset.clinic}/queued_patients/update_clinic_status?event=${e.currentTarget.dataset.event}`);
+      this.eventModalButtonTarget.textContent = e.currentTarget.dataset.btnlabel;
+      document.getElementsByClassName('eventCapitalized')[0].innerHTML = e.currentTarget.dataset.eventcapitalized;
+    }
   }
 }

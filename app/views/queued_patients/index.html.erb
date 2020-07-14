@@ -6,7 +6,7 @@
     <span class="font-bold ml-8 text-xl">Social Distancing Capacity:</span> <span class="text-xl"> <%= @clinic.active_queue_patients_count %> </span>
     <%= link_to "(update)", clinic_edit_queue_path(clinic_id: @clinic), class: "underline text-blue-500" %>
   </div>
-  <div>
+  <div data-controller="provider-enrollment-new-entry">
     <% if @clinic.upcoming? %>
       <%= link_to "Send Reminder Messages",
         send_check_in_reminders_clinic_queued_patients_path(clinic_id: @clinic),
@@ -21,14 +21,10 @@
         <% button_label = event.titleize %>
         <% button_label = "Close Clinic" if event == "close" %>
         <% button_label = "Open Clinic" if event == "open" %>
-      <%= link_to button_label,
-        update_clinic_status_clinic_queued_patients_path(clinic_id: @clinic, event: event),
-        data: {confirm: "Are you sure you want to #{event.humanize(capitalize: false)} this clinic?"},
-        class: "button-action",
-        method: 'post'
-      %>
+       <%= link_to button_label, "Javascript:", class: "button-action", 
+          data: { action: "click->provider-enrollment-new-entry#toggleOpenCheckinModal", event: event, btnlabel: button_label, clinic: @clinic.id, eventcapitalized: event.humanize(capitalize: false) } %>
     <% end %>
-
+    <%= render partial: "queued_patients/popup_modal" %>
   </div>
 </div>
 <div data-controller="clinic-activity-patients">  
