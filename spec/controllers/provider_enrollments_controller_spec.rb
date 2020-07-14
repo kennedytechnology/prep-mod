@@ -1,8 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe ProviderEnrollmentsController, type: :controller do
-  let(:valid_attributes) { attributes_for(:provider_enrollment) }
+  let(:valid_attributes) { attributes_for(:provider_enrollment).merge({
+    clinic_service_ids: [create(:clinic_service).id],
+    clinic_age_group_ids: [create(:clinic_age_group).id],
+    clinic_primary_group_ids: [create(:clinic_primary_group).id]
+    }) 
+  }
   let(:provider_enrollment) { create(:provider_enrollment) }
+  let(:provider_enrollment_build) { build(:provider_enrollment)}
 
   before { sign_in create(:user) }
 
@@ -24,7 +30,6 @@ RSpec.describe ProviderEnrollmentsController, type: :controller do
     context "with valid attributes" do
       it "creates new provider enrollment" do
         expect {
-          # Passing provider_enorllment_id is necessary for receiving the nested attributes
           post :create, params: { provider_enrollment: valid_attributes }
         }.to change(ProviderEnrollment, :count).by(1)
       end
@@ -34,7 +39,7 @@ RSpec.describe ProviderEnrollmentsController, type: :controller do
   describe "POST #update" do
     context "success" do
       before do
-        put :update, params: { id: provider_enrollment.id, reviewed: true, status: "pending", provider_enrollment: { license_number: "New License Number 2" } }
+        put :update, params: { id: provider_enrollment.id, provider_enrollment: { license_number: "New License Number 2" } }
         provider_enrollment.reload
       end
 
