@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe ProviderEnrollmentsController, type: :controller do
   let(:valid_attributes) { attributes_for(:provider_enrollment) }
   let(:provider_enrollment) { create(:provider_enrollment) }
-  let(:hola) { create(:provider_enrollment)}
 
   before { sign_in create(:user) }
 
@@ -26,7 +25,7 @@ RSpec.describe ProviderEnrollmentsController, type: :controller do
       it "creates new provider enrollment" do
         expect {
           # Passing provider_enorllment_id is necessary for receiving the nested attributes
-          post :create, params: { provider_enrollment: hola }
+          post :create, params: { provider_enrollment: valid_attributes }
         }.to change(ProviderEnrollment, :count).by(1)
       end
     end
