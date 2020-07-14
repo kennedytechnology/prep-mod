@@ -4,6 +4,12 @@ class Appointment < ApplicationRecord
   belongs_to :clinic
   belongs_to :patient
 
+  scope :to_be_reminded, -> {
+    start_date = DateTime.now.utc
+    end_date = DateTime.now.utc + 3.days
+    where(appointment_at: start_date..end_date).where(reminder_sent_at: nil)
+  }
+
   aasm column: :queue_state do
     state :not_checked_in, initial: true
     state :canceled, :checked_in, :invited, :at_clinic, :completed, :pending
@@ -38,7 +44,7 @@ class Appointment < ApplicationRecord
     end
 
     event :reinstate do
-      transitions from: [:canceled, :pending], to: :checked_in 
+      transitions from: [:canceled, :pending], to: :checked_in
     end
 
     event :move_to_pending do

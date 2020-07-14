@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_09_092130) do
+ActiveRecord::Schema.define(version: 2020_07_11_033628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 2020_07_09_092130) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "queue_state"
     t.boolean "on_waiting_list"
+    t.datetime "reminder_sent_at"
     t.index ["clinic_id"], name: "index_appointments_on_clinic_id"
     t.index ["patient_id"], name: "index_appointments_on_patient_id"
   end
