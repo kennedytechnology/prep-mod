@@ -23,8 +23,7 @@ export default class extends Controller {
   }
 
   setStatus(e) {
-    let statusField = document.getElementById("provider_enrollment_status");
-    statusField.value = e.target.value.split(' ').join('_').toLowerCase();
+    document.getElementById("provider_enrollment_status").value = e.currentTarget.getAttribute("data-status");
   }
 
   setDeniedStatus(e) {

@@ -351,8 +351,9 @@
 
             <div class="flex justify-end mt-8">
                 <%# submit_tag 'Preview & Submit', name: 'preview_button', class: "button-primary", data: {action: "click->review-form#openModal"} %>
-                <%= f.submit "Save", class: "button-action" %>
-                <%= link_to "Cancel", provider_enrollments_path, class: "button-primary" %>
+                <%= submit_tag "Accept", class: "button-primary", data: {status: "accepted", action: "click->provider-enrollment-new-entry#setStatus"} %>
+                <%= submit_tag "Deny", class: "button-primary", data: {status: "denied", action: "click->provider-enrollment-new-entry#setStatus"} %>
+                <%= submit_tag "Need More Information", class: "button-primary", data: {status: "need_more_information", action: "click->provider-enrollment-new-entry#setStatus"} %>
             </div>
 
             <%# render partial: "provider_enrollments/provider_denied_modal", locals: {f: f} %>
