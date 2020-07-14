@@ -68,14 +68,16 @@
         <div class="field-side-by-side">
             <div>
                 <h1 class="title">Date, Time, Location</h1>
-                <% params[:clinic_dates_attributes].reject!(&:blank?) if params[:clinic_dates_attributes] %>
-                <div class="clinicFieldsContainer">
-                    <%= f.fields_for :clinic_dates, @clinic_dates do |c| %>
-                        <%= render 'clinics/clinic_date', f: c %>
-                    <% end %>
+                <div data-controller="add-another">
+                    <div data-target="add-another.fieldContainer">
+                        <% params[:clinic_dates].reject!(&:blank?) if params[:clinic_dates] %>
+                        <%= render partial: "clinic_date", collection: (params[:clinic_dates] || [""]) %>
+                        <div data-target="add-another.blankFields" class="hidden">
+                            <%= render partial: "clinic_date", locals: {clinic_date: ""} %>
+                        </div>
+                    </div>
+                    <a href="#" data-action="add-another#addAnother" class="button-action mb-2">Add Another Date</a>
                 </div>
-                <%= link_to_add_clinic_date('Add Another Date', f, :clinic_dates, class: 'button-action mb-2 addClinicDate') %>
-
 
                 <p class="label">Start Time <span class="field-required">*</span></p>
                 <% 

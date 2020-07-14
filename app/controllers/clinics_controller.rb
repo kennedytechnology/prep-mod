@@ -22,7 +22,6 @@ class ClinicsController < ClinicManagementController
     @clinic = Clinic.new
     @clinic.initial_set_up!
     @page_title = "Create clinic"
-    @clinic_dates = @clinic.clinic_dates.build
   end
 
   def create
@@ -30,7 +29,7 @@ class ClinicsController < ClinicManagementController
     @page_title = "Create clinic"
 
     if @clinic.valid?
-      @clinic.clinic_dates.map(&:date_of_clinic).each do |clinic_date|
+      params[:clinic_dates].reject!(&:blank?).each do |clinic_date|
         @clinic_dup = Clinic.new(clinic_params)
         @clinic_dup.clinic_date = Chronic.parse(clinic_date)
         @clinic_dup.save
@@ -120,7 +119,6 @@ class ClinicsController < ClinicManagementController
       :appointments_available, users: [], :service_ids => [],
       :age_group_ids => [], :primary_group_ids => [],
       clinic_personnel_attributes: [:id, :name, :_destroy],
-      clinic_dates_attributes: [:id, :date_of_clinic, :_destroy],
       clinic_events_attributes: [:id, :patient_id, :outcome, :safety_kit_received,
         :contact_type, :screening_outcome, :clinic_staff_id, :notes, :test_name,
         :test_type, :test_processing, :category],

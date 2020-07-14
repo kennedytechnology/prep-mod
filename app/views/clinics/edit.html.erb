@@ -69,13 +69,16 @@
         <div class="field-side-by-side">
             <div>
                 <h1 class="title">Date, Time, Location</h1>
-                <% params[:clinic_dates_attributes].reject!(&:blank?) if params[:clinic_dates_attributes] %>
-                <div class="clinicFieldsContainer">
-                    <%= f.fields_for :clinic_dates do |c| %>
-                        <%= render 'clinics/clinic_date', f: c %>
-                    <% end %>
-                </div>
-                <%= link_to_add_clinic_date('Add Another Date', f, :clinic_dates, class: 'button-action mb-2 addClinicDate') %>
+                <%= f.label :clinic_date, class: "block" do %>
+                    <span> Clinic Date </span>
+                    <span class="field-required">*</span>
+                <% end %>
+                <%= f.text_field :clinic_date, class: "form-input", placeholder: "MM/DD/YYYY", required: true, 
+                                data: { target: "review-form.validates",	            
+                                    controller: "flatpickr",	           
+                                    flatpickr_default_date: @clinic.clinic_date ? @clinic.clinic_date.strftime("%Y-%m-%d") : nil,
+                                    flatpickr_min_date: Time.zone.now
+                } %>
 
                 <p class="label">Start Time <span class="field-required">*</span></p>
                 <% 
