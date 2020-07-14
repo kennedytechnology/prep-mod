@@ -352,12 +352,12 @@
             <div class="flex justify-end mt-8">
                 <%# submit_tag 'Preview & Submit', name: 'preview_button', class: "button-primary", data: {action: "click->review-form#openModal"} %>
                 <% if @provider_enrollment.status == "accepted"%>
-                    <button type="button" class="button-disabled" disabled="disabled"> Already Accepted </button>                
+                    <button type="button" class="button-disabled" disabled="disabled"> Already Accepted </button>                             
                 <% else %>
                     <button type="submit" class="button-action" value="accepted" data-action="click->review-form#submitInventoryForm"> Accept </button>
+                    <%= submit_tag "Deny", class: "button-primary", data: {status: "denied", action: "click->provider-enrollment-new-entry#setStatus"} %>
+                    <%= submit_tag "Need More Information", class: "button-primary", data: {status: "need_more_information", action: "click->provider-enrollment-new-entry#setStatus"} %>                
                 <% end%>
-                <%= submit_tag "Deny", class: "button-primary", data: {status: "denied", action: "click->provider-enrollment-new-entry#setStatus"} %>
-                <%= submit_tag "Need More Information", class: "button-primary", data: {status: "need_more_information", action: "click->provider-enrollment-new-entry#setStatus"} %>
                 <%= link_to "Cancel", provider_enrollments_path, class: "button-primary ml-3" %>
             </div>
 
