@@ -18,7 +18,6 @@
     <table class="table">
         <thead>
             <tr>
-                <!-- <th><%= sortable "clinic_date", "Date" %></th> -->
                 <th><%= sort_link(@q, :clinic_date, 'Date', default_order: :desc) %></th>
                 <th><%= sort_link(@q, :county, 'County', default_order: :asc) %></th>
                 <th><%= sort_link(@q, :venue_name, 'Venue Name', default_order: :asc) %></th>
@@ -34,7 +33,6 @@
             <%= render @clinics %>
         </tbody>
     </table>
-    
 
     <!--    <div class="pagination-section">
         <div class="pagination-container">
