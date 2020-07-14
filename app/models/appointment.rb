@@ -1,7 +1,7 @@
 class Appointment < ApplicationRecord
   include AASM
 
-  belongs_to :clinic
+  belongs_to :clinic, counter_cache: true
   belongs_to :patient
 
   scope :to_be_reminded, -> {
