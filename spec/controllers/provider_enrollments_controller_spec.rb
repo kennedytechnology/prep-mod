@@ -8,7 +8,6 @@ RSpec.describe ProviderEnrollmentsController, type: :controller do
     }) 
   }
   let(:provider_enrollment) { create(:provider_enrollment) }
-  let(:provider_enrollment_build) { build(:provider_enrollment)}
 
   before { sign_in create(:user) }
 
