@@ -157,7 +157,7 @@
               <span> Date of Issue </span>
               <span class="field-required">*</span>
             <% end %>
-            <%= f.text_field :license_date_of_issue, class: "form-select w-full", required: true, 
+            <%= f.text_field :license_date_of_issue, class: "form-input w-full", required: true, 
                                 data: {controller: "flatpickr", action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
           </div>
 
@@ -359,9 +359,8 @@
       <%= f.hidden_field :status, value: "pending", id: "provider_enrollment_status" %>
 
       <div class="flex justify-end mt-8">
-          <%# submit_tag 'Preview & Submit', name: 'preview_button', class: "button-primary", data: {action: "click->review-form#openModal"} %>
-          <%= f.submit "Submit Request", class: "button-action" %>
-          <%= link_to "Cancel", provider_enrollments_path, class: "button-primary" %>
+            <%= f.submit "Submit Request", class: "button-action" %>
+            <%= link_to "Cancel", root_path, class: "button-primary" %>
       </div>
 
       <% end %>

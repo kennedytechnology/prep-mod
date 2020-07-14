@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 2020_07_13_154553) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "queue_state"
     t.boolean "on_waiting_list"
+    t.datetime "reminder_sent_at"
     t.index ["clinic_id"], name: "index_appointments_on_clinic_id"
     t.index ["patient_id"], name: "index_appointments_on_patient_id"
   end
