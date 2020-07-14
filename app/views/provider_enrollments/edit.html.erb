@@ -354,7 +354,7 @@
                 <% if @provider_enrollment.status == "accepted"%>
                     <button type="button" class="button-disabled" disabled="disabled"> Already Accepted </button>                             
                 <% else %>
-                    <button type="submit" class="button-action" value="accepted" data-action="click->review-form#submitInventoryForm"> Accept </button>
+                    <%= submit_tag "Accept", class: "button-primary", data: {status: "accepted", action: "click->provider-enrollment-new-entry#setStatus"} %>
                     <%= submit_tag "Deny", class: "button-primary", data: {status: "denied", action: "click->provider-enrollment-new-entry#setStatus"} %>
                     <%= submit_tag "Need More Information", class: "button-primary", data: {status: "need_more_information", action: "click->provider-enrollment-new-entry#setStatus"} %>                
                 <% end%>
