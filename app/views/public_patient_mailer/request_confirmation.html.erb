@@ -13,6 +13,9 @@
     <b>Location:</b> <%= @clinic.address %>.
 </p>
 
-<p> If you cannot, make this appointment, click <%= link_to "here", "" %> to cancel. </p>
+<p> If you cannot, make this appointment, click
+    <%= link_to "here", cancel_appointment_clinic_queued_patients_url(appointment_id: @appointment.id, clinic_id: @clinic.id) %>
+    to cancel.
+</p>
 
 <p> Thank you</p>

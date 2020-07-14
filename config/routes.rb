@@ -85,6 +85,7 @@ Rails.application.routes.draw do
         post :send_check_in_reminders
         post :send_check_in_reminder
         post :update_clinic_status
+        get  :cancel_appointment
       end
     end
   end
