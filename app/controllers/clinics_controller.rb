@@ -6,15 +6,15 @@ class ClinicsController < ClinicManagementController
   def index
     # TODO: The details of the searching here should be moved to the model,
     # probably using scopes for a lot of this.
+    @q = Clinic.ransack(params[:q])
+    @clinics = Clinic.all.order(:clinic_date)
 
-    if params[:q].present?
-      @clinics = Clinic.search_for(params[:q])
-    elsif sort_column && sort_direction
-      @clinics = Clinic.order(sort_column + " " + sort_direction)
-    elsif params[:clinic_date]
-      @clinics = Clinic.past_or_upcoming(params[:clinic_date])
-    else
-      @clinics = Clinic.all.paginate(page: params[:page], per_page: 50)
+    if params[:clinic_date]
+      @clinics = Clinic.past_or_upcoming(params[:clinic_date]).order(:clinic_date)
+    end
+
+    if @q.result
+      @clinics = @q.result.order(:clinic_date)
     end
   end
 

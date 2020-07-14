@@ -18,13 +18,14 @@
     <table class="table">
         <thead>
             <tr>
-                <th><%= sortable "clinic_date", "Date" %></th>
-                <th><%= sortable "county", "County" %></th>
-                <th><%= sortable "venue_name", "Venue Name" %></th>
+                <!-- <th><%= sortable "clinic_date", "Date" %></th> -->
+                <th><%= sort_link(@q, :clinic_date, 'Date', default_order: :desc) %></th>
+                <th><%= sort_link(@q, :county, 'County', default_order: :asc) %></th>
+                <th><%= sort_link(@q, :venue_name, 'Venue Name', default_order: :asc) %></th>
                 <th>Registered</th>
                 <% if params[:clinic_display] == "virtual" %><th>Soc. Dist. Capacity</th><% end %>
                 <% unless params[:clinic_display] == "virtual" %>
-                <th><%= sortable "links", "Menu" %></th>
+                <th>Menu</th>
                 <% end %>
                 <th> Action </th>
             </tr>
