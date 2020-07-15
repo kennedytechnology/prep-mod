@@ -22,23 +22,27 @@ class ClinicsController < ClinicManagementController
     @clinic = Clinic.new
     @clinic.initial_set_up!
     @page_title = "Create clinic"
+    @errors = []
   end
 
   def create
     @clinic = Clinic.new(clinic_params)
     @page_title = "Create clinic"
+    @clinic_dates = params[:clinic_dates].reject(&:blank?)
 
-    if @clinic.valid?
-      params[:clinic_dates].reject!(&:blank?).each do |clinic_date|
+    @errors = []
+    @errors << "You have selected to have multiple clinics on the same date." if @clinic_dates.uniq.size != @clinic_dates.size
+
+    if @clinic.invalid? || @clinic_dates.empty? || @errors.any?
+      render :new
+    else
+      params[:clinic_dates].reject(&:blank?).each do |clinic_date|
         @clinic_dup = Clinic.new(clinic_params)
         @clinic_dup.clinic_date = Chronic.parse(clinic_date)
         @clinic_dup.save
         ClinicMailer.public_clinic_created(current_user, @clinic_dup).deliver
       end
-
       redirect_to clinics_path(clinic_date: 'upcoming'), notice: "Successfully created clinic!"
-    else
-      render :new
     end
   end
 

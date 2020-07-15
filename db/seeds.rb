@@ -310,6 +310,7 @@ end
       # clinic: clinic,
       received_at: Faker::Date.between(from: 30.days.ago, to: Date.today),
       item_type: INVENTORY_ITEM_TYPES.sample,
+      item_name: Faker::Dessert.topping,
       manufacturer: INVENTORY_MANUFACTURERS.sample,
       lot_number: Faker::Code.asin,
       expiration_date: Faker::Date.between(from: Date.today, to: 30.days.from_now),

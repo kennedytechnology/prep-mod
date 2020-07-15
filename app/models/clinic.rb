@@ -70,6 +70,19 @@ class Clinic < ApplicationRecord
     event :close do
       transitions from: :opened, to: :closed
     end
+
+    event :reopen do
+      transitions from: :closed, to: :opened
+    end
+
+    event :reopen_for_checkin_only do
+      transitions from: :opened, to: :opened_for_check_in
+    end
+
+    event :revert_to_pending do
+      transitions from: :opened_for_check_in, to: :upcoming
+    end
+
   end
 
   def initial_set_up!

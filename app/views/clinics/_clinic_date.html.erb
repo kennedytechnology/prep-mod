@@ -4,6 +4,6 @@
             <span> Clinic Date </span>
             <span class="field-required">*</span>
         <% end %>
-        <%= text_field_tag "clinic_dates[]", clinic_date, class: "form-input", data: {controller: "flatpickr", flatpickr_min_date: Time.zone.now} %>
+        <%= text_field_tag "clinic_dates[]", clinic_date, class: "form-input", id: "clinic_date", data: {controller: "flatpickr", flatpickr_min_date: Time.zone.now} %>
     </div>
 </div>
