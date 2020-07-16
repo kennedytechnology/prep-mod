@@ -26,7 +26,7 @@ RSpec.describe ProviderEnrollmentMailer, type: :mailer do
     end
 
     it "renders the headers" do
-      expect(mail.subject).to eq("Request to become a COVID-19 service srovider has been denied")
+      expect(mail.subject).to eq("Request to become a COVID-19 service provider has been denied")
       expect(mail.to).to eq([provider_enrollment.practice_email])
       expect(mail.from).to eq(["notifications@clinicwizard.com"])
     end
