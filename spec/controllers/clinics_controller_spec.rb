@@ -95,7 +95,7 @@ RSpec.describe ClinicsController, type: :controller do
     end
   end
 
-  it do
+  pending do
     params = {
       clinic: {
         venue_name: Faker::University.unique.name,
