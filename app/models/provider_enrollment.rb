@@ -28,8 +28,9 @@ class ProviderEnrollment < ApplicationRecord
   validates :does_provide_vfc, inclusion: [true, false]
 
   after_save :set_default_unique_number, if: lambda { unique_number == nil }
-  after_update :send_email, if: lambda { status == "accepted" }
-  after_update :email_provider_denial, if: lambda { status == "denied" }
+  after_update :send_email_for_need_more_information, if: lambda { status == "need_more_information" }
+  after_update :send_email_for_denied, if: lambda { status == "denied" }
+  after_update :send_email_for_accepted, if: lambda { status == "accepted" }
   after_update :create_provider, if: lambda { status == "accepted" }
   after_update :invite_user, if: lambda { status == "accepted" }
 
@@ -37,11 +38,15 @@ class ProviderEnrollment < ApplicationRecord
     self.update(unique_number: "P#{self.id}")
   end
 
-  def send_email
+  def send_email_for_need_more_information
+    ProviderEnrollmentMailer.need_more_information_email(self).deliver
+  end
+
+  def send_email_for_accepted
     ProviderEnrollmentMailer.acceptance_confirmation(self).deliver
   end
 
-  def email_provider_denial
+  def send_email_for_denied
     ProviderEnrollmentMailer.email_provider_denial(self).deliver
   end
 

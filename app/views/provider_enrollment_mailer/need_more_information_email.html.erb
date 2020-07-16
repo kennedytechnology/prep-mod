@@ -1,0 +1,14 @@
+<h1>ProviderEnrollment#acceptance_confirmation</h1>
+
+<p>
+  <%= @greeting %>, find me in app/views/provider_enrollment_mailer/acceptance_confirmation.html.erb
+</p>
+
+<p>
+<%= @provider_enrollment.first_name + " " + @provider_enrollment.last_name %>, your request for <%= @provider_enrollment.practice_name %> practice with the unique ID <%= @provider_enrollment.unique_number %> is still under consideration. We need more information in order to consider your request for a Provider Enrollment.
+</p>
+
+</p>
+Your Regional Administrator will be in touch shortly. To inquire about our request call your state health department.
+</p>
+<%= link_to 'Your Provider Enrollment', @provider_enrollment %>
