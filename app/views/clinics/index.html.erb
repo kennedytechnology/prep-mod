@@ -22,7 +22,6 @@
                 <th><%= sort_link(@q, :county, 'County', default_order: :asc) %></th>
                 <th><%= sort_link(@q, :venue_name, 'Venue Name', default_order: :asc) %></th>
                 <th><%= sort_link(@q, :appointments_count, 'Register', default_order: :asc) %></th>
-                <%# <th>Registered</th> %>
                 <% if params[:clinic_display] == "virtual" %> <th>Soc. Dist. Capacity</th><% end %>
                 <% unless params[:clinic_display] == "virtual" %>
                 <% end %>
