@@ -12,7 +12,7 @@ export default class extends Controller {
   }
 
   toggleLocation(e) {
-    this.selectedLocationsTarget.innerHTML = "Selected Locations: <br/>" + this.companyCheckboxTargets.filter(e => e.checked).map(e => e.dataset.employer).join("<br/> ")
+    this.selectedLocationsTarget.innerHTML = "<strong>Selected Locations:</strong> <br/>" + this.companyCheckboxTargets.filter(e => e.checked).map(e => e.dataset.employer).join("<br/> ")
   }
 
   showCheckboxes() {
