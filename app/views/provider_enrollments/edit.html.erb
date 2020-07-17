@@ -4,7 +4,7 @@
     <div data-controller="review-form">
         <%= form_with model: @provider_enrollment, local: true, class: "py-5", data: {target: "review-form.form"} do |f| %>
             <div class="field-fullwidth">
-                <h2 class="title"> What services would you like to provide? </h2>    
+                <h2 class="title"> What services would you like to provide? </h2>
                 <div class="checkboxes-container">
                     <%= collection_check_boxes(:provider_enrollment, :clinic_service_ids, ClinicService.where(category: "provider_enrollments"), :id, :name) do |b| %>
                     <div>
@@ -41,7 +41,7 @@
             </div>
 
             <div class="field-fullwidth">
-                <h2 class="title"> Provider Contact's Information </h2> 
+                <h2 class="title"> Provider Contact's Information </h2>
                 <div class="grid grid-cols-5 gap-4">
                     <div>
                         <%= f.label :first_name, class: "block" do %>
@@ -147,7 +147,6 @@
                         <% end %>
                         <%= f.text_field :license_date_of_issue, value: @provider_enrollment.license_date_of_issue.try(:strftime, "%Y/%m/%d"), class: "form-input w-full", required: true,
                                     data: { controller: "flatpickr",
-                                            flatpickr_max_date: "today",
                                             action: "keyup->provider-enrollment-new-entry#updateModalField"} %>
                     </div>
 
@@ -253,7 +252,7 @@
                         <% end %>
                         <%= f.text_field :practice_backup_office_phone, class: "form-input w-full", required: true, data: {action: "keyup->provider-enrollment-newpractice_-entry#updateModalField"} %>
                     </div>
-                    
+
                     <div>
                         <%= f.label :practice_backup_email, practice_class: "block" do %>
                         <span> Email Address </span>
@@ -274,7 +273,7 @@
 
             <div class="field-side-by-side">
                 <div>
-                    <h2 class="title"> Do you currently provide vaccinations?<span class="field-required">*</span> </h2> 
+                    <h2 class="title"> Do you currently provide vaccinations?<span class="field-required">*</span> </h2>
                     <%= f.radio_button :does_provide_vaccination, true, class: "form-radio" %>
                     <%= f.label :does_provide_vaccination, "Yes", class: "mr-4" %>
 
@@ -282,7 +281,7 @@
                     <%= f.label :does_provide_vaccination, "No" %>
                 </div>
                 <div>
-                    <h2 class="title"> Are you a Vaccines for Children (VFC) Provider?<span class="field-required">*</span> </h2> 
+                    <h2 class="title"> Are you a Vaccines for Children (VFC) Provider?<span class="field-required">*</span> </h2>
                     <%= f.radio_button :does_provide_vfc, true, class: "form-radio" %>
                     <%= f.label :does_provide_vfc, "Yes", class: "mr-4" %>
 
@@ -338,25 +337,25 @@
 
             <div class="field-fullwidth">
                 <h2 class="title"> Additional Information </h2>
-                <%= f.label :additional_info, 
-                    "Please provide any additional information you would like to share about your interest or relevant experience.", 
-                    class: "block" 
+                <%= f.label :additional_info,
+                    "Please provide any additional information you would like to share about your interest or relevant experience.",
+                    class: "block"
                 %>
                 <%= f.text_area :additional_info, class: "form-textarea w-full" %>
             </div>
 
-            <%= f.hidden_field :status, value: "", id: "provider_enrollment_status" %>        
+            <%= f.hidden_field :status, value: "", id: "provider_enrollment_status" %>
 
             <%= hidden_field_tag "reviewed", false, id: "reviewed_form_hidden_tag" %>
 
             <div class="flex justify-end mt-8">
                 <%# submit_tag 'Preview & Submit', name: 'preview_button', class: "button-primary", data: {action: "click->review-form#openModal"} %>
                 <% if @provider_enrollment.status == "accepted"%>
-                    <button type="button" class="button-disabled" disabled="disabled"> Already Accepted </button>                             
+                    <button type="button" class="button-disabled" disabled="disabled"> Already Accepted </button>
                 <% else %>
                     <%= submit_tag "Accept", class: "button-primary", data: {status: "accepted", action: "click->provider-enrollment-new-entry#setStatus"} %>
                     <%= submit_tag "Deny", class: "button-primary", data: {status: "denied", action: "click->provider-enrollment-new-entry#setStatus"} %>
-                    <%= submit_tag "Need More Information", class: "button-primary", data: {status: "need_more_information", action: "click->provider-enrollment-new-entry#setStatus"} %>                
+                    <%= submit_tag "Need More Information", class: "button-primary", data: {status: "need_more_information", action: "click->provider-enrollment-new-entry#setStatus"} %>
                 <% end%>
                 <%= link_to "Cancel", provider_enrollments_path, class: "button-primary ml-3" %>
             </div>

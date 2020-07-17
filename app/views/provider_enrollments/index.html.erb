@@ -7,10 +7,10 @@
 <table class="table">
     <thead>
         <tr>
-            <th> Request date </th>
-            <th> Entity Name </th>
+            <th><%= sort_link(@q, :created_at, 'Request Date', default_order: :asc) %></th>
+            <th><%= sort_link(@q, :practice_name, 'Entity Name', default_order: :desc) %></th>
             <th> Entity Type </th>
-            <th> County </th>
+            <th><%= sort_link(@q, :county, 'County', default_order: :desc) %></th>
             <th> Requested Service </th>
             <th> Action </th>
         </tr>
