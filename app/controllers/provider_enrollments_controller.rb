@@ -3,6 +3,7 @@ class ProviderEnrollmentsController < ApplicationController
   layout "clinic_management", except: [:new, :create]
 
   def index
+    @q = ProviderEnrollment.ransack(params[:q])
     @provider_enrollments = ProviderEnrollment.all
   end
 
@@ -21,7 +22,7 @@ class ProviderEnrollmentsController < ApplicationController
     else
       render :new
     end
-    
+
   end
 
   def edit
@@ -44,18 +45,18 @@ class ProviderEnrollmentsController < ApplicationController
 
     def provider_enrollment_params
       params.require(:provider_enrollment).permit(
-        :first_name, :last_name, :middle_initial, :status, 
-        :practice_address, :practice_office_phone, :practice_mobile_phone, 
-        :practice_fax_number, :practice_email, :title, 
-        :npi_number, :license_number, :license_type, 
-        :medical_specialty, :professional_license, :license_date_of_issue, 
-        :license_state_of_issue, :practice_type, :practice_name, 
-        :practice_city, :practice_state, :practice_zip_code, 
-        :practice_backup_contact, :practice_backup_phone, :practice_backup_email, 
-        :does_provide_vaccination, :does_provide_vfc, :refrigerator, 
-        :refrigerator_thermometer, :contact_office_phone, :contact_mobile_phone, 
+        :first_name, :last_name, :middle_initial, :status,
+        :practice_address, :practice_office_phone, :practice_mobile_phone,
+        :practice_fax_number, :practice_email, :title,
+        :npi_number, :license_number, :license_type,
+        :medical_specialty, :professional_license, :license_date_of_issue,
+        :license_state_of_issue, :practice_type, :practice_name,
+        :practice_city, :practice_state, :practice_zip_code,
+        :practice_backup_contact, :practice_backup_phone, :practice_backup_email,
+        :does_provide_vaccination, :does_provide_vfc, :refrigerator,
+        :refrigerator_thermometer, :contact_office_phone, :contact_mobile_phone,
         :contact_email, :practice_backup_office_phone, :practice_backup_mobile_phone,
-        :additional_info, :freezer, :county, :clinic_service_ids => [], 
+        :additional_info, :freezer, :county, :clinic_service_ids => [],
         :clinic_age_group_ids => [], :clinic_primary_group_ids => [])
     end
 
