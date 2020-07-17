@@ -58,8 +58,10 @@ addresses.shuffle!
 
 puts "Creating users..."
 USER_COUNT.times.each do |i|
+  email = i == 1 ? "user@test.com" : Faker::Internet.unique.email
   User.create!(
-    email: i == 1 ? "user@test.com" : Faker::Internet.unique.email,
+    email: email,
+    email_confirmation: email,
     password: 'password',
     password_confirmation: 'password',
     role: i == 1 ? "super_admin" : USER_ROLES.sample,
