@@ -1,6 +1,6 @@
 class ProviderEnrollmentsController < ApplicationController
   before_action :authenticate_user!, except: [:new, :create]
-  layout "clinic_management", except: [:new]
+  layout "clinic_management", except: [:new, :create]
 
   def index
     @provider_enrollments = ProviderEnrollment.all
