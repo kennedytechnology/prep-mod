@@ -3,7 +3,7 @@
 <div class="clinic-patients-index-page" data-controller="patients">
   <div class="header-section">
     <% unless @clinic %>
-      <h1 class="main-title">Patient Records Search</h1>
+      <h1 class="main-title">Find a Record</h1>
     <% end %>
 
 
@@ -30,7 +30,7 @@
           <%= f.search_field :date_of_birth_equals, type: "date", placeholder: "Date of Birth",
                                class: "form-input w-2/12 mr-2", 
                                data: {controller: "flatpickr"} %>
-          <%= f.search_field :mothers_maiden_name_cont, type: "text", placeholder: "Mother's Maiden Name", class: "form-input w-2/12 mr-2" %>
+          <%= f.search_field :mothers_maiden_name_cont, type: "text", placeholder: "Mother's Maiden Name", class: "form-input w-3/12 mr-2" %>
           <%= f.submit "Search", class: "button-action" %>
           <%= link_to "Reset", patients_path, class: "button-action" %>
         <% end %>

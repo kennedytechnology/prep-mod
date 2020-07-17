@@ -7,6 +7,9 @@
 <table class="table">
     <thead>
         <tr>
+
+            <th> Request Date </th>
+            <th> Entity Name </th>
             <th><%= sort_link(@q, :created_at, 'Request Date', default_order: :asc) %></th>
             <th><%= sort_link(@q, :practice_name, 'Entity Name', default_order: :desc) %></th>
             <th> Entity Type </th>
