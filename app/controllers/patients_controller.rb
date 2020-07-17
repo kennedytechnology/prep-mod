@@ -22,6 +22,13 @@ class PatientsController < ApplicationController
       end
     end
 
+    @q = Patient.ransack(params[:q])
+
+
+    if params[:date_of_birth]
+      @patients = Patient.with_appointments(params[:date_of_birth]).order(:date_of_birth)
+    end
+
   end
 
   def anonymized_index
