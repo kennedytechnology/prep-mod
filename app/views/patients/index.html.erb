@@ -8,6 +8,8 @@
 
 
     <% if @clinic %>
+      <span class=" pt-16 font-bold text-xl">Number Registered:</span> <span class="mr-8 text-xl"><%= @patients_appointments %> </span>
+      <span class=" pt-16 font-bold text-xl">Waiting List:</span> <span class="mr-8 text-xl"><%= @patients_waiting_list %> </span>
       <div class="w-full flex justify-between items-center mt-8">
         <div class="flex items-center w-3/12">
           <label class="text-lg mr-3 text-gray-600" for="search"> Search: </label>
@@ -28,7 +30,7 @@
           <%= f.search_field :first_name_cont, type: "text", placeholder: "First Name", class: "form-input mr-2 w-2/12" %>
           <%= f.search_field :last_name_cont, type: "text", placeholder: "Last Name", class: "form-input w-2/12 mr-2" %>
           <%= f.search_field :date_of_birth_equals, type: "date", placeholder: "Date of Birth",
-                               class: "form-input w-2/12 mr-2", 
+                               class: "form-input w-2/12 mr-2",
                                data: {controller: "flatpickr"} %>
           <%= f.search_field :mothers_maiden_name_cont, type: "text", placeholder: "Mother's Maiden Name", class: "form-input w-3/12 mr-2" %>
           <%= f.submit "Search", class: "button-action" %>

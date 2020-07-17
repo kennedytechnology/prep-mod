@@ -29,6 +29,10 @@ class PatientsController < ApplicationController
       @patients = Patient.with_appointments(params[:date_of_birth]).order(:date_of_birth)
     end
 
+    if params[:clinic_id]
+      @patients_waiting_list = Clinic.find(params[:clinic_id]).patients.with_appointments.count
+      @patients_appointments = Clinic.find(params[:clinic_id]).appointments_count
+    end
   end
 
   def anonymized_index
