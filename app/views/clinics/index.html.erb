@@ -21,11 +21,11 @@
                 <th><%= sort_link(@q, :clinic_date, 'Date', default_order: :desc) %></th>
                 <th><%= sort_link(@q, :county, 'County', default_order: :asc) %></th>
                 <th><%= sort_link(@q, :venue_name, 'Venue Name', default_order: :asc) %></th>
-                <th>Registered</th>
-                <% if params[:clinic_display] == "virtual" %><th>Soc. Dist. Capacity</th><% end %>
+                <th><%= sort_link(@q, :appointments_count, 'Registered', default_order: :asc) %></th>
+                <% if params[:clinic_display] == "virtual" %> <th>Soc. Dist. Capacity</th><% end %>
                 <% unless params[:clinic_display] == "virtual" %>
-                <th>Menu</th>
                 <% end %>
+                <th>Menu</th>
                 <th> Action </th>
             </tr>
         </thead>
