@@ -2,7 +2,7 @@
 
 <% if @clinic.errors.any? || @errors.any? %>
   <div id="error_explanation" class="p-4 border-2 bg-red-100 border-red-500 mb-4"> 
-    <h2 class="text-lg font-bold"><%= pluralize(@clinic.errors.count + @errors.size, "error") %> prohibited this article from being saved:</h2>
+    <h2 class="text-lg font-bold"><%= pluralize(@clinic.errors.count + @errors.try(:size).to_i, "error") %> prohibited this article from being saved:</h2>
  
     <ul class="list-disc ml-8">
     <% @clinic.errors.full_messages.each do |msg| %>
