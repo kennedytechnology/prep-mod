@@ -6,7 +6,6 @@ FactoryBot.define do
     password_confirmation { 'password' }
     role { 'super_admin' }
     venues { VENUE_TYPES.sample(7) }
-    county { COUNTIES.sample }
     first_name { Faker::Name.unique.first_name }
     last_name { Faker::Name.unique.last_name }
     clinics { Clinic.all.sample(5) }
