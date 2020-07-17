@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :patients
   belongs_to :provider, optional: true
 
-  validates_presence_of :email, :first_name, :last_name, :role, :county, :venues, :email_confirmation
+  validates_presence_of :email, :first_name, :last_name, :role, :email_confirmation
   validates_uniqueness_of :email, confirmation: true
 
 
