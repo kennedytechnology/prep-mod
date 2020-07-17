@@ -3,11 +3,13 @@
 <div class="clinic-patients-index-page" data-controller="patients">
   <div class="header-section">
     <% unless @clinic %>
-      <h1 class="main-title">Patient Records Search</h1>
+      <h1 class="main-title">Find a Record</h1>
     <% end %>
 
-    
+
     <% if @clinic %>
+      <span class=" pt-16 font-bold text-xl">Number Registered:</span> <span class="mr-8 text-xl"><%= @patients_appointments %> </span>
+      <span class=" pt-16 font-bold text-xl">Waiting List:</span> <span class="mr-8 text-xl"><%= @patients_waiting_list %> </span>
       <div class="w-full flex justify-between items-center mt-8">
         <div class="flex items-center w-3/12">
           <label class="text-lg mr-3 text-gray-600" for="search"> Search: </label>
@@ -20,7 +22,7 @@
           <%= link_to "Download Registration List", clinic_patients_path(clinic_id: @clinic.id, format: :csv), class: "button-primary" %><br/>
           <a href="javascript:" class="button-primary" data-action="click->main#printContent">Print</a>
         </div>
-        
+
       </div>
     <% else %>
       <div class="flex justify-start my-4 search-inputs-container">
@@ -28,9 +30,9 @@
           <%= f.search_field :first_name_cont, type: "text", placeholder: "First Name", class: "form-input mr-2 w-2/12" %>
           <%= f.search_field :last_name_cont, type: "text", placeholder: "Last Name", class: "form-input w-2/12 mr-2" %>
           <%= f.search_field :date_of_birth_equals, type: "date", placeholder: "Date of Birth",
-                               class: "form-input w-2/12 mr-2", 
+                               class: "form-input w-2/12 mr-2",
                                data: {controller: "flatpickr"} %>
-          <%= f.search_field :mothers_maiden_name_cont, type: "text", placeholder: "Mother's Maiden Name", class: "form-input w-2/12 mr-2" %>
+          <%= f.search_field :mothers_maiden_name_cont, type: "text", placeholder: "Mother's Maiden Name", class: "form-input w-3/12 mr-2" %>
           <%= f.submit "Search", class: "button-action" %>
           <%= link_to "Reset", patients_path, class: "button-action" %>
         <% end %>
@@ -41,7 +43,7 @@
     <% end %>
   </div>
 
-  
+
   <div class="flex flex-col printable mt-8">
     <div class="sorting-table-wrapper">
       <div class="sorting-table-container" data-controller="clinic-activity-patients">
@@ -67,8 +69,8 @@
                 <td><%= ((Date.today.to_time - patient.date_of_birth.to_time) / 1.year.seconds).floor if patient.date_of_birth %></td>
                 <td><%= patient.sex == "F" ? "Female" : "Male" %></td>
                 <% if @clinic %>
-                    <td><%= patient.appointments.last.on_waiting_list? ? "Waiting List" : patient.appointments.last.appointment_at.strftime("%I:%M %p") %></td> 
-                <% end %>           
+                    <td><%= patient.appointments.last.on_waiting_list? ? "Waiting List" : patient.appointments.last.appointment_at.strftime("%I:%M %p") %></td>
+                <% end %>
                 <td class="w-4/12 text-right table-action-buttons">
                   <% if @clinic %>
                     <%= link_to "Invite", invite_patient_to_register_path(patient_id: patient.id), class: "button-action" if patient.appointments.last.on_waiting_list? %>
@@ -77,10 +79,10 @@
                     <%= link_to "Enter Encounter", new_clinic_event_path(clinic_id: @clinic, patient_id: patient.id),
                                 class: "button-action" %>
                   <% end %>
-                  <%= link_to "Delete", "javascript:", 
-                      data: {recordis: "patients", recordid: patient.id, recordname: patient.full_name, 
+                  <%= link_to "Delete", "javascript:",
+                      data: {recordis: "patients", recordid: patient.id, recordname: patient.full_name,
                           action: "click->clinic-activity-patients#showHideDeleteModal"}, class: "button-action" %>
-                </td> 
+                </td>
               </tr>
             <% end %>
           <% end %>
