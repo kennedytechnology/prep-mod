@@ -31,6 +31,7 @@
                 <%= f.select :location, options_for_select(ClinicEvent.available_locations), {}, {class: "form-select w-full"} %>
             </div>
 
+<!--
             <div class="mb-4 w-5/12">
                 <p class="label mb-2"> Encounter Type </p>
                 <div class="w-full checkboxes-container">
@@ -41,6 +42,11 @@
                     </div>
                     <% end %>
                 </div>
+            </div>
+-->
+            <div class="w-3/12">
+                <%= f.label :category, "Encounter Type", class: "block" %>
+                <%= f.select :category, options_for_select(ClinicService.where(category: "clinic_events").collect(&:name)),{}, {class: "w-full form-select"} %>
             </div>
 
             <div class="w-3/12">
