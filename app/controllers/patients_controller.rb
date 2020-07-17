@@ -7,7 +7,7 @@ class PatientsController < ApplicationController
   before_action :patients_listing, only: [:index, :upload_record]
 
   def index
-    @page_title = "Patient Record Search"
+    @page_title = @clinic ? "Registration List" : "Patient Record Search"
 
     respond_to do |format|
       format.html

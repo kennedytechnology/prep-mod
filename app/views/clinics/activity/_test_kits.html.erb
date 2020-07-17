@@ -22,6 +22,21 @@
                 <%= f.fields_for :test_kits do |test_kit_fields| %>
                     <%= render 'clinics/activity/test_kit_row', {f: test_kit_fields, clinic_form: f} %>
                 <% end %>
+                <tr class="new_test_kit_row">
+                    <td class="font-bold" colspan="2"> Totals: </td>
+                    
+                    <td> <%= @clinic.test_kits.sum(:test_kits_quantity) %> </td>
+                    <td> <%= @clinic.test_kits.sum(:tests_administered) %></td>
+                    <td> <%= @clinic.test_kits.sum(:unusable_tests) %></td>
+                    <td> <%= @clinic.test_kits.sum(:tests_returned) %></td>
+                    <td>
+                    
+                    </td>
+                    <td class="flex w-full">
+
+                    </td>        
+                </tr>
+
             </tbody>
         </table>
         </div>

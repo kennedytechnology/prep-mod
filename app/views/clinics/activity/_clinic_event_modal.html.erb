@@ -20,11 +20,11 @@
           <% unless event_form.nil? %>
             <% if event_form.object.new_record? %>
                     <span class="ml-3 inline-flex rounded-md shadow-sm">
-                      <a class="button-primary" data-action="clinic-activity-patients#okModal" data-event-category="<%= category_selection %>">Save</a>
+                      <button type="submit" class="button-primary" data-event-category="<%= category_selection %>">Save</button>
                     </span>
             <% else %>
                     <span class="inline-flex rounded-md shadow-sm">
-                        <a data-action="clinic-activity-patients#okModal" class="button-primary" data-event-category="<%= category_selection %>" data-confirm="Are you sure?">Update</a>
+                        <button type="submit" class="button-primary" data-event-category="<%= category_selection %>" data-confirm="Are you sure?">Update</button>
                     </span>
             <% end %>
           <% end %>

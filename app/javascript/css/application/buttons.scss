@@ -49,7 +49,7 @@
 
     &-tab {
         @extend .button-base;
-        @apply bg-gray-100 rounded-full border-gray-300 text-gray-800 text-sm font-normal px-3 mx-3 py-0 mb-2;
+        @apply bg-gray-100 rounded-full border-gray-300 text-gray-800 text-sm font-normal px-2 mx-2 py-0 mb-2;
         min-height: auto;
         min-width: auto;
         width: auto;

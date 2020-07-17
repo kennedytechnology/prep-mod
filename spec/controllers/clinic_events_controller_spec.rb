@@ -66,7 +66,7 @@ RSpec.describe ClinicEventsController, type: :controller do
       }
     }
     should permit(:clinic_id, :patient_id, :category, :outcome,
-      :notes, :contact_type, :screening_outcome,
+      :notes, :contact_type,
       :test_name, :test_type, :test_processing, :clinic_staff_id).
       for(:create, params: params).
       on(:clinic_event)

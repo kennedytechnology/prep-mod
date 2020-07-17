@@ -24,8 +24,9 @@
                 <th><%= sort_link(@q, :appointments_count, 'Registered', default_order: :asc) %></th>
                 <% if params[:clinic_display] == "virtual" %> <th>Soc. Dist. Capacity</th><% end %>
                 <% unless params[:clinic_display] == "virtual" %>
+                    <th>Menu</th>
                 <% end %>
-                <th>Menu</th>
+                
                 <th> Action </th>
             </tr>
         </thead>

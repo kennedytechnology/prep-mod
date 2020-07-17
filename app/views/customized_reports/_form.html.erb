@@ -52,6 +52,14 @@
             </div>
 
             <div class="absolute flex items-center h-5">
+                <%= form.check_box :patients_vaccinated, class: "form-checkbox" %>
+            </div>
+            <div class="pl-7 text-sm leading-5 mb-5">
+                <%= form.label :patients_vaccinated, "Vaccinated Patients" %>
+            </div>
+
+
+            <div class="absolute flex items-center h-5">
                 <%= form.check_box :safety_kit, class: "form-checkbox"%>
             </div>
             <div class="pl-7 text-sm leading-5 mb-5">
@@ -113,6 +121,27 @@
                 <%= form.label :date_of_birth, "Date of Birth" %>
             </div>
 
+            <div class="absolute flex items-center h-5">
+                <%= form.check_box :test_type, class: "form-checkbox" %>
+            </div>
+            <div class="pl-7 text-sm leading-5 mb-5">
+                <%= form.label :test_type, "Test Type" %>
+            </div>
+
+            <div class="absolute flex items-center h-5">
+                <%= form.check_box :test_results, class: "form-checkbox" %>
+            </div>
+            <div class="pl-7 text-sm leading-5 mb-5">
+                <%= form.label :test_results, "Test Results" %>
+            </div>
+
+            <div class="absolute flex items-center h-5">
+                <%= form.check_box :remarks, class: "form-checkbox" %>
+            </div>
+            <div class="pl-7 text-sm leading-5 mb-5">
+                <%= form.label :remarks, "Remarks" %>
+            </div>
+
             <%# TODO: Ask for more details %>
             <!-- 
             <div class="absolute flex items-center h-5">
@@ -140,7 +169,7 @@
         </div>
     </div>
 
-    <div class="flex items-center justify-center">
+    <div class="flex items-center justify-center pt-4">
         <%= form.submit "Generate Report in PDF", name: "pdf_file", class: "button-primary" %>
         <%= form.submit "Generate Report in Excel", name: "excel_file", class: "button-primary" %>
     </div>

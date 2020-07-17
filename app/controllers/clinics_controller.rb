@@ -76,6 +76,8 @@ class ClinicsController < ClinicManagementController
 
   def update
     @page_title = "View/Edit clinic"
+    @clinic.default_test_kit = clinic_params['default_test_kit']
+    
     if @clinic.update(clinic_params)
       finish_patients_in_queue
       redirect_back fallback_location: clinics_path(clinic_date: 'upcoming')
@@ -124,7 +126,7 @@ class ClinicsController < ClinicManagementController
       :age_group_ids => [], :primary_group_ids => [],
       clinic_personnel_attributes: [:id, :name, :_destroy],
       clinic_events_attributes: [:id, :patient_id, :outcome, :safety_kit_received,
-        :contact_type, :screening_outcome, :clinic_staff_id, :notes, :test_name,
+        :contact_type, :clinic_staff_id, :notes, :test_name,
         :test_type, :test_processing, :category],
       test_kits_attributes: [:id, :test_name, :test_manufacturer,
         :test_lot_number, :test_type, :test_processing,
