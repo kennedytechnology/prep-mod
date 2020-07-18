@@ -5,6 +5,10 @@ class ProviderEnrollmentsController < ApplicationController
   def index
     @q = ProviderEnrollment.ransack(params[:q])
     @provider_enrollments = ProviderEnrollment.all
+
+    if @q.result
+      @provider_enrollments = @q.result.order(:created_at)
+    end
   end
 
   def new
