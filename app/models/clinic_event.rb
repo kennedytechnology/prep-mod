@@ -3,8 +3,11 @@ class ClinicEvent < ApplicationRecord
   belongs_to :patient
   belongs_to :user, optional: true
   has_and_belongs_to_many :clinic_services
+  before_save :send_notification, if: :test_processing_changed?
 
-  validates :event_date, presence: true
+  def send_notification
+    ClinicMailer.send_vaccinated_confirmation(self).deliver
+  end
 
   def self.available_locations
     locations = []
