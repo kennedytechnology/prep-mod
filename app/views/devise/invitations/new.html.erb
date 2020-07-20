@@ -25,16 +25,30 @@
                   <% end %>
                   <%= f.email_field :email, class: "form-input w-full", required: true %>
 
-                  <div class="pt-4 pb-4">
-                      <%= f.label :provider_id, "Provider:", class: "mr-2" %>
-                      <%= f.collection_select(:provider_id, Provider.all, :id, :practice_name, {include_blank: "(none)"}, {class: "form-select w-full"}) %>
-                  </div>
+                  <%= f.label :email_confirmation, class: "block" do %>
+                      <span> Email Confirmation</span>
+                      <span class="field-required">*</span>
+                  <% end %>
+                  <%= f.email_field :email_confirmation, class: "form-input w-full", required: true %>
+
+                  <%= f.label :county, class: "block" do %>
+                      <span> County </span>
+                      <span class="field-required">*</span>
+                  <% end %>
+                  <%= f.select :county, COUNTIES, {prompt: "Select"}, {class: "form-select w-full", required: true} %>
+
+                  <%= f.label :venues, class: "block" do %>
+                    <span> Venue </span>
+                    <span class="field-required">*</span>
+                <% end %>
+                <%= f.select :venues, VENUE_TYPES, {include_blank: "None"}, {class: "form-select w-full"} %>
+
 
                   <%= f.label :role, class: "block" do %>
                       <span> Role </span>
                       <span class="field-required">*</span>
                   <% end %>
-                  <%= f.select :role, current_user.assignable_roles, {prompt: "Select"}, {class: "form-select w-full", required: true} %>
+                  <%= f.select :role, current_user.assignable_roles.reject{|role| role == ["Super Admin", "super_admin"]}, {prompt: "Select"}, {class: "form-select w-full", required: true} %>
               </div>
               <div></div>
           </div>

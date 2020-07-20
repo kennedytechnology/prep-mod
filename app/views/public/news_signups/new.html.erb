@@ -16,11 +16,15 @@
     <div class="field-fullwidth">
         <div class="grid grid-cols-4 gap-4">
             <div>
-                <%= f.label :first_name, "First Name", class: "block" %>
+                <%= f.label :first_name, class: "block" do %>
+                    First Name <span class="field-required">*</span>
+                <% end %>
                 <%= f.text_field :first_name, class: "form-input w-full", required: true %>
             </div>
             <div>
-                <%= f.label :last_name, "Last Name", class: "block" %>
+                <%= f.label :last_name, class: "block" do %>
+                    Last Name <span class="field-required">*</span>
+                <% end %>
                 <%= f.text_field :last_name, class: "form-input w-full", required: true %>
             </div>
             <div class="flex-1 mr-2">
@@ -30,7 +34,9 @@
                 </div>
             </div>
             <div>
-                <%= f.label :zip_code, class: "block" %>
+                <%= f.label :zip_code, class: "block" do %>
+                    Zip code <span class="field-required">*</span>
+                <% end %>    
                 <%= f.text_field :zip_code, class: "form-input w-full", required: true %>
             </div>
         </div>
@@ -39,18 +45,22 @@
     <div class="field-fullwidth" data-controller="email-confirmation">
         <div class="grid grid-cols-3 gap-4">
             <div>
-                <%= f.label :occupation, "Choose Occupation", class: "block" %>
+                <%= f.label :occupation, class: "block" do %>
+                    Choose Occupation <span class="field-required">*</span>
+                <% end %>    
                 <%= f.select :occupation, PATIENT_OCCUPATIONS, {prompt: "Select"}, {class: "block form-select w-full", required: true} %>
             </div>    
             <div>
-                <%= f.label :email, "Email Address", class: "block" %>
+                <%= f.label :email, class: "block" do %>
+                    Email Address <span class="field-required">*</span>
+                <% end %>    
                 <%= f.email_field :email, class: "form-input w-full", required: true, 
                     data: {action: "keyup->email-confirmation#emailConfirmation
                                     change->email-confirmation#emailConfirmation",
                             target: "email-confirmation.emailField"} %>
             </div>
             <div>
-                <label class="block"> Re-Type Email Address </label>
+                <label class="block"> Re-Type Email Address <span class="field-required">*</span></label>
                 <input type="email" class="form-input w-full" required="true"
                     data-action="keyup->email-confirmation#emailConfirmation change->email-confirmation#emailConfirmation"
                     data-target="email-confirmation.confirmEmailField" />
@@ -61,7 +71,7 @@
     <div class="field-fullwidth">
         <div class="grid grid-cols-1 gap-4">
         <div class="py-4">
-                <span class="text-base">Do you or anyone in your household have a chronic health condition (Example: diabetes, heart disease, high blood pressure, COPD, asthma)?</span><br/>
+                <span class="text-lg font-bold">Do you or anyone in your household have a chronic health condition (Example: diabetes, heart disease, high blood pressure, COPD, asthma)?</span><br/>
             <div class="mt-4 p-4">
                 <label class="text-xl"><%= f.radio_button :chronic_health_condition, true %> <span>Yes</span></label>
                 <label class="text-xl ml-8"><%= f.radio_button :chronic_health_condition, false %> <span>No</span></label>

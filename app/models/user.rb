@@ -8,8 +8,9 @@ class User < ApplicationRecord
   has_many :patients
   belongs_to :provider, optional: true
 
-  validates_presence_of :email, :first_name, :last_name, :role
-  validates_uniqueness_of :email
+  validates_presence_of :email, :first_name, :last_name, :role, :email_confirmation
+  validates_uniqueness_of :email, confirmation: true
+
 
   # ROLES
   include RoleModel
@@ -35,7 +36,7 @@ class User < ApplicationRecord
     first_name.to_s + " " + last_name.to_s
   end
 
-  def assignable_roles
+  def assignable_roles  
     roles = User.valid_roles.map { |r| [r.to_s.titleize, r.to_s]}
     roles = roles.map.reject { |r| r[1] == 'super_admin' } unless has_role?(:super_admin)
     roles = roles.map.reject { |r| r[1] == 'regional_admin' } unless has_roles?(:super_admin, :regional_admin)

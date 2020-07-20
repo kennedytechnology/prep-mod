@@ -1,20 +1,22 @@
 <h1 class="main-title"> <%= @page_title %> </h1>
 
-<% if @clinic.errors.any? %>
+<% if @clinic.errors.any? || @errors.try(:any?) %>
   <div id="error_explanation" class="p-4 border-2 bg-red-100 border-red-500 mb-4"> 
-    <h2 class="text-lg font-bold"><%= pluralize(@clinic.errors.count, "error") %> prohibited this article from being saved:</h2>
+    <h2 class="text-lg font-bold"><%= pluralize(@clinic.errors.count + @errors.try(:size).to_i, "error") %> prohibited this article from being saved:</h2>
  
     <ul class="list-disc ml-8">
     <% @clinic.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    <% @errors.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
     </ul>
   </div>
 <% end %>
 
-<div data-controller="review-form">
-    <%= form_with model: @clinic, local: true, data: {action: "change->review-form#onDisableFormPage keyup->review-form#onDisableFormPage", 
-                                                       target: "review-form.form"} do |f| %>
+<div>
+    <%= form_with model: @clinic, local: true do |f| %>
         <div class="field-fullwidth">
             <p class="title">Is clinic public or private? <span class="field-required">*</span> </p>
             <div class="w-3/12 radio-buttons-container">
@@ -86,7 +88,7 @@
                     values = (start_time..end_time).step(15.minutes)
                 %>
                 <select class="hour form-select" name="clinic[start_hour_minute]" id="clinic_start_hour_minute" required="true">
-                    <%= options_for_select(values.map{ |t| Time.at(t).strftime("%I:%M") }, @clinic.start_time ? @clinic.start_time.strftime('%I:%M') : nil) %>
+                    <%= options_for_select(values.map{ |t| Time.at(t).strftime("%l:%M") }, @clinic.start_time ? @clinic.start_time.strftime('%I:%M') : " 9:00") %>
                 </select>
 
                 <select class="meridiem form-select" name="clinic[start_meridiem]" id="clinic_start_meridiem" required="true">
@@ -95,11 +97,11 @@
 
                 <p class="label">End Time <span class="field-required">*</span></p>
                 <select class="hour form-select" name="clinic[end_hour_minute]" id="clinic_end_hour_minute" required="true">
-                    <%= options_for_select(values.map{ |t| Time.at(t).strftime("%I:%M") }, @clinic.end_time ? @clinic.end_time.strftime('%I:%M') : nil) %>
+                    <%= options_for_select(values.map{ |t| Time.at(t).strftime("%l:%M") }, @clinic.end_time ? @clinic.end_time.strftime('%I:%M') : " 5:00") %>
                 </select>
 
                 <select name="clinic[end_meridiem]" class="meridiem form-select" id="clinic_end_meridiem" required="true">
-                    <%= options_for_select(['AM', 'PM'], @clinic.end_time ? @clinic.end_time.strftime("%p") : nil) %>
+                    <%= options_for_select(['AM', 'PM'], @clinic.end_time ? @clinic.end_time.strftime("%p") : "PM") %>
                 </select>
             </div>
 
@@ -261,9 +263,9 @@
                 <%= link_to_add_test_kit('Add More Test Kits', f, :test_kits, class: 'button-primary') %>
             </div>
             <div class="flex flex-col">
-                <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-                    <div class="align-middle inline-block min-w-full overflow-hidden border-b border-gray-200">
-                        <table class="table">
+                <div class="-my-2 py-2 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+                    <div class="align-middle inline-block min-w-full border-b border-gray-200">
+                        <table class="table" style="overflow: visible">
                             <thead>
                                 <tr>
                                     <th> Test Name </th>

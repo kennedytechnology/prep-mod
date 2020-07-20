@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_13_154553) do
+ActiveRecord::Schema.define(version: 2020_07_17_133643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,7 +105,6 @@ ActiveRecord::Schema.define(version: 2020_07_13_154553) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
     t.string "contact_type"
-    t.string "screening_outcome"
     t.string "test_name"
     t.string "test_type"
     t.string "test_processing"
@@ -214,6 +213,7 @@ ActiveRecord::Schema.define(version: 2020_07_13_154553) do
     t.integer "social_distancing"
     t.string "contact_email"
     t.string "backup_contact_email"
+    t.integer "appointments_count"
   end
 
   create_table "clinics_users", id: false, force: :cascade do |t|
@@ -239,6 +239,10 @@ ActiveRecord::Schema.define(version: 2020_07_13_154553) do
     t.boolean "registration_date"
     t.bigint "user_id"
     t.bigint "clinic_id"
+    t.boolean "patients_vaccinated"
+    t.boolean "test_type"
+    t.boolean "test_result"
+    t.boolean "remarks"
   end
 
   create_table "employers", force: :cascade do |t|
@@ -583,6 +587,8 @@ ActiveRecord::Schema.define(version: 2020_07_13_154553) do
     t.string "last_name"
     t.string "venues", default: [], array: true
     t.integer "provider_id"
+    t.string "email_confirmation"
+    t.string "county"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true

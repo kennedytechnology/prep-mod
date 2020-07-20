@@ -37,17 +37,7 @@
     <%= render "queued_patients/add_patient_modal" %>
   </div>
 
-  <%= render partial: 'filters' %>
-
-  <div id="patient-tables">
-    <% if params[:state] %>
-      <%= render partial: 'patient_table', locals: {queue_state: params[:state]} %>
-    <% else %>
-      <% Appointment.aasm.states.collect(&:name).each do |queue_state| %>
-        <% if @clinic.appointments.select{|a| a.queue_state.to_s == queue_state.to_s}.any? %>
-          <%= render partial: 'patient_table', locals: {queue_state: queue_state} %>
-        <% end %>
-      <% end %>
-    <% end %>
+  <div id="queued_patient_list">
+    <%= render "patients_view" %>
   </div>
 </div>

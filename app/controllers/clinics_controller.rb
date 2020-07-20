@@ -6,15 +6,15 @@ class ClinicsController < ClinicManagementController
   def index
     # TODO: The details of the searching here should be moved to the model,
     # probably using scopes for a lot of this.
+    @q = Clinic.ransack(params[:q])
+    @clinics = Clinic.all.order(:clinic_date)
 
-    if params[:q].present?
-      @clinics = Clinic.search_for(params[:q])
-    elsif sort_column && sort_direction
-      @clinics = Clinic.order(sort_column + " " + sort_direction)
-    elsif params[:clinic_date]
-      @clinics = Clinic.past_or_upcoming(params[:clinic_date])
-    else
-      @clinics = Clinic.all.paginate(page: params[:page], per_page: 50)
+    if params[:clinic_date]
+      @clinics = Clinic.past_or_upcoming(params[:clinic_date]).order(:clinic_date)
+    end
+
+    if @q.result
+      @clinics = @q.result.order(:clinic_date)
     end
   end
 
@@ -22,23 +22,27 @@ class ClinicsController < ClinicManagementController
     @clinic = Clinic.new
     @clinic.initial_set_up!
     @page_title = "Create clinic"
+    @errors = []
   end
 
   def create
     @clinic = Clinic.new(clinic_params)
     @page_title = "Create clinic"
+    @clinic_dates = params[:clinic_dates].reject(&:blank?)
 
-    if @clinic.valid?
-      params[:clinic_dates].reject!(&:blank?).each do |clinic_date|
+    @errors = []
+    @errors << "You have selected to have multiple clinics on the same date." if @clinic_dates.uniq.size != @clinic_dates.size
+
+    if @clinic.invalid? || @clinic_dates.empty? || @errors.any?
+      render :new
+    else
+      params[:clinic_dates].reject(&:blank?).each do |clinic_date|
         @clinic_dup = Clinic.new(clinic_params)
         @clinic_dup.clinic_date = Chronic.parse(clinic_date)
         @clinic_dup.save
         ClinicMailer.public_clinic_created(current_user, @clinic_dup).deliver
       end
-
       redirect_to clinics_path(clinic_date: 'upcoming'), notice: "Successfully created clinic!"
-    else
-      render :new
     end
   end
 
@@ -72,7 +76,8 @@ class ClinicsController < ClinicManagementController
 
   def update
     @page_title = "View/Edit clinic"
-
+    @clinic.default_test_kit = clinic_params['default_test_kit'] if clinic_params['default_test_kit']
+    
     if @clinic.update(clinic_params)
       finish_patients_in_queue
       send_vaccinated_patients_confirmation
@@ -128,7 +133,7 @@ class ClinicsController < ClinicManagementController
       :age_group_ids => [], :primary_group_ids => [],
       clinic_personnel_attributes: [:id, :name, :_destroy],
       clinic_events_attributes: [:id, :patient_id, :outcome, :safety_kit_received,
-        :contact_type, :screening_outcome, :clinic_staff_id, :notes, :test_name,
+        :contact_type, :clinic_staff_id, :notes, :test_name,
         :test_type, :test_processing, :category],
       test_kits_attributes: [:id, :test_name, :test_manufacturer,
         :test_lot_number, :test_type, :test_processing,

@@ -12,7 +12,7 @@ export default class extends Controller {
   }
 
   toggleLocation(e) {
-    this.selectedLocationsTarget.innerHTML = "Selected Locations: <br/>" + this.companyCheckboxTargets.filter(e => e.checked).map(e => e.dataset.employer).join("<br/> ")
+    this.selectedLocationsTarget.innerHTML = "<strong>Selected Locations:</strong> <br/>" + this.companyCheckboxTargets.filter(e => e.checked).map(e => e.dataset.employer).join("<br/> ")
   }
 
   showCheckboxes() {
@@ -180,7 +180,7 @@ export default class extends Controller {
         event.target.name == "employer[email]" ||
         event.target.name == "employer[backup_email]"
       ) {
-        let emailRe = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+        let emailRe = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         // Display error message if user's input is not valid
         if (!emailRe.test(event.target.value)) {
           event.target.style.marginBottom = 0;

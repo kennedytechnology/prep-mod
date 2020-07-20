@@ -25,6 +25,9 @@ $(document).on('turbolinks:load', function () {
         time = new Date().getTime();
         regexp = new RegExp($(this).data('id'), 'g');
         $('#testKits').append($(this).data('fields').replace(regexp, time));
+        Awesomplete.$$("input.awesomplete").forEach(function (input) {
+            new Awesomplete(input);
+        });
         return event.preventDefault();
     });
 

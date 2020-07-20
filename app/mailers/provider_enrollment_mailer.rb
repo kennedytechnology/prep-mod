@@ -20,8 +20,15 @@ class ProviderEnrollmentMailer < ApplicationMailer
     mail to: provider_enrollment.practice_email, subject: "Confirmation for your acceptance"
   end
 
-  def email_provider_denial(provider)
+  def email_provider_denial(provider_enrollment)
     @message = ProviderDenialMessage.first
-    mail to: provider.practice_email, subject: "Request to become a COVID-19 service srovider has been denied"
+    mail to: provider_enrollment.practice_email, subject: "Request to become a COVID-19 service provider has been denied"
+  end
+
+  def need_more_information_email(provider_enrollment)
+    @greeting = "Hi"
+    @provider_enrollment = provider_enrollment
+
+    mail to: provider_enrollment.practice_email, subject: "We need more information" 
   end
 end

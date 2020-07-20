@@ -11,11 +11,11 @@ puts 'Seeding...'
 NAMED_PLACE_COUNT = 50
 CLINIC_COUNT = 10
 USER_COUNT = 100
-PATIENT_COUNT = CLINIC_COUNT * 50
+PATIENT_COUNT = CLINIC_COUNT * 10
 CLINIC_EVENTS_PER_PATIENT = 3
 CLINIC_STAFF_PER_CLINIC = 3
 SUPPLY_INVENTORY_PER_CLINIC = 10
-TEST_KITS_PER_CLINIC = 3
+TEST_KITS_PER_CLINIC = 5
 NEWS_SIGNUP_COUNT = 100
 VENUE_STATES = ["MD", "NY", "PA", "DC", "KY", "VT", "CA", "CO", "AL"]
 
@@ -58,8 +58,10 @@ addresses.shuffle!
 
 puts "Creating users..."
 USER_COUNT.times.each do |i|
+  email = i == 1 ? "user@test.com" : Faker::Internet.unique.email
   User.create!(
-    email: i == 1 ? "user@test.com" : Faker::Internet.unique.email,
+    email: email,
+    email_confirmation: email,
     password: 'password',
     password_confirmation: 'password',
     role: i == 1 ? "super_admin" : USER_ROLES.sample,
@@ -310,6 +312,7 @@ end
       # clinic: clinic,
       received_at: Faker::Date.between(from: 30.days.ago, to: Date.today),
       item_type: INVENTORY_ITEM_TYPES.sample,
+      item_name: Faker::Dessert.topping,
       manufacturer: INVENTORY_MANUFACTURERS.sample,
       lot_number: Faker::Code.asin,
       expiration_date: Faker::Date.between(from: Date.today, to: 30.days.from_now),

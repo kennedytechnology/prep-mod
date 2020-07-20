@@ -6,7 +6,7 @@ class QueuedPatientsController < ClinicManagementController
     raise CanCan::AccessDenied if current_user.has_roles?(:government, :school_nurse)
     @page_title = "Manage Virtual Queue"
     auto_invite
-    @clinic.reload
+    @clinic.reload; @clinic.patients.reload; @clinic.appointments.reload
     @patients = @clinic.patients
     @patient = Patient.new
   end
@@ -32,7 +32,7 @@ class QueuedPatientsController < ClinicManagementController
     @appointment.send(params[:event])
     @appointment.save
     auto_invite
-    @appointment.reload
+    @clinic.reload; @clinic.patients.reload; @clinic.appointments.reload
     respond_to do |format|
       format.html { redirect_back fallback_location: clinic_queued_patients_path(@appointment.clinic) }
       format.js

@@ -11,6 +11,7 @@ require("jquery")
 require("@rails/activestorage")
 require("chartkick")
 require("chart.js")
+require("awesomplete")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

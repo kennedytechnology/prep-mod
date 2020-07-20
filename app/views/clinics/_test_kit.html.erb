@@ -1,7 +1,7 @@
 <% if action_name == "activity" %>
     <tr class="new_test_kit_row">
-        <td> <%= f.text_field :test_name, class: "form-input w-full" %> </td>
-        <td> <%= f.text_field :test_lot_number, class: "form-input w-full" %> </td>
+        <td> <%= f.text_field :test_name, class: "form-input w-full awesomplete", data: {list: SupplyInventory.pluck(:item_name).join(",")} %> </td>
+        <td> <%= f.text_field :test_lot_number, class: "form-input w-full awesomplete", data: {list: SupplyInventory.pluck(:lot_number).join(",")} %> </td>
         <td> <%= f.number_field :test_kits_quantity, class: "form-input w-full", min: 0 %> </td>
         <td> <%= f.number_field :tests_administered, class: "form-input w-full" %> </td>
         <td> <%= f.number_field :unusable_tests, class: "form-input w-full" %> </td>
@@ -16,12 +16,12 @@
 
 <% else %>
 
-    <tr class="new_test_kit_row">
-        <td> <%= f.text_field :test_name, class: "form-input w-full" %> </td>
+    <tr class="new_test_kit_row" style="overflow: visible">
+        <td> <%= f.text_field :test_name, class: "form-input w-full awesomplete", data: {list: SupplyInventory.pluck(:item_name).join(",")}, autocomplete: "search" %> </td>
         <% if params[:controller] == "clinics" %>
-        <td> <%= f.text_field :test_manufacturer, class: "form-input w-full" %> </td>
+        <td> <%= f.text_field :test_manufacturer, class: "form-input w-full awesomplete", data: {list: SupplyInventory.pluck(:manufacturer).join(",")} %> </td>
         <% end %>
-        <td> <%= f.text_field :test_lot_number, class: "form-input w-full" %> </td>
+        <td> <%= f.text_field :test_lot_number, class: "form-input w-full awesomplete", data: {list: SupplyInventory.pluck(:lot_number).join(",")} %> </td>
         <% if params[:controller] == "clinics" %>
         <td> <%= f.select :test_type, ["PCR", "Serological"], {prompt: "Select"}, {class: "block form-select w-full"} %> </td>
         <td> <%= f.select :test_processing, ["Standard", "Rapid"], {prompt: "Select"}, {class: "block form-select w-full"} %> </td>
@@ -51,3 +51,19 @@
     </tr>
 
 <% end %>
+
+
+    <script>
+
+        // var input = document.getElementsByClassName('test-name-field')[0];
+        // var countries = <%= raw SupplyInventory.pluck(:item_name).to_json %>;
+
+        // alert(countries);
+        // autocomplete({
+        //     input: input,
+        //     fetch: function(text, update){
+
+        //     }
+        // });
+
+    </script>

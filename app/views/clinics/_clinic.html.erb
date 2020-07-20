@@ -2,7 +2,7 @@
     <td class="w-1/12"> <%= clinic.clinic_date.try(:strftime, "%m/%d/%Y") %> </td>
     <td class="w-1/12"> <%= clinic.county %> </td>
     <td class="w-2/12"> <%= clinic.venue_name %> </td>
-    <td class="w-1/12"> <%= clinic.appointments.size %> </td>
+    <td class="w-2/12"> <%= clinic.appointments.size %> </td>
     <% if params[:clinic_display] == "virtual" %><td class="w-1/12"> <%= clinic.active_queue_patients_count %> </td><% end %>
     <% unless params[:clinic_display] == "virtual" %>
     <td class="w-9/12 grid grid-cols-2 gap-3">
