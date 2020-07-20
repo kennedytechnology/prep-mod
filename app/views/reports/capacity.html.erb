@@ -1,4 +1,9 @@
-<h1 class="main-title"> Capacity </h1>
+<div class="justify-between flex">
+    <h1 class="main-title justify-start"> Capacity </h1>
+    <div class="justify-end text-gray-700 mt-4">
+        <%= Time.current.time %>
+    </div>
+</div>
 <p> A summary of resources and utilization by venue, county, or statewide.
     Includes available testing appointments, scheduled appointments, pockets of need.</p>
 
@@ -16,6 +21,3 @@
         <%= column_chart reports_capacity_scheduled_appointments_by_county_path, title: "Scheduled appointments by county"%>
     </div>
 </div>
-
-
-

@@ -1,5 +1,10 @@
-<h1 class="main-title"> Supply Inventories </h1>
-<p class="mb-12"> An accounting of testing kits and other supplies by venue, county, or statewide. </p>
+<div class="justify-between flex">
+    <h1 class="main-title justify-start"> Supply Inventories  </h1>
+    <div class="justify-end text-gray-700 mt-4">
+        <%= Time.current.time %>
+    </div>
+</div>
+<p class="mb-12 justify-start"> An accounting of testing kits and other supplies by venue, county, or statewide. </p>
 
 <div class="grid grid-cols-1 md:grid-cols-2 md:gap-4">
     <div class="p-4 border border-gray-50 rounded-lg ">
@@ -24,7 +29,7 @@
                     }]
                 }
             },
-            dataset: { 
+            dataset: {
                 barPercentage: 0.6,
             }
         %>
@@ -38,7 +43,7 @@
             library: {
                 scales: {
                     xAxes: [{
-                        ticks: {stepSize: 1},  
+                        ticks: {stepSize: 1},
                         gridLines: {
                             drawOnChartArea: true,
                             color: "#f4f5f7"
@@ -52,7 +57,7 @@
                     }]
                 }
             },
-            dataset: { 
+            dataset: {
                 categoryPercentage: 0.6,
             }
         %>

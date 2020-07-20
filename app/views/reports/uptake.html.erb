@@ -1,5 +1,10 @@
-<h1 class="main-title"> Uptake </h1>
-<p class="mb-12"> An overview of COVID-19 services utilized so far by demographics, 
+<div class="justify-between flex">
+    <h1 class="main-title justify-start"> Uptake </h1>
+    <div class="justify-end text-gray-700 mt-4">
+        <%= Time.current.time %>
+    </div>
+</div>
+<p class="mb-12"> An overview of COVID-19 services utilized so far by demographics,
     ZIP Code, county, or region: number of available appointments, number of completed appointments.</p>
 
 <%= column_chart reports_available_and_completed_appointments_path, title: "Availabale/Completed appointments" %>
