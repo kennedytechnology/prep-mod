@@ -1,30 +1,36 @@
 <h2 class="main-title"> Provider and Business Enrollment </h2>
 
-<div class="flex justify-end mb-6">
-    <%= link_to "Add New Provider/Business", new_provider_enrollment_path, class: "button-primary" %>
-</div>
+<div data-controller="clinic-activity-patients">
+    <div class="flex items-center justify-between mt-12 mb-6">
+        <form class="flex justify-start items-center">
+            <label class="flex text-lg mr-3 align-middle text-gray-600 block" for="search"> Search: </label>
+            <input class="form-input w-full" id="search" data-action="keyup->clinic-activity-patients#search" type="text">
+        </form>
+        <%= link_to "Add New Provider/Business", new_provider_enrollment_path, class: "button-primary" %>
+    </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th><%= sort_link(@q, :created_at, 'Request Date', default_order: :asc) %></th>
-            <th><%= sort_link(@q, :practice_name, 'Entity Name', default_order: :desc) %></th>
-            <th> Entity Type </th>
-            <th><%= sort_link(@q, :county, 'County', default_order: :desc) %></th>
-            <th> Requested Service </th>
-            <th> Action </th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @provider_enrollments.each do |provider| %>
-        <tr>
-            <td> <%= provider.created_at.strftime("%m-%d-%Y") %> </td>
-            <td> <%= provider.practice_name %> </td>
-            <td> Provider </td>
-            <td> <%= provider.county %> </td>
-            <td> <%= provider.clinic_services.pluck(:name).join(", ") %> </td>
-            <td> <%= link_to "Review Request", edit_provider_enrollment_path(provider), class: "button-action" %> </td>
-        </tr>
-        <% end %>
-    </tbody>
-</table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th><%= sort_link(@q, :created_at, 'Request Date', default_order: :asc) %></th>
+                <th><%= sort_link(@q, :practice_name, 'Entity Name', default_order: :desc) %></th>
+                <th> Entity Type </th>
+                <th><%= sort_link(@q, :county, 'County', default_order: :desc) %></th>
+                <th> Requested Service </th>
+                <th> Action </th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @provider_enrollments.each do |provider| %>
+            <tr data-target="clinic-activity-patients.searchableRow" data-search-content="<%= provider.county.try(:downcase) %>">
+                <td> <%= provider.created_at.strftime("%m-%d-%Y") %> </td>
+                <td> <%= provider.practice_name %> </td>
+                <td> Provider </td>
+                <td> <%= provider.county %> </td>
+                <td> <%= provider.clinic_services.pluck(:name).join(", ") %> </td>
+                <td> <%= link_to "Review Request", edit_provider_enrollment_path(provider), class: "button-action" %> </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
