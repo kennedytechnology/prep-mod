@@ -17,7 +17,11 @@
         </div>
         <div class="flex items-end">
           <% if @clinic %>
-            <%= link_to "Download Waiting List", patients_path(format: :xlsx), class: "button-primary" %>
+            <% if @clinic.appointments.where("on_waiting_list = ?", true).empty? %>
+                <button type="button" diabled="disabled" class="button-disabled" title="Waiting List is empty"> Download Waiting List </button>
+            <% else %>
+                <%= link_to "Download Waiting List", patients_path(format: :xlsx), class: "button-primary" %>
+            <% end %>
           <% end %>
           <%= link_to "Download Registration List", clinic_patients_path(clinic_id: @clinic.id, format: :csv), class: "button-primary" %><br/>
           <a href="javascript:" class="button-primary" data-action="click->main#printContent">Print</a>
