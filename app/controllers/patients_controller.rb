@@ -24,14 +24,19 @@ class PatientsController < ApplicationController
 
     @q = Patient.ransack(params[:q])
 
-
     if params[:date_of_birth]
       @patients = Patient.with_appointments(params[:date_of_birth]).order(:date_of_birth)
     end
 
     if params[:clinic_id]
-      @patients_waiting_list = Clinic.find(params[:clinic_id]).patients.with_appointments.count
-      @patients_appointments = Clinic.find(params[:clinic_id]).appointments_count
+      @clinic = Clinic.find(params[:clinic_id])
+      @patients_waiting_list = @clinic.patients.with_appointments.count
+      @patients_appointments = @clinic.appointments_count
+
+      if params[:display_patients] == "waiting_list"
+        @page_title = "Patients Waiting List"
+        @patients = @clinic.patients.with_appointments.where("appointments.on_waiting_list = ?", true)
+      end
     end
   end
 
@@ -112,6 +117,7 @@ class PatientsController < ApplicationController
       format.csv { send_data @patients.to_csv, filename: "patients-#{Date.today}.csv" }
     end
   end
+
 
   private
 
