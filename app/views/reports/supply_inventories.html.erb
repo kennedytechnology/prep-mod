@@ -1,9 +1,4 @@
-<div class="justify-between flex">
-    <h1 class="main-title justify-start"> Supply Inventories  </h1>
-    <div class="justify-end text-gray-700 mt-4">
-        <%= Time.current.time %>
-    </div>
-</div>
+<%= render partial: 'reports/reports_header', locals: {title: "Supply Inventories"} %>
 <p class="mb-12 justify-start"> An accounting of testing kits and other supplies by venue, county, or statewide. </p>
 
 <div class="grid grid-cols-1 md:grid-cols-2 md:gap-4">

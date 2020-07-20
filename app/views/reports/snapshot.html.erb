@@ -1,9 +1,4 @@
-<div class="justify-between flex">
-    <h1 class="main-title justify-start"> Snapshot </h1>
-    <div class="justify-end text-gray-700 mt-4">
-        <%= Time.current.time %>
-    </div>
-</div>
+<%= render partial: 'reports/reports_header', locals: {title: "Snapshot"} %>
 <p> A quick look at metrics of interest by demographics, region, or county:
     number of people tested, positive results, negative results, evidence of immunity. </p>
 
