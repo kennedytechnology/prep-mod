@@ -31,12 +31,13 @@ class ClinicsController < ClinicManagementController
     @clinic_dates = params[:clinic_dates].reject(&:blank?)
 
     @errors = []
+    @errors << "You must select at least one clinic date." if @clinic_dates.empty?
     @errors << "You have selected to have multiple clinics on the same date." if @clinic_dates.uniq.size != @clinic_dates.size
 
     if @clinic.invalid? || @clinic_dates.empty? || @errors.any?
       render :new
     else
-      params[:clinic_dates].reject(&:blank?).each do |clinic_date|
+      @clinic_dates.each do |clinic_date|
         @clinic_dup = Clinic.new(clinic_params)
         @clinic_dup.clinic_date = Chronic.parse(clinic_date)
         @clinic_dup.save
