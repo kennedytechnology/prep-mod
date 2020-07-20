@@ -35,7 +35,7 @@ class ProviderEnrollment < ApplicationRecord
   after_update :invite_user, if: lambda { status == "accepted" }
 
   def set_default_unique_number
-    self.update(unique_number: "P#{self.id}")
+    self.update(unique_number: "P" + self.id.to_s.rjust(6, '0'))
   end
 
   def send_email_for_need_more_information
