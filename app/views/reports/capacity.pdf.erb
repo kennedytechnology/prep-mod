@@ -1,0 +1,25 @@
+<h2> Available appointments by venue </h2>
+<% @available_appointments.each do |r| %>
+    <p> <%= r[0] %>: <%= r[1] %> </p>
+<% end %>
+
+========
+
+<h2> Scheduled appointments by venue </h2>
+<% @scheduled_appointments.each do |r| %>
+    <p> <%= r[0] %>: <%= r[1] %> </p>
+<% end %>
+
+========
+
+<h2> Available appointments by county </h2>
+<% @available_appointments_by_county.each do |r| %>
+    <p> <%= r[0] %>: <%= r[1] %> </p>
+<% end %>
+
+======
+
+<h3> Scheduled appointments by county </h3>
+<% @scheduled_appintments_by_county.each do |r| %>
+    <p> <%= r[0] %>: <%= r[1] %> </p>
+<% end %>

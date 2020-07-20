@@ -4,10 +4,12 @@
         <%= Time.current.time %>
     </div>
 </div>
-<p class="mb-12">
+<p class="mb-3">
     An accounting of providers engaged in the response by specialty, regions,
     number of patients tested, vaccine inventory.
 </p>
+
+<%= link_to "Download PDF Report", reports_providers_path(format: :pdf), target: "_blank", class: "button-primary w-3/12 mt-3 mb-12" %>
 
 <div class="grid grid-cols-2 gap-4">
     <div class="pr-4 border-r border-gray-100 mr-4">

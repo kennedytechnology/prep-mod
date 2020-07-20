@@ -4,9 +4,10 @@
         <%= Time.current.time %>
     </div>
 </div>
-<p class="mb-12"> A summary of activities at testing sites: overall number, number of
+<p class="mb-3"> A summary of activities at testing sites: overall number, number of
     tests administered by location, ratio of available appointments to
     completed appointments, patient demographics. </p>
+    <%= link_to "Download PDF Report", reports_locations_path(format: :pdf), target: "_blank", class: "button-primary w-3/12 mt-3 mb-12" %>
 
 <div class="w-6/12 p-4 border border-gray-50 shadow rounded-lg">
     <%= pie_chart reports_appointments_by_county_path, donut: true, title: "Total appointments by county" %>

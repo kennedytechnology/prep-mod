@@ -3,7 +3,25 @@ class ReportsController < ApplicationController
   layout "clinic_management"
   before_action :authenticate_user!
 
-  def providers; end
+  def providers
+    @providers_by_specialty = ProviderEnrollment.group(:medical_specialty).count
+    @providers_by_county = ProviderEnrollment.group(:county).count
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "Customized report",
+                page_size: 'A4',
+                template: "reports/providers.pdf.erb",
+                layout: "clinic-print.pdf.erb",
+                orientation: "Landscape",
+                lowquality: true,
+                zoom: 1,
+                dpi: 75,
+                encoding: 'utf8'
+      end
+    end
+  end
 
   def providers_by_county
     render json: ProviderEnrollment.group(:county).count
@@ -14,11 +32,50 @@ class ReportsController < ApplicationController
   end
 
   def snapshot_tested
-    render json: ClinicEvent.where(outcome: ["Positive", "Negative"]).group(:outcome).count
+    @results = ClinicEvent.where(outcome: ["Positive", "Negative"]).group(:outcome).count
+
+    respond_to do |format|
+      format.pdf do
+        render pdf: "Customized report",
+                page_size: 'A4',
+                template: "reports/snapshot.pdf.erb",
+                layout: "clinic-print.pdf.erb",
+                orientation: "Landscape",
+                lowquality: true,
+                zoom: 1,
+                dpi: 75,
+                encoding: 'utf8'
+      end
+      format.json do
+        render json: @results
+      end
+    end
+  end
+
+  def capacity
+    @available_appointments = Clinic.joins(:appointments).all.group(:venue_name).count 
+    @scheduled_appointments = Clinic.joins(:appointments).where("appointments.queue_state = ?", "not_checked_in").group(:venue_name).count
+    @available_appointments_by_county = Clinic.joins(:appointments).all.group(:county).count
+    @scheduled_appintments_by_county = Clinic.joins(:appointments).where("appointments.queue_state = ?", "not_checked_in").group(:county).count
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "Customized report",
+                page_size: 'A4',
+                template: "reports/capacity.pdf.erb",
+                layout: "clinic-print.pdf.erb",
+                orientation: "Landscape",
+                lowquality: true,
+                zoom: 1,
+                dpi: 75,
+                encoding: 'utf8'
+      end
+    end
   end
 
   def capacity_available_testing_appointments
-    render json:  Clinic.joins(:appointments).all.group(:venue_name).count
+    render json: Clinic.joins(:appointments).all.group(:venue_name).count
   end
 
   def capacity_scheduled_appointments
@@ -37,12 +94,46 @@ class ReportsController < ApplicationController
                     library: column_chart_background_colors }].chart_json
   end
 
-
-  def uptake; end
-  def uptake_by_zip_code
+  def uptake
+    @results = Appointment.where("queue_state = ? OR queue_state = ? ", *["not_checked_in", "done"]).group(:queue_state).count
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "Customized report",
+                page_size: 'A4',
+                template: "reports/uptake.pdf.erb",
+                layout: "clinic-print.pdf.erb",
+                orientation: "Landscape",
+                lowquality: true,
+                zoom: 1,
+                dpi: 75,
+                encoding: 'utf8'
+      end
+    end
   end
 
-  def locations; end
+  def uptake_by_zip_code; end
+
+  def locations
+    @appointments_by_county = Patient.joins(:appointments).group(:county).count
+    @available_appointments_by_county = Patient.joins(:appointments).where("appointments.queue_state = ?", "not_checked_in").group(:county).count
+    @completed_appointments_by_county = Patient.joins(:appointments).where("appointments.queue_state = ?", "done").group(:county).count
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "Customized report",
+                page_size: 'A4',
+                template: "reports/locations.pdf.erb",
+                layout: "clinic-print.pdf.erb",
+                orientation: "Landscape",
+                lowquality: true,
+                zoom: 1,
+                dpi: 75,
+                encoding: 'utf8'
+      end
+    end
+  end
 
   def employers_state
     render json: Employer.group(:state).count
@@ -109,7 +200,6 @@ class ReportsController < ApplicationController
                 dpi: 75,
                 encoding: 'utf8'
       end
-
       format.xlsx do
         render xlsx: 'New and Notifications Contact List', template: 'reports/news_and_notifications',
                 disposition: 'inline',
