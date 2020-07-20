@@ -1,25 +1,30 @@
-<h1 class="main-title"> COVID-19 Response Reports in Real-Time </h1>
+<div class="justify-between flex">
+    <h1 class="main-title justify-start"> COVID-19 Response Reports in Real-Time  </h1>
+    <div class="justify-end text-gray-700 mt-4">
+        <%= Time.current.time %>
+    </div>
+</div>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
     <%= link_to reports_snapshot_path, class: "rounded-sm border-2 p-8 flex items-stretch", style: "min-height: 150px;" do %>
-        <div class="pr-4 flex justify-center items-center"> 
+        <div class="pr-4 flex justify-center items-center">
             <%= image_tag 'icons/snapshot.png', style: "max-width: 80px;" %>
         </div>
         <div class="pl-4 border-l-2 flex flex-col justify-center text-gray-600">
             <h1 class="text-2xl uppercase mb-2 font-bold"> Snapshot </h1>
-            <p class="text-sm leading-5 italic"> 
-                A quick look at metrics of interest by demographics, region, or county: 
+            <p class="text-sm leading-5 italic">
+                A quick look at metrics of interest by demographics, region, or county:
                 number of people tested, positive results, negative results, evidence of immunity.
             </p>
         </div>
     <% end %>
 
     <%= link_to reports_capacity_path, class: "rounded-sm border-2 p-8 flex items-stretch", style: "min-height: 200px;" do %>
-        <div class="pr-4 flex justify-center items-center"> 
+        <div class="pr-4 flex justify-center items-center">
             <%= image_tag 'icons/capacity.png', style: "max-width: 80px;" %>
         </div>
         <div class="pl-4 border-l-2 flex flex-col justify-center text-gray-600">
             <h1 class="text-2xl uppercase mb-2 font-bold"> Capacity </h1>
-            <p class="text-sm leading-5 italic"> 
+            <p class="text-sm leading-5 italic">
                 A summary of resources and utilization by venue, county, or statewide.
                 Includes available testing appointments, scheduled appointments, pockets of need.
             </p>
@@ -27,89 +32,89 @@
     <% end %>
 
     <%= link_to reports_uptake_path, class: "rounded-sm border-2 p-8 flex items-stretch", style: "min-height: 200px;" do %>
-        <div class="pr-4 flex justify-center items-center"> 
+        <div class="pr-4 flex justify-center items-center">
             <%= image_tag 'icons/uptake.png', style: "max-width: 80px;" %>
         </div>
         <div class="pl-4 border-l-2 flex flex-col justify-center text-gray-600">
             <h1 class="text-2xl uppercase mb-2 font-bold"> Uptake </h1>
-            <p class="text-sm leading-5 italic"> 
-                An overview of COVID-19 services utilized so far by demographics, 
+            <p class="text-sm leading-5 italic">
+                An overview of COVID-19 services utilized so far by demographics,
                 ZIP Code, county, or region: number of available appointments, number of completed appointments.
             </p>
         </div>
     <% end %>
 
     <%= link_to reports_locations_path, class: "rounded-sm border-2 p-8 flex items-stretch", style: "min-height: 200px;" do %>
-        <div class="pr-4 flex justify-center items-center"> 
+        <div class="pr-4 flex justify-center items-center">
             <%= image_tag 'icons/locations.png', style: "max-width: 80px;" %>
         </div>
         <div class="pl-4 border-l-2 flex flex-col justify-center text-gray-600">
             <h1 class="text-2xl uppercase mb-2 font-bold"> Locations </h1>
-            <p class="text-sm leading-5 italic"> 
-                A summary of activities at testing sites: overall number, number of 
-                tests administered by location, ratio of available appointments to 
+            <p class="text-sm leading-5 italic">
+                A summary of activities at testing sites: overall number, number of
+                tests administered by location, ratio of available appointments to
                 completed appointments, patient demographics.
             </p>
         </div>
     <% end %>
 
     <%= link_to reports_providers_path, class: "rounded-sm border-2 p-8 flex items-stretch", style: "min-height: 200px;" do %>
-        <div class="pr-4 flex justify-center items-center"> 
+        <div class="pr-4 flex justify-center items-center">
             <%= image_tag 'icons/providers.png', style: "max-width: 80px;" %>
         </div>
         <div class="pl-4 border-l-2 flex flex-col justify-center text-gray-600">
             <h1 class="text-2xl uppercase mb-2 font-bold"> Providers </h1>
-            <p class="text-sm leading-5 italic"> 
-                An accounting of providers engaged in the response by specialty, regions, 
+            <p class="text-sm leading-5 italic">
+                An accounting of providers engaged in the response by specialty, regions,
                 number of patients tested, vaccine inventory.
             </p>
         </div>
     <% end %>
 
     <%= link_to reports_employers_path, class: "rounded-sm border-2 p-8 flex items-stretch", style: "min-height: 200px;" do %>
-        <div class="pr-4 flex justify-center items-center"> 
+        <div class="pr-4 flex justify-center items-center">
             <%= image_tag 'icons/employers.png', style: "max-width: 80px;" %>
         </div>
         <div class="pl-4 border-l-2 flex flex-col justify-center text-gray-600">
             <h1 class="text-2xl uppercase mb-2 font-bold"> Employers </h1>
-            <p class="text-sm leading-5 italic"> 
-                An accounting of employers engaged in the response by specialty, regions, 
+            <p class="text-sm leading-5 italic">
+                An accounting of employers engaged in the response by specialty, regions,
                 number of patients tested, vaccine inventory.
             </p>
         </div>
     <% end %>
 
     <%= link_to reports_supply_inventories_path, class: "rounded-sm border-2 p-8 flex items-stretch", style: "min-height: 200px;" do %>
-        <div class="pr-4 flex justify-center items-center"> 
+        <div class="pr-4 flex justify-center items-center">
             <%= image_tag 'icons/inventory.png', style: "max-width: 80px;" %>
         </div>
         <div class="pl-4 border-l-2 flex flex-col justify-center text-gray-600">
             <h1 class="text-2xl uppercase mb-2 font-bold"> Supplies Inventory </h1>
-            <p class="text-sm leading-5 italic"> 
+            <p class="text-sm leading-5 italic">
                 An accounting of testing kits and other supplies by venue, county, or statewide.
             </p>
         </div>
     <% end %>
 
     <%= link_to reports_customized_path, class: "rounded-sm border-2 p-8 flex items-stretch", style: "min-height: 200px;" do %>
-        <div class="pr-4 flex justify-center items-center"> 
+        <div class="pr-4 flex justify-center items-center">
             <%= image_tag 'icons/customized.png', style: "max-width: 80px;" %>
         </div>
         <div class="pl-4 border-l-2 flex flex-col justify-center text-gray-600">
             <h1 class="text-2xl uppercase mb-2 font-bold"> Customized </h1>
-            <p class="text-sm leading-5 italic"> 
+            <p class="text-sm leading-5 italic">
                 Choose from a variety of data points to create your own report.
             </p>
         </div>
     <% end %>
 
     <%= link_to reports_news_and_notifications_path, class: "rounded-sm border-2 p-8 flex items-stretch", style: "min-height: 200px;" do %>
-        <div class="pr-4 flex justify-center items-center"> 
+        <div class="pr-4 flex justify-center items-center">
             <%= image_tag 'icons/news.png', style: "max-width: 80px;" %>
         </div>
         <div class="pl-4 border-l-2 flex flex-col justify-center text-gray-600">
             <h1 class="text-2xl uppercase mb-2 font-bold"> News and Notifications </h1>
-            <p class="text-sm leading-5 italic"> 
+            <p class="text-sm leading-5 italic">
                 News and Notification Contact List.
             </p>
         </div>
