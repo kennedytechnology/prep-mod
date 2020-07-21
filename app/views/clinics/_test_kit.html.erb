@@ -26,14 +26,14 @@
         <td> <%= f.select :test_type, ["PCR", "Serological"], {prompt: "Select"}, {class: "block form-select w-full"} %> </td>
         <td> <%= f.select :test_processing, ["Standard", "Rapid"], {prompt: "Select"}, {class: "block form-select w-full"} %> </td>
         <td>
-            <%= f.text_field :test_expiration_date, class: "form-input", placeholder: "MM/DD/YYYY",
+            <%= f.text_field :test_expiration_date, class: "form-input", placeholder: "MM/DD/YYYY", value: f.object.test_expiration_date.try(:strftime, "%Y/%m/%d"),
                 data: {
                         controller: "flatpickr",
                     }
             %>
         </td>
 
-        
+
 
         <% end %>
         <td> <%= f.number_field :test_kits_quantity, class: "form-input w-full", min: 0 %> </td>

@@ -44,7 +44,7 @@
         <%= search_form_for @q, class: "flex items-start" do |f| %>
           <%= f.search_field :first_name_cont, type: "text", placeholder: "First Name", class: "form-input mr-2 w-2/12" %>
           <%= f.search_field :last_name_cont, type: "text", placeholder: "Last Name", class: "form-input w-2/12 mr-2" %>
-          <%= f.search_field :date_of_birth_equals, type: "date", placeholder: "Date of Birth",
+          <%= f.search_field :date_of_birth_equals, type: "date", placeholder: "Date of Birth", value: @q.date_of_birth_equals.try(:strftime, "%Y/%m/%d"),
                                class: "form-input w-2/12 mr-2",
                                data: {controller: "flatpickr"} %>
           <%= f.search_field :mothers_maiden_name_cont, type: "text", placeholder: "Mother's Maiden Name", class: "form-input w-3/12 mr-2" %>
