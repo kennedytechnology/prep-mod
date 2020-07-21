@@ -1,5 +1,5 @@
 <%= render "clinics/header" %>
-<div class="clinic-events-page">
+<div class="clinic-events-page" data-controller="clinic-activity-patients">
     <div class="card-wrapper">
       <%= render 'clinics/activity/header' %>
       <div class="card-content">
@@ -13,7 +13,7 @@
               <input type="submit" name="save-submit" value="Save and Submit" class="button-primary ml-2 bg-blue-500 text-white mt-10">
             </div>
 
-          
+
         <% end %>
 
         <div class="patients-table-section" data-controller="clinic-activity-patients">
@@ -64,7 +64,7 @@
                             <%= event_form.check_box :safety_kit_received, class: "form-checkbox", onclick: "Rails.fire(this.form, 'submit');" %>
                           </td>
                           <td>
-                            <%= event_form.radio_button :category, "Cancelled", class: "form-radio", onclick: "Rails.fire(this.form, 'submit');"  %> 
+                            <%= event_form.radio_button :category, "Cancelled", class: "form-radio", onclick: "Rails.fire(this.form, 'submit');"  %>
                           </td>
                           <td><%= event_form.radio_button :category, "No Show", class: "form-radio", onclick: "Rails.fire(this.form, 'submit');"  %></td>
                           <td><%= link_to "Remark", "javascript:", data: {action: "clinic-activity-patients#showModal", selection: "Remark"}, class: "form-text" %></td>
@@ -86,10 +86,10 @@
               </div>
             </div>
 
-            
+
             <%= render "clinics/activity/delete_record_modal" %>
           </div>
-          
+
       </div>
     </div>
 </div>

@@ -15,7 +15,7 @@ export default class extends Controller {
         let patientId = event.target.closest("tr").dataset.patientId
         return (el.dataset['patientId'] == patientId && el.dataset['categorySelection'] == categorySelection )
       })[0]
-    } 
+    }
 
     modal.classList.toggle('hidden')
   }
@@ -66,6 +66,4 @@ export default class extends Controller {
     this.cancelModalTarget.classList.toggle('hidden')
     this.cancelRecordButtonTarget.href = `/admin/clinics/${event.currentTarget.dataset.cancelid}`;
   }
-
-
 }
