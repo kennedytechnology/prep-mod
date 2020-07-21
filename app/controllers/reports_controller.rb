@@ -135,6 +135,27 @@ class ReportsController < ApplicationController
     end
   end
 
+  def employers
+    @employers_by_state = Employer.group(:state).count
+    @employers_patients_tested_company_name = Employer.joins(:patients).group(:company_name).count
+    @employers_patients_tested_city = Employer.joins(:patients).group(:city).count
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "Customized report",
+                page_size: 'A4',
+                template: "reports/employers.pdf.erb",
+                layout: "clinic-print.pdf.erb",
+                orientation: "Landscape",
+                lowquality: true,
+                zoom: 1,
+                dpi: 75,
+                encoding: 'utf8'
+      end
+    end
+  end
+
   def employers_state
     render json: Employer.group(:state).count
   end
@@ -163,7 +184,25 @@ class ReportsController < ApplicationController
                     library: column_chart_background_colors }].chart_json
   end
 
-  def supply_inventories; end
+  def supply_inventories
+    @supply_inventories_by_county = SupplyInventory.group(:county).count
+    @supply_inventories_by_venue_name = SupplyInventory.group(:venue_name).count
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "Customized report",
+                page_size: 'A4',
+                template: "reports/supply_inventories.pdf.erb",
+                layout: "clinic-print.pdf.erb",
+                orientation: "Landscape",
+                lowquality: true,
+                zoom: 1,
+                dpi: 75,
+                encoding: 'utf8'
+      end
+    end
+  end
 
   def supply_inventories_by_county
     chart_data = SupplyInventory.group(:county).count

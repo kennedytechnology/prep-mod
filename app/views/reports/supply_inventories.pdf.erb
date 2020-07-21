@@ -1,0 +1,19 @@
+<div class="justify-between flex">
+    <h1 class="main-title justify-start"> Supply Inventories </h1>
+    <div class="justify-end text-gray-700 mt-4">
+        <%= Time.zone.now.inspect %>
+    </div>
+</div>
+
+<p class="mb-12 justify-start"> An accounting of testing kits and other supplies by venue, county, or statewide. </p>
+
+<h2> Supplies by county </h2>
+<% @supply_inventories_by_county.each do |r| %>
+    <p> <%= r[0] %>: <%= r[1] %> </p>
+<% end %>
+
+=====
+<h2> Supplies by venue </h2>
+<% @supply_inventories_by_venue_name.each do |r| %>
+    <p> <%= r[0] %>: <%= r[1] %> </p>
+<% end %>
