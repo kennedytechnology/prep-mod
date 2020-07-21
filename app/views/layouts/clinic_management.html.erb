@@ -13,7 +13,7 @@
   </head>
 
   <body data-controller="main">
-    <%# render partial: "layouts/flash_message", locals: {message: alert ? "alert" : "notice", flash_message: (alert || notice)} if alert || notice %>
+    <%= render partial: "layouts/flash_message", locals: {message: alert ? "alert" : "notice", flash_message: (alert || notice)} if flash.any? %>
 
     <div class="main-container">
         <div class="flex justify-between content-end">
