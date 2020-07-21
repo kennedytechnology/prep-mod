@@ -18,107 +18,41 @@
 
       <h1 class="main-title">Add a Patient</h1>
 
-        <%= form_for(@patient, remote: false, data: {controller: "testing-referral-review-form age-calculator"}) do |f| %>
-            <%# f.hidden_field :clinic_id, value: @clinic.id %>
+        <%= form_with(scope: :appointment, remote: false, url: update_appointment_clinic_queued_patients_path(clinic_id: @clinic.id), 
+            method: :post, data: {controller: "testing-referral-review-form age-calculator"}) do |f| %>
 
-            <div class="field-fullwidth">
-                <div class="grid grid-cols-4 gap-4">
-                    <div>
-                        <%= f.label :first_name, "Patient's First Name", class: "block" %>
-                        <%= f.text_field :first_name, class: "w-full form-input", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
-                    </div>
-                    <div>
-                        <%= f.label :middle_initial, class: "block" %>
-                        <%= f.text_field :middle_initial, class: "w-full form-input", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
-                    </div>
-                    <div>
-                        <%= f.label :last_name, "Patient's Last Name", class: "block" %>
-                        <%= f.text_field :last_name, class: "w-full form-input", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
-                    </div>
-                    <div>
-                        <%= f.label :mothers_maiden_name, "Mother's Maiden Name", class: "block" %>
-                        <%= f.text_field :mothers_maiden_name, class: "w-full form-input", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
-                    </div>
-                </div>
-            </div>
-            <div class="field-side-by-side">
-                <div class="flex">
-                    <div class="w-7/12 mr-2">
-                        <%= f.label :date_of_birth, "Date of Birth", class: "block" %>
-                        <div class="flex">
-                            <%= f.date_select :date_of_birth, {order: [:month, :day, :year], start_year: Date.current.year - 99, end_year: Date.current.year, include_blank: true}, class: "form-select flex-auto",
-                                                data: {action: "change->testing-referral-review-form#updateModalField keyup->testing-referral-review-form#updateModalField age-calculator#calculateAge",
-                                                       target: "age-calculator.dobField"} %>
-                        </div>
-                    </div>
-                    <div class="w-2/12 mr-2">
-                        <%= f.label :age, class: "block" %>
-                        <%= f.number_field :age, class: "w-full form-input", data: {action: "keyup->testing-referral-review-form#updateModalField",
-                                                                                    target: "age-calculator.ageField"} %>
-                    </div>
-                    <div class="flex-1">
-                        <%= f.label :sex, "Gender", class: "block" %>
-                        <%= f.select :sex, [["Male", "M"], ["Female", "F"], ["Other", "O"]], {}, {class: "w-full form-select", data: {action: "keyup->testing-referral-review-form#updateModalField"}} %>
-                    </div>
-                </div>
-                <div>
-                    <%# TODO: Check why this is state instead of race %>
-                    <%= f.label :race, "Race", class: "block" %>
-                    <%= f.select :race, options_for_select(US_RACES, @patient.state), {prompt: "Select"}, {class: "w-full form-select", data: {action: "keyup->testing-referral-review-form#updateModalField"}} %>
-                </div>
+            <div>
+                <%= label_tag "patient_id", "Select Patient", class: "block" %>
+                <%= select_tag "patient_id", options_from_collection_for_select(@patiens_waiting_list, "id", "full_name"), prompt: "Select Patient", class: "form-select w-full" %>
             </div>
 
-            <div class="field-fullwidth">
-                <div class="grid grid-cols-5 gap-4">
-                    <div>
-                        <%= f.label :address, class: "block" %>
-                        <%= f.text_field :address, placeholder: "", id: "autocomplete", onFocus: "geolocate()", class: "w-full form-input", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
-                        <%= render partial: "public/clinics/google_maps_script" %>
-                    </div>
-                    <div>
-                        <%= f.label :city, class: "block" %>
-                        <%= f.text_field :city, class: "w-full form-input", id: "locality", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
-                    </div>
-                    <div>
-                        <%= f.label :state, class: "block" %>
-                        <%= f.select :state, options_for_select(US_STATES, @patient.state), {prompt: "Select"}, {class: "w-full form-select", id: "administrative_area_level_1", data: {action: "change->testing-referral-review-form#updateModalField"}} %>
-                    </div>
-                    <div>
-                        <%= f.label :zip_code, "Zip Code", class: "block" %>
-                        <%= f.text_field :zip_code, class: "w-full form-input", id: "postal_code", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
-                    </div>
-                    <div>
-                        <%= f.label :phone_number, "Mobile or Daytime Number", class: "block" %>
-                        <%= f.text_field :phone_number, class: "w-full form-input", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
-                    </div>
-                </div>
-                <div class="w-4/12">
-                    <%= f.label :email, "Email Address", class: "block" %>
-                    <%= f.email_field :email, class: "w-full form-input", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
-                </div>
-            </div>
+            <label> Clinic Date </label>
+            <p class="form-input w-full mb-3"> <%= @clinic.clinic_date %> </p>
 
-            <div class="field-side-by-side">
-                <div>
-                    <h1 class="title">Send Patient Invitation Via</h1>
-                    <div class="flex">
-                        <div class="mr-6">
-                            <%= f.check_box :notify_via_sms, class: "form-checkbox", data: {action: "click->testing-referral-review-form#updateModalCheckboxField"} %> 
-                            <%= f.label :notify_via_sms, "SMS" %>
-                        </div>
+            <div>
+                <label class="block"> Choose Appointment </label>
+                <%= fields_for :appointment do |af| %>
+                    <% @clinic.appointment_times.each do |time| %>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="flex items-center">
+                                <div class="flex items-center">
+                                    <% if @clinic.appointment_slots.to_i > 0 %>
+                                        <%= af.radio_button(:appointment_at, time, class: "form-radio", onclick: "var elements = document.getElementsByName('appointment[on_waiting_list]'); for(var i=0; i < elements.length; i++) elements[i].checked = false;") %>
+                                    <% else %>
+                                        <%= af.radio_button(:appointment_at, time, class: "form-radio", disabled: "true") %>
+                                    <% end %>
+                                    <span class="ml-2"><%= time %></span>
+                                </div>
 
-                        <div>
-                            <%= f.check_box :notify_via_email, class: "form-checkbox", data: {action: "click->testing-referral-review-form#updateModalCheckboxField"} %> 
-                            <%= f.label :notify_via_email, "Email" %>
+                                <p class="ml-3 text-xs text-gray-400"> (<%= @clinic.appointment_slots.to_i %> appointments available) </p>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div>
-                </div>
+                    <% end %>
+                <% end %>
             </div>
 
             <div class="flex justify-end my-4">
-                <%= f.submit "Create", class: "button-primary" %>
+                <%= f.submit "Save", class: "button-primary" %>
                 <a data-action="clinic-activity-patients#cancelModal" data-parent="<%= @patient.id.nil? ? "addMorePatients" : @patient.id %>" class="button-primary sm:mr-0 md:mr-0">Cancel</a>
             </div>
         <% end %>

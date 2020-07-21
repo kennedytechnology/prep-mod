@@ -9,6 +9,7 @@ class QueuedPatientsController < ClinicManagementController
     @clinic.reload; @clinic.patients.reload; @clinic.appointments.reload
     @patients = @clinic.patients
     @patient = Patient.new
+    @patiens_waiting_list = @clinic.patients.with_appointments.where("appointments.on_waiting_list = ?", true)
   end
 
   def send_check_in_reminders
@@ -49,6 +50,21 @@ class QueuedPatientsController < ClinicManagementController
     redirect_back fallback_location: clinic_queued_patients_path(@clinic.id)
   end
 
+  def update_appointment
+    @appointment = Appointment.find_by(patient_id: params[:patient_id], clinic_id: params[:clinic_id], on_waiting_list: true)
+
+    if @appointment
+      @appointment.on_waiting_list = false
+      if @appointment.update(appointment_params)
+        flash[:notice] = "Successfully added appointment"
+      else
+        flash[:alert] = "Error!"
+      end
+    end
+
+    redirect_back fallback_location: clinic_queued_patients_path(clinic_id: params[:clinic_id])
+  end
+
   def cancel_appointment
     @appointment = Appointment.find(params[:appointment_id])
 
@@ -66,6 +82,10 @@ class QueuedPatientsController < ClinicManagementController
   end
 
   private
+
+  def appointment_params
+    params.require(:appointment).permit(:appointment_at)
+  end
 
   def auto_invite
     @clinic.appointments_to_invite.each(&:invite!) if @clinic.opened?
