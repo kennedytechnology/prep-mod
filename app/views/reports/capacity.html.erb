@@ -1,6 +1,7 @@
 <%= render partial: 'reports/reports_header', locals: {title: "Capacity"} %>
 <p> A summary of resources and utilization by venue, county, or statewide.
     Includes available testing appointments, scheduled appointments, pockets of need.</p>
+<%= link_to "Download PDF Report", reports_capacity_path(format: :pdf), target: "_blank", class: "button-primary w-3/12 mt-3" %>
 
 <div class="grid grid-cols-2 gap-4 mt-8">
     <div class="pr-4 border-r border-gray-100 mr-4">
@@ -13,6 +14,6 @@
         <%= bar_chart reports_capacity_available_testing_appointments_by_county_path, title: "Available appointments by county" %>
     </div>
     <div class="mt-8">
-        <%= column_chart reports_capacity_scheduled_appointments_by_county_path, title: "Scheduled appointments by county"%>
+        <%= column_chart reports_capacity_scheduled_appointments_by_county_path, title: "Scheduled appointments by county" %>
     </div>
 </div>

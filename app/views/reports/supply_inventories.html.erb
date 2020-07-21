@@ -1,5 +1,6 @@
 <%= render partial: 'reports/reports_header', locals: {title: "Supply Inventories"} %>
-<p class="mb-12 justify-start"> An accounting of testing kits and other supplies by venue, county, or statewide. </p>
+<p class="mb-3 justify-start"> An accounting of testing kits and other supplies by venue, county, or statewide. </p>
+<%= link_to "Download PDF Report", reports_supply_inventories_path(format: :pdf), target: "_blank", class: "button-primary w-3/12 mt-3 mb-12" %>
 
 <div class="grid grid-cols-1 md:grid-cols-2 md:gap-4">
     <div class="p-4 border border-gray-50 rounded-lg ">

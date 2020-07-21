@@ -1,0 +1,26 @@
+<div class="justify-between flex">
+    <h1 class="main-title justify-start"> Locations </h1>
+    <div class="justify-end text-gray-700 mt-4">
+        <%= Time.current.time %>
+    </div>
+</div>
+<p class="mb-3"> A summary of activities at testing sites: overall number, number of
+    tests administered by location, ratio of available appointments to
+    completed appointments, patient demographics. </p>
+
+<h2> Total appointments by county </h2>
+<% @appointments_by_county.each do |r| %>
+    <p> <%= r[0] %>: <%= r[1] %> </p>
+<% end %>
+
+=====
+<h2> Available appointments by county </h2>
+<% @available_appointments_by_county.each do |r| %>
+    <p> <%= r[0] %>: <%= r[1] %> </p>
+<% end %>
+
+=====
+<h2> Completed appointments by county </h2>
+<% @completed_appointments_by_county.each do |r| %>
+    <p> <%= r[0] %>: <%= r[1] %> </p>
+<% end %>

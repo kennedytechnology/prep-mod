@@ -1,0 +1,21 @@
+<div class="justify-between flex">
+    <h1 class="main-title justify-start"> Providers Reports </h1>
+    <div class="justify-end text-gray-700 mt-4">
+        <%= Time.current.time %>
+    </div>
+</div>
+<p class="mb-12">
+    An accounting of providers engaged in the response by specialty, regions,
+    number of patients tested, vaccine inventory.
+</p>
+
+<h2> Providers engaged by specialty </h2>
+<% @providers_by_specialty.each do |r| %>
+    <p> <%= r[0] %>: <%= r[1] %> </p>
+<% end %>
+
+=====
+<h2> Providers engaged by county </h2>
+<% @providers_by_county.each do |r| %>
+    <p> <%= r[0] %>: <%= r[1] %> </p>
+<% end %>

@@ -1,0 +1,17 @@
+<div class="justify-between flex">
+    <h1 class="main-title justify-start"> News & Notifications </h1>
+    <div class="justify-end text-gray-700 mt-4">
+        <%= Time.zone.now.inspect %>
+    </div>
+</div>
+
+<h2> Numbers of subscriptions by occupation </h2>
+<% @news_signups_by_occupation.each do |r| %>
+    <p> <%= r[0] %>: <%= r[1] %> </p>
+<% end %>
+
+======
+<h2> Subscribers with/without cronic health condition </h2>
+<% @news_signups_with_chronic_health_condition.each do |r| %>
+    <p> <%= r[0] %>: <%= r[1] %> </p>
+<% end %>

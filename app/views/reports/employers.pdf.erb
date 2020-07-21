@@ -1,0 +1,26 @@
+<div class="justify-between flex">
+    <h1 class="main-title justify-start"> Employers </h1>
+    <div class="justify-end text-gray-700 mt-4">
+        <%= Time.zone.now.inspect %>
+    </div>
+</div>
+
+<p> An accounting of employers engaged in the response by specialty, regions,
+    number of patients tested, vaccine inventory.</p>
+
+<h2> Employers by state </h2>
+<% @employers_by_state.each do |r| %>
+    <p> <%= r[0] %>: <%= r[1] %> </p>
+<% end %>
+
+======
+<h2> Patients tested by company name </h2>
+<% @employers_patients_tested_company_name.each do |r| %>
+    <p> <%= r[0] %>: <%= r[1] %> </p>
+<% end %>
+
+======
+<h2> Patients tested by city </h2>
+<% @employers_patients_tested_city.each do |r| %>
+    <p> <%= r[0] %>: <%= r[1] %> </p>
+<% end %>
