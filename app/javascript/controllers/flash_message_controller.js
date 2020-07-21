@@ -8,8 +8,9 @@ export default class extends Controller {
 
       flashMessage.classList.add("flash-message-modal-active");
       setTimeout(function() { 
-          flashMessage.classList.remove("flash-message-modal-active");
-      }, 3000);
+        flashMessage.classList.remove("flash-message-modal-active");
+        flashMessage.remove();
+      }, 4500);
     }
 
     disconnect() {
@@ -17,6 +18,7 @@ export default class extends Controller {
 
       if (flashMessage.classList.contains("flash-message-modal-active")) {
         flashMessage.classList.remove("flash-message-modal-active");
+        flashMessage.remove();
       }
     }
 }
