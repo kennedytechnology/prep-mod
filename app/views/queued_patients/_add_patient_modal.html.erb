@@ -20,12 +20,8 @@
 
         <%= form_with(scope: :appointment, remote: false, url: update_appointment_clinic_queued_patients_path(clinic_id: @clinic.id), 
             method: :post, data: {controller: "testing-referral-review-form age-calculator"}) do |f| %>
-            <%# f.hidden_field :clinic_id, value: @clinic.id %>
-
-            <% @patiens_waiting_list = Patient.joins(:clinics).where("clinics.id = ?", @clinic.id).joins(:appointments).where("appointments.on_waiting_list = ?", true) %>
 
             <div>
-                <%# TODO: Check why this is state instead of race %>
                 <%= label_tag "patient_id", "Select Patient", class: "block" %>
                 <%= select_tag "patient_id", options_from_collection_for_select(@patiens_waiting_list, "id", "full_name"), prompt: "Select Patient", class: "form-select w-full" %>
             </div>
@@ -40,7 +36,7 @@
                         <div class="grid grid-cols-2 gap-4">
                             <div class="flex items-center">
                                 <div class="flex items-center">
-                                    <% if @clinic.appointment_slots.to_i >= (@patient.patient_family_members.count + 1) %>
+                                    <% if @clinic.appointment_slots.to_i > 0 %>
                                         <%= af.radio_button(:appointment_at, time, class: "form-radio", onclick: "var elements = document.getElementsByName('appointment[on_waiting_list]'); for(var i=0; i < elements.length; i++) elements[i].checked = false;") %>
                                     <% else %>
                                         <%= af.radio_button(:appointment_at, time, class: "form-radio", disabled: "true") %>

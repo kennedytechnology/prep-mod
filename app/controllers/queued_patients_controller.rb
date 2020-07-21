@@ -9,6 +9,7 @@ class QueuedPatientsController < ClinicManagementController
     @clinic.reload; @clinic.patients.reload; @clinic.appointments.reload
     @patients = @clinic.patients
     @patient = Patient.new
+    @patiens_waiting_list = @clinic.patients.with_appointments.where("appointments.on_waiting_list = ?", true)
   end
 
   def send_check_in_reminders
