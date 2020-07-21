@@ -225,13 +225,16 @@ class ReportsController < ApplicationController
 
   def news_and_notifications
     @news_signups = NewsSignup.all
+    @news_signups_by_occupation = NewsSignup.group(:occupation).count
+    @news_signups_with_chronic_health_condition = NewsSignup.group(:chronic_health_condition).count
 
+    template_name = params[:is_report] ? "news_and_notifications_report" : "news_and_notifications"
     respond_to do |format|
       format.html
       format.pdf do
         render pdf: "Customized report",
                 page_size: 'A4',
-                template: "reports/news_and_notifications.pdf.erb",
+                template: "reports/#{template_name}.pdf.erb",
                 layout: "clinic-print.pdf.erb",
                 orientation: "Landscape",
                 lowquality: true,
