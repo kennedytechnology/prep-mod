@@ -33,13 +33,11 @@
 
                   <%= f.label :county, class: "block" do %>
                       <span> County </span>
-                      <span class="field-required">*</span>
                   <% end %>
-                  <%= f.select :county, COUNTIES, {prompt: "Select"}, {class: "form-select w-full", required: true} %>
+                  <%= f.select :county, COUNTIES, {prompt: "Select"}, {class: "form-select w-full"} %>
 
                   <%= f.label :venues, class: "block" do %>
                     <span> Venue </span>
-                    <span class="field-required">*</span>
                 <% end %>
                 <%= f.select :venues, VENUE_TYPES, {include_blank: "None"}, {class: "form-select w-full"} %>
 
