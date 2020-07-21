@@ -1,10 +1,4 @@
-<div class="justify-between flex">
-    <h1 class="main-title justify-start"> News and Notifications </h1>
-    <div class="justify-end text-gray-700 mt-4">
-        <%= Time.current.time %>
-    </div>
-</div>
-
+<%= render partial: 'reports/reports_header', locals: {title: "News & Notifications"} %>
 <div class="my-10">
     <p class="mb-2"> News and Notification Contact List </p>
     <%= link_to "Generate Contact List in PDF", reports_news_and_notifications_path(format: :pdf), class: "button-action", target: "_blank" %>

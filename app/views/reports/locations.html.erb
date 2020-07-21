@@ -1,10 +1,6 @@
-<div class="justify-between flex">
-    <h1 class="main-title justify-start"> Locations </h1>
-    <div class="justify-end text-gray-700 mt-4">
-        <%= Time.current.time %>
-    </div>
-</div>
-<p class="mb-3"> A summary of activities at testing sites: overall number, number of
+<%= render partial: 'reports/reports_header', locals: {title: "Locations"} %>
+
+<p class="mb-12"> A summary of activities at testing sites: overall number, number of
     tests administered by location, ratio of available appointments to
     completed appointments, patient demographics. </p>
     <%= link_to "Download PDF Report", reports_locations_path(format: :pdf), target: "_blank", class: "button-primary w-3/12 mt-3 mb-12" %>

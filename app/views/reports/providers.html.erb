@@ -1,10 +1,5 @@
-<div class="justify-between flex">
-    <h1 class="main-title justify-start"> Providers Reports </h1>
-    <div class="justify-end text-gray-700 mt-4">
-        <%= Time.current.time %>
-    </div>
-</div>
-<p class="mb-3">
+<%= render partial: 'reports/reports_header', locals: {title: "Providers Reports"} %>
+<p class="mb-12">
     An accounting of providers engaged in the response by specialty, regions,
     number of patients tested, vaccine inventory.
 </p>

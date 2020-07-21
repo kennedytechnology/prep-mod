@@ -8,8 +8,19 @@
 
 
     <% if @clinic %>
-      <span class=" pt-16 font-bold text-xl">Number Registered:</span> <span class="mr-8 text-xl"><%= @patients_appointments %> </span>
-      <span class=" pt-16 font-bold text-xl">Waiting List:</span> <span class="mr-8 text-xl"><%= @patients_waiting_list %> </span>
+     <div class="flex justify-between">
+        <div>
+          <span class=" pt-16 font-bold text-xl">Number Registered:</span> <span class="mr-8 text-xl"><%= @patients_appointments %> </span>
+          <span class=" pt-16 font-bold text-xl">Waiting List:</span> <span class="mr-8 text-xl"><%= @patients_waiting_list %> </span>
+        </div>
+        <div>
+          <% if params[:display_patients] == "waiting_list" %>
+                <%= link_to 'See all patients', patients_path(clinic_id: @clinic.id), class: "button-action" %>
+          <% else %>
+                <%= link_to 'See Patients On Waiting List', patients_path(clinic_id: @clinic.id, display_patients: "waiting_list"), class: "button-action" %>
+          <% end %>
+        </div>
+     </div>
       <div class="w-full flex justify-between items-center mt-8">
         <div class="flex items-center w-3/12">
           <label class="text-lg mr-3 text-gray-600" for="search"> Search: </label>

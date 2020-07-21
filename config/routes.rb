@@ -5,14 +5,14 @@ Rails.application.routes.draw do
   get 'pages/landing_page'
   get 'pages/reports_menu'
   get 'pages/boom'
-  
+
   devise_for :users,
   controllers: {
     registrations: 'users/registrations',
     invitations: 'users/invitations',
     sessions: 'users/sessions'
   }
-  
+
   get 'public_portal/index'
   get '/clinic/search', to: 'public/clinics#index'
   post '/clinic/search', to: 'public/clinics#index'
@@ -25,12 +25,13 @@ Rails.application.routes.draw do
   post '/client/registration/(/:access_code)', to: 'public/patients#update'
 
   get '/check_in/:check_in_code', to: 'public/patients#check_in', as: :check_in
-  
+
   get "/clear_session", to: 'public/patients#clear_session'
   get 'patients/upload_records', to: 'patients#upload_records'
   post 'patients/upload_records', to: 'patients#upload_records'
   get 'patients/download_records', to: 'patients#download_records'
   post 'patients/download_records', to: 'patients#download_records'
+
 
   get "/reports/providers", to: "reports#providers"
   get "/reports/snapshot", to: "reports#snapshot"
@@ -68,7 +69,7 @@ Rails.application.routes.draw do
   namespace :public do
     resources :news_signups, only: [:new, :create]
   end
-  
+
   resources :patients
   get :invite_patient_to_register, to: 'patients#invite_patient_to_register', as: :invite_patient_to_register
   resources :clinics, only: [:index, :new, :create, :edit, :update] do

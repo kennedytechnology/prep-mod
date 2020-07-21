@@ -1,10 +1,5 @@
-<div class="justify-between flex">
-    <h1 class="main-title justify-start"> Uptake </h1>
-    <div class="justify-end text-gray-700 mt-4">
-        <%= Time.current.time %>
-    </div>
-</div>
-<p class="mb-3"> An overview of COVID-19 services utilized so far by demographics,
+<%= render partial: 'reports/reports_header', locals: {title: "Uptake"} %>
+<p class="mb-12"> An overview of COVID-19 services utilized so far by demographics,
     ZIP Code, county, or region: number of available appointments, number of completed appointments.</p>
     <%= link_to "Download PDF Report", reports_uptake_path(format: :pdf), target: "_blank", class: "button-primary w-3/12" %>
 

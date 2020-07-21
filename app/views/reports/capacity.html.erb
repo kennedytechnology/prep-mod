@@ -1,9 +1,4 @@
-<div class="justify-between flex">
-    <h1 class="main-title justify-start"> Capacity </h1>
-    <div class="justify-end text-gray-700 mt-4">
-        <%= Time.current.time %>
-    </div>
-</div>
+<%= render partial: 'reports/reports_header', locals: {title: "Capacity"} %>
 <p> A summary of resources and utilization by venue, county, or statewide.
     Includes available testing appointments, scheduled appointments, pockets of need.</p>
     <%= link_to "Download PDF Report", reports_capacity_path(format: :pdf), target: "_blank", class: "button-primary w-3/12 mt-3" %>
