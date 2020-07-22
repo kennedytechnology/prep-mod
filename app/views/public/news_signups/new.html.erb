@@ -1,3 +1,6 @@
+<%= content_for :prevent_unsaved_form_script do %>
+    <%= javascript_pack_tag 'prevent_unsaved_form', 'data-turbolinks-track': 'reload' %>
+<% end %>
 <h1 class="main-title font-bold pt-20"> Sign Up for News and Notifications About COVID-19 </h1>
 
 <% if @news_signup.errors.any? %>

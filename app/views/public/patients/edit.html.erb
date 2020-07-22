@@ -1,3 +1,6 @@
+<%= content_for :prevent_unsaved_form_script do %>
+    <%= javascript_pack_tag 'prevent_unsaved_form', 'data-turbolinks-track': 'reload' %>
+<% end %>
 <h1 class="main-title mt-8 md:mt-0">Register for COVID-19 Testing: <%= @clinic.name %></h1>
 
 <%= form_for( @patient , url: "/client/registration" ,remote: false, data: {controller: "inventory-new-entry"}) do |f| %>

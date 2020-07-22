@@ -1,3 +1,6 @@
+<%= content_for :prevent_unsaved_form_script do %>
+    <%= javascript_pack_tag 'prevent_unsaved_form', 'data-turbolinks-track': 'reload' %>
+<% end %>
 <% if current_user.can_create_user? %>
   <h1 class="main-title"><%= t "devise.invitations.new.header" %></h1>
 

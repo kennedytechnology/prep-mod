@@ -1,3 +1,6 @@
+<%= content_for :prevent_unsaved_form_script do %>
+    <%= javascript_pack_tag 'prevent_unsaved_form', 'data-turbolinks-track': 'reload' %>
+<% end %>
 <h2 class="main-title"> New Entry for <%= @supply_inventory.product_name %> (Received <%= @supply_inventory.received_at.strftime("%d-%m-%Y") %>) </h2>
 
 <%= form_with model: @supply_inventory_event, local: true, class: "py-5", data: {controller: "inventory-new-entry", target: "inventory-new-entry.form"} do |f| %>
