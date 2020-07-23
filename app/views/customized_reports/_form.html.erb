@@ -67,7 +67,7 @@
             </div>
 
             <%# TODO: Ask more details %>
-            <!-- 
+            <!--
             <div class="absolute flex items-center h-5">
                 <input class="form-checkbox" type="checkbox" id="tester" name="customized_report[tester]" value="1" />
             </div>
@@ -143,7 +143,7 @@
             </div>
 
             <%# TODO: Ask for more details %>
-            <!-- 
+            <!--
             <div class="absolute flex items-center h-5">
                 <input class="form-checkbox" type="checkbox" id="vacine_name_and_lot_number"
                 name="customized_report[vacine_name_and_lot_number]" value="1" />
@@ -170,7 +170,7 @@
     </div>
 
     <div class="flex items-center justify-center pt-4">
-        <%= form.submit "Generate Report in PDF", name: "pdf_file", class: "button-primary" %>
-        <%= form.submit "Generate Report in Excel", name: "excel_file", class: "button-primary" %>
+        <%= form.button "Generate Report in PDF", name: "pdf_file", class: "button-primary" %>
+        <%= form.button "Generate Report in Excel", name: "excel_file", class: "button-primary" %>
     </div>
 <% end %>
