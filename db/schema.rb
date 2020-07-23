@@ -92,14 +92,6 @@ ActiveRecord::Schema.define(version: 2020_07_23_140944) do
     t.bigint "provider_enrollment_id", null: false
   end
 
-  create_table "clinic_dates", force: :cascade do |t|
-    t.bigint "clinic_id", null: false
-    t.date "date_of_clinic"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["clinic_id"], name: "index_clinic_dates_on_clinic_id"
-  end
-
   create_table "clinic_events", force: :cascade do |t|
     t.integer "clinic_id"
     t.integer "patient_id"
