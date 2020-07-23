@@ -6,9 +6,9 @@
     are scheduled for:
     <br />
     <br />
-    <b>Date:</b> <%= @appointment.appointment_at.strftime("%m-%d-%Y") %>,
+    <b>Date:</b> <%= @appointment.appointment_at ? @appointment.appointment_at.strftime("%m-%d-%Y") : "On Waiting List" %>,
     <br />
-    <b>Time:</b> <%= @appointment.appointment_at.strftime("%H:%M %p") %>,
+    <b>Time:</b> <%= @appointment.appointment_at ? @appointment.appointment_at.strftime("%H:%M %p") : "On Waiting List" %>,
     <br />
     <b>Location:</b> <%= @clinic.address %>.
 </p>

@@ -4,8 +4,8 @@ Thank you for registering for <%= @clinic.services.pluck(:name).join(", ") %>.
 <%= @patient.patient_family_members.select([:first_name, :last_name]).map{ |m| "#{m.first_name} #{m.last_name}" }.join(", ") %>
 are scheduled for:
 
-Date: <%= @appointment.appointment_at.strftime("%m-%d-%Y") %>,
-Time: <%= @appointment.appointment_at.strftime("%H:%M %p") %>,
+Date: <%= @appointment.appointment_at ? @appointment.appointment_at.strftime("%m-%d-%Y") : "On Waiting List" %>,
+Time: <%= @appointment.appointment_at ? @appointment.appointment_at.strftime("%H:%M %p") : "On Waiting List" %>,
 Location: <%= @clinic.address %>.
 
 If you cannot, make this appointment, click <%= link_to "here", "" %> to cancel.
