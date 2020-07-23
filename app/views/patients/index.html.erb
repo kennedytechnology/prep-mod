@@ -35,7 +35,7 @@
             <% end %>
           <% end %>
           <%= link_to "Download Registration List", clinic_patients_path(clinic_id: @clinic.id, format: :csv), class: "button-primary" %><br/>
-          <a href="javascript:" class="button-primary" data-action="click->main#printContent">Print</a>
+          <a href="javascript:" class="button-primary" onclick="window.print();">Print</a>
         </div>
 
       </div>
@@ -51,9 +51,7 @@
           <%= f.submit "Search", class: "button-action" %>
           <%= link_to "Reset", patients_path, class: "button-action" %>
         <% end %>
-        <a href="javascript:"
-          class="button-primary"
-          data-action="click->main#printContent">Print</a>
+        <a href="javascript:" class="button-primary" onclick="window.print();">Print</a>
       </div>
     <% end %>
   </div>

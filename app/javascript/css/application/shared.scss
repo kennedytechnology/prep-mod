@@ -16,7 +16,7 @@
             margin: 0 auto 10px auto;
         }
 
-        &:after { 
+        &:after {
             @apply w-full absolute bg-gray-600;
             height: 2px;
             content: '';
@@ -53,6 +53,7 @@
 @media print {
     * {
         @apply p-0 m-0 invisible;
+        height: 0;
 
         .main-navbar-container,
         .main-links-container,
@@ -61,7 +62,7 @@
             @apply hidden;
         }
     }
-    .printable *, .header * {
+    .printable *, .header h2 {
         @apply visible;
     }
 }
@@ -110,7 +111,7 @@ input[type=file][data-direct-upload-url][disabled] { @apply hidden; }
 
 // Clinic Personnel - Hide close button for first input
 .fields {
-    .clinic_new_personnel:first-child { 
+    .clinic_new_personnel:first-child {
         .remove_record { @apply hidden; }
     }
 }

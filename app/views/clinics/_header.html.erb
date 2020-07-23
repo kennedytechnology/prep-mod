@@ -1,4 +1,4 @@
-<div id="clinic-header" class="bg-gray-100 p-2 mt-12 mb-12 -mx-4 border-b-2 border-gray-500 shadow">
+<div id="clinic-header" class="bg-gray-100 p-2 mt-12 mb-12 -mx-4 border-b-2 border-gray-500 shadow header">
   <h2 class="text-4xl font-bold flex-grow"><%= @page_title || raise %></h2>
     <%
         clinic_menu = {
@@ -12,7 +12,7 @@
         clinic_menu["Activity Report"] = clinic_report_path(clinic_id: @clinic.id) if @clinic.open_state == "closed"
       %>
       <h1 class="text-xl font-bold"><%= action_name == "activity" ? @clinic.venue_name : @clinic.name %></h1>
-  
+
   <div class="flex justify-between pt-12">
       <div><span class="font-bold text-xl">Clinic Status: </span> <span class="text-xl"> <%= @clinic.open_state.titleize %> </span></div>
 
