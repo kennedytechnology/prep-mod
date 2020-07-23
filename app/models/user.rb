@@ -11,6 +11,7 @@ class User < ApplicationRecord
   validates_presence_of :email, :first_name, :last_name, :role, :email_confirmation
   validates_uniqueness_of :email, confirmation: true
 
+  after_save :set_name, if: lambda { name == nil }
 
   # ROLES
   include RoleModel
@@ -32,8 +33,9 @@ class User < ApplicationRecord
     role == passed_role.to_s
   end
 
-  def name
-    first_name.to_s + " " + last_name.to_s
+  def set_name
+    full_name = first_name.to_s + " " + last_name.to_s
+    self.update(name: full_name)
   end
 
   def assignable_roles  

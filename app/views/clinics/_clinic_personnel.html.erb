@@ -1,5 +1,5 @@
 <div class="relative clinic_new_personnel">
-  <%= f.text_field :name, placeholder: "Clinic Staff Person's Name", class: "form-input w-full" %>
+  <%= f.text_field :name, placeholder: "Clinic Staff Person's Name", class: "form-input w-full awesomplete", data: {list: User.pluck(:name).join(",")} %>
   <div class="absolute clinic-new-personnel-delete-button" style="top: -8px; right: -8px;">
     <%= f.hidden_field :_destroy %>
     <%= link_to '#', class: 'remove_record rounded-full shadow flex justify-center items-center bg-brand-blue-600 text-white', style: "width: 25px; height: 25px;" do %>
