@@ -1,7 +1,8 @@
 FactoryBot.define do
+  custom_email =  Faker::Internet.unique.email
   factory :user do
-    email { Faker::Internet.unique.email }
-    email_confirmation { Faker::Internet.unique.email }
+    email { custom_email }
+    email_confirmation { custom_email }
     password { 'password' }
     password_confirmation { 'password' }
     role { 'super_admin' }

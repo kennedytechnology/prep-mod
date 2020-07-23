@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe ClinicEventsController, type: :controller do
-  let(:patient) { create(:patient) }
-  let(:clinic_event) { create(:clinic_event) }
+  let(:user) { create(:user, email: "user@clinic_event.com", email_confirmation: "user@clinic_event.com") }
+  let(:patient) { create(:patient, user: user) }
+  let(:clinic_event) { create(:clinic_event, user: user) }
   let(:clinic_event_const) { CLINIC_EVENTS.sample }
-  let(:user) { create(:user) }
   before { sign_in user }
 
   describe "GET #index" do

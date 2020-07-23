@@ -6,7 +6,7 @@ RSpec.describe ClinicEvent, type: :model do
   it { should belong_to(:user).optional }
 
   context "validations" do
-    subject { create(:clinic_event) }
+    subject { build(:clinic_event) }
 
     it { should be_valid }
   end

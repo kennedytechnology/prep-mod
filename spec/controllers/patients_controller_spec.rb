@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe PatientsController, type: :controller do
+  let(:user) { create(:user) }
   let(:clinic) { create(:clinic) }
-  let(:patient) { create(:patient) }
+  let(:patient) { create(:patient, user: user) }
   let(:access_code) { Patient.generate_access_code }
-  before { sign_in create(:user) }
+  before { sign_in user }
 
   describe "GET #index" do
     it "returns http success" do
