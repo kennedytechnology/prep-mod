@@ -3,135 +3,151 @@
   power of attorney for an adult.
 </span>
 
-<%= f.fields_for :patient_family_members do |fm| %>
-  <div class="family-member-form mt-6 border-b">
-    <div class="w-full md:flex">
-      <div class="inline-field-wrapper">
-          <%= fm.label :first_name do %>
-            <span> Patient's First Name </span>
-            <span class="field-required">*</span>
-          <% end %>
-          <%= fm.text_field :first_name, class: "w-full form-input", required: true %>
+<div data-controller="consent-form-signature">
+  <%= f.fields_for :patient_family_members do |fm| %>
+    <div class="member-<%= fm.object.object_id %>">
+      <% if fm.object.id != @patient.patient_family_members.first.id && fm.object.id.nil? %>
+       <div class="flex justify-between mt-20">
+        <h2 class="text-xl font-bold"> Family Member </h2>
+        <%= link_to "Delete Family Member", 'javascript:',
+            class: 'button-danger',
+            style: "width: auto; height: 25px; font-size: 0.75rem",
+            data: {
+              member: "#{fm.object.object_id}",
+              action: "click->consent-form-signature#onRemoveFamilyMember"
+            } %>
+        </div>
+      <% end %>
+      <div class="family-member-form mt-6 border-b">
+        <div class="w-full md:flex">
+          <div class="inline-field-wrapper">
+              <%= fm.label :first_name do %>
+                <span> Patient's First Name </span>
+                <span class="field-required">*</span>
+              <% end %>
+              <%= fm.text_field :first_name, class: "w-full form-input", required: true %>
+          </div>
+          <div class="inline-field-wrapper inline-field-wrapper-narrow">
+              <%= fm.label :middle_initial %>
+              <%= fm.text_field :middle_initial, class: "w-full form-input" %>
+          </div>
+          <div class="inline-field-wrapper">
+              <%= fm.label :last_name do %>
+                <span> Patient's Last Name </span>
+                <span class="field-required">*</span>
+              <% end %>
+              <%= fm.text_field :last_name, class: "w-full form-input", required: true %>
+          </div>
+          <div class="inline-field-wrapper">
+              <%= fm.label :mothers_maiden_name do %>
+                <span> Mother's Maiden Name </span>
+                <span class="field-required">*</span>
+              <% end %>
+              <%= fm.text_field :mothers_maiden_name, class: "w-full form-input", required: true %>
+          </div>
+          <div class="inline-field-wrapper">
+            <%= fm.label :race do %>
+                <span> Race </span>
+                <span class="field-required">*</span>
+            <% end %>
+            <%= fm.select :race, options_for_select(US_RACES, @patient.race), {prompt: "--"}, {class: "form-select w-full", required: true} %>
+          </div>
+          <div class="inline-field-wrapper">
+            <%= fm.label :date_of_birth do %>
+                <span> Date of Birth </span>
+                <span class="field-required">*</span>
+            <% end %>
+            <%= fm.text_field :date_of_birth, class: "w-full form-input", required: true,
+                                  data: { controller: "flatpickr", flatpickr_max_date: "today" } %>
+          </div>
+        </div>
+
+        <div class="md:flex" data-controller="same-as-parent">
+          <div class="inline-field-wrapper pt-7">
+          <label>
+            <input type="checkbox" data-action="change->same-as-parent#applyValues">
+            Same Insurance as Parent</label>
+          </div>
+
+          <div class="inline-field-wrapper">
+            <%= fm.label :insurance_company_name, "Insurance Company Name" %>
+            <%= fm.text_field :insurance_company_name, class: "w-full form-input", data: {parent_field: @patient.insurance_company_name, target: "same-as-parent.field" } %>
+          </div>
+
+          <div class="inline-field-wrapper">
+            <%= fm.label :member_id_for_insurance, "Policy Number" %>
+            <%= fm.text_field :member_id_for_insurance, class: "w-full form-input", data: {parent_field: @patient.member_id_for_insurance, target: "same-as-parent.field" } %>
+          </div>
+
+          <div class="inline-field-wrapper">
+            <%= fm.label :group_number_for_insurance, "Group Number" %>
+            <%= fm.text_field :group_number_for_insurance, class: "w-full form-input", data: {parent_field: @patient.group_number_for_insurance, target: "same-as-parent.field" } %>
+          </div>
+        </div>
       </div>
-      <div class="inline-field-wrapper inline-field-wrapper-narrow">
-          <%= fm.label :middle_initial %>
-          <%= fm.text_field :middle_initial, class: "w-full form-input" %>
-      </div>
-      <div class="inline-field-wrapper">
-          <%= fm.label :last_name do %>
-            <span> Patient's Last Name </span>
-            <span class="field-required">*</span>
-          <% end %>
-          <%= fm.text_field :last_name, class: "w-full form-input", required: true %>
-      </div>
-      <div class="inline-field-wrapper">
-          <%= fm.label :mothers_maiden_name do %>
-            <span> Mother's Maiden Name </span>
-            <span class="field-required">*</span>
-          <% end %>
-          <%= fm.text_field :mothers_maiden_name, class: "w-full form-input", required: true %>
-      </div>
-      <div class="inline-field-wrapper">
-        <%= fm.label :race do %>
-            <span> Race </span>
-            <span class="field-required">*</span>
-        <% end %>
-        <%= fm.select :race, options_for_select(US_RACES, @patient.race), {prompt: "--"}, {class: "form-select w-full", required: true} %>
-      </div>
-      <div class="inline-field-wrapper">
-        <%= fm.label :date_of_birth do %>
-            <span> Date of Birth </span>
-            <span class="field-required">*</span>
-        <% end %>
-        <%= fm.text_field :date_of_birth, class: "w-full form-input", required: true,
-                              data: { controller: "flatpickr", flatpickr_max_date: "today" } %>
-      </div>
+      <p class="field-required mb-3"> You must complete all fields with a star. </p>
+    <p class="font-bold mb-4"> Do any of the following apply to you? </p>
+    <div class="field-side-by-side">
+        <div>
+            <h2 class="title"> Do you have: </h2>
+            <%= fm.check_box :has_fever_over, class: "form-checkbox" %>
+            <%= fm.label :has_fever_over, "A fever of 100.4 degrees Fahrenheit or higher" %>
+
+            <br />
+            <%= f.check_box :has_cough, class: "form-checkbox" %>
+            <%= f.label :has_cough, "A cough" %>
+
+            <br />
+            <%= fm.check_box :has_difficult_breathing, class: "form-checkbox" %>
+            <%= fm.label :has_difficult_breathing, "Shortness of breath or difficulty breathing" %>
+        </div>
+        <div>
+            <h2 class="title"> Have you traveled in the past 14 days to regions affected by COVID-19?<span class="field-required">*</span> </h2>
+            <%= fm.radio_button :had_traveled_to_affected_place, true, class: "form-radio " %>
+            <%= fm.label :had_traveled_to_affected_place, "Yes", class: "mr-3" %>
+
+            <%= fm.radio_button :had_traveled_to_affected_place, false, class: "form-radio" %>
+            <%= fm.label :had_traveled_to_affected_place, "No" %>
+        </div>
     </div>
 
-    <div class="md:flex" data-controller="same-as-parent">
-      <div class="inline-field-wrapper pt-7">
-      <label>
-        <input type="checkbox" data-action="change->same-as-parent#applyValues">
-        Same Insurance as Parent</label>
-      </div>
+    <div class="field-side-by-side">
+        <div>
+            <h2 class="title"> Have you been in close contact with anyone who has a confirmed COVID-19 diagnosis?<span class="field-required">*</span> </h2>
+            <%= fm.radio_button :had_contact_with_confirmed_case, true, class: "form-radio" %>
+            <%= fm.label :had_contact_with_confirmed_case, "Yes", class: "mr-3" %>
 
-      <div class="inline-field-wrapper">
-        <%= fm.label :insurance_company_name, "Insurance Company Name" %>
-        <%= fm.text_field :insurance_company_name, class: "w-full form-input", data: {parent_field: @patient.insurance_company_name, target: "same-as-parent.field" } %>
-      </div>
+            <%= fm.radio_button :had_contact_with_confirmed_case, false, class: "form-radio" %>
+            <%= fm.label :had_contact_with_confirmed_case, "No" %>
+        </div>
+        <div>
+            <h2 class="title">Do you have heart disease, lung disease, kidney disease or diabetes?<span class="field-required">*</span></h2>
+            <%= fm.radio_button :has_risk_factor, true, class: "form-radio" %>
+            <%= fm.label :has_risk_factor, "Yes", class: "mr-3" %>
 
-      <div class="inline-field-wrapper">
-        <%= fm.label :member_id_for_insurance, "Policy Number" %>
-        <%= fm.text_field :member_id_for_insurance, class: "w-full form-input", data: {parent_field: @patient.member_id_for_insurance, target: "same-as-parent.field" } %>
-      </div>
+            <%= fm.radio_button :has_risk_factor, false, class: "form-radio" %>
+            <%= fm.label :has_risk_factor, "No" %>
+        </div>
+    </div>
 
-      <div class="inline-field-wrapper">
-        <%= fm.label :group_number_for_insurance, "Group Number" %>
-        <%= fm.text_field :group_number_for_insurance, class: "w-full form-input", data: {parent_field: @patient.group_number_for_insurance, target: "same-as-parent.field" } %>
+      <div class="field-side-by-side">
+          <div>
+              <h2 class="title">Are you 60 or older?<span class="field-required">*</span></h2>
+              <%= fm.radio_button :is_age_60_or_more, true, class: "form-radio" %>
+              <%= fm.label :is_age_60_or_more, "Yes", class: "mr-3" %>
+
+              <%= fm.radio_button :is_age_60_or_more, false, class: "form-radio" %>
+              <%= fm.label :is_age_60_or_more, "No" %>
+          </div>
+          <div>
+              <h2 class="title">Is there any other reason you think you should be tested for COVID-19? If "yes", explain<span class="field-required">*</span></h2>
+              <%= fm.radio_button :has_other_reason, true, class: "form-radio" %>
+              <%= fm.label :has_other_reason, "Yes", class: "mr-3" %>
+
+              <%= fm.radio_button :has_other_reason, false, class: "form-radio" %>
+              <%= fm.label :has_other_reason, "No" %>
+          </div>
       </div>
     </div>
-  </div>
-  <p class="field-required mb-3"> You must complete all fields with a star. </p>
-<p class="font-bold mb-4"> Do any of the following apply to you? </p>
-<div class="field-side-by-side">
-    <div>
-        <h2 class="title"> Do you have: </h2>
-        <%= fm.check_box :has_fever_over, class: "form-checkbox" %>
-        <%= fm.label :has_fever_over, "A fever of 100.4 degrees Fahrenheit or higher" %>
-
-        <br />
-        <%= f.check_box :has_cough, class: "form-checkbox" %>
-        <%= f.label :has_cough, "A cough" %>
-
-        <br />
-        <%= fm.check_box :has_difficult_breathing, class: "form-checkbox" %>
-        <%= fm.label :has_difficult_breathing, "Shortness of breath or difficulty breathing" %>
-    </div>
-    <div>
-        <h2 class="title"> Have you traveled in the past 14 days to regions affected by COVID-19?<span class="field-required">*</span> </h2> 
-        <%= fm.radio_button :had_traveled_to_affected_place, true, class: "form-radio " %>
-        <%= fm.label :had_traveled_to_affected_place, "Yes", class: "mr-3" %>
-
-        <%= fm.radio_button :had_traveled_to_affected_place, false, class: "form-radio" %>
-        <%= fm.label :had_traveled_to_affected_place, "No" %>
-    </div>
+  <% end %>
 </div>
-
-<div class="field-side-by-side">
-    <div>
-        <h2 class="title"> Have you been in close contact with anyone who has a confirmed COVID-19 diagnosis?<span class="field-required">*</span> </h2>
-        <%= fm.radio_button :had_contact_with_confirmed_case, true, class: "form-radio" %>
-        <%= fm.label :had_contact_with_confirmed_case, "Yes", class: "mr-3" %>
-
-        <%= fm.radio_button :had_contact_with_confirmed_case, false, class: "form-radio" %>
-        <%= fm.label :had_contact_with_confirmed_case, "No" %>
-    </div>
-    <div>
-        <h2 class="title">Do you have heart disease, lung disease, kidney disease or diabetes?<span class="field-required">*</span></h2>
-        <%= fm.radio_button :has_risk_factor, true, class: "form-radio" %>
-        <%= fm.label :has_risk_factor, "Yes", class: "mr-3" %>
-
-        <%= fm.radio_button :has_risk_factor, false, class: "form-radio" %>
-        <%= fm.label :has_risk_factor, "No" %>
-    </div>
-</div>
-
-  <div class="field-side-by-side">
-      <div>
-          <h2 class="title">Are you 60 or older?<span class="field-required">*</span></h2>
-          <%= fm.radio_button :is_age_60_or_more, true, class: "form-radio" %>
-          <%= fm.label :is_age_60_or_more, "Yes", class: "mr-3" %>
-
-          <%= fm.radio_button :is_age_60_or_more, false, class: "form-radio" %>
-          <%= fm.label :is_age_60_or_more, "No" %>
-      </div>
-      <div>
-          <h2 class="title">Is there any other reason you think you should be tested for COVID-19? If "yes", explain<span class="field-required">*</span></h2>
-          <%= fm.radio_button :has_other_reason, true, class: "form-radio" %>
-          <%= fm.label :has_other_reason, "Yes", class: "mr-3" %>
-
-          <%= fm.radio_button :has_other_reason, false, class: "form-radio" %>
-          <%= fm.label :has_other_reason, "No" %>
-      </div>
-  </div>
-<% end %>

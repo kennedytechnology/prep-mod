@@ -18,4 +18,9 @@ export default class extends Controller {
       this.signatureInputTarget.classList.remove("hidden");
     }
   }
+
+  onRemoveFamilyMember(e) {
+    let memberObjectId = document.getElementsByClassName(`member-${e.currentTarget.dataset.member}`)[0];
+    memberObjectId.parentNode.removeChild(memberObjectId);
+  }
 }
