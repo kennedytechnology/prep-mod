@@ -8,8 +8,8 @@ class User < ApplicationRecord
   has_many :patients
   belongs_to :provider, optional: true
 
-  validates_presence_of :email, :first_name, :last_name, :role, :email_confirmation
-  validates_uniqueness_of :email, confirmation: true
+  validates_presence_of :first_name, :last_name, :role, :email, :email_confirmation
+  validates :email, confirmation: true
 
   after_save :set_name, if: lambda { name == nil }
 

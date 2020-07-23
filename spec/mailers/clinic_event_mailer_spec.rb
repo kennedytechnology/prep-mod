@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe ClinicEventMailer, type: :mailer do
   describe "registration_confirmed" do
-    let(:clinic_event) { create(:clinic_event) }
+    let(:clinic_event) { build(:clinic_event) }
     let(:mail) { ClinicEventMailer.registration_confirmed(clinic_event) }
 
     it "renders the headers" do

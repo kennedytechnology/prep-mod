@@ -22,17 +22,26 @@
                   <% end %>
                   <%= f.text_field :last_name, class: "form-input w-full", required: true %>
 
+                <div data-controller="email-confirmation">
                   <%= f.label :email, class: "block" do %>
                       <span> Email </span>
                       <span class="field-required">*</span>
                   <% end %>
-                  <%= f.email_field :email, class: "form-input w-full", required: true %>
+                  <%= f.email_field :email, class: "form-input w-full", required: true,
+                        data: { target: "email-confirmation.emailField",
+                                action: "keyup->email-confirmation#emailConfirmation
+                                        change->email-confirmation#emailConfirmation"} %>
 
                   <%= f.label :email_confirmation, class: "block" do %>
                       <span> Email Confirmation</span>
                       <span class="field-required">*</span>
                   <% end %>
-                  <%= f.email_field :email_confirmation, class: "form-input w-full", required: true %>
+                  <%= f.email_field :email_confirmation, class: "form-input w-full", required: true,
+                        data: { target: "email-confirmation.confirmEmailField",
+                                action: "keyup->email-confirmation#emailConfirmation
+                                        change->email-confirmation#emailConfirmation"} %>
+                  <p class="text-red-600 -mt-2 text-xs mb-4" data-target="email-confirmation.confirmEmailError"> </p>
+                </div>
 
                   <%= f.label :county, class: "block" do %>
                       <span> County </span>
@@ -56,7 +65,7 @@
       <%# end -%>
 
       <div class="actions">
-          <%= f.submit t("devise.invitations.new.submit_button"), class: "button-primary" %>
+          <%= f.submit t("devise.invitations.new.submit_button"), class: "button-primary", id: "submitButton" %>
       </div>
   <% end %>
 <% else %>
