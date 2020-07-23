@@ -2,7 +2,7 @@
     <%= javascript_pack_tag 'prevent_unsaved_form', 'data-turbolinks-track': 'reload' %>
 <% end %>
 <%= form_with(model: @patient, url: "/kit/create", remote: false, class: "bg-white") do |f| %>
-    <h1 class="main-title">Register for COVID-19 Safety Kit </h1>
+    <h1 class="main-title">Pre-Register</h1>
     <%= render "form_fields", f: f %>
     <div class="flex justify-end">
         <%= f.submit "Save and Continue →", class: "button-primary mt-10" %>
