@@ -64,6 +64,6 @@ export default class extends Controller {
 
   onShowHideCancelModal(event) {
     this.cancelModalTarget.classList.toggle('hidden')
-    this.cancelRecordButtonTarget.href = `/admin/clinics/${event.currentTarget.dataset.cancelid}`;
+    this.cancelRecordButtonTarget.href = `/clinics/${event.currentTarget.dataset.cancelid}`;
   }
 }
