@@ -24,9 +24,9 @@ class CustomizedReportsController < InheritedResources::Base
       end
 
       format.xlsx do
-        render xlsx: 'customized_report', template: 'customized_reports/report_excel', 
-                disposition: 'inline', 
-                filename: @customized_report.clinic ? 
+        render xlsx: 'customized_report', template: 'customized_reports/report_excel',
+                disposition: 'inline',
+                filename: @customized_report.clinic ?
                             "report_#{@clinic.name.downcase.parameterize.underscore}.xlsx"
                           : "customized_report_#{Date.today.strftime("%d_%m_%Y")}.xlsx",
                 xlsx_author: @customized_report.user.name
@@ -35,7 +35,11 @@ class CustomizedReportsController < InheritedResources::Base
   end
 
   def new
-    @clinic = Clinic.find(params['clinic_id']) if params['clinic_id']
+    if params['clinic_id']
+      @clinic = Clinic.find(params['clinic_id'])
+    else
+      redirect_to clinics_path, notice: "Please select a report from the clinic."
+    end
     @customized_report = CustomizedReport.new
     @page_title = "New Customized Report"
   end
@@ -56,11 +60,11 @@ class CustomizedReportsController < InheritedResources::Base
 
     def customized_report_params
       params.require(:customized_report).permit(
-        :patients_screened, :patients_tested, :safety_kit, 
+        :patients_screened, :patients_tested, :safety_kit,
         :pending_patients, :registration_date,
         :age, :gender, :race, :clinic_id, :zip_code,
         :insurance_type, :date_of_birth, :vaccine_name_and_lot_number,
-        :county
+        :county, :patients_vaccinated, :test_type, :remarks, :test_result
       )
     end
 
