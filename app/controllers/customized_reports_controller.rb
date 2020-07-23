@@ -48,7 +48,6 @@ class CustomizedReportsController < InheritedResources::Base
     @customized_report = CustomizedReport.new(customized_report_params)
     @customized_report.user = current_user
     format_name = params[:pdf_file] ? :pdf : :xlsx
-
     if @customized_report.save
       redirect_to customized_report_path(id: @customized_report.id, format: format_name)
     else

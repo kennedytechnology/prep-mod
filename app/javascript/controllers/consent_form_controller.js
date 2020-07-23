@@ -1,7 +1,7 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "searchableRow", "employer", "locations", 
+  static targets = [ "searchableRow", "employer", "locations",
       "companyCheckbox", "companyInputField", "locationsCheckboxes", "otherReasonExplanation",
       "emailField", "confirmEmailField", "confirmEmailError" ]
 
@@ -30,7 +30,7 @@ export default class extends Controller {
   }
 
   displayLocations(e) {
-    if (e.currentTarget.checked) {
+    if (e.currentTarget.checked && e.currentTarget.dataset.type === "employer") {
       this.toggleModal(e);
       this.employerTarget.innerText = e.currentTarget.getAttribute("data-employer");
       this.locationsTarget.innerText = e.currentTarget.getAttribute("data-locations");

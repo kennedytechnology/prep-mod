@@ -14,14 +14,59 @@
     <% if @clinic %>
         <%= form.hidden_field :clinic_id, value: @clinic.id %>
     <% else %>
-        <div class="w-3/4 flex mb-6">
-            <div class="w-1/3 mr-6">
-                <%= form.label :county %>
-                <%= form.select :county, COUNTIES, {prompt: "Select"}, {class: "block form-select w-full"} %>
+        <div class="w-3/4 flex mb-6" data-controller="consent-form">
+            <div class="multiselect-dropdown w-1/3 mr-6">
+                <label class="block">County</label>
+              <div class="selectBox" data-action="click->consent-form#showCheckboxes">
+                <input type="text" id="predict_company_name" data-action="keyup->consent-form#search" placeholder="Search county" class="block form-select form-input w-full" style="height: 50px;" />
+              </div>
+              <div class="checkboxes-in-dropdown w-full z-10" id="locationsCheckboxes" data-target="consent-form.locationsCheckboxes" style="top: 73px;">
+              <% all_counties = ["All"] + COUNTIES %>
+              <% all_counties.each do |county| %>
+                <div class="relative flex items-start px-3 hover:bg-blue-50" data-target="consent-form.searchableRow" data-search-content="<%= [county.try(:downcase)] %>">
+                    <div class="absolute flex items-center h-5">
+                      <%= form.check_box(:county, { multiple: true, include_hidden: false, class: "form-checkbox cursor-pointer text-base font-bold",
+                                      data: {action: "click->consent-form#displayLocations",
+                                             locations: "",
+                                             employer: "#{county}",
+                                             type: "county",
+                                             target: "consent-form.companyCheckbox"
+                                      }}, county) %>
+                    </div>
+                    <div class="pl-6 text-sm leading-5">
+                      <%= label_tag :county, county %>
+                    </div>
+                </div>
+              <% end %>
+
+
+              </div>
             </div>
-            <div class="w-1/3">
-                <%= form.label :clinic_id %>
-                <%= form.select :clinic_id, options_for_select(Clinic.all.collect { | clinic | [clinic.name, clinic.id] }), {prompt: "Select"}, {class: "block form-select w-full"} %>
+            <div class="w-1/3" data-controller="consent-form">
+                <div class="multiselect-dropdown">
+                    <label class="block">Clinic</label>
+                    <div class="selectBox" data-action="click->consent-form#showCheckboxes">
+                        <input type="text" id="predict_company_name" data-action="keyup->consent-form#search" placeholder="Search venue" class="form-input w-full" style="height: 50px;" />
+                    </div>
+                    <div class="checkboxes-in-dropdown z-10 w-full" id="locationsCheckboxes" data-target="consent-form.locationsCheckboxes" style="top: 73px;">
+                        <% Clinic.all.each do |clinic| %>
+                            <div class="relative flex items-start px-3 hover:bg-blue-50" data-target="consent-form.searchableRow" data-search-content="<%= [clinic.name.try(:downcase)] %>">
+                                <div class="absolute flex items-center h-5">
+                                    <%= form.check_box(:clinic_id, {multiple: true, include_hidden: false, class: "form-checkbox cursor-pointer text-base font-bold",
+                                        data: {action: "click->consent-form#displayLocations",
+                                        locations: "",
+                                        employer: "#{clinic.name}",
+                                        type: "clinic",
+                                        target: "consent-form.companyCheckbox"
+                                        }}, clinic.id) %>
+                                </div>
+                                <div class="pl-6 text-sm leading-5">
+                                    <%= label_tag :clinic_id, clinic.name %>
+                                </div>
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
             </div>
         </div>
     <% end %>
