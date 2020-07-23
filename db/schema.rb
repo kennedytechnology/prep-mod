@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_17_133643) do
+ActiveRecord::Schema.define(version: 2020_07_23_140944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -214,6 +214,7 @@ ActiveRecord::Schema.define(version: 2020_07_17_133643) do
     t.string "contact_email"
     t.string "backup_contact_email"
     t.integer "appointments_count"
+    t.datetime "canceled_at"
   end
 
   create_table "clinics_users", id: false, force: :cascade do |t|

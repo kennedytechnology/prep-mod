@@ -91,6 +91,13 @@ class ClinicsController < ClinicManagementController
     @clinics = Clinic.all
   end
 
+  def destroy
+    @clinic = Clinic.find(params[:id])
+    @clinic.canceled_at = Time.now
+    @clinic.save
+    redirect_back fallback_location: clinics_path(clinic_date: 'upcoming'), notice: "Successfully canceled clinic."
+  end
+
   private
 
   def finish_patients_in_queue
