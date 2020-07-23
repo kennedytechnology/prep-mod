@@ -9,6 +9,7 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= yield :head_directives if content_for?(:head_directives) %>
     <%= yield :google_maps_script if content_for?(:google_maps_script) %>
     <%= yield :prevent_unsaved_form_script if content_for?(:prevent_unsaved_form_script) %>
   </head>
