@@ -156,50 +156,57 @@
     <%= render partial: "supply_inventories/new_entry_review", locals: {f: f} %>
 <% end %>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th> Date Received </th>
-            <th> Item Type </th>
-            <th> Item Name </th>
-            <th> Manufacturer </th>
-            <th> Source </th>
-            <th> Lot <br /> Number </th>
-            <th> Expiration <br /> Date </th>
-            <th> Starting Qty </th>
-            <th> Pkg </th>
-            <th> Qty<br>Used </th>
-            <th> Qty<br>Lost </th>
-            <th> Qty<br>Loaned </th>
-            <th> Current<br>Qty </th>
-            <th> Select<br>Item</th>
-        </tr>
-    </thead>
-    <tbody class="bg-white">
-        <% @supply_inventories.each do |supply_inventory| %>
-            <tr class="hover:bg-gray-50">
-                <td> <%= supply_inventory.received_at.strftime("%m-%d-%Y") %> </td>
-                <td> <%= supply_inventory.item_type %> </td>
-                <td class="underline"> <%= link_to supply_inventory.product_name, supply_inventory %> </td>
-                <td> <%= supply_inventory.manufacturer %> </td>
-                <td> <%= supply_inventory.source %> </td>
-                <td> <%= supply_inventory.lot_number %> </td>
-                <td> <%= supply_inventory.expiration_date.strftime("%m-%d-%Y") %> </td>
-                <td> <%= supply_inventory.quantity %> </td>
-                <td> <%= supply_inventory.packaging %> </td>
-                <td> <%= supply_inventory.quantity_used_sum %> </td>
-                <td> <%= supply_inventory.quantity_lost_sum %> </td>
-                <td> <%= supply_inventory.quantity_loaned_sum %> </td>
-                <td> <%= supply_inventory.remaining_quantity_sum %> </td>
-                <td> 
-                   <div class="flex items-center h-5">
-                       <input id="providers" type="checkbox" class="form-checkbox">
-                   </div>
-                </td>
+<div data-controller="clinic-activity-patients">
+    <form class="flex justify-start items-center mt-12">
+        <label class="flex text-lg mr-3 align-middle text-gray-600 block mb-2" for="search"> Search: </label>
+        <input class="form-input w-2/12" id="search" data-action="keyup->clinic-activity-patients#search" type="text">
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th> Date Received </th>
+                <th> Item Type </th>
+                <th> Item Name </th>
+                <th> Manufacturer </th>
+                <th> Source </th>
+                <th> Lot <br /> Number </th>
+                <th> Expiration <br /> Date </th>
+                <th> Starting Qty </th>
+                <th> Pkg </th>
+                <th> Qty<br>Used </th>
+                <th> Qty<br>Lost </th>
+                <th> Qty<br>Loaned </th>
+                <th> Current<br>Qty </th>
+                <th> Select<br>Item</th>
             </tr>
-        <% end %>
-    </tbody>
-</table>
+        </thead>
+        <tbody class="bg-white">
+            <% @supply_inventories.each do |supply_inventory| %>
+                <tr class="hover:bg-gray-50" data-target="clinic-activity-patients.searchableRow" data-search-content="<%= supply_inventory.item_type.try(:downcase) %>">
+                    <td> <%= supply_inventory.received_at.strftime("%m-%d-%Y") %> </td>
+                    <td> <%= supply_inventory.item_type %> </td>
+                    <td class="underline"> <%= link_to supply_inventory.product_name, supply_inventory %> </td>
+                    <td> <%= supply_inventory.manufacturer %> </td>
+                    <td> <%= supply_inventory.source %> </td>
+                    <td> <%= supply_inventory.lot_number %> </td>
+                    <td> <%= supply_inventory.expiration_date.strftime("%m-%d-%Y") %> </td>
+                    <td> <%= supply_inventory.quantity %> </td>
+                    <td> <%= supply_inventory.packaging %> </td>
+                    <td> <%= supply_inventory.quantity_used_sum %> </td>
+                    <td> <%= supply_inventory.quantity_lost_sum %> </td>
+                    <td> <%= supply_inventory.quantity_loaned_sum %> </td>
+                    <td> <%= supply_inventory.remaining_quantity_sum %> </td>
+                    <td> 
+                    <div class="flex items-center h-5">
+                        <input id="providers" type="checkbox" class="form-checkbox">
+                    </div>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
 
 <div class="flex justify-end mt-4">
     <button class="button-primary">Sync Selected Data</button>
