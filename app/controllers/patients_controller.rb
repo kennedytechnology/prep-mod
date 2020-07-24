@@ -7,15 +7,16 @@ class PatientsController < ApplicationController
 
   def index
     @page_title = @clinic ? "Registration List" : "Patient Record Search"
+    @patients = @clinic ? @clinic.patients.with_appointments : Patient.with_appointments
 
     respond_to do |format|
       format.html
       format.csv { send_data @clinic.patients.to_csv, filename: "news_signups-#{Date.today}.csv" }
       format.xlsx do
-        @patients = Patient.with_appointments
+        @patients = @clinic.patients.on_waiting_list
         render  template: 'patients/index',
                 disposition: 'inline',
-                xlsx: 'patients_waiting_list_#{Date.today.strftime("%d_%m_%Y")}.xlsx',
+                xlsx: "patients_waiting_list_#{Date.today.strftime("%d_%m_%Y")}.xlsx",
                 filename: "patients_waiting_list_#{Date.today.strftime("%d_%m_%Y")}.xlsx",
                 xlsx_author: current_user.name
       end
@@ -27,10 +28,9 @@ class PatientsController < ApplicationController
       @patients = Patient.with_appointments(params[:date_of_birth]).order(:date_of_birth)
     end
 
-    if params[:clinic_id]
-      @clinic = Clinic.find(params[:clinic_id])
-      @patients_waiting_list = @clinic.patients.on_waiting_list.count
-      @patients_appointments = @clinic.patients.with_appointments.count
+    if @clinic
+      @patients_waiting_list_count = @clinic.patients.on_waiting_list.count
+      @patients_appointments_count = @clinic.patients.with_appointments.count
 
       if params[:display_patients] == "waiting_list"
         @page_title = "Patients Waiting List"

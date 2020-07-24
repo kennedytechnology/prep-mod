@@ -10,8 +10,8 @@
     <% if @clinic %>
      <div class="flex justify-between">
         <div>
-          <span class=" pt-16 font-bold text-xl">Number Registered:</span> <span class="mr-8 text-xl"><%= @patients_appointments %> </span>
-          <span class=" pt-16 font-bold text-xl">Waiting List:</span> <span class="mr-8 text-xl"><%= @patients_waiting_list %> </span>
+          <span class=" pt-16 font-bold text-xl">Number Registered:</span> <span class="mr-8 text-xl"><%= @patients_appointments_count %> </span>
+          <span class=" pt-16 font-bold text-xl">Waiting List:</span> <span class="mr-8 text-xl"><%= @patients_waiting_list_count %> </span>
         </div>
         <div>
           <% if params[:display_patients] == "waiting_list" %>
@@ -28,10 +28,10 @@
         </div>
         <div class="flex items-end">
           <% if @clinic %>
-            <% if @clinic.appointments.where("on_waiting_list = ?", true).empty? %>
-                <button type="button" diabled="disabled" class="button-disabled" title="Waiting List is empty"> Download Waiting List </button>
+            <% if @patients_waiting_list_count %>
+                <%= link_to "Download Waiting List", patients_path(clinic_id: @clinic.id, format: :xlsx), class: "button-primary" %>
             <% else %>
-                <%= link_to "Download Waiting List", patients_path(format: :xlsx), class: "button-primary" %>
+                <button type="button" diabled="disabled" class="button-disabled" title="Waiting List is empty"> Download Waiting List </button>
             <% end %>
           <% end %>
           <%= link_to "Download Registration List", clinic_patients_path(clinic_id: @clinic.id, format: :csv), class: "button-primary" %><br/>
