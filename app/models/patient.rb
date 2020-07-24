@@ -15,7 +15,11 @@ class Patient < ApplicationRecord
   validates :last_name, presence: true
 
   scope :with_appointments, -> {
-    joins(:appointments).where("appointments.on_waiting_list")
+    joins(:appointments).where.not(appointments: {appointment_at: nil})
+  }
+
+  scope :on_waiting_list, -> {
+    joins(:appointments).where(appointments: {on_waiting_list: true})
   }
 
   def current_clinic
