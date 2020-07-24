@@ -79,7 +79,7 @@ class ClinicsController < ClinicManagementController
     @page_title = "View/Edit clinic"
     @errors = []
     @clinic.default_test_kit = clinic_params['default_test_kit'] if clinic_params['default_test_kit']
-    
+
     if @clinic.update(clinic_params)
       finish_patients_in_queue
       redirect_back fallback_location: clinics_path(clinic_date: 'upcoming')
