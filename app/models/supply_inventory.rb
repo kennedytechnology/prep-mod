@@ -1,5 +1,6 @@
 class SupplyInventory < ApplicationRecord
   has_many :supply_inventory_events
+  belongs_to :user
 
   validates_presence_of :item_type, :product_name, :received_at, :manufacturer,
     :lot_number, :expiration_date, :packaging, :source,

@@ -1,5 +1,7 @@
 FactoryBot.define do
   factory :supply_inventory do
+    association :user, factory: :user
+
     received_at { Faker::Date.between(from: 30.days.ago, to: Date.today) }
     item_type { INVENTORY_ITEM_TYPES.sample }
     item_name { "Item Name" }

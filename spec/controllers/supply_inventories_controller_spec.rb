@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe SupplyInventoriesController, type: :controller do
-  let(:supply_inventory) { create(:supply_inventory) }
-  before { sign_in create(:user) }
+  let(:user) { create(:user) }
+  let(:supply_inventory) { create(:supply_inventory, user: user) }
+  before { sign_in user }
 
   describe "GET #index" do
     it "returns http success" do

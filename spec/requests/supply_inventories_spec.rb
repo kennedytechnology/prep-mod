@@ -1,10 +1,13 @@
  require 'rails_helper'
 
 RSpec.describe "/supply_inventories", type: :request do
-  before(:each) do
-    @supply_inventory = create(:supply_inventory)
-    sign_in create(:user)
-  end
+  let(:user) { create(:user) }
+  let(:supply_inventory) { create(:supply_inventory, user: user) }
+  before { sign_in user }
+  # before(:each) do
+  #   # supply_inventory = create(:supply_inventory)
+  #   sign_in user
+  # end
 
   describe "GET /index" do
     it "renders a successful response" do
@@ -15,7 +18,7 @@ RSpec.describe "/supply_inventories", type: :request do
 
   describe "GET /show" do
     it "renders a successful response" do
-      get supply_inventory_url(@supply_inventory)
+      get supply_inventory_url(supply_inventory)
       expect(response).to be_successful
     end
   end
@@ -51,29 +54,16 @@ RSpec.describe "/supply_inventories", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       it "updates the requested supply_inventory" do
-        patch supply_inventory_url(@supply_inventory), params: { supply_inventory: attributes_for(:supply_inventory, product_name: "Updated Product Name") }
-        @supply_inventory.reload
-        expect(@supply_inventory.product_name).to eq("Updated Product Name")
+        patch supply_inventory_url(supply_inventory), params: { supply_inventory: attributes_for(:supply_inventory, product_name: "Updated Product Name") }
+        supply_inventory.reload
+        expect(supply_inventory.product_name).to eq("Updated Product Name")
       end
 
       it "redirects to the supply_inventory" do
-        patch supply_inventory_url(@supply_inventory), params: { supply_inventory: attributes_for(:supply_inventory) }
-        @supply_inventory.reload
-        expect(response).to redirect_to(supply_inventory_url(@supply_inventory))
+        patch supply_inventory_url(supply_inventory), params: { supply_inventory: attributes_for(:supply_inventory) }
+        supply_inventory.reload
+        expect(response).to redirect_to(supply_inventory_url(supply_inventory))
       end
-    end
-  end
-
-  describe "DELETE /destroy" do
-    it "destroys the requested supply_inventory" do
-      expect {
-        delete supply_inventory_url(@supply_inventory)
-      }.to change(SupplyInventory, :count).by(-1)
-    end
-
-    it "redirects to the supply_inventories list" do
-      delete supply_inventory_url(@supply_inventory)
-      expect(response).to redirect_to(supply_inventories_url)
     end
   end
 end
