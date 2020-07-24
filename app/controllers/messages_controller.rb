@@ -1,6 +1,7 @@
 class MessagesController < ApplicationController
-  layout "clinic_management"
+  before_action :authenticate_user!
   load_and_authorize_resource
+  layout "clinic_management"
 
   def new
     @message = Message.new
