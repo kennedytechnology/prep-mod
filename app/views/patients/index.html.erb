@@ -10,8 +10,8 @@
     <% if @clinic %>
      <div class="flex justify-between">
         <div>
-          <span class=" pt-16 font-bold text-xl">Number Registered:</span> <span class="mr-8 text-xl"><%= @patients_appointments %> </span>
-          <span class=" pt-16 font-bold text-xl">Waiting List:</span> <span class="mr-8 text-xl"><%= @patients_waiting_list %> </span>
+          <span class=" pt-16 font-bold text-xl">Number Registered:</span> <span class="mr-8 text-xl"><%= @patients_appointments_count %> </span>
+          <span class=" pt-16 font-bold text-xl">Waiting List:</span> <span class="mr-8 text-xl"><%= @patients_waiting_list_count %> </span>
         </div>
         <div>
           <% if params[:display_patients] == "waiting_list" %>

@@ -8,6 +8,7 @@ class PatientsController < ApplicationController
 
   def index
     @page_title = @clinic ? "Registration List" : "Patient Record Search"
+    @patients = @clinic ? @clinic.patients.with_appointments : Patient.with_appointments
 
     respond_to do |format|
       format.html
@@ -30,8 +31,8 @@ class PatientsController < ApplicationController
 
     if params[:clinic_id]
       @clinic = Clinic.find(params[:clinic_id])
-      @patients_waiting_list = @clinic.patients.on_waiting_list.count
-      @patients_appointments = @clinic.patients.with_appointments.count
+      @patients_waiting_list_count = @clinic.patients.on_waiting_list.count
+      @patients_appointments_count = @clinic.patients.with_appointments.count
 
       if params[:display_patients] == "waiting_list"
         @page_title = "Patients Waiting List"
