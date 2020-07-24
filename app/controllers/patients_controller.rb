@@ -1,10 +1,9 @@
 class PatientsController < ApplicationController
-  load_and_authorize_resource except: [:anonymized_index]
-
-  layout "clinic_management"
   before_action :authenticate_user!
+  load_and_authorize_resource except: [:anonymized_index]
   helper_method :sort_column, :sort_direction
   before_action :patients_listing, only: [:index, :upload_record]
+  layout "clinic_management"
 
   def index
     @page_title = @clinic ? "Registration List" : "Patient Record Search"

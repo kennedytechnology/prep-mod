@@ -1,7 +1,7 @@
 class SupplyInventoriesController < InheritedResources::Base
   before_action :authenticate_user!
-  layout "clinic_management"
   load_and_authorize_resource
+  layout "clinic_management"
 
   def index
     @supply_inventories = SupplyInventory.all

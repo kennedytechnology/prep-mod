@@ -1,7 +1,7 @@
 class ReportsController < ApplicationController
   include ReportHelper
-  layout "clinic_management"
   before_action :authenticate_user!
+  layout "clinic_management"
 
   def providers
     @providers_by_specialty = ProviderEnrollment.group(:medical_specialty).count
