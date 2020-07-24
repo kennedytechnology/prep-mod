@@ -30,12 +30,12 @@ class PatientsController < ApplicationController
 
     if params[:clinic_id]
       @clinic = Clinic.find(params[:clinic_id])
-      @patients_waiting_list = @clinic.patients.with_appointments.count
-      @patients_appointments = @clinic.appointments_count
+      @patients_waiting_list = @clinic.patients.on_waiting_list.count
+      @patients_appointments = @clinic.patients.with_appointments.count
 
       if params[:display_patients] == "waiting_list"
         @page_title = "Patients Waiting List"
-        @patients = @clinic.patients.with_appointments.where("appointments.on_waiting_list = ?", true)
+        @patients = @clinic.patients.on_waiting_list
       end
     end
   end
