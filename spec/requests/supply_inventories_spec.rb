@@ -4,10 +4,6 @@ RSpec.describe "/supply_inventories", type: :request do
   let(:user) { create(:user) }
   let(:supply_inventory) { create(:supply_inventory, user: user) }
   before { sign_in user }
-  # before(:each) do
-  #   # supply_inventory = create(:supply_inventory)
-  #   sign_in user
-  # end
 
   describe "GET /index" do
     it "renders a successful response" do
