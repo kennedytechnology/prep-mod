@@ -29,8 +29,7 @@ class PatientsController < ApplicationController
       @patients = Patient.with_appointments(params[:date_of_birth]).order(:date_of_birth)
     end
 
-    if params[:clinic_id]
-      @clinic = Clinic.find(params[:clinic_id])
+    if @clinic
       @patients_waiting_list_count = @clinic.patients.on_waiting_list.count
       @patients_appointments_count = @clinic.patients.with_appointments.count
 
