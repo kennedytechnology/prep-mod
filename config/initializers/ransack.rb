@@ -6,8 +6,8 @@ Ransack.configure do |config|
     type: :string
 
   config.custom_arrows = {
-    up_arrow:   '&#8693;',
-    down_arrow: '&#8693;',
+    up_arrow: '&#8593;',
+    down_arrow: '&#8595;',
     default_arrow: '&#8693;'
   }
 end
