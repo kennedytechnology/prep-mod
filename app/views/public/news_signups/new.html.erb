@@ -86,7 +86,9 @@
 
     <div class="field-fullwidth">
         <div class="py-4">
-            <%= f.label "Please keep me informed about:", class: "block text-xl mb-4" %>
+            <%= f.label :topics, class: "block text-xl mb-4" do %>
+                Please keep me informed about: <span class="field-required">*</span>
+            <% end %>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 lg:gap-2">
                 <% NEWS_TOPICS.each do |topic|%>
                     <div class="relative flex items-start mb-4">
