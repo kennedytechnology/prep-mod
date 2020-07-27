@@ -2,19 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "patients/new.html.erb", type: :view do
   before(:each) do
-    assign(:patient, Patient.new(
-      first_name: Faker::Name.first_name,
-      last_name: Faker::Name.last_name,
-      middle_initial: ("A".."Z").to_a.sample,
-      email: "patient@example.com",
-      date_of_birth: Faker::Date.birthday,
-      address: "3440 Brookhaven Road",
-      city: "Pasadena",
-      state: "MD",
-      zip_code: 21122,
-      county: COUNTIES.sample,
-      phone_number: Faker::PhoneNumber.cell_phone,
-    ))
+    assign(:patient, Patient.new(attributes_for(:patient)))
   end
 
   it "renders new patient form" do
