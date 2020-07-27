@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe SupplyInventoryEventsController, type: :controller do
-  let(:supply_inventory) { create(:supply_inventory) }
-  let(:supply_inventory_event) { create(:supply_inventory_event) }
+  let(:user) { create(:user) }
+  let(:supply_inventory) { create(:supply_inventory, user: user) }
+  let(:supply_inventory_event) { create(:supply_inventory_event, supply_inventory: supply_inventory) }
   let(:valid_attributes) { attributes_for(:supply_inventory_event).merge({supply_inventory_id: supply_inventory.id}) }
-  before { sign_in create(:user) }
+  before { sign_in user }
 
   describe "GET #edit" do
     it "returns http success" do

@@ -2,7 +2,7 @@
 
 RSpec.describe "/supply_inventories", type: :request do
   let(:user) { create(:user) }
-  let(:supply_inventory) { create(:supply_inventory) }
+  let(:supply_inventory) { create(:supply_inventory, user: user) }
   let(:valid_attributes) { attributes_for(:supply_inventory) }
   let(:invalid_attributes) { attributes_for(:invalid_supply_inventory) }
   before { sign_in user }

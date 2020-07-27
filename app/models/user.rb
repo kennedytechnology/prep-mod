@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :customized_reports
   has_many :patients
+  has_many :supply_inventories
   belongs_to :provider, optional: true
 
   validates_presence_of :first_name, :last_name, :role, :email, :email_confirmation
