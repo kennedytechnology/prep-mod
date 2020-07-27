@@ -4,6 +4,7 @@ RSpec.describe "Patients", type: :request do
   let(:user) { create(:user) }
   let(:appointment) { create(:appointment) }
   let(:valid_attributes) { attributes_for(:patient) }
+  let(:patient) { Patient.create! valid_attributes.merge(user_id: user.id) }
 
   before do 
     clinic = create(:clinic)
@@ -23,7 +24,6 @@ RSpec.describe "Patients", type: :request do
 
   describe "GET /show" do
     it "renders a successful response" do
-      patient = Patient.create! valid_attributes
       get patient_url(patient)
       expect(response).to be_successful
     end
@@ -66,29 +66,22 @@ RSpec.describe "Patients", type: :request do
 
   describe "GET /edit" do
     it "renders a successful response" do
-      patient = Patient.create! valid_attributes
       get edit_patient_url(patient)
       expect(response).to be_successful
     end
   end
 
   describe "DELETE /destroy" do
-    before do
-      @patient1 = Patient.create! valid_attributes
-      sign_in user
-    end
-
     # The controllers/patients_controller.rb destroy method works properly
     # there seems to be a problem with rspec's :patient (using factory)
-
-    # it "destroys the requested patient" do
+    # pending "destroys the requested patient" do
     #   expect {
     #     delete patient_url(@patient1)
     #   }.to change(Patient, :count).by(-1)
     # end
 
     it "redirects to clinics" do
-      delete patient_url(@patient1)
+      delete patient_url(patient)
       expect(response).to redirect_to(clinics_url)
     end
   end

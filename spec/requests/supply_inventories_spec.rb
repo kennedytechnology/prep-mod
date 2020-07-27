@@ -3,6 +3,8 @@
 RSpec.describe "/supply_inventories", type: :request do
   let(:user) { create(:user) }
   let(:supply_inventory) { create(:supply_inventory, user: user) }
+  let(:valid_attributes) { attributes_for(:supply_inventory) }
+  let(:invalid_attributes) { attributes_for(:invalid_supply_inventory) }
   before { sign_in user }
 
   describe "GET /index" do
@@ -23,12 +25,12 @@ RSpec.describe "/supply_inventories", type: :request do
     context "with valid parameters" do
       it "creates a new SupplyInventory" do
         expect {
-          post supply_inventories_url, params: { supply_inventory: attributes_for(:supply_inventory)}
+          post supply_inventories_url, params: {supply_inventory: valid_attributes}
         }.to change(SupplyInventory, :count).by(1)
       end
 
       it "redirects to the created supply_inventory" do
-        post supply_inventories_url, params: { supply_inventory: attributes_for(:supply_inventory) }
+        post supply_inventories_url, params: {supply_inventory: valid_attributes}
         expect(response).to redirect_to(supply_inventories_url)
       end
     end
@@ -36,12 +38,12 @@ RSpec.describe "/supply_inventories", type: :request do
     context "with invalid parameters" do
       it "does not create a new SupplyInventory" do
         expect {
-          post supply_inventories_url, params: { supply_inventory: attributes_for(:invalid_supply_inventory) }
+          post supply_inventories_url, params: { supply_inventory: invalid_attributes }
         }.to change(SupplyInventory, :count).by(0)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
-        post supply_inventories_url, params: { supply_inventory: attributes_for(:invalid_supply_inventory) }
+        post supply_inventories_url, params: { supply_inventory: invalid_attributes }
         expect(response).to redirect_to(supply_inventories_url)
       end
     end
@@ -50,13 +52,13 @@ RSpec.describe "/supply_inventories", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       it "updates the requested supply_inventory" do
-        patch supply_inventory_url(supply_inventory), params: { supply_inventory: attributes_for(:supply_inventory, product_name: "Updated Product Name") }
+        patch supply_inventory_url(supply_inventory), params: { supply_inventory: {product_name: "Updated Product Name"} }
         supply_inventory.reload
         expect(supply_inventory.product_name).to eq("Updated Product Name")
       end
 
       it "redirects to the supply_inventory" do
-        patch supply_inventory_url(supply_inventory), params: { supply_inventory: attributes_for(:supply_inventory) }
+        patch supply_inventory_url(supply_inventory), params: { supply_inventory: valid_attributes }
         supply_inventory.reload
         expect(response).to redirect_to(supply_inventory_url(supply_inventory))
       end

@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Public::NewsSignupsController, type: :controller do
+  let(:valid_attributes) { attributes_for(:news_signup) }
+
   describe "GET #new" do
     it "returns http success" do
       get :new
@@ -12,35 +14,15 @@ RSpec.describe Public::NewsSignupsController, type: :controller do
     context "with valid attributes" do
       it "create new signup" do
         expect {
-          post :create, params: { news_signup: {
-            first_name: Faker::Name.first_name,
-            last_name: Faker::Name.last_name,
-            email: Faker::Internet.email,
-            date_of_birth: Faker::Date.birthday,
-            zip_code: Faker::Address.zip_code,
-            topics: NEWS_TOPICS,
-            occupation: PATIENT_OCCUPATIONS.sample,
-            chronic_health_condition: Faker::Boolean.boolean
-          } }
+          post :create, params: {news_signup: valid_attributes}
         }.to change(NewsSignup, :count).by(1)
       end
     end
   end
 
   it do
-    params = {
-      news_signup: {
-        name: Faker::Name.name,
-        email: Faker::Internet.email,
-        date_of_birth: Faker::Date.birthday,
-        zip_code: Faker::Address.zip_code,
-        topics: NEWS_TOPICS,
-        occupation: PATIENT_OCCUPATIONS.sample,
-        chronic_health_condition: Faker::Boolean.boolean
-      }
-    }
     should permit(:first_name, :last_name, :email, :date_of_birth, :zip_code, :occupation, topics: []).
-      for(:create, params: params).
+      for(:create, params: {news_signup: valid_attributes}).
       on(:news_signup)
   end
 end

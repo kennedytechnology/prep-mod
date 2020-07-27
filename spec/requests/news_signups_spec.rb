@@ -15,26 +15,12 @@
 RSpec.describe "/public/news_signups", type: :request do
   # NewsSignup. As you add validations to NewsSignup, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    {first_name: Faker::Name.first_name,
-    last_name: Faker::Name.first_name, 
-    email: Faker::Internet.email,
-    date_of_birth: Faker::Date.birthday,
-    zip_code: Faker::Address.zip_code,
-    topics: NEWS_TOPICS,
-    occupation: PATIENT_OCCUPATIONS.sample,
-    chronic_health_condition: Faker::Boolean.boolean}
-  }
-
+  let(:valid_attributes) { attributes_for(:news_signup) }
   let(:invalid_attributes) {
-    {first_name: "",
-      last_name: "",
-      email: "",
-      date_of_birth: Faker::Date.birthday,
-      zip_code: Faker::Address.zip_code,
-      topics: NEWS_TOPICS,
-      occupation: PATIENT_OCCUPATIONS.sample,
-      chronic_health_condition: Faker::Boolean.boolean}
+    {
+      first_name: "",
+      last_name: ""
+    }
   }
 
   describe "GET /new" do

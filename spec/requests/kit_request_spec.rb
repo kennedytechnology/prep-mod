@@ -14,36 +14,11 @@
 
 RSpec.describe "/kit", type: :request do
   let(:clinic) { create(:clinic) }
-
-  let(:valid_attributes) {
-    {
-      first_name: Faker::Name.first_name,
-      last_name: Faker::Name.last_name,
-      middle_initial: ("A".."Z").to_a.sample,
-      email: "new_kit@example.com",
-      date_of_birth: Faker::Date.birthday,
-      address: "3440 Brookhaven Road",
-      city: "Pasadena",
-      state: "MD",
-      zip_code: 21122,
-      county: COUNTIES.sample,
-      phone_number: Faker::PhoneNumber.cell_phone,
-    }
-  }
-
+  let(:valid_attributes) { attributes_for(:patient) }
   let(:invalid_attributes) {
     {
       first_name: "",
       last_name: "",
-      middle_initial: ("A".."Z").to_a.sample,
-      email: "new_kit@example.com",
-      date_of_birth: Faker::Date.birthday,
-      address: "3440 Brookhaven Road",
-      city: "Pasadena",
-      state: "MD",
-      zip_code: 21122,
-      county: COUNTIES.sample,
-      phone_number: Faker::PhoneNumber.cell_phone,
     }
   }
 

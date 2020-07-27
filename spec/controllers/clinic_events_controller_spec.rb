@@ -4,6 +4,7 @@ RSpec.describe ClinicEventsController, type: :controller do
   let(:user) { create(:user, email: "user@clinic_event.com", email_confirmation: "user@clinic_event.com") }
   let(:patient) { create(:patient, user: user) }
   let(:clinic_event) { create(:clinic_event, user: user) }
+  let(:valid_attributes) { attributes_for(:clinic_event).merge({patient_id: patient.id}) }
   let(:clinic_event_const) { CLINIC_EVENTS.sample }
   before { sign_in user }
 
@@ -25,16 +26,7 @@ RSpec.describe ClinicEventsController, type: :controller do
     context "with valid attributes" do
       it "create new clinic event" do
         expect {
-          post :create, params: { clinic_event: {
-            clinic: clinic_event.clinic,
-            patient: patient,
-            category: clinic_event_const[:name],
-            clinic_staff_id: clinic_event.clinic.clinic_personnel.sample,
-            outcome: clinic_event_const[:outcomes].sample,
-            created_at: Faker::Date.between(from: 30.days.ago, to:Date.today),
-            user: user,
-            notes: Faker::Lorem.paragraph(sentence_count: 0, random_sentences_to_add: 2, supplemental: true)
-          } }
+          post :create, params: { clinic_event: valid_attributes }
         }.to change(ClinicEvent, :count).by(1)
       end
     end
@@ -53,22 +45,9 @@ RSpec.describe ClinicEventsController, type: :controller do
   end
 
   it do
-    params = {
-      clinic_event: {
-        clinic: clinic_event.clinic,
-        patient: patient,
-        category: clinic_event_const[:name],
-        clinic_staff_id: clinic_event.clinic.clinic_personnel.sample,
-        outcome: clinic_event_const[:outcomes].sample,
-        created_at: Faker::Date.between(from: 30.days.ago, to:Date.today),
-        user: user,
-        notes: Faker::Lorem.paragraph(sentence_count: 0, random_sentences_to_add: 2, supplemental: true)
-      }
-    }
-    should permit(:clinic_id, :patient_id, :category, :outcome,
-      :notes, :contact_type,
+    should permit(:clinic_id, :patient_id, :category, :outcome, :notes, :contact_type,
       :test_name, :test_type, :test_processing, :clinic_staff_id).
-      for(:create, params: params).
+      for(:create, params: {clinic_event: valid_attributes}).
       on(:clinic_event)
   end
 

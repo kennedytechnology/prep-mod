@@ -56,7 +56,6 @@ RSpec.describe ProviderEnrollmentsController, type: :controller do
   end
 
   it do
-    params = { provider_enrollment: valid_attributes }
     should permit(:first_name, :last_name, :middle_initial, :status, 
         :practice_address, :practice_office_phone, :practice_mobile_phone, 
         :practice_fax_number, :practice_email, :title, 
@@ -70,7 +69,7 @@ RSpec.describe ProviderEnrollmentsController, type: :controller do
         :contact_email, :practice_backup_office_phone, :practice_backup_mobile_phone,
         :additional_info, :freezer, :county, :clinic_service_ids => [], 
         :clinic_age_group_ids => [], :clinic_primary_group_ids => []).
-      for(:create, params: params).
+      for(:create, params: {provider_enrollment: valid_attributes}).
       on(:provider_enrollment)
   end
 end
