@@ -6,7 +6,7 @@ class ItemsImportsController < ApplicationController
   def create
     @items_import = ItemsImport.new(params[:items_import])
     if @items_import.save
-      redirect_to items_path
+      redirect_back fallback_location: "/clinics", notice: "Successfully uploaded records."
     else
       render :new
     end
