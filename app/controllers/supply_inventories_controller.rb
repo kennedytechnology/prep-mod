@@ -10,6 +10,7 @@ class SupplyInventoriesController < InheritedResources::Base
 
   def create
     @supply_inventory = SupplyInventory.new(supply_inventory_params)
+    @supply_inventory.user = current_user
 
     if @supply_inventory.save
       redirect_to supply_inventories_path, notice: "Successfully Added Inventory"

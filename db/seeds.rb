@@ -322,6 +322,7 @@ end
       product_name: Faker::Company.name,
       county: COUNTIES.sample,
       venue_name: Faker::University.unique.name,
+      user_id: Faker::Number.between(from: 1, to: User.count)
     )
 
     Faker::Number.between(from: 1, to: 5).times do 
