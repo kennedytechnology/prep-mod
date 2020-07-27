@@ -24,7 +24,7 @@ class SupplyInventoriesImport
   def load_imported_items
     spreadsheet = open_spreadsheet
     header = spreadsheet.row(1)
-    (6..spreadsheet.last_row).map do |i|
+    (2..spreadsheet.last_row).map do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
       item = SupplyInventory.find_by_id(row["id"]) || SupplyInventory.new
       item.attributes = row.to_hash
