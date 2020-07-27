@@ -6,6 +6,16 @@ class SupplyInventoriesController < InheritedResources::Base
   def index
     @supply_inventories = SupplyInventory.all
     @supply_inventory = SupplyInventory.new
+
+    respond_to do |format|
+      format.html
+      format.xlsx do
+        render xlsx: 'inventory', template: 'supply_inventories/index',
+                disposition: 'inline',
+                filename: "inventories_#{Date.today.strftime("%d_%m_%Y")}.xlsx",
+                xlsx_author: current_user.name
+      end
+    end
   end
 
   def create
