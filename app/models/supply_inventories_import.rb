@@ -1,4 +1,4 @@
-class ItemsImport
+class SupplyInventoriesImport
   include ActiveModel::Model
   require 'roo'
 
