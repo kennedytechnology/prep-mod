@@ -136,3 +136,15 @@ input[type=file][data-direct-upload-url][disabled] { @apply hidden; }
 
 //awesomplete
 .awesomplete { @apply w-full; }
+
+.awesomplete-last-row {
+    ul {
+        bottom: 100%;
+
+        &::before {
+            bottom: -.43em;
+            top: auto;
+            transform: rotate(225deg);
+        }
+    }
+}

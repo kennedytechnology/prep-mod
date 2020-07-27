@@ -4,9 +4,9 @@
 <%= render '/clinics/header' %>
 
 <% if @clinic.errors.any? %>
-  <div id="error_explanation" class="p-4 border-2 bg-red-100 border-red-500 mb-4"> 
+  <div id="error_explanation" class="p-4 border-2 bg-red-100 border-red-500 mb-4">
     <h2 class="text-lg font-bold"><%= pluralize(@clinic.errors.count, "error") %> prohibited this article from being saved:</h2>
- 
+
     <ul class="list-disc ml-8">
     <% @clinic.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
@@ -16,7 +16,7 @@
 <% end %>
 
 <div data-controller="review-form">
-    <%= form_with model: @clinic, local: true, 
+    <%= form_with model: @clinic, local: true,
         data: {action: "change->review-form#onDisableFormPage keyup->review-form#onDisableFormPage",
                target: "review-form.form"} do |f| %>
         <div class="field-fullwidth">
@@ -76,15 +76,15 @@
                     <span> Clinic Date </span>
                     <span class="field-required">*</span>
                 <% end %>
-                <%= f.text_field :clinic_date, class: "form-input", placeholder: "MM/DD/YYYY", required: true, 
-                                data: { target: "review-form.validates",	            
-                                    controller: "flatpickr",	           
+                <%= f.text_field :clinic_date, class: "form-input", placeholder: "MM/DD/YYYY", required: true,
+                                data: { target: "review-form.validates",
+                                    controller: "flatpickr",
                                     flatpickr_default_date: @clinic.clinic_date ? @clinic.clinic_date.strftime("%Y-%m-%d") : nil,
                                     flatpickr_min_date: Time.zone.now
                 } %>
 
                 <p class="label">Start Time <span class="field-required">*</span></p>
-                <% 
+                <%
                     start_time = Time.parse("1 AM").to_i
                     end_time = Time.parse("12 PM").to_i
                     values = (start_time..end_time).step(15.minutes)
@@ -123,7 +123,7 @@
 
                 <%= f.label :address, class: "block" %>
                 <%= f.text_field :address, id: "autocomplete", onFocus: "geolocate()", class: "form-input w-full", placeholder: "Address", required: true, "data-target": "review-form.validates" %>
-                
+
                 <%= render partial: "public/clinics/google_maps_script" %>
 
                 <div class="grid grid-cols-3 gap-4">
@@ -151,7 +151,7 @@
                     <%= f.radio_button :appointments_available, "yes_required", class: "form-radio", required: true, "data-target": "review-form.validates" %>
                     <%= f.label :appointments_available, "Yes, required", for: "clinic_appointments_available_yes_required" %>
                 </div>
-                
+
                 <div>
                     <%= f.radio_button :appointments_available, "yes_optional", class: "form-radio", required: true, "data-target": "review-form.validates" %>
                     <%= f.label :appointments_available, "Yes, optional", for: "clinic_appointments_available_yes_optional" %>
@@ -219,7 +219,7 @@
                     <%= f.text_area :incidents_comments, placeholder: "Enter Details Here", class: "form-textarea w-1/2", required: true, "data-target": "review-form.validates" %>
                 </div>
             </div>
-        </div>    
+        </div>
 
         <div class="field-fullwidth">
             <h3 class="title"> Registration and Staff </h3>
@@ -256,7 +256,7 @@
             </div>
             <div class="flex flex-col">
                 <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-                    <div class="align-middle inline-block min-w-full overflow-hidden border-b border-gray-200">
+                    <div class="align-middle inline-block min-w-full overflow-scroll border-b border-gray-200">
                         <table class="table">
                             <thead>
                                 <tr>

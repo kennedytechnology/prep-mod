@@ -31,6 +31,8 @@ $(document).on('turbolinks:load', function () {
         return event.preventDefault();
     });
 
+    awesomeComplete();
+
     addFormField('.addClinicDate', '.clinicFieldsContainer');
     removeFormField('.removeClinicDatefield', '.nestedClinicDate');
 });
@@ -50,5 +52,13 @@ function removeFormField(buttonKlass, fieldContainer) {
         $(this).prev('input[type=hidden]').val('1');
         $(this).closest(fieldContainer).hide();
         return event.preventDefault();
+    });
+}
+
+function awesomeComplete() {
+    var kitsTableRows = document.querySelectorAll('#testKits tr');
+
+    kitsTableRows[kitsTableRows.length - 1].querySelectorAll('.awesomplete').forEach((elem) => {
+        elem.classList.add('awesomplete-last-row');
     });
 }
