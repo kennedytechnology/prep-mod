@@ -49,7 +49,7 @@ class SupplyInventoriesImport
       return false
     end
 
-    if imported_items.nil?
+    if imported_items.blank?
       self.errors.add(:base, "#{file.original_filename} shouldn't be empty!")
       return false 
     end
