@@ -19,7 +19,7 @@ class SupplyInventoriesImportsController < ApplicationController
 
   def create
     if params[:supply_inventories_import]
-      @supply_inventories_import = SupplyInventoriesImport.new(supply_inventories_import_params)
+      @supply_inventories_import = SupplyInventoriesImport.new(supply_inventories_import_params.merge(user_id: current_user.id))
       if @supply_inventories_import.save
         redirect_to supply_inventories_path, notice: "Successfully uploaded records."
       else

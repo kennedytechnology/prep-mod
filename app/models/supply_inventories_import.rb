@@ -2,7 +2,7 @@ class SupplyInventoriesImport
   include ActiveModel::Model
   require 'roo'
 
-  attr_accessor :file
+  attr_accessor :file, :user_id
 
   def initialize(attributes={})
     attributes.each { |name, value| send("#{name}=", value) }
@@ -32,7 +32,7 @@ class SupplyInventoriesImport
       if row.to_hash.keys.difference(SupplyInventory.columns.collect(&:name)).any?
         item.errors.add(:base, "Content is invalid!")
       else
-        item.attributes = row.to_hash
+        item.attributes = row.to_hash.merge(user_id: user_id)
       end
 
       item

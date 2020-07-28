@@ -18,7 +18,6 @@
     </ul>
   <% end %>
 
-  <%= f.hidden_field :user_id, value: current_user.id %>
   <%= f.file_field :file, class: "form-input" %>
   <%= f.submit "Upload", class: "button-action" %>
 <% end %>

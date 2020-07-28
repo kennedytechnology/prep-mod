@@ -3,5 +3,5 @@ wb = xlsx_package.workbook
 wb.add_worksheet(name: "Patients on Waiting List") do |sheet|
   sheet.add_row ["item_type", "item_name", "received_at",
       "manufacturer",	"lot_number",	"expiration_date",	"quantity",	"packaging",
-      "source",	"product_name",	"county",	"venue_name",	"user_id"]
+      "source",	"product_name",	"county",	"venue_name"]
 end
