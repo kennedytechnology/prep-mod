@@ -1,13 +1,26 @@
 class PatientsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource except: [:anonymized_index]
-  helper_method :sort_column, :sort_direction
-  before_action :patients_listing, only: [:index, :upload_record]
+  # before_action :patients_listing, only: [:index, :upload_record]
   layout "clinic_management"
 
   def index
     @page_title = @clinic ? "Registration List" : "Patient Record Search"
     @patients = @clinic ? @clinic.patients.with_appointments : Patient.with_appointments
+    @q = Patient.ransack(params[:q])
+
+    case
+      when params[:clinic_id]
+        @clinic = Clinic.includes(appointments: :patient).find(params[:clinic_id])
+        @patients = @clinic.patients.order(params.dig(:q, :s)).paginate(page: params[:page], per_page: 250)
+      when @q.result
+        @patients = @q.result.page(params[:page]).to_a.uniq
+      else
+        @patients = Patient.all.paginate(page: params[:page], per_page: 50)
+      end
+
+    @patients = @patients.take(40)
+    @patients.uniq!
 
     respond_to do |format|
       format.html
@@ -21,8 +34,6 @@ class PatientsController < ApplicationController
                 xlsx_author: current_user.name
       end
     end
-
-    @q = Patient.ransack(params[:q])
 
     if params[:date_of_birth]
       @patients = Patient.with_appointments(params[:date_of_birth]).order(:date_of_birth)
@@ -120,32 +131,7 @@ class PatientsController < ApplicationController
 
   private
 
-  def sort_column
-    Patient.where(id: params[:id]).column_names.include?(params[:sort]) ? params[:sort] : "clinic_id"
-  end
-
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
-  end
-
-  def patients_listing
-    @q = Patient.ransack(params[:q])
-
-    case
-    when params[:clinic_id]
-      @clinic = Clinic.includes(appointments: :patient).find(params[:clinic_id])
-
-      @patients = @clinic.patients.order(params.dig(:q, :s)).paginate(page: params[:page], per_page: 250)
-    when params[:direction]
-      @patients = Patient.order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 50)
-    when @q.result
-      @patients = @q.result.page(params[:page]).to_a.uniq
-    else
-      @patients = Patient.all.paginate(page: params[:page], per_page: 50)
-    end
-    @patients = @patients.take(40)
-    @patients.uniq!
-  end
+  def patients_listing;end
 
   def patient_params
     params.require(:patient).permit(:clinic, :clinic_id, :user_id, :student_id,

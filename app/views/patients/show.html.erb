@@ -23,12 +23,12 @@
 <table class="table printable">
     <thead>
         <tr>
-            <th><%= sortable "event_date", "Date" %></th>
-            <th><%= sortable "location", "Location" %></th>
-            
-            <th><%= sortable "category", "Service" %></th>
-            <th><%= sortable "outcome", "Status" %></th>
-            <th><%= sortable "notes" %></th>
+            <th>Date</th>
+            <th>Location</th>
+
+            <th>Service</th>
+            <th>Status</th>
+            <th>Notes</th>
             <th class="table-action-buttons">Actions</th>
         </tr>
     </thead>
@@ -37,13 +37,13 @@
         <tr>
             <td><%= clinic_event.clinic ? clinic_event.clinic.clinic_date.try(:strftime, "%m/%d/%Y") : clinic_event.event_date.try(:strftime, "%m/%d/%Y") %></td>
             <td><%= clinic_event.clinic ? clinic_event.clinic.venue_name : clinic_event.location %></td>
-            
+
             <td><%= clinic_event.category %></td>
             <td><%= clinic_event.outcome %></td>
             <td><%= clinic_event.notes %></td>
             <td class="table-action-buttons">
-                <%= link_to "Delete", "javascript:", 
-                    data: {recordis: "clinic_events", recordid: clinic_event.id, 
+                <%= link_to "Delete", "javascript:",
+                    data: {recordis: "clinic_events", recordid: clinic_event.id,
                         action: "click->clinic-activity-patients#showHideDeleteModal"}, class: "button-action" %>
             </td>
         </tr>
