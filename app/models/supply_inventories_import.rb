@@ -37,16 +37,23 @@ class SupplyInventoriesImport
   end
 
   def save
-    if imported_items.map(&:valid?).all?
-      imported_items.each(&:save!)
-      true
-    else
-      imported_items.each_with_index do |item, index|
-        item.errors.full_messages.each do |msg|
-          errors.add :base, "Row #{index + 6}: #{msg}"
-        end
-      end
+    file_name = File.extname(file.original_filename)
+    if (file_name != ".csv") && (file_name != ".xls") && (file_name != ".xlsx")
+      self.errors.add(:base, "Unknown file type: #{file.original_filename}")
       false
+    else
+
+      if imported_items.map(&:valid?).all?
+        imported_items.each(&:save!)
+        true
+      else
+        imported_items.each_with_index do |item, index|
+          item.errors.full_messages.each do |msg|
+            errors.add :base, "Row #{index + 6}: #{msg}"
+          end
+        end
+        false
+      end
     end
   end
 

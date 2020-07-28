@@ -7,10 +7,19 @@ class SupplyInventoriesImportsController < ApplicationController
   end
 
   def create
-    @supply_inventories_import = SupplyInventoriesImport.new(supply_inventories_import_params)
-    if @supply_inventories_import.save
-      redirect_to supply_inventories_path, notice: "Successfully uploaded records."
+    if params[:supply_inventories_import]
+      @supply_inventories_import = SupplyInventoriesImport.new(supply_inventories_import_params)
+      if @supply_inventories_import.save
+        redirect_to supply_inventories_path, notice: "Successfully uploaded records."
+      else
+        render :new
+      end
     else
+      @supply_inventories_import = SupplyInventoriesImport.new
+      # byebug
+      # @errors = []
+      # @errors << "File can't be empty!"
+      @supply_inventories_import.errors.add(:base, "File can't be empty!")
       render :new
     end
   end
