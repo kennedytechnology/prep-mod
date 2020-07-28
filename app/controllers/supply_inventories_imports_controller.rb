@@ -16,9 +16,6 @@ class SupplyInventoriesImportsController < ApplicationController
       end
     else
       @supply_inventories_import = SupplyInventoriesImport.new
-      # byebug
-      # @errors = []
-      # @errors << "File can't be empty!"
       @supply_inventories_import.errors.add(:base, "File can't be empty!")
       render :new
     end

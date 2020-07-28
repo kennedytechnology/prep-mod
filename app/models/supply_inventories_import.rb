@@ -23,6 +23,8 @@ class SupplyInventoriesImport
 
   def load_imported_items
     spreadsheet = open_spreadsheet
+    return if spreadsheet.first_row.nil?
+    spreadsheet.first_row.nil?
     header = spreadsheet.row(1)
     (2..spreadsheet.last_row).map do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
@@ -37,23 +39,26 @@ class SupplyInventoriesImport
   end
 
   def save
-    file_name = File.extname(file.original_filename)
-    if (file_name != ".csv") && (file_name != ".xls") && (file_name != ".xlsx")
+    unless [".csv", ".xls", ".xlsx"].include?(File.extname(file.original_filename))
       self.errors.add(:base, "Unknown file type: #{file.original_filename}")
-      false
-    else
+      return false
+    end
 
-      if imported_items.map(&:valid?).all?
-        imported_items.each(&:save!)
-        true
-      else
-        imported_items.each_with_index do |item, index|
-          item.errors.full_messages.each do |msg|
-            errors.add :base, "Row #{index + 6}: #{msg}"
-          end
+    if imported_items.nil?
+      self.errors.add(:base, "#{file.original_filename} shouldn't be empty!")
+      return false 
+    end
+
+    if imported_items.map(&:valid?).all?
+      imported_items.each(&:save!)
+      true
+    else
+      imported_items.each_with_index do |item, index|
+        item.errors.full_messages.each do |msg|
+          errors.add :base, "Row #{index + 6}: #{msg}"
         end
-        false
       end
+      false
     end
   end
 
