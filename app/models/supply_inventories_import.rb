@@ -29,7 +29,12 @@ class SupplyInventoriesImport
     (2..spreadsheet.last_row).map do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
       item = SupplyInventory.find_by_id(row["id"]) || SupplyInventory.new
-      item.attributes = row.to_hash
+      if row.to_hash.keys.difference(SupplyInventory.columns.collect(&:name)).any?
+        item.errors.add(:base, "Content is invalid!")
+      else
+        item.attributes = row.to_hash
+      end
+
       item
     end
   end
