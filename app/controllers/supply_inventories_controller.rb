@@ -4,7 +4,7 @@ class SupplyInventoriesController < InheritedResources::Base
   layout "clinic_management"
 
   def index
-    @supply_inventories = SupplyInventory.all
+    @supply_inventories = SupplyInventory.all.order(:received_at)
     @supply_inventory = SupplyInventory.new
   end
 
