@@ -4,6 +4,17 @@ class SupplyInventoriesImportsController < ApplicationController
 
   def new
     @supply_inventories_import = SupplyInventoriesImport.new
+
+    respond_to do |format|
+      format.html
+      format.xlsx do
+        render  template: 'supply_inventories_imports/headers_example',
+                disposition: 'inline',
+                xlsx: "headers_example_#{Date.today.strftime("%d_%m_%Y")}.xlsx",
+                filename: "headers_example_#{Date.today.strftime("%d_%m_%Y")}.xlsx",
+                xlsx_author: current_user.name
+      end
+    end
   end
 
   def create
