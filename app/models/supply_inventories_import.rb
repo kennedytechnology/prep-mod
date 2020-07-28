@@ -44,6 +44,11 @@ class SupplyInventoriesImport
   end
 
   def save
+    if file.blank?
+      self.errors.add(:base, "No file imported!")
+      return false 
+    end
+  
     unless [".csv", ".xls", ".xlsx"].include?(File.extname(file.original_filename))
       self.errors.add(:base, "Unknown file type: #{file.original_filename}")
       return false
@@ -51,7 +56,7 @@ class SupplyInventoriesImport
 
     if imported_items.blank?
       self.errors.add(:base, "#{file.original_filename} shouldn't be empty!")
-      return false 
+      return false
     end
 
     if imported_items.map(&:valid?).all?
