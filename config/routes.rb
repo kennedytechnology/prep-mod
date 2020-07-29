@@ -71,6 +71,7 @@ Rails.application.routes.draw do
   end
 
   resources :patients
+  resources :patients_imports, only: [:new, :create]
   get :invite_patient_to_register, to: 'patients#invite_patient_to_register', as: :invite_patient_to_register
   resources :clinics, only: [:index, :new, :create, :edit, :update, :destroy] do
     get :activity
