@@ -1,20 +1,15 @@
 class ClinicsController < ClinicManagementController
   load_and_authorize_resource except: [:index]
   before_action :get_clinic, only: [:edit, :update]
-  helper_method :sort_column, :sort_direction
 
   def index
     # TODO: The details of the searching here should be moved to the model,
     # probably using scopes for a lot of this.
     @q = Clinic.ransack(params[:q])
-    @clinics = Clinic.all.order(:clinic_date)
-
-    if params[:clinic_date]
-      @clinics = Clinic.past_or_upcoming(params[:clinic_date]).order(:clinic_date)
-    end
 
     if @q.result
-      @clinics = @q.result.order(:clinic_date)
+      params[:clinic_date] ? @clinics = @q.result.past_or_upcoming(params[:clinic_date]).order(:clinic_date) :
+                              @clinics = @q.result.order(:clinic_date)
     end
   end
 
@@ -105,14 +100,6 @@ class ClinicsController < ClinicManagementController
     return unless clinic_params[:clinic_events_attributes]
     patients_to_finish = clinic_params[:clinic_events_attributes].values.select{|h| h[:category]}.collect{|h| h[:patient_id].to_i}
     @clinic.appointments.where(patient_id: patients_to_finish, queue_state: 'at_clinic').each{|a| a.finish!}
-  end
-
-  def sort_column
-    Clinic.where(id: params[:id]).column_names.include?(params[:sort]) ? params[:sort] : nil
-  end
-
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : nil
   end
 
   def get_clinic
