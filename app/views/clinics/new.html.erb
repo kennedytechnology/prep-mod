@@ -4,9 +4,9 @@
 <h1 class="main-title"> <%= @page_title %> </h1>
 
 <% if @clinic.errors.any? || @errors.try(:any?) %>
-  <div id="error_explanation" class="p-4 border-2 bg-red-100 border-red-500 mb-4"> 
+  <div id="error_explanation" class="p-4 border-2 bg-red-100 border-red-500 mb-4">
     <h2 class="text-lg font-bold"><%= pluralize(@clinic.errors.count + @errors.try(:size).to_i, "error") %> prohibited this article from being saved:</h2>
- 
+
     <ul class="list-disc ml-8">
     <% @clinic.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
@@ -85,7 +85,7 @@
                 </div>
 
                 <p class="label">Start Time <span class="field-required">*</span></p>
-                <% 
+                <%
                     start_time = Time.parse("1 AM").to_i
                     end_time = Time.parse("12 PM").to_i
                     values = (start_time..end_time).step(15.minutes)
@@ -148,7 +148,7 @@
                     <%= f.radio_button :appointments_available, "yes_required", class: "form-radio" %>
                     <%= f.label :appointments_available, "Yes, required", for: "clinic_appointments_available_yes_required" %>
                 </div>
-                
+
                 <div>
                     <%= f.radio_button :appointments_available, "yes_optional", class: "form-radio" %>
                     <%= f.label :appointments_available, "Yes, optional", for: "clinic_appointments_available_yes_optional" %>
@@ -238,7 +238,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <%= f.label :students_registered, "Number of Patients Registered", class: "block" %>
-                    <%= f.number_field :students_registered, placeholder: "Number of Patients Registered", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
+                    <%= f.number_field :students_registered, placeholder: "Number of Patients Registered", min:"0", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
                 </div>
 
                 <div>
