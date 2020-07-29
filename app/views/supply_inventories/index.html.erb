@@ -12,6 +12,8 @@
   </div>
 <% end %>
 
+<%= link_to 'Upload Supplies', new_supply_inventories_import_path, class: "w-2/12 button-primary" %>
+
 <%= form_with model: @supply_inventory, local: true, class: "py-5", data: {controller: "inventory-new-entry", target: "inventory-new-entry.form"} do |f| %>
     <div class="sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 lg:gap-6">
         <div>
