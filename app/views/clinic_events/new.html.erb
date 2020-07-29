@@ -5,9 +5,9 @@
     <%= form_for(@clinic_event, remote: false) do |f| %>
 
         <% if @clinic_event.errors.any? %>
-        <div id="error_explanation" class="p-4 border-2 bg-red-100 border-red-500 mb-4"> 
+        <div id="error_explanation" class="p-4 border-2 bg-red-100 border-red-500 mb-4">
             <h2 class="text-lg font-bold"><%= pluralize(@clinic_event.errors.count, "error") %> prohibited this article from being saved:</h2>
-        
+
             <ul class="list-disc ml-8">
             <% @clinic_event.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>
@@ -25,8 +25,8 @@
 
             <div class="w-3/12">
                 <%= f.label :event_date, "Date of Encounter", class: "block" %>
-                <%= f.text_field :event_date, class: "form-input w-full", placeholder: "MM/DD/YYYY", 
-                        required: true, data: { controller: "flatpickr" }%>
+                <%= f.text_field :event_date, class: "form-input w-full", placeholder: "MM/DD/YYYY",
+                        required: true, data: { controller: "flatpickr", flatpickr_min_date: "today" } %>
             </div>
 
             <div class="w-3/12">
