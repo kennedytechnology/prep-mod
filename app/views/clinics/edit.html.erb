@@ -240,11 +240,6 @@
             <h3 class="title"> Registration and Staff </h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <%= f.label :students_registered, "Number of Patients Registered", class: "block" %>
-                    <%= f.number_field :students_registered, placeholder: "Number of Patients Registered", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
-                </div>
-
-                <div>
                     <%= f.label :lead_vaccinator_name, class: "block" do %>
                         <span> Lead Tester’s Name </span>
                         <span class="field-required">*</span>
