@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_24_125056) do
+ActiveRecord::Schema.define(version: 2020_07_30_131516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -177,7 +177,6 @@ ActiveRecord::Schema.define(version: 2020_07_24_125056) do
     t.date "clinic_date"
     t.integer "venue_id"
     t.string "lead_vaccinator_name"
-    t.integer "students_registered"
     t.string "clinic_status"
     t.integer "user_id"
     t.text "outcome_comments"
