@@ -16,10 +16,10 @@
           <span class=" pt-16 font-bold text-xl">Waiting List:</span> <span class="mr-8 text-xl"><%= @patients_waiting_list_count %> </span>
         </div>
         <div>
-          <% if params[:display_patients] == "waiting_list" %>
-                <%= link_to 'See all patients', patients_path(clinic_id: @clinic.id), class: "button-action" %>
+          <% if params[:display_waiting_list] == "true" %>
+                <%= link_to 'See Registration List', patients_path(clinic_id: @clinic.id), class: "button-action" %>
           <% else %>
-                <%= link_to 'See Patients On Waiting List', patients_path(clinic_id: @clinic.id, display_patients: "waiting_list"), class: "button-action" %>
+                <%= link_to 'See Waiting List', patients_path(clinic_id: @clinic.id, display_waiting_list: "true"), class: "button-action" %>
           <% end %>
         </div>
      </div>

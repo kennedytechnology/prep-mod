@@ -1,30 +1,16 @@
 class PatientsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource except: [:anonymized_index]
-  # before_action :patients_listing, only: [:index, :upload_record]
+  before_action :patients_listing, only: [:index, :upload_record]
   layout "clinic_management"
 
   def index
-    @page_title = @clinic ? "Registration List" : "Patient Record Search"
-    @patients = @clinic ? @clinic.patients.with_appointments : Patient.with_appointments
-    @q = Patient.ransack(params[:q])
-
-    case
-      when params[:clinic_id]
-        @clinic = Clinic.includes(appointments: :patient).find(params[:clinic_id])
-        @patients = @clinic.patients.order(params.dig(:q, :s)).paginate(page: params[:page], per_page: 250)
-      when @q.result
-        @patients = @q.result.page(params[:page]).to_a.uniq
-      else
-        @patients = Patient.all.paginate(page: params[:page], per_page: 50)
-      end
-
-    @patients = @patients.take(40)
-    @patients.uniq!
+    @patients_waiting_list_count = @clinic.patients.on_waiting_list.count if @clinic
+    @patients_appointments_count = @clinic.patients.with_appointments.count if @clinic
 
     respond_to do |format|
       format.html
-      format.csv { send_data @clinic.patients.to_csv, filename: "news_signups-#{Date.today}.csv" }
+      format.csv { send_data @clinic.patients.with_appointments.to_csv, filename: "patients_registration_list_#{Date.today.strftime("%d_%m_%Y")}.csv" }
       format.xlsx do
         @patients = @clinic.patients.on_waiting_list
         render  template: 'patients/index',
@@ -32,20 +18,6 @@ class PatientsController < ApplicationController
                 xlsx: "patients_waiting_list_#{Date.today.strftime("%d_%m_%Y")}.xlsx",
                 filename: "patients_waiting_list_#{Date.today.strftime("%d_%m_%Y")}.xlsx",
                 xlsx_author: current_user.name
-      end
-    end
-
-    if params[:date_of_birth]
-      @patients = Patient.with_appointments(params[:date_of_birth]).order(:date_of_birth)
-    end
-
-    if @clinic
-      @patients_waiting_list_count = @clinic.patients.on_waiting_list.count
-      @patients_appointments_count = @clinic.patients.with_appointments.count
-
-      if params[:display_patients] == "waiting_list"
-        @page_title = "Patients Waiting List"
-        @patients = @clinic.patients.on_waiting_list
       end
     end
   end
@@ -131,7 +103,24 @@ class PatientsController < ApplicationController
 
   private
 
-  def patients_listing;end
+  def patients_listing
+    @clinic = Clinic.includes(appointments: :patient).find(params[:clinic_id]) if params[:clinic_id]
+    @page_title = "Patient Record Search"
+    @q = Patient.ransack(params[:q])
+
+    case 
+    when params[:clinic_id] && params[:display_waiting_list] == "true"
+      @page_title = "Patients Waiting List"
+      @patients = @clinic.patients.on_waiting_list.order(params.dig(:q, :s))
+    when params[:clinic_id]
+      @page_title = "Registration List"
+      @patients = @clinic.patients.with_appointments.order(params.dig(:q, :s)).paginate(page: params[:page], per_page: 250)
+    when @q.result
+      @patients = @q.result.page(params[:page]).to_a.uniq
+    else
+      @patients = @clinic ? @clinic.patients.with_appointments.order(params.dig(:q, :s)) : Patient.with_appointments..order(params.dig(:q, :s))
+    end
+  end
 
   def patient_params
     params.require(:patient).permit(:clinic, :clinic_id, :user_id, :student_id,
