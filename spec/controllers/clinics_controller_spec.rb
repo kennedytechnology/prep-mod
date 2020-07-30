@@ -76,7 +76,7 @@ RSpec.describe ClinicsController, type: :controller do
   pending do
     should permit(:clinic_status, :start_time, :end_time,
       :address, :lead_vaccinator_name,
-      :clinic_date, :students_registered, :public_or_private,
+      :clinic_date, :public_or_private,
       :incidents_comments, :county, :venue_name, :zip,
       :city, :state, :appointment_frequency_minutes,
       :appointment_slots, :contact_person, :contact_phone_number,

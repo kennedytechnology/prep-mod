@@ -110,7 +110,7 @@ class ClinicsController < ClinicManagementController
     params.require(:clinic).permit(
       :clinic_status, :start_time, :end_time, :location, :public_or_private,
       :address, :lead_vaccinator_name, :social_distancing, :provider_enrollment_id,
-      :clinic_date, :students_registered, :default_test_kit,
+      :clinic_date, :default_test_kit,
       :incidents_comments, :county, :venue_name, :zip,
       :city, :state, :appointment_frequency_minutes, :active_queue_patients_count,
       :appointment_slots, :contact_person, :contact_phone_number,

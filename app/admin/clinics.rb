@@ -1,13 +1,12 @@
 ActiveAdmin.register Clinic do
 
   permit_params :clinic_date, :venue_id, :venue_name, :lead_vaccinator_name,
-    :students_registered, :clinic_status, :user_id, :outcome_comments,
+    :clinic_status, :user_id, :outcome_comments,
     :incidents_comments, :start_time, :end_time, :duration, user_ids: []
 
   filter :clinic_date
   filter :venue
   filter :lead_vaccinator_name
-  filter :students_registered
   filter :clinic_status
   
   index do
@@ -17,7 +16,6 @@ ActiveAdmin.register Clinic do
     column :venue
     column :place_name
     column :lead_vaccinator_name
-    column :students_registered
     column :clinic_status
     actions
   end
@@ -30,7 +28,6 @@ ActiveAdmin.register Clinic do
       row :venue_name
       row :address
       row :lead_vaccinator_name
-      row :students_registered
       row :clinic_status
       row :users
       row :outcome_comments
@@ -56,7 +53,6 @@ ActiveAdmin.register Clinic do
       f.input :address
       f.input :venue_name
       f.input :lead_vaccinator_name
-      f.input :students_registered
       f.input :clinic_status
       f.input :outcome_comments
       f.input :incidents_comments

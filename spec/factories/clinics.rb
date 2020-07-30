@@ -6,7 +6,6 @@ FactoryBot.define do
     clinic_date { Faker::Date.between(from: 1.month.ago, to: 6.months.from_now) }
     lead_vaccinator_name { Faker::Name.unique.name }
     public_or_private {%w(Public Private).sample}
-    students_registered { Faker::Number.normal(mean: 100, standard_deviation: 50) }
     clinic_status { %w(Pending Completed Cancelled).sample }
     outcome_comments { Faker::Lorem.paragraph(sentence_count: 0, random_sentences_to_add: 9, supplemental: true) }
     incidents_comments { Faker::Lorem.paragraph(sentence_count: 0, random_sentences_to_add: 9, supplemental: true) }
