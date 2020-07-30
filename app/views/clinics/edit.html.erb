@@ -180,34 +180,49 @@
             </div>
         </div>
 
-        <div class="field-side-by-side">
-            <div>
-                <h1 class="title">Contact Information</h1>
+        <div class="pb-3 border-b border-gray-200 mb-6 flex flex-wrap">
+            <h1 class="form-section-title">Contact Information</h1>
+            <div class="w-5/12 mr-6">
                 <%= f.label :contact_person do %>
                     <span> Contact Person </span>
                     <span class="field-required">*</span>
                 <% end %>
                 <%= f.text_field :contact_person, placeholder: "Contact Person", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
-
+            </div>
+            <div class="w-5/12 mr-6">
+                <%= f.label :contact_phone_number do %>
+                    <span> Contact Phone Number </span>
+                    <span class="field-required">*</span>
+                <% end %>
+                <%= f.text_field :contact_phone_number, placeholder: "Contact Number", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
+            </div>
+            <div class="w-5/12 mr-6">
+                <%= f.label :contact_email do %>
+                    <span> Contact E-mail </span>
+                    <span class="field-required">*</span>
+                <% end %>
+                <%= f.email_field :contact_email, placeholder: "Contact Email Address", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
+            </div>
+            <div class="w-5/12 mr-6">
                 <%= f.label :backup_contact_person do %>
                     <span> Back-Up Contact Person </span>
                     <span class="field-required">*</span>
                 <% end %>
                 <%= f.text_field :backup_contact_person, placeholder: "Back-Up Contact Person", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
             </div>
-            <div>
-                <h1 class="title"> &nbsp; </h1>
-                <%= f.label :contact_phone_number do %>
-                    <span> Contact Phone Number </span>
-                    <span class="field-required">*</span>
-                <% end %>
-                <%= f.text_field :contact_phone_number, placeholder: "Contact Number", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
-
+            <div class="w-5/12 mr-6">
                 <%= f.label :backup_contact_phone_number do %>
                     <span> Back-Up Contact Phone Number </span>
                     <span class="field-required">*</span>
                 <% end %>
                 <%= f.text_field :backup_contact_phone_number, placeholder: "Back-Up Contact Number", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
+            </div>
+            <div class="w-5/12 mr-6">
+                <%= f.label :backup_contact_email do %>
+                    <span> Back-Up Contact E-mail </span>
+                    <span class="field-required">*</span>
+                <% end %>
+                <%= f.email_field :backup_contact_email, placeholder: "Back-Up Contact Email Address", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
             </div>
         </div>
 
