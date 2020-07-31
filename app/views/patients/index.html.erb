@@ -70,7 +70,7 @@
             <th><%= sort_link(@q, :date_of_birth, 'Age', default_order: :desc) %></th>
             <th><%= sort_link(@q, :sex, 'Gender', default_order: :desc) %></th>
             <% if @clinic %>
-            <th><%= sort_link(@q, :appointment_at, 'Appointment', default_order: :desc) %></th>
+            <th><%= sort_link(@q, 'appointments.appointment_at', 'Appointment', default_order: :desc) %></th>
             <% end %>
             <th>&nbsp;</th>
           </tr>
