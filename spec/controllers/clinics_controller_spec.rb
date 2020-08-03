@@ -3,7 +3,12 @@ require 'rails_helper'
 RSpec.describe ClinicsController, type: :controller do
   let(:user) { create(:user) }
   let(:clinic) { create(:clinic) }
-  let(:valid_attributes) { attributes_for(:clinic) }
+  let(:valid_attributes) { attributes_for(:clinic).merge({
+    service_ids: [create(:clinic_service).id],
+    age_group_ids: [create(:clinic_age_group).id]
+    }) 
+  }
+
   before { sign_in user }
 
   describe "GET #index" do
@@ -22,7 +27,6 @@ RSpec.describe ClinicsController, type: :controller do
 
   describe "POST #create" do
     context "with valid attributes" do
-      let(:provider_enrollment) { create(:provider_enrollment) }
       it "create new clinic" do
         expect {
           post :create, params: { clinic: valid_attributes, clinic_dates: [
@@ -73,27 +77,35 @@ RSpec.describe ClinicsController, type: :controller do
     end
   end
 
-  pending do
-    should permit(:clinic_status, :start_time, :end_time,
-      :address, :lead_vaccinator_name,
-      :clinic_date, :public_or_private,
-      :incidents_comments, :county, :venue_name, :zip,
-      :city, :state, :appointment_frequency_minutes,
-      :appointment_slots, :contact_person, :contact_phone_number,
-      :backup_contact_person, :backup_contact_phone_number,
-      :start_hour_minute, :start_meridiem,
-      :end_hour_minute, :end_meridiem, :start_hour, :start_minute, :end_hour, :end_minute,
-      :appointments_available, users: [], :service_ids => [],
-      :age_group_ids => [], :primary_group_ids => [],
-      clinic_personnel_attributes: [:id, :name, :_destroy],
-      clinic_events_attributes: [:id, :patient_id, :outcome, :safety_kit_received,
-        :contact_type, :clinic_staff_id, :notes, :test_name,
-        :test_type, :test_processing, :category],
-      test_kits_attributes: [:id, :test_name, :test_manufacturer,
-        :test_lot_number, :test_type, :test_processing,
-        :test_expiration_date, :test_kits_quantity, :tests_administered,
-        :unusable_tests, :tests_returned, :_destroy]).
-      for(:create, params: {clinic: valid_attributes}).
-      on(:clinic)
+  describe "permitted parameters" do
+    it do
+      should permit(
+        :clinic_status, :start_time, :end_time, :location, :public_or_private,
+        :address, :lead_vaccinator_name, :social_distancing, :provider_enrollment_id,
+        :clinic_date, :default_test_kit,
+        :incidents_comments, :county, :venue_name, :zip,
+        :city, :state, :appointment_frequency_minutes, :active_queue_patients_count,
+        :appointment_slots, :contact_person, :contact_phone_number,
+        :backup_contact_person, :backup_contact_phone_number,
+        :start_hour_minute, :start_meridiem, :venue_type,
+        :end_hour_minute, :end_meridiem, :start_hour, :start_minute, :end_hour, :end_minute,
+        :contact_email, :backup_contact_email,
+        :appointments_available, users: [], :service_ids => [],
+        :age_group_ids => [], :primary_group_ids => [],
+        clinic_personnel_attributes: [:id, :name, :_destroy],
+        clinic_events_attributes: [:id, :patient_id, :outcome, :safety_kit_received,
+          :contact_type, :clinic_staff_id, :notes, :test_name,
+          :test_type, :test_processing, :category],
+        test_kits_attributes: [:id, :test_name, :test_manufacturer,
+          :test_lot_number, :test_type, :test_processing,
+          :test_expiration_date, :test_kits_quantity, :tests_administered,
+          :unusable_tests, :tests_returned, :_destroy]
+          ).for(:create, params: {
+            clinic: valid_attributes, clinic_dates: [
+              Faker::Date.between(from: Date.today, to: 6.months.from_now)
+            ] 
+          } 
+        ).on(:clinic)
+    end
   end
 end

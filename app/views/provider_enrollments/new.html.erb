@@ -31,7 +31,7 @@
       </div>
 
       <div class="field-fullwidth">
-        <h2 class="title mb-4"> Population(s) Served <span class="field-required">*</span></h2>
+        <h2 class="title mb-4"> Open to <span class="field-required">*</span></h2>
         <div class="checkboxes-container">
           <%= collection_check_boxes(:provider_enrollment, :clinic_age_group_ids, ClinicAgeGroup.all, :id, :name) do |b| %>
             <div>

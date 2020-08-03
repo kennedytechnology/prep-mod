@@ -3,22 +3,24 @@ class Clinic < ApplicationRecord
 
   belongs_to :provider_enrollment, optional: true
   has_many :clinic_vaccines
-  has_many :clinic_personnel, class_name: "ClinicStaff"
   has_many :clinic_events
   has_many :appointments, dependent: :destroy
   has_many :patients, through: :appointments
+  has_many :test_kits, dependent: :destroy
+  has_many :customized_report
+  has_many :clinic_personnel, class_name: "ClinicStaff"
   has_and_belongs_to_many :users
   has_and_belongs_to_many :services, class_name: "ClinicService"
   has_and_belongs_to_many :age_groups, class_name: "ClinicAgeGroup"
-  has_and_belongs_to_many :primary_groups, class_name: "ClinicPrimaryGroup"
-  has_many :test_kits, dependent: :destroy
-  has_many :customized_report
 
+  accepts_nested_attributes_for :services
+  accepts_nested_attributes_for :age_groups
   accepts_nested_attributes_for :clinic_personnel, allow_destroy: true,
     reject_if: lambda {|attributes| attributes['name'].blank?}
-
-  accepts_nested_attributes_for :clinic_events, reject_if: lambda {|attributes| attributes['category'].blank?}
-  accepts_nested_attributes_for :test_kits, allow_destroy: true, reject_if: :all_blank
+  accepts_nested_attributes_for :clinic_events, 
+    reject_if: lambda {|attributes| attributes['category'].blank?}
+  accepts_nested_attributes_for :test_kits, allow_destroy: true, 
+    reject_if: :all_blank
 
   geocoded_by :address
   after_validation :geocode, if: :should_geocode?
@@ -28,11 +30,14 @@ class Clinic < ApplicationRecord
     :end_hour_minute, :end_meridiem
 
   validates :public_or_private, presence: true
-  # validates :clinic_date, presence: true
   validates :venue_name, presence: true
   validates :county, presence: true
   validates :address, presence: true
   validates :lead_vaccinator_name, presence: true
+  # validates :clinic_date, presence: true
+
+  validates_presence_of :services, message: '- Please select: Services Provided'
+  validates_presence_of :age_groups, message: '- Please select: Open to'
 
   scope :search_for, ->(search_string) {
     all.select{ |c| c.search_string.downcase.include?(search_string.downcase) }
