@@ -9,7 +9,7 @@ class Patient < ApplicationRecord
   has_one_attached :insurance_card_back
   belongs_to :user, optional: true
 
-  accepts_nested_attributes_for :patient_family_members
+  accepts_nested_attributes_for :patient_family_members, allow_destroy: true, reject_if: :all_blank
 
   validates :first_name, presence: true
   validates :last_name, presence: true

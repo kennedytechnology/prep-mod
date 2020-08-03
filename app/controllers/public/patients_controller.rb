@@ -160,7 +160,7 @@ class Public::PatientsController < ApplicationController
         :insurance_company_name, :group_number_for_insurance,
         :member_id_for_insurance, :patient_id,
         :has_fever_over, :has_difficult_breathing, :had_traveled_to_affected_place, 
-        :had_contact_with_confirmed_case, :has_risk_factor, :is_age_60_or_more, :has_other_reason] )
+        :had_contact_with_confirmed_case, :has_risk_factor, :is_age_60_or_more, :has_other_reason, :_destroy] )
   end
 
   def appointment_params

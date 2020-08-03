@@ -20,7 +20,14 @@ export default class extends Controller {
   }
 
   onRemoveFamilyMember(e) {
-    let memberObjectId = document.getElementsByClassName(`member-${e.currentTarget.dataset.member}`)[0];
-    memberObjectId.parentNode.removeChild(memberObjectId);
+    let memberObjectId = document.getElementsByClassName(`member-${e.currentTarget.dataset.member}`)[0],
+        requiredFields = memberObjectId.querySelectorAll("[required]");
+
+    memberObjectId.querySelector("input[type=hidden]").value = "true";
+    memberObjectId.style.display = "none";
+
+    for( let i = 0 ; i < requiredFields.length; i++ ) {
+      requiredFields[i].required = false;
+    }
   }
 }
