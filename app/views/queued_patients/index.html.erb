@@ -21,6 +21,7 @@
         <% button_label = event.titleize %>
         <% button_label = "Close Clinic" if event == "close" %>
         <% button_label = "Open Clinic" if event == "open" %>
+        <% button_label = "Reopen for Check-In Only" if event == "reopen_for_checkin_only" %>
        <%= link_to button_label, "Javascript:", class: "button-action", 
           data: { action: "click->provider-enrollment-new-entry#toggleOpenCheckinModal", event: event, btnlabel: button_label, clinic: @clinic.id, eventcapitalized: event.humanize(capitalize: false) } %>
     <% end %>
