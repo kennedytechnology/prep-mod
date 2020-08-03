@@ -1,5 +1,6 @@
 class SupplyInventoryEvent < ApplicationRecord
   belongs_to :supply_inventory
+  belongs_to :clinic, optional: true
 
   validates :quantity_used, :quantity_lost, 
             :quantity_destroyed, :quantity_loaned,

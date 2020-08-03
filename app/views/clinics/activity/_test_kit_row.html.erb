@@ -1,20 +1,15 @@
 <tr class="new_test_kit_row">
-    <td> <%= f.text_field :test_name, class: "form-input w-full" %> </td>
-    <td> <%= f.text_field :test_lot_number, class: "form-input w-full" %> </td>
-    <td> <%= f.number_field :test_kits_quantity, min: 0, oninput: "validity.valid||(value='');", class: "form-input w-full" %> </td>
+    <td> <%= f.text_field :test_name, disabled: true, class: "form-input w-full" %> </td>
+    <td> <%= f.text_field :test_lot_number, disabled: true, class: "form-input w-full" %> </td>
+    <td> <%= f.number_field :test_kits_quantity, disabled: true, min: 0, oninput: "validity.valid||(value='');", class: "form-input w-full" %> </td>
     <td> <%= f.number_field :tests_administered, min: 0, oninput: "validity.valid||(value='');", class: "form-input w-full",
         value: f.object.tests_administered %></td>
     <td> <%= f.number_field :unusable_tests, min: 0, oninput: "validity.valid||(value='');", class: "form-input w-full" %> </td>
     <td> <%= f.number_field :tests_returned, min: 0, oninput: "validity.valid||(value='');", class: "form-input w-full" %> </td>
-    <td>
-        <%= f.hidden_field :_destroy %>
-        <%= link_to '#', class: 'remove_test_kit_record button-action mb-4' do %>
-            <span class="text-xs"> Delete </span>
-        <% end %>
-    </td>
+    
     <td class="flex w-full">
         <%= radio_button_tag "clinic[default_test_kit]", f.object.id, f.object.is_default, class: "radio-deluxe hidden", id: "test-kit-option-#{f.object.id}" %>
-        <label for="test-kit-option-<%= f.object.id %>" class="pt-4">
+        <label for="test-kit-option-<%= f.object.id %>" class="pt-4 pl-4">
             <span></span>
         </label>
     </td>

@@ -4,6 +4,7 @@ class Clinic < ApplicationRecord
   belongs_to :provider_enrollment, optional: true
   has_many :clinic_vaccines
   has_many :clinic_events
+  has_many :supply_inventory_events
   has_many :appointments, dependent: :destroy
   has_many :patients, through: :appointments
   has_many :test_kits, dependent: :destroy
@@ -13,8 +14,8 @@ class Clinic < ApplicationRecord
   has_and_belongs_to_many :services, class_name: "ClinicService"
   has_and_belongs_to_many :age_groups, class_name: "ClinicAgeGroup"
   has_and_belongs_to_many :primary_groups, class_name: "ClinicPrimaryGroup"
-  has_many :test_kits
   has_many :customized_report
+  has_and_belongs_to_many :supply_inventories
   
   accepts_nested_attributes_for :services
   accepts_nested_attributes_for :age_groups
@@ -161,6 +162,18 @@ class Clinic < ApplicationRecord
 
   def name
     "#{venue_name} on #{clinic_date}"
+  end
+
+  def setup_test_kits
+    existing_test_kits = test_kits.collect(&:test_name)
+    needed_test_kits = supply_inventories.collect(&:item_name)
+    # debugger
+    supply_inventories_to_add = supply_inventories.reject{|si| existing_test_kits.include?(si.item_name) }
+    test_kits_to_remove = test_kits.reject{|tk| needed_test_kits.include?(tk.test_name) }
+    supply_inventories_to_add.each do |si|
+      test_kits.create!(test_name: si.item_name, test_type: si.item_type, test_lot_number: si.lot_number, test_kits_quantity: si.quantity, test_expiration_date: si.expiration_date)
+    end
+    test_kits_to_remove.each(&:destroy)
   end
 
   def appointment_times

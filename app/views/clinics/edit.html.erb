@@ -76,6 +76,7 @@
                     <span> Clinic Date </span>
                     <span class="field-required">*</span>
                 <% end %>
+
                 <%= f.text_field :clinic_date, class: "form-input", placeholder: "MM/DD/YYYY", required: true,
                                 data: { target: "review-form.validates",
                                     controller: "flatpickr",
@@ -231,7 +232,7 @@
             <div class="grid grid-cols-2 gap-4 items-start">
                 <div class="col-span-2">
                     <%= f.label :incidents_comments, "Incidents Comments", class: "block" %>
-                    <%= f.text_area :incidents_comments, placeholder: "Enter Details Here", class: "form-textarea w-1/2", required: true, "data-target": "review-form.validates" %>
+                    <%= f.text_area :incidents_comments, placeholder: "Enter Details Here", class: "form-textarea w-1/2", "data-target": "review-form.validates" %>
                 </div>
             </div>
         </div>
@@ -259,6 +260,9 @@
 
         </div>
 
+        <%= render partial: 'supply_inventories', locals: {f: f} %>
+
+<!--
         <div class="field-fullwidth">
             <h1 class="title"> Test Kits </h1>
             <div class="flex justify-end mb-4">
@@ -292,12 +296,12 @@
                 </div>
             </div>
         </div>
-
+-->
         <%= hidden_field_tag "reviewed", false, id: "reviewed_form_hidden_tag" %>
 
         <div class="flex justify-end mt-8">
             <%# submit_tag 'Preview & Submit', name: 'preview_button', class: "button-primary", data: {action: "click->review-form#onDisableFormPage click->review-form#openModal", target: "review-form.submitButton"} %>
-            <%= f.submit "Review & Submit", class: "button-primary" %>
+            <%= f.submit "Update", class: "button-primary" %>
             <%= link_to "Cancel", clinics_path, class: "button-primary" %>
         </div>
     <% end %>

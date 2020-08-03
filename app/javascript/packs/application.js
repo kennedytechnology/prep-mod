@@ -22,5 +22,4 @@ require("awesomplete")
 // const imagePath = (name) => images(name, true)
 import '../css/application.scss'
 require("packs/direct_upload")
-require("packs/new_kit")
 import "controllers"

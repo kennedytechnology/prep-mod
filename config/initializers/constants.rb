@@ -49,8 +49,9 @@ CLINIC_EVENTS = [
     "Other"
   ]
 
-  INVENTORY_ITEM_TYPES = ["Test Kit-PCR", "Test Kit - Blood", "Safety Kit", "Supplies", "Influenza", "Tdap", 
+  VACCINE_ITEM_TYPES = ["Safety Kit", "Supplies", "Influenza", "Tdap", 
     "MCV4", "HPV", "IPV", "Var", "MMR", "Hep B", "Hep A", "DTaP", "Hib", "Pnemococcal", "Zoster", "Other" ]
+  TEST_ITEM_TYPES = ["Serological", "PCR"]
   INVENTORY_MANUFACTURERS = ["GlaxoSmithKline", "MedImmune", "Pfizer", "Sanofi Pasteur", "Seqiris"]
   INVENTORY_PACKAGINGS = ["Unit", "Box", "Case", "Other"]
   INVENTORY_SOURCES = ["Private Purchase", "VFC", "Borrowed", "Other"]

@@ -90,7 +90,7 @@ RSpec.describe ClinicsController, type: :controller do
         :start_hour_minute, :start_meridiem, :venue_type,
         :end_hour_minute, :end_meridiem, :start_hour, :start_minute, :end_hour, :end_minute,
         :contact_email, :backup_contact_email,
-        :appointments_available, users: [], :service_ids => [],
+        :appointments_available, users: [], :service_ids => [], supply_inventory_ids: [],
         :age_group_ids => [], :primary_group_ids => [],
         clinic_personnel_attributes: [:id, :name, :_destroy],
         clinic_events_attributes: [:id, :patient_id, :outcome, :safety_kit_received,

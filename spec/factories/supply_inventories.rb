@@ -3,7 +3,7 @@ FactoryBot.define do
     association :user, factory: :user
 
     received_at { Faker::Date.between(from: 30.days.ago, to: Date.today) }
-    item_type { INVENTORY_ITEM_TYPES.sample }
+    item_type { VACCINE_ITEM_TYPES.sample }
     item_name { "Item Name" }
     manufacturer { INVENTORY_MANUFACTURERS.sample }
     lot_number { "x34RghY" }

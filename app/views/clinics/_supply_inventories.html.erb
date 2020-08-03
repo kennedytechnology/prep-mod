@@ -1,0 +1,53 @@
+<div class="field-fullwidth mt-8" data-controller="habtm-form">
+    <h1 class="title"> Clinic Inventory </h1>
+    <div class="flex mb-8 mt-8">
+        <div class="w-2/12">
+            <%= select_tag(:new_clinic_supply_inventory, options_for_select(SupplyInventory.all.sort_by(&:category).collect{|si| [si.name, si.id]}), data: {target: "habtm-form.newItemId", action: "habtm-form#updateDetails"}, class: "form-select w-full") %>
+        </div>
+        <div class="w-8/12 pl-4 pt-3" id="new_supply_inventory_details">
+            <% SupplyInventory.all.each do |supply_inventory| %>
+                <div class="hidden" data-id="<%= supply_inventory.id %>" data-target="habtm-form.newItemDetails">
+                    
+                    <strong>Lot #: </strong> <%= supply_inventory.lot_number %> •
+                    <strong>Type: </strong> <%= supply_inventory.item_type %> •
+                    <strong>Exp. Date: </strong> <%= supply_inventory.expiration_date %> •
+                    <strong>Qty: </strong><%= supply_inventory.quantity %>
+                </div>
+            <% end %>
+        </div>
+        <div class="w-1/12">
+            <span class="button-action" data-action="click->habtm-form#addItem">Add Item</span>
+        </div>
+    </div>
+    <table class="table" style="overflow: visible">
+        <thead>
+            <tr>
+                <th> Category </th>
+                <th> Name </th>
+                <th> Lot Number </th>
+                <th> Type </th>
+                <th> Expiration Date </th>
+                <th> # of Items </th>
+                <th> Action </th>
+            </tr>
+        </thead>
+        <% SupplyInventory.all.each do |supply_inventory| %>
+            <tr class="hidden" data-target="habtm-form.detailRow" data-id="<%= supply_inventory.id %>">
+                <td><%= supply_inventory.category %></td>
+                <td><%= supply_inventory.item_name %></td>
+                <td><%= supply_inventory.lot_number %></td>
+                <td><%= supply_inventory.item_type %></td>
+                <td><%= supply_inventory.expiration_date %></td>
+                <td><%= supply_inventory.remaining_quantity_sum %></td>
+                <td>
+                    <a class="button-action" data-action="habtm-form#removeItem" data-id="<%= supply_inventory.id %>">Remove</a>
+                </td>
+            </tr>
+        <% end %>
+        <% %>
+
+    </table>
+    <div class="hidden">
+    <%= f.collection_check_boxes(:supply_inventory_ids, SupplyInventory.all, :id, :name) %>
+    </div>
+</div>

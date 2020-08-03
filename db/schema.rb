@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_30_131516) do
+ActiveRecord::Schema.define(version: 2020_08_03_212322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -214,6 +214,11 @@ ActiveRecord::Schema.define(version: 2020_07_30_131516) do
     t.string "backup_contact_email"
     t.integer "appointments_count"
     t.datetime "canceled_at"
+  end
+
+  create_table "clinics_supply_inventories", id: false, force: :cascade do |t|
+    t.bigint "clinic_id", null: false
+    t.bigint "supply_inventory_id", null: false
   end
 
   create_table "clinics_users", id: false, force: :cascade do |t|
@@ -519,6 +524,7 @@ ActiveRecord::Schema.define(version: 2020_07_30_131516) do
     t.string "county"
     t.string "venue_name"
     t.bigint "user_id"
+    t.string "category"
     t.index ["user_id"], name: "index_supply_inventories_on_user_id"
   end
 
@@ -533,6 +539,7 @@ ActiveRecord::Schema.define(version: 2020_07_30_131516) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "quantity_returned"
+    t.integer "clinic_id"
     t.index ["supply_inventory_id"], name: "index_supply_inventory_events_on_supply_inventory_id"
   end
 

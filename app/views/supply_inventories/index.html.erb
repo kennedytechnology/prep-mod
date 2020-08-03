@@ -35,7 +35,7 @@
                 <span class="text-gray-500"> Item Type </span>
                 <span class="text-brand-red-500">*</span>
             <% end %>
-            <%= f.select :item_type, INVENTORY_ITEM_TYPES, {prompt: "Select"}, {class: "block form-select w-full", required: true,
+            <%= f.select :item_type, VACCINE_ITEM_TYPES, {prompt: "Select"}, {class: "block form-select w-full", required: true,
                 data: {action: "change->inventory-new-entry#updateModalField
                                 blur->inventory-new-entry#validateInputField"}} %>
                 <p class="error-message hidden"> This field is required! </p>

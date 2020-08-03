@@ -1,6 +1,7 @@
 class SupplyInventory < ApplicationRecord
   has_many :supply_inventory_events
   belongs_to :user
+  has_and_belongs_to_many :clinics
 
   validates_presence_of :item_type, :product_name, :manufacturer,
     :lot_number, :packaging, :source,
@@ -41,5 +42,9 @@ class SupplyInventory < ApplicationRecord
 
   def remaining_quantity_sum
     quantity - (quantity_lost_sum + quantity_used_sum + quantity_loaned_sum + quantity_returned_sum + quantity_destroyed_sum)
+  end
+
+  def name
+    category + ": " + item_name
   end
 end

@@ -8,7 +8,7 @@
       <div class="card-content">
         <%= form_with(model: @clinic, url: clinic_path(@clinic), method: :put) do |f| %>
           <%= render partial: 'clinics/activity/details', locals: {f: f} %>
-
+          <%# render partial: 'clinics/supply_inventories', locals: {f: f} %>
           <%= render partial: 'clinics/activity/test_kits', locals: {f: f} %>
 
             <div class="button-container flex justify-end">

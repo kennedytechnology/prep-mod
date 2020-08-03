@@ -255,6 +255,10 @@
             <%= link_to_add_row('Add more staff', f, :clinic_personnel, class: 'button-add-more-staff') %>
         </div>
 
+        <%= render partial: 'supply_inventories', locals: {f: f} %>
+
+
+<!--
         <div class="field-fullwidth">
             <h1 class="title"> Test Kits </h1>
             <div class="flex justify-end mb-4">
@@ -286,12 +290,12 @@
                 </div>
             </div>
         </div>
-
+-->
         <%= hidden_field_tag "reviewed", false, id: "reviewed_form_hidden_tag" %>
 
         <div class="flex justify-end mt-8">
             <%# submit_tag 'Preview & Submit', name: 'preview_button', class: "button-primary" %>
-            <%= f.submit 'Preview & Submit', class: "button-primary" %>
+            <%= f.submit 'Submit', class: "button-primary" %>
             <%= link_to "Cancel", clinics_path, class: "button-primary" %>
         </div>
     <% end %>

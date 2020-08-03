@@ -14,8 +14,8 @@ USER_COUNT = 100
 PATIENT_COUNT = CLINIC_COUNT * 20
 CLINIC_EVENTS_PER_PATIENT = 3
 CLINIC_STAFF_PER_CLINIC = 3
-SUPPLY_INVENTORY_PER_CLINIC = 10
-TEST_KITS_PER_CLINIC = 5
+SUPPLY_INVENTORY_COUNT = 18
+INVENTORY_ITEMS_PER_CLINIC = 5
 NEWS_SIGNUP_COUNT = 100
 VENUE_STATES = ["MD", "NY", "PA", "DC", "KY", "VT", "CA", "CO", "AL"]
 
@@ -201,7 +201,7 @@ CLINIC_COUNT.times.each do |i|
     user_id: User.take.id,
     provider_enrollment_id: ProviderEnrollment.take.id,
     venue_name: Faker::University.unique.name,
-    clinic_date: Faker::Date.between(from: 1.month.ago, to: 6.months.from_now),
+    clinic_date: Faker::Date.between(from: 3.days.from_now, to: 6.months.from_now),
     lead_vaccinator_name: Faker::Name.unique.name,
     clinic_status: %w(Pending Completed Cancelled).sample,
     public_or_private: %w(Public Private).sample,
@@ -212,7 +212,10 @@ CLINIC_COUNT.times.each do |i|
     duration: 180,
     age_groups: ClinicAgeGroup.all.sample(rand(ClinicAgeGroup.count) + 1),
     services: ClinicService.where(category: "clinics").sample(rand(ClinicService.count) + 1),
-    address: "#{address['address1']}, #{address['city']}, #{address['state']} #{address['postalCode']}",
+    address:address['address1'],
+    city: address['city'],
+    state: address['state'],
+    zip: address['postalCode'],
     longitude: address['coordinates']['lng'],
     latitude: address['coordinates']['lat'],
     location: "Nowhere",
@@ -221,7 +224,13 @@ CLINIC_COUNT.times.each do |i|
     appointments_available: ["yes_required", "yes_optional", "no_walk_in"].sample,
     active_queue_patients_count: rand(2) + 2,
     venue_type: VENUE_TYPES.sample,
-    county: COUNTIES.sample
+    county: COUNTIES.sample,
+    contact_person: Faker::Name.unique.name,
+    contact_phone_number: Faker::PhoneNumber.cell_phone,
+    backup_contact_person: Faker::Name.unique.name,
+    backup_contact_phone_number: Faker::PhoneNumber.cell_phone,
+    contact_email: Faker::Internet.email,
+    backup_contact_email: Faker::Internet.email
   )
 end
 
@@ -304,41 +313,48 @@ clinics = Clinic.all.to_a
   )
 
 end
+SUPPLY_INVENTORY_COUNT.times do
+  category = ["Test", "Vaccination", "Vaccination", "Vaccination"].sample
+  sp = SupplyInventory.create!(
+    category: category,
+    received_at: Faker::Date.between(from: 30.days.ago, to: Date.today),
+    item_type: category == "Test" ? TEST_ITEM_TYPES.sample : VACCINE_ITEM_TYPES.sample,
+    item_name: Faker::Lorem.words(number: 2).collect(&:capitalize).join(" "),
+    manufacturer: INVENTORY_MANUFACTURERS.sample,
+    lot_number: Faker::Code.asin,
+    expiration_date: Faker::Date.between(from: Date.today, to: 30.days.from_now),
+    quantity: Faker::Number.between(from: 100, to: 200),
+    packaging: INVENTORY_PACKAGINGS.sample,
+    source: INVENTORY_SOURCES.sample,
+    product_name: Faker::Company.name,
+    county: COUNTIES.sample,
+    venue_name: Faker::University.unique.name,
+    user_id: Faker::Number.between(from: 1, to: User.count)
+  )
 
-# Clinic.all.each do |clinic|
-  SUPPLY_INVENTORY_PER_CLINIC.times do
-    sp = SupplyInventory.create!(
-      # clinic: clinic,
-      received_at: Faker::Date.between(from: 30.days.ago, to: Date.today),
-      item_type: INVENTORY_ITEM_TYPES.sample,
-      item_name: Faker::Dessert.topping,
-      manufacturer: INVENTORY_MANUFACTURERS.sample,
-      lot_number: Faker::Code.asin,
-      expiration_date: Faker::Date.between(from: Date.today, to: 30.days.from_now),
-      quantity: Faker::Number.between(from: 100, to: 200),
-      packaging: INVENTORY_PACKAGINGS.sample,
-      source: INVENTORY_SOURCES.sample,
-      product_name: Faker::Company.name,
-      county: COUNTIES.sample,
-      venue_name: Faker::University.unique.name,
-      user_id: Faker::Number.between(from: 1, to: User.count)
-    )
-
-    Faker::Number.between(from: 1, to: 5).times do 
-      sp.supply_inventory_events.create!(
-        quantity_used: Faker::Number.between(from: 1, to: 5),
-        quantity_lost: Faker::Number.between(from: 1, to: 3),
-        quantity_loaned: Faker::Number.between(from: 1, to: 3),
-        quantity_destroyed: Faker::Number.between(from: 1, to: 3),
-        event_type: INVENTORY_EVENT_TYPES.sample,
-        event_date: Faker::Date.between(from: Date.today, to: 30.days.from_now)
-      )
-    end
-  end
-# end
+  
+end
 
 Clinic.all.each do |clinic|
-  TEST_KITS_PER_CLINIC.times do
+  clinic.supply_inventories << SupplyInventory.all.sample(INVENTORY_ITEMS_PER_CLINIC)
+  clinic.save
+
+  Faker::Number.between(from: 1, to: 5).times do 
+    clinic.supply_inventories.sample.supply_inventory_events.create!(
+      quantity_used: Faker::Number.between(from: 1, to: 5),
+      quantity_lost: Faker::Number.between(from: 1, to: 3),
+      quantity_loaned: Faker::Number.between(from: 1, to: 3),
+      quantity_destroyed: Faker::Number.between(from: 1, to: 3),
+      event_type: INVENTORY_EVENT_TYPES.sample,
+      event_date: Faker::Date.between(from: Date.today, to: 30.days.from_now),
+      clinic: clinic
+    )
+  end
+end
+
+
+Clinic.all.each do |clinic|
+  INVENTORY_ITEMS_PER_CLINIC.times do
     TestKit.create!(
       clinic: clinic,
       test_name: Faker::Dessert.topping,
