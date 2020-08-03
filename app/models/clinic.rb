@@ -12,7 +12,10 @@ class Clinic < ApplicationRecord
   has_and_belongs_to_many :users
   has_and_belongs_to_many :services, class_name: "ClinicService"
   has_and_belongs_to_many :age_groups, class_name: "ClinicAgeGroup"
-
+  has_and_belongs_to_many :primary_groups, class_name: "ClinicPrimaryGroup"
+  has_many :test_kits
+  has_many :customized_report
+  
   accepts_nested_attributes_for :services
   accepts_nested_attributes_for :age_groups
   accepts_nested_attributes_for :clinic_personnel, allow_destroy: true,
@@ -48,6 +51,14 @@ class Clinic < ApplicationRecord
       all.where("clinic_date < ?", Date.current)
     else
       all.where("clinic_date >= ?", Date.current)
+    end
+  }
+
+  scope :for_user, ->(user) {
+    if user.has_roles?(:super_admin)
+      all
+    else
+      where(venue_name: user.venues)
     end
   }
 

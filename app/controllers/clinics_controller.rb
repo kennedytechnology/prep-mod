@@ -6,10 +6,14 @@ class ClinicsController < ClinicManagementController
     # TODO: The details of the searching here should be moved to the model,
     # probably using scopes for a lot of this.
     @q = Clinic.ransack(params[:q])
+    @clinics = Clinic.for_user(current_user).order(:clinic_date)
+
+    if params[:clinic_date]
+      @clinics = Clinic.for_user(current_user).past_or_upcoming(params[:clinic_date]).order(:clinic_date)
+    end
 
     if @q.result
-      params[:clinic_date] ? @clinics = @q.result.past_or_upcoming(params[:clinic_date]).order(:clinic_date) :
-                              @clinics = @q.result.order(:clinic_date)
+      @clinics = @q.result.for_user(current_user).order(:clinic_date)
     end
   end
 
