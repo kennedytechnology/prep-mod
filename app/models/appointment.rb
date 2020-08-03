@@ -36,7 +36,7 @@ class Appointment < ApplicationRecord
     end
 
     event :mark_arrived do
-      transitions from: :invited, to: :at_clinic
+      transitions from: :invited, to: :at_clinic, if: :clinic_has_capacity?
     end
 
     event :finish do
@@ -54,6 +54,10 @@ class Appointment < ApplicationRecord
 
   def available_event_names
     aasm.events(permitted: true).collect(&:name).collect(&:to_s)
+  end
+
+  def clinic_has_capacity?
+    clinic.active_queue_patients_count > clinic.appointments.where(queue_state: "at_clinic").count
   end
 
   def clinic_is_open?

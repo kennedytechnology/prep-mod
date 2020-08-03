@@ -9,9 +9,9 @@
 puts 'Seeding...'
 
 NAMED_PLACE_COUNT = 50
-CLINIC_COUNT = 10
+CLINIC_COUNT = 20
 USER_COUNT = 100
-PATIENT_COUNT = CLINIC_COUNT * 10
+PATIENT_COUNT = CLINIC_COUNT * 20
 CLINIC_EVENTS_PER_PATIENT = 3
 CLINIC_STAFF_PER_CLINIC = 3
 SUPPLY_INVENTORY_PER_CLINIC = 10
@@ -219,7 +219,7 @@ CLINIC_COUNT.times.each do |i|
     appointment_frequency_minutes: [10, 15, 30, 60].sample,
     appointment_slots: (2..10).to_a.sample,
     appointments_available: ["yes_required", "yes_optional", "no_walk_in"].sample,
-    active_queue_patients_count: rand(6),
+    active_queue_patients_count: rand(2) + 2,
     venue_type: VENUE_TYPES.sample,
     county: COUNTIES.sample
   )
