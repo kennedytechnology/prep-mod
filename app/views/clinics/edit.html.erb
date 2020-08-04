@@ -15,6 +15,11 @@
   </div>
 <% end %>
 
+<div class="field-fullwidth">
+    <span class="font-bold text-xl">Number of Patients Registered: </span>
+    <span class="text-xl"><%= @clinic.appointments.size %></span>
+</div>
+
 <div data-controller="review-form">
     <%= form_with model: @clinic, local: true,
         data: {action: "change->review-form#onDisableFormPage keyup->review-form#onDisableFormPage",
