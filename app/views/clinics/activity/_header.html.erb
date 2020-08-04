@@ -3,4 +3,5 @@
   <h3>County: <%= @clinic.address.split(',')[1] %></h3>
   <h3>Venue Name: <%= @clinic.venue_name %></h3>
   <h3>Lead Tester's Name: <%= @clinic.lead_vaccinator_name %> </h3>
+  <h3> Patients Registered: <%= @clinic.appointments.count %> </h3>
 </div>
