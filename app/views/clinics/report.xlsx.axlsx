@@ -1,0 +1,11 @@
+wb = xlsx_package.workbook
+
+@clinic.clinic_events.group_by(&:outcome).each do |outcome, events|
+  wb.add_worksheet(name: outcome) do |sheet|
+    sheet.add_row ["First Name", "Last Name", "Date of Birth"]
+
+    events.each do |event|
+      sheet.add_row [event.patient.first_name, event.patient.last_name, event.patient.date_of_birth]
+    end
+  end
+end

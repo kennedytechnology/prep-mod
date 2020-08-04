@@ -73,6 +73,27 @@ class ClinicsController < ClinicManagementController
   def report
     @clinic = Clinic.find(params['clinic_id'])
     @page_title = "Clinic Activity Report"
+
+    respond_to do |format|
+      format.html
+      format.xlsx do
+        render xlsx: 'CAF Report', template: 'clinics/report',
+              disposition: 'inline',
+              filename: "caf_report_#{Date.today.strftime("%d_%m_%Y")}.xlsx",
+              xlsx_author: current_user.name
+      end
+      format.pdf do
+        render pdf: "CAF Report",
+          page_size: 'A4',
+          template: "clinics/report.pdf.erb",
+          layout: "clinic-print.pdf.erb",
+          orientation: "Landscape",
+          lowquality: true,
+          zoom: 1,
+          dpi: 75,
+          encoding: 'utf8'
+      end
+    end
   end
 
   def update

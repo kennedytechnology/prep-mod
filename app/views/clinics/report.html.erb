@@ -1,5 +1,8 @@
 <%= render "clinics/header" %>
 
+<%= link_to "Export in PDF", clinic_report_path(format: :pdf), class: "button-action" %>
+<%= link_to "Export in Excel", clinic_report_path(format: :xlsx), class: "button-action" %>
+
 <div class="flex flex-wrap">
   <span class="m-4 p-2"><span class="font-bold">Clinic Date</span><br/><%= @clinic.clinic_date %></span>
   <span class="m-4 p-2"><span class="font-bold">Venue Name</span><br/><%= @clinic.venue_name %></span>
