@@ -146,10 +146,19 @@
                                     blur->inventory-new-entry#validateInputField"}} %>
             <p class="error-message hidden"> This field is required! </p>
         </div>
+
+        <div>
+            <%= f.label :information_sheet do %>
+                <span class="text-gray-500"> Information Sheet </span>
+            <% end %>
+
+            <%= f.file_field :information_sheet, class: 'block form-input w-full' %>
+
+        </div>
     </div>
 
     <div class="flex justify-end items-end mt-2 mb-8">
-        <p class="button-primary" data-action="click->inventory-new-entry#formValidity"> Review & Confirm </p>
+        <button type="submit" class="button-primary"> Review & Confirm </p>
     </div>
 
     <%= render partial: "supply_inventories/new_entry_review", locals: {f: f} %>

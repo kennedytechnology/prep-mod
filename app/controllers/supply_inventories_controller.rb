@@ -31,7 +31,7 @@ class SupplyInventoriesController < InheritedResources::Base
         :received_at, :item_type,
         :manufacturer, :lot_number, :expiration_date,
         :quantity, :packaging, :source, :product_name,
-        :county, :venue_name
+        :county, :venue_name, :information_sheet
       )
     end
 

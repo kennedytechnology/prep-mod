@@ -332,6 +332,8 @@ SUPPLY_INVENTORY_COUNT.times do
     user_id: Faker::Number.between(from: 1, to: User.count)
   )
 
+  sp.information_sheet.attach(io: File.open(Rails.root.to_s + "/db/sample_data/test.pdf"), filename: 'test.pdf')
+
   
 end
 

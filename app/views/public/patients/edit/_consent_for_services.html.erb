@@ -61,6 +61,16 @@
     </div>
 </div>
 
+<div class="border-2 border-blue-500 bg-blue-100 p-4 mb-2">
+    <p class="font-bold"> Information Sheets for Offered Services </p>
+    
+        <ol class="list-disc ml-8 mt-2">
+            <% @clinic.supply_inventories.select{|si| si.information_sheet.attached? }.each do |supply_inventory| %>
+                <li><%= link_to "View PDF", url_for(supply_inventory.information_sheet), class: "underline" %> • Information Sheet: <%= supply_inventory.name %>
+            <% end %>
+        </ol>
+</div>
+
 <div class="md:flex w-full mb-5" data-controller="consent-form-signature">
     <div class="w-full md:w-10/12 lg:w-10/12">
         <p class="mt-10 font-semibold">
