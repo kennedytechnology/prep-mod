@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  require 'sidekiq/web'
   get 'kit/new', to: 'public/kit#new'
   post 'kit/create', to: 'public/kit#create'
   get 'pages/landing_page'
