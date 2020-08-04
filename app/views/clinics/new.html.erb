@@ -18,6 +18,11 @@
   </div>
 <% end %>
 
+<div class="field-fullwidth">
+    <span class="font-bold text-xl">Number of Patients Registered: </span>
+    <span class="text-xl"><%= @clinic.appointments.size %></span>
+</div>
+
 <div>
     <%= form_with model: @clinic, local: true do |f| %>
         <div class="field-fullwidth">
