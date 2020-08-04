@@ -1,0 +1,20 @@
+<% @clinic.clinic_events.group_by(&:category).each do |category, events| %>
+    <h3 class="font-bold text-2xl mt-8"><%= category %></h3>
+    <table class="table mt-4">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Date of Birth</th>
+            <th>Outcome</th>
+        </tr>
+        </thead>
+
+        <% events.each do |event| %>
+        <tr>
+            <td><%= event.patient.full_name %></td>
+            <td><%= event.patient.date_of_birth %></td>
+            <td><%= event.outcome %></td>
+        </tr>
+        <% end %>
+    </table>
+<% end %>

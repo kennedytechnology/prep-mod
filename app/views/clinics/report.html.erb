@@ -1,5 +1,8 @@
 <%= render "clinics/header" %>
 
+<%= link_to "Export in PDF", clinic_report_path(format: :pdf), class: "button-action" %>
+<%= link_to "Export in Excel", clinic_report_path(format: :xlsx), class: "button-action" %>
+
 <div class="flex flex-wrap">
   <span class="m-4 p-2"><span class="font-bold">Clinic Date</span><br/><%= @clinic.clinic_date %></span>
   <span class="m-4 p-2"><span class="font-bold">Venue Name</span><br/><%= @clinic.venue_name %></span>
@@ -9,13 +12,14 @@
   <span class="m-4 p-2"><span class="font-bold">Clinic Staff</span><br/><%= @clinic.clinic_personnel.size + 1 %></span>
 </div>
 
-<% @clinic.clinic_events.group_by(&:outcome).each do |outcome, events| %>
-  <h3 class="font-bold text-2xl mt-8"><%= outcome %></h3>
+<% @clinic.clinic_events.group_by(&:category).each do |category, events| %>
+  <h3 class="font-bold text-2xl mt-8"><%= category %></h3>
   <table class="table mt-4">
     <thead>
       <tr>
         <th>Name</th>
         <th>Date of Birth</th>
+        <th>Outcome</th>
       </tr>
     </thead>
 
@@ -23,6 +27,7 @@
       <tr>
         <td><%= event.patient.full_name %></td>
         <td><%= event.patient.date_of_birth %></td>
+        <td><%= event.outcome %></td>
       </tr>
     <% end %>
   </table>
