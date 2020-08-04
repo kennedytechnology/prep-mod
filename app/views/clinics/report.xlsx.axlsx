@@ -1,7 +1,7 @@
 wb = xlsx_package.workbook
 
-@clinic.clinic_events.group_by(&:outcome).each do |outcome, events|
-  wb.add_worksheet(name: outcome) do |sheet|
+@clinic.clinic_events.group_by(&:category).each do |category, events|
+  wb.add_worksheet(name: category) do |sheet|
     sheet.add_row ["First Name", "Last Name", "Date of Birth"]
 
     events.each do |event|
