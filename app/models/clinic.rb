@@ -16,14 +16,14 @@ class Clinic < ApplicationRecord
   has_and_belongs_to_many :primary_groups, class_name: "ClinicPrimaryGroup"
   has_many :customized_report
   has_and_belongs_to_many :supply_inventories
-  
+
   accepts_nested_attributes_for :services
   accepts_nested_attributes_for :age_groups
   accepts_nested_attributes_for :clinic_personnel, allow_destroy: true,
     reject_if: lambda {|attributes| attributes['name'].blank?}
-  accepts_nested_attributes_for :clinic_events, 
+  accepts_nested_attributes_for :clinic_events,
     reject_if: lambda {|attributes| attributes['category'].blank?}
-  accepts_nested_attributes_for :test_kits, allow_destroy: true, 
+  accepts_nested_attributes_for :test_kits, allow_destroy: true,
     reject_if: :all_blank
 
   geocoded_by :address
