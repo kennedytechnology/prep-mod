@@ -123,7 +123,7 @@ class PatientsController < ApplicationController
   end
 
   def patient_params
-    params.require(:patient).permit(:clinic, :clinic_id, :user_id, :student_id,
+    params.require(:patient).permit(:clinic, :clinic_ids, :user_id, :student_id,
       :access_code, :vaccination_status, :clinic_vaccine_id, :clinic_staff_id,
       :reaction_type, :downloaded_status, :state, :county, :city, :zip_code,
       :school, :first_name, :last_name, :mothers_maiden_name, :middle_initial,

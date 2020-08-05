@@ -84,7 +84,7 @@
                 <td class="underline"><%= link_to patient.full_name, [@clinic, patient]  %></td>
                 <td><%= patient.date_of_birth.strftime("%m/%d/%y") if patient.date_of_birth %></td>
                 <td><%= ((Date.today.to_time - patient.date_of_birth.to_time) / 1.year.seconds).floor if patient.date_of_birth %></td>
-                <td><%= patient.sex == "F" ? "Female" : "Male" %></td>
+                <td><%= patient.sex == "F" ? "Female" : (patient.sex == "M" ? "Male" : "Other") %></td>
                 <% if @clinic %>
                     <td><%= patient.appointments.last.on_waiting_list? ? "Waiting List" : patient.appointments.last.appointment_at.strftime("%I:%M %p") %></td>
                 <% end %>

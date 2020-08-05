@@ -55,7 +55,7 @@ RSpec.describe PatientsController, type: :controller do
   end
 
   it do
-    should permit(:clinic, :clinic_id, :user_id, :student_id, :access_code, :vaccination_status, :clinic_vaccine_id,
+    should permit(:clinic, :clinic_ids, :user_id, :student_id, :access_code, :vaccination_status, :clinic_vaccine_id,
       :clinic_staff_id, :reaction_type, :downloaded_status, :state, :county, :city, :zip_code, :school,
       :first_name, :last_name, :mothers_maiden_name, :middle_initial, :age, :address, :email, :email_confirmation,
       :date_of_birth, :sex, :phone_number, :relation_to_patient_for_insurance, :insurance_type,
