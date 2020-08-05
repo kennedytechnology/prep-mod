@@ -6,7 +6,7 @@
       <h1 class="main-title">Find a Record</h1>
     <% end %>
 
-    <%= link_to 'Upload records', new_patients_import_path, class: "button-action" %>
+
 
 
     <% if @clinic %>
@@ -18,8 +18,10 @@
         <div>
           <% if params[:display_waiting_list] == "true" %>
                 <%= link_to 'See Registration List', patients_path(clinic_id: @clinic.id), class: "button-action" %>
+                <%= link_to 'Upload records', new_patients_import_path, class: "button-action" %>
           <% else %>
                 <%= link_to 'See Waiting List', patients_path(clinic_id: @clinic.id, display_waiting_list: "true"), class: "button-action" %>
+                <%= link_to 'Upload records', new_patients_import_path, class: "button-action" %>
           <% end %>
         </div>
      </div>
