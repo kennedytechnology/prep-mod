@@ -4,7 +4,7 @@
     </p>
     <div class="mt-1 sm:mt-0 sm:col-span-2">
         <div class="max-w-xs rounded-md shadow-sm">
-        <%= event_form.select :test_name, options_for_select(@clinic.test_kits_names_types, @clinic.default_test_kit_name), {}, class: "block form-select w-full" %>
+        <%= event_form.select :test_name, options_for_select(@clinic.test_kits_names_types, event_form.object.test_name), {}, class: "block form-select w-full" %>
         </div>
     </div>
 </div>
@@ -13,9 +13,9 @@
     Test Administrator
   </p>
   <div class="mt-1 sm:mt-0 sm:col-span-2">
+
     <div class="max-w-xs rounded-md shadow-sm">
-      <%= event_form.select :clinic_staff_id, [@clinic.lead_vaccinator_name] + @clinic.clinic_personnel.collect(&:name), {}, class: "block form-select w-full" %>
-    </div>
+      <%= event_form.select :clinic_staff_id, [@clinic.lead_vaccinator_name] + @clinic.clinic_personnel.collect(&:name), {}, class: "block form-select w-full" %>     </div>
   </div>
 </div>
 <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">

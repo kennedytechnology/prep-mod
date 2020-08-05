@@ -4,7 +4,7 @@
     </p>
     <div class="mt-1 sm:mt-0 sm:col-span-2">
         <div class="max-w-xs rounded-md shadow-sm">
-            <%= event_form.select :contact_type, options_for_select(["In Person", "Telephone", "Electronic", "Other"], event_form.object.outcome), {}, class: "block form-select w-full" %>
+            <%= event_form.select :contact_type, options_for_select(["In Person", "Telephone", "Electronic", "Other"], event_form.object.contact_type), {}, class: "block form-select w-full" %>
         </div>
     </div>
 </div>

@@ -6,7 +6,7 @@
 
   <div class="modal-overlay fixed w-full h-full bg-black opacity-25 top-0 left-0 cursor-pointer"></div>
   <div class="absolute p-8 bg-white rounded-lg shadow-lg flex <%= patient.id.nil? ? "overflow-y-scroll" : "" %>" style="<%= "top:50px; bottom: 50px;" if patient.id.nil? %>">
-    
+
     <div class="w-full">
         <% unless category_selection == "AddPatient" %>
           <h1 class="text-lg leading-6 font-medium text-gray-900">
@@ -18,19 +18,14 @@
       <div class="mt-8 pt-5">
         <div class="flex justify-end">
           <% unless event_form.nil? %>
-            <% if event_form.object.new_record? %>
-                    <span class="ml-3 inline-flex rounded-md shadow-sm">
-                      <button type="submit" class="button-primary" data-event-category="<%= category_selection %>">Save</button>
-                    </span>
-            <% else %>
-                    <span class="inline-flex rounded-md shadow-sm">
-                        <button type="submit" class="button-primary" data-event-category="<%= category_selection %>" data-confirm="Are you sure?">Update</button>
-                    </span>
-            <% end %>
+            <span class="ml-3 inline-flex rounded-md shadow-sm">
+              <button type="submit" class="button-primary" data-event-category="<%= category_selection %>">Update</button>
+            </span>
           <% end %>
           <% unless category_selection == "AddPatient" %>
             <span class="inline-flex rounded-md shadow-sm">
-              <a data-action="clinic-activity-patients#cancelModal" data-parent="<%= patient.id.nil? ? "addMorePatients" : patient.id %>" class="button-primary sm:mr-0 md:mr-0">Cancel</a>
+              <a data-action="clinic-activity-patients#cancelModal"
+                data-parent="<%= patient.id.nil? ? "addMorePatients" : patient.id %>" class="button-primary sm:mr-0 md:mr-0">Close</a>
             </span>
           <% end %>
         </div>

@@ -25,8 +25,8 @@ class ClinicEventsController < ClinicManagementController
       format.js do
         @clinic_event.save
       end
-    end 
-    
+    end
+
   end
 
   def destroy
@@ -46,7 +46,7 @@ class ClinicEventsController < ClinicManagementController
       format.html { redirect_back fallback_location: root_path }
       format.js
     end
-    
+
   end
 
   def clinic_event_params
