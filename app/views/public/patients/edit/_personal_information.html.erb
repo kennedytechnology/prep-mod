@@ -61,16 +61,6 @@
             <%= f.select :sex, [["Male", "M"], ["Female", "F"], ["Other", "O"]], {include_blank: true}, {class: "form-select w-full", required: true} %>
         </div>
     </div>
-    <div class="flex">
-        <div class="flex-1 mr-2">
-            <%= f.label :race, "Race" %>
-            <%= f.select :race, options_for_select(US_RACES, @patient.race), {prompt: "--"}, {class: "form-select w-full"} %>
-        </div>
-        <div class="flex-1">
-            <%= f.label :occupation %>
-            <%= f.select :occupation, options_for_select(PATIENT_OCCUPATIONS, @patient.occupation), {prompt: "--"}, {class: "form-select w-full"} %>
-        </div>
-    </div>
 </div>
 
 <div class="field-side-by-side">
