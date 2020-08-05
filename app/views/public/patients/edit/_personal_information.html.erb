@@ -62,6 +62,7 @@
         </div>
     </div>
     <div class="flex">
+    <% if ENV["SCHOOL_VACCINATION_MODE"] && (ENV["SCHOOL_VACCINATION_MODE"] == "true") %>
         <div class="flex-1 mr-2">
             <%= f.label :grade, "Grade" %>
             <%= f.text_field :grade, class: "w-full form-input" %>
@@ -70,6 +71,7 @@
             <%= f.label :homeroom_teacher %>
             <%= f.text_field :homeroom_teacher, class: "w-full form-input" %>
         </div>
+    <% end %>
     </div>
 </div>
 
