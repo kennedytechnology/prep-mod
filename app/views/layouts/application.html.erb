@@ -19,7 +19,8 @@
 
     <div class="main-container">
         <% unless @hide_header %>
-          <a href="/"><%= image_tag (ENV['SITE_LOGO'] || 'prep-mod.png'), class: "mt-2 mb-2", style: "max-height: 60px;" %></a>
+          <!-- <a href="/"><%= image_tag (ENV['SITE_LOGO'] || 'prep-mod.png'), class: "mt-2 mb-2", style: "max-height: 60px;" %></a> -->
+          <a href="/"><%= image_tag 'covid_readi.png', class: "mt-2 mb-2", style: "max-height: 160px;" %></a>
         <% end %>
 
         <%= yield %>
