@@ -148,3 +148,14 @@ input[type=file][data-direct-upload-url][disabled] { @apply hidden; }
         }
     }
 }
+
+
+.covidreadi-content {
+    h3 {
+        @apply text-lg font-bold mb-4;
+    }
+
+    a {
+        @apply px-6 py-3 bg-gray-200 text-center font-bold text-lg;
+    }
+}
