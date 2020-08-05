@@ -1,0 +1,47 @@
+<h1 class="main-title"> Get COVIDReady! </h1>
+<p> 
+    A COVID-19 vaccine is coming. We don't know when, but we need to be ready when it gets here.
+    <br />
+    Do your part to make sure the vaccine gets to everyone as quickly and smoothly as possible.
+    <br />
+    The faster we get this done, the sooner we can get back out there.
+</p>
+
+<h2 class="text-2xl my-4"> <span class="font-bold">318,430,293</span> Americans to be Vaccinated </h2>
+
+<div class="grid grid-cols-5 gap-5">
+    <div>
+        <h3> Pre-Register for a Vaccination</h3>
+        <p class="mb-4"> Help us plan vaccination for your area. </p>
+
+        <%= link_to "Pre-Register", "/kit/new", class: "px-6 py-3 bg-gray-200" %>
+    </div>
+
+    <div>
+        <h3> Provider Sign-Up</h3>
+        <p class="mb-4"> Healthcare Providers: let us know you want to administer vaccine.</p>
+
+        <%= link_to "Vaccinate", new_provider_enrollment_path, class: "px-6 py-3 bg-gray-200" %>
+    </div>
+
+    <div>
+        <h3> Clinic Site Sign-Up </h3>
+        <p class="mb-4"> Offer location to host a clinic at your.</p>
+
+        <%= link_to "Host", "", class: "px-6 py-3 bg-gray-200" %>
+    </div>
+
+    <div>
+        <h3> Contract Workers </h3>
+        <p class="mb-4"> Offer to work clinics in your free time.</p>
+
+        <%= link_to "Work", "", class: "px-6 py-3 bg-gray-200" %>
+    </div>
+
+    <div>
+        <h3> Volunteer </h3>
+        <p class="mb-4"> Help out in your spare time.</p>
+
+        <%= link_to "Volunteer", "", class: "px-6 py-3 bg-gray-200" %>
+    </div>
+</div>

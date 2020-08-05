@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   }
 
   get 'public_portal/index'
+  get 'public_portal/index2'
   get '/clinic/search', to: 'public/clinics#index'
   post '/clinic/search', to: 'public/clinics#index'
   get '/clinic/data_transfer', to: 'clinics#data_transfer'
@@ -111,5 +112,5 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
   ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  root to: 'public_portal#index'
+  root to: 'public_portal#index2'
 end
