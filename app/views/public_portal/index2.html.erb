@@ -10,38 +10,38 @@
 <h2 class="text-2xl my-4"> <span class="font-bold">318,430,293</span> Americans to be Vaccinated </h2>
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
-    <div>
+    <div class="flex flex-col justify-between">
         <h3> Pre-Register for a Vaccination</h3>
         <p class="mb-4"> Help us plan vaccination for your area. </p>
 
-        <%= link_to "Pre-Register", "/kit/new", class: "px-6 py-3 bg-gray-200" %>
+        <%= link_to "Pre-Register", "/kit/new", class: "px-6 py-3 bg-gray-200 text-center" %>
     </div>
 
-    <div>
+    <div class="flex flex-col justify-between">
         <h3> Provider Sign-Up</h3>
         <p class="mb-4"> Healthcare Providers: let us know you want to administer vaccine.</p>
 
-        <%= link_to "Vaccinate", new_provider_enrollment_path, class: "px-6 py-3 bg-gray-200" %>
+        <%= link_to "Vaccinate", new_provider_enrollment_path, class: "px-6 py-3 bg-gray-200 text-center" %>
     </div>
 
-    <div>
+    <div class="flex flex-col justify-between">
         <h3> Clinic Site Sign-Up </h3>
         <p class="mb-4"> Offer location to host a clinic at your.</p>
 
-        <%= link_to "Host", "", class: "px-6 py-3 bg-gray-200" %>
+        <%= link_to "Host", "", class: "px-6 py-3 bg-gray-200 text-center" %>
     </div>
 
-    <div>
+    <div class="flex flex-col justify-between">
         <h3> Contract Workers </h3>
         <p class="mb-4"> Offer to work clinics in your free time.</p>
 
-        <%= link_to "Work", "", class: "px-6 py-3 bg-gray-200" %>
+        <%= link_to "Work", "", class: "px-6 py-3 bg-gray-200 text-center" %>
     </div>
 
-    <div>
+    <div class="flex flex-col justify-between">
         <h3> Volunteer </h3>
         <p class="mb-4"> Help out in your spare time.</p>
 
-        <%= link_to "Volunteer", "", class: "px-6 py-3 bg-gray-200" %>
+        <%= link_to "Volunteer", "", class: "px-6 py-3 bg-gray-200 text-center" %>
     </div>
 </div>
