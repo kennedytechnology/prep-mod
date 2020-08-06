@@ -61,6 +61,7 @@
             <%= f.select :sex, [["Male", "M"], ["Female", "F"], ["Other", "O"]], {include_blank: true}, {class: "form-select w-full", required: true} %>
         </div>
     </div>
+    
     <div class="flex">
     <% if ENV["SCHOOL_VACCINATION_MODE"] && (ENV["SCHOOL_VACCINATION_MODE"] == "true") %>
         <div class="flex-1 mr-2">
@@ -74,6 +75,49 @@
     <% end %>
     </div>
 </div>
+
+
+
+
+
+<div class="flex">
+        <div class="w-1/2 mr-3">
+            <%= f.label :parent_first_name, class: "block" do %>
+                <span> Parent/Guardian's First Name </span>
+                <span class="field-required"> * </span>
+            <% end %>
+            <%= f.text_field :first_name, class: "w-full form-input block", required: true %>
+        </div>
+
+        <div class="w-1/2 mr-1">
+            <%= f.label :parent_last_name, class: "block" do %>
+                <span> Parent/Guardian's Last Name </span>
+                <span class="field-required"> * </span>
+            <% end %>
+            <%= f.text_field :last_name, class: "w-full form-input block", required: true %>
+        </div>
+
+        <div class="w-1/2 mr-3 ml-3">
+        <%= f.label :email do %>
+            <label> Email Address <span class="field-required">*</span></label>
+        <% end %>
+        <%= f.text_field :email, disabled: @patient.access_code.present?, class: "w-full form-input block", required: true,
+            data: {
+                action: "keyup->email-confirmation#emailConfirmation
+                         change->email-confirmation#emailConfirmation",
+                target: "email-confirmation.emailField"}%>
+        </div>
+        
+        <div class="w-1/2 mr-1">
+        <label> Retype Email Address <span class="field-required">*</span> </label>
+        <input type="email" class="form-input w-full" value="<%= @patient.email %>" required="required"
+            data-action="keyup->email-confirmation#emailConfirmation change->email-confirmation#emailConfirmation"
+            data-target="email-confirmation.confirmEmailField" />
+        <p class="text-red-600 -mt-2" data-target="email-confirmation.confirmEmailError"> </p>
+    </div>
+</div>
+<div class="field-side-by-side"></div>
+
 
 <div class="field-side-by-side">
     <div class="flex">
@@ -106,27 +150,6 @@
         </div>
     </div>
 </div>
-
-<div class="field-side-by-side" data-controller="email-confirmation">
-    <div>
-        <%= f.label :email do %>
-            Email Address <span class="field-required">*</span>
-        <% end %>
-        <%= f.text_field :email, disabled: @patient.access_code.present?, class: "form-input w-full", required: true,
-            data: {
-                action: "keyup->email-confirmation#emailConfirmation
-                         change->email-confirmation#emailConfirmation",
-                target: "email-confirmation.emailField"}%>
-    </div>
-    <div>
-        <label> Retype Email Address <span class="field-required">*</span> </label>
-        <input type="email" class="form-input w-full" value="<%= @patient.email %>" required="required"
-            data-action="keyup->email-confirmation#emailConfirmation change->email-confirmation#emailConfirmation"
-            data-target="email-confirmation.confirmEmailField" />
-        <p class="text-red-600 -mt-2" data-target="email-confirmation.confirmEmailError"> </p>
-    </div>
-</div>
-
 <div class="field-side-by-side">
     <div>
         <%= f.label :phone_number do %>
