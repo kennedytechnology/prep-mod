@@ -12,7 +12,7 @@
 
 <div class="field-side-by-side">
     <div class="md:flex lg:flex">
-        <div class="w-full md:w-9/12 md:mr-2 lg:w-9/12 lg:mr-2">
+        <div class="w-full md:w-9/12 md:mr-2 lg:w-8/12 lg:mr-2">
             <%= f.label :first_name do %>
                <%= t 'static_pages.public.patients.consent_form.personal_information.first_name' %> <span class="field-required">*</span>
             <% end %>
@@ -54,7 +54,7 @@
             <%= f.label t('static_pages.public.patients.consent_form.personal_information.age') %>
             <%= f.text_field :age, class: "w-full form-input", data: {target: "age-calculator.ageField"}%>
         </div>
-        <div class="flex-1">
+        <div class="flex-1 md:mr-2 lg:mr-2">
             <%= f.label :sex do %>
                 <%= t 'static_pages.public.patients.consent_form.personal_information.gender' %> <span class="field-required">*</span>
             <% end %>
@@ -63,18 +63,73 @@
     </div>
 
     <div class="flex">
-    <% if ENV["SCHOOL_VACCINATION_MODE"] && (ENV["SCHOOL_VACCINATION_MODE"] == "true") %>
-        <div class="flex-1 mr-2">
-            <%= f.label :grade, t('activerecord.models.patient.grade') %>
-            <%= f.text_field :grade, class: "w-full form-input" %>
+        <% if ENV["SCHOOL_VACCINATION_MODE"] && (ENV["SCHOOL_VACCINATION_MODE"] == "true") %>
+            <div class="flex-1 mr-2">
+                <%= f.label :grade, t('activerecord.models.patient.grade') %>
+                <%= f.text_field :grade, class: "w-full form-input" %>
+            </div>
+            <div class="flex-1">
+                <%= f.label :homeroom_teacher, t('activerecord.models.patient.homeroom_teacher') %>
+                <%= f.text_field :homeroom_teacher, class: "w-full form-input" %>
+            </div>
+        <% end %>
+        <div class="flex-1 flex mr-2">
+            <div class="w-1/2 mr-1">
+                <%= f.label :email do %>
+                    Email Address <span class="field-required">*</span>
+                <% end %>
+                <%= f.email_field :email, class: "w-full form-input block", required: true,
+                    data: {
+                        action: "keyup->email-confirmation#emailConfirmation
+                                change->email-confirmation#emailConfirmation",
+                        target: "email-confirmation.emailField"}%>
+            </div>
+            <div class="w-1/2 mr-1">
+                <label> Retype Email Address <span class="field-required">*</span> </label>
+                <input type="email" class="form-input w-full" value="<%= @patient.email %>" required="required"
+                    data-action="keyup->email-confirmation#emailConfirmation change->email-confirmation#emailConfirmation"
+                    data-target="email-confirmation.confirmEmailField" />
+                <p class="text-red-600 -mt-2" data-target="email-confirmation.confirmEmailError"> </p>
+            </div>
         </div>
-        <div class="flex-1">
-            <%= f.label :homeroom_teacher, t('activerecord.models.patient.homeroom_teacher') %>
-            <%= f.text_field :homeroom_teacher, class: "w-full form-input" %>
-        </div>
-    <% end %>
     </div>
 </div>
+
+<div class="flex">
+    <div class="w-1/2 mr-3">
+        <%= f.label :parent_first_name, class: "block" do %>
+            Parent/Guardian's First Name <span class="field-required"> * </span>
+        <% end %>
+        <%= f.text_field :first_name, class: "w-full form-input block", required: true %>
+    </div>
+
+    <div class="w-1/2 mr-1">
+        <%= f.label :parent_last_name, class: "block" do %>
+            Parent/Guardian's Last Name <span class="field-required"> * </span>
+        <% end %>
+        <%= f.text_field :last_name, class: "w-full form-input block", required: true %>
+    </div>
+
+    <div class="w-1/2 mr-3 ml-3">
+    <%= f.label :guardian_email do %>
+        Email Address <span class="field-required">*</span>
+    <% end %>
+    <%= f.email_field :guardian_email, class: "w-full form-input block", required: true,
+        data: {
+            action: "keyup->email-confirmation#emailConfirmation
+                    change->email-confirmation#emailConfirmation",
+            target: "email-confirmation.emailField"}%>
+    </div>
+
+    <div class="w-1/2 mr-1">
+        <label> Retype Email Address <span class="field-required">*</span> </label>
+        <input type="email" class="form-input w-full" value="<%= @patient.email %>" required="required"
+            data-action="keyup->email-confirmation#emailConfirmation change->email-confirmation#emailConfirmation"
+            data-target="email-confirmation.confirmEmailField" />
+        <p class="text-red-600 -mt-2" data-target="email-confirmation.confirmEmailError"> </p>
+    </div>
+</div>
+<div class="field-side-by-side"></div>
 
 <div class="field-side-by-side">
     <div class="flex">
@@ -107,27 +162,6 @@
         </div>
     </div>
 </div>
-
-<div class="field-side-by-side" data-controller="email-confirmation">
-    <div>
-        <%= f.label :email do %>
-            <%= t 'static_pages.public.patients.consent_form.personal_information.email' %> <span class="field-required">*</span>
-        <% end %>
-        <%= f.text_field :email, disabled: @patient.access_code.present?, class: "form-input w-full", required: true,
-            data: {
-                action: "keyup->email-confirmation#emailConfirmation
-                         change->email-confirmation#emailConfirmation",
-                target: "email-confirmation.emailField"}%>
-    </div>
-    <div>
-        <label> <%= t 'static_pages.public.patients.consent_form.personal_information.retype_email' %> <span class="field-required">*</span> </label>
-        <input type="email" class="form-input w-full" value="<%= @patient.email %>" required="required"
-            data-action="keyup->email-confirmation#emailConfirmation change->email-confirmation#emailConfirmation"
-            data-target="email-confirmation.confirmEmailField" />
-        <p class="text-red-600 -mt-2" data-target="email-confirmation.confirmEmailError"> </p>
-    </div>
-</div>
-
 <div class="field-side-by-side">
     <div>
         <%= f.label :phone_number do %>
