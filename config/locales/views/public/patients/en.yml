@@ -1,0 +1,8 @@
+en:
+  views:
+    public:
+      patients:
+        access:
+          title: "COVID-19 Testing: Do you have a code?"
+          sub_title: "If you've been referred for COVID-19 testing and you've received an access code, please enter it here to proceed with registration for testing."
+          button: "Continue"

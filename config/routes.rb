@@ -1,6 +1,30 @@
 Rails.application.routes.draw do
+  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
+    root to: 'public_portal#index2'
+    get 'public_portal/index'
+    get '/client/access', to: 'public/patients#access'
+    get '/clinic/search', to: 'public/clinics#index'
+    post '/clinic/search', to: 'public/clinics#index'
+    get '/client/registration(/:access_code)', to: 'public/patients#edit', as: :client_registration
+
+    namespace :public do
+      resources :news_signups, only: [:new, :create]
+    end
+
+    resources :news_signups
+
+    resources :provider_enrollments
+
+    resources :employers, only: [:index, :new, :create, :destroy] do
+      member do
+        get :activity
+      end
+    end
+
+    get 'kit/new', to: 'public/kit#new'
+  end
+
   require 'sidekiq/web'
-  get 'kit/new', to: 'public/kit#new'
   post 'kit/create', to: 'public/kit#create'
   get 'pages/landing_page'
   get 'pages/reports_menu'
@@ -19,9 +43,8 @@ Rails.application.routes.draw do
   post '/clinic/search', to: 'public/clinics#index'
   get '/clinic/data_transfer', to: 'clinics#data_transfer'
   # get '/client/registration', to: 'public/patients#edit', as: :client_registration
-  get '/client/access', to: 'public/patients#access'
 
-  get '/client/registration(/:access_code)', to: 'public/patients#edit', as: :client_registration
+
   patch '/client/registration/(/:access_code)', to: 'public/patients#edit'
   post '/client/registration/(/:access_code)', to: 'public/patients#update'
 
@@ -67,10 +90,6 @@ Rails.application.routes.draw do
     get "news_signups_with_chronic_health_condition"
   end
 
-  namespace :public do
-    resources :news_signups, only: [:new, :create]
-  end
-
   resources :patients
   resources :patients_imports, only: [:new, :create]
   get :invite_patient_to_register, to: 'patients#invite_patient_to_register', as: :invite_patient_to_register
@@ -99,18 +118,10 @@ Rails.application.routes.draw do
   resources :supply_inventories_imports, only: [:new, :create]
   resources :supply_inventory_events
   resources :test_kits
-  resources :provider_enrollments
   resources :providers
-  resources :news_signups
   resources :messages, only: [:new, :create]
-  resources :employers, only: [:index, :new, :create, :destroy] do
-    member do
-      get :activity
-    end
-  end
   devise_for :admin_users, ActiveAdmin::Devise.config
   mount Sidekiq::Web => '/sidekiq'
   ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  root to: 'public_portal#index2'
 end

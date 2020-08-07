@@ -13,7 +13,7 @@ class ProviderEnrollmentsController < ApplicationController
 
   def new
     @provider_enrollment = ProviderEnrollment.new
-    @title = "Request to Become a COVID-19 Service Provider"
+    @title = I18n.t 'views.provider_enrollments.new.title'
   end
 
   def create

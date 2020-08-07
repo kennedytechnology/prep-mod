@@ -1,0 +1,22 @@
+es:
+  views:
+    provider_enrollments:
+      new:
+        title: "Solicitud de convertirse en un proveedor de servicio COVID-19"
+        services: "Qué servicios le gustaría ofrecer?"
+        population_served: "Open to"
+        under_served_groups: "What high-risk or under-served groups are largely represented in your practice?"
+        provider_contact_info: "Provider Contact's Information"
+        practice_info: "Información de Práctica"
+        backup_contact_info: "Back-Up Contact Information"
+        vaccination_provider: "Do you currently provide vaccinations?"
+        children_vaccines: "Are you a Vaccines for Children (VFC) Provider?"
+        model_refrigirator: "Qué marca y modelo de refrigerador tienes?"
+        not_refrigirator: "No tengo refrigerador"
+        model_freezer: "Qué marca y modelo de congelador tienes?"
+        not_freezer: "No tengo congelador"
+        model_data_logger: "What make and model data logger/refrigerator thermometer do you have?"
+        not_data_logger: "I do not have a refrigerator thermometer"
+        additional_info: "Información Adicional"
+        submit: "Enviar Peticion"
+        cancel: "Cancelar"

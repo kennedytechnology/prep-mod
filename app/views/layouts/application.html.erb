@@ -19,6 +19,13 @@
 
     <div class="main-container">
         <% unless @hide_header %>
+          <div class="flex justify-between items-center">
+            <a href="/"><%= image_tag (ENV['SITE_LOGO'] || 'prep-mod.png'), class: "mt-2 mb-2", style: "max-height: 60px;" %></a>
+            <div class="flex">
+              <%= link_to "EN", {locale: :en}, class: "mr-3" %>
+              <%= link_to "ES", {locale: :es} %>
+            </div>
+          </div>
           <!-- <a href="/"><%= image_tag (ENV['SITE_LOGO'] || 'prep-mod.png'), class: "mt-2 mb-2", style: "max-height: 60px;" %></a> -->
           <a href="/"><%= image_tag 'covid_readi.png', class: "mt-2 mb-2", style: "max-height: 160px;" %></a>
         <% end %>
