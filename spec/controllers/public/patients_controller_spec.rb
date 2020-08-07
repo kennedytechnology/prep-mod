@@ -27,9 +27,9 @@ RSpec.describe Public::PatientsController, type: :controller do
         put :edit, params: { step: "end_flag", clinic_id: clinic.id, patient: valid_attributes}
         patient.reload
       end
-      
+
       it { expect(response).to have_http_status(:success) }
-      
+
     end
   end
 end

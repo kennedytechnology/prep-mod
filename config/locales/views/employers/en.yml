@@ -1,0 +1,14 @@
+en:
+  views:
+    employers:
+      new:
+        main_title: "Request to Receive COVID-19 Information About Your Employees or Students"
+        title: "What information are you seeking about individuals affiliated with your organization? (Select all that apply)"
+        or: "OR"
+        business_location: "Business Location/Environment (Select all that apply)"
+        selected_locations: "Selected Locations: "
+        contact_details: "Contact Details"
+        backup_contact_details: "Back-Up Contact's Details"
+        employee_info: "Employee Info"
+        location_info: "Location Info"
+        cancel: "Cancel"

@@ -1,0 +1,13 @@
+en:
+  views:
+    public:
+      kit:
+        new:
+          title: "Pre-Register"
+          submit: "Save and Continue →"
+          number_of_adults: "Number of Adults in Your Household"
+          number_of_children: "Number of Children in Your Household"
+          certify: "I certify that the information provided is correct."
+          signature: "Please sign here with your finger or mouse"
+          sign_button: "Sign by typing my full name"
+          relationship_to_patient: "Relationship to Patient"

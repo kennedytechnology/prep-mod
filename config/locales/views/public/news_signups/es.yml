@@ -1,0 +1,11 @@
+es:
+  views:
+    public:
+      news_signups:
+        new:
+          title: "Sign Up for News and Notifications About COVID-19 (Spanish)"
+          email_confirmation: "Re-Type Email Address"
+          chronic_health: "Do you or anyone in your household have a chronic health condition (Example: diabetes, heart disease, high blood pressure, COPD, asthma)?"
+          permission_text: "I give permission to be contacted about the topics selected and other health and wellness services and programs.  I understand that I may opt out of receiving these communications at any time by contacting the health department in my county, calling 888-503-0515, or emailing info@prepmod.com."
+          signature: "Please sign here with your finger or mouse"
+          signature_with_names: "Sign by typing my full name"

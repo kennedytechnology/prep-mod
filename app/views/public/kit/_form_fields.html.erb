@@ -1,14 +1,14 @@
 <div class="field-side-by-side">
     <div>
         <%= f.label :county, class: "block" do %>
-            <span> County </span>
+            <span> <%= t 'activerecord.models.patient.county' %> </span>
             <span class="field-required"> * </span>
         <% end %>
         <%= f.select :county, options_for_select(COUNTIES),{include_blank: true}, {class: "w-full form-select block", required: true} %>
     </div>
     <div>
         <%= f.label :occupation, class: "block" do %>
-            <span> Occupation </span>
+            <span> <%= t 'activerecord.models.patient.occupation' %> </span>
             <span class="field-required"> * </span>
         <% end %>
         <%= f.select :occupation, PATIENT_OCCUPATIONS, {prompt: "Select"}, {class: "w-full form-select", required: true} %>
@@ -18,19 +18,19 @@
 <div class="field-side-by-side">
     <div>
         <%= f.label :first_name, class: "block" do %>
-            <span> First Name </span>
+            <span> <%= t 'activerecord.models.patient.first_name' %> </span>
             <span class="field-required"> * </span>
         <% end %>
         <%= f.text_field :first_name, class: "w-full form-input block", required: true %>
     </div>
     <div class="flex">
         <div class="mr-3">
-            <%= f.label :middle_initial, "Middle Initial", class: "block" %>
+            <%= f.label :middle_initial, t('activerecord.models.patient.middle_initial'), class: "block" %>
             <%= f.text_field :middle_initial, class: "w-11/12 form-input block" %>
         </div>
         <div class="flex-1">
             <%= f.label :last_name, class: "block" do %>
-                <span> Last Name </span>
+                <span> <%= t 'activerecord.models.patient.last_name' %> </span>
                 <span class="field-required"> * </span>
             <% end %>
             <%= f.text_field :last_name, class: "w-full form-input", required: true %>
@@ -40,12 +40,12 @@
 
 <div class="field-side-by-side">
     <div>
-        <%= f.label :mothers_maiden_name, class: "block" %>
+        <%= f.label :mothers_maiden_name, t('activerecord.models.patient.mothers_maiden_name'), class: "block" %>
         <%= f.text_field :mothers_maiden_name, disabled: true, class: "w-full form-input" %>
     </div>
     <div>
         <%= f.label :address, class: "block" do %>
-            <span> Address </span>
+            <span> <%= t 'activerecord.models.patient.address' %> </span>
             <span class="field-required"> * </span>
         <% end %>
         <%= f.text_field :address, id: "autocomplete", onFocus: "geolocate()", placeholder: "", class: "w-full form-input", required: true %>
@@ -56,7 +56,7 @@
 <div class="field-side-by-side">
     <div>
         <%= f.label :state, class: "block" do %>
-            <span> State </span>
+            <span> <%= t 'activerecord.models.patient.state' %> </span>
             <span class="field-required"> * </span>
         <% end %>
         <%= f.select :state, options_for_select(US_STATES), {}, {class: "w-full form-select", id: "administrative_area_level_1", required: true} %>
@@ -64,14 +64,14 @@
     <div class="flex">
         <div class="flex-1 mr-3">
             <%= f.label :city, class: "block" do %>
-                <span> City </span>
+                <span> <%= t 'activerecord.models.patient.city' %> </span>
             <span class="field-required"> * </span>
             <% end %>
             <%= f.text_field :city, id: "locality", class: "form-input w-full", required: true %>
         </div>
         <div class="flex-1">
             <%= f.label :zip_code, class: "block" do %>
-                <span> Zip Code </span>
+                <span> <%= t 'activerecord.models.patient.zip_code' %> </span>
             <span class="field-required"> * </span>
             <% end %>
             <%= f.text_field :zip_code, id: "postal_code", class: "w-full form-input", required: true %>
@@ -83,24 +83,24 @@
     <div class="flex" data-controller="age-calculator">
         <%# TODO: Fix flex for small screen %>
         <div class="mr-3 w-7/12">
-            <%= f.label :date_of_birth, class: "block" %>
+            <%= f.label :date_of_birth, t('activerecord.models.patient.date_of_birth'), class: "block" %>
             <div class="flex">
                 <%= f.date_select :date_of_birth, {order: [:month, :day, :year], include_blank: true}, disabled: true, class: "form-select flex-auto",
                                         data: {action: "age-calculator#calculateAge", target: "age-calculator.dobField"} %>
             </div>
         </div>
         <div class="mr-3 w-2/12">
-            <%= f.label :age, class: "block" %>
+            <%= f.label :age, t('activerecord.models.patient.age'), class: "block" %>
             <%= f.text_field :age, disabled: true, class: "form-input w-full flex-wrap", data: {target: "age-calculator.ageField"} %>
         </div>
 
         <div class="flex-1 w-3/12">
-            <%= f.label :sex, "Gender", class: "block w-full" %>
+            <%= f.label :sex, t('activerecord.models.patient.sex'), class: "block w-full" %>
             <%= f.select :sex, [["Male", "M"], ["Female", "F"], ["Other", "O"]], {prompt: "Select"}, {disabled: true, class: "w-full form-select"} %>
         </div>
     </div>
     <div>
-        <%= f.label :race, class: "block" %>
+        <%= f.label :race, t('activerecord.models.patient.race'), class: "block" %>
         <%= f.select :race, options_for_select(US_RACES), {prompt: "Select"}, {disabled: true, class: "w-full form-select"} %>
     </div>
 </div>
@@ -110,14 +110,14 @@
         <%# TODO: There's not field in DB called number_of_adults %>
         <%# f.label :number_of_adults, "Number of Adults in Your Household", class: "block" %>
         <%# f.select :number_of_adults, (1..10), {prompt: "Select"}, {class: "w-full form-select"} %>
-        <p class="label"> Number of Adults in Your Household </p>
+        <p class="label"> <%= t 'views.public.kit.new.number_of_adults' %> </p>
         <%= select_tag :number_of_adults, options_for_select((1..10).to_a), prompt: "Select", class: "w-full form-select" %>
     </div>
     <div>
         <%# f.label :number_of_children, "Number of Children in Your Household", class: "block" %>
         <%# f.select :number_of_children, (1..10), {prompt: "Select"}, {class: "w-full form-select"} %>
         <%# TODO: There's not field in DB called number_of_children %>
-        <p class="label"> Number of Children in Your Household </p>
+        <p class="label"> <%= t 'views.public.kit.new.number_of_children' %> </p>
         <%= select_tag :number_of_children, options_for_select((1..10).to_a), prompt: "Select", class: "w-full form-select" %>
     </div>
 </div>
@@ -125,25 +125,25 @@
 <div class="field-side-by-side">
     <div>
         <%= f.label :email, class: "block" do %>
-            <span> Email Address </span>
+            <span> <%= t 'activerecord.models.patient.email' %> </span>
             <span class="field-required"> * </span>
         <% end %>
         <%= f.text_field :email, class: "w-full form-input", required: true %>
     </div>
     <div>
         <%= f.label :phone_number, class: "block" do %>
-            <span> Mobile or Daytime Number </span>
+            <span> <%= t 'activerecord.models.patient.phone_number' %> </span>
             <span class="field-required"> * </span>
         <% end %>
         <%= f.text_field :phone_number, class: "w-full form-input", required: true %>
     </div>
 </div>
 
-<p class="text-lg text-gray-800 font-medium">I certify that the information provided is correct.</p>
+<p class="text-lg text-gray-800 font-medium"><%= t 'views.public.kit.new.certify' %></p>
 
 <div class="flex w-full mb-5" data-controller="consent-form-signature">
     <div class="w-10/12">
-        <p class="mt-10 font-semibold" data-target="consent-form-signature.title"> Please sign here with your finger or mouse </p>
+        <p class="mt-10 font-semibold" data-target="consent-form-signature.title"> <%= t 'views.public.kit.new.signature' %> </p>
         <div class="border border-gray-400 mt-2 mb-4 w-1/2 h-40" data-target="consent-form-signature.signatureInput">
             <canvas style="width:100%; height: 100%;"></canvas>
         </div>
@@ -151,19 +151,19 @@
 
         <div class="hidden w-8/12 mt-2 mb-4" data-target="consent-form-signature.fullName">
             <div class="h-40">
-                <%= f.text_field :signatory_first_name, placeholder: "First Name", class: "w-10/12 form-input" %>
-                <%= f.text_field :signatory_last_name, placeholder: "Last Name", class: "w-10/12 form-input" %>
+                <%= f.text_field :signatory_first_name, placeholder: t('activerecord.models.patient.signatory_first_name'), class: "w-10/12 form-input" %>
+                <%= f.text_field :signatory_last_name, placeholder: t('activerecord.models.patient.signatory_last_name'), class: "w-10/12 form-input" %>
             </div>
         </div>
 
         <div class="w-1/2 flex flex-col justify-end items-end">
-            <div class="button-primary" 
+            <div class="button-primary"
                 data-action="click->consent-form-signature#toggleSignature"
-                data-target="consent-form-signature.buttonTitle"> Sign by typing my full name </div>
+                data-target="consent-form-signature.buttonTitle"> <%= t 'views.public.kit.new.sign_button' %> </div>
         </div>
     </div>
     <div class="flex flex-wrap content-end">
-        <p><%= f.label :consent_date, "Date", class: "label" %></p>
+        <p><%= f.label :consent_date, t('activerecord.models.patient.consent_date'), class: "label" %></p>
         <%= text_field_tag "", Date.today.strftime("%m/%d/%y"), readonly: true, class: "form-input cursor-not-allowed bg-gray-200 text-gray-600" %>
         <%= f.hidden_field :consent_date, value: Date.today.strftime("%d-%m-%Y") %>
     </div>
@@ -171,7 +171,7 @@
 
 <%# TODO: Move this into the proper place. %>
 <script>
-    
+
         var canvas = document.querySelector("canvas");
         var ratio =  Math.max(window.devicePixelRatio || 1, 1);
         canvas.width = canvas.offsetWidth * ratio;
@@ -188,8 +188,8 @@
 
 <div class="field-fullwidth">
     <div class="w-1/2">
-        <%= f.label :relation_to_patient_for_insurance, class: "block" do %>
-            <span> Relationship to Patient </span>
+        <%= f.label :relation_to_patient_for_insurance, t('activerecord.models.patient.relation_to_patient_for_insurance'), class: "block" do %>
+            <span> <%= t 'views.public.kit.new.relationship_to_patient' %> </span>
             <span class="field-required"> * </span>
         <% end %>
         <%= f.select :relation_to_patient_for_insurance, ["Self","Parent/Guardian","Other"], {}, class: "form-select w-full" %>

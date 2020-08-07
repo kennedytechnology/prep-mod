@@ -95,3 +95,4 @@ gem "aws-sdk-s3", require: false
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-heroku', '2.12.5.0', group: :production
 gem 'rails-erd', group: :development
+gem 'rails-i18n'

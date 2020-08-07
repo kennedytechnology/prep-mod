@@ -1,10 +1,10 @@
-<h2 class="main-title">Find a Covid-19 Service</h2>
+<h2 class="main-title"><%= t 'views.public.clinics.index.search.title' %></h2>
 
 <form action="/clinic/search" method="post">
     <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
     <div class="field-side-by-side">
         <div>
-            <h2 class="title"> What service(s) are you seeking? <span class="field-required">*</span> </h2>
+            <h2 class="title"> <%= t 'views.public.clinics.index.search.services' %> <span class="field-required">*</span> </h2>
             <div class="checkboxes-container">
                 <% ClinicService.where(category: "clinics").each do |service| %>
                 <div>
@@ -17,7 +17,7 @@
             </div>
         </div>
         <div>
-            <h2 class="title"> Age Group of Person(s) Seeking Services <span class="field-required">*</span> </h2>
+            <h2 class="title"> <%= t 'views.public.clinics.index.search.age_groups' %> <span class="field-required">*</span> </h2>
             <div class="checkboxes-container">
                 <% ClinicAgeGroup.all.each do |age_group| %>
                 <div>
@@ -33,26 +33,26 @@
 
     <div class="field-side-by-side">
         <div>
-            <h2 class="title"> Search Within <span class="field-required">*</span> </h2>
+            <h2 class="title"> <%= t 'views.public.clinics.index.search.search_within' %> <span class="field-required">*</span> </h2>
             <%= select_tag(:search_radius,
-                options_for_select(["All", "1 mile", "5 miles", "10 miles", "25 miles", "50 miles", "100 miles", "100+ miles"], 
+                options_for_select(["All", "1 mile", "5 miles", "10 miles", "25 miles", "50 miles", "100 miles", "100+ miles"],
                 params[:search_radius]), class: "form-select block w-full", required: true) %>
         </div>
         <div>
-            <h2 class="title"> Address </h2>
+            <h2 class="title"> <%= t 'views.public.clinics.index.search.address' %> </h2>
             <%= text_field_tag "location", "Enter address", value: params[:location], id: "autocomplete", class: "form-input w-full", placeholder: "Enter address" %>
             <%= render partial: "google_maps_script" %>
         </div>
     </div>
 
     <div class="flex justify-center">
-        <%= submit_tag "Search", class: "button-primary" %>
+        <%= submit_tag t('views.public.clinics.index.search.button') , class: "button-primary" %>
     </div>
 </form>
 
 <div class="mt-24 pt-4 border-t border-gray-200">
     <% if @clinics.length == 0 %>
-        <h3 class="text-3xl text-gray-600"> No clinics to show. </h3>
+        <h3 class="text-3xl text-gray-600"> <%= t 'views.public.clinics.index.search.no_clinics'%> </h3>
     <% else %>
         <% @clinics.each do |clinic| %>
         <div class="field-fullwidth">
@@ -60,18 +60,18 @@
                 <div class="flex-1 text-gray-800 text-sm">
                     <h1 class="title"><%= clinic.name %></h1>
                     <h4><%= clinic.address %></h4>
-                    <p><strong>Services available:</strong> <%= clinic.services.collect(&:name).join(", ") %></p>
-                    <p><strong>Age groups served:</strong> <%= clinic.age_groups.collect(&:name).join(", ") %></p>
+                    <p><strong><%= t 'views.public.clinics.index.search.clinic_name.services_available' %></strong> <%= clinic.services.collect(&:name).join(", ") %></p>
+                    <p><strong><%= t 'views.public.clinics.index.search.clinic_name.age_groups' %></strong> <%= clinic.age_groups.collect(&:name).join(", ") %></p>
                     <% if clinic.services.include?(ClinicService.find_by_name("Testing")) && (session[:patient_id] || clinic.public?) %>
                         <p class="w-5/12 my-3">
-                            <%= link_to "Select Testing Appointment Here", 
+                            <%= link_to t("views.public.clinics.index.search.select_testing_here"),
                                 "/client/registration?clinic_id=#{clinic.id}&next_step=#{params[:next_step]}", class: "button-primary px-4 " %>
                         </p>
                     <% end %>
                     <% if clinic.services.include?(ClinicService.find_by_name("Safety Kit Distribution")) %>
-                    <p class="w-5/12 my-3">
-                        <%= link_to "Sign-Up For Safety Kit", "/kit/new", class: "button-primary" %>
-                    </p>
+                      <p class="w-5/12 my-3">
+                          <%= link_to t('views.public.clinics.index.search.signup_kit_button'), "/kit/new", class: "button-primary" %>
+                      </p>
                     <% end %>
                 </div>
                 <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=15&size=400x280&markers=size:small%7Ccolor:red%7C#{clinic.latitude},#{clinic.longitude}&key=#{ENV['GOOGLE_MAPS_API_KEY']}", alt: "Map", class: "flex-none" %>
