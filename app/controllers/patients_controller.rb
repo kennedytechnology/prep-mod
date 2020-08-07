@@ -55,11 +55,9 @@ class PatientsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        if ENV["CONSENT_FORM_SCHOOL_MODE"] && (ENV["CONSENT_FORM_SCHOOL_MODE"] == "true")
-          render pdf: "patient-#{@patient.id}", template: "patients/report_school_mode.pdf.erb", layout: "clinic-print", show_as_html: params.key?('debug')
-        else
-          render pdf: "patient-#{@patient.id}", template: "patients/report.pdf.erb", layout: "clinic-print", show_as_html: params.key?('debug')
-        end
+        render pdf: "patient-#{@patient.id}", 
+                template: (ENV["CONSENT_FORM_SCHOOL_MODE"] && (ENV["CONSENT_FORM_SCHOOL_MODE"] == "true")) ? "patients/report_school_mode.pdf.erb" : "patients/report.pdf.erb",
+                layout: "clinic-print", show_as_html: params.key?('debug')
       end
     end
   end
