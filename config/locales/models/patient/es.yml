@@ -1,0 +1,91 @@
+es:
+  activerecord:
+    models:
+      patient:
+        one: "one"
+        many: "%{count}"
+        county: "County"
+        occupation: "Occupation"
+        first_name: "First Name"
+        middle_initial: "Middle Initial"
+        last_name: "Last Name"
+        mothers_maiden_name: "Mothers Maiden Name"
+        address: "Address"
+        state: "State"
+        city: "City"
+        zip_code: "Zip code"
+        date_of_birth: "Date Of Birth"
+        age: "Age"
+        sex: "Gender"
+        grade: "Grade"
+        homeroom_teacher: "Homeroom teacher"
+        race: "Race"
+        email: "Email Address"
+        phone_number: "Mobile or Daytime Number"
+        signatory_first_name: "First Name"
+        signatory_last_name: "Last Name"
+        consent_date: "Date"
+        relation_to_patient_for_insurance: "Relationship to Patient"
+        # Health Insurance
+        insurance_type: "Type of Insurance"
+        insurance_company_name: "Insurance Company Name"
+        member_id_for_insurance: "Member ID Number"
+        group_number_for_insurance: "Group Number"
+        card_number_for_insurance: "Medical Assistance Number, Recipient Number, or any other number on card"
+        insured_first_name: "Insured Adult's First Name"
+        insured_last_name: "Insured Adult's Last Name"
+        insured_date_of_birth: "Insured Adult's Date Of Birth"
+        relation_to_patient_for_consent: "Relationship To Patient"
+        insurance_card_front: "Upload the FRONT of your insurance card"
+        insurance_card_back: "Upload the BACK of your insurance card"
+        # Health Questions
+        has_fever_over: "A fever of 100.4 degrees Fahrenheit or higher"
+        has_cough: "A cough"
+        has_difficult_breathing: "Shortness of breath or difficulty breathing"
+        had_traveled_to_affected_place:
+          - "Yes"
+          - "No"
+        had_contact_with_confirmed_case:
+          - "Yes"
+          - "No"
+        has_risk_factor:
+          - "Yes"
+          - "No"
+        is_age_60_or_more:
+          - "Yes"
+          - "No"
+        has_other_reason:
+          - "Yes"
+          - "No"
+        has_other_reason_explanation: "Explain here:"
+        # Consent For Services
+        sharing_results_authorized: "In selecting this entity, you agree to share only information about the COVID-19 testing and vaccination services you have received. If you do not want to share your information with the locations of this employer, please uncheck the box."
+        # Add Family
+        first_name: "Patient's First Name"
+        middle_initial: "Middle Initial"
+        last_name: "Patient's Last Name"
+        mothers_maiden_name: "Mother's maiden name"
+        race: "Race"
+        date_of_birth: "Date of Birth"
+        insurance_company_name: "Insurance Company Name"
+        member_id_for_insurance: "Policy Number"
+        group_number_for_insurance: "Group Number"
+        has_fever_over: "A fever of 100.4 degrees Fahrenheit or higher"
+        has_cough: "A cough"
+        has_difficult_breathing: "Shortness of breath or difficulty breathing"
+        had_traveled_to_affected_place:
+          - "Yes"
+          - "No"
+        had_contact_with_confirmed_case:
+          - "Yes"
+          - "No"
+        has_risk_factor:
+          - "Yes"
+          - "No"
+        is_age_60_or_more:
+          - "Yes"
+          - "No"
+        has_other_reason:
+          - "Yes"
+          - "No"
+        # Appointment

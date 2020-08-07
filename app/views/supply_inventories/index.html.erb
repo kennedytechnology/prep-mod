@@ -1,15 +1,15 @@
 <h2 class="main-title"> Inventory Management </h2>
 
 <% if @supply_inventory.errors.any? %>
-  <div id="error_explanation" class="p-4 border-2 bg-red-100 border-red-500 mb-4"> 
-    <h2 class="text-lg font-bold"><%= pluralize(@supply_inventory.errors.count, "error") %> prohibited this article from being saved:</h2>
- 
-    <ul class="list-disc ml-8">
-    <% @supply_inventory.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
+    <div id="error_explanation" class="p-4 border-2 bg-red-100 border-red-500 mb-4">
+        <h2 class="text-lg font-bold"><%= pluralize(@supply_inventory.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+        <ul class="list-disc ml-8">
+        <% @supply_inventory.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+        </ul>
+    </div>
 <% end %>
 
 <%= link_to 'Upload Supplies', new_supply_inventories_import_path, class: "w-2/12 button-primary" %>
@@ -205,7 +205,7 @@
                     <td> <%= supply_inventory.quantity_lost_sum %> </td>
                     <td> <%= supply_inventory.quantity_loaned_sum %> </td>
                     <td> <%= supply_inventory.remaining_quantity_sum %> </td>
-                    <td> 
+                    <td>
                     <div class="flex items-center h-5">
                         <input id="providers" type="checkbox" class="form-checkbox">
                     </div>

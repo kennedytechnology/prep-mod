@@ -1,0 +1,25 @@
+es:
+  static_pages:
+    public:
+      patients:
+        consent_form:
+          personal_information:
+            title: "Tendrá la oportunidad de inscribir a sus hijos menores en un paso futuro."
+            county: "Condado"
+            first_name: "Primer nombre"
+            middle_initial: "Middle Initial"
+            last_name: "Apellido"
+            mothers_maiden_name: "Mother's Maiden Name"
+            date_of_birth: "Fecha De Nacimiento"
+            age: "Años"
+            gender: "Género"
+            race: "La Raza"
+            occupation: "Ocupación"
+            address: "Address"
+            city: "Ciudad"
+            state: "State"
+            zip_code: "Código Postal"
+            email: "E-mail"
+            retype_email: "Vuelva a Escribir el E-mail"
+            phone_number: "Número De Móvil"
+            save_and_continue: "Guardar y Continuar →"

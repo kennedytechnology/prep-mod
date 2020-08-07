@@ -1,40 +1,26 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
-en:
-  date:
-    formats:
-      default: "%d/%m/%Y"
-  time:
-    formats:
-      default: "%d/%m/%Y %H:%M"
+  static_pages:
+    public:
+      patients:
+        consent_form:
+          title: "Register for COVID-19 Testing:"
+          personal_information:
+            title: "You'll have the opportunity to enroll your minor children at a future step."
+            county: "County"
+            first_name: "First Name"
+            middle_initial: "Middle Initial"
+            last_name: "Last Name"
+            mothers_maiden_name: "Mother's Maiden Name"
+            date_of_birth: "Date Of Birth"
+            age: "Age"
+            gender: "Gender"
+            race: "Race"
+            occupation: "Occupation"
+            address: "Address"
+            city: "City"
+            state: "State"
+            zip_code: "Zip Code"
+            email: "Email Address"
+            retype_email: "Retype Email Address"
+            phone_number: "Mobile or Daytime Number"
+            save_and_continue: "Save and Continue →"

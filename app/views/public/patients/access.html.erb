@@ -1,12 +1,11 @@
-<h1 class="main-title">COVID-19 Testing: Do you have a code?</h1>
+<h1 class="main-title"> <%= t 'views.public.patients.access.title' %> </h1>
 <form action="/client/registration">
     <div class="field-side-by-side">
         <div>
-            <p class="label"> If you've been referred for COVID-19 testing and you've received an access code, please enter it here to proceed with registration for testing. </p>
+            <p class="label"> <%= t 'views.public.patients.access.sub_title' %> </p>
             <input name="access_code" class="form-input w-full my-4" value="<%= Patient.all.sample.access_code %>">
-            <input type="submit" value="Continue" class="button-primary-fullwidth">
+            <input type="submit" value="<%= t 'views.public.patients.access.button' %>" class="button-primary-fullwidth">
         </div>
         <div> </div>
     </div>
 </form>
-

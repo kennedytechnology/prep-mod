@@ -1,0 +1,22 @@
+en:
+  views:
+    provider_enrollments:
+      new:
+        title: "Request to Become a COVID-19 Service Provider"
+        services: "What services would you like to provide?"
+        population_served: "Open to"
+        under_served_groups: "What high-risk or under-served groups are largely represented in your practice?"
+        provider_contact_info: "Provider Contact's Information"
+        practice_info: "Practice Information"
+        backup_contact_info: "Back-Up Contact Information"
+        vaccination_provider: "Do you currently provide vaccinations?"
+        children_vaccines: "Are you a Vaccines for Children (VFC) Provider?"
+        model_refrigirator: "What make and model refrigerator do you have?"
+        not_refrigirator: "I do not have a refrigerator"
+        model_freezer: "What make and model freezer do you have?"
+        not_freezer: "I do not have a freezer"
+        model_data_logger: "What make and model data logger/refrigerator thermometer do you have?"
+        not_data_logger: "I do not have a refrigerator thermometer"
+        additional_info: "Additional Information"
+        submit: "Submit Request"
+        cancel: "Cancel"

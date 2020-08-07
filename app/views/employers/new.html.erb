@@ -1,35 +1,35 @@
 <%= content_for :prevent_unsaved_form_script do %>
     <%= javascript_pack_tag 'prevent_unsaved_form', 'data-turbolinks-track': 'reload' %>
 <% end %>
-<h1 class="main-title mt-6"> Request to Receive COVID-19 Information About Your Employees or Students </h1>
+<h1 class="main-title mt-6"> <%= t 'views.employers.new.main_title'%> </h1>
 
-<%= form_with model: @employer, remote: true, 
-                                html: { novalidate: true }, 
-                                data: { 
-                                    controller: "employer-form", 
-                                    target: "employer-form.form", 
+<%= form_with model: @employer, remote: true,
+                                html: { novalidate: true },
+                                data: {
+                                    controller: "employer-form",
+                                    target: "employer-form.form",
                                     action: "ajax:beforeSend->employer-form#submitForm"
-                                }, 
+                                },
                                 class: "block mt-10" do |f| %>
-                                
+
     <div class="field-fullwidth" id="individualsInfo">
-        <p class="title">What information are you seeking about individuals affiliated with your organization? (Select all that apply) <span class="field-required">*</span></p>
+        <p class="title"> <%= t 'views.employers.new.title' %> <span class="field-required">*</span></p>
         <div class="w-full checkboxes-container">
             <div>
                 <span> <%= f.check_box :screening_info, class: "form-checkbox" %> </span>
-                <span> <%= f.label :screening_info, "COVID-19 Screening", class: "text-base" %> </span>
+                <span> <%= f.label :screening_info, t('activerecord.models.employer.screening_info'), class: "text-base" %> </span>
             </div>
             <div>
                 <span> <%= f.check_box :testing_info, class: "form-checkbox" %> </span>
-                <span> <%= f.label :testing_info, "COVID-19 Testing", class: "text-base" %> </span>
+                <span> <%= f.label :testing_info, t('activerecord.models.employer.testing_info'), class: "text-base" %> </span>
             </div>
             <div>
                 <span> <%= f.check_box :vacination_info, class: "form-checkbox" %> </span>
-                <span> <%= f.label :vacination_info, "COVID-19 Vaccination", class: "text-base" %> </span>
+                <span> <%= f.label :vacination_info, t('activerecord.models.employer.vacination_info'), class: "text-base" %> </span>
             </div>
             <div class="w-full flex flex-col">
-                <p class="title"> OR </p>
-                <%= f.label :other_info, "Other", class: "block w-full text-base" %>
+                <p class="title"> <%= t 'views.employers.new.or' %> </p>
+                <%= f.label :other_info, t('activerecord.models.employer.other_info'), class: "block w-full text-base" %>
                 <%= f.text_area :other_info, placeholder: "Enter Details Here", class: "form-textarea w-full" %>
             </div>
         </div>
@@ -37,7 +37,7 @@
     </div>
 
     <div class="field-fullwidth">
-        <p class="title"> Business Location/Environment (Select all that apply) <span class="field-required">*</span></p>
+        <p class="title"> <%= t 'views.employers.new.business_location' %> <span class="field-required">*</span></p>
         <div class="multiselect-dropdown">
             <div class="selectBox" data-action="click->employer-form#showCheckboxes">
                 <select class="form-select w-1/3">
@@ -49,7 +49,7 @@
                 <% BUSINESS_LOCATIONS.each do |location| %>
                 <div class="relative flex items-start px-3 hover:bg-blue-50">
                     <div class="absolute flex items-center h-5">
-                        <%= f.check_box(:business_locations, {multiple: true, id: "location_#{location}", class: "form-checkbox cursor-pointer", 
+                        <%= f.check_box(:business_locations, {multiple: true, id: "location_#{location}", class: "form-checkbox cursor-pointer",
                             data: {
                                 action: "click->employer-form#toggleLocation",
                                 employer: "#{location}",
@@ -63,31 +63,31 @@
                 <% end %>
             </div>
             <p class="employer-error-message mt-2 text-red-600 text-sm hidden" data-target="employer-form.checkboxErrors">Please select at least one option or enter other details!</p>
-            <p data-target="employer-form.selectedLocations"> <strong>Selected Locations:</strong> </p>
+            <p data-target="employer-form.selectedLocations"> <strong> <%= t 'views.employers.new.selected_locations' %> </strong> </p>
         </div>
     </div>
 
     <div class="field-fullwidth">
-        <p class="title"> Contact Details </p>
+        <p class="title"> <%= t 'views.employers.new.contact_details' %> </p>
         <div class="grid grid-cols-3 gap-4">
             <div>
-                <%= f.label :first_name, "First Name", class: "inline-block" %><span class="field-required">*</span>
-                <%= f.text_field :first_name, required: true, 
-                                              data: { action: "blur->employer-form#validateInputField" }, 
+                <%= f.label :first_name, t('activerecord.models.employer.first_name'), class: "inline-block" %><span class="field-required">*</span>
+                <%= f.text_field :first_name, required: true,
+                                              data: { action: "blur->employer-form#validateInputField" },
                                               class: "form-input w-full" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
             <div>
-                <%= f.label :last_name, "Last Name", class: "inline-block" %><span class="field-required">*</span>
-                <%= f.text_field :last_name, required: true, 
-                                             data: { action: "blur->employer-form#validateInputField" }, 
+                <%= f.label :last_name, t('activerecord.models.employer.last_name'), class: "inline-block" %><span class="field-required">*</span>
+                <%= f.text_field :last_name, required: true,
+                                             data: { action: "blur->employer-form#validateInputField" },
                                              class: "form-input w-full" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
             <div>
-                <%= f.label :position, "Position/Title", class: "inline-block" %><span class="field-required">*</span>
-                <%= f.text_field :position, required: true, 
-                                            data: { action: "blur->employer-form#validateInputField" }, 
+                <%= f.label :position, t('activerecord.models.employer.position'), class: "inline-block" %><span class="field-required">*</span>
+                <%= f.text_field :position, required: true,
+                                            data: { action: "blur->employer-form#validateInputField" },
                                             class: "form-input w-full" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
@@ -99,35 +99,35 @@
 
         <div class="flex">
             <div class="w-4/12 mr-4">
-                <%= f.label :address_1, "Address 1", class: "inline-block" %><span class="field-required">*</span>
-                <%= f.text_field :address_1, required: true, 
-                                             data: { action: "blur->employer-form#validateInputField" }, 
+                <%= f.label :address_1, t('activerecord.models.employer.address_1'), class: "inline-block" %><span class="field-required">*</span>
+                <%= f.text_field :address_1, required: true,
+                                             data: { action: "blur->employer-form#validateInputField" },
                                              class: "form-input w-full", id: "autocomplete", onFocus: "geolocate()" %>
                 <%= render partial: "public/clinics/google_maps_script" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
             <div class="w-4/12 mr-4">
-                <%= f.label :address_2, "Unit Number/Address 2", class: "inline-block" %>
+                <%= f.label :address_2, t('activerecord.models.employer.address_2'), class: "inline-block" %>
                 <%= f.text_field :address_2, class: "form-input w-full" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
             <div class="flex-1 mr-4">
-                <%= f.label :city, class: "inline-block" %><span class="field-required">*</span>
-                <%= f.text_field :city, required: true, 
+                <%= f.label :city, t('activerecord.models.employer.city'), class: "inline-block" %><span class="field-required">*</span>
+                <%= f.text_field :city, required: true,
                                         data: { action: "blur->employer-form#validateInputField" },
                                         class: "form-input w-full", id: "locality" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
             <div class="flex-1 mr-4">
-                <%= f.label :state, class: "inline-block" %><span class="field-required">*</span>
-                <%= f.text_field :state, required: true, 
+                <%= f.label :state, t('activerecord.models.employer.state'), class: "inline-block" %><span class="field-required">*</span>
+                <%= f.text_field :state, required: true,
                                          data: { action: "blur->employer-form#validateInputField" },
                                          class: "form-input w-full", id: "administrative_area_level_1" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
             <div class="flex-1">
-                <%= f.label :zip_code, "Zip Code", class: "inline-block" %><span class="field-required">*</span>
-                <%= f.text_field :zip_code, required: true, 
+                <%= f.label :zip_code, t('activerecord.models.employer.zip_code'), class: "inline-block" %><span class="field-required">*</span>
+                <%= f.text_field :zip_code, required: true,
                                             data: { action: "blur->employer-form#validateInputField" },
                                             class: "form-input w-full", id: "postal_code" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
@@ -136,28 +136,28 @@
 
         <div class="grid grid-cols-4 gap-4">
             <div>
-                <%= f.label :office_phone, "Office Phone Number", class: "inline-block" %><span class="field-required">*</span>
-                <%= f.text_field :office_phone, required: true, 
-                                                data: { action: "blur->employer-form#validateInputField" }, 
+                <%= f.label :office_phone, t('activerecord.models.employer.office_phone'), class: "inline-block" %><span class="field-required">*</span>
+                <%= f.text_field :office_phone, required: true,
+                                                data: { action: "blur->employer-form#validateInputField" },
                                                 class: "form-input w-full" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
             <div>
-                <%= f.label :mobile_phone, "Mobile Phone Name", class: "inline-block" %><span class="field-required">*</span>
-                <%= f.text_field :mobile_phone, required: true, 
-                                                data: { action: "blur->employer-form#validateInputField" }, 
+                <%= f.label :mobile_phone, t('activerecord.models.employer.mobile_phone'), class: "inline-block" %><span class="field-required">*</span>
+                <%= f.text_field :mobile_phone, required: true,
+                                                data: { action: "blur->employer-form#validateInputField" },
                                                 class: "form-input w-full" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
             <div>
-                <%= f.label :email, "Email Address", class: "inline-block" %><span class="field-required">*</span>
-                <%= f.email_field :email, required: true, 
-                                          data: { action: "blur->employer-form#validateInputField" }, 
+                <%= f.label :email, t('activerecord.models.employer.email'), class: "inline-block" %><span class="field-required">*</span>
+                <%= f.email_field :email, required: true,
+                                          data: { action: "blur->employer-form#validateInputField" },
                                           class: "form-input w-full" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
             <div>
-                <%= f.label :website, "Website", class: "inline-block" %>
+                <%= f.label :website, t('activerecord.models.employer.website'), class: "inline-block" %>
                 <%= f.text_field :website, class: "form-input w-full" %>
             </div>
         </div>
@@ -165,26 +165,26 @@
 
     <!-- Back up Contact Info -->
     <div class="field-fullwidth">
-        <p class="title"> Back-Up Contact's Details </p>
+        <p class="title"> <%= t 'views.employers.new.backup_contact_details' %> </p>
         <div class="grid grid-cols-3 gap-4">
             <div>
-                <%= f.label :backup_first_name, "Back-Up Contact's First Name", class: "inline-block" %><span class="field-required">*</span>
-                <%= f.text_field :backup_first_name, required: true, 
-                                                     data: { action: "blur->employer-form#validateInputField" }, 
+                <%= f.label :backup_first_name, t('activerecord.models.employer.backup_first_name'), class: "inline-block" %><span class="field-required">*</span>
+                <%= f.text_field :backup_first_name, required: true,
+                                                     data: { action: "blur->employer-form#validateInputField" },
                                                      class: "form-input w-full" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
             <div>
-                <%= f.label :backup_last_name, "Back-Up Contact's Last Name", class: "inline-block" %><span class="field-required">*</span>
-                <%= f.text_field :backup_last_name, required: true, 
-                                                    data: { action: "blur->employer-form#validateInputField" }, 
+                <%= f.label :backup_last_name, t('activerecord.models.employer.backup_last_name'), class: "inline-block" %><span class="field-required">*</span>
+                <%= f.text_field :backup_last_name, required: true,
+                                                    data: { action: "blur->employer-form#validateInputField" },
                                                     class: "form-input w-full" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
             <div>
-                <%= f.label :backup_position, "Back-Up Contact's Position/Title", class: "inline-block" %><span class="field-required">*</span>
-                <%= f.text_field :backup_position, required: true, 
-                                                   data: { action: "blur->employer-form#validateInputField" }, 
+                <%= f.label :backup_position, t('activerecord.models.employer.backup_position'), class: "inline-block" %><span class="field-required">*</span>
+                <%= f.text_field :backup_position, required: true,
+                                                   data: { action: "blur->employer-form#validateInputField" },
                                                    class: "form-input w-full" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
@@ -192,39 +192,39 @@
 
         <div class="flex">
             <div class="flex-1 mr-4">
-                <%= f.label :backup_company_name, "Company Name", class: "inline-block" %>
+                <%= f.label :backup_company_name, t('activerecord.models.employer.backup_company_name'), class: "inline-block" %>
                 <%= f.text_field :backup_company_name, class: "form-input w-full" %>
             </div>
             <div class="w-3/12 mr-4">
-                <%= f.label :backup_address_1, "Address 1", class: "inline-block" %><span class="field-required">*</span>
-                <%= f.text_field :backup_address_1, required: true, 
-                                                    data: { action: "blur->employer-form#validateInputField" }, 
+                <%= f.label :backup_address_1, t('activerecord.models.employer.backup_address_1'), class: "inline-block" %><span class="field-required">*</span>
+                <%= f.text_field :backup_address_1, required: true,
+                                                    data: { action: "blur->employer-form#validateInputField" },
                                                     class: "form-input w-full" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
             <div class="w-3/12 mr-4">
-                <%= f.label :backup_address_2, "Address 2", class: "inline-block" %>
+                <%= f.label :backup_address_2, t('activerecord.models.employer.backup_address_2'), class: "inline-block" %>
                 <%= f.text_field :backup_address_2, class: "form-input w-full" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
             <div class="flex-1 mr-4">
-                <%= f.label :backup_city, "City", class: "inline-block" %><span class="field-required">*</span>
-                <%= f.text_field :backup_city, required: true, 
-                                               data: { action: "blur->employer-form#validateInputField" }, 
+                <%= f.label :backup_city, t('activerecord.models.employer.backup_city'), class: "inline-block" %><span class="field-required">*</span>
+                <%= f.text_field :backup_city, required: true,
+                                               data: { action: "blur->employer-form#validateInputField" },
                                                class: "form-input w-full" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
             <div class="flex-1 mr-4">
-                <%= f.label :backup_state, "State", class: "inline-block" %><span class="field-required">*</span>
-                <%= f.text_field :backup_state, required: true, 
-                                                data: { action: "blur->employer-form#validateInputField" }, 
+                <%= f.label :backup_state, t('activerecord.models.employer.backup_state'), class: "inline-block" %><span class="field-required">*</span>
+                <%= f.text_field :backup_state, required: true,
+                                                data: { action: "blur->employer-form#validateInputField" },
                                                 class: "form-input w-full" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
             <div class="flex-1 mr-4">
-                <%= f.label :backup_zip_code, "Zip Code", class: "inline-block" %><span class="field-required">*</span>
-                <%= f.text_field :backup_zip_code, required: true, 
-                                                   data: { action: "blur->employer-form#validateInputField" }, 
+                <%= f.label :backup_zip_code, t('activerecord.models.employer.backup_zip_code'), class: "inline-block" %><span class="field-required">*</span>
+                <%= f.text_field :backup_zip_code, required: true,
+                                                   data: { action: "blur->employer-form#validateInputField" },
                                                    class: "form-input w-full" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
@@ -232,23 +232,23 @@
 
         <div class="grid grid-cols-3 gap-4">
             <div>
-                <%= f.label :backup_office_phone, "Office Phone Number", class: "inline-block" %><span class="field-required">*</span>
-                <%= f.text_field :office_phone, required: true, 
-                                                data: { action: "blur->employer-form#validateInputField" }, 
+                <%= f.label :backup_office_phone, t('activerecord.models.employer.backup_office_phone'), class: "inline-block" %><span class="field-required">*</span>
+                <%= f.text_field :office_phone, required: true,
+                                                data: { action: "blur->employer-form#validateInputField" },
                                                 class: "form-input w-full" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
             <div>
-                <%= f.label :backup_mobile_phone, "Mobile Phone Name", class: "inline-block" %><span class="field-required">*</span>
-                <%= f.text_field :mobile_phone, required: true, 
-                                                data: { action: "blur->employer-form#validateInputField" }, 
+                <%= f.label :backup_mobile_phone, t('activerecord.models.employer.backup_mobile_phone'), class: "inline-block" %><span class="field-required">*</span>
+                <%= f.text_field :mobile_phone, required: true,
+                                                data: { action: "blur->employer-form#validateInputField" },
                                                 class: "form-input w-full" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
             <div>
-                <%= f.label :backup_email, "Email Address", class: "inline-block" %><span class="field-required">*</span>
-                <%= f.text_field :backup_email, required: true, 
-                                                data: { action: "blur->employer-form#validateInputField" }, 
+                <%= f.label :backup_email, t('activerecord.models.employer.backup_email'), class: "inline-block" %><span class="field-required">*</span>
+                <%= f.text_field :backup_email, required: true,
+                                                data: { action: "blur->employer-form#validateInputField" },
                                                 class: "form-input w-full" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
@@ -257,30 +257,30 @@
 
     <div class="field-side-by-side">
         <div>
-            <p class="title">Employee Info </p>
-            <%= f.label :total_employees, "Total Number of Employees", class: "inline-block" %><span class="field-required">*</span>
-            <%= f.text_field :total_employees, required: true, 
-                                               data: { action: "blur->employer-form#validateInputField" }, 
+            <p class="title"> <%= t 'views.employers.new.employee_info' %> </p>
+            <%= f.label :total_employees, t('activerecord.models.employer.total_employees'), class: "inline-block" %><span class="field-required">*</span>
+            <%= f.text_field :total_employees, required: true,
+                                               data: { action: "blur->employer-form#validateInputField" },
                                                class: "form-input w-full" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
         </div>
         <div>
-            <p class="title">Location Info </p>
-            <%= f.label :total_locations, "Total Number of Locations", class: "inline-block" %><span class="field-required">*</span>
-            <%= f.text_field :total_locations, required: true, 
-                                               data: { action: "blur->employer-form#validateInputField" }, 
+            <p class="title"> <%= t 'views.employers.new.location_info' %> </p>
+            <%= f.label :total_locations, t('activerecord.models.employer.total_locations'), class: "inline-block" %><span class="field-required">*</span>
+            <%= f.text_field :total_locations, required: true,
+                                               data: { action: "blur->employer-form#validateInputField" },
                                                class: "form-input w-full" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
         </div>
     </div>
 
     <div class="field-fullwidth">
-        <%= f.label :comment, "Please share any additional, relevant information about your business", class: "block" %>
+        <%= f.label :comment, t('activerecord.models.employer.comment'), class: "block" %>
         <%= f.text_area :comment, class: "form-textarea w-1/2" %>
     </div>
 
     <div class="flex justify-end">
-        <%= f.submit "Submit Request", class: "button-primary" %>
-        <%= link_to "Cancel", root_path, class: "button-primary" %>
+        <%= f.submit t('activerecord.models.employer.submit'), class: "button-primary" %>
+        <%= link_to t('views.employers.new.cancel'), root_path, class: "button-primary" %>
     </div>
 <% end %>

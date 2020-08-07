@@ -2,9 +2,9 @@
     <%= javascript_pack_tag 'prevent_unsaved_form', 'data-turbolinks-track': 'reload' %>
 <% end %>
 <%= form_with(model: @patient, url: "/kit/create", remote: false, class: "bg-white") do |f| %>
-    <h1 class="main-title">Pre-Register</h1>
+    <h1 class="main-title"> <%= t 'views.public.kit.new.title' %> </h1>
     <%= render "form_fields", f: f %>
     <div class="flex justify-end">
-        <%= f.submit "Save and Continue →", class: "button-primary mt-10" %>
+        <%= f.submit t('views.public.kit.new.submit'), class: "button-primary mt-10" %>
     </div>
 <% end %>

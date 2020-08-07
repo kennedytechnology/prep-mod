@@ -1,11 +1,28 @@
 class ApplicationController < ActionController::Base
   before_action :set_cache_headers
+  before_action :set_locale
+
   rescue_from CanCan::AccessDenied do |exception|
     logger.debug exception.inspect
     render file: 'public/401.html', status: :unauthorized
   end
 
   private
+
+  def default_url_options
+    { locale: I18n.locale }
+  end
+
+  def set_locale
+    I18n.locale = extract_locale || I18n.default_locale
+  end
+
+  def extract_locale
+    parsed_locale = params[:locale]
+
+    I18n.available_locales.map(&:to_s).include?(parsed_locale) ?
+        parsed_locale.to_sym : nil
+  end
 
   def set_cache_headers
     response.headers["Cache-Control"] = "no-cache, no-store"
