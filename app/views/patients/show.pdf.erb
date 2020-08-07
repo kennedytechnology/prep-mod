@@ -1,13 +1,6 @@
-<div class="flex jusitfy-between">
-    <%= image_tag wicked_pdf_asset_base64(ENV['SITE_LOGO'] || 'prep-mod.png'), class: "mt-2 mb-2", style: "max-height: 60px;" %>
+<%= image_tag wicked_pdf_asset_base64(ENV['SITE_LOGO'] || 'prep-mod.png'), class: "mt-2 mb-2", style: "max-height: 60px;" %>
 
-    <div class="w-3/12">
-        <p class="w-full border-b pb-2"> <%= @clinic.venue_name %> </p>
-        <p> School Name </p>
-    </div>
-</div>
-
-<h1 class="w-full text-center text-xl font-bold">2020 COVID-19 Test Clinic Consent Form</h1>
+<h1 class="w-full text-center text-xl font-bold"> <%= @clinic.county %> Consent For <%= @clinic.venue_name %> </h1>
 <p class="text-sm my-2">
   DEMO FORM: PrepMod is in testing mode. This is not a real consent for medical
   services.
