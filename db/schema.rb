@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_05_092531) do
+ActiveRecord::Schema.define(version: 2020_08_07_072254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -415,6 +415,9 @@ ActiveRecord::Schema.define(version: 2020_08_05_092531) do
     t.text "has_other_reason_explanation"
     t.string "grade"
     t.string "homeroom_teacher"
+    t.string "guardian_first_name"
+    t.string "guardian_last_name"
+    t.string "guardian_email"
   end
 
   create_table "provider_denial_messages", force: :cascade do |t|
