@@ -3,86 +3,86 @@
         <div class="container">
             <div class="w-full text-center mb-6">
                 <h3 class="leading-9 font-extrabold tracking-tight text-gray-700 xl:text-5xl xl:mb-4 sm:text-4xl sm:leading-10">
-                    Which C-19 service would you like?
+                    <%= t 'views.public_portal.index.services_section.main_title' %>
                 </h3>
             </div>
             <div class="mt-10 sm:grid sm:grid-cols-3 sm:col-gap-10 sm:row-gap-10 lg:col-span-2 lg:mt-16">
                 <div class="flex flex-col pb-4">
                     <div class="mb-0">
-                        <h5 class="tracking-tight lg:leading-8 xl:text-3xl lg:text-xl md:text-lg font-bold text-gray-700">News & <br/> Notifications</h5>
+                        <h5 class="tracking-tight lg:leading-8 xl:text-3xl lg:text-xl md:text-lg font-bold text-gray-700"> <%= t 'views.public_portal.index.services_section.news_service.title' %> </h5>
                         <p class="my-4 sm:text-lg lg:text-xl lg:leading-6 md:text-lg text-gray-500 text-justify">
-                            Sign Up for News and Notifications to get the latest on C-19
+                           <%= t 'views.public_portal.index.services_section.news_service.sub_title' %>
                         </p>
                     </div>
-                    <%= link_to new_public_news_signup_path, 
-                        class: "flex justify-center lg:w-2/4 md:w-full py-2 text px-8 mt-auto mb-0 xl:text-lg lg:text-base rounded-md bg-indigo-600 hover:bg-indigo-500 text-white border-2", 
+                    <%= link_to new_public_news_signup_path,
+                        class: "flex justify-center lg:w-2/4 md:w-full py-2 text px-8 mt-auto mb-0 xl:text-lg lg:text-base rounded-md bg-indigo-600 hover:bg-indigo-500 text-white border-2",
                         style: "background-color:  #2699FB; border-color: #BCE0FD;" do %>
-                        <span> Sign Up </span>
+                        <span> <%= t 'views.public_portal.index.services_section.sign_up_button' %> </span>
                     <% end %>
                 </div>
                 <div class="flex flex-col pb-4">
                     <div class="mb-0">
-                        <h5 class="tracking-tight lg:leading-8 xl:text-3xl lg:text-xl md:text-lg font-bold text-gray-700">Testing - Referral Code </h5>
+                        <h5 class="tracking-tight lg:leading-8 xl:text-3xl lg:text-xl md:text-lg font-bold text-gray-700"> <%= t 'views.public_portal.index.services_section.testing_referral.title' %> </h5>
                         <p class="my-4 sm:text-lg lg:text-xl lg:leading-6 md:text-lg text-gray-500 text-justify">
-                            You must have a referral code to schedule a testing appointment
+                            <%= t 'views.public_portal.index.services_section.testing_referral.sub_title' %>
                         </p>
                     </div>
-                    <%= link_to "/client/access", 
-                        class: "flex justify-center lg:w-2/4 md:w-full py-2 text px-8 mt-auto mb-0 xl:text-lg lg:text-base rounded-md bg-indigo-600 hover:bg-indigo-500 text-white border-2", 
+                    <%= link_to "/client/access",
+                        class: "flex justify-center lg:w-2/4 md:w-full py-2 text px-8 mt-auto mb-0 xl:text-lg lg:text-base rounded-md bg-indigo-600 hover:bg-indigo-500 text-white border-2",
                         style: "background-color:  #2699FB; border-color: #BCE0FD;" do %>
-                        <span> Sign Up </span>
+                        <span> <%= t 'views.public_portal.index.services_section.sign_up_button' %> </span>
                     <% end %>
                 </div>
                 <div class="flex flex-col pb-4">
                     <div class="mb-0">
-                        <h5 class="tracking-tight lg:leading-8 xl:text-3xl lg:text-xl font-bold text-gray-700"> Testing - No Code </h5>
+                        <h5 class="tracking-tight lg:leading-8 xl:text-3xl lg:text-xl font-bold text-gray-700"> <%= t 'views.public_portal.index.services_section.testing_no_code.title' %> </h5>
                         <p class="my-4 sm:text-lg lg:text-xl lg:leading-6 md:text-lg text-gray-500 text-justify">
-                            If you don't have an access code, you can search for a clinic and make an appointment.
+                            <%= t 'views.public_portal.index.services_section.testing_no_code.sub_title' %>
                         </p>
                     </div>
-                    <%= link_to "/clinic/search?service[]=Testing", 
-                        class: "flex justify-center lg:w-2/4 md:w-full py-2 text px-8 mt-auto mb-0 xl:text-lg lg:text-base rounded-md bg-indigo-600 hover:bg-indigo-500 text-white border-2", 
+                    <%= link_to "/clinic/search?service[]=Testing",
+                        class: "flex justify-center lg:w-2/4 md:w-full py-2 text px-8 mt-auto mb-0 xl:text-lg lg:text-base rounded-md bg-indigo-600 hover:bg-indigo-500 text-white border-2",
                         style: "background-color:  #2699FB; border-color: #BCE0FD;" do %>
-                        <span> Sign Up </span>
+                        <span> <%= t 'views.public_portal.index.services_section.sign_up_button' %> </span>
                     <% end %>
                 </div>
                 <div class="flex flex-col pb-4">
                     <div class="mb-0">
-                        <h5 class="tracking-tight lg:leading-8 xl:text-3xl lg:text-xl font-bold text-gray-700"> Pre-Register </h5>
+                        <h5 class="tracking-tight lg:leading-8 xl:text-3xl lg:text-xl font-bold text-gray-700"> <%= t 'views.public_portal.index.services_section.pre_register.title' %> </h5>
                         <p class="my-4 sm:text-lg lg:text-xl lg:leading-6 md:text-lg text-gray-500 text-justify">
-                            Pre-Register here for a vaccination
+                            <%= t 'views.public_portal.index.services_section.pre_register.sub_title' %>
                         </p>
                     </div>
-                    <%= link_to "/kit/new", 
-                        class: "flex justify-center lg:w-2/4 md:w-full py-2 text px-8 mt-auto mb-0 xl:text-lg lg:text-base rounded-md bg-indigo-600 hover:bg-indigo-500 text-white border-2", 
+                    <%= link_to "/kit/new",
+                        class: "flex justify-center lg:w-2/4 md:w-full py-2 text px-8 mt-auto mb-0 xl:text-lg lg:text-base rounded-md bg-indigo-600 hover:bg-indigo-500 text-white border-2",
                         style: "background-color:  #2699FB; border-color: #BCE0FD;" do %>
-                        <span> Sign Up </span>
+                        <span> <%= t 'views.public_portal.index.services_section.sign_up_button' %> </span>
                     <% end %>
                 </div>
                 <div class="flex flex-col pb-4">
                     <div class="mb-0">
-                        <h5 class="tracking-tight lg:leading-8 xl:text-3xl lg:text-lg font-bold text-gray-700"> Provider Enrollment </h5>
+                        <h5 class="tracking-tight lg:leading-8 xl:text-3xl lg:text-lg font-bold text-gray-700"> <%= t 'views.public_portal.index.services_section.provider_enrollment.title' %> </h5>
                         <p class="my-4 sm:text-lg lg:text-xl lg:leading-6 md:text-lg text-gray-500 lg:text-justify">
-                            For Healthcare Providers
+                            <%= t 'views.public_portal.index.services_section.provider_enrollment.sub_title' %>
                         </p>
                     </div>
-                    <%= link_to new_provider_enrollment_path, 
-                        class: "flex justify-center lg:w-2/4 md:w-full py-2 text px-8 mt-auto mb-0 xl:text-lg lg:text-base rounded-md bg-indigo-600 hover:bg-indigo-500 text-white border-2", 
+                    <%= link_to new_provider_enrollment_path,
+                        class: "flex justify-center lg:w-2/4 md:w-full py-2 text px-8 mt-auto mb-0 xl:text-lg lg:text-base rounded-md bg-indigo-600 hover:bg-indigo-500 text-white border-2",
                         style: "background-color:  #2699FB; border-color: #BCE0FD;" do %>
-                        <span> Sign Up </span>
+                        <span> <%= t 'views.public_portal.index.services_section.sign_up_button' %> </span>
                     <% end %>
                 </div>
                 <div class="flex flex-col pb-4">
                     <div class="mb-0">
-                        <h5 class="tracking-tight lg:leading-8 xl:text-3xl lg:text-lg font-bold text-gray-700"> Business Enrollment </h5>
+                        <h5 class="tracking-tight lg:leading-8 xl:text-3xl lg:text-lg font-bold text-gray-700"> <%= t 'views.public_portal.index.services_section.business_enrollment.title' %> </h5>
                         <p class="my-4 sm:text-lg lg:text-xl lg:leading-6 md:text-lg text-gray-500 lg:text-justify">
-                            Request access to information about your workplace
+                            <%= t 'views.public_portal.index.services_section.business_enrollment.sub_title' %>
                         </p>
                     </div>
-                    <%= link_to new_employer_path, 
-                        class: "flex justify-center lg:w-2/4 md:w-full py-2 text px-8 mt-auto mb-0 xl:text-lg lg:text-base rounded-md bg-indigo-600 hover:bg-indigo-500 text-white border-2", 
+                    <%= link_to new_employer_path,
+                        class: "flex justify-center lg:w-2/4 md:w-full py-2 text px-8 mt-auto mb-0 xl:text-lg lg:text-base rounded-md bg-indigo-600 hover:bg-indigo-500 text-white border-2",
                         style: "background-color:  #2699FB; border-color: #BCE0FD;" do %>
-                        <span> Sign Up </span>
+                        <span> <%= t 'views.public_portal.index.services_section.sign_up_button' %> </span>
                     <% end %>
                 </div>
             </div>

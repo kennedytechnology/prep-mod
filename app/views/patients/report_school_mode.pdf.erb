@@ -1,4 +1,6 @@
-<h1 class="w-full text-center text-xl font-bold">2020 COVID-19 Test Clinic Consent Form</h1>
+<%= image_tag wicked_pdf_asset_base64(ENV['SITE_LOGO'] || 'prep-mod.png'), class: "mt-2 mb-2", style: "max-height: 60px;" %>
+
+<h1 class="w-full text-center text-xl font-bold"> <%= @clinic.county %> Consent For <%= @clinic.venue_name %> </h1>
 <p class="text-sm my-2">
   DEMO FORM: PrepMod is in testing mode. This is not a real consent for medical
   services.
@@ -10,50 +12,67 @@ Please Print Clearly in Ink
 
 <table class="w-full mt-2">
   <tr>
-    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "LAST Name", value: @patient.last_name} %>
-    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "FIRST Name", value: @patient.first_name} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Student's LAST Name", value: @patient.last_name} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Student's FIRST Name", value: @patient.first_name} %>
     <%= render partial: 'consent_form_cell', locals: {width: "40px;", label: "MI", value: @patient.middle_initial} %>
-    <%= render partial: 'consent_form_cell', locals: {width: 1, label: "DOB", value: @patient.date_of_birth.try(:strftime, "%m/%d/%y")} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 1, label: "Studen't Date of Birth", value: @patient.date_of_birth.try(:strftime, "%m/%d/%y")} %>
     <%= render partial: 'consent_form_cell', locals: {width: 1, label: "Age", value: @patient.age} %>
     <%= render partial: 'consent_form_cell', locals: {width: 1, label: "Sex", value: @patient.sex} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 1, label: "Grade", value: @patient.grade} %>
   </tr>
   <tr>
-    <%= render partial: 'consent_form_cell', locals: {width: 2, colspan: 2, label: "Address", value: @patient.address} %>
-    <%= render partial: 'consent_form_cell', locals: {colspan: 2, label: "City", value: @patient.city} %>
-    <%= render partial: 'consent_form_cell', locals: {label: "State", value: @patient.state} %>
-    <%= render partial: 'consent_form_cell', locals: {label: "ZIP Code", value: @patient.zip_code} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Parent/Guardian LAST Name", value: @patient.last_name} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "FIRST NAME", value: @patient.first_name} %>
+    <%= render partial: 'consent_form_cell', locals: {width: "40px;", label: "MI", value: @patient.middle_initial} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 1, colspan: 4, label: "Student ID#", value: @patient.id} %>
   </tr>
   <tr>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, colspan: 3, label: "Address", value: @patient.address} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, colspan: 2, label: "Cell/Home Phone", value: @patient.formatted_phone_number} %>
     <%= render partial: 'consent_form_cell', locals: {width: 2, colspan: 2, label: "Email Address", value: @patient.email} %>
-    <%= render partial: 'consent_form_cell', locals: {width: 2, colspan: 2, label: "Phone Number", value: @patient.formatted_phone_number} %>
+  </tr>
+  <tr>
+    <%= render partial: 'consent_form_cell', locals: {colspan: 2, label: "City", value: @patient.city} %>
+    <%= render partial: 'consent_form_cell', locals: {colspan: 1, label: "ZIP Code", value: @patient.zip_code} %>
+    <%= render partial: 'consent_form_cell', locals: {colspan: 4, label: "School Name", value: @clinic.venue_name} %>
   </tr>
 </table>
 
-<div class="bg-black text-white text-center mt-2 mb-2 p-1">
+<div class="bg-black text-white text-center mt-2 mb-2 p-1 uppercase">
   HEALTH INSURANCE INFORMATION &mdash; Please fill out COMPLETELY and ACCURATELY
 </div>
 
 <div class="bg-gray-400 text-xs text-center mt-2 mb-2 p-1">
-  Please write this information FROM YOUR INSURANCE CARD. We will bill your
+  Please copy this information FROM YOUR INSURANCE CARD. We will bill your
   insurance. <span class="underline">You will NOT be charged</span> for a co-pay or deductible.
 </div>
 
 <table class="w-full mt-2">
-  <tr>
-    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Type of Insurance", value: @patient.insurance_type} %>
-    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Insurance Company Name", value: @patient.insurance_company_name} %>
-    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Insurance Member Number", value: @patient.member_id_for_insurance} %>
-  </tr>
-  <tr>
-    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Insurance Group Number", value: @patient.group_number_for_insurance} %>
-    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Other Insurance Number", value: @patient.card_number_for_insurance} %>
-  </tr>
-  <tr>
-    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Insured Adult's Name", value: "#{@patient.insured_first_name} #{@patient.insured_last_name}"} %>
-    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Relationship to Patient", value: @patient.relation_to_patient_for_insurance} %>
-    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Insured Adult's Date of Birth", value: @patient.insured_date_of_birth} %>
-  </tr>
+    <tr>
+        <td class="border-2 border-gray-300 align-top pl-4 pb-2 h-16 w-full" colspan="4">
+            <span class="font-bold w-full text-xs"> Type of Insurance </span><br/>
+            <div class="pt-2 pl-4 font-mono text-base font-bold text-gray-800 tracking-widest">
+                <% INSURANCE_TYPES.each do |str_insurance_type| %>
+                    <span> <input type="checkbox" class="form-checkbox" <%= "checked" if @patient.insurance_type == str_insurance_type %> /> </span>
+                    <span class="label"> <%= str_insurance_type %> </span>
+                    <br />
+                <% end %>
+            </div>
+        </td> 
+    </tr>
+    <tr>
+        <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Insurance Company Name", value: @patient.insurance_company_name} %>
+        <%= render partial: 'consent_form_cell', locals: {colspan: 2, label: "Insurance Member Number", value: @patient.member_id_for_insurance} %>
+        <%= render partial: 'consent_form_cell', locals: {colspan: 2, label: "Insurance Group Number", value: @patient.group_number_for_insurance} %>
+    </tr>
+    <tr>
+        <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Policy Holder's/Insured Adult's Name", value: "#{@patient.insured_first_name} #{@patient.insured_last_name}"} %>
+        <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Relationship to Student", value: @patient.relation_to_patient_for_insurance} %>
+        <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Insured Adult's Birthday", value: @patient.insured_date_of_birth} %>
+        <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Any other # from Insurance Card", value: @patient.card_number_for_insurance} %>
+    </tr>
 </table>
+
 
 <div class="bg-gray-400 text-center font-bold mt-2 mb-2 p-1">
   Do any of the following apply to you?

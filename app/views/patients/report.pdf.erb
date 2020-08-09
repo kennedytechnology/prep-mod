@@ -1,0 +1,136 @@
+<h1 class="w-full text-center text-xl font-bold">2020 COVID-19 Test Clinic Consent Form</h1>
+<p class="text-sm my-2">
+  DEMO FORM: PrepMod is in testing mode. This is not a real consent for medical
+  services.
+</p>
+
+<div class="bg-gray-400 text-xs py-1 pl-4 font-bold">
+Please Print Clearly in Ink
+</div>
+
+<table class="w-full mt-2">
+  <tr>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "LAST Name", value: @patient.last_name} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "FIRST Name", value: @patient.first_name} %>
+    <%= render partial: 'consent_form_cell', locals: {width: "40px;", label: "MI", value: @patient.middle_initial} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 1, label: "DOB", value: @patient.date_of_birth.try(:strftime, "%m/%d/%y")} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 1, label: "Age", value: @patient.age} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 1, label: "Sex", value: @patient.sex} %>
+  </tr>
+  <tr>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, colspan: 2, label: "Address", value: @patient.address} %>
+    <%= render partial: 'consent_form_cell', locals: {colspan: 2, label: "City", value: @patient.city} %>
+    <%= render partial: 'consent_form_cell', locals: {label: "State", value: @patient.state} %>
+    <%= render partial: 'consent_form_cell', locals: {label: "ZIP Code", value: @patient.zip_code} %>
+  </tr>
+  <tr>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, colspan: 2, label: "Email Address", value: @patient.email} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, colspan: 2, label: "Phone Number", value: @patient.formatted_phone_number} %>
+  </tr>
+</table>
+
+<div class="bg-black text-white text-center mt-2 mb-2 p-1">
+  HEALTH INSURANCE INFORMATION &mdash; Please fill out COMPLETELY and ACCURATELY
+</div>
+
+<div class="bg-gray-400 text-xs text-center mt-2 mb-2 p-1">
+  Please write this information FROM YOUR INSURANCE CARD. We will bill your
+  insurance. <span class="underline">You will NOT be charged</span> for a co-pay or deductible.
+</div>
+
+<table class="w-full mt-2">
+  <tr>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Type of Insurance", value: @patient.insurance_type} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Insurance Company Name", value: @patient.insurance_company_name} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Insurance Member Number", value: @patient.member_id_for_insurance} %>
+  </tr>
+  <tr>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Insurance Group Number", value: @patient.group_number_for_insurance} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Other Insurance Number", value: @patient.card_number_for_insurance} %>
+  </tr>
+  <tr>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Insured Adult's Name", value: "#{@patient.insured_first_name} #{@patient.insured_last_name}"} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Relationship to Patient", value: @patient.relation_to_patient_for_insurance} %>
+    <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Insured Adult's Date of Birth", value: @patient.insured_date_of_birth} %>
+  </tr>
+</table>
+
+<div class="bg-gray-400 text-center font-bold mt-2 mb-2 p-1">
+  Do any of the following apply to you?
+</div>
+
+<table class="w-full mt-2">
+    <tr>
+        <td class="border-2 border-gray-300 align-top pl-4 pb-2 h-16" style="width: 2%" colspan=2>
+            <span class="font-bold w-full text-xs"> Do you have? </span><br/>
+            <div class="pt-2 pl-4 font-mono text-base font-bold text-gray-800 tracking-widest">
+                <span> <input type="checkbox" class="form-checkbox" <%= "checked" if @patient.has_fever_over %> /> </span>
+                <span class="label"> A fever of 100.4 degrees Fahrenheit or higher </span>
+                <br />
+
+                <span> <input type="checkbox" class="form-checkbox" <%= "checked" if @patient.has_cough %> /> </span>
+                <span class="label"> A cough </span>
+                <br />
+
+                <span> <input type="checkbox" class="form-checkbox" <%= "checked" if @patient.has_difficult_breathing %> /> </span>
+                <span class="label"> Shortness of breath or difficulty breathing </span>
+            </div>
+        </td> 
+
+        <%= render partial: 'consent_form_cell_boolean', locals: {width: 2, colspan: 2, label: "Have you traveled in the past 14 days to regions affected by COVID-19?", value: @patient.had_traveled_to_affected_place} %>
+    </tr>
+    <tr>
+        <%= render partial: 'consent_form_cell_boolean', locals: {width: 2, colspan: 2, label: "Have you been in close contact with anyone who has a confirmed COVID-19 diagnosis?", value: @patient.had_contact_with_confirmed_case} %>
+        <%= render partial: 'consent_form_cell_boolean', locals: {width: 2, colspan: 2, label: "Do you have heart disease, lung disease, kidney disease or diabetes?", value: @patient.has_risk_factor} %>
+    </tr>
+    <tr>
+        <%= render partial: 'consent_form_cell_boolean', locals: {width: 2, colspan: 2, label: "Are you 60 or older?", value: @patient.is_age_60_or_more} %>
+        <%= render partial: 'consent_form_cell_boolean', locals: {width: 2, colspan: 2, label: "Is there any other reason you think you should be tested for COVID-19? If 'yes', explain", value: @patient.has_other_reason} %>
+    </tr>
+</table>
+
+<% if @patient.clinic_events.exists? %>
+    <div class="bg-black text-white text-center mt-2 mb-2 p-1" style="page-break-before: always;">
+        INFORMATION ABOUT PATIENT ENCOUNTERS
+    </div>
+
+    <table class="w-full mt-2">
+        <thead>
+            <tr>
+                <th> Clinic Name </th>
+                <th> Encounter Date </th>
+                <th> Encounter Type </th>
+                <th> Outcome </th>
+                <th> Location </th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @patient.clinic_events.each do |clinic_event| %>
+            <tr>
+                <%= render partial: 'consent_form_cell', locals: {width: 2, label: " ", value: clinic_event.clinic.name} %>
+                <%= render partial: 'consent_form_cell', locals: {width: 2, label: " ", value: clinic_event.event_date} %>
+                <%= render partial: 'consent_form_cell', locals: {width: 2, label: " ", value: clinic_event.category} %>
+                <%= render partial: 'consent_form_cell', locals: {width: 2, label: " ", value: clinic_event.outcome} %>
+                <%= render partial: 'consent_form_cell', locals: {width: 2, label: " ", value: clinic_event.location} %>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+<% end %>
+
+<table class="w-full mt-10"><tr>
+  <td>
+    <% if @patient.signature_data.blank? %>
+      <span class="block h-20 pt-8">(no signature)</span>
+    <% else %>
+      <%= image_tag @patient.signature_data, style: "width: 450px;", class: "border-b-2 border-black" %>
+    <% end %>
+    <span class="font-bold">Signature of Patient or Parent/Guardian</span>
+  </td>
+  <td class="align-bottom">
+    <div class="border-b-2 px-8 border-black font-mono">
+      <%= @patient.consent_date %>
+    </div>
+    <span class="font-bold">Date</span>
+  </td>
+</tr></table>

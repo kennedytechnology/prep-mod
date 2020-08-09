@@ -1,0 +1,32 @@
+es:
+  views:
+    public_portal:
+      header:
+        name: "Maryland"
+        service: "Servicios"
+        sub_title: "A continuación, se encuentra el servicio C-19 que mejor se adapte a sus necesidades"
+        find_button: "Encontrar Servicios"
+      index:
+        services_section:
+          main_title: "Which C-19 service would you like?"
+          news_service:
+            title: "News & Notifications"
+            sub_title: "Sign Up for News and Notifications to get the latest on C-19"
+          testing_referral:
+            title: "Testing - Referral Code"
+            sub_title: "You must have a referral code to schedule a testing appointment"
+          testing_no_code:
+            title: "Testing - No Code"
+            sub_title: " If you don't have an access code, you can search for a clinic and make an appointment."
+          pre_register:
+            title: "Pre-Register"
+            sub_title: "Pre-Register here for a vaccination"
+          provider_enrollment:
+            title: "Provider Enrollment"
+            sub_title: "For Healthcare Providers"
+          business_enrollment:
+            title: "Business Enrollment"
+            sub_title: "Request access to information about your workplace"
+          sign_up_button: "Regístrate"
+      footer:
+        copyrights: "ClinicWizard, Inc. Todos los derechos reservados."

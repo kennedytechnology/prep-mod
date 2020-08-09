@@ -1,0 +1,18 @@
+es:
+  views:
+    public:
+      clinics:
+        index:
+          search:
+            title: "Encuentre un servicio Covid-19"
+            services: "What service(s) are you seeking?"
+            age_groups: "Age Group of Person(s) Seeking Services"
+            search_within: "Search Within"
+            address: "Address"
+            button: "Buscar"
+            no_clinics: "No clinics to show."
+            clinic_name:
+              services_available: "Servicios disponibles:"
+              age_groups: "Edad de los grupos servido:"
+            select_testing_here: "Seleccionar cita de evaluación"
+            signup_kit_button: "Sign-Up For Safety Kit"

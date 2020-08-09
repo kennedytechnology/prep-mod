@@ -1,0 +1,71 @@
+es:
+  views:
+    public:
+      patients:
+        edit:
+          title: "Register for COVID-19 Testing:"
+          buttons:
+            back: "Back"
+            save_add_household_member: "Save and Add a Household Member"
+            review_submit: "Review & Submit"
+            save_add_another_household_member: "Save and Add Another Household Member"
+            save_continue: "Save And Continue"
+            find_location: "Find Another Location"
+          personal_info:
+            title: "You'll have the opportunity to enroll your minor children at a future step."
+          health_insurance:
+            drag_and_drop: "or drag and drop"
+          health_questions:
+            reminder: "You must complete all fields with a star."
+            question: "Do any of the following apply to you?"
+            do_you_have: "Do you have:"
+            have_you_traveled: "Have you traveled in the past 14 days to regions affected by COVID-19?"
+            close_contact: "Have you been in close contact with anyone who has a confirmed COVID-19 diagnosis?"
+            diseases: "Do you have heart disease, lung disease, kidney disease or diabetes?"
+            age_question: "Are you 60 or older?"
+            testing_reasons: "Is there any other reason you think you should be tested for COVID-19? If 'yes', explain"
+          consent_for_services:
+            share_results:
+              title: "Share Your COVID-19 Results With Your Provider, School, or Employer"
+              note: "If you have questions about COVID-19, please contact your doctor, local health department, or go to"
+              sahre_with_whom: "With whom would you like to share your information?"
+              entity: "Selected Entity: "
+            consent_for_covid:
+              title: "Consent for COVID-19 Testing - You Must Sign This to be Tested"
+              notice: "By signing this form, I give permission for a COVID-19 test to be administered and a record of the test and results be entered into a database for use to monitor control of the disease. Further, I agree that the information above is correct, and:"
+              list:
+                - "I have read information about the test or someone has explained it to me;"
+                - "I understand the risks and benefits of being tested and consent to be tested, and"
+                - "Any questions I had about the test have been answered."
+            information_offered_service:
+              title: "Information Sheets for Offered Services"
+              link_text: "View PDF"
+              info_sheet: "• Information Sheet:"
+            signature:
+              title: "Please sign here with your finger or mouse"
+              with_name: "Sign My Name"
+            relation_to_patient_for_insurance_options:
+              - "Self"
+              - "Parent/Guardian"
+              - "Other"
+          add_family:
+            header: "You must be the parent or guardian of a minor or dependent child, or have power of attorney for an adult."
+            family_member_section: "Family Member"
+            delete_member: "Delete Family Member"
+            complete_field: "You must complete all fields with a star."
+            health_questions_title: "Do any of the following apply to you?"
+            do_you_have: "Do you have:"
+            have_you_traveled: "Have you traveled in the past 14 days to regions affected by COVID-19?"
+            close_contact: "Have you been in close contact with anyone who has a confirmed COVID-19 diagnosis?"
+            diseases: "Do you have heart disease, lung disease, kidney disease or diabetes?"
+            age_question: "Are you 60 or older?"
+            testing_reasons: "Is there any other reason you think you should be tested for COVID-19? If 'yes', explain"
+            same_insurance: "Same Insurance as Parent"
+          appointment:
+            title: "Please select a time for your appointment"
+            time: "Time"
+            available: "Appointments Available"
+            appointments_available: "appointments available"
+            waiting_list: "Add To Waiting List"
+            contact: "Someone will contact you about your appointment."
+        save_and_continue: "Save and Continue →"

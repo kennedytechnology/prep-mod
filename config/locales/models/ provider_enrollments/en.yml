@@ -1,0 +1,47 @@
+en:
+  activerecord:
+    models:
+      provider_enrollments:
+        clinic_services:
+        clinic_age_groups:
+        clinic_primary_groups:
+        first_name: "First Name"
+        middle_initial: "Middle Name"
+        last_name: "Last Name"
+        professional_license: "Professional License"
+        title: "Title"
+        contact_office_phone: "Office Phone Number"
+        contact_mobile_phone: "Mobile Phone Number"
+        contact_email: "Email Address"
+        county: "County"
+        npi_number: "NPI Number"
+        license_number: "License Number"
+        license_state_of_issue: "State of Issue"
+        license_date_of_issue: "Date of Issue"
+        medical_specialty: "Specialty"
+        practice_type: "Practice Type"
+        practice_mobile_phone: "Mobile Phone Number"
+        practice_email: "Email Address"
+        practice_name: "Name"
+        practice_address: "Address"
+        practice_city: "City"
+        practice_state: "State"
+        practice_zip_code: "Zip code"
+        practice_office_phone: "Office Phone Number"
+        practice_backup_contact: "Name"
+        practice_backup_office_phone: "Office Phone"
+        practice_backup_email: "Email Address"
+        practice_backup_mobile_phone: "Mobile Phone"
+        does_provide_vaccination:
+          - "Yes"
+          - "No"
+        does_provide_vfc:
+          - "Yes"
+          - "No"
+        refrigerator: "I do not have a refrigerator"
+        freezer: "I do not have a freezer"
+        refrigerator_thermometer: "I do not have a refrigerator thermometer"
+        date_of_birth: "Date of Birth"
+        zip_code: "Zip code"
+        occupation: "Choose Occupation"
+        email: "Email Address"

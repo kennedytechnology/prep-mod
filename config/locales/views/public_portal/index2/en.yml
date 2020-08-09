@@ -1,0 +1,24 @@
+en:
+  views:
+    public_portal:
+      index:
+        title: "Get COVIDReady!"
+        subtitle_part1: "A COVID-19 vaccine is coming. We don't know when, but we need to be ready when it gets here."
+        subtitle_part2: "Do your part to make sure the vaccine gets to everyone as quickly and smoothly as possible."
+        subtitle_part3: "The faster we get this done, the sooner we can get back out there."
+        to_be_vaccinated: "Americans to be Vaccinated"
+        pre_register: "Pre-Register for a Vaccination"
+        help_us: "Help us plan vaccination for your area."
+        pre_register_button: "Pre-Register"
+        provider: "Provider Sign-Up"
+        healthcare_providers: "Healthcare Providers: let us know you want to administer vaccine."
+        vaccinate_button: "Vaccinate"
+        clinic_state: "Clinic Site Sign-Up"
+        offer_location: "Offer location to host a clinic at your."
+        host_button: "Host"
+        contract_workers: "Contract Workers"
+        work_offer: "Offer to work clinics in your free time."
+        work_button: "Work"
+        volunteer: "Volunteer"
+        help_out: "Help out in your spare time."
+        volunteer_button: "Volunteer"

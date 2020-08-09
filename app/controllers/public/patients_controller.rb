@@ -2,11 +2,11 @@ class Public::PatientsController < ApplicationController
   helper_method :last_step
   def clear_session
     session.destroy
-    redirect_to "/"
+    redirect_to root_path
   end
 
-  def edit 
-    load_patient_and_clinic   
+  def edit
+    load_patient_and_clinic
     edit_gate
     update if @clinic && @patient
   end
@@ -19,7 +19,7 @@ class Public::PatientsController < ApplicationController
     load_patient_and_clinic
     parse_dates
     @patient ||= Patient.new
-    
+
     @patient.update(patient_params) if params[:patient]
     @patient.save(validate: false)
 
@@ -38,7 +38,7 @@ class Public::PatientsController < ApplicationController
 
     session['last_step'] = session['this_step']
     session['this_step'] = @step
-  
+
     if current_step_is_valid?
       unless @step == "end_flag"
         render "edit", alert: "Success: This step of updating your patient request was saved."
@@ -52,7 +52,7 @@ class Public::PatientsController < ApplicationController
       render "edit", alert: "Your update patient request was not saved."
     end
   end
- 
+
   def access
     session[:clinic_id] = nil
     session[:patient_id] = nil
@@ -84,11 +84,11 @@ class Public::PatientsController < ApplicationController
     true
   end
 
-  def last_step  
+  def last_step
     return "add_family" if @step == "appointment" && @patient.patient_family_members.any?
     return 'consent_for_services' if @step == 'add_family'
     return nil if @step == 'personal_information'
-  
+
     steps = %w(personal_information health_insurance health_questions consent_for_services appointment)
     steps[steps.index(@step) - 1]
   end
@@ -154,12 +154,14 @@ class Public::PatientsController < ApplicationController
       :relation_to_patient_for_consent, :consent_date, :password,
       :password_confirmation, :notify_via_sms, :notify_via_email,
       :appointment_time, :occupation, :race, :signature_data, :has_other_reason_explanation,
-      :insurance_card_front, :insurance_card_back, employer_ids: [],
+      :insurance_card_front, :insurance_card_back, :guardian_first_name, :guardian_last_name, :guardian_email,
+      :grade, :homeroom_teacher,
+      employer_ids: [],
       patient_family_members_attributes: [:id, :first_name, :middle_initial,
         :last_name, :mothers_maiden_name, :race, :date_of_birth,
         :insurance_company_name, :group_number_for_insurance,
         :member_id_for_insurance, :patient_id,
-        :has_fever_over, :has_difficult_breathing, :had_traveled_to_affected_place, 
+        :has_fever_over, :has_difficult_breathing, :had_traveled_to_affected_place,
         :had_contact_with_confirmed_case, :has_risk_factor, :is_age_60_or_more, :has_other_reason, :_destroy] )
   end
 
