@@ -151,14 +151,12 @@
             <%= f.label :information_sheet do %>
                 <span class="text-gray-500"> Information Sheet </span>
             <% end %>
-
             <%= f.file_field :information_sheet, class: 'block form-input w-full' %>
-
         </div>
     </div>
 
     <div class="flex justify-end items-end mt-2 mb-8">
-        <button type="submit" class="button-primary"> Review & Confirm </p>
+        <button type="submit" class="button-primary"> Create </p>
     </div>
 
     <%= render partial: "supply_inventories/new_entry_review", locals: {f: f} %>
