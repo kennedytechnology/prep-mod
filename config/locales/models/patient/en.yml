@@ -2,8 +2,8 @@ en:
   activerecord:
     models:
       patient:
-        one: "one"
-        other: "%{count}"
+        one: "Patient"
+        other: "Patients"
         county: "County"
         occupation: "Occupation"
         first_name: "First Name"
