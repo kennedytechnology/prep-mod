@@ -1,0 +1,69 @@
+<p class="field-required mb-3"> <%= t 'views.public.patients.edit.health_questions.reminder' %> </p>
+<p class="font-bold mb-4"> <%= t 'views.public.patients.edit.health_questions.question' %> </p>
+<div class="field-side-by-side">
+    <div>
+        <h2 class="title"> <%= t 'views.public.patients.edit.health_questions.do_you_have' %> </h2>
+        <%= f.check_box :has_fever_over, class: "form-checkbox" %>
+        <%= f.label :has_fever_over, t('views.public.patients.edit.has_fever_over') %>
+
+        <br />
+        <%= f.check_box :has_cough, class: "form-checkbox" %>
+        <%= f.label :has_cough, t('views.public.patients.edit.has_cough') %>
+
+        <br />
+        <%= f.check_box :has_difficult_breathing, class: "form-checkbox" %>
+        <%= f.label :has_difficult_breathing, t('views.public.patients.edit.has_difficult_breathing') %>
+    </div>
+    <div>
+        <h2 class="title"> <%= t 'views.public.patients.edit.health_questions.have_you_traveled' %> <span class="field-required">*</span> </h2>
+        <% t('activerecord.models.patient.had_traveled_to_affected_place').each do |h| %>
+            <label class="mr-3"><%= f.radio_button :had_traveled_to_affected_place, h == 'Yes' ? true : false %>
+              <span><%= h %></span>
+            </label>
+        <% end %>
+
+    </div>
+</div>
+
+<div class="field-side-by-side">
+    <div>
+        <h2 class="title"> <%= t 'views.public.patients.edit.health_questions.close_contact' %> <span class="field-required">*</span> </h2>
+        <% t('activerecord.models.patient.had_contact_with_confirmed_case').each do |c| %>
+            <label class="mr-3"><%= f.radio_button :had_contact_with_confirmed_case, c == 'Yes' ? true : false %>
+              <span><%= c %></span>
+            </label>
+        <% end %>
+    </div>
+    <div>
+        <h2 class="title"> <%= t 'views.public.patients.edit.health_questions.diseases' %> <span class="field-required">*</span></h2>
+        <% t('activerecord.models.patient.has_risk_factor').each do |r| %>
+            <label class="mr-3"><%= f.radio_button :has_risk_factor, r == 'Yes' ? true : false %>
+              <span><%= r %></span>
+            </label>
+        <% end %>
+    </div>
+</div>
+
+<div class="field-side-by-side" data-controller="consent-form">
+    <div>
+        <h2 class="title"> <%= t 'views.public.patients.edit.health_questions.age_question' %> <span class="field-required">*</span></h2>
+        <% t('activerecord.models.patient.is_age_60_or_more').each do |s| %>
+            <label class="mr-3"><%= f.radio_button :is_age_60_or_more, s == 'Yes' ? true : false %>
+              <span><%= s %></span>
+            </label>
+        <% end %>
+    </div>
+    <div>
+        <h2 class="title"><%= t 'views.public.patients.edit.health_questions.age_question' %><span class="field-required">*</span></h2>
+        <% t('activerecord.models.patient.has_other_reason').each do |o| %>
+            <label class="mr-3"><%= f.radio_button :has_other_reason, o == 'Yes' ? true : false %>
+              <span><%= o %></span>
+            </label>
+        <% end %>
+
+        <div class="hidden" data-target="consent-form.otherReasonExplanation">
+            <%= f.label :has_other_reason_explanation, t('activerecord.models.patient.has_other_reason_explanation'), class: "block w-full" %>
+            <%= f.text_area :has_other_reason_explanation, class: "form-textarea w-full" %>
+        </div>
+    </div>
+</div>

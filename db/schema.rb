@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_10_104801) do
+ActiveRecord::Schema.define(version: 2020_08_10_121427) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -419,6 +419,11 @@ ActiveRecord::Schema.define(version: 2020_08_10_104801) do
     t.string "guardian_first_name"
     t.string "guardian_last_name"
     t.string "guardian_email"
+    t.string "has_child_allergies"
+    t.string "has_child_serious_reaction_to_vaccine"
+    t.string "has_child_immune_system_problem"
+    t.string "is_child_pregnant_or_possible_to_become"
+    t.string "has_child_been_vaccinated_last_four_weeks"
   end
 
   create_table "provider_denial_messages", force: :cascade do |t|
