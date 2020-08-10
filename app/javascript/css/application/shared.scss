@@ -52,7 +52,7 @@
 
 @media print {
     * {
-        @apply p-0 m-0 invisible;
+        @apply p-0 m-0 mb-10 invisible;
         height: 0;
 
         .main-navbar-container,
