@@ -20,6 +20,9 @@ CLINIC_EVENTS = [
   { name: "Tested",
     outcomes: %w(Pending Positive Negative Normal Elevated FollowUp Needed PickedUp Refused)
   },
+  { name: "Vaccinated",
+    outcomes: %w()
+  },
   { name: "No Show",
     outcomes: %w()
   },

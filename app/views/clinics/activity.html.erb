@@ -43,6 +43,7 @@
                       <th>Tested</th>
                       <th>Safety Kit</th>
                       <th>Cancelled</th>
+                      <th>Vaccinated</th>
                       <th>No Show</th>
                       <th>Follow Up</th>
                       <th>Action</th>
@@ -68,6 +69,9 @@
                           </td>
                           <td>
                             <%= event_form.radio_button :category, "Cancelled", class: "form-radio", onclick: "Rails.fire(this.form, 'submit');"  %>
+                          </td>
+                          <td>
+                            <%= event_form.radio_button :category, "Vaccinated", class: "form-radio", onclick: "Rails.fire(this.form, 'submit');"  %>
                           </td>
                           <td><%= event_form.radio_button :category, "No Show", class: "form-radio", onclick: "Rails.fire(this.form, 'submit');"  %></td>
                           <td><%= link_to "Remark", "javascript:", data: {action: "clinic-activity-patients#showModal", selection: "Remark"}, class: "form-text" %></td>
