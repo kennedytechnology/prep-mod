@@ -12,3 +12,4 @@ en:
         employee_info: "Employee Info"
         location_info: "Location Info"
         cancel: "Cancel"
+        error: "Please select at least one option or enter other details!"
