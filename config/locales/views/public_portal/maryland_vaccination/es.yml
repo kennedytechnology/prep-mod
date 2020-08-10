@@ -1,0 +1,29 @@
+es:
+  public_portal:
+    maryland_vaccination:
+      header:
+        title: "Bienvenido al registro de vacunación de Maryland"
+        find_button: "Buscar Servicios"
+      services:
+        main_title: "ES: Which service would you like?"
+        news_service:
+          title: "ES: News & Notifications"
+          sub_title: "ES: Sign Up for News and Notifications to get the latest on C-19"
+        testing_referral:
+          title: "ES: Testing - Referral Code"
+          sub_title: "ES: You must have a referral code to schedule a testing appointment"
+        testing_no_code:
+          title: "ES: Testing - No Code"
+          sub_title: "ES: If you don't have an access code, you can search for a clinic and make an appointment."
+        pre_register:
+          title: "ES: Pre-Register"
+          sub_title: "Pre-Register here for a vaccination"
+        provider_enrollment:
+          title: "ES: Provider Enrollment"
+          sub_title: "ES: For Healthcare Providers"
+        business_enrollment:
+          title: "ES: Business Enrollment"
+          sub_title: "ES: Request access to information about your workplace"
+        sign_up_button: "Regístrate"
+      footer:
+        copyrights: "ES: ClinicWizard, Inc. Todos los derechos reservados."

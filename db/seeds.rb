@@ -16,9 +16,9 @@ CLINIC_EVENTS_PER_PATIENT = 3
 CLINIC_STAFF_PER_CLINIC = 3
 SUPPLY_INVENTORY_COUNT = 18
 INVENTORY_ITEMS_PER_CLINIC = 5
+VENUE_COUNT = 200
 NEWS_SIGNUP_COUNT = 100
-VENUE_STATES = ["MD", "NY", "PA", "DC", "KY", "VT", "CA", "CO", "AL"]
-VENUE_COUNT = 20
+VENUE_STATES = ["MD"]
 
 def age(birthday, today)
   diff = today.year - birthday.year
@@ -260,6 +260,25 @@ puts "Creating clinic staff..."
     clinic: Clinic.all.sample
   )
 end
+
+puts "Creating venues..."
+
+VENUE_COUNT.times.each do |i|
+  address = addresses.sample
+  venue = Venue.create(
+    name: Faker::University.unique.name,
+    category: VENUE_TYPES.sample,
+    county: COUNTIES.sample,
+    address: address['address1'],
+    city: address['city'],
+    state: address['state'],
+    zip_code: address['postalCode'],
+    longitude: address['coordinates']['lng'],
+    latitude: address['coordinates']['lat'],
+  )
+end
+
+address = addresses.sample
 
 addresses = JSON.load(Rails.root.join("db/addresses.json"))["addresses"]
 addresses.select!{|a| VENUE_STATES.include?(a["state"])}
