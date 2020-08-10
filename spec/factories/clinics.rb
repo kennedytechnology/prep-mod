@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :clinic do
     association :provider_enrollment, factory: :provider_enrollment
+    association :venue, factory: :venue
 
     before(:create) { |clinic| clinic.services << create(:clinic_service) }
     before(:create) { |clinic| clinic.age_groups << create(:clinic_age_group) }

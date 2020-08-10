@@ -16,6 +16,7 @@ class Clinic < ApplicationRecord
   has_and_belongs_to_many :primary_groups, class_name: "ClinicPrimaryGroup"
   has_many :customized_report
   has_and_belongs_to_many :supply_inventories
+  belongs_to :venue, optional: true
 
   accepts_nested_attributes_for :services
   accepts_nested_attributes_for :age_groups

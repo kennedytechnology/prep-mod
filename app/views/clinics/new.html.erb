@@ -65,13 +65,20 @@
             </div>
         </div>
 
-        <div class="field-fullwidth">
-            <div class="w-full md:w-1/2">
+        <div class="field-side-by-side">
+            <div>
                 <%= f.label :venue_type, class: "block" do %>
                     <span> Venue Type </span>
                     <span class="field-required">*</span>
                 <% end %>
                 <%= f.select :venue_type, VENUE_TYPES, {prompt: "Select"}, {class: "form-select w-full", required: true, "data-target": "review-form.validates"} %>
+            </div>
+            <div>
+                <%= f.label :venue_id, class: "block" do %>
+                    <span> Choose Venue </span>
+                    <span class="field-required">*</span>
+                <% end %>
+                <%= f.select :venue_id, options_for_select(Venue.all.collect { | venue | [venue.name, venue.id] }), {prompt: "Select"}, {class: "form-select w-full", required: true, "data-target": "review-form.validates"} %>
             </div>
         </div>
 

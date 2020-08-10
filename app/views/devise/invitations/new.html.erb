@@ -53,6 +53,12 @@
                 <% end %>
                 <%= f.select :venues, VENUE_TYPES, {include_blank: "None"}, {class: "form-select w-full"} %>
 
+                <%= f.label :venue_id, class: "block" do %>
+                    <span> Choose Venue </span>
+                    <span class="field-required">*</span>
+                <% end %>
+                <%= f.select :venue_id, options_for_select(Venue.all.collect { | venue | [venue.name, venue.id] }), {prompt: "Select"}, {class: "form-select w-full"} %>
+
 
                   <%= f.label :role, class: "block" do %>
                       <span> Role </span>

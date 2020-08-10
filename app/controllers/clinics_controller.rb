@@ -140,7 +140,7 @@ class ClinicsController < ClinicManagementController
       :backup_contact_person, :backup_contact_phone_number,
       :start_hour_minute, :start_meridiem, :venue_type,
       :end_hour_minute, :end_meridiem, :start_hour, :start_minute, :end_hour, :end_minute,
-      :contact_email, :backup_contact_email,
+      :contact_email, :backup_contact_email, :venue_id,
       :appointments_available, users: [], :service_ids => [], :supply_inventory_ids => [],
       :age_group_ids => [], :primary_group_ids => [],
       clinic_personnel_attributes: [:id, :name, :_destroy],

@@ -1,6 +1,8 @@
 FactoryBot.define do
   custom_email =  Faker::Internet.unique.email
   factory :user do
+    association :venue, factory: :venue
+
     email { custom_email }
     email_confirmation { custom_email }
     password { 'password' }

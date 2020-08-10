@@ -2,7 +2,6 @@ class CreateClinics < ActiveRecord::Migration[6.0]
   def change
     create_table :clinics do |t|
       t.date :clinic_date
-      t.integer :venue_id
       t.string :lead_vaccinator_name
       t.integer :students_registered
       t.string :clinic_status

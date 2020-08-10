@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_07_072254) do
+ActiveRecord::Schema.define(version: 2020_08_10_104801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -175,7 +175,6 @@ ActiveRecord::Schema.define(version: 2020_08_07_072254) do
 
   create_table "clinics", force: :cascade do |t|
     t.date "clinic_date"
-    t.integer "venue_id"
     t.string "lead_vaccinator_name"
     t.string "clinic_status"
     t.integer "user_id"
@@ -214,6 +213,8 @@ ActiveRecord::Schema.define(version: 2020_08_07_072254) do
     t.string "backup_contact_email"
     t.integer "appointments_count"
     t.datetime "canceled_at"
+    t.bigint "venue_id"
+    t.index ["venue_id"], name: "index_clinics_on_venue_id"
   end
 
   create_table "clinics_supply_inventories", id: false, force: :cascade do |t|
@@ -603,6 +604,7 @@ ActiveRecord::Schema.define(version: 2020_08_07_072254) do
     t.integer "provider_id"
     t.string "email_confirmation"
     t.string "county"
+    t.bigint "venue_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
@@ -611,13 +613,30 @@ ActiveRecord::Schema.define(version: 2020_08_07_072254) do
     t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by_type_and_invited_by_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
+    t.index ["venue_id"], name: "index_users_on_venue_id"
+  end
+
+  create_table "venues", force: :cascade do |t|
+    t.string "name"
+    t.text "address"
+    t.string "city"
+    t.integer "zip_code"
+    t.string "state"
+    t.float "longitude"
+    t.float "latitude"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "county"
+    t.string "category"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "appointments", "clinics"
   add_foreign_key "appointments", "patients"
+  add_foreign_key "clinics", "venues"
   add_foreign_key "providers", "users"
   add_foreign_key "supply_inventories", "users"
   add_foreign_key "supply_inventory_events", "supply_inventories"
   add_foreign_key "test_kits", "clinics"
+  add_foreign_key "users", "venues"
 end

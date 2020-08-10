@@ -18,6 +18,7 @@ SUPPLY_INVENTORY_COUNT = 18
 INVENTORY_ITEMS_PER_CLINIC = 5
 NEWS_SIGNUP_COUNT = 100
 VENUE_STATES = ["MD", "NY", "PA", "DC", "KY", "VT", "CA", "CO", "AL"]
+VENUE_COUNT = 20
 
 def age(birthday, today)
   diff = today.year - birthday.year
@@ -56,6 +57,22 @@ addresses = JSON.load(Rails.root.join("db/addresses.json"))["addresses"]
 addresses.select!{|a| VENUE_STATES.include?(a["state"])}
 addresses.shuffle!
 
+puts "Creating venues..."
+VENUE_COUNT.times.each do |i|
+  address = addresses.sample
+  venue = Venue.create(
+    name: Faker::University.unique.name,
+    category: VENUE_TYPES.sample,
+    county: COUNTIES.sample,
+    address: address['address1'],
+    city: address['city'],
+    state: address['state'],
+    zip_code: address['postalCode'],
+    longitude: address['coordinates']['lng'],
+    latitude: address['coordinates']['lat'],
+  )
+end
+
 puts "Creating users..."
 USER_COUNT.times.each do |i|
   email = i == 1 ? "user@test.com" : Faker::Internet.unique.email
@@ -68,7 +85,8 @@ USER_COUNT.times.each do |i|
     venues: VENUE_TYPES.sample(7),
     first_name: i == 5 ? "Sam" : Faker::Name.unique.first_name,
     last_name: i == 5 ? "Kennedy" : Faker::Name.unique.last_name,
-    clinics: Clinic.all.sample(5)
+    clinics: Clinic.all.sample(5),
+    venue_id: Faker::Number.between(from: 5, to: Venue.count)
   )
 end
 
@@ -230,7 +248,8 @@ CLINIC_COUNT.times.each do |i|
     backup_contact_person: Faker::Name.unique.name,
     backup_contact_phone_number: Faker::PhoneNumber.cell_phone,
     contact_email: Faker::Internet.email,
-    backup_contact_email: Faker::Internet.email
+    backup_contact_email: Faker::Internet.email,
+    venue_id: Faker::Number.between(from: 5, to: Venue.count)
   )
 end
 
