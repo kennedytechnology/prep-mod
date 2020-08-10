@@ -59,6 +59,7 @@
                           <%= render partial: '/clinics/activity/screened_details', layout: "clinics/activity/clinic_event_modal", locals: {patient: patient, event_form: event_form, category_selection: 'Screened'} %>
                           <%= render partial: '/clinics/activity/tested_details', layout: "clinics/activity/clinic_event_modal", locals: {patient: patient, event_form: event_form, category_selection: 'Tested'} %>
                           <%= render partial: '/clinics/activity/remark_details', layout: "clinics/activity/clinic_event_modal", locals: {patient: patient, event_form: event_form, category_selection: 'Remark'} %>
+                           <%= render partial: '/clinics/activity/vaccinated_details', layout: "clinics/activity/clinic_event_modal", locals: {patient: patient, event_form: event_form, category_selection: 'Vaccinated'} %>
                             <%= link_to patient.first_name + ' ' + patient.last_name, patient %> <br/>
                           </td>
                           <td><%= patient.date_of_birth.try(:strftime, "%D") %></td>
@@ -70,9 +71,7 @@
                           <td>
                             <%= event_form.radio_button :category, "Cancelled", class: "form-radio", onclick: "Rails.fire(this.form, 'submit');"  %>
                           </td>
-                          <td>
-                            <%= event_form.radio_button :category, "Vaccinated", class: "form-radio", onclick: "Rails.fire(this.form, 'submit');"  %>
-                          </td>
+                          <td><%= event_form.radio_button :category, "Vaccinated", data: {action: "click->clinic-activity-patients#showModal", selection: "Vaccinated"}, class: "form-radio" %></td>
                           <td><%= event_form.radio_button :category, "No Show", class: "form-radio", onclick: "Rails.fire(this.form, 'submit');"  %></td>
                           <td><%= link_to "Remark", "javascript:", data: {action: "clinic-activity-patients#showModal", selection: "Remark"}, class: "form-text" %></td>
                           <td>
