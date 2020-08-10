@@ -3,7 +3,7 @@ es:
     models:
       patient:
         one: "one"
-        many: "%{count}"
+        other: "%{count}"
         county: "County"
         occupation: "Occupation"
         first_name: "First Name"
