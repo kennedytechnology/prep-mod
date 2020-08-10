@@ -26,7 +26,7 @@ RSpec.describe ProviderEnrollmentMailer, type: :mailer do
     end
 
     it "renders the headers" do
-      expect(mail.subject).to eq("Request to become a COVID-19 service provider has been denied")
+      expect(mail.subject).to eq(I18n.t('provider_enrollment_mailer.email_provider_denial.subject'))
       expect(mail.to).to eq([provider_enrollment.practice_email])
       expect(mail.from).to eq(["notifications@clinicwizard.com"])
     end
@@ -42,7 +42,7 @@ RSpec.describe ProviderEnrollmentMailer, type: :mailer do
     let(:mail) { ProviderEnrollmentMailer.acceptance_confirmation(provider_enrollment, ) }
 
     it "renders the headers" do
-      expect(mail.subject).to eq("Confirmation for your acceptance")
+      expect(mail.subject).to eq(I18n.t('provider_enrollment_mailer.acceptance_confirmation.subject'))
       expect(mail.to).to eq([provider_enrollment.practice_email])
       expect(mail.from).to eq(["notifications@clinicwizard.com"])
     end

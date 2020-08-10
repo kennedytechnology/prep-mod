@@ -1,0 +1,22 @@
+en:
+  views:
+    patient_notifier_mailer:
+      invitation:
+        title: "Your COVID-19 Test Registration"
+        dear: "Dear %{patient}"
+        registration: "Your registration for a COVID-19 test has been processed. To proceed, please register and arrange your appointment online at %{site_name} using your access code:"
+        or: "Or just click the link here:"
+        questions: "If you have any questions or problems, just email us at"
+        end: "Thank you,"
+      check_in_reminder:
+        title: "Reminder: Your COVID-19 Clinic Appointment %{date} at %{location}"
+        reminder: "This is a reminder about your upcoming COVID-19 appointment. To avoid contact with others waiting, use our Virtual Queue. When you arrive, use the link below to check in for your appointment. When the clinic is ready to see you, you will be notified by SMS."
+        note: "NOTE:"
+        check_in: "Check in location will be verified, so please wait until you are at the clinic location."
+        button: "Check In"
+        end: "Thank you,"
+      kit_created:
+        title: "Your Safety Kit was Successfully Created"
+        patient: "Dear %{patient_email}"
+        successful: "Your Safety Kit was Successfully Created."
+        end: "Thank you,"

@@ -1,0 +1,9 @@
+es:
+  views:
+    clinic_event_mailer:
+      registration_confirmed:
+        title: "Registration Confirmated"
+        subtitle: "You are registered for the clinic on %{date}"
+        message_1: "To help with social distancing, we will text or email when we're ready for you."
+        message_2: "We'll send you a link that you'll be able to click on and check in from outside."
+        end: "Thank you"

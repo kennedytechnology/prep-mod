@@ -1,25 +1,21 @@
 <h1>
-  Reminder: Your COVID-19 Clinic Appointment
-  <%= @appointment.clinic.clinic_date %> at <%= @appointment.clinic.location %>
+  <%= t('views.patient_notifier_mailer.check_in_reminder.title',
+    date: @appointment.clinic.clinic_date, location: @appointment.clinic.location) %>
 </h1>
 
 <p>
-This is a reminder about your upcoming COVID-19 appointment. To avoid contact
-with others waiting, use our Virtual Queue. When you arrive, use the link below
-to check in for your appointment. When the clinic is ready to see you, you will
-be notified by SMS.
+  <%= t('views.patient_notifier_mailer.check_in_reminder.reminder') %>
 </p>
 
 <p>
-<strong>NOTE:</strong> Check in location will be verified, so please wait until
-you are at the clinic location.
+<strong><%= t('views.patient_notifier_mailer.check_in_reminder.note') %></strong> <%= t('views.patient_notifier_mailer.check_in_reminder.check_in' )%>
 </p>
 
 <p>
-<%= link_to "Check In", check_in_url(check_in_code: @patient.check_in_code) %>
+<%= link_to t('views.patient_notifier_mailer.check_in_reminder.button'), check_in_url(check_in_code: @patient.check_in_code) %>
 </p>
 
 <p>
-Thank you, <br/>
+<%= t('views.patient_notifier_mailer.check_in_reminder.end') %> <br/>
 ClinicWizard
 </p>

@@ -1,10 +1,9 @@
-<h1> Registration Confirmated </h1>
+<h1> <%= t 'views.clinic_event_mailer.registration_confirmed.title' %> </h1>
 
-<p> You are registered for the clinic on <%= @clinic_event.event_date.strftime("%d/%m/%Y") %>. </p>
+<p> <%= t 'views.clinic_event_mailer.registration_confirmed.subtitle', date: @clinic_event.event_date.strftime("%d/%m/%Y") %> </p>
 
-<p> To help with social distancing, we will text or email when we're ready for you. </p>
+<p> <%= t 'views.clinic_event_mailer.registration_confirmed.message_1' %> </p>
 
-<p> We'll send you a link that you'll be able to click on and check in from outside .</p>
+<p> <%= t 'views.clinic_event_mailer.registration_confirmed.message_2' %></p>
 
-<p> Thank you,
-Clinic Wizard</p>
+<p> <%= t 'views.clinic_event_mailer.registration_confirmed.end' %>, Clinic Wizard</p>

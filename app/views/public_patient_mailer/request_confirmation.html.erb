@@ -1,21 +1,21 @@
-<p> Thank you for registering for <b><%= @clinic.services.pluck(:name).join(", ") %></b>. </p>
+<p> <%= t('views.public_patient_mailer.request_confirmation.title', name: @clinic.services.pluck(:name).join(", ")) %></b>. </p>
 
-<p> 
-    <%= @patient.full_name %>, 
+<p>
+    <%= t('views.public_patient_mailer.request_confirmation.patient', full_name: @patient.full_name) %>,
     <%= @patient.patient_family_members.select([:first_name, :last_name]).map{ |m| "#{m.first_name} #{m.last_name}" }.join(", ") %>
     are scheduled for:
     <br />
     <br />
-    <b>Date:</b> <%= @appointment.appointment_at ? @appointment.appointment_at.strftime("%m-%d-%Y") : "On Waiting List" %>,
+    <b><%= t'views.public_patient_mailer.request_confirmation.date' %></b> <%= @appointment.appointment_at ? @appointment.appointment_at.strftime("%m-%d-%Y") : "On Waiting List" %>,
     <br />
-    <b>Time:</b> <%= @appointment.appointment_at ? @appointment.appointment_at.strftime("%H:%M %p") : "On Waiting List" %>,
+    <b><%= t'views.public_patient_mailer.request_confirmation.time'%></b> <%= @appointment.appointment_at ? @appointment.appointment_at.strftime("%H:%M %p") : "On Waiting List" %>,
     <br />
-    <b>Location:</b> <%= @clinic.address %>.
+    <b><%= t('views.public_patient_mailer.request_confirmation.location', address: @clinic.address) %>.
 </p>
 
-<p> If you cannot, make this appointment, click
+<p> <%= t'views.public_patient_mailer.request_confirmation.click'%>
     <%= link_to "here", cancel_appointment_clinic_queued_patients_url(appointment_id: @appointment.id, clinic_id: @clinic.id) %>
-    to cancel.
+    <%= t'views.public_patient_mailer.request_confirmation.cancel'%>
 </p>
 
-<p> Thank you</p>
+<p> <%= t'views.public_patient_mailer.request_confirmation.end'%> </p>

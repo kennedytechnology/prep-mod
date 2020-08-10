@@ -1,12 +1,12 @@
-<h1> Confirmation for vaccinated patient! </h1>
+<h1> <%= t('views.clinic_mailer.send_vaccinated_confirmation.title') %> </h1>
 
-<h2> Patient Info: </h2>
-<p> Full Name: <%= @patient.full_name %> </p>
-<p> Initials: <%= @patient.middle_initial %> </p>
+<h2> <%= t('views.clinic_mailer.send_vaccinated_confirmation.sub_title') %> </h2>
+<p> <%= t('views.clinic_mailer.send_vaccinated_confirmation.full_name', full_name: @patient.full_name) %> </p>
+<p> <%= t('views.clinic_mailer.send_vaccinated_confirmation.initials', initials: @patient.middle_initial) %> </p>
 
-<h2> Vaccine Info: </h2>
-<p> Clinic Date: <%= @clinic_event.clinic.clinic_date %> </p>
-<p> Vaccine Name: </p>
-<p> Manufacturer: </p>
-<p> Lot Number: </p>
-<p> Expiration Date: </p>
+<h2> <%= t('views.clinic_mailer.send_vaccinated_confirmation.vaccine_info') %> </h2>
+<p> <%= t('views.clinic_mailer.send_vaccinated_confirmation.clinic_date', clinic_date: @clinic_event.clinic.clinic_date) %> </p>
+<p> <%= t('views.clinic_mailer.send_vaccinated_confirmation.vaccine_name') %> </p>
+<p> <%= t('views.clinic_mailer.send_vaccinated_confirmation.manufacturer') %> </p>
+<p> <%= t('views.clinic_mailer.send_vaccinated_confirmation.lot_number') %> </p>
+<p> <%= t('views.clinic_mailer.send_vaccinated_confirmation.expiration_date') %> </p>

@@ -3,6 +3,9 @@ class PublicPatientMailer < ApplicationMailer
     @patient = patient
     @clinic = clinic
     @appointment = patient.appointments.find_by(clinic_id: clinic.id)
-    mail to: patient.email, subject: "Confirmation for your request about COVID-19 testing."
+
+    I18n.with_locale(locale) do
+      mail to: patient.email
+    end
   end
 end

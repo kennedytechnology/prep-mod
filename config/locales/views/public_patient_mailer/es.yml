@@ -1,0 +1,12 @@
+es:
+  views:
+    public_patient_mailer:
+      request_confirmation:
+        title: "Thank you for registering for %{name}"
+        patient: "%{full_name}"
+        date: "Date:"
+        time: "Time:"
+        location: "Location: %{address}"
+        click: "If you cannot, make this appointment, click"
+        cancel: "to cancel."
+        end: "Thank you."
