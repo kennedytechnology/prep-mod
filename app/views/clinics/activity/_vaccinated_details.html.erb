@@ -1,0 +1,50 @@
+<div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:pt-5">
+    <p class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
+        Vaccine Name
+    </p>
+    <div class="mt-1 sm:mt-0 sm:col-span-2">
+        <div class="max-w-xs rounded-md shadow-sm">
+        <%= event_form.select :test_name, options_for_select(@clinic.test_kits_names_types, event_form.object.test_name), {}, class: "block form-select w-full" %>
+        </div>
+    </div>
+</div>
+<div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+  <p class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
+    Route
+  </p>
+  <div class="mt-1 sm:mt-0 sm:col-span-2">
+
+    <div class="max-w-xs rounded-md shadow-sm">
+      <%= event_form.select :vaccine_route, ["SubQ", "IM"], {}, class: "block form-select w-full" %>     </div>
+  </div>
+</div>
+<div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+  <p class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
+    Site
+  </p>
+  <div class="mt-1 sm:mt-0 sm:col-span-2">
+    <div class="max-w-xs rounded-md shadow-sm">
+      <%= event_form.select :vaccine_site, options_for_select(["RA","LA"]), {}, class: "block form-select w-full" %>
+    </div>
+  </div>
+</div>
+<div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+  <p class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
+    Reaction
+  </p>
+  <div class="mt-1 sm:mt-0 sm:col-span-2">
+    <div class="max-w-xs rounded-md shadow-sm">
+      <%= event_form.select :vaccine_reaction, options_for_select(["None", "Local", "Syncope", "Anaphylaxis"]), {}, class: "block form-select w-full" %>
+    </div>
+  </div>
+</div>
+<div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+  <p class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
+    Vaccinator 
+  </p>
+  <div class="mt-1 sm:mt-0 sm:col-span-2">
+    <div class="max-w-xs rounded-md shadow-sm">
+      <%= event_form.select :clinic_staff_id, [@clinic.lead_vaccinator_name] + @clinic.clinic_personnel.collect(&:name), {}, class: "block form-select w-full" %>
+    </div>
+  </div>
+</div>

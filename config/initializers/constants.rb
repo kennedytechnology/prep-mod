@@ -31,7 +31,19 @@ CLINIC_EVENTS = [
   },
   { name: "Screened",
     outcomes: %w()
-  }
+  },
+  { name: "Vaccinated",
+    outcomes: %w()
+  },
+  { name: "Refused",
+    outcomes: %w()
+  },
+  { name: "Sick",
+    outcomes: %w()
+  },
+  { name: "Absent",
+    outcomes: %w()
+  },
   ]
 
   PATIENT_OCCUPATIONS = [
