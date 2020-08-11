@@ -12,7 +12,8 @@ en:
             save_continue: "Save And Continue"
             find_location: "Find Another Location"
           personal_info:
-            title: "You'll have the opportunity to enroll your minor children at a future step."
+            regular_title: "You'll have the opportunity to enroll your minor children at a future step."
+            school_mode_title: "You will be able to register additional children using this same form."
           health_insurance:
             drag_and_drop: "or drag and drop"
           health_questions:
