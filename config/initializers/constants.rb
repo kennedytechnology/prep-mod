@@ -66,7 +66,7 @@ CLINIC_EVENTS = [
     VACCINE_ITEM_TYPES = ["Safety Kit", "Supplies", "Influenza", "Tdap", 
       "MCV4", "HPV", "IPV", "Var", "MMR", "Hep B", "Hep A", "DTaP", "Hib", "Pnemococcal", "Zoster", "Other" ]
   else
-    VACCINE_ITEM_TYPES = ["Tdap", "DTaP". "Meningococcal Meningitis (MCV4)", "HPV", "Measles, Mumps, Rubella", "Varicella (chickenpox)", "Polio", "Hepatitis B", "MenB"]
+    VACCINE_ITEM_TYPES = ["Tdap", "DTaP", "Meningococcal Meningitis (MCV4)", "HPV", "Measles, Mumps, Rubella", "Varicella (chickenpox)", "Polio", "Hepatitis B", "MenB"]
   end
   TEST_ITEM_TYPES = ["Serological", "PCR"]
   INVENTORY_MANUFACTURERS = ["GlaxoSmithKline", "MedImmune", "Pfizer", "Sanofi Pasteur", "Seqiris"]
