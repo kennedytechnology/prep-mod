@@ -15,7 +15,7 @@
   <div class="mt-1 sm:mt-0 sm:col-span-2">
 
     <div class="max-w-xs rounded-md shadow-sm">
-      <%= event_form.select "route", ["SubQ", "IM"], {}, class: "block form-select w-full" %>     </div>
+      <%= event_form.select :vaccine_route, ["SubQ", "IM"], {}, class: "block form-select w-full" %>     </div>
   </div>
 </div>
 <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
@@ -24,7 +24,7 @@
   </p>
   <div class="mt-1 sm:mt-0 sm:col-span-2">
     <div class="max-w-xs rounded-md shadow-sm">
-      <%= event_form.select "site", options_for_select(["RA","LA"]), {}, class: "block form-select w-full" %>
+      <%= event_form.select :vaccine_site, options_for_select(["RA","LA"]), {}, class: "block form-select w-full" %>
     </div>
   </div>
 </div>
@@ -34,7 +34,7 @@
   </p>
   <div class="mt-1 sm:mt-0 sm:col-span-2">
     <div class="max-w-xs rounded-md shadow-sm">
-      <%= event_form.select "reaction", options_for_select(["None", "Local", "Syncope", "Anaphylaxis"]), {}, class: "block form-select w-full" %>
+      <%= event_form.select :vaccine_reaction, options_for_select(["None", "Local", "Syncope", "Anaphylaxis"]), {}, class: "block form-select w-full" %>
     </div>
   </div>
 </div>

@@ -55,6 +55,7 @@ class ClinicEventsController < ClinicManagementController
       :notes, :contact_type, :safety_kit_received,
       :test_name, :test_type, :test_processing, :clinic_staff_id,
       :is_refused, :is_sick, :is_absent,
+      :vaccine_route, :vaccine_site, :vaccine_reaction,
       :event_date, :location, clinic_service_ids: []
     )
   end

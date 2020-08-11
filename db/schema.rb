@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_11_081827) do
+ActiveRecord::Schema.define(version: 2020_08_11_104539) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,6 +114,9 @@ ActiveRecord::Schema.define(version: 2020_08_11_081827) do
     t.boolean "is_refused"
     t.boolean "is_sick"
     t.boolean "is_absent"
+    t.string "vaccine_route"
+    t.string "vaccine_site"
+    t.string "vaccine_reaction"
   end
 
   create_table "clinic_events_services", id: false, force: :cascade do |t|
