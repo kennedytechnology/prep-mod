@@ -3,7 +3,8 @@
     <div>
         <h2 class="title"> Does the child have allergies to medications, food, a vaccine component, or latex? <span class="field-required">*</span></h2>
         <% ["Yes", "No", "Don't know"].each do |s| %>
-            <label class="mr-3"><%= f.radio_button :has_child_allergies, s == f.object.has_child_allergies ? true : false %>
+            <label class="mr-3">
+                <%= f.radio_button :has_child_allergies, s, value: s %>
                 <span><%= s %></span>
             </label>
         <% end %>
@@ -11,7 +12,7 @@
     <div>
         <h2 class="title"> Has the child had a serious reaction to a vaccine in the past? <span class="field-required">*</span></h2>
         <% ["Yes", "No", "Don't know"].each do |o| %>
-            <label class="mr-3"><%= f.radio_button :has_child_serious_reaction_to_vaccine, o == f.object.has_child_serious_reaction_to_vaccine ? true : false %>
+            <label class="mr-3"><%= f.radio_button :has_child_serious_reaction_to_vaccine, o, value: o %>
             <span><%= o %></span>
             </label>
         <% end %>
@@ -22,7 +23,7 @@
     <div>
         <h2 class="title"> Does the child have cancer, leukemia, HIV/AIDS, or any other immune system problem? <span class="field-required">*</span></h2>
         <% ["Yes", "No", "Don't know"].each do |s| %>
-            <label class="mr-3"><%= f.radio_button :has_child_immune_system_problem, s == f.object.has_child_immune_system_problem ? true : false %>
+            <label class="mr-3"><%= f.radio_button :has_child_immune_system_problem, s, value: s %>
             <span><%= s %></span>
             </label>
         <% end %>
@@ -30,7 +31,7 @@
     <div>
         <h2 class="title"> Is the child/teen pregnant or is there a chance she could become pregnant during the next month? <span class="field-required">*</span></h2>
         <% ["Yes", "No", "Don't know"].each do |o| %>
-            <label class="mr-3"><%= f.radio_button :is_child_pregnant_or_possible_to_become, o == f.object.is_child_pregnant_or_possible_to_become ? true : false %>
+            <label class="mr-3"><%= f.radio_button :is_child_pregnant_or_possible_to_become, o, value: o %>
             <span><%= o %></span>
             </label>
         <% end %>
@@ -41,7 +42,7 @@
     <div>
         <h2 class="title"> Has the child received vaccinations in the past 4 weeks? <span class="field-required">*</span></h2>
         <% ["Yes", "No", "Don't know"].each do |s| %>
-            <label class="mr-3"><%= f.radio_button :has_child_been_vaccinated_last_four_weeks, s == f.object.has_child_been_vaccinated_last_four_weeks ? true : false %>
+            <label class="mr-3"><%= f.radio_button :has_child_been_vaccinated_last_four_weeks, s, value: s %>
             <span><%= s %></span>
             </label>
         <% end %>
