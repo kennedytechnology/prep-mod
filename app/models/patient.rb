@@ -8,7 +8,7 @@ class Patient < ApplicationRecord
   has_one_attached :insurance_card_front
   has_one_attached :insurance_card_back
   belongs_to :user, optional: true
-  belongs_to :venue, optional: true
+  belongs_to :venue
 
   accepts_nested_attributes_for :patient_family_members, allow_destroy: true, reject_if: :all_blank
 
