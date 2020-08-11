@@ -38,7 +38,7 @@
                                         <%= event_form.hidden_field :patient_id %>
                                         <%= event_form.hidden_field :clinic_id %>
                                         <%= render partial: '/clinics/activity/vaccinated_details', layout: "clinics/activity/clinic_event_modal", locals: {patient: patient, event_form: event_form, category_selection: 'Vaccinated'} %>
-                                        <%= link_to patient.first_name + ' ' + patient.last_name, patient %> <br />
+                                        <%= link_to patient.first_name + ' ' + patient.last_name, patient, class: "underline" %> <br />
                                     </td>
                                     <td><%= patient.date_of_birth.try(:strftime, "%D") %></td>
                                     <td><%= event_form.radio_button :category, "Vaccinated", data: {action: "click->clinic-activity-patients#showModal", selection: "Vaccinated"}, class: "form-radio" %> </td>

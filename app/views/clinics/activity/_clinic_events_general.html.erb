@@ -38,7 +38,7 @@
                     <%= render partial: '/clinics/activity/screened_details', layout: "clinics/activity/clinic_event_modal", locals: {patient: patient, event_form: event_form, category_selection: 'Screened'} %>
                     <%= render partial: '/clinics/activity/tested_details', layout: "clinics/activity/clinic_event_modal", locals: {patient: patient, event_form: event_form, category_selection: 'Tested'} %>
                     <%= render partial: '/clinics/activity/remark_details', layout: "clinics/activity/clinic_event_modal", locals: {patient: patient, event_form: event_form, category_selection: 'Remark'} %>
-                    <%= link_to patient.first_name + ' ' + patient.last_name, patient %> <br/>
+                    <%= link_to patient.first_name + ' ' + patient.last_name, patient, class: "underline" %> <br/>
                     </td>
                     <td><%= patient.date_of_birth.try(:strftime, "%D") %></td>
                     <td><%= event_form.radio_button :category, "Screened", data: {action: "click->clinic-activity-patients#showModal", selection: "Screened"}, class: "form-radio" %></td>
