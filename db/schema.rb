@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_11_133431) do
+ActiveRecord::Schema.define(version: 2020_08_11_183622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -359,6 +359,12 @@ ActiveRecord::Schema.define(version: 2020_08_11_133431) do
     t.boolean "has_risk_factor"
     t.boolean "is_age_60_or_more"
     t.boolean "has_other_reason"
+    t.string "has_child_allergies"
+    t.string "has_child_serious_reaction_to_vaccine"
+    t.string "has_child_immune_system_problem"
+    t.string "is_child_pregnant_or_possible_to_become"
+    t.string "has_child_been_vaccinated_last_four_weeks"
+    t.text "has_other_reason_explanation"
   end
 
   create_table "patients", force: :cascade do |t|
