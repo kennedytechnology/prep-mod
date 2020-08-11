@@ -64,7 +64,7 @@
         </div>
     </div>
 
-    <div class="flex">
+    <div class="flex" data-controller="email-confirmation">
         <div class="flex-1 flex mr-2">
             <div class="w-1/2 mr-1">
                 <%= f.label :email do %>
@@ -107,7 +107,7 @@
     </div>
 <% end %>
 
-<div class="flex">
+<div class="flex" data-controller="email-confirmation">
     <div class="w-1/2 mr-3">
         <%= f.label :parent_first_name, class: "block" do %>
             Parent/Guardian's First Name <span class="field-required"> * </span>
@@ -135,7 +135,7 @@
 
     <div class="w-1/2 mr-1">
         <label> Retype Email Address <span class="field-required">*</span> </label>
-        <input type="email" class="form-input w-full" value="<%= @patient.email %>" required="required"
+        <input type="email" class="form-input w-full" value="<%= @patient.guardian_email %>" required="required"
             data-action="keyup->email-confirmation#emailConfirmation change->email-confirmation#emailConfirmation"
             data-target="email-confirmation.confirmEmailField" />
         <p class="text-red-600 -mt-2" data-target="email-confirmation.confirmEmailError"> </p>
