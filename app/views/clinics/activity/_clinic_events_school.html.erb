@@ -21,6 +21,9 @@
                             <th>Patient Name</th>
                             <th>DOB</th>
                             <th>Vaccinated</th>
+                            <th>Refused</th>
+                            <th>Sick</th>
+                            <th>Absent/Withdrawn</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -39,6 +42,9 @@
                                     </td>
                                     <td><%= patient.date_of_birth.try(:strftime, "%D") %></td>
                                     <td><%= event_form.radio_button :category, "Vaccinated", data: {action: "click->clinic-activity-patients#showModal", selection: "Vaccinated"}, class: "form-radio" %> </td>
+                                    <td><%= event_form.radio_button :category, "Refused", data: {action: "click->clinic-activity-patients#showModal", selection: "Refused"}, class: "form-radio" %> </td>
+                                    <td><%= event_form.radio_button :category, "Sick", data: {action: "click->clinic-activity-patients#showModal", selection: "Sick"}, class: "form-radio" %> </td>
+                                    <td><%= event_form.radio_button :category, "Absent", data: {action: "click->clinic-activity-patients#showModal", selection: "Absent"}, class: "form-radio" %> </td>
                                     <td>
                                         <div class="flex">
                                         <%= link_to "Delete", "javascript:",
