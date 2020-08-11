@@ -2,7 +2,7 @@
     <h1 class="title"> Clinic Inventory </h1>
     <div class="flex mb-8 mt-8">
         <div class="w-2/12">
-            <%= select_tag(:new_clinic_supply_inventory, options_for_select(SupplyInventory.all.sort_by(&:category).collect{|si| [si.name, si.id]}), data: {target: "habtm-form.newItemId", action: "habtm-form#updateDetails"}, class: "form-select w-full") %>
+            <%= select_tag(:new_clinic_supply_inventory, options_for_select(SupplyInventory.all.sort_by{|si| si.category.to_s}.collect{|si| [si.name, si.id]}), data: {target: "habtm-form.newItemId", action: "habtm-form#updateDetails"}, class: "form-select w-full") %>
         </div>
         <div class="w-8/12 pl-4 pt-3" id="new_supply_inventory_details">
             <% SupplyInventory.all.each do |supply_inventory| %>
