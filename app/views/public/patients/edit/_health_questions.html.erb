@@ -1,4 +1,4 @@
-<% if ENV["SCHOOL_VACCINATION_MODE"] %>
+<% if school_mode_on? %>
     <%= render partial: "public/patients/edit/health_questions_school", locals: {f:f} %>
 <% else %>
     <%= render partial: "public/patients/edit/health_questions_school_regular", locals: {f:f} %>

@@ -63,16 +63,6 @@
     </div>
 
     <div class="flex">
-        <% if ENV["SCHOOL_VACCINATION_MODE"] && (ENV["SCHOOL_VACCINATION_MODE"] == "true") %>
-            <div class="flex-1 mr-2">
-                <%= f.label :grade, t('activerecord.models.patient.grade') %>
-                <%= f.text_field :grade, class: "w-full form-input" %>
-            </div>
-            <div class="flex-1">
-                <%= f.label :homeroom_teacher, t('activerecord.models.patient.homeroom_teacher') %>
-                <%= f.text_field :homeroom_teacher, class: "w-full form-input" %>
-            </div>
-        <% end %>
         <div class="flex-1 flex mr-2">
             <div class="w-1/2 mr-1">
                 <%= f.label :email do %>
@@ -93,6 +83,19 @@
             </div>
         </div>
     </div>
+
+    <% if school_mode_on? %>
+        <div class="flex">
+            <div class="flex-1 mr-2">
+                <%= f.label :grade, t('activerecord.models.patient.grade') %>
+                <%= f.text_field :grade, class: "w-full form-input" %>
+            </div>
+            <div class="flex-1">
+                <%= f.label :homeroom_teacher, t('activerecord.models.patient.homeroom_teacher') %>
+                <%= f.text_field :homeroom_teacher, class: "w-full form-input" %>
+            </div>
+        </div>
+    <% end %>
 </div>
 
 <div class="flex">

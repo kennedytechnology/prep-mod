@@ -4,7 +4,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <% if ENV["SCHOOL_VACCINATION_MODE"] && (ENV["SCHOOL_VACCINATION_MODE"] == "true") %>
+                    <% if school_mode_on? %>
                         <th> Vaccine Name </th>
                         <th> Vaccine Lot Number </th>
                         <th> # of Starting Kits </th>

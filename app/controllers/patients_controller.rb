@@ -1,4 +1,6 @@
 class PatientsController < ApplicationController
+  include ApplicationHelper
+
   before_action :authenticate_user!
   load_and_authorize_resource except: [:anonymized_index]
   before_action :patients_listing, only: [:index, :upload_record]
@@ -55,7 +57,7 @@ class PatientsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        template_for_consent_pdf = ENV["CONSENT_FORM_SCHOOL_MODE"] ? "patients/report_school_mode.pdf.erb" : "patients/report.pdf.erb"
+        template_for_consent_pdf = school_mode_on? ? "patients/report_school_mode.pdf.erb" : "patients/report.pdf.erb"
         render pdf: "patient-#{@patient.id}", 
                 template: template_for_consent_pdf,
                 layout: "clinic-print", show_as_html: params.key?('debug')
