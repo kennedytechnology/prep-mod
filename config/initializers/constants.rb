@@ -20,9 +20,6 @@ CLINIC_EVENTS = [
   { name: "Tested",
     outcomes: %w(Pending Positive Negative Normal Elevated FollowUp Needed PickedUp Refused)
   },
-  { name: "Vaccinated",
-    outcomes: %w()
-  },
   { name: "No Show",
     outcomes: %w()
   },
@@ -34,7 +31,19 @@ CLINIC_EVENTS = [
   },
   { name: "Screened",
     outcomes: %w()
-  }
+  },
+  { name: "Vaccinated",
+    outcomes: %w()
+  },
+  { name: "Refused",
+    outcomes: %w()
+  },
+  { name: "Sick",
+    outcomes: %w()
+  },
+  { name: "Absent",
+    outcomes: %w()
+  },
   ]
 
   PATIENT_OCCUPATIONS = [
