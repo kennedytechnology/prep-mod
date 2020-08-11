@@ -14,9 +14,7 @@
   <% else %>
     <%= link_to "Back to records", patients_path, class: "button-action" %>
   <% end %>
-  <a href="javascript:"
-     class="button-primary"
-     data-action="click->main#printContent">Print</a>
+    <a href="javascript:" class="button-primary" onclick="window.print();">Print</a>
 </div>
 
 <div data-controller="clinic-activity-patients">

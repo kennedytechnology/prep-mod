@@ -24,3 +24,13 @@ en:
             retype_email: "Retype Email Address"
             phone_number: "Mobile or Daytime Number"
             save_and_continue: "Save and Continue →"
+  forms:
+    messages:
+      errors:
+        one: 'One error prohibited this article from being saved'
+        other: '%{count} errors prohibited this feedback from being saved'
+  date:
+    formats:
+      default: "%m-%d-%Y"
+      short: "%b %d"
+      long: "%B %d, %Y"
