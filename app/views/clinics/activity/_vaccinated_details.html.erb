@@ -4,7 +4,7 @@
     </p>
     <div class="mt-1 sm:mt-0 sm:col-span-2">
         <div class="max-w-xs rounded-md shadow-sm">
-        <%= event_form.select "vaccine_name", options_for_select(@clinic.test_kits_names_types, event_form.object.test_name), {}, class: "block form-select w-full" %>
+        <%= event_form.select "vaccine_name", ["Vaccine Name 1", "Vaccine Name 2"], {}, {class: "block form-select w-full"} %>
         </div>
     </div>
 </div>
