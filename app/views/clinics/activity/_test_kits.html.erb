@@ -4,14 +4,25 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th> Test Name </th>
-                    <th> Test Lot Number </th>
-                    <th> # of Starting kits </th>
-                    <th> # of Tests Administered </th>
-                    <th> # Unusable tests </th>
-                    <th> # Tests Returned </th>
+                    <% if ENV["SCHOOL_VACCINATION_MODE"] && (ENV["SCHOOL_VACCINATION_MODE"] == "true") %>
+                        <th> Vaccine Name </th>
+                        <th> Vaccine Lot Number </th>
+                        <th> # of Starting Kits </th>
+                        <th> # of Vaccines Administered </th>
+                        <th> # Unusable Vaccines </th>
+                        <th> # Vaccines Returned </th>
                     
-                    <th> Default </th>
+                        <th> Default </th>
+                    <% else %>
+                        <th> Test Name </th>
+                        <th> Test Lot Number </th>
+                        <th> # of Starting Kits </th>
+                        <th> # of Tests Administered </th>
+                        <th> # Unusable Tests </th>
+                        <th> # Tests Returned </th>
+                        
+                        <th> Default </th>
+                    <% end %>
                 </tr>
             </thead>
             <tbody id="testKits">
