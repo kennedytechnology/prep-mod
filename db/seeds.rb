@@ -249,7 +249,7 @@ CLINIC_COUNT.times.each do |i|
     backup_contact_phone_number: Faker::PhoneNumber.cell_phone,
     contact_email: Faker::Internet.email,
     backup_contact_email: Faker::Internet.email,
-    venue_id: Faker::Number.between(from: 5, to: Venue.count)
+    venue_id: Faker::Number.between(from: 1, to: Venue.count)
   )
 end
 
@@ -261,27 +261,6 @@ puts "Creating clinic staff..."
   )
 end
 
-puts "Creating venues..."
-
-VENUE_COUNT.times.each do |i|
-  address = addresses.sample
-  venue = Venue.create(
-    name: Faker::University.unique.name,
-    category: VENUE_TYPES.sample,
-    county: COUNTIES.sample,
-    address: address['address1'],
-    city: address['city'],
-    state: address['state'],
-    zip_code: address['postalCode'],
-    longitude: address['coordinates']['lng'],
-    latitude: address['coordinates']['lat'],
-  )
-end
-
-address = addresses.sample
-
-addresses = JSON.load(Rails.root.join("db/addresses.json"))["addresses"]
-addresses.select!{|a| VENUE_STATES.include?(a["state"])}
 puts "Creating patients..."
 clinics = Clinic.all
 PATIENT_COUNT.times.each do |i|
@@ -312,7 +291,8 @@ PATIENT_COUNT.times.each do |i|
     notify_via_sms: Faker::Boolean.boolean,
     notify_via_email: Faker::Boolean.boolean,
     consent_date: Faker::Date.between(from: 6.months.ago, to: 1.day.ago),
-    employers: Employer.all.sample(rand(3))
+    employers: Employer.all.sample(rand(3)),
+    venue_id: Faker::Number.between(from: 1, to: Venue.count)
   )
 
   if rand(3) == 0

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_11_104539) do
+ActiveRecord::Schema.define(version: 2020_08_11_133431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -430,6 +430,8 @@ ActiveRecord::Schema.define(version: 2020_08_11_104539) do
     t.string "has_child_immune_system_problem"
     t.string "is_child_pregnant_or_possible_to_become"
     t.string "has_child_been_vaccinated_last_four_weeks"
+    t.bigint "venue_id"
+    t.index ["venue_id"], name: "index_patients_on_venue_id"
   end
 
   create_table "provider_denial_messages", force: :cascade do |t|
@@ -645,6 +647,7 @@ ActiveRecord::Schema.define(version: 2020_08_11_104539) do
   add_foreign_key "appointments", "clinics"
   add_foreign_key "appointments", "patients"
   add_foreign_key "clinics", "venues"
+  add_foreign_key "patients", "venues"
   add_foreign_key "providers", "users"
   add_foreign_key "supply_inventories", "users"
   add_foreign_key "supply_inventory_events", "supply_inventories"
