@@ -1,0 +1,20 @@
+en:
+  views:
+    provider_enrollment_mailer:
+      request_confirmation:
+        title: "Dear %{first_name} %{last_name}"
+        message: "We appreciate your interest in joining our effort. An administrator will contact you soon."
+        status: "To inquire about your status, please contact your local health department. english"
+        end: "Thank you."
+      acceptance_confirmation:
+        title: "ProviderEnrollment#acceptance_confirmation"
+        find_me: "find me in app/views/provider_enrollment_mailer/acceptance_confirmation.html.erb"
+        request: "%{first_name}  %{last_name}, your request for %{practice_name} practice with the unique ID %{unique_number} was accepted. Your temporary password is %{temp_password} (NOTE: This password is a temporary placeholder for the purpose of ClinicWizard2 development, and will be made to be dynamic in production.)"
+        administrator: "Your Regional Administrator will be in touch shortly. To inquire about our request call your state health department."
+      email_provider_denial:
+        title: "Request to become a COVID-19 service provider has been denied"
+      need_more_information_email:
+        title: "ProviderEnrollment#acceptance_confirmation"
+        find_me: "find me in app/views/provider_enrollment_mailer/acceptance_confirmation.html.erb"
+        request: "%{first_name}  %{last_name}, your request for %{practice_name} practice with the unique ID %{unique_number} is still under consideration. We need more information in order to consider your request for a Provider Enrollment."
+        administrator: "Your Regional Administrator will be in touch shortly. To inquire about our request call your state health department."

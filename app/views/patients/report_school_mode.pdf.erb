@@ -1,10 +1,12 @@
 <%= image_tag wicked_pdf_asset_base64(ENV['SITE_LOGO'] || 'prep-mod.png'), class: "mt-2 mb-2", style: "max-height: 60px;" %>
+<div class="test">
+    <h1 class="w-full text-center text-xl font-bold"> <%= @clinic.county %> Consent For <%= @clinic.venue_name %> </h1>
+    <p class="text-sm my-2">
+    DEMO FORM: PrepMod is in testing mode. This is not a real consent for medical
+    services.
+    </p>
+</div>
 
-<h1 class="w-full text-center text-xl font-bold"> <%= @clinic.county %> Consent For <%= @clinic.venue_name %> </h1>
-<p class="text-sm my-2">
-  DEMO FORM: PrepMod is in testing mode. This is not a real consent for medical
-  services.
-</p>
 
 <div class="bg-gray-400 text-xs py-1 pl-4 font-bold">
 Please Print Clearly in Ink

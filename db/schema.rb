@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_10_104801) do
+ActiveRecord::Schema.define(version: 2020_08_11_104539) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,6 +111,12 @@ ActiveRecord::Schema.define(version: 2020_08_10_104801) do
     t.boolean "safety_kit_received"
     t.date "event_date"
     t.string "location"
+    t.boolean "is_refused"
+    t.boolean "is_sick"
+    t.boolean "is_absent"
+    t.string "vaccine_route"
+    t.string "vaccine_site"
+    t.string "vaccine_reaction"
   end
 
   create_table "clinic_events_services", id: false, force: :cascade do |t|
@@ -419,6 +425,11 @@ ActiveRecord::Schema.define(version: 2020_08_10_104801) do
     t.string "guardian_first_name"
     t.string "guardian_last_name"
     t.string "guardian_email"
+    t.string "has_child_allergies"
+    t.string "has_child_serious_reaction_to_vaccine"
+    t.string "has_child_immune_system_problem"
+    t.string "is_child_pregnant_or_possible_to_become"
+    t.string "has_child_been_vaccinated_last_four_weeks"
   end
 
   create_table "provider_denial_messages", force: :cascade do |t|

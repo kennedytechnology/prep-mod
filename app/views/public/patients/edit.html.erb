@@ -23,8 +23,7 @@
 
   <% if false # @patient.errors.any? %>
     <div id="error_explanation" class="p-4 border-2 bg-red-100 border-red-500 mb-4">
-      <h2 class="text-lg font-bold"><%= pluralize(@patient.errors.count, "item") %> remaining to complete your
-        application:</h2>
+       <h2 class="text-lg font-bold"><%= t('forms.messages.errors', count: @patient.errors.count) %></h2>
 
       <ul class="list-disc ml-8">
         <% @patient.errors.full_messages.each do |msg| %>

@@ -7,17 +7,26 @@ class PatientNotifierMailer < ApplicationMailer
   #
   def invitation(patient)
     @patient = patient
-    mail to: patient.email, subject: "Your COVID-19 Test Registration Access Code"
+
+    I18n.with_locale(locale) do
+      mail to: patient.email
+    end
   end
 
   def check_in_reminder
     @appointment = params[:appointment]
     @patient = @appointment.patient
-    mail to: @patient.email, subject: "Reminder: Your COVID-19 Clinic Appointment #{@appointment.clinic.clinic_date} at #{@appointment.clinic.location}"
+
+    I18n.with_locale(locale) do
+      mail to: @patient.email, subject: t('.subject', date: @appointment.clinic.clinic_date, location: @appointment.clinic.location)
+    end
   end
 
   def kit_created(patient)
     @patient = patient
-    mail to: patient.email, subject: "Safety Kit Successfully Created"
+
+    I18n.with_locale(locale) do
+      mail to: patient.email
+    end
   end
 end

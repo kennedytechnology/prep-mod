@@ -16,9 +16,9 @@ CLINIC_EVENTS_PER_PATIENT = 3
 CLINIC_STAFF_PER_CLINIC = 3
 SUPPLY_INVENTORY_COUNT = 18
 INVENTORY_ITEMS_PER_CLINIC = 5
+VENUE_COUNT = 200
 NEWS_SIGNUP_COUNT = 100
-VENUE_STATES = ["MD", "NY", "PA", "DC", "KY", "VT", "CA", "CO", "AL"]
-VENUE_COUNT = 20
+VENUE_STATES = ["MD"]
 
 def age(birthday, today)
   diff = today.year - birthday.year
@@ -261,6 +261,25 @@ puts "Creating clinic staff..."
   )
 end
 
+puts "Creating venues..."
+
+VENUE_COUNT.times.each do |i|
+  address = addresses.sample
+  venue = Venue.create(
+    name: Faker::University.unique.name,
+    category: VENUE_TYPES.sample,
+    county: COUNTIES.sample,
+    address: address['address1'],
+    city: address['city'],
+    state: address['state'],
+    zip_code: address['postalCode'],
+    longitude: address['coordinates']['lng'],
+    latitude: address['coordinates']['lat'],
+  )
+end
+
+address = addresses.sample
+
 addresses = JSON.load(Rails.root.join("db/addresses.json"))["addresses"]
 addresses.select!{|a| VENUE_STATES.include?(a["state"])}
 puts "Creating patients..."
@@ -295,7 +314,7 @@ PATIENT_COUNT.times.each do |i|
     consent_date: Faker::Date.between(from: 6.months.ago, to: 1.day.ago),
     employers: Employer.all.sample(rand(3))
   )
-  
+
   if rand(3) == 0
     Appointment.create!(
       patient: patient,
@@ -316,7 +335,7 @@ patients = Patient.all.to_a
 users = User.all.to_a
 clinics = Clinic.all.to_a
 (PATIENT_COUNT * CLINIC_EVENTS_PER_PATIENT).times.each do |i|
-  clinic_event = CLINIC_EVENTS.sample  
+  clinic_event = CLINIC_EVENTS.sample
   clinic = clinics.sample
   ClinicEvent.create(
     clinic: clinic,
@@ -353,14 +372,14 @@ SUPPLY_INVENTORY_COUNT.times do
 
   sp.information_sheet.attach(io: File.open(Rails.root.to_s + "/db/sample_data/test.pdf"), filename: 'test.pdf')
 
-  
+
 end
 
 Clinic.all.each do |clinic|
   clinic.supply_inventories << SupplyInventory.all.sample(INVENTORY_ITEMS_PER_CLINIC)
   clinic.save
 
-  Faker::Number.between(from: 1, to: 5).times do 
+  Faker::Number.between(from: 1, to: 5).times do
     clinic.supply_inventories.sample.supply_inventory_events.create!(
       quantity_used: Faker::Number.between(from: 1, to: 5),
       quantity_lost: Faker::Number.between(from: 1, to: 3),
@@ -392,7 +411,6 @@ Clinic.all.each do |clinic|
 end
 
 NEWS_SIGNUP_COUNT.times.each do |i|
-  # byebug
   NewsSignup.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,

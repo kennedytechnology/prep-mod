@@ -9,7 +9,9 @@ class ProviderEnrollmentMailer < ApplicationMailer
     @greeting = "Hi"
     @provider_enrollment = provider_enrollment
 
-    mail to: provider_enrollment.practice_email, subject: "Request confirmation"
+    I18n.with_locale(locale) do
+      mail to: provider_enrollment.practice_email
+    end
   end
 
   def acceptance_confirmation(provider_enrollment, temp_password = 1234567890 )
@@ -17,18 +19,25 @@ class ProviderEnrollmentMailer < ApplicationMailer
     @provider_enrollment = provider_enrollment
     @temp_password = temp_password
 
-    mail to: provider_enrollment.practice_email, subject: "Confirmation for your acceptance"
+    I18n.with_locale(locale) do
+      mail to: provider_enrollment.practice_email
+    end
   end
 
   def email_provider_denial(provider_enrollment)
     @message = ProviderDenialMessage.first
-    mail to: provider_enrollment.practice_email, subject: "Request to become a COVID-19 service provider has been denied"
+
+    I18n.with_locale(locale) do
+      mail to: provider_enrollment.practice_email
+    end
   end
 
   def need_more_information_email(provider_enrollment)
     @greeting = "Hi"
     @provider_enrollment = provider_enrollment
 
-    mail to: provider_enrollment.practice_email, subject: "We need more information" 
+    I18n.with_locale(locale) do
+      mail to: provider_enrollment.practice_email
+    end
   end
 end

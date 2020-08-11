@@ -1,12 +1,11 @@
-<p> Dear <%= "#{@provider_enrollment.first_name} #{@provider_enrollment.last_name}" %>, </p> 
+<p> <%= t('views.provider_enrollment_mailer.request_confirmation.title', first_name: @provider_enrollment.first_name,  last_name: @provider_enrollment.last_name) %>, </p>
 
-<p> 
-    We appreciate your interest in joining our effort. 
-    An administrator will contact you soon.
+<p>
+    <%= t 'views.provider_enrollment_mailer.request_confirmation.message' %>
 </p>
 
-<p> 
-    To inquire about your status, please contact your local health department. 
+<p>
+     <%= t 'views.provider_enrollment_mailer.request_confirmation.status' %>
 </p>
 
-<p> Thank you. </p>
+<p>  <%= t 'views.provider_enrollment_mailer.request_confirmation.end' %> </p>

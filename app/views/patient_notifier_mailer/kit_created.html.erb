@@ -1,13 +1,12 @@
-<h1>Your Safety Kit was Successfully Created</h1>
+<h1><%= t('views.patient_notifier_mailer.kit_created.title')%></h1>
 
-<p>Dear <%= @patient.email %>,
+<p> <%= t('views.patient_notifier_mailer.kit_created.patient', patient_email: @patient.email) %>,
 <br />
-Your Safety Kit was Successfully Created.
+<%= t('views.patient_notifier_mailer.kit_created.successful') %>
 <p>
 
 <p>
-Thank you,
+<%= t('views.patient_notifier_mailer.kit_created.end') %>
 <br />
 Clinic Wizard
 <p>
-

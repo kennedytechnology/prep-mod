@@ -1,14 +1,13 @@
-<h1> Upcoming appointment reminder </h1>
+<h1> <%= t('views.appointment_mailer.send_reminder.title') %> </h1>
 
-<p> We look forward to seeing you at your upcoming appointment.</p>
+<p> <%= t('views.appointment_mailer.send_reminder.subtitle') %> </p>
 
-<p> To help with social distancing, you can check in on your mobile device.</p>
+<p> <%= t('views.appointment_mailer.send_reminder.message_1') %> </p>
 
-<p> When you get to the clinic location, click the button below.  
-We will text or email you when we're ready for you. </p>
+<p> <%= t('views.appointment_mailer.send_reminder.message_2') %> </p>
 
-<p> You must be on-site to check in so only check in when you are in the area. </p>
+<p> <%= t('views.appointment_mailer.send_reminder.message_3') %> </p>
 
-<%= link_to "Click Here to Check In", "#{ENV['SITE_URL']}/check_in/#{@appointment.patient.check_in_code}" %>
+<%= link_to t('views.appointment_mailer.send_reminder.check_in_button'), "#{ENV['SITE_URL']}/check_in/#{@appointment.patient.check_in_code}" %>
 
-<p> Thank you! </p>
+<p> <%= t('views.appointment_mailer.send_reminder.end') %> </p>

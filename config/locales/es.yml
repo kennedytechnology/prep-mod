@@ -23,3 +23,13 @@ es:
             retype_email: "Vuelva a Escribir el E-mail"
             phone_number: "Número De Móvil"
             save_and_continue: "Guardar y Continuar →"
+  forms:
+    messages:
+      errors:
+        one: 'One error prohibited this article from being saved (Spanish)'
+        other: '%{count} errors prohibited this feedback from being saved (Spanish)'
+  date:
+    formats:
+      default: "%m-%d-%Y"
+      short: "%b %d"
+      long: "%B %d, %Y"

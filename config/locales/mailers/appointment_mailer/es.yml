@@ -1,0 +1,43 @@
+es:
+  appointment_mailer:
+    patient_checked_in:
+      subject: "You're Checked In!"
+    send_reminder:
+      subject: "Upcoming appointment reminder"
+    patient_invited:
+      subject: "You're Invited!"
+    appointment_canceled:
+      subject: "Your appointment is canceled"
+  clinic_event_mailer:
+    registration_confirmed:
+      subject: "You are registered for the clinic on %{date}"
+  clinic_mailer:
+    public_clinic_created:
+      subject: "New Public Clinic Created"
+    send_vaccinated_confirmation:
+      subject: "Vaccinated confirmation"
+  employer_mailer:
+    request_confirmation:
+      subject: "Your request to receive COVID-19 information about your constituents or employees has been submitted successfully."
+  news_signup_mailer:
+    successful_signup:
+      subject: "Thank you for your subscription"
+  patient_notifier_mailer:
+    invitation:
+      subject: "Your COVID-19 Test Registration Access Code"
+    check_in_reminder:
+      subject: "Reminder: Your COVID-19 Clinic Appointment %{date} at %{location}"
+    kit_created:
+      subject: "Safety Kit Successfully Created"
+  provider_enrollment_mailer:
+    request_confirmation:
+      subject: "Request confirmation"
+    acceptance_confirmation:
+      subject: "Confirmation for your acceptance"
+    email_provider_denial:
+      subject: "Request to become a COVID-19 service provider has been denied english"
+    need_more_information_email:
+      subject: "We need more information"
+  public_patient_mailer:
+    request_confirmation:
+      subject: "Confirmation for your request about COVID-19 testing."

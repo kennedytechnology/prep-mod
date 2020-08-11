@@ -59,6 +59,7 @@ The application will look for its configuration in these environment variables:
 * **TWILIO_AUTH_TOKEN**: Twilio account key
 * **TWILIO_FROM_PHONE**: The phone number from which SMS messages will be sent
 * **SLACK_NOTIFY_URL**: A callback URL for reporting errors to a chat room
+* **SCHOOL_VACCINATION_MODE**: Switching from Regular to School Mode
 
 # Application source code layout
 

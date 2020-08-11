@@ -1,0 +1,46 @@
+<h1 class="main-title"> <%= t 'views.public_portal.covidreadi.index.title' %> </h1>
+<p>
+    <%= t 'views.public_portal.covidreadi.index.subtitle_part1' %>
+    <br />
+    <%= t 'views.public_portal.covidreadi.index.subtitle_part2' %>    <br />
+    <%= t 'views.public_portal.covidreadi.index.subtitle_part3' %>
+</p>
+
+<h2 class="text-2xl my-4 mb-8" data-controller="ticker"> <span class="font-bold" data-target="ticker.number">318,430,293</span> <%= t'views.public_portal.covidreadi.index.to_be_vaccinated' %> </h2>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 covidreadi-content">
+    <div class="flex flex-col justify-between">
+        <h3> <%= t 'views.public_portal.covidreadi.index.pre_register' %></h3>
+        <p class="mb-4"> <%= t 'views.public_portal.covidreadi.index.help_us' %> </p>
+
+        <%= link_to t('views.public_portal.covidreadi.index.pre_register_button'), "/kit/new", class: "px-6 py-3 bg-gray-200 text-center" %>
+    </div>
+
+    <div class="flex flex-col justify-between">
+        <h3 class=""> <%= t 'views.public_portal.covidreadi.index.provider' %></h3>
+        <p class="mb-4"> <%= t 'views.public_portal.covidreadi.index.healthcare_providers' %></p>
+
+        <%= link_to t('views.public_portal.covidreadi.index.vaccinate_button'), new_provider_enrollment_path, class: "" %>
+    </div>
+
+    <div class="flex flex-col justify-between">
+        <h3> <%= t 'views.public_portal.covidreadi.index.clinic_state' %> </h3>
+        <p class="mb-4"> <%= t 'views.public_portal.covidreadi.index.offer_location' %></p>
+
+        <%= link_to t('views.public_portal.covidreadi.index.host_button'), "", class: "px-6 py-3 bg-gray-200 text-center font-bold text-lg" %>
+    </div>
+
+    <div class="flex flex-col justify-between">
+        <h3> <%= t 'views.public_portal.covidreadi.index.contract_workers' %> </h3>
+        <p class="mb-4"> <%= t 'views.public_portal.covidreadi.index.work_offer' %></p>
+
+        <%= link_to t('views.public_portal.covidreadi.index.work_button'), "", class: "px-6 py-3 bg-gray-200 text-center" %>
+    </div>
+
+    <div class="flex flex-col justify-between">
+        <h3> <%= t 'views.public_portal.covidreadi.index.volunteer' %> </h3>
+        <p class="mb-4"> <%= t 'views.public_portal.covidreadi.index.help_out' %></p>
+
+        <%= link_to t('views.public_portal.covidreadi.index.volunteer_button'), "", class: "px-6 py-3 bg-gray-200 text-center" %>
+    </div>
+</div>

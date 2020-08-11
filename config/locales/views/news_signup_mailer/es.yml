@@ -1,0 +1,6 @@
+es:
+  views:
+    news_signup_mailer:
+      succesful_signup:
+        title: "Thank you for signing up!"
+        body: "We will be in touch when we have something new to share."

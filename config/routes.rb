@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
-    root to: 'public_portal#index2'
+    root to: 'public_portal#index'
     get 'public_portal/index'
     get '/client/access', to: 'public/patients#access'
     get '/clinic/search', to: 'public/clinics#index'
@@ -38,7 +38,6 @@ Rails.application.routes.draw do
   }
 
   get 'public_portal/index'
-  get 'public_portal/index2'
   get '/clinic/search', to: 'public/clinics#index'
   post '/clinic/search', to: 'public/clinics#index'
   get '/clinic/data_transfer', to: 'clinics#data_transfer'

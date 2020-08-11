@@ -1,0 +1,19 @@
+en:
+  views:
+    appointment_mailer:
+      appointment_canceled:
+        canceled: "Your appointment has been canceled!"
+      patient_checked_in:
+        title: "You're Checked In!"
+        subtitle: "Thank you! You are checked in. We will text and/or email you when we're ready for you."
+      patient_invited:
+        title: "You're Invited!"
+        message: "We're ready for you! Please come inside for your appointment."
+      send_reminder:
+        title: "Upcoming appointment reminder"
+        subtitle: "We look forward to seeing you at your upcoming appointment."
+        message_1: "To help with social distancing, you can check in on your mobile device."
+        message_2: "When you get to the clinic location, click the button below. We will text or email you when we're ready for you."
+        message_3: "You must be on-site to check in so only check in when you are in the area."
+        check_in_button: "Click Here to Check In"
+        end: "Thank you!"

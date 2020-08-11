@@ -1,0 +1,31 @@
+en:
+  views:
+    clinic_mailer:
+        public_clinic_created:
+            title_part_1: "Dear %{user_name}"
+            title_part_2: "A new public clinic has been created. Here are the details:"
+            venue: "Venue Name: %{venue}"
+            clinic_date: "Clinic Date: %{date}"
+            lead_vaccinator: "Lead Vaccinator Name: %{name}"
+            clinic_status: "Clinic Status: %{status}"
+            outcome: "Outcome Comments: %{comments}"
+            start_time: "Clinic Start Time: %{start_time}"
+            end_time: "Clinic End Time: %{end_time}"
+            duration: "Clinic Duration: %{duration}"
+            age_groups: "Clinic Age Groups: "
+            address: "Address: %{address}"
+            appointment_frequency: "Appointment Frequency Minutes: %{frequency}"
+            slots: "Appointment Slots: %{slots}"
+            available: "Appointments Available: %{available}"
+            county: "County: %{county}"
+        send_vaccinated_confirmation:
+            title: "Confirmation for vaccinated patient!"
+            sub_tile: "Patient Info:"
+            full_name: "Full Name: %{full_name}"
+            initials: "Initials: %{initials}"
+            vaccine_info: "Vaccine Info:"
+            clinic_date: "Clinic Date: %{date}"
+            vaccine_name: "Vaccine Name:"
+            manufacturer: "Manufacturer:"
+            lot_number: "Lot Number:"
+            expiration_date: "Expiration Date:"

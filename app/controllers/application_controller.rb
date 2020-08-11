@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :set_cache_headers
   before_action :set_locale
+  helper_method :logo_path
 
   rescue_from CanCan::AccessDenied do |exception|
     logger.debug exception.inspect
@@ -38,5 +39,13 @@ class ApplicationController < ActionController::Base
     else
       root_path
     end
+  end
+
+  def template_for_homepage
+    params['template'] || ENV['TEMPLATE_FOR_HOMEPAGE'] || 'index'
+  end
+
+  def logo_path
+    "logo-#{template_for_homepage}.png"
   end
 end
