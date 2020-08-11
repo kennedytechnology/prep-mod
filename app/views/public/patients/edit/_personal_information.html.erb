@@ -85,20 +85,27 @@
             </div>
         </div>
     </div>
+</div>
 
-    <% if school_mode? %>
+<% if school_mode? %>
+    <div class="field-side-by-side">
         <div class="flex">
             <div class="flex-1 mr-2">
-                <%= f.label :grade, t('activerecord.models.patient.grade') %>
+                <%= f.label :grade, t('activerecord.models.patient.grade'), class: "block" %>
                 <%= f.text_field :grade, class: "w-full form-input" %>
             </div>
-            <div class="flex-1">
-                <%= f.label :homeroom_teacher, t('activerecord.models.patient.homeroom_teacher') %>
+            <div class="flex-1 mr-2">
+                <%= f.label :homeroom_teacher, t('activerecord.models.patient.homeroom_teacher'), class: "block" %>
                 <%= f.text_field :homeroom_teacher, class: "w-full form-input" %>
             </div>
         </div>
-    <% end %>
-</div>
+
+        <div>
+            <%= f.label :venue_id, "Select Venue", class: "block" %>
+            <%= f.select :venue_id, options_for_select(Venue.all.collect { | venue | [venue.name, venue.id] }, @patient.venue.id), {prompt: "Select"}, {class: "form-select w-full", required: true} %>
+        </div>
+    </div>
+<% end %>
 
 <div class="flex">
     <div class="w-1/2 mr-3">
