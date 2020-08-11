@@ -1,4 +1,4 @@
-<% if school_mode_on? %>
+<% if school_mode? %>
     <%= render partial: "public/patients/edit/health_questions_school", locals: {f:f} %>
 <% else %>
     <%= render partial: "public/patients/edit/health_questions_school_regular", locals: {f:f} %>

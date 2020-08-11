@@ -57,7 +57,7 @@ class PatientsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        template_for_consent_pdf = school_mode_on? ? "patients/report_school_mode.pdf.erb" : "patients/report.pdf.erb"
+        template_for_consent_pdf = school_mode? ? "patients/report_school_mode.pdf.erb" : "patients/report.pdf.erb"
         render pdf: "patient-#{@patient.id}", 
                 template: template_for_consent_pdf,
                 layout: "clinic-print", show_as_html: params.key?('debug')

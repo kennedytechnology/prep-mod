@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def school_mode_on?
+  def school_mode?
     return (ENV["SCHOOL_VACCINATION_MODE"] && (ENV["SCHOOL_VACCINATION_MODE"] == "true")) ? true : false
   end
 end

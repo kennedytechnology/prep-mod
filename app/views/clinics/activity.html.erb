@@ -20,7 +20,7 @@
                 </div>
             <% end %>
 
-            <% if ENV["SCHOOL_VACCINATION_MODE"] %>
+            <% if school_mode? %>
                 <%= render partial: "clinics/activity/clinic_events_school" %>
             <% else %>
                 <%= render partial: "clinics/activity/clinic_events_general" %>
