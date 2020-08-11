@@ -46,6 +46,6 @@ class SupplyInventory < ApplicationRecord
   end
 
   def name
-    category + ": " + item_name
+    category.nil? ? item_name.to_s : category.to_s + ": " + item_name.to_s
   end
 end
