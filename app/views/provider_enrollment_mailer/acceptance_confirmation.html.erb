@@ -11,4 +11,5 @@
 </p>
 <%= t'views.provider_enrollment_mailer.acceptance_confirmation.administrator' %>
 </p>
-<%# link_to 'Your Provider Enrollment', @provider_enrollment %>
+
+<%= link_to 'Your Provider Enrollment', provider_enrollment_url(locale: locale, id: @provider_enrollment.id) %>
