@@ -173,3 +173,11 @@ select {
     background-color: #3490DC; //bg-blue
     box-shadow: 0px 0px 0px 2px white inset;
 }
+
+.search-field-title {
+    @apply block w-full text-lg leading-5 text-gray-800 font-black mb-2;
+
+    @screen md {
+        @apply block w-full text-xl leading-5 text-gray-800 font-black mb-2;
+    }
+}

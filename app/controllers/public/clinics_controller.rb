@@ -15,6 +15,10 @@ class Public::ClinicsController < ApplicationController
       @clinics = @clinics.select{|clinic| (clinic.services.collect(&:name) & params['service']).any?  }
     end
 
+    if params[:search_name].present?
+      @clinics = Clinic.where("venue_name ILIKE ?", "%#{params[:search_name]}%")
+    end
+
     @clinics = @clinics.take(10)
     render :index   
   end

@@ -31,15 +31,19 @@
         </div>
     </div>
 
-    <div class="field-side-by-side">
-        <div>
-            <h2 class="title"> <%= t 'views.public.clinics.index.search.search_within' %> <span class="field-required">*</span> </h2>
+    <div class="flex">
+        <div class="w-4/12 mr-4">
+            <h2 class="search-field-title"> <%= t 'views.public.clinics.index.search.search_within' %> <span class="field-required">*</span> </h2>
             <%= select_tag(:search_radius,
                 options_for_select(["All", "1 mile", "5 miles", "10 miles", "25 miles", "50 miles", "100 miles", "100+ miles"],
                 params[:search_radius]), class: "form-select block w-full", required: true) %>
         </div>
-        <div>
-            <h2 class="title"> <%= t 'views.public.clinics.index.search.address' %> </h2>
+        <div class="w-4/12 mr-4">
+            <h2 class="search-field-title"> <%= t 'views.public.clinics.index.search.search_name' %> </h2>
+            <%= text_field_tag(:search_name, params[:search_name], class: "form-input block w-full") %>
+        </div>
+        <div class="w-4/12">
+            <h2 class="search-field-title"> <%= t 'views.public.clinics.index.search.address' %> </h2>
             <%= text_field_tag "location", "Enter address", value: params[:location], id: "autocomplete", class: "form-input w-full", placeholder: "Enter address" %>
             <%= render partial: "google_maps_script" %>
         </div>
