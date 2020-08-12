@@ -129,17 +129,17 @@
 
 <div class="flex" data-controller="email-confirmation">
     <div class="w-1/2 mr-3">
-        <%= f.label :parent_first_name, class: "block" do %>
+        <%= f.label :guardian_first_name, class: "block" do %>
             Parent/Guardian's First Name <span class="field-required"> * </span>
         <% end %>
-        <%= f.text_field :first_name, class: "w-full form-input block", required: true %>
+        <%= f.text_field :guardian_first_name, class: "w-full form-input block", required: true %>
     </div>
 
     <div class="w-1/2 mr-1">
-        <%= f.label :parent_last_name, class: "block" do %>
+        <%= f.label :guardian_last_name, class: "block" do %>
             Parent/Guardian's Last Name <span class="field-required"> * </span>
         <% end %>
-        <%= f.text_field :last_name, class: "w-full form-input block", required: true %>
+        <%= f.text_field :guardian_last_name, class: "w-full form-input block", required: true %>
     </div>
 
     <div class="w-1/2 mr-3 ml-3">
