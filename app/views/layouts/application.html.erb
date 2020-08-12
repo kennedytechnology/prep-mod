@@ -20,7 +20,7 @@
     <div class="main-container">
         <% unless @hide_header %>
           <div class="flex justify-between items-center">
-            <a href="/"><%= image_tag logo_path, class: "mt-2 mb-2", style: "max-height: 160px;" %></a>
+            <a href="/"><%= image_tag public_logo, class: "mt-2 mb-4 h-32 logo-#{ENV['PUBLIC_LOGO']}" %></a>
             <div class="flex">
               <%= link_to "EN", {locale: :en}, class: "mr-3" %>
               <%= link_to "ES", {locale: :es} %>

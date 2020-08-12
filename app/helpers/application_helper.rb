@@ -16,4 +16,12 @@ module ApplicationHelper
     return (ENV["SCHOOL_VACCINATION_MODE"] && (ENV["SCHOOL_VACCINATION_MODE"] == "true")) ? true : false
   end
 
+  def public_logo
+    ENV['PUBLIC_LOGO'] + "-logo.png"
+  end
+
+  def clinic_logo
+    ENV['CLINIC_LOGO'] + "-logo.png"
+  end
+
 end

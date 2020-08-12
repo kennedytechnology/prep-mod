@@ -60,6 +60,7 @@ The application will look for its configuration in these environment variables:
 * **TWILIO_FROM_PHONE**: The phone number from which SMS messages will be sent
 * **SLACK_NOTIFY_URL**: A callback URL for reporting errors to a chat room
 * **SCHOOL_VACCINATION_MODE**: Switching from Regular to School Mode
+* **PUBLIC_LOGO** and **CLINIC_LOGO**: Mandatory values to configure the logos used
 
 # Application source code layout
 

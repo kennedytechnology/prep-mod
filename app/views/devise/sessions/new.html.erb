@@ -1,5 +1,10 @@
 <div class="flex flex-col md:flex-row mt-8 md:mt-20 px-2">
-    <div class="flex w-full md:w-1/2 items-center"><%= image_tag (ENV['SITE_LOGO'] || 'prep-mod.png'), class: "object-scale-down h-24 w-full" %></div>
+  
+    <div class="flex w-full md:w-1/2 items-center"><%= image_tag clinic_logo, class: "logo-#{ENV['CLINIC_LOGO']}" %></div>
+  
+  <!--  <div class="flex w-full md:w-1/2 items-center"><%= image_tag (ENV['SITE_LOGO'] || 'logo-index.png'), class: "object-scale-down h-24 w-full" %></div>
+  -->
+  
     <div class="w-full md:w-3/12 md:mx-24">
         <h2 class="main-title mt-6 md:mt-0">Login</h2>
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>

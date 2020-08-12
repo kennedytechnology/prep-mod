@@ -24,14 +24,14 @@
             locals: {
                 url: patients_path,
                 name: "Find a Record",
-                image: 'find_record' } 
+                image: 'find_record' }
         %>
 
         <%= render partial: 'menu_button',
             locals: {
                 url: new_patient_path,
                 name: "Refer Patient for Services",
-                image: 'export_refer' } 
+                image: 'export_refer' }
         %>
 
         <%= render partial: 'menu_button',
@@ -45,20 +45,20 @@
             locals: {
                 url: supply_inventories_path,
                 name: "Inventory Management",
-                image: 'inventory_management' } 
+                image: 'inventory_management' }
         %>
 
         <%= render partial: 'menu_button',
             locals: {
                 url: pages_reports_menu_path,
                 name: "Generate Reports",
-                image: 'customized_report' } 
+                image: 'customized_report' }
         %>
         <%= render partial: 'menu_button',
             locals: {
                 url: new_message_path,
                 name: "Send a Message",
-                image: 'message' } 
+                image: 'message' }
         %>
 
         <div class="w-full sm:w-1/2 md:w-1/3 md:w-1/3 lg:w-1/5 px-4 mb-4 md:mb-6  lg:mb-10">
@@ -66,7 +66,7 @@
                 <h1 class="text-gray-600 pb-1 border-b w-full mb-6 flex flex-col justify-center items-center" style="min-height: 55px;">
                 Logout
                 </h1>
-                <%= image_tag "icons/logout.png", class: "m-auto", style: "max-height: 70px; max-width: 80px;" %>  
+                <%= image_tag "icons/logout.png", class: "m-auto", style: "max-height: 70px; max-width: 80px;" %>
             <% end %>
         </div>
     </div>

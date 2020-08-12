@@ -42,8 +42,9 @@ class ApplicationController < ActionController::Base
   end
 
   def template_for_homepage
-    params['template'] || ENV['TEMPLATE_FOR_HOMEPAGE'] || 'index'
+    params['template'] || ENV['TEMPLATE_FOR_HOMEPAGE'] || 'index' || ENV["CONSENT_FORM_LOGO"]
   end
+
 
   def logo_path
     "logo-#{template_for_homepage}.png"
