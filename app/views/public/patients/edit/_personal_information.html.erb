@@ -17,7 +17,7 @@
         <div class="w-full md:w-9/12 md:mr-2 lg:w-8/12 lg:mr-2">
             <%= f.label :first_name do %>
                <% if school_mode? %> 
-                Student's First Name
+                <%= t('activerecord.models.patient.student_first_name') %>
                <% else %>
                  <%= t 'static_pages.public.patients.consent_form.personal_information.first_name' %>
                <% end %>
@@ -28,7 +28,7 @@
         <div class="flex-1">
             <%= f.label :middle_initial do %>
                 <% if school_mode? %>
-                    Student's Middle Initial
+                    <%= t('activerecord.models.patient.student_middle_initial') %>
                 <% else %>
                     <%= t('static_pages.public.patients.consent_form.personal_information.middle_initial') %>
                 <% end %>
@@ -40,7 +40,7 @@
         <div class="flex-1 md:mr-2 lg:mr-2">
             <%= f.label :last_name do %>
                 <% if school_mode? %> 
-                    Student's Last Name
+                    <%= t('activerecord.models.patient.student_last_name') %>
                 <% else %>
                     <%= t 'static_pages.public.patients.consent_form.personal_information.last_name' %>
                 <% end %>
