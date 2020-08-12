@@ -22,7 +22,7 @@
             <div class="flex">
                 <%= cw_date_field(f, :event_date, {class: "form-input block w-full", palceholder: "MM/DD/YYYY", required: true},
                     {'data-controller' => 'flatpickr',
-                    'data-flatpickr-max-date' => Time.zone.now,
+                    'data-flatpickr-min-date' => Time.zone.now,
                     'data-action' => 'change->inventory-new-entry#updateModalField keyup->inventory-new-entry#updateModalField blur->inventory-new-entry#validateInputField'
                     }
                 ) %>

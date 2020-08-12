@@ -1,9 +1,9 @@
 module ApplicationHelper
 
   def cw_date_field(form, name, options = {}, args = {})
-    if args["data-flatpickr-min-date"]
+    if args["data-flatpickr-max-date"]
       date_options = {order: [:month, :day, :year], start_year: Date.current.year - 99, end_year: Date.current.year, include_blank: true}
-    elsif args["data-flatpickr-max-date"]
+    elsif args["data-flatpickr-min-date"]
       date_options = {order: [:month, :day, :year], start_year: Date.current.year, end_year: Date.current.year + 10, include_blank: true}
     else
       date_options = {order: [:month, :day, :year], include_blank: true}

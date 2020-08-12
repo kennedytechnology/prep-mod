@@ -61,7 +61,7 @@
               <div class="flex">
                 <%= cw_date_field(fm, :date_of_birth, {class: "form-input w-full", required: true},
                             {'data-controller' => 'flatpickr',
-                            'data-flatpickr-min-date' => Time.zone.now
+                            'data-flatpickr-max-date' => Time.zone.now
                             }
                 ) %>
               </div>

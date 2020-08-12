@@ -54,7 +54,7 @@
             <div class="flex">
                 <%= cw_date_field(f, :date_of_birth, {class: "form-input w-full", value: @patient.date_of_birth.try(:strftime, "%Y/%m/%d"), required: true},
                     {'data-controller' => 'flatpickr',
-                    'data-flatpickr-min-date' => Time.zone.now,
+                    'data-flatpickr-max-date' => Time.zone.now,
                     'data-action' => 'age-calculator#calculateAge',
                     'data-target' => 'age-calculator.dobField'
                     }

@@ -44,7 +44,7 @@
                             data: { controller: "flatpickr", flatpickr_max_date: "today" } %>
         <%= cw_date_field(f, :insured_date_of_birth, {class: "form-input w-full", value: @patient.insured_date_of_birth.try(:strftime, "%Y/%m/%d"), required: true},
                     {'data-controller' => 'flatpickr',
-                    'data-flatpickr-min-date' => Time.zone.now
+                    'data-flatpickr-max-date' => Time.zone.now
                     }
         ) %>
     </div>
