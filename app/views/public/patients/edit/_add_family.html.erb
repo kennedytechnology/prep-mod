@@ -56,8 +56,17 @@
                 <span> <%= t 'activerecord.models.patient.date_of_birth' %> </span>
                 <span class="field-required">*</span>
             <% end %>
-            <%= fm.text_field :date_of_birth, class: "w-full form-input", required: true,
+            <%#= fm.text_field :date_of_birth, class: "w-full form-input", required: true,
                                   data: { controller: "flatpickr", flatpickr_max_date: "today" } %>
+              <div class="flex">
+                <%= cw_date_field(fm, :date_of_birth, {class: "form-input w-full", required: true},
+                            {'data-controller' => 'flatpickr',
+                            'data-flatpickr-min-date' => Time.zone.now
+                            }
+                ) %>
+              </div>
+            </div>
+
           </div>
         </div>
 

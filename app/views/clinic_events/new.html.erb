@@ -25,8 +25,12 @@
 
             <div class="w-3/12">
                 <%= f.label :event_date, "Date of Encounter", class: "block" %>
-                <%= f.text_field :event_date, class: "form-input w-full", placeholder: "MM/DD/YYYY",
+                <%#= f.text_field :event_date, class: "form-input w-full", placeholder: "MM/DD/YYYY",
                         required: true, data: { controller: "flatpickr", flatpickr_min_date: "today" } %>
+                <%= cw_date_field(f, :event_date, {class: "form-input", placeholder: "MM/DD/YYYY"},
+                                                    {'data-controller' => 'flatpickr',
+                                                    'data-flatpickr-min-date' => Time.zone.now}
+                                                    ) %>
             </div>
 
             <div class="w-3/12">

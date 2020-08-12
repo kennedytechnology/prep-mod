@@ -89,13 +89,18 @@
                     <span class="field-required">*</span>
                 <% end %>
 
-                <%= f.text_field :clinic_date, class: "form-input", placeholder: "MM/DD/YYYY", required: true,
+                <%#= f.text_field :clinic_date, class: "form-input", placeholder: "MM/DD/YYYY", required: true,
                                 data: { target: "review-form.validates",
                                     controller: "flatpickr",
                                     flatpickr_default_date: @clinic.clinic_date ? @clinic.clinic_date.strftime("%Y-%m-%d") : nil,
                                     flatpickr_min_date: Time.zone.now
                 } %>
-
+                <%= cw_date_field(f, :clinic_date, {class: "form-input", placeholder: "MM/DD/YYYY", required: true},
+                                                    {'data-controller' => 'flatpickr',
+                                                    'data-target' => 'review-form.validates',
+                                                    'data-flatpickr-default-date' => @clinic.clinic_date ? @clinic.clinic_date.strftime("%Y-%m-%d") : nil,
+                                                    'data-flatpickr-min-date' => Time.zone.now}
+                                                    ) %>
                 <p class="label">Start Time <span class="field-required">*</span></p>
                 <%
                     start_time = Time.parse("1 AM").to_i
