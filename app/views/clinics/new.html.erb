@@ -77,7 +77,7 @@
                     <span> Choose Venue </span>
                     <span class="field-required">*</span>
                 <% end %>
-                <%= f.select :venue_id, options_for_select(Venue.all.collect { | venue | [venue.name, venue.id] }), {prompt: "Select"}, {class: "form-select w-full", required: true, "data-target": "review-form.validates"} %>
+                <%= f.select :venue_id, options_for_select(Venue.all.collect { | venue | [venue.name, venue.id] }, @clinic.venue_id), {prompt: "Select"}, {class: "form-select w-full"} %>
             </div>
         </div>
 
