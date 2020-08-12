@@ -3,7 +3,7 @@ en:
     maryland_vaccination:
       header:
         title: "Welcome to the Maryland Vaccination Sign-Up"
-        find_button: "Find Services"
+        find_button: "Find a Vaccination Clinic"
       services:
         main_title: "Which vaccination service would you like?"
         news_service:
