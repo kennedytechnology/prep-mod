@@ -102,7 +102,7 @@
 
         <div>
             <%= f.label :venue_id, "Select Venue", class: "block" %>
-            <%= f.select :venue_id, options_for_select(Venue.all.collect { | venue | [venue.name, venue.id] }, @patient.venue.id), {prompt: "Select"}, {class: "form-select w-full", required: true} %>
+            <%= f.select :venue_id, options_for_select(Venue.all.collect { | venue | [venue.name, venue.id] }, @patient.venue.try(:id)), {prompt: "Select"}, {class: "form-select w-full", required: true} %>
         </div>
     </div>
 <% end %>
