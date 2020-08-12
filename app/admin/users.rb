@@ -1,7 +1,7 @@
 ActiveAdmin.register User do
 
   permit_params do
-    permitted = [:email, :password, :password_confirmation, :first_name, :last_name, :role, {clinic_ids: []}]
+    permitted = [:email, :email_confirmation, :password, :password_confirmation, :first_name, :last_name, :role, {clinic_ids: []}]
     if params[:user] && params[:user][:password].blank? && params[:user][:password_confirmation].blank?
       params[:user].delete(:password)
       params[:user].delete(:password_confirmation)
@@ -68,6 +68,7 @@ ActiveAdmin.register User do
         f.inputs do
           f.inputs "User Details" do
             f.input :email
+            f.input :email_confirmation
             f.input :first_name
             f.input :last_name
             f.input :role, as: :select, collection: User.valid_roles.map { |r| [r.to_s.titleize, r.to_s]}
