@@ -80,7 +80,7 @@
           <tbody>
           <% @patients.each do |patient| %>
             <% unless patient.appointments.empty? %>
-              <tr data-target="patients.searchableRow" data-search-content="<%= [patient.first_name.downcase, patient.last_name.downcase, patient.county, patient.date_of_birth.strftime("%m/%d/%y")].join(" ") %>" data-patient-id="<%= patient.id %>">
+              <tr data-target="patients.searchableRow" data-search-content="<%= [patient.first_name.downcase, patient.last_name.downcase, patient.county, patient.date_of_birth.try(:strftime, "%m/%d/%y")].join(" ") %>" data-patient-id="<%= patient.id %>">
                 <td class="underline"><%= link_to patient.full_name, [@clinic, patient]  %></td>
                 <td><%= patient.date_of_birth.strftime("%m/%d/%y") if patient.date_of_birth %></td>
                 <td><%= ((Date.today.to_time - patient.date_of_birth.to_time) / 1.year.seconds).floor if patient.date_of_birth %></td>
