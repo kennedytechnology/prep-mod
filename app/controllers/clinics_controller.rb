@@ -1,4 +1,6 @@
 class ClinicsController < ClinicManagementController
+  include ApplicationHelper
+
   load_and_authorize_resource except: [:index]
   before_action :get_clinic, only: [:edit, :update]
 
@@ -72,12 +74,13 @@ class ClinicsController < ClinicManagementController
     @page_title = "Clinic Activity Report"
 
     respond_to do |format|
+      @clinic_events_for_report = school_mode? ? @clinic.clinic_events.where(category: ["Vaccinated", "Sick", "Absent", "Refused"]).group_by(&:category) : @clinic.clinic_events.where(category: ["Tested", "Cancelled",  "No Show", "Safety Kit", "Screened"]).group_by(&:category)
       format.html
       format.xlsx do
         render xlsx: 'CAF Report', template: 'clinics/report',
-              disposition: 'inline',
-              filename: "caf_report_#{Date.today.strftime("%d_%m_%Y")}.xlsx",
-              xlsx_author: current_user.name
+        disposition: 'inline',
+        filename: "caf_report_#{Date.today.strftime("%d_%m_%Y")}.xlsx",
+        xlsx_author: current_user.name
       end
       format.pdf do
         render pdf: "CAF Report",
