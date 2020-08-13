@@ -45,6 +45,9 @@ en:
             signature:
               title: "Please sign here with your finger or mouse"
               with_name: "Type My Full Name"
+            signer:
+              first_name: "Signer First Name"
+              last_name: "Signer Last Name"
             relation_to_patient_for_insurance_options:
               - "Self"
               - "Parent/Guardian"

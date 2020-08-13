@@ -157,7 +157,7 @@ class Public::PatientsController < ApplicationController
       :insurance_card_front, :insurance_card_back, :guardian_first_name, :guardian_last_name, :guardian_email,
       :grade, :homeroom_teacher, :has_child_allergies, :has_child_serious_reaction_to_vaccine, :has_child_immune_system_problem,
       :is_child_pregnant_or_possible_to_become, :has_child_been_vaccinated_last_four_weeks,
-      :venue_id,
+      :venue_id, :signer_first_name, :signer_last_name,
       employer_ids: [],
       patient_family_members_attributes: [:id, :first_name, :middle_initial,
         :last_name, :mothers_maiden_name, :race, :date_of_birth,

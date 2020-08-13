@@ -292,7 +292,9 @@ PATIENT_COUNT.times.each do |i|
     notify_via_email: Faker::Boolean.boolean,
     consent_date: Faker::Date.between(from: 6.months.ago, to: 1.day.ago),
     employers: Employer.all.sample(rand(3)),
-    venue_id: Faker::Number.between(from: 1, to: Venue.count)
+    venue_id: Faker::Number.between(from: 1, to: Venue.count),
+    signer_first_name: Faker::Name.first_name,
+    signer_last_name: Faker::Name.last_name,
   )
 
   if rand(3) == 0

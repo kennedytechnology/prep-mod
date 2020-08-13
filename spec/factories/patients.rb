@@ -24,5 +24,7 @@ FactoryBot.define do
     email_confirmation { "patient@example.com" }
     notify_via_sms { Faker::Boolean.boolean }
     notify_via_email { Faker::Boolean.boolean }
+    signer_first_name { Faker::Name.first_name }
+    signer_last_name { Faker::Name.last_name }
   end
 end
