@@ -1,0 +1,67 @@
+<div class="clinic-patients-index-page" data-controller="patients">
+  <div class="header-section">
+    <h1 class="main-title">Find a Record</h1>
+      <div class="flex justify-start my-4 search-inputs-container">
+        <%= search_form_for(@q, url: patients_records_search_path, class: "flex items-start") do |f| %>
+          <%= f.search_field :first_name_cont, type: "text", placeholder: "First Name", class: "form-input mr-2 w-2/12" %>
+          <%= f.search_field :last_name_cont, type: "text", placeholder: "Last Name", class: "form-input w-2/12 mr-2" %>
+          <%= f.search_field :date_of_birth_equals, type: "date", placeholder: "Date of Birth", value: @q.date_of_birth_equals.try(:strftime, "%Y/%m/%d"),
+                               class: "form-input w-2/12 mr-2",
+                               data: {controller: "flatpickr"} %>
+          <%= f.search_field :mothers_maiden_name_cont, type: "text", placeholder: "Mother's Maiden Name", class: "form-input w-3/12 mr-2" %>
+          <%= f.submit "Search", class: "button-action" %>
+          <%= link_to "Reset", patients_records_search_path, class: "button-action" %>
+        <% end %>
+        <a href="javascript:" class="button-primary" onclick="window.print();">Print</a>
+      </div>
+  </div>
+
+
+  <div class="flex flex-col printable mt-8">
+    <div class="sorting-table-wrapper">
+      <div class="sorting-table-container" data-controller="clinic-activity-patients">
+        <table class="table">
+          <thead>
+          <tr>
+            <th><%= sort_link(@q, :last_name, 'Name', default_order: :desc) %></th>
+            <th><%= sort_link(@q, :date_of_birth, 'Date of Birth', default_order: :desc) %></th>
+            <th><%= sort_link(@q, :date_of_birth, 'Age', default_order: :desc) %></th>
+            <th><%= sort_link(@q, :sex, 'Gender', default_order: :desc) %></th>
+            <th>&nbsp;</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @patients.each do |patient| %>
+              <tr data-target="patients.searchableRow" data-search-content="<%= [patient.first_name.downcase, patient.last_name.downcase, patient.county, patient.date_of_birth.try(:strftime, "%m/%d/%y")].join(" ") %>" data-patient-id="<%= patient.id %>">
+                <td class="underline"><%= link_to patient.full_name, [@clinic, patient]  %></td>
+                <td><%= patient.date_of_birth.strftime("%m/%d/%y") if patient.date_of_birth %></td>
+                <td><%= ((Date.today.to_time - patient.date_of_birth.to_time) / 1.year.seconds).floor if patient.date_of_birth %></td>
+                <td><%= patient.sex == "F" ? "Female" : (patient.sex == "M" ? "Male" : "Other") %></td>
+                <td class="w-4/12 text-right table-action-buttons">
+                    <%= link_to "Enter Encounter", new_clinic_event_path(clinic_id: @clinic, patient_id: patient.id),
+                                class: "button-action" %>
+                    <%= link_to "Delete", "javascript:",
+                      data: {recordis: "patients", recordid: patient.id, recordname: patient.full_name,
+                          action: "click->clinic-activity-patients#showHideDeleteModal"}, class: "button-action" %>
+                </td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+        <%= render "clinics/activity/delete_record_modal" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="pagination-section">
+    <div class="pagination-container">
+      <div class="pagination-info">
+        <p><%# page_entries_info @patients %></p>
+      </div>
+      <div class="pagination-buttons">
+        <span class="lg-buttons"><%# will_paginate @patients %></span>
+        <span class="sm-buttons"><%# will_paginate @patients, page_links: false %></span>
+      </div>
+    </div>
+  </div>
+</div>

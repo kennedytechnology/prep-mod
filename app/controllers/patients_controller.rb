@@ -7,8 +7,8 @@ class PatientsController < ApplicationController
   layout "clinic_management"
 
   def index
-    @patients_waiting_list_count = @clinic.patients.on_waiting_list.count if @clinic
-    @patients_appointments_count = @clinic.patients.with_appointments.count if @clinic
+    @patients_waiting_list_count = @clinic.patients.on_waiting_list.count
+    @patients_appointments_count = @clinic.patients.with_appointments.count
 
     respond_to do |format|
       format.html
@@ -22,6 +22,11 @@ class PatientsController < ApplicationController
                 xlsx_author: current_user.name
       end
     end
+  end
+
+  def records_search
+    @q = Patient.ransack(params[:q])
+    @patients = @q.result.reverse.to_a.uniq
   end
 
   def anonymized_index
@@ -109,8 +114,7 @@ class PatientsController < ApplicationController
   private
 
   def patients_listing
-    @clinic = Clinic.includes(appointments: :patient).find(params[:clinic_id]) if params[:clinic_id]
-    @page_title = "Patient Record Search"
+    @clinic = Clinic.includes(appointments: :patient).find(params[:clinic_id])
     @q = Patient.ransack(params[:q])
 
     case 
@@ -120,10 +124,8 @@ class PatientsController < ApplicationController
     when params[:clinic_id]
       @page_title = "Registration List"
       @patients = @clinic.patients.with_appointments.order(params.dig(:q, :s)).paginate(page: params[:page], per_page: 250)
-    when @q.result
-      @patients = @q.result.page(params[:page]).to_a.uniq
     else
-      @patients = @clinic ? @clinic.patients.with_appointments.order(params.dig(:q, :s)) : Patient.with_appointments..order(params.dig(:q, :s))
+      @patients = @clinic.patients.with_appointments.order(params.dig(:q, :s))
     end
   end
 

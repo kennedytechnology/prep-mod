@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "Patients", type: :request do
   let(:user) { create(:user) }
   let(:appointment) { create(:appointment) }
+  let(:clinic) { create(:clinic) }
   let(:valid_attributes) { attributes_for(:patient) }
   let(:patient) { Patient.create! valid_attributes.merge(user_id: user.id) }
 
@@ -17,7 +18,14 @@ RSpec.describe "Patients", type: :request do
 
   describe "GET /index" do
     it "returns http success" do
-      get patients_path
+      get patients_path(clinic_id: clinic.id)
+      expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe "GET /index" do
+    it "returns http success" do
+      get patients_records_search_path
       expect(response).to have_http_status(:success)
     end
   end

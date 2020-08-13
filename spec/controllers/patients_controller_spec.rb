@@ -10,7 +10,14 @@ RSpec.describe PatientsController, type: :controller do
 
   describe "GET #index" do
     it "returns http success" do
-      get :index
+      get :index, params: { clinic_id: clinic.id }
+      expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe "GET #records_search" do
+    it "returns http success" do
+      get :records_search
       expect(response).to have_http_status(:success)
     end
   end
