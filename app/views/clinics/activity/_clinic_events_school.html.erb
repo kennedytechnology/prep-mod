@@ -43,13 +43,13 @@
                                     <td><%= patient.date_of_birth.try(:strftime, "%D") %></td>
                                     <td><%= event_form.radio_button :category, "Vaccinated", data: {action: "click->clinic-activity-patients#showModal", selection: "Vaccinated"}, class: "form-radio" %> </td>
                                     <td>
-                                        <%= event_form.check_box :is_refused, class: "form-checkbox", onclick: "Rails.fire(this.form, 'submit');" %>
+                                        <%= event_form.radio_button :category, "Refused", onclick: "Rails.fire(this.form, 'submit');", class: "form-radio" %>
                                     </td>
                                     <td>
-                                        <%= event_form.check_box :is_sick, class: "form-checkbox", onclick: "Rails.fire(this.form, 'submit');" %>
+                                        <%= event_form.radio_button :category, "Sick", onclick: "Rails.fire(this.form, 'submit');", class: "form-radio" %>
                                     </td>
                                     <td>
-                                        <%= event_form.check_box :is_absent, class: "form-checkbox", onclick: "Rails.fire(this.form, 'submit');" %>
+                                        <%= event_form.radio_button :category, "Absent", onclick: "Rails.fire(this.form, 'submit');", class: "form-radio" %>
                                     </td>
                                     <td>
                                         <div class="flex">

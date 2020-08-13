@@ -16,22 +16,37 @@ RELATIONSHIP_TYPES = ["Self", "Spouse", "Other"]
 
 CLINIC_APPOINTMENT_INTERVALS = [1, 2, 3, 5, 7, 10, 12, 15, 20, 30, 45, 60]
 
+# CLINIC_EVENTS = [
+#   { name: "Tested",
+#     outcomes: %w(Pending Positive Negative Normal Elevated FollowUp Needed PickedUp Refused)
+#   },
+#   { name: "No Show",
+#     outcomes: %w()
+#   },
+#   { name: "Cancelled",
+#     outcomes: %w()
+#   },
+#   { name: "Safety Kit",
+#     outcomes: %w()
+#   },
+#   { name: "Screened",
+#     outcomes: %w()
+#   },
+#   { name: "Vaccinated",
+#     outcomes: %w()
+#   },
+#   { name: "Refused",
+#     outcomes: %w()
+#   },
+#   { name: "Sick",
+#     outcomes: %w()
+#   },
+#   { name: "Absent",
+#     outcomes: %w()
+#   },
+#   ]
+
 CLINIC_EVENTS = [
-  { name: "Tested",
-    outcomes: %w(Pending Positive Negative Normal Elevated FollowUp Needed PickedUp Refused)
-  },
-  { name: "No Show",
-    outcomes: %w()
-  },
-  { name: "Cancelled",
-    outcomes: %w()
-  },
-  { name: "Safety Kit",
-    outcomes: %w()
-  },
-  { name: "Screened",
-    outcomes: %w()
-  },
   { name: "Vaccinated",
     outcomes: %w()
   },
@@ -45,6 +60,7 @@ CLINIC_EVENTS = [
     outcomes: %w()
   },
   ]
+
 
   PATIENT_OCCUPATIONS = [
     "Construction, Landscaping, Other Trades",
@@ -63,10 +79,10 @@ CLINIC_EVENTS = [
   ]
 
   if ENV['SCHOOL_VACCINATION_MODE']
-    VACCINE_ITEM_TYPES = ["Safety Kit", "Supplies", "Influenza", "Tdap", 
-      "MCV4", "HPV", "IPV", "Var", "MMR", "Hep B", "Hep A", "DTaP", "Hib", "Pnemococcal", "Zoster", "Other" ]
-  else
     VACCINE_ITEM_TYPES = ["Tdap", "DTaP", "Meningococcal Meningitis (MCV4)", "HPV", "Measles, Mumps, Rubella", "Varicella (chickenpox)", "Polio", "Hepatitis B", "MenB"]
+  else
+    VACCINE_ITEM_TYPES = ["Safety Kit", "Supplies", "Influenza", "Tdap", 
+      "MCV4", "HPV", "IPV", "Var", "MMR", "Hep B", "Hep A", "DTaP", "Hib", "Pnemococcal", "Zoster", "Other" ]  
   end
   TEST_ITEM_TYPES = ["Serological", "PCR"]
   INVENTORY_MANUFACTURERS = ["GlaxoSmithKline", "MedImmune", "Pfizer", "Sanofi Pasteur", "Seqiris"]

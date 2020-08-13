@@ -12,7 +12,7 @@ NAMED_PLACE_COUNT = 50
 CLINIC_COUNT = 20
 USER_COUNT = 100
 PATIENT_COUNT = CLINIC_COUNT * 20
-CLINIC_EVENTS_PER_PATIENT = 3
+CLINIC_EVENTS_PER_PATIENT = 0.3
 CLINIC_STAFF_PER_CLINIC = 3
 SUPPLY_INVENTORY_COUNT = 18
 INVENTORY_ITEMS_PER_CLINIC = 5
@@ -260,7 +260,7 @@ puts "Creating clinic staff..."
     clinic: Clinic.all.sample
   )
 end
-
+users = User.all.to_a
 puts "Creating patients..."
 clinics = Clinic.all
 PATIENT_COUNT.times.each do |i|
@@ -308,29 +308,67 @@ PATIENT_COUNT.times.each do |i|
       appointment_at: clinic.appointment_times.sample
     )
   end
+
+  if rand(2) == 0
+    clinic_event = CLINIC_EVENTS.sample
+    ce = ClinicEvent.create(
+      clinic: clinic,
+      patient: patient,
+      category: clinic_event[:name],
+      clinic_staff_id: clinic.clinic_personnel.sample,
+      outcome: clinic_event[:outcomes].sample,
+      event_date: Faker::Date.between(from: Date.today, to: 1.year.from_now),
+      created_at: Faker::Date.between(from: 30.days.ago, to:Date.today),
+      location: Faker::Address.street_address,
+      user: users.sample,
+      notes: Faker::Lorem.paragraph(sentence_count: 0, random_sentences_to_add: 2, supplemental: true)
+    )
+    
+    if ce.category == "Vaccinated"
+      (rand(2) + 2).times do
+        ce.vaccine_event_details.create!(
+          vaccine: VACCINE_ITEM_TYPES.sample,
+          route: %w(SubQ IM).sample,
+          site: %w(RA LA).sample,
+          reaction: %w(None Local Syncope Anaphylaxis).sample)
+      end
+    end
+  end
+
 end
 
-puts "Creating clinic events..."
-patients = Patient.all.to_a
-users = User.all.to_a
-clinics = Clinic.all.to_a
-(PATIENT_COUNT * CLINIC_EVENTS_PER_PATIENT).times.each do |i|
-  clinic_event = CLINIC_EVENTS.sample
-  clinic = clinics.sample
-  ClinicEvent.create(
-    clinic: clinic,
-    patient: patients.sample,
-    category: clinic_event[:name],
-    clinic_staff_id: clinic.clinic_personnel.sample,
-    outcome: clinic_event[:outcomes].sample,
-    event_date: Faker::Date.between(from: Date.today, to: 1.year.from_now),
-    created_at: Faker::Date.between(from: 30.days.ago, to:Date.today),
-    location: Faker::Address.street_address,
-    user: users.sample,
-    notes: Faker::Lorem.paragraph(sentence_count: 0, random_sentences_to_add: 2, supplemental: true)
-  )
+# puts "Creating clinic events..."
+# patients = Patient.all.to_a
+# users = User.all.to_a
+# clinics = Clinic.all.to_a
+# (PATIENT_COUNT * CLINIC_EVENTS_PER_PATIENT).to_i.times.each do |i|
+#   clinic_event = CLINIC_EVENTS.sample
+#   clinic = clinics.sample
+#   ce = ClinicEvent.create(
+#     clinic: clinic,
+#     patient: clinic.patients.where{|p| p.clinic_events.empty?}.to_a.sample,
+#     category: clinic_event[:name],
+#     clinic_staff_id: clinic.clinic_personnel.sample,
+#     outcome: clinic_event[:outcomes].sample,
+#     event_date: Faker::Date.between(from: Date.today, to: 1.year.from_now),
+#     created_at: Faker::Date.between(from: 30.days.ago, to:Date.today),
+#     location: Faker::Address.street_address,
+#     user: users.sample,
+#     notes: Faker::Lorem.paragraph(sentence_count: 0, random_sentences_to_add: 2, supplemental: true)
+#   )
+  
+#   if ce.category == "Vaccinated"
+#     (rand(2) + 2).times do
+#       ce.vaccine_event_details.create!(
+#         vaccine: VACCINE_ITEM_TYPES.sample,
+#         route: %w(SubQ IM).sample,
+#         site: %w(RA LA).sample,
+#         reaction: %w(None Local Syncope Anaphylaxis).sample)
+#     end
+#   end
 
-end
+
+# end
 SUPPLY_INVENTORY_COUNT.times do
   category = ["Test", "Vaccination", "Vaccination", "Vaccination"].sample
   sp = SupplyInventory.create!(
