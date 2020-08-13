@@ -67,7 +67,7 @@
 <h1 class="font-bold text-2xl">Vaccines for <%= p %> </h1>
 
 <div class="border-1 border-blue-500 p-4 mb-2">
-    
+
         <ol class="list-disc ml-8 mt-2">
             <% @clinic.supply_inventories.select{|si| si.information_sheet.attached? }.each do |supply_inventory| %>
                 <span><%= check_box(:one, :two, class: "mr-8") %><%= supply_inventory.item_name %> (<%= link_to "Vaccine Information", url_for(supply_inventory.information_sheet), class: "underline" %>)</span><br/>
@@ -151,4 +151,4 @@
     </div>
 </div>
 
-<%# hidden_field_tag :next_step, "appointment" %>
+<%= hidden_field_tag :next_step, "review" %>

@@ -89,8 +89,8 @@ class Public::PatientsController < ApplicationController
     return 'consent_for_services' if @step == 'add_family'
     return nil if @step == 'personal_information'
 
-    steps = %w(personal_information health_insurance health_questions consent_for_services appointment)
-    steps[steps.index(@step) - 1]
+    steps = %w(personal_information health_insurance health_questions consent_for_services review appointment)
+     steps[steps.index(@step) - 1]
   end
 
   def create_family_patients
@@ -165,7 +165,7 @@ class Public::PatientsController < ApplicationController
         :member_id_for_insurance, :patient_id,
         :has_fever_over, :has_difficult_breathing, :had_traveled_to_affected_place,
         :had_contact_with_confirmed_case, :has_risk_factor, :is_age_60_or_more, :has_other_reason,
-        :has_child_allergies, :has_child_serious_reaction_to_vaccine, :has_child_immune_system_problem, 
+        :has_child_allergies, :has_child_serious_reaction_to_vaccine, :has_child_immune_system_problem,
         :is_child_pregnant_or_possible_to_become, :has_child_been_vaccinated_last_four_weeks, :_destroy] )
   end
 

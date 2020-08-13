@@ -1,0 +1,30 @@
+<p class="font-bold mb-4"> Screening Checklist for Contraindications to Vaccines for Children and Teens </p>
+<div class="field-side-by-side">
+    <div>
+        <p> Does the child have allergies to medications, food, a vaccine component, or latex? </p>
+        <p class="font-bold"> <%= patient.has_child_allergies %> </p>
+    </div>
+    <div>
+        <p> Has the child had a serious reaction to a vaccine in the past? </p>
+        <p class="font-bold"> <%= patient.has_child_serious_reaction_to_vaccine %> </p>
+    </div>
+</div>
+
+<div class="field-side-by-side">
+    <div>
+        <p> Does the child have cancer, leukemia, HIV/AIDS, or any other immune system problem? </p>
+        <p class="font-bold"> <%= patient.has_child_immune_system_problem %> </p>
+    </div>
+    <div>
+        <p> Is the child/teen pregnant or is there a chance she could become pregnant during the next month? </p>
+        <p class="font-bold"> <%= patient.is_child_pregnant_or_possible_to_become %> </p>
+    </div>
+</div>
+
+<div class="field-side-by-side">
+    <div>
+        <p> Has the child received vaccinations in the past 4 weeks? </p>
+        <p class="font-bold"> <%= patient.has_child_been_vaccinated_last_four_weeks %> </p>
+    </div>
+    <div> </div>
+</div>

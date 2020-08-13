@@ -1,0 +1,47 @@
+<h2 class="text-xl font-bold mb-4"> Consent For Services </h2>
+<div class="field-side-by-side">
+    <div>
+        <p> Share Your COVID-19 Results With Your Provider, School, or Employer </p>
+        <p class="font-bold"> <%= @patient.sharing_results_authorized %> </p>
+    </div>
+    <div>
+        <p> With whom would you like to share your information? </p>
+        <p class="font-bold"> <%= @patient.employers.collect(&:company_name).join(", ") %> </p>
+    </div>
+</div>
+<% if school_mode? %>
+    <div class="field-side-by-side">
+       <div>
+            <p> Vaccines for: </p>
+            <p class="font-bold"> <%= @patient.first_name + " " + @patient.last_name %> </p>
+       </div>
+    </div>
+<% end %>
+<div class="field-side-by-side">
+    <div>
+        <p> Signatory First Name </p>
+        <p class="font-bold"> <%= @patient.signatory_first_name %> </p>
+    </div>
+    <div>
+       <p> Signatory Last Name </p>
+       <p class="font-bold"> <%= @patient.signatory_last_name %> </p>
+    </div>
+    <div>
+       <p> Date </p>
+       <p class="font-bold"> <%= @patient.consent_date %> </p>
+    </div>
+</div>
+<div class="field-side-by-side">
+    <div>
+        <p> Relationship to Patient </p>
+        <p class="font-bold"> <%= @patient.relation_to_patient_for_insurance %> </p>
+    </div>
+    <div>
+       <p> Signer First Name </p>
+       <p class="font-bold"> <%= @patient.signer_first_name %> </p>
+    </div>
+    <div>
+       <p> Signer Last Name </p>
+       <p class="font-bold"> <%= @patient.signer_last_name %> </p>
+    </div>
+</div>

@@ -54,6 +54,8 @@
         <%= t'views.public.patients.edit.buttons.save_add_another_household_member' %>
       </button>
       <button type="submit" name="next_step" value="consent_for_services" class="button-action"><%= t'views.public.patients.edit.buttons.save_continue' %></button>
+    <% elsif @step == "review" %>
+      <button type="submit" name="next_step" value="appointment" class="button-action"><%= t'views.public.patients.edit.buttons.save_continue' %></button>
     <% else %>
       <% if @step == "appointment" %>
         <%= link_to t('views.public.patients.edit.buttons.find_location'), '/clinic/search?service[]=Testing&next_step=appointment', class: "button-action" %>

@@ -24,4 +24,14 @@ module ApplicationHelper
     ENV['CLINIC_LOGO'] + "-logo.png"
   end
 
+  def humanize_boolean(boolean)
+    case boolean
+    when true
+      'Yes'
+    when false
+      'No'
+    else
+      boolean
+    end
+  end
 end

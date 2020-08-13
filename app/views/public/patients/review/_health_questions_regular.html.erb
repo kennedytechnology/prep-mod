@@ -1,0 +1,48 @@
+<p class="field-required mb-3"> <%= t 'views.public.patients.edit.health_questions.reminder' %> </p>
+<p class="font-bold mb-4"> <%= t 'views.public.patients.edit.health_questions.question' %> </p>
+<div class="field-side-by-side">
+    <div>
+        <p> <%= t 'views.public.patients.edit.health_questions.do_you_have' %></p>
+        <p class="font-bold"> <%= humanize_boolean(patient.has_fever_over) %> </p>
+        <br />
+
+        <p> <%= t('views.public.patients.edit.has_cough') %> </p>
+        <p class="font-bold"> <%= humanize_boolean(patient.has_cough) %> </p>
+        <br />
+
+        <p> <%= t('views.public.patients.edit.has_difficult_breathing') %> </p>
+        <p class="font-bold"> <%= humanize_boolean(patient.has_difficult_breathing) %> </p>
+    </div>
+    <div>
+        <p> <%= t 'views.public.patients.edit.health_questions.have_you_traveled' %></p>
+        <p class="font-bold"> <%= humanize_boolean(patient.had_traveled_to_affected_place) %> </p>
+
+    </div>
+</div>
+
+<div class="field-side-by-side">
+    <div>
+        <p> <%= t 'views.public.patients.edit.health_questions.close_contact' %></p>
+        <p class="font-bold"> <%= humanize_boolean(patient.had_contact_with_confirmed_case) %> </p>
+    </div>
+    <div>
+        <p> <%= t 'views.public.patients.edit.health_questions.diseases' %></p>
+        <p class="font-bold"> <%= humanize_boolean(patient.has_risk_factor) %> </p>
+    </div>
+</div>
+
+<div class="field-side-by-side">
+    <div>
+        <p> <%= t 'views.public.patients.edit.health_questions.age_question' %></p>
+        <p class="font-bold"> <%= humanize_boolean(patient.is_age_60_or_more) %> </p>
+    </div>
+    <div>
+        <p><%= t 'views.public.patients.edit.health_questions.age_question' %></p>
+        <p class="font-bold"> <%= humanize_boolean(patient.has_other_reason) %> </p>
+
+        <% if patient.has_other_reason == true %>
+            <p> <%= t('activerecord.models.patient.has_other_reason_explanation') %> </p>
+            <p class="font-bold"> <%= humanize_boolean(patient.has_other_reason_explanation) %> </p>
+        <% end %>
+    </div>
+</div>

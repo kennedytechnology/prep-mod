@@ -1,0 +1,55 @@
+<div>
+    <% @patient.patient_family_members.each do |family_member| %>
+        <p class="text-blue-600"> Family Member: <%= @patient.full_name %> </p>
+        <div class="field-fullwidth">
+            <div class="w-full flex">
+                <div class="flex-1 mr-2">
+                    <p> <%= t 'activerecord.models.patient.first_name' %> </p>
+                    <p class="font-bold"> <%= family_member.first_name %> </p>
+                </div>
+                <div class="flex-1 mr-2">
+                    <p> <%= t('activerecord.models.patient.middle_initial') %> </p>
+                    <p class="font-bold"> <%= family_member.middle_initial %> </p>
+                </div>
+                <div class="flex-1 mr-2">
+                    <p> <%= t 'activerecord.models.patient.last_name' %> </p>
+                    <p class="font-bold"> <%= family_member.last_name %> </p>
+                </div>
+                <div class="flex-1 mr-2">
+                    <p> <%= t 'activerecord.models.patient.mothers_maiden_name' %> </p>
+                    <p class="font-bold"> <%= family_member.mothers_maiden_name %> </p>
+                </div>
+                <div class="flex-1">
+                    <p> <%= t 'activerecord.models.patient.date_of_birth' %> </p>
+                    <p class="font-bold"> <%= family_member.date_of_birth %> </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="field-fullwidth">
+            <div class="w-full flex">
+                <div class="flex-1 mr-2">
+                    <p> <%= t('activerecord.models.patient.insurance_company_name') %> </p>
+                    <p class="font-bold"> <%= family_member.insurance_company_name %> </p>
+                </div>
+
+                <div class="flex-1 mr-2">
+                    <p> <%= t('activerecord.models.patient.member_id_for_insurance') %> </p>
+                    <p class="font-bold"> <%= family_member.member_id_for_insurance %> </p>
+                </div>
+
+                <div class="flex-1">
+                    <p> <%= t('activerecord.models.patient.group_number_for_insurance') %> </p>
+                    <p class="font-bold"> <%= family_member.group_number_for_insurance %> </p>
+                </div>
+            </div>
+        </div>
+
+        <% if school_mode? %>
+            <%= render partial: "public/patients/review/health_questions_school", locals: {patient: family_member} %>
+        <% else %>
+            <%= render partial: "public/patients/review/health_questions_regular", locals: {patient: family_member} %>
+        <% end %>
+
+    <% end %>
+</div>
