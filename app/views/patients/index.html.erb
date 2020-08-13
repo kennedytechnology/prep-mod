@@ -10,10 +10,10 @@
         </div>
         <div>
           <% if params[:display_waiting_list] == "true" %>
-                <%= link_to 'See Registration List', patients_path(clinic_id: @clinic.id), class: "button-action" %>
+                <%= link_to 'See Registration List', clinic_patients_path(clinic_id: @clinic.id), class: "button-action" %>
                 <%= link_to 'Upload records', new_patients_import_path, class: "button-action" %>
           <% else %>
-                <%= link_to 'See Waiting List', patients_path(clinic_id: @clinic.id, display_waiting_list: "true"), class: "button-action" %>
+                <%= link_to 'See Waiting List', clinic_patients_path(clinic_id: @clinic.id, display_waiting_list: "true"), class: "button-action" %>
                 <%= link_to 'Upload records', new_patients_import_path, class: "button-action" %>
           <% end %>
         </div>
@@ -25,7 +25,7 @@
         </div>
         <div class="flex items-end">
             <% if @patients_waiting_list_count %>
-                <%= link_to "Download Waiting List", patients_path(clinic_id: @clinic.id, format: :xlsx), class: "button-primary" %>
+                <%= link_to "Download Waiting List", clinic_patients_path(clinic_id: @clinic.id, format: :xlsx), class: "button-primary" %>
             <% else %>
                 <button type="button" diabled="disabled" class="button-disabled" title="Waiting List is empty"> Download Waiting List </button>
             <% end %>
