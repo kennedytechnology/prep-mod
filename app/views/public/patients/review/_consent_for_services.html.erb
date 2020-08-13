@@ -1,19 +1,22 @@
 <h2 class="text-xl font-bold mb-4"> Consent For Services </h2>
-<div class="field-side-by-side">
-    <div>
-        <p> Share Your COVID-19 Results With Your Provider, School, or Employer </p>
-        <p class="font-bold"> <%= @patient.sharing_results_authorized %> </p>
-    </div>
-    <div>
-        <p> With whom would you like to share your information? </p>
-        <p class="font-bold"> <%= @patient.employers.collect(&:company_name).join(", ") %> </p>
-    </div>
-</div>
 <% if school_mode? %>
     <div class="field-side-by-side">
        <div>
-            <p> Vaccines for: </p>
+            <p class="text-xl font-bold"> Vaccines for: </p>
             <p class="font-bold"> <%= @patient.first_name + " " + @patient.last_name %> </p>
+            <ul class="list-disc pl-12">
+                <% @patient.vaccine_offerings.each do |vo| %>
+                    <li><%= vo.name %></li>
+                <% end %>
+            </ul>
+            <% @patient.patient_family_members.each do |fm| %>
+                <p class="font-bold"> <%= fm.first_name + " " + fm.last_name %> </p>
+                <ul class="list-disc pl-12">
+                    <% fm.vaccine_offerings.each do |vo| %>
+                        <li><%= vo.name %></li>
+                    <% end %>
+                </ul>
+            <% end %>
        </div>
     </div>
 <% end %>
