@@ -90,7 +90,7 @@ class Public::PatientsController < ApplicationController
     return nil if @step == 'personal_information'
 
     steps = %w(personal_information health_insurance health_questions consent_for_services review appointment)
-     steps[steps.index(@step) - 1]
+    steps[steps.index(@step) - 1]
   end
 
   def create_family_patients

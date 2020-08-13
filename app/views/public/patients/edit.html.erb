@@ -38,9 +38,8 @@
 
   <div class="md:flex justify-center items-center mt-6">
     <% if last_step %>
-      <button type="submit" name="next_step" value="<%= last_step %>" class="button-action mb-4 md:mb-0">
-        <%= t'views.public.patients.edit.buttons.back' %>
-      </button>
+      <% @step == 'add_family' || @step == 'consent_for_services' ? this_step = "health_questions" : this_step = last_step%>
+      <%= link_to "#{t'views.public.patients.edit.buttons.back'}", client_registration_path(clinic_id: @clinic.id, next_step: this_step), class: "button-action mb-4 md:mb-0" %>
     <% end %>
     <% if @step == "health_questions" %>
       <button type="submit" name="next_step" value="add_family" class="button-action mb-4 md:mb-0">
