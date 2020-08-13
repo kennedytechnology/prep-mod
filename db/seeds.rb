@@ -457,6 +457,13 @@ ProviderDenialMessage.create!(
   body: "Your request to Become a COVID-19 Service Provider has been denied. Please for further details contact us here: (xxx) xxx-xxx."
 )
 
+SCHOOL_VACCINES.each do |k,v|
+  VaccineOffering.create!(
+    name: v,
+    short_name: k
+  )
+end
+
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
 
 puts 'Done.'

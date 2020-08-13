@@ -16,6 +16,21 @@ RELATIONSHIP_TYPES = ["Self", "Spouse", "Other"]
 
 CLINIC_APPOINTMENT_INTERVALS = [1, 2, 3, 5, 7, 10, 12, 15, 20, 30, 45, 60]
 
+SCHOOL_VACCINES = {
+  'tdap': "Tdap",
+  'dtap': "DTaP",
+  'mcv4': "Meningococcal Meningitis (MCV4)",
+  'hpv': "HPV",
+  'mmr': "Measles, Mumps, Rubella",
+  'varicella': "Varicella (Chickenpox)",
+  'polio': "Polio",
+  'hepb': "Hepatitis B",
+  'menb': "MenB",
+  'td': "Td",
+  'hib': "HIB",
+  'prevnar': 'Prevnar'
+}
+
 # CLINIC_EVENTS = [
 #   { name: "Tested",
 #     outcomes: %w(Pending Positive Negative Normal Elevated FollowUp Needed PickedUp Refused)

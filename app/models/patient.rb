@@ -9,6 +9,7 @@ class Patient < ApplicationRecord
   has_one_attached :insurance_card_back
   belongs_to :user, optional: true
   belongs_to :venue, optional: true
+  has_and_belongs_to_many :vaccine_offerings
 
   accepts_nested_attributes_for :patient_family_members, allow_destroy: true, reject_if: :all_blank
 

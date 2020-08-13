@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_13_093147) do
+ActiveRecord::Schema.define(version: 2020_08_13_144656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -367,6 +367,11 @@ ActiveRecord::Schema.define(version: 2020_08_13_093147) do
     t.text "has_other_reason_explanation"
   end
 
+  create_table "patient_family_members_vaccine_offerings", id: false, force: :cascade do |t|
+    t.bigint "vaccine_offering_id", null: false
+    t.bigint "patient_family_member_id", null: false
+  end
+
   create_table "patients", force: :cascade do |t|
     t.integer "student_id"
     t.string "vaccination_status"
@@ -440,6 +445,11 @@ ActiveRecord::Schema.define(version: 2020_08_13_093147) do
     t.string "signer_first_name"
     t.string "signer_last_name"
     t.index ["venue_id"], name: "index_patients_on_venue_id"
+  end
+
+  create_table "patients_vaccine_offerings", id: false, force: :cascade do |t|
+    t.bigint "vaccine_offering_id", null: false
+    t.bigint "patient_id", null: false
   end
 
   create_table "provider_denial_messages", force: :cascade do |t|
@@ -643,6 +653,13 @@ ActiveRecord::Schema.define(version: 2020_08_13_093147) do
     t.string "site"
     t.string "reaction"
     t.integer "clinic_event_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "vaccine_offerings", force: :cascade do |t|
+    t.string "name"
+    t.string "short_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

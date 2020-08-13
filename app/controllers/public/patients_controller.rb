@@ -158,15 +158,15 @@ class Public::PatientsController < ApplicationController
       :grade, :homeroom_teacher, :has_child_allergies, :has_child_serious_reaction_to_vaccine, :has_child_immune_system_problem,
       :is_child_pregnant_or_possible_to_become, :has_child_been_vaccinated_last_four_weeks,
       :venue_id, :signer_first_name, :signer_last_name,
-      employer_ids: [],
+      employer_ids: [], vaccine_offering_ids: [],
       patient_family_members_attributes: [:id, :first_name, :middle_initial,
         :last_name, :mothers_maiden_name, :race, :date_of_birth,
         :insurance_company_name, :group_number_for_insurance,
         :member_id_for_insurance, :patient_id,
         :has_fever_over, :has_difficult_breathing, :had_traveled_to_affected_place,
         :had_contact_with_confirmed_case, :has_risk_factor, :is_age_60_or_more, :has_other_reason,
-        :has_child_allergies, :has_child_serious_reaction_to_vaccine, :has_child_immune_system_problem,
-        :is_child_pregnant_or_possible_to_become, :has_child_been_vaccinated_last_four_weeks, :_destroy] )
+        :has_child_allergies, :has_child_serious_reaction_to_vaccine, :has_child_immune_system_problem, 
+        :is_child_pregnant_or_possible_to_become, :has_child_been_vaccinated_last_four_weeks, :_destroy, vaccine_offering_ids: [],] )
   end
 
   def appointment_params
