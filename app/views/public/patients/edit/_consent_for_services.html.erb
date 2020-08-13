@@ -136,14 +136,14 @@
         </div>
         <div class="w-full md:w-4/12 mr-2">
             <%= f.label :signer_first_name, class: "block" do %>
-                <span> Signer First Name  </span>
+                <span> <%= t 'views.public.patients.edit.consent_for_services.signer.first_name' %> </span>
                 <span class="field-required">*</span>
             <% end %>
             <%= f.text_field :signer_first_name, class: "form-input w-full", required: true %>
         </div>
         <div class="w-full md:w-4/12 mr-2">
             <%= f.label :signer_last_name, class: "block" do %>
-                <span> Signer Last Name  </span>
+                <span> <%= t 'views.public.patients.edit.consent_for_services.signer.last_name' %>  </span>
                 <span class="field-required">*</span>
             <% end %>
             <%= f.text_field :signer_last_name, class: "form-input w-full", required: true %>
