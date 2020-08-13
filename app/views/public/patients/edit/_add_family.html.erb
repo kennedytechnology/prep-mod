@@ -86,13 +86,12 @@
             <%= fm.text_field :group_number_for_insurance, class: "w-full form-input", data: {parent_field: @patient.group_number_for_insurance, target: "same-as-parent.field" } %>
           </div>
         </div>
+
+        <% if school_mode? %>
+            <%= render partial: "public/patients/edit/health_questions_school", locals: {f:fm} %>
+        <% else %>
+            <%= render partial: "public/patients/edit/health_questions_regular", locals: {f:fm} %>
+        <% end %>
       </div>
-
-    <% if school_mode? %>
-        <%= render partial: "public/patients/edit/health_questions_school", locals: {f:fm} %>
-    <% else %>
-        <%= render partial: "public/patients/edit/health_questions_regular", locals: {f:fm} %>
-    <% end %>
-
   <% end %>
 </div>
