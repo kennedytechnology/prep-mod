@@ -88,28 +88,30 @@
             <%= f.select :sex, [["Male", "M"], ["Female", "F"], ["Other", "O"]], {include_blank: true}, {class: "form-select w-full", required: true} %>
         </div>
     </div>
-
-    <div class="flex" data-controller="email-confirmation">
-        <div class="flex-1 flex mr-2">
-            <div class="w-1/2 mr-1">
-                <%= f.label :email do %>
-                    Email Address <span class="field-required">*</span>
-                <% end %>
-                <%= f.email_field :email, class: "w-full form-input block", required: true,
-                    data: {
-                        action: "keyup->email-confirmation#emailConfirmation
-                                change->email-confirmation#emailConfirmation",
-                        target: "email-confirmation.emailField"}%>
-            </div>
-            <div class="w-1/2 mr-1">
-                <label> Retype Email Address <span class="field-required">*</span> </label>
-                <input type="email" class="form-input w-full" value="<%= @patient.email %>" required="required"
-                    data-action="keyup->email-confirmation#emailConfirmation change->email-confirmation#emailConfirmation"
-                    data-target="email-confirmation.confirmEmailField" />
-                <p class="text-red-600 -mt-2" data-target="email-confirmation.confirmEmailError"> </p>
+    <% unless school_mode? %>
+        <div class="flex" data-controller="email-confirmation">
+            <div class="flex-1 flex mr-2">
+                <div class="w-1/2 mr-1">
+                    <%= f.label :email do %>
+                        Email Address <span class="field-required">*</span>
+                    <% end %>
+                    <%= f.email_field :email, class: "w-full form-input block", required: true,
+                        data: {
+                            action: "keyup->email-confirmation#emailConfirmation
+                                    change->email-confirmation#emailConfirmation",
+                            target: "email-confirmation.emailField"}%>
+                </div>
+                <div class="w-1/2 mr-1">
+                    <label> Retype Email Address <span class="field-required">*</span> </label>
+                    <input type="email" class="form-input w-full" value="<%= @patient.email %>" required="required"
+                        data-action="keyup->email-confirmation#emailConfirmation change->email-confirmation#emailConfirmation"
+                        data-target="email-confirmation.confirmEmailField" />
+                    <p class="text-red-600 -mt-2" data-target="email-confirmation.confirmEmailError"> </p>
+                </div>
             </div>
         </div>
-    </div>
+    <% end %>
+
 </div>
 
 <% if school_mode? %>
@@ -144,7 +146,7 @@
 
     <div class="w-1/2 mr-3 ml-3">
     <%= f.label :guardian_email do %>
-        Email Address <span class="field-required">*</span>
+        Parent/Guardian Email Address <span class="field-required">*</span>
     <% end %>
     <%= f.email_field :guardian_email, class: "w-full form-input block", required: true,
         data: {
@@ -154,7 +156,7 @@
     </div>
 
     <div class="w-1/2 mr-1">
-        <label> Retype Email Address <span class="field-required">*</span> </label>
+        <label> Retype Parent/Guardian Email Address <span class="field-required">*</span> </label>
         <input type="email" class="form-input w-full" value="<%= @patient.guardian_email %>" required="required"
             data-action="keyup->email-confirmation#emailConfirmation change->email-confirmation#emailConfirmation"
             data-target="email-confirmation.confirmEmailField" />

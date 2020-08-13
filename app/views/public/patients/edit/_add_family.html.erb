@@ -44,13 +44,7 @@
               <% end %>
               <%= fm.text_field :mothers_maiden_name, class: "w-full form-input", required: true %>
           </div>
-          <div class="inline-field-wrapper">
-            <%= fm.label :race do %>
-                <span> <%= t 'activerecord.models.patient.race' %> </span>
-                <span class="field-required">*</span>
-            <% end %>
-            <%= fm.select :race, options_for_select(US_RACES, @patient.race), {prompt: "--"}, {class: "form-select w-full", required: true} %>
-          </div>
+          
           <div class="inline-field-wrapper">
             <%= fm.label :date_of_birth do %>
                 <span> <%= t 'activerecord.models.patient.date_of_birth' %> </span>

@@ -7,7 +7,7 @@
 <%= form_for(@patient, url: "/client/registration", remote: false, data: {controller: "inventory-new-entry"}) do |f| %>
   <div class="min-w-full mb-12 hidden md:block">
     <ul class="multistep-form-progressbar">
-      <% %w(personal_information health_insurance health_questions consent_for_services add_family appointment).each do |step| %>
+      <% %w(personal_information health_insurance health_questions add_family consent_for_services review appointment).each do |step| %>
         <li class="<%= 'active' if step == @step %>"> <%= step.humanize.titleize %> </li>
       <% end %>
     </ul>
@@ -15,7 +15,7 @@
 
   <div class="min-w-full mb-12 block md:hidden">
     <ul class="multistep-form-progressbar">
-      <% %w(personal_information health_insurance health_questions consent_for_services add_family appointment).each do |step| %>
+      <% %w(personal_information health_insurance health_questions add_family consent_for_services review appointment).each do |step| %>
         <li class="<%= 'active' if step == @step %>"> <%= step.humanize.titleize if step == @step %> </li>
       <% end %>
     </ul>
@@ -42,18 +42,18 @@
         <%= t'views.public.patients.edit.buttons.back' %>
       </button>
     <% end %>
-    <% if @step == "consent_for_services" %>
+    <% if @step == "health_questions" %>
       <button type="submit" name="next_step" value="add_family" class="button-action mb-4 md:mb-0">
         <%= t'views.public.patients.edit.buttons.save_add_household_member' %>
       </button>
-      <button type="submit" name="next_step" value="appointment" class="button-action mb-4 md:mb-0">
-        <%= t'views.public.patients.edit.buttons.review_submit' %>
+      <button type="submit" name="next_step" value="consent_for_services" class="button-action mb-4 md:mb-0">
+        Continue
       </button>
     <% elsif @step == "add_family" %>
       <button type="submit" name="next_step" value="add_another_family" class="button-action mb-4 md:mb-0">
         <%= t'views.public.patients.edit.buttons.save_add_another_household_member' %>
       </button>
-      <button type="submit" name="next_step" value="appointment" class="button-action"><%= t'views.public.patients.edit.buttons.save_continue' %></button>
+      <button type="submit" name="next_step" value="consent_for_services" class="button-action"><%= t'views.public.patients.edit.buttons.save_continue' %></button>
     <% else %>
       <% if @step == "appointment" %>
         <%= link_to t('views.public.patients.edit.buttons.find_location'), '/clinic/search?service[]=Testing&next_step=appointment', class: "button-action" %>

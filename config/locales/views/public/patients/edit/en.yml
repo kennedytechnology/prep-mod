@@ -3,7 +3,7 @@ en:
     public:
       patients:
         edit:
-          title: "Register for COVID-19 Testing:"
+          title: "Register for Vaccination:"
           buttons:
             back: "Back"
             save_add_household_member: "Save and Add a Household Member"
@@ -44,7 +44,7 @@ en:
               info_sheet: "• Information Sheet:"
             signature:
               title: "Please sign here with your finger or mouse"
-              with_name: "Sign My Name"
+              with_name: "Type My Full Name"
             relation_to_patient_for_insurance_options:
               - "Self"
               - "Parent/Guardian"

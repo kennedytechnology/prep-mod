@@ -85,7 +85,7 @@ class Public::PatientsController < ApplicationController
   end
 
   def last_step
-    return "add_family" if @step == "appointment" && @patient.patient_family_members.any?
+    return "add_family" if @step == "consent_for_services" && @patient.patient_family_members.any?
     return 'consent_for_services' if @step == 'add_family'
     return nil if @step == 'personal_information'
 

@@ -1,35 +1,42 @@
-<h2 class="main-title"><%= t 'views.public.clinics.index.search.title' %></h2>
+<% if school_mode? %>
+    <h2 class="main-title">Find a Vaccination Clinic</h2>
+<% else %>
+    <h2 class="main-title"><%= t 'views.public.clinics.index.search.title' %></h2>
+<% end %>
 
 <form action="/clinic/search" method="post">
     <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-    <div class="field-side-by-side">
-        <div>
-            <h2 class="title"> <%= t 'views.public.clinics.index.search.services' %> <span class="field-required">*</span> </h2>
-            <div class="checkboxes-container">
-                <% ClinicService.where(category: "clinics").each do |service| %>
-                <div>
-                    <label>
-                        <%= check_box_tag "service[]", service.name, params[:service].to_a.include?(service.name), class: "form-checkbox" %>
-                        <%= service.name %>
-                    </label>
+
+    <% unless school_mode? %>
+        <div class="field-side-by-side">
+            <div>
+                <h2 class="title"> <%= t 'views.public.clinics.index.search.services' %> <span class="field-required">*</span> </h2>
+                <div class="checkboxes-container">
+                    <% ClinicService.where(category: "clinics").each do |service| %>
+                    <div>
+                        <label>
+                            <%= check_box_tag "service[]", service.name, params[:service].to_a.include?(service.name), class: "form-checkbox" %>
+                            <%= service.name %>
+                        </label>
+                    </div>
+                    <% end %>
                 </div>
-                <% end %>
+            </div>
+            <div>
+                <h2 class="title"> <%= t 'views.public.clinics.index.search.age_groups' %> <span class="field-required">*</span> </h2>
+                <div class="checkboxes-container">
+                    <% ClinicAgeGroup.all.each do |age_group| %>
+                    <div>
+                        <label>
+                            <%= check_box_tag "age_group[]", age_group.name, params[:age_group].to_a.include?(age_group.name), class: "form-checkbox" %>
+                            <%= age_group.name %>
+                        </label>
+                    </div>
+                    <% end %>
+                </div>
             </div>
         </div>
-        <div>
-            <h2 class="title"> <%= t 'views.public.clinics.index.search.age_groups' %> <span class="field-required">*</span> </h2>
-            <div class="checkboxes-container">
-                <% ClinicAgeGroup.all.each do |age_group| %>
-                <div>
-                    <label>
-                        <%= check_box_tag "age_group[]", age_group.name, params[:age_group].to_a.include?(age_group.name), class: "form-checkbox" %>
-                        <%= age_group.name %>
-                    </label>
-                </div>
-                <% end %>
-            </div>
-        </div>
-    </div>
+    <% end %>
 
     <div class="flex">
         <div class="w-4/12 mr-4">
@@ -63,7 +70,7 @@
             <div class="flex">
                 <div class="flex-1 text-gray-800 text-sm">
                     <h1 class="title"><%= clinic.name %></h1>
-                    <h4><%= clinic.address %></h4>
+                    <h4><%= clinic.address %>, <%= clinic.city %> <%= clinic.state %>, <%= clinic.zip %> </h4>
                     <p><strong><%= t 'views.public.clinics.index.search.clinic_name.services_available' %></strong> <%= clinic.services.collect(&:name).join(", ") %></p>
                     <p><strong><%= t 'views.public.clinics.index.search.clinic_name.age_groups' %></strong> <%= clinic.age_groups.collect(&:name).join(", ") %></p>
                     <% if clinic.services.include?(ClinicService.find_by_name("Testing")) && (session[:patient_id] || clinic.public?) %>

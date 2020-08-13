@@ -42,7 +42,7 @@
         <%= f.label :insured_date_of_birth, t('activerecord.models.patient.insured_date_of_birth'), class: "block" %>
         <%#= f.text_field :insured_date_of_birth, value: @patient.insured_date_of_birth.try(:strftime, "%Y/%m/%d"), class: "w-full form-input",
                             data: { controller: "flatpickr", flatpickr_max_date: "today" } %>
-        <%= cw_date_field(f, :insured_date_of_birth, {class: "form-input w-full", value: @patient.insured_date_of_birth.try(:strftime, "%Y/%m/%d"), required: true},
+        <%= cw_date_field(f, :insured_date_of_birth, {class: "form-input w-full", value: @patient.insured_date_of_birth.try(:strftime, "%Y/%m/%d"), required: false},
                     {'data-controller' => 'flatpickr',
                     'data-flatpickr-max-date' => Time.zone.now
                     }

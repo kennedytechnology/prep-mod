@@ -1,3 +1,4 @@
+<% unless school_mode? %>
 <div class="border-2 border-green-500 bg-green-100 p-4 mb-8">
     <h2 class="text-lg mb-1 font-bold"> <%= t 'views.public.patients.edit.consent_for_services.share_results.title' %> </h2>
     <p class="mb-2 ml-2">
@@ -57,16 +58,24 @@
         </ol>
     </div>
 </div>
+<% end %>
 
-<div class="border-2 border-blue-500 bg-blue-100 p-4 mb-2">
-    <p class="font-bold"> <%= t 'views.public.patients.edit.consent_for_services.information_offered_service.title' %> </p>
+<% if school_mode? %>
+    <h2 class="text-3xl mb-1 font-bold"> Please select the desired vaccine for each patient </h2>
+<% end %>
+<% ([f.object.full_name] + f.object.patient_family_members.collect{|fm| fm.full_name}).each do |p| %>
+<h1 class="font-bold text-2xl">Vaccines for <%= p %> </h1>
 
+<div class="border-1 border-blue-500 p-4 mb-2">
+    
         <ol class="list-disc ml-8 mt-2">
             <% @clinic.supply_inventories.select{|si| si.information_sheet.attached? }.each do |supply_inventory| %>
-                <li><%= link_to t('views.public.patients.edit.consent_for_services.information_offered_service.title'), url_for(supply_inventory.information_sheet), class: "underline" %> • Information Sheet: <%= supply_inventory.name %>
+                <span><%= check_box(:one, :two, class: "mr-8") %><%= supply_inventory.item_name %> (<%= link_to "Vaccine Information", url_for(supply_inventory.information_sheet), class: "underline" %>)</span><br/>
             <% end %>
         </ol>
 </div>
+
+<% end %>
 
 <div class="md:flex w-full mb-5" data-controller="consent-form-signature">
     <div class="w-full md:w-10/12 lg:w-10/12">
