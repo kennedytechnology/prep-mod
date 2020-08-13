@@ -126,12 +126,28 @@
 </script>
 
 <div class="field-fullwidth">
-    <div class="w-full md:w-3/12">
-        <%= f.label :relation_to_patient_for_insurance, class: "block" do %>
-            <span> <%= t('activerecord.models.patient.relation_to_patient_for_insurance') %> </span>
-            <span class="field-required">*</span>
-        <% end %>
-        <%= f.select :relation_to_patient_for_insurance, t('views.public.patients.edit.consent_for_services.relation_to_patient_for_insurance_options'), {}, {class: "form-select w-full"} %>
+    <div class="flex flex-col md:flex-row">
+        <div class="w-full md:w-4/12 mr-2">
+            <%= f.label :relation_to_patient_for_insurance, class: "block" do %>
+                <span> <%= t('activerecord.models.patient.relation_to_patient_for_insurance') %> </span>
+                <span class="field-required">*</span>
+            <% end %>
+            <%= f.select :relation_to_patient_for_insurance, t('views.public.patients.edit.consent_for_services.relation_to_patient_for_insurance_options'), {}, {class: "form-select w-full"} %>
+        </div>
+        <div class="w-full md:w-4/12 mr-2">
+            <%= f.label :signer_first_name, class: "block" do %>
+                <span> Signer First Name  </span>
+                <span class="field-required">*</span>
+            <% end %>
+            <%= f.text_field :signer_first_name, class: "form-input w-full", required: true %>
+        </div>
+        <div class="w-full md:w-4/12 mr-2">
+            <%= f.label :signer_last_name, class: "block" do %>
+                <span> Signer First Name  </span>
+                <span class="field-required">*</span>
+            <% end %>
+            <%= f.text_field :signer_last_name, class: "form-input w-full", required: true %>
+        </div>
     </div>
 </div>
 
