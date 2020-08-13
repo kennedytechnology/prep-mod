@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_13_144656) do
+ActiveRecord::Schema.define(version: 2020_08_13_170557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -308,6 +308,14 @@ ActiveRecord::Schema.define(version: 2020_08_13_144656) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "inventory_allocations", force: :cascade do |t|
+    t.integer "clinic_id"
+    t.integer "supply_inventory_id"
+    t.integer "allocated_count"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "messages", force: :cascade do |t|
     t.string "subject"
     t.text "body"
@@ -562,6 +570,7 @@ ActiveRecord::Schema.define(version: 2020_08_13_144656) do
     t.string "venue_name"
     t.bigint "user_id"
     t.string "category"
+    t.integer "number_of_items"
     t.index ["user_id"], name: "index_supply_inventories_on_user_id"
   end
 

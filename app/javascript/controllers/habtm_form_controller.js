@@ -11,11 +11,13 @@ export default class extends Controller {
     var selectedNewItemId = this.newItemIdTarget.value
     var visibleDetails = this.newItemDetailsTargets.filter(function(el){return el.dataset["id"] == selectedNewItemId})
     var visibleDetailRows = this.detailRowTargets.filter(function(el){return document.getElementById("clinic_supply_inventory_ids_" + el.dataset["id"]).checked})
-    
+
+
     this.newItemDetailsTargets.forEach(function(el){ el.classList.add("hidden") })
     this.detailRowTargets.forEach(function(el){ el.classList.add("hidden") })
     visibleDetails.forEach(function(el){ el.classList.remove("hidden") })
     visibleDetailRows.forEach(function(el){ el.classList.remove("hidden") })
+
   }
 
   addItem(){

@@ -1,21 +1,21 @@
 <div class="field-fullwidth mt-8" data-controller="habtm-form">
     <h1 class="title"> Clinic Inventory </h1>
-    <div class="flex mb-8 mt-8">
+    <div class="flex items-center justify-between mb-8 mt-8">
         <div class="w-2/12">
-            <%= select_tag(:new_clinic_supply_inventory, options_for_select(SupplyInventory.all.sort_by{|si| si.category.to_s}.collect{|si| [si.name, si.id]}), data: {target: "habtm-form.newItemId", action: "habtm-form#updateDetails"}, class: "form-select w-full") %>
+            <%= select_tag(:new_clinic_supply_inventory, options_for_select(SupplyInventory.all.sort_by{|si| si.category.to_s}.collect{|si| [si.name, si.id]}), data: {target: "habtm-form.newItemId", action: "habtm-form#updateDetails"}, class: "form-select w-full", style:"margin-bottom: 0;") %>
         </div>
-        <div class="w-8/12 pl-4 pt-3" id="new_supply_inventory_details">
+        <div class="" id="new_supply_inventory_details">
             <% SupplyInventory.all.each do |supply_inventory| %>
                 <div class="hidden" data-id="<%= supply_inventory.id %>" data-target="habtm-form.newItemDetails">
-                    
+
                     <strong>Lot #: </strong> <%= supply_inventory.lot_number %> •
                     <strong>Type: </strong> <%= supply_inventory.item_type %> •
                     <strong>Exp. Date: </strong> <%= supply_inventory.expiration_date %> •
-                    <strong>Qty: </strong><%= supply_inventory.quantity %>
+                    
                 </div>
             <% end %>
         </div>
-        <div class="w-1/12">
+        <div class="">
             <span class="button-action" data-action="click->habtm-form#addItem">Add Item</span>
         </div>
     </div>
@@ -38,16 +38,17 @@
                 <td><%= supply_inventory.lot_number %></td>
                 <td><%= supply_inventory.item_type %></td>
                 <td><%= supply_inventory.expiration_date %></td>
-                <td><%= supply_inventory.remaining_quantity_sum %></td>
+                    
+                 <td class="habtm-form.allocationCount"><input name="supply_inventory_allocation[<%= supply_inventory.id %>]" type="text" value="<%= @clinic.inventory_allocations.where(supply_inventory_id: supply_inventory.id).first.try(:allocated_count) %>"></td> 
+
                 <td>
                     <a class="button-action" data-action="habtm-form#removeItem" data-id="<%= supply_inventory.id %>">Remove</a>
                 </td>
             </tr>
         <% end %>
-        <% %>
 
     </table>
     <div class="hidden">
-    <%= f.collection_check_boxes(:supply_inventory_ids, SupplyInventory.all, :id, :name) %>
+     <%= f.collection_check_boxes(:supply_inventory_ids, SupplyInventory.all, :id, :name) %>
     </div>
 </div>

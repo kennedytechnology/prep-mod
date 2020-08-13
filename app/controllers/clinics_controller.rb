@@ -39,6 +39,8 @@ class ClinicsController < ClinicManagementController
         @clinic_dup = Clinic.new(clinic_params)
         @clinic_dup.clinic_date = Chronic.parse(clinic_date)
         @clinic_dup.save
+        @clinic = @clinic_dup
+        update_inventory_allocations
         ClinicMailer.public_clinic_created(current_user, @clinic_dup).deliver
       end
       redirect_to clinics_path(clinic_date: 'upcoming'), notice: "Successfully created clinic!"
@@ -100,8 +102,10 @@ class ClinicsController < ClinicManagementController
     @page_title = "View/Edit clinic"
     @errors = []
     @clinic.default_test_kit = clinic_params['default_test_kit'] if clinic_params['default_test_kit']
-
+    
     if @clinic.update(clinic_params)
+      
+      update_inventory_allocations
       finish_patients_in_queue
       redirect_back fallback_location: clinics_path(clinic_date: 'upcoming')
     else
@@ -121,6 +125,12 @@ class ClinicsController < ClinicManagementController
   end
 
   private
+
+  def update_inventory_allocations
+    params["supply_inventory_allocation"].permit!.to_h.each do |k,v|
+      @clinic.inventory_allocations.where(supply_inventory_id: k).update(allocated_count: v)
+    end
+  end
 
   def finish_patients_in_queue
     return unless clinic_params[:clinic_events_attributes]

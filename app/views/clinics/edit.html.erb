@@ -279,45 +279,8 @@
 
         <%= render partial: 'supply_inventories', locals: {f: f} %>
 
-<!--
-        <div class="field-fullwidth">
-            <h1 class="title"> Test Kits </h1>
-            <div class="flex justify-end mb-4">
-                <%= link_to_add_test_kit('Add More Test Kits', f, :test_kits, class: 'button-primary') %>
-            </div>
-            <div class="flex flex-col">
-                <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-                    <div class="align-middle inline-block min-w-full overflow-scroll border-b border-gray-200">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th> Test Name </th>
-                                    <th> Manufacturer </th>
-                                    <th> Lot Number </th>
-                                    <th> Type </th>
-                                    <th> Processing </th>
-                                    <th> Expiration Date </th>
-                                    <th> # of Test Kits </th>
-                                    <th> Action </th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white" id="testKits">
-                                <% @clinic.test_kits.each do |test_kit| %>
-                                    <%= f.fields_for :test_kits, test_kit do |test_kit_fields| %>
-                                        <%= render 'clinics/test_kit', f: test_kit_fields %>
-                                    <% end %>
-                                <% end %>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
--->
-        <%= hidden_field_tag "reviewed", false, id: "reviewed_form_hidden_tag" %>
-
         <div class="flex justify-end mt-8">
-            <%# submit_tag 'Preview & Submit', name: 'preview_button', class: "button-primary", data: {action: "click->review-form#onDisableFormPage click->review-form#openModal", target: "review-form.submitButton"} %>
+            
             <%= f.submit "Update", class: "button-primary" %>
             <%= link_to "Cancel", clinics_path, class: "button-primary" %>
         </div>

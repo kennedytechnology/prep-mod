@@ -19,6 +19,15 @@ class SupplyInventoriesController < InheritedResources::Base
     end
   end
 
+  def update
+    @supply_inventory = SupplyInventory.find(params[:id])
+
+    if @supply_inventory.update_attributes(supply_inventory_params)
+    else
+      redirect_back fallback_location: supply_inventories_path, alert: "Error! #{@supply_inventory.errors.full_messages.join(", ")}"
+    end
+  end
+
   def show
     @supply_inventory = SupplyInventory.find(params[:id])
     @supply_inventory_event = SupplyInventoryEvent.new

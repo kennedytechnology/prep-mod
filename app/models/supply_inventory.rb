@@ -1,7 +1,10 @@
 class SupplyInventory < ApplicationRecord
   has_many :supply_inventory_events
   belongs_to :user
-  has_and_belongs_to_many :clinics
+  # has_and_belongs_to_many :clinics
+  has_many :inventory_allocations
+  has_many :clinics, through: :inventory_allocations
+  
   has_one_attached :information_sheet
 
   validates_presence_of :item_type, :product_name, :manufacturer,
