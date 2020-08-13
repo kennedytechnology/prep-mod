@@ -2,7 +2,7 @@
 
 <p> <%= t('views.patient_notifier_mailer.invitation.dear', patient: @patient.full_name) %>,
 <p>
-  <%= t('views.patient_notifier_mailer.invitation.registration', site_name: ENV['SITE_NAME']) %>
+  <%= t('views.patient_notifier_mailer.invitation.registration', site_name: ENV['SITE_URL']) %>
 <p>
 <strong><%= @patient.access_code %></strong>
 <p>
@@ -14,6 +14,6 @@
 <%= t 'views.patient_notifier_mailer.invitation.questions' %>
 <a href="mailto:help@vaccineconsent.com">help@vaccineconsent.com</a>.
 <p>
-<%= t 'views.patient_notifier_mailer.invitation.end' %>,
+<%= t 'views.patient_notifier_mailer.invitation.end' %>
 <p>
 Clinic Wizard

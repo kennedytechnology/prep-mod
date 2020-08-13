@@ -3,13 +3,13 @@ Your COVID-19 Test Registration
 Dear <%= @patient.full_name %>,
 
 Your registration for a COVID-19 test has been processed. To proceed, please
-register and arrange your appointment online at <%= ENV['SITE_NAME'] %> using
+register and arrange your appointment online at <%= ENV['SITE_URL'] %> using
 your access code:
 
 <%= @patient.access_code %>
 
 Or just click the link here:
-    <%= ENV['SITE_URL'] %>/client/registration/<%= @patient.access_code %>
+    <%= ENV['SITE_URL'] %>client/registration/<%= @patient.access_code %>
 
 If you have any questions or problems, just email us at help@vaccineconsent.com.
 
