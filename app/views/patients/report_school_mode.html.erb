@@ -1,0 +1,322 @@
+<div class="patient-pdf-page">
+  <header class="header">
+    <div class="logo">
+      <%= image_tag wicked_pdf_asset_base64(ENV['SITE_LOGO'] || logo_path), class: "mt-2 mb-2", style: "max-height: 50px;" %>
+    </div>
+    <div class="school-nurse">
+      <p>School Nurse</p>
+    </div>
+  </header>
+
+  <h1 class="w-full text-center text-lg font-bold"> <%= @clinic.county %> Consent For <%= @clinic.venue_name %> </h1>
+  <p class="text-sm my-2">
+    DEMO FORM: PrepMod is in testing mode. This is not a real consent for medical
+    services.
+  </p>
+
+  <div class="bg-gray-300 text-base pl-1 py-1 font-bold">
+    Please Print Clearly in Ink
+  </div>
+
+  <table class="table-auto w-full border-collapse border border-black">
+    <tbody>
+    <tr>
+      <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Student's LAST Name", value: @patient.last_name} %>
+      <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Student's FIRST Name", value: @patient.first_name} %>
+      <%= render partial: 'consent_form_cell', locals: {width: "40px;", label: "MI", value: @patient.middle_initial} %>
+      <%= render partial: 'consent_form_cell', locals: {width: 1, label: "Studen't Date of Birth", value: @patient.date_of_birth.try(:strftime, "%m/%d/%y")} %>
+      <%= render partial: 'consent_form_cell', locals: {width: 1, label: "Age", value: @patient.age} %>
+      <%= render partial: 'consent_form_cell', locals: {width: 1, label: "Sex", value: @patient.sex} %>
+      <%= render partial: 'consent_form_cell', locals: {width: 1, label: "Grade", value: @patient.grade} %>
+    </tr>
+    <tr>
+      <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Parent/Guardian LAST Name", value: @patient.last_name} %>
+      <%= render partial: 'consent_form_cell', locals: {width: 2, label: "FIRST NAME", value: @patient.first_name} %>
+      <%= render partial: 'consent_form_cell', locals: {width: "40px;", label: "MI", value: @patient.middle_initial} %>
+      <%= render partial: 'consent_form_cell', locals: {width: 1, colspan: 4, label: "Student ID#", value: @patient.id} %>
+    </tr>
+    <tr>
+      <%= render partial: 'consent_form_cell', locals: {width: 2, colspan: 3, label: "Address", value: @patient.address} %>
+      <%= render partial: 'consent_form_cell', locals: {width: 2, colspan: 2, label: "Cell/Home Phone", value: @patient.formatted_phone_number} %>
+      <%= render partial: 'consent_form_cell', locals: {width: 2, colspan: 2, label: "Email Address", value: @patient.email} %>
+    </tr>
+    <tr>
+      <%= render partial: 'consent_form_cell', locals: {colspan: 3, label: "City", value: @patient.city} %>
+      <%= render partial: 'consent_form_cell', locals: {colspan: 1, label: "ZIP Code", value: @patient.zip_code} %>
+      <%= render partial: 'consent_form_cell', locals: {colspan: 4, label: "School Name", value: @clinic.venue_name} %>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="bg-black text-white font-bold text-center mt-6 p-1 uppercase">
+    HEALTH INSURANCE INFORMATION &mdash; Please fill out COMPLETELY and ACCURATELY
+  </div>
+
+  <div class="bg-gray-400 text-xs text-center p-1 border-r border-l border-black">
+    Please copy this information FROM YOUR INSURANCE CARD. We will bill your
+    insurance. <span class="underline">You will NOT be charged</span> for a co-pay or deductible.
+  </div>
+
+  <div class="border border-black px-4 py-4">
+    <p class="font-bold w-full text-base inline pr-4">Type of Insurance:</p>
+    <% INSURANCE_TYPES.each do |str_insurance_type| %>
+      <div class="inline pr-4">
+        <span> <input type="checkbox" class="form-checkbox leading-tight" <%= "checked" if @patient.insurance_type == str_insurance_type %> /> </span>
+        <span class="label text-sm"> <%= str_insurance_type %> </span>
+      </div>
+    <% end %>
+  </div>
+
+  <table class="table-auto w-full border-collapse border border-black">
+    <tr>
+      <td class="border border-black align-top" style="width: 40%;" rowspan="3">
+        <p class="font-bold w-full text-xs w-full bg-gray-300 pl-4">Insurance Company Name</p>
+        <div class="pt-2 pl-2 font-mono text-xs font-bold text-gray-800 tracking-widest pr-2">
+          <%= @patient.insurance_company_name %>
+        </div>
+      </td>
+      <td class="border border-black align-top" rowspan="3">
+        <div>
+          <div class="font-bold w-full text-xs w-full bg-gray-300 pl-2">Member ID Number</div>
+          <div class="py-2 px-2 font-mono text-xs font-bold text-gray-800 tracking-widest">
+            <%= @patient.member_id_for_insurance %>
+          </div>
+        </div>
+
+        <div>
+          <p class="font-bold w-full text-xs w-full bg-gray-300 pl-2">Group Number</p>
+          <div class="py-2 px-2 font-mono text-xs font-bold text-gray-800 tracking-widest">
+            <%= @patient.group_number_for_insurance %>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <div class="bg-gray-400 text-sm font-bold p-1 pl-4 border-r border-l border-black">
+    FOR PRIVATE INSURANCE ONLY
+  </div>
+  <table class="table-auto w-full border-collapse border border-black">
+    <tr>
+      <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Policy Holder's/Insured Adult's Name", value: "#{@patient.insured_first_name} #{@patient.insured_last_name}"} %>
+      <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Relationship to Student", value: @patient.relation_to_patient_for_insurance} %>
+      <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Insured Adult's Birthday", value: @patient.insured_date_of_birth} %>
+      <%= render partial: 'consent_form_cell', locals: {width: 2, label: "Any other # from Insurance Card", value: @patient.card_number_for_insurance} %>
+    </tr>
+  </table>
+
+
+  <div class="bg-gray-400 text-center text-sm font-bold mt-6 p-1 border border-black">
+    Do any of the following apply to your child? (If you answer YES to any question, your child might not be
+    vaccinated.)
+  </div>
+
+  <table class="table-auto w-full border-collapse border border-black">
+    <tr>
+      <td class="border border-black align-top">
+        <div class="pt-2 pl-4 text-sm text-gray-800 tracking-widest">
+          <div class="mb-3">
+            <input type="checkbox" class="form-checkbox mr-3" <%= "checked" if @patient.has_child_allergies %>>
+            <label>Does the child have allergies to medications, food, a vaccine component, or latex?</label>
+          </div>
+
+          <div class="mb-3">
+            <input type="checkbox" class="form-checkbox mr-3" <%= "checked" if @patient.has_child_serious_reaction_to_vaccine %> />
+            <label> Has the child had a serious reaction to a vaccine in the past? </label>
+          </div>
+
+          <div class="mb-3">
+            <input type="checkbox" class="form-checkbox mr-3" <%= "checked" if @patient.has_child_immune_system_problem %> />
+            <label> Does the child have cancer, leukemia, HIV/AIDS, or any other immune system problem? </label>
+          </div>
+        </div>
+      </td>
+      <td class="border border-black align-top">
+        <div class="pt-2 pl-4 text-sm text-gray-800 tracking-widest">
+          <div class="mb-3">
+            <input type="checkbox" class="form-checkbox mr-3" <%= "checked" if @patient.is_child_pregnant_or_possible_to_become %> />
+            <label> Is the child/teen pregnant or is there a chance she could become pregnant during the next
+              month? </label>
+          </div>
+
+          <div class="mb-3">
+            <input type="checkbox" class="form-checkbox mr-3" <%= "checked" if @patient.has_child_been_vaccinated_last_four_weeks %> />
+            <label> Has the child received vaccinations in the past 4 weeks? </label>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+
+  <table class="table-auto w-full mt-6">
+    <tr>
+      <td class="align-top border-black border-2" style="width: 50%;">
+        <p class="p-1 text-sm font-bold">PLEASE INITIAL BESIDE THE VACCINE(S) you would like your child to receive. We will check to be sure it is needed.</p>
+        <table class="table-auto w-full text-center">
+          <thead>
+            <tr>
+              <th class="border border-black bg-gray-400" style="width: 80px;">Patient's Initials</th>
+              <th class="border border-black bg-gray-400">Vaccine Name</th>
+              <th class="border border-black bg-gray-400">VIS Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-black"></td>
+              <td class="border border-black">Tdap</td>
+              <td class="border border-black">02/24/15</td>
+            </tr>
+            <tr>
+              <td class="border border-black"></td>
+              <td class="border border-black">Meningococcal ACWY (MCV4)</td>
+              <td class="border border-black">08/15/19</td>
+            </tr>
+            <tr>
+              <td class="border border-black"></td>
+              <td class="border border-black">Meningitis B (MenB)</td>
+              <td class="border border-black">08/15/19</td>
+            </tr>
+            <tr>
+              <td class="border border-black"></td>
+              <td class="border border-black">Human Papilloma Virus (HPV) </td>
+              <td class="border border-black">10/30/19</td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+      <td class="border border-black align-top" style="border-width: 10px">
+        <p class="p-1 font-bold text-center mb-0">
+          FOR OFFICE USE ONLY</p>
+        <p class="p-1 font-bold text-center mb-0">PARENTS: <span class="underline">DO NOT</span> WRITE IN THIS SPACE</p>
+        <table class="table-auto w-full text-center">
+          <thead>
+          <tr>
+            <th class="border border-black bg-gray-400">Manufacturer</th>
+            <th class="border border-black bg-gray-400">Site</th>
+            <th class="border border-black bg-gray-400">Route</th>
+            <th class="border border-black bg-gray-400">Lot number</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td class="border border-black"></td>
+            <td class="border border-black"></td>
+            <td class="border border-black">IM</td>
+            <td class="border border-black"></td>
+          </tr>
+          <tr>
+            <td class="border border-black"></td>
+            <td class="border border-black"></td>
+            <td class="border border-black">IM</td>
+            <td class="border border-black"></td>
+          </tr>
+          <tr>
+            <td class="border border-black"></td>
+            <td class="border border-black"></td>
+            <td class="border border-black">IM</td>
+            <td class="border border-black"></td>
+          </tr>
+          <tr>
+            <td class="border border-black"></td>
+            <td class="border border-black"></td>
+            <td class="border border-black">IM</td>
+            <td class="border border-black"></td>
+          </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </table>
+
+  <% if @patient.clinic_events.exists? %>
+    <div class="bg-black text-white text-center mt-2 mb-2 p-1" style="page-break-before: always;">
+      INFORMATION ABOUT PATIENT ENCOUNTERS
+    </div>
+
+    <table class="w-full mt-2">
+      <thead>
+      <tr>
+        <th class="border border-black" style="width: 30%;"> Clinic Name</th>
+        <th class="border border-black"> Encounter Date</th>
+        <th class="border border-black"> Encounter Type</th>
+        <th class="border border-black"> Outcome</th>
+        <th class="border border-black"> Location</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @patient.clinic_events.each do |clinic_event| %>
+        <tr>
+          <%= render partial: 'consent_form_cell', locals: {width: 2, label: " ", value: clinic_event.clinic.name} %>
+          <%= render partial: 'consent_form_cell', locals: {width: 2, label: " ", value: clinic_event.event_date} %>
+          <%= render partial: 'consent_form_cell', locals: {width: 2, label: " ", value: clinic_event.category} %>
+          <%= render partial: 'consent_form_cell', locals: {width: 2, label: " ", value: clinic_event.outcome} %>
+          <%= render partial: 'consent_form_cell', locals: {width: 2, label: " ", value: clinic_event.location} %>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% end %>
+
+  <div class="border border-black mt-6">
+    <div class="p-2">
+      <h1 class="font-bold ">CONSENT FOR VACCINATION(S) -
+        <span class="bg-gray-400">YOU MUST SIGN HERE FOR YOUR CHILD TO BE VACCINATED</span></h1>
+      <div class="text-xs">
+        <p>By signing this form, I give permission for my child to be vaccinated with the vaccines listed above, my
+          insurance company to be billed, and vaccine(s) entered into ImmuNet, Maryland's. immunization registry.
+          Further,
+          I agree that the information above is correct, and:</p>
+        <p>(1) I have read the current Vaccine Information Statement for each vaccine(s) or someone has read it to
+          me;</p>
+        <p>(2) I understand the risks and benefits of getting the vaccine(s) I have consented for my child to receive;
+          and</p>
+        <p>(3) Any questions I had about the vaccine(s) have been answered</p>
+      </div>
+    </div>
+
+    <div class="bg-gray-400 py-2 px-1" style="margin-left: 1px; margin-bottom: 1px;">
+      <div class="inline mr-8"><span class="font-bold">Signature of Parent/Legal Guardian:</span>
+        <% if @patient.signature_data.blank? %>
+          (no signature)
+        <% else %>
+          <%= image_tag @patient.signature_data, style: "width: 450px;", class: "border-b-2 border-black" %>
+        <% end %>
+      </div>
+      <div class="inline"><span class="font-bold">Date:</span> <%= @patient.consent_date %></div>
+    </div>
+  </div>
+
+  <div class="pb-16 mt-16" style="border-top: 2px solid #000000; border-bottom: none;">
+    <div class="bg-gray-400 text-center text-sm font-bold mt-6 p-1 border border-black">
+      OFFICE USE ONLY - PARENTS: <span class="underline">DO NOT</span> WRITE IN THIS SPACE
+    </div>
+    <table class="table-auto w-full border-collapse border border-black">
+      <tr>
+        <td class="border border-black text-center">
+          <p class="font-bold w-full text-xs pl-4">Date VIS Given/Vaccine Administrated</p>
+          <div class="pt-2 pl-2 font-mono text-base font-bold text-gray-800 tracking-widest pr-2">
+
+          </div>
+        </td>
+        <td class="border border-black text-center">
+          <p class="font-bold w-full text-xs pl-4">Print Name of Vaccine Administrator</p>
+          <div class="pt-2 pl-2 font-mono text-base font-bold text-gray-800 tracking-widest pr-2">
+
+          </div>
+        </td>
+        <td class="border border-black text-center" style="width:30%;">
+          <p class="font-bold w-full text-xs pl-4">Notes</p>
+          <div class="pt-2 pl-2 font-mono text-base font-bold text-gray-800 tracking-widest pr-2">
+
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="border border-black py-6"></td>
+        <td class="border border-black py-6"></td>
+        <td class="border border-black py-6"></td>
+      </tr>
+    </table>
+  </div>
+</div>

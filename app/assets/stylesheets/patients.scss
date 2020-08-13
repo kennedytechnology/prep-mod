@@ -1,3 +1,27 @@
-// Place all the styles related to the Patients controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+@import "tailwindcss.min";
+
+.patient-pdf-page {
+  font-family: sans-serif;
+
+  .header {
+    position: relative;
+    height: 60px;
+    width: 100%;
+
+    .logo, .school-nurse {
+      position: absolute;
+    }
+
+    .logo {
+      left: 0;
+      top: 0;
+    }
+
+    .school-nurse {
+      width: 150px;
+      border-top: 1px solid #000000;
+      right: 0;
+      top: 25%;
+    }
+  }
+}

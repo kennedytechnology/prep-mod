@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <%#= wicked_pdf_javascript_pack_tag 'application' %>
+    <%= wicked_pdf_stylesheet_link_tag 'patients' %>
+  </head>
+  <body class="pdf font-serif">
+    <div id="header">
+      <%# wicked_pdf_image_tag 'mysite.jpg' %>
+    </div>
+    <div class="">
+      <%= yield %>
+    </div>
+  </body>
+</html>

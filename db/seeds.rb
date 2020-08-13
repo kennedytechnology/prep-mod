@@ -293,8 +293,18 @@ PATIENT_COUNT.times.each do |i|
     consent_date: Faker::Date.between(from: 6.months.ago, to: 1.day.ago),
     employers: Employer.all.sample(rand(3)),
     venue_id: Faker::Number.between(from: 1, to: Venue.count),
+    insurance_company_name: Faker::Company.name,
+    member_id_for_insurance: Faker::IDNumber.valid.to_s,
+    group_number_for_insurance: Faker::Number.number(digits: 16).to_s,
+    insurance_type: INSURANCE_TYPES.sample,
+    grade: Faker::Number.between(from: 1, to: 5),
+    insured_first_name: Faker::Name.first_name,
+    insured_last_name: Faker::Name.last_name,
+    relation_to_patient_for_insurance: Faker::Relationship.familial,
+    insured_date_of_birth: Faker::Date.birthday(min_age: 14, max_age: 18),
+    card_number_for_insurance: Faker::Number.number(digits: 16).to_s,
     signer_first_name: Faker::Name.first_name,
-    signer_last_name: Faker::Name.last_name,
+    signer_last_name: Faker::Name.last_name
   )
 
   if rand(3) == 0
