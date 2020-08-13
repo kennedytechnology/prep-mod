@@ -17,7 +17,7 @@ class ClinicEventsController < ClinicManagementController
       format.html do
         if @clinic_event.save
           ClinicEventMailer.registration_confirmed(@clinic_event).deliver_now
-          redirect_to patients_path
+          redirect_to patients_records_search_path
         else
           render "new", alert: "Your entry was not saved."
         end

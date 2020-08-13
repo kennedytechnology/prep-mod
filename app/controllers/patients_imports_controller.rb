@@ -10,7 +10,7 @@ class PatientsImportsController < ApplicationController
     if params[:patients_import]
       @patients_import = PatientsImport.new(patients_import_params.merge(user_id: current_user.id))
       if @patients_import.save
-        redirect_to patients_path, notice: "Successfully uploaded records."
+        redirect_to patients_records_search_path, notice: "Successfully uploaded records."
       else
         render :new
       end
