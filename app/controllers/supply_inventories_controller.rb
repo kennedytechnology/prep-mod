@@ -23,6 +23,7 @@ class SupplyInventoriesController < InheritedResources::Base
     @supply_inventory = SupplyInventory.find(params[:id])
 
     if @supply_inventory.update_attributes(supply_inventory_params)
+      redirect_to supply_inventories_path
     else
       redirect_back fallback_location: supply_inventories_path, alert: "Error! #{@supply_inventory.errors.full_messages.join(", ")}"
     end

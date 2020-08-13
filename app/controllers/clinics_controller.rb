@@ -127,8 +127,10 @@ class ClinicsController < ClinicManagementController
   private
 
   def update_inventory_allocations
-    params["supply_inventory_allocation"].permit!.to_h.each do |k,v|
-      @clinic.inventory_allocations.where(supply_inventory_id: k).update(allocated_count: v)
+    if params["supply_inventory_allocation"]
+      params["supply_inventory_allocation"].permit!.to_h.each do |k,v|
+        @clinic.inventory_allocations.where(supply_inventory_id: k).update(allocated_count: v)
+      end
     end
   end
 

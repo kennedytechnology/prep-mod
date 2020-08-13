@@ -60,7 +60,7 @@ RSpec.describe "/supply_inventories", type: :request do
       it "redirects to the supply_inventory" do
         patch supply_inventory_url(supply_inventory), params: { supply_inventory: valid_attributes }
         supply_inventory.reload
-        expect(response).to redirect_to supply_inventory_path(supply_inventory, locale: I18n.default_locale)
+        expect(response).to redirect_to supply_inventories_path(locale: I18n.default_locale)
       end
     end
   end
