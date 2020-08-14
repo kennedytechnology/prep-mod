@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :set_cache_headers
   before_action :set_locale
   helper_method :logo_path
+  before_action :set_notification
 
   rescue_from CanCan::AccessDenied do |exception|
     logger.debug exception.inspect
@@ -43,6 +44,11 @@ class ApplicationController < ActionController::Base
 
   def template_for_homepage
     params['template'] || ENV['TEMPLATE_FOR_HOMEPAGE'] || 'index' || ENV["CONSENT_FORM_LOGO"]
+  end
+
+  def set_notification
+    request.env['exception_notifier.exception_data'] = { 'site_url' => request.env['SITE_URL'] }
+    # can be any key-value pairs
   end
 
 
