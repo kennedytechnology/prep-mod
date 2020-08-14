@@ -1,7 +1,7 @@
-<h2 class="text-xl font-bold mb-4"> Personal Information </h2>
+<h2 class="text-xl font-bold mb-4"> <%= t 'views.public.patients.review.personal_information.title' %> </h2>
 <div class="field-side-by-side">
     <div>
-        <p> County </p>
+        <p> <%= t 'views.public.patients.review.personal_information.county' %> </p>
         <p class="font-bold"> <%= @patient.county %> </p>
     </div>
     <div> </div>
@@ -10,8 +10,8 @@
 <div class="field-side-by-side">
     <div class="md:flex lg:flex">
         <div class="w-full md:w-9/12 md:mr-2 lg:w-8/12 lg:mr-2">
-            <p> 
-                <% if school_mode? %> 
+            <p>
+                <% if school_mode? %>
                     <%= t('activerecord.models.patient.student_first_name') %>
                 <% else %>
                     <%= t 'static_pages.public.patients.consent_form.personal_information.first_name' %>
@@ -33,7 +33,7 @@
     <div class="md:flex lg:flex">
         <div class="flex-1 md:mr-2 lg:mr-2">
             <p>
-                <% if school_mode? %> 
+                <% if school_mode? %>
                     <%= t('activerecord.models.patient.student_last_name') %>
                 <% else %>
                     <%= t 'static_pages.public.patients.consent_form.personal_information.last_name' %>
@@ -92,17 +92,17 @@
 
     <div class="flex">
         <div class="w-1/2 mr-3">
-            <p> Parent/Guardian's First Name: </p>
+            <p> <%= t 'views.public.patients.review.personal_information.guardian_first_name' %> </p>
             <p class="font-bold"> <%= @patient.guardian_first_name %> </p>
         </div>
 
         <div class="w-1/2 mr-1">
-            <p> Parent/Guardian's Last Name: </p>
+            <p> <%= t 'views.public.patients.review.personal_information.guardian_last_name' %> </p>
             <p class="font-bold"> <%= @patient.guardian_last_name %> </p>
         </div>
 
         <div class="w-1/2 mr-3 ml-3">
-            <p> Parent/Guardian Email Address: </p>
+            <p> <%= t 'views.public.patients.review.personal_information.guardian_email' %> </p>
             <p class="font-bold"> <%= @patient.guardian_email %> </p>
         </div>
     </div>
