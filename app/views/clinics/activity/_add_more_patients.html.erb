@@ -77,25 +77,27 @@
             <%= f.email_field :email, class: "w-full form-input", data: {action: "keyup->testing-referral-review-form#updateModalField"} %>
         </div>
     </div>
-
-    <div class="field-side-by-side">
-        <div>
+    
+    <div class="field-side-by-side"><div>
+    <% if school_mode? %> 
+        <% else %>
             <h1 class="title">Send Patient Invitation Via</h1>
             <div class="flex">
                 <div class="mr-6">
                     <%= f.check_box :notify_via_sms, class: "form-checkbox", data: {action: "click->testing-referral-review-form#updateModalCheckboxField"} %> 
-                    <%= f.label :notify_via_sms, "SMS" %>
+                    <%= f.label :notify_via_sms, "SMS" %>     
                 </div>
-
                 <div>
                     <%= f.check_box :notify_via_email, class: "form-checkbox", data: {action: "click->testing-referral-review-form#updateModalCheckboxField"} %> 
                     <%= f.label :notify_via_email, "Email" %>
-                </div>
-            </div>
+                </div>   
+            </div> 
         </div>
+        <% end %>
         <div>
         </div>
     </div>
+    
 
     <div class="flex justify-end my-4">
         <%= f.submit "Create", class: "button-primary" %>
