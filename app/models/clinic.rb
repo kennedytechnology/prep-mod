@@ -184,7 +184,7 @@ class Clinic < ApplicationRecord
     last_time = end_time
     results = []
     while this_time < last_time
-      results << this_time.strftime("%l:%M%P")
+      results << this_time.strftime("%l:%M%P").strip
       this_time = this_time + appointment_frequency_minutes.to_i.minutes
     end
     return results
@@ -218,6 +218,11 @@ class Clinic < ApplicationRecord
 
   def private?
     public_or_private == "Private"
+  end
+
+  def appointment_slots_for(time)
+    appointments_taken = appointments.reject{|a| a.appointment_at.nil?}.select{|a| a.appointment_at.strftime("%H:%M%P") == time}.count
+    appointment_slots.to_i - appointments_taken
   end
 
 end

@@ -100,7 +100,9 @@ class Public::PatientsController < ApplicationController
       attributes.delete('patient_id')
       patient = Patient.create(attributes)
       patient.save(validate: false)
-      Appointment.create(patient: patient, clinic: @clinic, appointment_at: @appointment.appointment_at)
+      @clinic.appointments.reload
+      appointment_time = @clinic.appointment_times[@clinic.appointment_times.index(@appointment.appointment_at.strftime("%l:%M%P").strip)..].reject{|t| @clinic.appointment_slots_for(t) < 1}.first
+      Appointment.create(patient: patient, clinic: @clinic, appointment_at: appointment_time)
     end
   end
 
