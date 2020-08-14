@@ -47,8 +47,10 @@ class PatientsController < ApplicationController
     @patient.access_code = Patient.generate_access_code
     @patient.user = current_user if current_user
     if @patient.save
-      PatientNotifierMailer.invitation(@patient).deliver if @patient.notify_via_email?
-      @patient.sms_invite if @patient.notify_via_sms?
+      unless school_mode?
+        PatientNotifierMailer.invitation(@patient).deliver if @patient.notify_via_email?
+        @patient.sms_invite if @patient.notify_via_sms?
+      end
       redirect_back fallback_location: "/patients", notice: "Your patient referral is created."
     else
       render :new, alert: "Your referral was not saved!. Please try again."
