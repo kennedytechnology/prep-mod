@@ -61,7 +61,7 @@ puts "Creating venues..."
 VENUE_COUNT.times.each do |i|
   address = addresses.sample
   venue = Venue.create(
-    name: Faker::University.unique.name,
+    name: i == 1 ? "All" : Faker::University.unique.name,
     category: VENUE_TYPES.sample,
     county: COUNTIES.sample,
     address: address['address1'],
