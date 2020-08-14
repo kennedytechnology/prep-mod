@@ -87,8 +87,8 @@ class ClinicsController < ClinicManagementController
       format.pdf do
         render pdf: "CAF Report",
           page_size: 'A4',
-          template: "clinics/report.pdf.erb",
-          layout: "clinic-print.pdf.erb",
+          template: "clinics/report_pdf.html.erb",
+          layout: "clinic_print.html.erb",
           orientation: "Landscape",
           lowquality: true,
           zoom: 1,
