@@ -6,7 +6,7 @@ export default class extends Controller {
   connect() {}
 
   toggleSignature(e) {
-    if(this.titleTarget.innerText == "Please sign here with your finger or mouse ") {
+    if(this.fullNameTarget.classList.contains("hidden")) {
       this.titleTarget.innerText = "Please type your first and last name";
       this.buttonTitleTarget.innerText = "Sign My Name";
       this.signatureInputTarget.classList.add("hidden");
