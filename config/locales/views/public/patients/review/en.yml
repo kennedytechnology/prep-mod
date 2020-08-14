@@ -1,0 +1,43 @@
+en:
+  views:
+    public:
+      patients:
+        review:
+          personal_information:
+            title: "Personal Information"
+            county: "County"
+            guardian_first_name: "Parent/Guardian's First Name:"
+            guardian_last_name: "Parent/Guardian's Last Name:"
+            guardian_email: "Parent/Guardian Email Address:"
+          health_insurance:
+            title: "Health Insurance"
+            type: "Insurance Type"
+            company_name: "Insurance Company Name"
+            policy_number: "Policy Number"
+            group_number: "Group Number"
+            card_number: "Medical Assistance Number, Recipient Number, or any other number on card"
+            insured_first_name: "Insured Adult's First Name"
+            insured_last_name: "Insured Adult's Last Name"
+            insured_dob: "Insured Adult's Date Of Birth"
+            relationship_to_patient: "Relationship To Patient"
+            front_card: "FRONT of your insurance card"
+            back_card: "BACK of your insurance card"
+          health_questions_school:
+            title: "Screening Checklist for Contraindications to Vaccines for Children and Teens"
+            allergies: "Does the child have allergies to medications, food, a vaccine component, or latex?"
+            vaccine_reaction: "Has the child had a serious reaction to a vaccine in the past?"
+            immune_system_problem: "Does the child have cancer, leukemia, HIV/AIDS, or any other immune system problem?"
+            pregnant: "Is the child/teen pregnant or is there a chance she could become pregnant during the next month?"
+            vaccinated: "as the child received vaccinations in the past 4 weeks?"
+          consent_for_services:
+            title: "Consent For Services"
+            vaccines_for: "Vaccines for:"
+            signatory_first_name: "Signatory First Name"
+            signatory_last_name: "Signatory Last Name"
+            date: "Date"
+            relationship_to_patient: "Relationship to Patient"
+            signer_first_name: "Signer First Name"
+            signer_last_name: "Signer Last Name"
+          add_family:
+            title: "Family Members"
+            member: "Family Member:"

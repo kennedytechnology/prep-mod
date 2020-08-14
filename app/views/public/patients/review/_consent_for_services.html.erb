@@ -1,8 +1,8 @@
-<h2 class="text-xl font-bold mb-4"> Consent For Services </h2>
+<h2 class="text-xl font-bold mb-4"> <%= t 'views.public.patients.review.consent_for_services.title' %> </h2>
 <% if school_mode? %>
     <div class="field-side-by-side">
        <div>
-            <p class="text-xl font-bold"> Vaccines for: </p>
+            <p class="text-xl font-bold"> <%= t 'views.public.patients.review.consent_for_services.vaccines_for' %> </p>
             <p class="font-bold"> <%= @patient.first_name + " " + @patient.last_name %> </p>
             <ul class="list-disc pl-12">
                 <% @patient.vaccine_offerings.each do |vo| %>
@@ -22,29 +22,29 @@
 <% end %>
 <div class="field-side-by-side">
     <div>
-        <p> Signatory First Name </p>
+        <p> <%= t 'views.public.patients.review.consent_for_services.signatory_first_name' %> </p>
         <p class="font-bold"> <%= @patient.signatory_first_name %> </p>
     </div>
     <div>
-       <p> Signatory Last Name </p>
+       <p> <%= t 'views.public.patients.review.consent_for_services.signatory_last_name' %> </p>
        <p class="font-bold"> <%= @patient.signatory_last_name %> </p>
     </div>
     <div>
-       <p> Date </p>
+       <p> <%= t 'views.public.patients.review.consent_for_services.date' %> </p>
        <p class="font-bold"> <%= @patient.consent_date %> </p>
     </div>
 </div>
 <div class="field-side-by-side">
     <div>
-        <p> Relationship to Patient </p>
+        <p> <%= t 'views.public.patients.review.consent_for_services.relationship_to_patient' %> </p>
         <p class="font-bold"> <%= @patient.relation_to_patient_for_insurance %> </p>
     </div>
     <div>
-       <p> Signer First Name </p>
+       <p> <%= t 'views.public.patients.review.consent_for_services.signer_first_name' %> </p>
        <p class="font-bold"> <%= @patient.signer_first_name %> </p>
     </div>
     <div>
-       <p> Signer Last Name </p>
+       <p> <%= t 'views.public.patients.review.consent_for_services.signer_last_name' %> </p>
        <p class="font-bold"> <%= @patient.signer_last_name %> </p>
     </div>
 </div>
