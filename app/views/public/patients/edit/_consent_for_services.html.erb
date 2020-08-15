@@ -69,7 +69,7 @@
 <div class="border-1 border-blue-500 p-4 mb-2">
     <% if school_mode? %>
         <%= f.collection_check_boxes(:vaccine_offering_ids, VaccineOffering.all, :id, :name) do |b| %>
-            <span><%= b.check_box(class: "mr-8") %><%= b.label(class: "text-lg") %> </span> (<%= link_to "Vaccine Information", "/pdf-vis/#{b.object.short_name}.pdf", class: "underline" %>)<br/>
+            <span><%= b.check_box(class: "mr-8") %><%= b.label(class: "text-lg") %> </span> (<%= link_to "Vaccine Information", "/pdf-vis/#{b.object.short_name}.pdf", class: "underline", target: "_blank" %>)<br/>
         <% end %>            
     <% else %>
         <% @clinic.supply_inventories.select{|si| si.information_sheet.attached? }.each do |supply_inventory| %>

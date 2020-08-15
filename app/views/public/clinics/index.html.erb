@@ -40,17 +40,17 @@
 
     <div class="flex">
         <div class="w-4/12 mr-4">
-            <h2 class="search-field-title"> <%= t 'views.public.clinics.index.search.search_within' %> <span class="field-required">*</span> </h2>
+            <h2 class="search-field-title"> <%= t 'views.public.clinics.index.search.search_within' %></h2>
             <%= select_tag(:search_radius,
                 options_for_select(["All", "1 mile", "5 miles", "10 miles", "25 miles", "50 miles", "100 miles", "100+ miles"],
-                params[:search_radius]), class: "form-select block w-full", required: true) %>
+                params[:search_radius]), class: "form-select block w-full") %>
         </div>
         <div class="w-4/12 mr-4">
-            <h2 class="search-field-title"> <%= t 'views.public.clinics.index.search.search_name' %> </h2>
+            <h2 class="search-field-title"> Search by School Name </h2>
             <%= text_field_tag(:search_name, params[:search_name], class: "form-input block w-full") %>
         </div>
         <div class="w-4/12">
-            <h2 class="search-field-title"> <%= t 'views.public.clinics.index.search.address' %> </h2>
+            <h2 class="search-field-title"> Search by Your Address </h2>
             <%= text_field_tag "location", "Enter address", value: params[:location], id: "autocomplete", class: "form-input w-full", placeholder: "Enter address" %>
             <%= render partial: "google_maps_script" %>
         </div>
@@ -73,16 +73,23 @@
                     <h4><%= clinic.address %>, <%= clinic.city %> <%= clinic.state %>, <%= clinic.zip %> </h4>
                     <p><strong><%= t 'views.public.clinics.index.search.clinic_name.services_available' %></strong> <%= clinic.services.collect(&:name).join(", ") %></p>
                     <p><strong><%= t 'views.public.clinics.index.search.clinic_name.age_groups' %></strong> <%= clinic.age_groups.collect(&:name).join(", ") %></p>
-                    <% if clinic.services.include?(ClinicService.find_by_name("Testing")) && (session[:patient_id] || clinic.public?) %>
-                        <p class="w-5/12 my-3">
-                            <%= link_to t("views.public.clinics.index.search.select_testing_here"),
+                    <% if school_mode? %>
+                        <p class="w-6/12 my-3">
+                            <%= link_to "Register for Vaccination Appointment",
                                 "/client/registration?clinic_id=#{clinic.id}&next_step=#{params[:next_step]}", class: "button-primary px-4 " %>
                         </p>
-                    <% end %>
-                    <% if clinic.services.include?(ClinicService.find_by_name("Safety Kit Distribution")) %>
-                      <p class="w-5/12 my-3">
-                          <%= link_to t('views.public.clinics.index.search.signup_kit_button'), "/kit/new", class: "button-primary" %>
-                      </p>
+                    <% else %>
+                        <% if clinic.services.include?(ClinicService.find_by_name("Testing")) && (session[:patient_id] || clinic.public?) %>
+                            <p class="w-6/12 my-3">
+                                <%= link_to t("views.public.clinics.index.search.select_testing_here"),
+                                    "/client/registration?clinic_id=#{clinic.id}&next_step=#{params[:next_step]}", class: "button-primary px-4 " %>
+                            </p>
+                        <% end %>
+                        <% if clinic.services.include?(ClinicService.find_by_name("Safety Kit Distribution")) %>
+                        <p class="w-5/12 my-3">
+                            <%= link_to t('views.public.clinics.index.search.signup_kit_button'), "/kit/new", class: "button-primary" %>
+                        </p>
+                        <% end %>
                     <% end %>
                 </div>
                 <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=15&size=400x280&markers=size:small%7Ccolor:red%7C#{clinic.latitude},#{clinic.longitude}&key=#{ENV['GOOGLE_MAPS_API_KEY']}", alt: "Map", class: "flex-none" %>
