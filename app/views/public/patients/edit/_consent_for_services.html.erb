@@ -63,10 +63,10 @@
 
 <h1 class="font-bold text-2xl">Vaccines for <%= f.object.full_name %> </h1>
 
-<div class="border-1 border-blue-500 p-4 mb-2">
+<div class="border-1 border-blue-500 p-4 mb-2" data-controller="select-one-checkbox">
     <% if school_mode? %>
         <%= f.collection_check_boxes(:vaccine_offering_ids, VaccineOffering.all, :id, :name) do |b| %>
-            <span><%= b.check_box(class: "mr-8") %><%= b.label(class: "text-lg") %> </span> (<%= link_to "Vaccine Information", "/pdf-vis/#{b.object.short_name}.pdf", class: "underline", target: "_blank" %>)<br/>
+            <span><%= b.check_box(class: "mr-8", required: true, data: {target: "select-one-checkbox.requiredCheckbox", action: "select-one-checkbox#update"}) %><%= b.label(class: "text-lg") %> </span> (<%= link_to "Vaccine Information", "/pdf-vis/#{b.object.short_name}.pdf", class: "underline", target: "_blank" %>)<br/>
         <% end %>            
     <% else %>
         <% @clinic.supply_inventories.select{|si| si.information_sheet.attached? }.each do |supply_inventory| %>
@@ -79,10 +79,10 @@
 <%= f.fields_for :patient_family_members do |pfm| %>    
     <h1 class="font-bold text-2xl">Vaccines for <%= pfm.object.full_name %> </h1>
 
-    <div class="border-1 border-blue-500 p-4 mb-2">
+    <div class="border-1 border-blue-500 p-4 mb-2" data-controller="select-one-checkbox">
         <% if school_mode? %>
             <%= pfm.collection_check_boxes(:vaccine_offering_ids, VaccineOffering.all, :id, :name) do |b| %>
-                <span><%= b.check_box(class: "mr-8") %><%= b.label(class: "text-lg") %> </span> (<%= link_to "Vaccine Information", "/pdf-vis/#{b.object.short_name}.pdf", class: "underline" %>)<br/>
+                <span><%= b.check_box(class: "mr-8", required: true, data: {target: "select-one-checkbox.requiredCheckbox", action: "select-one-checkbox#update"}) %><%= b.label(class: "text-lg") %> </span> (<%= link_to "Vaccine Information", "/pdf-vis/#{b.object.short_name}.pdf", class: "underline" %>)<br/>
             <% end %>            
         <% else %>
             <% @clinic.supply_inventories.select{|si| si.information_sheet.attached? }.each do |supply_inventory| %>
@@ -166,7 +166,7 @@
             errorMessage.classList.add("hidden");
         }
     }
-    signaturePad.fromDataURL("<%= @patient.signature_data %>")
+    // signaturePad.fromDataURL("<%= @patient.signature_data %>")
 
 </script>
 
