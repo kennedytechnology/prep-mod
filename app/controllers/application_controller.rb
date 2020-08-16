@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_notification
-    request.env['exception_notifier.exception_data'] = { 'site_url' => request.env['SITE_URL'] }
+    request.env['exception_notifier.exception_data'] = { 'site_urlw' => request.env['SITE_URL'] }
     # can be any key-value pairs
   end
 

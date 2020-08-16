@@ -57,21 +57,30 @@ addresses = JSON.load(Rails.root.join("db/addresses.json"))["addresses"]
 addresses.select!{|a| VENUE_STATES.include?(a["state"])}
 addresses.shuffle!
 
+
 puts "Creating venues..."
-VENUE_COUNT.times.each do |i|
-  address = addresses.sample
-  venue = Venue.create(
-    name: i == 1 ? "All" : Faker::University.unique.name,
-    category: VENUE_TYPES.sample,
-    county: COUNTIES.sample,
-    address: address['address1'],
-    city: address['city'],
-    state: address['state'],
-    zip_code: address['postalCode'],
-    longitude: address['coordinates']['lng'],
-    latitude: address['coordinates']['lat'],
-  )
+
+csv_text = File.read(Rails.root.join('db', 'sample_data', 'venues.csv'))
+csv = CSV.parse(csv_text.scrub, :headers => true)
+csv.each do |row|
+  Venue.create!(row.to_h)
 end
+
+# 
+# VENUE_COUNT.times.each do |i|
+#   address = addresses.sample
+#   venue = Venue.create(
+#     name: i == 1 ? "All" : Faker::University.unique.name,
+#     category: VENUE_TYPES.sample,
+#     county: COUNTIES.sample,
+#     address: address['address1'],
+#     city: address['city'],
+#     state: address['state'],
+#     zip_code: address['postalCode'],
+#     longitude: address['coordinates']['lng'],
+#     latitude: address['coordinates']['lat'],
+#   )
+# end
 
 puts "Creating users..."
 USER_COUNT.times.each do |i|
@@ -465,6 +474,8 @@ SCHOOL_VACCINES.each do |k,v|
     short_name: k
   )
 end
+
+
 
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
 

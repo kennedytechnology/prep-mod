@@ -1,16 +1,6 @@
-<h1 class="text-blue-400 font-bold text-lg p-2 mb-6">
+<h1 class="text-red-700 font-bold text-2xl p-2 mb-6">
     <%= t "views.public.patients.edit.personal_info.#{school_mode? ? 'school_mode_title' : 'regular_title'}" %>
 </h1>
-
-<div class="field-side-by-side">
-    <div>
-        <%= f.label :county do %>
-            <%= t 'static_pages.public.patients.consent_form.personal_information.county' %> <span class="field-required">*</span>
-        <% end %>
-        <%= f.select :county, options_for_select(COUNTIES.sort, @patient.county),{include_blank: true}, {class: "w-full form-select", required: true} %>
-    </div>
-    <div> </div>
-</div>
 
 <div class="field-side-by-side">
     <div class="md:flex lg:flex">
@@ -49,8 +39,8 @@
             <%= f.text_field :last_name, disabled: @patient.access_code.present?, class: "w-full form-input", required: true %>
         </div>
         <div class="flex-1">
-            <%= f.label :mothers_maiden_name, t('static_pages.public.patients.consent_form.personal_information.mothers_maiden_name') %>
-            <%= f.text_field :mothers_maiden_name, class: "form-input w-full" %>
+            <%= f.label :mothers_maiden_name, t('static_pages.public.patients.consent_form.personal_information.mothers_maiden_name') %><span class="field-required">*</span>
+            <%= f.text_field :mothers_maiden_name, class: "form-input w-full", required: true %>
         </div>
     </div>
 </div>
@@ -115,13 +105,22 @@
 </div>
 
 <% if school_mode? %>
-    <div class="field-side-by-side">
-        <div class="flex">
-            <div class="flex-1 mr-2">
+    <div class="field-fullwidth">
+        <div class="flex" data-controller="select-child-items">
+            <div class="mr-2">
+                <%= f.label :county, t('activerecord.models.patient.county'), class: "block" %>
+                <% county_options = Venue.all.collect(&:county).uniq.collect{|c| [c, c, data: {child_items: options_for_select(Venue.where(county: c).collect{|v| [v.name, v.id]}, f.object.venue_id) }]} %>
+                <%= f.select :county, options_for_select(county_options, f.object.county), {include_blank: true}, class: 'form-select', data: {target: 'select-child-items.parent', action: 'select-child-items#update'} %>
+            </div>
+            <div class="mr-2 w-4/12">
+                <%= f.label :venue_id, t('activerecord.models.patient.school'), class: "block" %>                
+                <%= f.select :venue_id, options_for_select([]), {include_blank: true}, class: 'form-select w-full', data: {target: 'select-child-items.children'} %>
+            </div>
+            <div class="mr-2 w-1/12">
                 <%= f.label :grade, t('activerecord.models.patient.grade'), class: "block" %>
                 <%= f.text_field :grade, class: "w-full form-input" %>
             </div>
-            <div class="flex-1 mr-2">
+            <div class="mr-2">
                 <%= f.label :homeroom_teacher, t('activerecord.models.patient.homeroom_teacher'), class: "block" %>
                 <%= f.text_field :homeroom_teacher, class: "w-full form-input" %>
             </div>

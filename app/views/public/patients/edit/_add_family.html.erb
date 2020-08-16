@@ -17,7 +17,20 @@
             } %>
         </div>
 
+      
+
       <div class="family-member-form mt-6 border-b">
+        <div class="w-full flex" data-controller="select-child-items">
+          <div class="mr-2">
+              <%= fm.label :county, t('activerecord.models.patient.county'), class: "block" %>
+              <% county_options = Venue.all.collect(&:county).uniq.collect{|c| [c, c, data: {child_items: options_for_select(Venue.where(county: c).collect{|v| [v.name, v.id]}, fm.object.venue_id) }]} %>
+              <%= fm.select :county, options_for_select(county_options, fm.object.county), {include_blank: true}, class: 'form-select', data: {target: 'select-child-items.parent', action: 'select-child-items#update'} %>
+          </div>
+          <div class="mr-2 w-4/12">
+              <%= fm.label :venue_id, t('activerecord.models.patient.school'), class: "block" %>                
+              <%= fm.select :venue_id, options_for_select([]), {include_blank: true}, class: 'form-select w-full', data: {target: 'select-child-items.children'} %>
+          </div>
+        </div>
         <div class="w-full md:flex">
           <div class="inline-field-wrapper">
               <%= fm.label :first_name do %>
@@ -104,7 +117,7 @@
 </div>
 
 <div class="md:flex justify-center items-center mt-6">
-  <button type="submit" name="next_step" value="consent_for_services" class="text-xl button-action mb-4 md:mb-0">
+  <button type="submit" name="next_step" value="add_another_family" class="text-xl button-action mb-4 md:mb-0">
     <%= t'views.public.patients.edit.buttons.save_add_another_household_member' %>
   </button>
 </div>

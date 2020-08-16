@@ -162,7 +162,7 @@ class Public::PatientsController < ApplicationController
       :venue_id, :signer_first_name, :signer_last_name,
       employer_ids: [], vaccine_offering_ids: [],
       patient_family_members_attributes: [:id, :first_name, :middle_initial,
-        :last_name, :mothers_maiden_name, :race, :date_of_birth,
+        :last_name, :mothers_maiden_name, :race, :date_of_birth, :county, :venue_id,
         :insurance_company_name, :group_number_for_insurance,
         :member_id_for_insurance, :patient_id,
         :has_fever_over, :has_difficult_breathing, :had_traveled_to_affected_place,
