@@ -65,20 +65,21 @@
         </div>
 
         <div class="field-side-by-side">
-            <div>
-                <%= f.label :venue_type, class: "block" do %>
+            <!-- <div>
+                <%# f.label :venue_type, class: "block" do %>
                     <span> Venue Type </span>
                     <span class="field-required">*</span>
-                <% end %>
-                <%= f.select :venue_type, VENUE_TYPES, {prompt: "Select"}, {class: "form-select w-full", required: true, "data-target": "review-form.validates"} %>
-            </div>
+                <%# end %>
+                <%# f.select :venue_type, VENUE_TYPES, {prompt: "Select"}, {class: "form-select w-full", required: true, "data-target": "review-form.validates"} %>
+            </div> -->
             <div>
                 <%= f.label :venue_id, class: "block" do %>
-                    <span> Choose Venue </span>
+                    <span> Venue </span>
                     <span class="field-required">*</span>
                 <% end %>
                 <%= f.select :venue_id, options_for_select(Venue.all.collect { | venue | [venue.name, venue.id] }, @clinic.venue_id), {prompt: "Select"}, {class: "form-select w-full"} %>
             </div>
+            <div></div>
         </div>
 
         <div class="field-side-by-side">
@@ -191,46 +192,28 @@
         <div class="pb-3 border-b border-gray-200 mb-6 flex flex-wrap">
             <h1 class="form-section-title">Contact Information</h1>
             <div class="w-5/12 mr-6">
-                <%= f.label :contact_person do %>
-                    <span> Contact Person </span>
-                    <span class="field-required">*</span>
-                <% end %>
-                <%= f.text_field :contact_person, placeholder: "Contact Person", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
+                <%= f.label :contact_person, "Contact Person" %>
+                <%= f.text_field :contact_person, placeholder: "Contact Person", class: "form-input w-full" %>
             </div>
             <div class="w-5/12 mr-6">
-                <%= f.label :contact_phone_number do %>
-                    <span> Contact Phone Number </span>
-                    <span class="field-required">*</span>
-                <% end %>
-                <%= f.text_field :contact_phone_number, placeholder: "Contact Number", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
+                <%= f.label :contact_phone_number, "Contact Phone Number" %>
+                <%= f.text_field :contact_phone_number, placeholder: "Contact Number", class: "form-input w-full" %>
             </div>
             <div class="w-5/12 mr-6">
-                <%= f.label :contact_email do %>
-                    <span> Contact E-mail </span>
-                    <span class="field-required">*</span>
-                <% end %>
-                <%= f.email_field :contact_email, placeholder: "Contact Email Address", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
+                <%= f.label :contact_email, "Contact E-mail" %>
+                <%= f.email_field :contact_email, placeholder: "Contact Email Address", class: "form-input w-full" %>
             </div>
             <div class="w-5/12 mr-6">
-                <%= f.label :backup_contact_person do %>
-                    <span> Back-Up Contact Person </span>
-                    <span class="field-required">*</span>
-                <% end %>
-                <%= f.text_field :backup_contact_person, placeholder: "Back-Up Contact Person", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
+                <%= f.label :backup_contact_person, "Back-Up Contact Person" %>
+                <%= f.text_field :backup_contact_person, placeholder: "Back-Up Contact Person", class: "form-input w-full" %>
             </div>
             <div class="w-5/12 mr-6">
-                <%= f.label :backup_contact_phone_number do %>
-                    <span> Back-Up Contact Phone Number </span>
-                    <span class="field-required">*</span>
-                <% end %>
-                <%= f.text_field :backup_contact_phone_number, placeholder: "Back-Up Contact Number", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
+                <%= f.label :backup_contact_phone_number, "Back-Up Contact Phone Number" %>
+                <%= f.text_field :backup_contact_phone_number, placeholder: "Back-Up Contact Number", class: "form-input w-full" %>
             </div>
             <div class="w-5/12 mr-6">
-                <%= f.label :backup_contact_email do %>
-                    <span> Back-Up Contact E-mail </span>
-                    <span class="field-required">*</span>
-                <% end %>
-                <%= f.email_field :backup_contact_email, placeholder: "Back-Up Contact Email Address", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
+                <%= f.label :backup_contact_email, "Back-Up Contact E-mail" %>
+                <%= f.email_field :backup_contact_email, placeholder: "Back-Up Contact Email Address", class: "form-input w-full" %>
             </div>
         </div>
 
@@ -248,11 +231,8 @@
             <h3 class="title"> Registration and Staff </h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <%= f.label :lead_vaccinator_name, class: "block" do %>
-                        <span> Lead Tester’s Name </span>
-                        <span class="field-required">*</span>
-                    <% end %>
-                    <%= f.text_field :lead_vaccinator_name, placeholder: "Lead Tester's Name", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
+                    <%= f.label :lead_vaccinator_name, "Lead Tester’s Name", class: "block" %>
+                    <%= f.text_field :lead_vaccinator_name, placeholder: "Lead Tester's Name", class: "form-input w-full" %>
                 </div>
             </div>
 
