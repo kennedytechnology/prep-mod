@@ -104,10 +104,9 @@ class ClinicsController < ClinicManagementController
     @clinic.default_test_kit = clinic_params['default_test_kit'] if clinic_params['default_test_kit']
     
     if @clinic.update(clinic_params)
-      
       update_inventory_allocations
       finish_patients_in_queue
-      redirect_back fallback_location: clinics_path(clinic_date: 'upcoming')
+      redirect_back fallback_location: clinics_path(clinic_date: 'upcoming'), notice: "Clinic was updated successfully."
     else
       render :new
     end
