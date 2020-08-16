@@ -14,7 +14,7 @@
 </p>
 
 <p> <%= t'views.public_patient_mailer.request_confirmation.click'%>
-    <%= link_to "here", cancel_appointment_clinic_queued_patients_url(appointment_id: @appointment.id, clinic_id: @clinic.id) %>
+    <%= link_to "here", cancel_appointment_clinic_queued_patients_url(cancel_appointment: @cancel_appointment, clinic_id: @clinic.id) %>
     <%= t'views.public_patient_mailer.request_confirmation.cancel'%>
 </p>
 
