@@ -22,24 +22,25 @@ export default class extends Controller {
 
   okModal(event) {
     event.target.closest("tr").setAttribute('data-event-category', event.target.dataset.eventCategory)
-    // debugger
     event.target.closest('.modal').classList.toggle('hidden');
   }
 
   cancelModal(event) {
-    // debugger
     if (event.target.dataset['parent'] == 'addMorePatients') {
       event.target.closest('.modal').classList.toggle('hidden');
     } else {
-      let originallySelectedElement = [...event.target.closest("tr").getElementsByTagName("input")].find(element => element.value == event.target.closest('tr').dataset['eventCategory'])
-      if(originallySelectedElement) {
-        originallySelectedElement.checked = true;
-      } else {
-        [...event.target.closest("tr").getElementsByTagName("input")].forEach(element => element.checked = false);
-      }
-
       event.target.closest('.modal').classList.toggle('hidden');
     }
+  }
+
+  updatePatientTable(event) {
+    event.preventDefault();
+    let radioButton = [...event.target.closest("tr").getElementsByTagName("input")]
+        .find(elem => elem.dataset.selection === event.target.dataset.eventCategory),
+        closestForm = document.getElementsByClassName(`clinic_event_${event.currentTarget.dataset.clinicEvent}_form`)[0];
+
+    radioButton.checked = true;
+    Rails.fire(closestForm, 'submit');
   }
 
   search(event) {
