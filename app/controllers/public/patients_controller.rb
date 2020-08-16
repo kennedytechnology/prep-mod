@@ -1,5 +1,7 @@
 class Public::PatientsController < ApplicationController
+  include ApplicationHelper
   helper_method :last_step
+
   def clear_session
     session.destroy
     redirect_to root_path
@@ -44,7 +46,7 @@ class Public::PatientsController < ApplicationController
         render "edit", alert: "Success: This step of updating your patient request was saved."
       else
         create_family_patients
-        # PublicPatientMailer.request_confirmation(@patient, @clinic).deliver unless ENV["SCHOOL_VACCINATION_MODE"]
+        PublicPatientMailer.request_confirmation(@patient, @clinic).deliver unless school_mode?
         redirect_to root_path, alert: "Success: Your update patient request was fully saved."
       end
     else
