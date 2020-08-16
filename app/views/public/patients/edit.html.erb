@@ -1,6 +1,6 @@
-<%= content_for :prevent_unsaved_form_script do %>
-  <%= javascript_pack_tag 'prevent_unsaved_form', 'data-turbolinks-track': 'reload' %>
-<% end %>
+<%# content_for :prevent_unsaved_form_script do %>
+  <%# javascript_pack_tag 'prevent_unsaved_form', 'data-turbolinks-track': 'reload' %>
+<%# end %>
 
 <h1 class="main-title mt-8 md:mt-0"> <%= t 'views.public.patients.edit.title' %> <%= @clinic.name %></h1>
 
@@ -50,7 +50,7 @@
         Continue
       </button>
       <br/>
-      <button type="submit" name="next_step" value="add_family" class="button-action mb-4 md:mb-0">
+      <button type="submit" name="next_step" value="add_family" class="button-action my-3">
         <%= t'views.public.patients.edit.buttons.save_add_household_member' %>
       </button>
     <% elsif @step == "add_family" %>

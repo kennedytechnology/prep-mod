@@ -6,9 +6,9 @@ es:
           title: "Register for COVID-19 Testing:"
           buttons:
             back: "Back"
-            save_add_household_member: "Save and Add a Household Member"
+            save_add_household_member: "Save and Add Another Child"
             review_submit: "Review & Submit"
-            save_add_another_household_member: "Save and Add Another Household Member"
+            save_add_another_household_member: "Save and Add Another Child"
             save_continue: "Save And Continue"
             find_location: "Find Another Location"
           personal_info:

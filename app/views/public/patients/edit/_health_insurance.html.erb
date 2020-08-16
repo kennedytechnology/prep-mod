@@ -5,34 +5,34 @@
     </div>
     <div>
         <%= f.label :insurance_company_name, t('activerecord.models.patient.insurance_company_name'), class: "block" %>
-        <%= f.text_field :insurance_company_name, class: "w-full form-input" %>
+        <%= f.text_field :insurance_company_name, class: "w-full form-input", disabled: true %>
     </div>
 </div>
 
 <div class="field-side-by-side">
     <div>
         <%= f.label :member_id_for_insurance, t('activerecord.models.patient.member_id_for_insurance'), class: "block" %>
-        <%= f.text_field :member_id_for_insurance, class: "w-full form-input" %>
+        <%= f.text_field :member_id_for_insurance, class: "w-full form-input", disabled: true %>
     </div>
     <div>
         <%= f.label :group_number_for_insurance, t('activerecord.models.patient.group_number_for_insurance'), class: "block" %>
-        <%= f.text_field :group_number_for_insurance, class: "w-full form-input" %>
+        <%= f.text_field :group_number_for_insurance, class: "w-full form-input", disabled: true %>
     </div>
 </div>
 
 <div class="field-side-by-side">
     <div>
         <%= f.label :card_number_for_insurance, t('activerecord.models.patient.card_number_for_insurance'), class: "block" %>
-        <%= f.text_field :card_number_for_insurance, class: "w-full form-input" %>
+        <%= f.text_field :card_number_for_insurance, class: "w-full form-input", disabled: true %>
     </div>
     <div class="flex">
         <div class="flex-1 mr-2">
             <%= f.label :insured_first_name, t('activerecord.models.patient.insured_first_name'), class: "block" %>
-            <%= f.text_field :insured_first_name, class: "w-11/12 form-input" %>
+            <%= f.text_field :insured_first_name, class: "w-11/12 form-input", disabled: true %>
         </div>
         <div class="flex-1">
             <%= f.label :insured_last_name, t('activerecord.models.patient.insured_last_name'), class: "block" %>
-            <%= f.text_field :insured_last_name, class: "w-11/12 form-input" %>
+            <%= f.text_field :insured_last_name, class: "w-11/12 form-input", disabled: true %>
         </div>
     </div>
 </div>
@@ -42,7 +42,7 @@
         <%= f.label :insured_date_of_birth, t('activerecord.models.patient.insured_date_of_birth'), class: "block" %>
         <%#= f.text_field :insured_date_of_birth, value: @patient.insured_date_of_birth.try(:strftime, "%Y/%m/%d"), class: "w-full form-input",
                             data: { controller: "flatpickr", flatpickr_max_date: "today" } %>
-        <%= cw_date_field(f, :insured_date_of_birth, {class: "form-input w-full", value: @patient.insured_date_of_birth.try(:strftime, "%Y/%m/%d"), required: false},
+        <%= cw_date_field(f, :insured_date_of_birth, {class: "form-input w-full", value: @patient.insured_date_of_birth.try(:strftime, "%Y/%m/%d"), required: false, disabled: true},
                     {'data-controller' => 'flatpickr',
                     'data-flatpickr-max-date' => Time.zone.now
                     }
@@ -52,7 +52,7 @@
         <%= f.label :relation_to_patient_for_consent, class: "block" do %>
             <span><%= t('activerecord.models.patient.relation_to_patient_for_consent') %></span>
         <% end %>
-        <%= f.select :relation_to_patient_for_consent, options_for_select(RELATIONSHIP_TYPES, @patient.relation_to_patient_for_consent),{}, {class: "w-full form-select"} %>
+        <%= f.select :relation_to_patient_for_consent, options_for_select(RELATIONSHIP_TYPES, @patient.relation_to_patient_for_consent),{}, {class: "w-full form-select", disabled: true} %>
     </div>
 </div>
 
@@ -60,14 +60,14 @@
     <div>
         <%= f.label :insurance_card_front, t('activerecord.models.patient.insurance_card_front'), class: "block" %>
         <%= image_tag f.object.insurance_card_front.variant(resize_to_limit: [500, 500]), class: "mb-3" if f.object.insurance_card_front.attached? %>
-        <%= f.file_field :insurance_card_front, class: "form-input w-full text-gray-600", direct_upload: true %>
+        <%= f.file_field :insurance_card_front, class: "form-input w-full text-gray-600", direct_upload: true, disabled: true %>
         <p class="mt-1 text-xs text-gray-500"> <%= t 'views.public.patients.edit.health_insurance.drag_and_drop' %> </p>
     </div>
 
     <div>
         <%= f.label :insurance_card_back, t('activerecord.models.patient.insurance_card_back'), class: "block" %>
         <%= image_tag f.object.insurance_card_back.variant(resize_to_limit: [500, 500]), class: "mb-3" if f.object.insurance_card_back.attached? %>
-        <%= f.file_field :insurance_card_back, class: "form-input w-full text-gray-600", direct_upload: true %>
+        <%= f.file_field :insurance_card_back, class: "form-input w-full text-gray-600", direct_upload: true, disabled: true %>
         <p class="mt-1 text-xs text-gray-500"> <%= t 'views.public.patients.edit.health_insurance.drag_and_drop' %> </p>
     </div>
 </div>
