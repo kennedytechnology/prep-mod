@@ -64,21 +64,25 @@
             </div>
         </div>
 
-        <div class="field-side-by-side">
+
+        <div class="field-side-by-side"  data-controller="select-child-items">
             <div>
-                <%= f.label :venue_type, class: "block" do %>
-                    <span> Venue Type </span>
+            <%= f.label :county, class: "block" do %>
+                    <span> County </span>
                     <span class="field-required">*</span>
                 <% end %>
-                <%= f.select :venue_type, VENUE_TYPES, {prompt: "Select"}, {class: "form-select w-full", required: true, "data-target": "review-form.validates"} %>
+                <%# debugger %>
+                <% county_options = Venue.all.collect(&:county).uniq.collect{|c| [c, c, data: {child_items: options_for_select(Venue.where(county: c).order(:name).collect{|v| [v.name, v.id]}, f.object.venue_id) }]} %>
+                <%= f.select :county, options_for_select(county_options, f.object.county), {prompt: "Select", include_blank: true}, {class: "form-select w-full", required: true, data: {target: 'select-child-items.parent', action: 'select-child-items#update'}} %>
             </div>
             <div>
                 <%= f.label :venue_id, class: "block" do %>
-                    <span> Choose Venue </span>
+                    <span> Venue </span>
                     <span class="field-required">*</span>
                 <% end %>
-                <%= f.select :venue_id, options_for_select(Venue.all.collect { | venue | [venue.name, venue.id] }, @clinic.venue_id), {prompt: "Select"}, {class: "form-select w-full"} %>
+                <%= f.select :venue_id, options_for_select([]), {prompt: "Select"}, {class: "form-select w-full", data: {target: 'select-child-items.children'}} %>
             </div>
+            <div></div>
         </div>
 
         <div class="field-side-by-side">
@@ -129,12 +133,6 @@
 
             <div>
                 <h1 class="title"> &nbsp; </h1>
-
-                <%= f.label :county, class: "block" do %>
-                    <span> County </span>
-                    <span class="field-required">*</span>
-                <% end %>
-                <%= f.select :county, COUNTIES, {prompt: "Select"}, {class: "form-select w-full", required: true, "data-target": "review-form.validates"} %>
 
                 <%= f.label :venue_name, class: "block" %>
                 <%= f.text_field :venue_name, placeholder: "Location", class: "form-input w-full", required: true, "data-target": "review-form.validates" %>
