@@ -1,0 +1,10 @@
+<tr class="new_vaccine_row">
+    <td> <%= f.select :vaccine, VACCINE_ITEM_TYPES, {include_blank: true}, class: "form-select" %> </td>
+    <td> <%= f.select :route, %w(SubQ IM), {include_blank: true}, class: "form-select" %> </td>
+    <td> <%= f.select :site, %w(RA LA), {include_blank: true}, class: "form-select" %> </td>
+    <td> <%= f.select :reaction, %w(None Local Syncope Anaphylaxis), {include_blank: true}, class: "form-select" %> </td>
+    <td>
+        <%= f.hidden_field :_destroy %>
+        <%= link_to 'Remove', "javascript:", class: 'remove_new_vaccine button-action', data: {action: "click->main#removeVaccineDetails"} %>
+    </td>
+</tr>

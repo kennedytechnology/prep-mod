@@ -4,31 +4,22 @@
   <%# render partial: '/clinics/activity/vaccinated_details_prepmod', layout: "clinics/activity/clinic_event_modal", locals: {patient: patient, event_form: event_form, category_selection: category_selection} %>  
 <%# end %>
 
-<table class="w-full mt-8">
-  <tr>
-    <th>Vaccine</th>
-    <th>Route</th>
-    <th>Site</th>
-    <th>Reaction</th>
-  </tr>
-    <% event_form.object.vaccine_event_details << VaccineEventDetail.new unless event_form.object.vaccine_event_details.detect{|ved| ved.vaccine.blank?} %>
-    <%= event_form.fields_for :vaccine_event_details do |df| %>
-      <tr>
-        <td>
-          <%= df.select :vaccine, VACCINE_ITEM_TYPES, {include_blank: true}, class: "form-select" %>
-        </td>
-        <td>
-          <%= df.select :route, %w(SubQ IM), {include_blank: true}, class: "form-select" %>
-        </td>
-        <td>
-          <%= df.select :site, %w(RA LA), {include_blank: true}, class: "form-select" %>
-        </td>
-        <td>
-          <%= df.select :reaction, %w(None Local Syncope Anaphylaxis), {include_blank: true}, class: "form-select" %>
-        </td>
-      </tr>
-    <% end %>
-  
+ <%= link_to_add_new_vaccine('Add new Vaccine +', event_form, :vaccine_event_details, class: 'button-action mb-2 float-right button-add-new-vaccine', data: {action: "click->main#addVaccineDetails"}) %>
+<table class="w-full">
+    <thead>
+        <tr>
+            <th>Vaccine</th>
+            <th>Route</th>
+            <th>Site</th>
+            <th>Reaction</th>
+            <th> Action </th>
+        </tr>
+    </thead>
+    <tbody class="fields-new-vaccine">
+        <%= event_form.fields_for :vaccine_event_details, event_form.object.vaccine_event_details.build  do |df| %>
+            <%= render 'clinics/activity/vaccine_event_detail', f: df %>
+        <% end %>
+    </tbody>
 </table>
 
 <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start  sm:pt-5">
