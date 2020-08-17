@@ -17,7 +17,7 @@
         <% end %>
 
         <div>
-            <h2 class="title">Patient: <%= @clinic_event.patient.full_name %> (<%= @clinic_event.patient.date_of_birth.strftime("%B %e, %Y") %>)
+            <h2 class="title">Patient: <%= @clinic_event.patient.full_name %> (<%= @clinic_event.patient.date_of_birth.try(:strftime, "%B %e, %Y") %>)
             <div class="my-4 w-3/12">
                 <p class="label block">Logged In User</p>
                 <input class="form-input w-full" value="<%= current_user.name %>" disabled="true" />
@@ -27,7 +27,7 @@
                 <%= f.label :event_date, "Date of Encounter", class: "block" %>
                 <%#= f.text_field :event_date, class: "form-input w-full", placeholder: "MM/DD/YYYY",
                         required: true, data: { controller: "flatpickr", flatpickr_min_date: "today" } %>
-                <%= cw_date_field(f, :event_date, {class: "form-input w-full", placeholder: "MM/DD/YYYY", required: true}, 
+                <%= cw_date_field(f, :event_date, {class: "form-input w-full", placeholder: "MM/DD/YYYY", required: true},
                                                     {'data-controller' => 'flatpickr',
                                                     'data-flatpickr-min-date' => Time.zone.now}
                                                     ) %>
