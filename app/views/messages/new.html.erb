@@ -8,8 +8,8 @@
         <%= form_with model: @message, local: true, class: "content w-full flex flex-wrap justify-between" do |f| %>
             <div class="message-container py-12 px-6 max-w-xl lg:max-w-5xl lg:w-1/2 w-full">
                 <%= f.text_field :subject, class: 'form-input w-full', placeholder: "Subject:", required: true %>
-                <%= f.text_area :body, class: "form-textarea block w-full", rows: "9", placeholder: "Enter your message here.. ", reguired: true %>
-            </div> 
+                <%= f.text_area :body, class: "form-textarea block w-full", rows: "9", placeholder: "Enter your message here. ", reguired: true %>
+            </div>
             <div class="send-container py-12 px-6 max-w-xl lg:max-w-5xl lg:w-1/2 w-full">
                 <div class="send-content block w-full">
                     <span class="title text-gray-900 text-xl">Send Message to: </span>
@@ -20,7 +20,7 @@
                                     <%= f.check_box :send_to_all_users, class: "form-checkbox" %>
                                 </div>
                                 <div class="pl-7">
-                                    <%= f.label :send_to_all_users, "All users", class: "block" %>
+                                    <%= f.label :send_to_all_users, "All Users", class: "block" %>
                                 </div>
                             </div>
                         </div>
@@ -70,6 +70,6 @@
                     </div>
                 </div>
             </div>
-        <% end %>   
-    </div>    
-</div> 
+        <% end %>
+    </div>
+</div>

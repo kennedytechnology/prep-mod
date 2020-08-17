@@ -3,4 +3,6 @@
     ZIP Code, county, or region: number of available appointments, number of completed appointments.</p>
 <%= link_to "Download PDF Report", reports_uptake_path(format: :pdf), target: "_blank", class: "button-primary w-3/12 mb-12" %>
 
-<%= column_chart reports_available_and_completed_appointments_path, title: "Availabale/Completed appointments" %>
+<%= column_chart reports_available_and_completed_appointments_path, title: "Available/Completed appointments",
+    xtitle: "Not checked in"
+%>

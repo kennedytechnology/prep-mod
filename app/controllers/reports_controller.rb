@@ -53,7 +53,7 @@ class ReportsController < ApplicationController
   end
 
   def capacity
-    @available_appointments = Clinic.joins(:appointments).all.group(:venue_name).count 
+    @available_appointments = Clinic.joins(:appointments).all.group(:venue_name).count
     @scheduled_appointments = Clinic.joins(:appointments).where("appointments.queue_state = ?", "not_checked_in").group(:venue_name).count
     @available_appointments_by_county = Clinic.joins(:appointments).all.group(:county).count
     @scheduled_appintments_by_county = Clinic.joins(:appointments).where("appointments.queue_state = ?", "not_checked_in").group(:county).count
@@ -95,7 +95,7 @@ class ReportsController < ApplicationController
   end
 
   def uptake
-    @results = Appointment.where("queue_state = ? OR queue_state = ? ", *["not_checked_in", "done"]).group(:queue_state).count
+    @results = Appointment.where(queue_state: ["Not checked in", "Done"]).group(:queue_state).count
     respond_to do |format|
       format.html
       format.pdf do
@@ -226,7 +226,9 @@ class ReportsController < ApplicationController
   def news_and_notifications
     @news_signups = NewsSignup.all
     @news_signups_by_occupation = NewsSignup.group(:occupation).count
-    @news_signups_with_chronic_health_condition = NewsSignup.group(:chronic_health_condition).count
+    legend = {true => "With", false => "Without"}
+    @news_signups_with_chronic_health_condition = NewsSignup.group(:chronic_health_condition).count.transform_keys(&legend.method(:[]))
+
 
     template_name = params[:is_report] ? "news_and_notifications_report" : "news_and_notifications"
     respond_to do |format|
@@ -259,5 +261,10 @@ class ReportsController < ApplicationController
 
   def news_signups_with_chronic_health_condition
     render json: NewsSignup.group(:chronic_health_condition).count
+  end
+
+  def news_signups_with_chronic_health_condition
+    legend = {true => "With", false => "Without"}
+    render json: NewsSignup.group(:chronic_health_condition).count.transform_keys(&legend.method(:[]))
   end
 end

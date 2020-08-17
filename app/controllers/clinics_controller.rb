@@ -19,7 +19,7 @@ class ClinicsController < ClinicManagementController
   def new
     @clinic = Clinic.new
     @clinic.initial_set_up!
-    @page_title = "Create clinic"
+    @page_title = "Create Clinic"
     @errors = []
   end
 
@@ -102,7 +102,7 @@ class ClinicsController < ClinicManagementController
     @page_title = "View/Edit clinic"
     @errors = []
     @clinic.default_test_kit = clinic_params['default_test_kit'] if clinic_params['default_test_kit']
-    
+
     if @clinic.update(clinic_params)
       update_inventory_allocations
       finish_patients_in_queue
