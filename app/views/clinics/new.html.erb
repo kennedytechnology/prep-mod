@@ -70,7 +70,7 @@
                     <span> County </span>
                     <span class="field-required">*</span>
                 <% end %>
-                <% county_options = Venue.all.collect(&:county).uniq.collect{|c| [c, c, data: {child_items: options_for_select(Venue.where(county: c).order(:name).collect{|v| [v.name, v.id]}, f.object.venue_id) }]} %>
+                <% county_options = Venue.all.collect(&:county).sort.uniq.collect{|c| [c, c, data: {child_items: options_for_select(Venue.where(county: c).order(:name).collect{|v| [v.name, v.id]}, f.object.venue_id) }]} %>
                 <%= f.select :county, county_options, {prompt: "Select"}, {class: "form-select w-full", required: true, data: {target: 'select-child-items.parent', action: 'select-child-items#update'}} %>
             </div>
             <div>

@@ -8,6 +8,6 @@ export default class extends Controller {
   }
 
   update(){
-    this.childrenTarget.innerHTML = this.parentTarget[this.parentTarget.selectedIndex].dataset['child-items']
+    this.childrenTarget.innerHTML = this.parentTarget[this.parentTarget.selectedIndex].attributes['data-child-items'].value
   }
 }

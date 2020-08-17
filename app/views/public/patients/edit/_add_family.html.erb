@@ -27,12 +27,12 @@
                 <span><%= t('activerecord.models.patient.county') %></span><span class="field-required">*</span>
               <% end %>
 
-              <% county_options = Venue.all.collect(&:county).uniq.collect{|c| [c, c, data: {child_items: options_for_select(Venue.where(county: c).order(:name).collect{|v| [v.name, v.id]}, fm.object.venue_id) }]} %>
+              <% county_options = Venue.all.collect(&:county).sort.uniq.collect{|c| [c, c, data: {child_items: options_for_select(Venue.where(county: c).order(:name).collect{|v| [v.name, v.id]}, fm.object.venue_id) }]} %>
               <%= fm.select :county, options_for_select(county_options, fm.object.county), {include_blank: true}, class: 'form-select', data: {target: 'select-child-items.parent', action: 'select-child-items#update'}, required: true %>
               </div>
           </div>
           <div class="mr-2 w-4/12">
-              
+
               <%= fm.label :venue_id do %>
                 <span><%= t('activerecord.models.patient.school') %></span><span class="field-required">*</span>
               <% end %>
