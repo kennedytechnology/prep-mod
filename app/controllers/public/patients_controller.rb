@@ -1,5 +1,7 @@
 class Public::PatientsController < ApplicationController
+  include ApplicationHelper
   helper_method :last_step
+
   def clear_session
     session.destroy
     redirect_to root_path
@@ -44,7 +46,7 @@ class Public::PatientsController < ApplicationController
         render "edit", alert: "Success: This step of updating your patient request was saved."
       else
         create_family_patients
-        PublicPatientMailer.request_confirmation(@patient, @clinic).deliver
+        PublicPatientMailer.request_confirmation(@patient, @clinic).deliver unless school_mode?
         redirect_to root_path, alert: "Success: Your update patient request was fully saved."
       end
     else
@@ -100,7 +102,9 @@ class Public::PatientsController < ApplicationController
       attributes.delete('patient_id')
       patient = Patient.create(attributes)
       patient.save(validate: false)
-      Appointment.create(patient: patient, clinic: @clinic, appointment_at: @appointment.appointment_at)
+      @clinic.appointments.reload
+      appointment_time = @clinic.appointment_times[@clinic.appointment_times.index(@appointment.appointment_at.strftime("%l:%M%P").strip)..].reject{|t| @clinic.appointment_slots_for(t) < 1}.first
+      Appointment.create(patient: patient, clinic: @clinic, appointment_at: appointment_time)
     end
   end
 
@@ -160,7 +164,7 @@ class Public::PatientsController < ApplicationController
       :venue_id, :signer_first_name, :signer_last_name,
       employer_ids: [], vaccine_offering_ids: [],
       patient_family_members_attributes: [:id, :first_name, :middle_initial,
-        :last_name, :mothers_maiden_name, :race, :date_of_birth,
+        :last_name, :mothers_maiden_name, :race, :date_of_birth, :county, :venue_id,
         :insurance_company_name, :group_number_for_insurance,
         :member_id_for_insurance, :patient_id,
         :has_fever_over, :has_difficult_breathing, :had_traveled_to_affected_place,

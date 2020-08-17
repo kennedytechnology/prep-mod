@@ -13,7 +13,7 @@
 
 ## Installation: Native
 
-* First, configure the application according to your local environment (See "Configuration"). 
+* First, configure the application according to your local environment (See "Configuration").
 * In the application directory, run:
   * `bundle` to install Ruby dependencies
   * `yarn install` to install Javascript dependencies
@@ -50,7 +50,7 @@ Once the application is set up, you can:
 The application will look for its configuration in these environment variables:
 
 * **DATABASE_URL**: Login for application's PostgreSQL database
-* **GOOGLE_MAPS_API_KEY**: Used for geographic data, geocoding, display of static maps  
+* **GOOGLE_MAPS_API_KEY**: Used for geographic data, geocoding, display of static maps
 * **SITE_NAME**: The location of the application, as displayed to the user (Usually a URL)
 * **SITE_URL**: The URL of the application.
 * **SITE_HOST**: The host name where the application is running
@@ -60,6 +60,7 @@ The application will look for its configuration in these environment variables:
 * **TWILIO_FROM_PHONE**: The phone number from which SMS messages will be sent
 * **SLACK_NOTIFY_URL**: A callback URL for reporting errors to a chat room
 * **SCHOOL_VACCINATION_MODE**: Switching from Regular to School Mode
+* **MAILING_SECRET**: Verifier for the mailers links
 * **PUBLIC_LOGO** and **CLINIC_LOGO**: Mandatory values to configure the logos used
 
 # Application source code layout

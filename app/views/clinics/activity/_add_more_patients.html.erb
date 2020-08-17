@@ -23,18 +23,18 @@
             </div>
         </div>
     </div>
-     <div class="field-side-by-side">
+    <div class="field-side-by-side">
         <div class="flex flex-wrap">
             <div class="lg:w-2/3 lg:mr-2 sm:w-full">
                 <%= f.label :date_of_birth, "Date of Birth", class: "block" %>
                 <%= f.date_select :date_of_birth, {order: [:month, :day, :year], start_year: Date.current.year - 99, end_year: Date.current.year, include_blank: true}, class: "form-select",
-                        data: {action: "change->testing-referral-review-form#updateModalField keyup->testing-referral-review-form#updateModalField age-calculator#calculateAge",
-                               target: "age-calculator.dobField"} %>
+                            data: {action: "change->testing-referral-review-form#updateModalField keyup->testing-referral-review-form#updateModalField age-calculator#calculateAge",
+                                target: "age-calculator.dobField"} %>
             </div>
             <div class="w-2/12 mr-2">
                 <%= f.label :age, class: "block" %>
                 <%= f.number_field :age, class: "w-full form-input", data: {action: "keyup->testing-referral-review-form#updateModalField",
-                                                                            target: "age-calculator.ageField"} %>
+                                                                                target: "age-calculator.ageField"} %>
             </div>
             <div class="flex-1">
                 <%= f.label :sex, "Gender", class: "block" %>
@@ -42,7 +42,6 @@
             </div>
         </div>
         <div>
-            <%# TODO: Check why this is state instead of race %>
             <%= f.label :race, "Race", class: "block" %>
             <%= f.select :race, options_for_select(US_RACES, @patient.state), {prompt: "Select"}, {class: "w-full form-select", data: {action: "keyup->testing-referral-review-form#updateModalField"}} %>
         </div>
@@ -78,31 +77,29 @@
         </div>
     </div>
 
+    <% unless school_mode? %>
     <div class="field-side-by-side">
         <div>
             <h1 class="title">Send Patient Invitation Via</h1>
             <div class="flex">
                 <div class="mr-6">
-                    <%= f.check_box :notify_via_sms, class: "form-checkbox", data: {action: "click->testing-referral-review-form#updateModalCheckboxField"} %> 
+                    <%= f.check_box :notify_via_sms, class: "form-checkbox", data: {action: "click->testing-referral-review-form#updateModalCheckboxField"} %>
                     <%= f.label :notify_via_sms, "SMS" %>
                 </div>
-
                 <div>
-                    <%= f.check_box :notify_via_email, class: "form-checkbox", data: {action: "click->testing-referral-review-form#updateModalCheckboxField"} %> 
+                    <%= f.check_box :notify_via_email, class: "form-checkbox", data: {action: "click->testing-referral-review-form#updateModalCheckboxField"} %>
                     <%= f.label :notify_via_email, "Email" %>
                 </div>
             </div>
         </div>
-        <div>
-        </div>
+        <div></div>
     </div>
+    <% end %>
 
     <div class="flex justify-end my-4">
         <%= f.submit "Create", class: "button-primary" %>
-         <a data-action="clinic-activity-patients#cancelModal" data-parent="<%= patient.id.nil? ? "addMorePatients" : patient.id %>" class="button-primary sm:mr-0 md:mr-0">Cancel</a>
+        <a data-action="clinic-activity-patients#cancelModal"
+            data-parent="<%= patient.id.nil? ? "addMorePatients" : patient.id %>"
+            class="button-primary sm:mr-0 md:mr-0">Cancel</a>
     </div>
-
-     <span class="inline-flex rounded-md shadow-sm">
-           
-    </span>
 <% end %>

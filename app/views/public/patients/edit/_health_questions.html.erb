@@ -5,3 +5,20 @@
 <% end %>
 
 <%= hidden_field_tag :next_step, "consent_for_services" %>
+
+<div class="md:flex justify-center items-center mt-6">
+    <%= link_to "#{t'views.public.patients.edit.buttons.back'}", client_registration_path(clinic_id: @clinic.id, next_step: "health_insurance"), class: "button-action mb-4 md:mb-0" %>
+    <button type="submit" name="next_step" value="consent_for_services" class="button-action mb-4 md:mb-0">
+        Save and Select Vaccines
+    </button>    
+</div>
+
+<div class="md:flex justify-center items-center mt-6">
+    <button type="submit" name="next_step" value="add_family" class="text-xl button-action mr-0 my-3">
+        <%= t'views.public.patients.edit.buttons.save_add_household_member' %>
+    </button>
+</div>
+
+<div class="md:flex justify-center items-center mt-2">
+    <div class="w-3/12 text-center font-bold"><span>You will be able to select vaccines for all children on a following page.</span></div>
+</div>

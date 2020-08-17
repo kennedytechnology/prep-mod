@@ -2,7 +2,7 @@
   data-target="clinic-activity-patients.modal"
   data-patient-id="<%= patient.id.nil? ? "addMorePatients" : patient.id %>"
   data-category-selection="<%= category_selection %>"
-  class="modal hidden fixed w-full h-full top-0 left-0 flex items-center justify-center <%= "z-50" if patient.id.nil? %>">
+  class="modal hidden fixed w-full h-full top-0 left-0 flex items-center justify-center z-50">
 
   <div class="modal-overlay fixed w-full h-full bg-black opacity-25 top-0 left-0 cursor-pointer"></div>
   <div class="absolute p-8 bg-white rounded-lg shadow-lg flex w-7/12 <%= patient.id.nil? ? "overflow-y-scroll" : "" %>" style="<%= "top:50px; bottom: 50px;" if patient.id.nil? %>">
@@ -19,7 +19,10 @@
         <div class="flex justify-end">
           <% unless event_form.nil? %>
             <span class="ml-3 inline-flex rounded-md shadow-sm">
-              <button type="submit" class="button-primary" data-event-category="<%= category_selection %>">Update</button>
+              <button type="submit" class="button-primary"
+                      data-event-category="<%= category_selection %>"
+                      data-clinic-event="<%= patient.id unless patient.id.nil? %>"
+                      data-action="click->clinic-activity-patients#updatePatientTable">Update</button>
             </span>
           <% end %>
           <% unless category_selection == "AddPatient" %>

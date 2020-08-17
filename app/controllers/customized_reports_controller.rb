@@ -15,7 +15,7 @@ class CustomizedReportsController < InheritedResources::Base
         render pdf: "Customized report",
                 page_size: 'A4',
                 template: "customized_reports/report_pdf.html.erb",
-                layout: "clinic-print.pdf.erb",
+                layout: "clinic_print.html.erb",
                 orientation: "Landscape",
                 lowquality: true,
                 zoom: 1,

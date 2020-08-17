@@ -14,7 +14,7 @@
     },
     "worker": {
       "quantity": 1
-    }, 
+    },
     "test": {
       "quantity": 1,
       "size": "performance-l"
@@ -30,7 +30,8 @@
     "test": {
       "env": {
         "CLINIC_LOGO": "prepmod",
-        "PUBLIC_LOGO": "prepmod"
+        "PUBLIC_LOGO": "prepmod",
+        "MAILING_SECRET": "12345"
       }
     }
   }

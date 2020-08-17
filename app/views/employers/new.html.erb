@@ -137,14 +137,14 @@
         <div class="grid grid-cols-4 gap-4">
             <div>
                 <%= f.label :office_phone, t('activerecord.models.employer.office_phone'), class: "inline-block" %><span class="field-required">*</span>
-                <%= f.text_field :office_phone, required: true,
+                <%= f.text_field :office_phone, required: true, placeholder: "xxx-xxx-xxxx",
                                                 data: { action: "blur->employer-form#validateInputField" },
                                                 class: "form-input w-full" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
             <div>
                 <%= f.label :mobile_phone, t('activerecord.models.employer.mobile_phone'), class: "inline-block" %><span class="field-required">*</span>
-                <%= f.text_field :mobile_phone, required: true,
+                <%= f.text_field :mobile_phone, required: true, placeholder: "xxx-xxx-xxxx",
                                                 data: { action: "blur->employer-form#validateInputField" },
                                                 class: "form-input w-full" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
@@ -233,14 +233,14 @@
         <div class="grid grid-cols-3 gap-4">
             <div>
                 <%= f.label :backup_office_phone, t('activerecord.models.employer.backup_office_phone'), class: "inline-block" %><span class="field-required">*</span>
-                <%= f.text_field :office_phone, required: true,
+                <%= f.text_field :office_phone, required: true, placeholder: "xxx-xxx-xxxx",
                                                 data: { action: "blur->employer-form#validateInputField" },
                                                 class: "form-input w-full" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>
             </div>
             <div>
                 <%= f.label :backup_mobile_phone, t('activerecord.models.employer.backup_mobile_phone'), class: "inline-block" %><span class="field-required">*</span>
-                <%= f.text_field :mobile_phone, required: true,
+                <%= f.text_field :mobile_phone, required: true, placeholder: "xxx-xxx-xxxx",
                                                 data: { action: "blur->employer-form#validateInputField" },
                                                 class: "form-input w-full" %>
                 <p class="employer-error-message mb-4 text-red-600 text-sm hidden"></p>

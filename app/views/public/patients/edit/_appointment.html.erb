@@ -14,8 +14,8 @@
                     <% @clinic.appointment_times.each do |time| %>
                         <tr>
                             <td class="flex">
-                                <% if @clinic.appointment_slots.to_i >= (@patient.patient_family_members.count + 1) %>
-                                    <%= af.radio_button(:appointment_at, time, class: "form-radio", required: "true", 
+                                <% if @clinic.appointment_slots_for(time).to_i > 0 %>
+                                     <%= af.radio_button(:appointment_at, time, class: "form-radio", required: "true", 
                                         data: { 
                                             target: "consent-form-appointments.appointmentAt", 
                                             action: "click->consent-form-appointments#validateWaitingList" }) %>
@@ -24,7 +24,7 @@
                                 <% end %>
                                 <span class="ml-2"><%= time %></span>
                             </td>
-                            <td> <p> <%= @clinic.appointment_slots.to_i %> <%= t 'views.public.patients.edit.appointment.appointments_available' %> </p> </td>
+                            <td> <p> <%= @clinic.appointment_slots_for(time).to_i %> <%= t 'views.public.patients.edit.appointment.appointments_available' %> </p> </td>
                         </tr>
                     <% end %>
                     <tr class="border-t-4 border-gray-600">

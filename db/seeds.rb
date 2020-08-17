@@ -11,7 +11,7 @@ puts 'Seeding...'
 NAMED_PLACE_COUNT = 50
 CLINIC_COUNT = 20
 USER_COUNT = 100
-PATIENT_COUNT = CLINIC_COUNT * 20
+PATIENT_COUNT = CLINIC_COUNT * 25
 CLINIC_EVENTS_PER_PATIENT = 0.3
 CLINIC_STAFF_PER_CLINIC = 3
 SUPPLY_INVENTORY_COUNT = 18
@@ -57,21 +57,30 @@ addresses = JSON.load(Rails.root.join("db/addresses.json"))["addresses"]
 addresses.select!{|a| VENUE_STATES.include?(a["state"])}
 addresses.shuffle!
 
+
 puts "Creating venues..."
-VENUE_COUNT.times.each do |i|
-  address = addresses.sample
-  venue = Venue.create(
-    name: Faker::University.unique.name,
-    category: VENUE_TYPES.sample,
-    county: COUNTIES.sample,
-    address: address['address1'],
-    city: address['city'],
-    state: address['state'],
-    zip_code: address['postalCode'],
-    longitude: address['coordinates']['lng'],
-    latitude: address['coordinates']['lat'],
-  )
+
+csv_text = File.read(Rails.root.join('db', 'sample_data', 'venues.csv'))
+csv = CSV.parse(csv_text.scrub, :headers => true)
+csv.each do |row|
+  Venue.create!(row.to_h)
 end
+
+# 
+# VENUE_COUNT.times.each do |i|
+#   address = addresses.sample
+#   venue = Venue.create(
+#     name: i == 1 ? "All" : Faker::University.unique.name,
+#     category: VENUE_TYPES.sample,
+#     county: COUNTIES.sample,
+#     address: address['address1'],
+#     city: address['city'],
+#     state: address['state'],
+#     zip_code: address['postalCode'],
+#     longitude: address['coordinates']['lng'],
+#     latitude: address['coordinates']['lat'],
+#   )
+# end
 
 puts "Creating users..."
 USER_COUNT.times.each do |i|
@@ -238,7 +247,7 @@ CLINIC_COUNT.times.each do |i|
     latitude: address['coordinates']['lat'],
     location: "Nowhere",
     appointment_frequency_minutes: [10, 15, 30, 60].sample,
-    appointment_slots: (2..10).to_a.sample,
+    appointment_slots: (2..4).to_a.sample,
     appointments_available: ["yes_required", "yes_optional", "no_walk_in"].sample,
     active_queue_patients_count: rand(2) + 2,
     venue_type: VENUE_TYPES.sample,
@@ -314,10 +323,12 @@ PATIENT_COUNT.times.each do |i|
       on_waiting_list: true
     )
   else
+    # debugger
+    clinic.appointments.reload
     Appointment.create!(
       patient: patient,
       clinic: clinic,
-      appointment_at: clinic.appointment_times.sample
+      appointment_at: clinic.appointment_times.select{|t| clinic.appointment_slots_for(t) > 0 }.sample
     )
   end
 
@@ -463,6 +474,8 @@ SCHOOL_VACCINES.each do |k,v|
     short_name: k
   )
 end
+
+
 
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
 

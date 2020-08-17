@@ -38,7 +38,7 @@ class QueuedPatientsController < ClinicManagementController
       format.html { redirect_back fallback_location: clinic_queued_patients_path(@appointment.clinic) }
       format.js
     end
-    
+
   end
 
   def update_clinic_status
@@ -66,7 +66,8 @@ class QueuedPatientsController < ClinicManagementController
   end
 
   def cancel_appointment
-    @appointment = Appointment.find(params[:appointment_id])
+    canceled_appointment = ActiveSupport::MessageVerifier.new(ENV['MAILING_SECRET']).verify(params[:cancel_appointment])
+    @appointment = Appointment.find(canceled_appointment[:appointment_id])
 
     if @appointment.queue_state == "canceled"
       flash[:alert] = "Your appointment is already canceled."

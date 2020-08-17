@@ -10,8 +10,7 @@ class User < ApplicationRecord
   belongs_to :provider, optional: true
   belongs_to :venue, optional: true
 
-  validates_presence_of :first_name, :last_name, :role, :email, :email_confirmation
-  validates :email, confirmation: true
+  validates_presence_of :first_name, :last_name, :role, :email
 
   after_save :set_name, if: lambda { name == nil }
 

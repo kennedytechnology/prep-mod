@@ -28,7 +28,7 @@ SCHOOL_VACCINES = {
   'menb': "MenB",
   'td': "Td",
   'hib': "HIB",
-  'prevnar': 'Prevnar'
+  'prevnar': 'Pneumococcal Pneumonia'
 }
 
 # CLINIC_EVENTS = [

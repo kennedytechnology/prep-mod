@@ -29,7 +29,7 @@
                     </thead>
                     <tbody>
                         <% @clinic.patients.each do |patient| %>
-                            <%= form_with model: patient.event_for_clinic(@clinic), remote: true do |event_form| %>
+                            <%= form_with model: patient.event_for_clinic(@clinic), remote: true, class: "clinic_event_#{patient.id}_form" do |event_form| %>
                                 <tr data-target="clinic-activity-patients.searchableRow"
                                     data-event-category="<%= event_form.object.category %>"
                                     data-search-content="<%= [patient.first_name.downcase, patient.last_name.downcase].join(" ") %>"
@@ -41,16 +41,16 @@
                                         <%= link_to patient.first_name + ' ' + patient.last_name, patient, class: "underline" %> <br />
                                     </td>
                                     <td><%= patient.date_of_birth.try(:strftime, "%D") %></td>
-                                    <td><%= event_form.radio_button :category, "Vaccinated", data: {action: "click->clinic-activity-patients#showModal", selection: "Vaccinated"}, class: "form-radio" %> </td>
-                                    <td>
-                                        <%= event_form.radio_button :category, "Refused", onclick: "Rails.fire(this.form, 'submit');", class: "form-radio" %>
+                                    <td class="relative">
+                                        <div class="absolute bg-transparent h-4 w-4"
+                                            style="top: 26px; left: 8px;"
+                                            data-action="click->clinic-activity-patients#showModal"
+                                            data-selection="Vaccinated"></div>
+                                        <%= event_form.radio_button :category, "Vaccinated", data: {selection: "Vaccinated"}, class: "form-radio" %>
                                     </td>
-                                    <td>
-                                        <%= event_form.radio_button :category, "Sick", onclick: "Rails.fire(this.form, 'submit');", class: "form-radio" %>
-                                    </td>
-                                    <td>
-                                        <%= event_form.radio_button :category, "Absent", onclick: "Rails.fire(this.form, 'submit');", class: "form-radio" %>
-                                    </td>
+                                    <td><%= event_form.radio_button :category, "Refused", onclick: "Rails.fire(this.form, 'submit');", class: "form-radio" %></td>
+                                    <td><%= event_form.radio_button :category, "Sick", onclick: "Rails.fire(this.form, 'submit');", class: "form-radio" %></td>
+                                    <td><%= event_form.radio_button :category, "Absent", onclick: "Rails.fire(this.form, 'submit');", class: "form-radio" %></td>
                                     <td>
                                         <div class="flex">
                                         <%= link_to "Delete", "javascript:",

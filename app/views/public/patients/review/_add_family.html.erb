@@ -1,7 +1,7 @@
 <div>
     <% @patient.patient_family_members.each do |family_member| %>
-        <h2 class="text-xl font-bold mb-4 mt-8"> Family Members </h2>
-        <p class="text-blue-600"> Family Member: <%= @patient.full_name %> </p>
+        <h2 class="text-xl font-bold mb-4 mt-8"> <%= t 'views.public.patients.review.add_family.title' %> </h2>
+        <p class="text-blue-600 mb-3"> <%= t 'views.public.patients.review.add_family.member' %> <%= family_member.full_name %> </p>
         <div class="field-fullwidth">
             <div class="w-full flex">
                 <div class="flex-1 mr-2">

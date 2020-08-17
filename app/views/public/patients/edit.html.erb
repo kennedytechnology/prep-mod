@@ -1,6 +1,6 @@
-<%= content_for :prevent_unsaved_form_script do %>
-  <%= javascript_pack_tag 'prevent_unsaved_form', 'data-turbolinks-track': 'reload' %>
-<% end %>
+<%# content_for :prevent_unsaved_form_script do %>
+  <%# javascript_pack_tag 'prevent_unsaved_form', 'data-turbolinks-track': 'reload' %>
+<%# end %>
 
 <h1 class="main-title mt-8 md:mt-0"> <%= t 'views.public.patients.edit.title' %> <%= @clinic.name %></h1>
 
@@ -36,34 +36,36 @@
 
   <%= render '/public/patients/edit/' + @step, f: f %>
 
+  <!-- TODO: Move these into the step templates since they vary so much anyway -->
+  <% unless %w(health_questions add_family).include?(@step) %>
   <div class="md:flex justify-center items-center mt-6">
     <% if last_step %>
+
       <% @step == 'add_family' || @step == 'consent_for_services' ? this_step = "health_questions" : this_step = last_step%>
       <%= link_to "#{t'views.public.patients.edit.buttons.back'}", client_registration_path(clinic_id: @clinic.id, next_step: this_step), class: "button-action mb-4 md:mb-0" %>
     <% end %>
     <% if @step == "health_questions" %>
-      <button type="submit" name="next_step" value="add_family" class="button-action mb-4 md:mb-0">
-        <%= t'views.public.patients.edit.buttons.save_add_household_member' %>
-      </button>
+      
       <button type="submit" name="next_step" value="consent_for_services" class="button-action mb-4 md:mb-0">
         Continue
       </button>
-    <% elsif @step == "add_family" %>
-      <button type="submit" name="next_step" value="add_another_family" class="button-action mb-4 md:mb-0">
-        <%= t'views.public.patients.edit.buttons.save_add_another_household_member' %>
+      <br/>
+      <button type="submit" name="next_step" value="add_family" class="button-action my-3">
+        <%= t'views.public.patients.edit.buttons.save_add_household_member' %>
       </button>
-      <button type="submit" name="next_step" value="consent_for_services" class="button-action"><%= t'views.public.patients.edit.buttons.save_continue' %></button>
+    <% elsif @step == "add_family" %>
+      
     <% elsif @step == "review" %>
       <button type="submit" name="next_step" value="appointment" class="button-action"><%= t'views.public.patients.edit.buttons.save_continue' %></button>
     <% else %>
       <% if @step == "appointment" %>
         <%= link_to t('views.public.patients.edit.buttons.find_location'), '/clinic/search?service[]=Testing&next_step=appointment', class: "button-action" %>
       <% end %>
-      <%= submit_tag t('views.public.patients.save_and_continue'), class: "button-action", id: "submitButton" %>
+      <%= submit_tag t('views.public.patients.save_and_continue'), class: "button-action", id: "submitButton", data: {disable_with: false} %>
     <% end %>
     <%# if @step == "consent_for_services" %>
     <%# submit_tag "Save and Add Family Member →", class: "button-action" %>
     <%# end %>
-
   </div>
+  <% end %>
 <% end %>
