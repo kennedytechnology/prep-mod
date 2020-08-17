@@ -1,31 +1,23 @@
 import { Controller } from "stimulus";
 
 export default class extends Controller {
-  getAppointmentTimeInputs() {
-    return document.getElementsByName("appointment[appointment_at]");
-  }
-  getWaitingListInput() {
-    return document.getElementsByName("appointment[on_waiting_list]")[0];
+  static targets = ["onWaitingList", "appointmentAt"];
+
+  validateWaitingList() {
+    this.onWaitingListTarget.removeAttribute("required");
+    this.onWaitingListTarget.checked = false;
+
+    this.appointmentAtTargets.forEach((element) => {
+      element.setAttribute("required", true);
+    });
   }
 
   validateAppointmentTimeInputs() {
-    let appointmentTimeInputs = this.getAppointmentTimeInputs();
-    let waitingListInput = this.getWaitingListInput();
+    this.appointmentAtTargets.forEach((element) => {
+      element.removeAttribute("required");
+      element.checked = false;
+    });
 
-    if (waitingListInput.checked == true) {
-      for (let i = 0; i < appointmentTimeInputs.length; i++) {
-        appointmentTimeInputs[i].removeAttribute("required");
-        appointmentTimeInputs[i].checked = false;
-      }
-    }
-  }
-
-  validateWaitingList() {
-    let waitingListInput = this.getWaitingListInput();
-
-    if (waitingListInput.checked == true) {
-      waitingListInput.removeAttribute("required");
-      waitingListInput.checked = false;
-    }
+    this.onWaitingListTarget.setAttribute("required", true);
   }
 }

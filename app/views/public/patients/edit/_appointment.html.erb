@@ -15,7 +15,10 @@
                         <tr>
                             <td class="flex">
                                 <% if @clinic.appointment_slots.to_i >= (@patient.patient_family_members.count + 1) %>
-                                    <%= af.radio_button(:appointment_at, time, class: "form-radio", required: "true", data: { action: "click->consent-form-appointments#validateWaitingList" }) %>
+                                    <%= af.radio_button(:appointment_at, time, class: "form-radio", required: "true", 
+                                        data: { 
+                                            target: "consent-form-appointments.appointmentAt", 
+                                            action: "click->consent-form-appointments#validateWaitingList" }) %>
                                 <% else %>
                                     <%= af.radio_button(:appointment_at, time, class: "form-radio", disabled: "true") %>
                                 <% end %>
@@ -26,7 +29,10 @@
                     <% end %>
                     <tr class="border-t-4 border-gray-600">
                         <td>
-                            <%= af.radio_button(:on_waiting_list, "1", class: "form-radio", required: "true", data: { action: "click->consent-form-appointments#validateAppointmentTimeInputs" }) %>
+                            <%= af.radio_button(:on_waiting_list, "1", class: "form-radio", required: "true", 
+                                data: { 
+                                    target: "consent-form-appointments.onWaitingList",
+                                    action: "click->consent-form-appointments#validateAppointmentTimeInputs" }) %>
                             <span class="ml-1"><%= t 'views.public.patients.edit.appointment.waiting_list' %></span>
                         </td>
                         <td> <p><%= t 'views.public.patients.edit.appointment.contact' %></p> </td>
