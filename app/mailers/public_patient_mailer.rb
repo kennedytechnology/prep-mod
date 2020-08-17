@@ -8,7 +8,8 @@ class PublicPatientMailer < ApplicationMailer
     @cancel_appointment = ActiveSupport::MessageVerifier.new(ENV['MAILING_SECRET']).generate(message)
 
     I18n.with_locale(locale) do
-      mail to: patient.email
+      mail to: patient.email,
+        subject: t('.subject', name: @clinic.services.pluck(:name).join(", "))
     end
   end
 end

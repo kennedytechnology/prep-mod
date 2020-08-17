@@ -40,4 +40,4 @@ en:
       subject: "We need more information"
   public_patient_mailer:
     request_confirmation:
-      subject: "Confirmation for your request about COVID-19 testing."
+      subject: "Your %{name} Appointment is Confirmed!"

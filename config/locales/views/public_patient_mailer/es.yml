@@ -2,11 +2,13 @@ es:
   views:
     public_patient_mailer:
       request_confirmation:
-        title: "Thank you for registering for %{name}"
-        patient: "%{full_name}"
+        title: "This message is to confirm that %{first_name} %{middle_initial} %{last_name}, "
+        family: "%{family_members}, is scheduled for: "
         date: "Date:"
         time: "Time:"
         location: "Location: %{address}"
         click: "If you cannot, make this appointment, click"
         cancel: "to cancel."
-        end: "Thank you."
+        reschedule: "To reschedule, go to: "
+        end: "We look forward to seeing you!"
+        provider: "%{provider_name}"
