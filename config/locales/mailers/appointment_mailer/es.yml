@@ -18,7 +18,7 @@ es:
       subject: "Vaccinated confirmation"
   employer_mailer:
     request_confirmation:
-      subject: "Your request to receive COVID-19 information about your constituents or employees has been submitted successfully."
+      subject: "Confirmation for your request to access information about your workplace"
   news_signup_mailer:
     successful_signup:
       subject: "Thank you for your subscription"
