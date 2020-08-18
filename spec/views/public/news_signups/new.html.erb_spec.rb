@@ -12,9 +12,13 @@ RSpec.describe "/public/news_signups/new", type: :view do
       assert_select "input[name=?]", "news_signup[first_name]"
       assert_select "input[name=?]", "news_signup[last_name]"
       assert_select "input[name=?]", "news_signup[email]"
-      assert_select "select[name=?]", "news_signup[date_of_birth(1i)]"
-      assert_select "select[name=?]", "news_signup[date_of_birth(2i)]"
-      assert_select "select[name=?]", "news_signup[date_of_birth(3i)]"
+      if ENV['DATEPICKER'] == "true"
+        assert_select "select[name=?]", "news_signup[date_of_birth(1i)]"
+        assert_select "select[name=?]", "news_signup[date_of_birth(2i)]"
+        assert_select "select[name=?]", "news_signup[date_of_birth(3i)]"
+      else
+        assert_select "input[name=?]", "news_signup[date_of_birth]"
+      end
       assert_select "input[name=?]", "news_signup[zip_code]"
       assert_select "input[name=?]", "news_signup[topics][]"
       assert_select "select[name=?]", "news_signup[occupation]"
