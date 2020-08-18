@@ -47,7 +47,7 @@
     <div class="md:flex lg:flex">
         <div class="flex-1 md:mr-2 lg:mr-2">
             <p> <%= t 'views.public.patients.review.health_insurance.insured_dob' %> </p>
-            <p class="font-bold"> <%= @patient.insured_date_of_birth %> </p>
+            <p class="font-bold"> <%= @patient.insured_date_of_birth.try(:to_s, :long_ordinal) %> </p>
         </div>
     </div>
 </div>

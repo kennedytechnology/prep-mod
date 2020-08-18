@@ -22,7 +22,7 @@
                 </div>
                 <div class="flex-1">
                     <p> <%= t 'activerecord.models.patient.date_of_birth' %> </p>
-                    <p class="font-bold"> <%= family_member.date_of_birth %> </p>
+                    <p class="font-bold"> <%= family_member.date_of_birth.try(:to_s, :long_ordinal) %> </p>
                 </div>
             </div>
         </div>
