@@ -40,6 +40,7 @@ class Ability
         can :manage, Patient
         can :manage, Message
         can :view, Clinic
+        can :report, Clinic
       end
 
       if user.has_role?(:lead_staff)
