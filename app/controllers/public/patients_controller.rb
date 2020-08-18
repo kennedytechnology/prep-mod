@@ -103,8 +103,12 @@ class Public::PatientsController < ApplicationController
       patient = Patient.create(attributes)
       patient.save(validate: false)
       @clinic.appointments.reload
-      appointment_time = @clinic.appointment_times[@clinic.appointment_times.index(@appointment.appointment_at.strftime("%l:%M%P").strip)..].reject{|t| @clinic.appointment_slots_for(t) < 1}.first
-      Appointment.create(patient: patient, clinic: @clinic, appointment_at: appointment_time)
+      if @appointment.appointment_at?
+        appointment_time = @clinic.appointment_times[@clinic.appointment_times.index(@appointment.appointment_at.strftime("%l:%M%P").strip)..].reject{|t| @clinic.appointment_slots_for(t) < 1}.first
+        Appointment.create(patient: patient, clinic: @clinic, appointment_at: appointment_time)
+      else
+        Appointment.create(patient: patient, clinic: @clinic, on_waiting_list: true)
+      end
     end
   end
 
