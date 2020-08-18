@@ -1,4 +1,4 @@
-<%= render partial: 'reports/reports_header', locals: {title: "Providers Reports"} %>
+<%= render partial: 'reports/reports_header', locals: {title: "Providers"} %>
 <p class="mb-3">
     An accounting of providers engaged in the response by specialty, regions,
     number of patients tested, vaccine inventory.
@@ -11,6 +11,6 @@
         <%= pie_chart reports_providers_by_specialty_path, donut: true, title: "Providers engaged by specialty" %>
     </div>
     <div>
-        <%= pie_chart reports_providers_by_county_path, donut: true, title: "Providers engaged by regions" %>
+        <%= pie_chart reports_providers_by_county_path, donut: true, title: "Providers engaged by region" %>
     </div>
 </div>

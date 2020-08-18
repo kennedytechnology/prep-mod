@@ -1,11 +1,14 @@
 <h2 class="text-xl font-bold mb-4"> <%= t 'views.public.patients.review.personal_information.title' %> </h2>
-<div class="field-side-by-side">
-    <div>
-        <p> <%= t 'views.public.patients.review.personal_information.county' %> </p>
-        <p class="font-bold"> <%= @patient.county %> </p>
+
+<% if school_mode? %>
+    <div class="field-side-by-side">
+        <div>
+            <p> <%= t 'views.public.patients.review.personal_information.county' %> </p>
+            <p class="font-bold"> <%= @patient.county %> </p>
+        </div>
+        <div> </div>
     </div>
-    <div> </div>
-</div>
+<% end %>
 
 <div class="field-side-by-side">
     <div class="md:flex lg:flex">
@@ -52,7 +55,7 @@
     <div class="md:flex lg:flex">
         <div class="flex-1 md:mr-2 lg:mr-2">
             <p> <%= t 'static_pages.public.patients.consent_form.personal_information.date_of_birth' %> </p>
-            <p class="font-bold"> <%= @patient.date_of_birth%> </p>
+            <p class="font-bold"> <%= @patient.date_of_birth.try(:to_s, :long_ordinal) %> </p>
         </div>
         <div class="flex-1 md:mr-2 lg:mr-2">
             <p> <%= t('static_pages.public.patients.consent_form.personal_information.age') %> </p>

@@ -21,7 +21,7 @@
     <%= form_with url: {format: :csv}, method: :get, data: {controller: "upload-records", remote: false} do %>
       <div class="flex flex-row w-full items-center justify-start">
         <div class="inline w-1/6 mr-2">
-          <label class="text-gray-500 text-xl">Select County</label>
+          <label class="text-gray-500 text-xl">County</label>
           <%= select_tag :county, options_for_select(COUNTIES), {prompt: 'Please Select', class: "block form-select w-full"} %>
         </div>
         <div class="inline w-1/6 mr-2">
@@ -40,6 +40,6 @@
       <div class="flex w-1/6 mt-3 mr-2 hidden" data-target="upload-records.submitButton">
         <%= link_to "Submit", "", class: "button-primary lg:min-w-full lg:max-w-full" %>
       </div>
-    <% end %>  
+    <% end %>
   </div>
 </div>

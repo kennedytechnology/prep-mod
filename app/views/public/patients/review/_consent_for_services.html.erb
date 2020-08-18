@@ -31,7 +31,7 @@
     </div>
     <div>
        <p> <%= t 'views.public.patients.review.consent_for_services.date' %> </p>
-       <p class="font-bold"> <%= @patient.consent_date %> </p>
+       <p class="font-bold"> <%= @patient.consent_date.try(:to_s, :long_ordinal) %> </p>
     </div>
 </div>
 <div class="field-side-by-side">

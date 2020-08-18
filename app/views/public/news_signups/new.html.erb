@@ -35,7 +35,12 @@
           <%= t 'activerecords.models.news_signup.date_of_birth' %> <span class="field-required">*</span>
         <% end %>
         <div class="flex">
-          <%= f.date_select :date_of_birth, {order: [:month, :day, :year], start_year: Date.current.year - 99, end_year: Date.current.year, include_blank: true}, class: "form-select w-full", required: true %>
+          <%#= f.date_select :date_of_birth, {order: [:month, :day, :year], start_year: Date.current.year - 99, end_year: Date.current.year, include_blank: true}, class: "form-select w-full", required: true %>
+          <%= cw_date_field(f, :date_of_birth, {class: "form-input w-full", required: true},
+                          {'data-controller' => 'flatpickr',
+                          'data-flatpickr-max-date' => Time.zone.now
+                          }
+              ) %>
         </div>
       </div>
       <div>

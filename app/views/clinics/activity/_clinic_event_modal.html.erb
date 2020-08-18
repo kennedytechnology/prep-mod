@@ -5,9 +5,11 @@
   class="modal hidden fixed w-full h-full top-0 left-0 flex items-center justify-center z-50">
 
   <div class="modal-overlay fixed w-full h-full bg-black opacity-25 top-0 left-0 cursor-pointer"></div>
-  <div class="absolute p-8 bg-white rounded-lg shadow-lg flex w-7/12 <%= patient.id.nil? ? "overflow-y-scroll" : "" %>" style="<%= "top:50px; bottom: 50px;" if patient.id.nil? %>">
+  <div class="absolute p-8 bg-white rounded-lg shadow-lg flex w-7/12 
+    <%= (patient.id.nil? || category_selection.downcase == "vaccinated") ? "overflow-y-scroll" : "" %>" 
+    style="<%= "top:50px; bottom: 50px;" if (patient.id.nil? || category_selection.downcase == "vaccinated") %>">
 
-    <div class="w-full">
+    <div class="w-full <%= category_selection.downcase %>">
         <% unless category_selection == "AddPatient" %>
           <h1 class="text-lg leading-6 font-medium text-gray-900">
             <%= category_selection %>: <span class="font-bold"> <%= patient.full_name %> </span>

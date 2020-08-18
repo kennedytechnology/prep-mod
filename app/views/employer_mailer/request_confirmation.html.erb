@@ -1,7 +1,11 @@
 <p>
+     <%= t('views.employer_mailer.request_confirmation.dear', first_name: @employer.first_name, last_name: @employer.last_name) %>
+    <br />
     <%= t 'views.employer_mailer.request_confirmation.message' %>
     <br />
     <%= t 'views.employer_mailer.request_confirmation.contact' %>
     <br />
     <%= t 'views.employer_mailer.request_confirmation.request_status' %>
+    <br />
+    <%= t'views.employer_mailer.request_confirmation.provider', provider_name: ENV['PROVIDER_NAME'] || "Provider" %>
 </p>

@@ -72,7 +72,10 @@
                     <span class="field-required">*</span>
                 <% end %>
                 
-                <% county_options = Venue.all.collect(&:county).sort.uniq.collect{|c| [c, c, data: {child_items: options_for_select(Venue.where(county: c).order(:name).collect{|v| [v.name, v.id]}, f.object.venue_id) }]} %>
+                <% county_options = Venue.all.collect(&:county).sort.uniq.collect{|c| [c, c,
+                                                                                       data: {
+                                                                                           child_items: options_for_select(Venue.where(county: c).order(:name).collect{|v| [v.name, v.id]}, f.object.venue_id),
+                                                                                           vaccine_items: options_for_select(SupplyInventory.where(county: c).order(:category).collect{|o| [o.name, o.id]}) }]} %>
                 <%= f.select :county, options_for_select(county_options, f.object.county), {prompt: "Select", include_blank: true}, {class: "form-select w-full", required: true, data: {target: 'select-child-items.parent', action: 'select-child-items#update'}} %>
             </div>
             <div>

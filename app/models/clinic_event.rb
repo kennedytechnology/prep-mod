@@ -6,7 +6,7 @@ class ClinicEvent < ApplicationRecord
   has_many :vaccine_event_details
   before_save :send_notification, if: lambda { safety_kit_received == true }
 
-  accepts_nested_attributes_for :vaccine_event_details
+  accepts_nested_attributes_for :vaccine_event_details, allow_destroy: true, reject_if: :all_blank
 
   def send_notification
     ClinicMailer.send_vaccinated_confirmation(self).deliver

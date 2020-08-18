@@ -70,7 +70,12 @@
                     <span> County </span>
                     <span class="field-required">*</span>
                 <% end %>
-                <% county_options = Venue.all.collect(&:county).sort.uniq.collect{|c| [c, c, data: {child_items: options_for_select(Venue.where(county: c).order(:name).collect{|v| [v.name, v.id]}, f.object.venue_id) }]} %>
+                <% county_options = Venue.all.collect(&:county).sort.uniq.collect{|c| [c, c, 
+                    data: {
+                        child_items: options_for_select(Venue.where(county: c).order(:name).collect{|v| [v.name, v.id]}, f.object.venue_id),
+                        vaccine_items: options_for_select(SupplyInventory.where(county: c).order(:category).collect{|o| [o.name, o.id]})
+                    }]
+                    } %>
                 <%= f.select :county, county_options, {prompt: "Select"}, {class: "form-select w-full", required: true, data: {target: 'select-child-items.parent', action: 'select-child-items#update'}} %>
             </div>
             <div>
@@ -125,7 +130,7 @@
                 <h1 class="title"> &nbsp; </h1>
                 
 
-                <%= f.label :venue_name, class: "block" %>
+                <%= f.label :venue_name, "Venue Name", class: "block" %>
                 <%= f.text_field :venue_name, placeholder: "Venue Name", class: "form-input w-full" %>
 
                 <%= f.label :address, class: "block" %>

@@ -2,6 +2,8 @@ en:
   views:
     employer_mailer:
       request_confirmation:
-        message: "Your request to receive COVID-19 information about your constituents or employees has been submitted successfully."
-        contact: "We will contact you shortly."
-        request_status: "To inquire about the status of your request, call your local or state health department."
+        dear: "%{first_name} %{last_name},"
+        message: "your request to receive COVID-19 information about your employees or students has been submitted successfully."
+        contact: "Your regional administrator will be in touch shortly. To inquire about our request call your state health department."
+        request_status: "Thank you,"
+        provider: "%{provider_name}"

@@ -1,4 +1,4 @@
-<%= render partial: 'reports/reports_header', locals: {title: "Supply Inventories"} %>
+<%= render partial: 'reports/reports_header', locals: {title: "Supplies Inventories"} %>
 <p class="mb-3 justify-start"> An accounting of testing kits and other supplies by venue, county, or statewide. </p>
 <%= link_to "Download PDF Report", reports_supply_inventories_path(format: :pdf), target: "_blank", class: "button-primary w-3/12 mt-3 mb-12" %>
 
@@ -8,7 +8,7 @@
             height: "200px",
             discrete: true,
             legend: false,
-            ytitle: "No. of inventories",
+            ytitle: "Number of test kits",
             library: {
                 scales: {
                     xAxes: [{
@@ -32,10 +32,10 @@
     </div>
     <div class="p-4 border border-gray-50 rounded-lg ">
         <%= bar_chart reports_supply_inventories_by_venue_name_path, title: "Supplies by venue",
-            height: "200px",
+            height: "310px",
             discrete: true,
             legend: false,
-            xtitle: "No. of inventories",
+            xtitle: "Number of test kits",
             library: {
                 scales: {
                     xAxes: [{
@@ -50,7 +50,7 @@
                             drawOnChartArea: true,
                             color: "#f4f5f7"
                         }
-                    }]
+                    }],
                 }
             },
             dataset: {

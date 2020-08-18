@@ -15,12 +15,6 @@ Rails.application.routes.draw do
 
     resources :provider_enrollments
 
-    resources :employers, only: [:index, :new, :create, :destroy] do
-      member do
-        get :activity
-      end
-    end
-
     get 'kit/new', to: 'public/kit#new'
   end
 
@@ -87,6 +81,12 @@ Rails.application.routes.draw do
     get "capacity_scheduled_appointments_by_county"
     get "news_signups_by_occupation"
     get "news_signups_with_chronic_health_condition"
+  end
+
+  resources :employers, only: [:index, :new, :create, :destroy] do
+    member do
+      get :activity
+    end
   end
 
   resources :patients

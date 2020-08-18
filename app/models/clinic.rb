@@ -40,7 +40,6 @@ class Clinic < ApplicationRecord
   validates :venue_name, presence: true
   validates :county, presence: true
   validates :address, presence: true
-  validates :lead_vaccinator_name, presence: true
   # validates :clinic_date, presence: true
 
   validates_presence_of :services, message: '- Please select: Services Provided'
