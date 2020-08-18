@@ -1,8 +1,8 @@
-<div class="field-fullwidth mt-8" data-controller="habtm-form">
+<div class="field-fullwidth mt-8" id="supplyInventoriesDetails" data-controller="habtm-form">
     <h1 class="title"> Clinic Inventory </h1>
     <div class="flex items-center justify-between mb-8 mt-8">
         <div class="w-2/12">
-            <%= select_tag(:new_clinic_supply_inventory, options_for_select(SupplyInventory.all.sort_by{|si| si.category.to_s}.collect{|si| [si.name, si.id]}), data: {target: "habtm-form.newItemId", action: "habtm-form#updateDetails"}, class: "form-select w-full", style:"margin-bottom: 0;") %>
+            <%= select_tag(:new_clinic_supply_inventory, options_for_select([]), prompt: "Select", data: {target: "habtm-form.newItemId", action: "habtm-form#updateDetails"}, class: "form-select w-full vaccineSelect", style:"margin-bottom: 0;") %>
         </div>
         <div class="" id="new_supply_inventory_details">
             <% SupplyInventory.all.each do |supply_inventory| %>
