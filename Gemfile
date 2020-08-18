@@ -30,24 +30,12 @@ gem 'sidekiq'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
-# Will Paginate
-gem 'will_paginate', '~> 3.3.0'
-# Devise Invitable
-gem 'devise_invitable', '~> 2.0.0'
-# Ransack
-gem 'ransack', github: 'activerecord-hackery/ransack'
-gem 'image_processing'
-gem 'caxlsx'
-gem 'caxlsx_rails'
-gem "chartkick"
-gem 'cancancan'
-gem 'role_model'
-gem "roo", "~> 2.8.0"
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'wkhtmltopdf-binary-edge'
+  gem 'rspec-rails', '~> 4.0.0'
+  gem 'dotenv-rails'
 end
 
 group :development do
@@ -57,6 +45,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the   background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem "letter_opener"
+  gem 'rails-erd'
 end
 
 group :test do
@@ -69,21 +59,27 @@ group :test do
   gem 'simplecov', require: false
 end
 
-group :development, :test do
-  gem 'rspec-rails', '~> 4.0.0'
-  gem 'dotenv-rails'
-end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+# Project specific gems
+gem 'will_paginate', '~> 3.3.0'
+gem 'devise_invitable', '~> 2.0.0'
+gem 'ransack', github: 'activerecord-hackery/ransack'
+gem 'image_processing'
+gem 'caxlsx'
+gem 'caxlsx_rails'
+gem "chartkick"
+gem 'cancancan'
+gem 'role_model'
+gem "roo", "~> 2.8.0"
 gem 'activeadmin'
 gem 'devise'
 gem 'draper'
 gem 'factory_bot_rails'
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 gem 'geocoder'
-gem "letter_opener", :group => :development
 gem 'twilio-ruby'
 gem "combined_time_select", "~> 2.0.0"
 gem 'exception_notification'
@@ -94,5 +90,4 @@ gem 'phonelib'
 gem "aws-sdk-s3", require: false
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-heroku', '2.12.5.0', group: :production
-gem 'rails-erd', group: :development
 gem 'rails-i18n'
