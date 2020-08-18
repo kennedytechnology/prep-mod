@@ -134,7 +134,7 @@
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding-top: 10px;
+  padding-bottom: 10px;
   background: #2699FB;
 }
 .flatpickr-months .flatpickr-month {
@@ -147,7 +147,7 @@
   text-align: center;
   position: relative;
   -webkit-user-select: none;
-     -moz-user-select: none;
+      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
   overflow: hidden;
@@ -797,6 +797,6 @@ span.flatpickr-weekday {
   }
 }
 
-#flatpickr-custom-year-select {
+/* #flatpickr-custom-year-select {
   background: #2699FB;
-}
+} */
