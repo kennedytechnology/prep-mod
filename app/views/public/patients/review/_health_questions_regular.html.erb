@@ -36,7 +36,7 @@
         <p class="font-bold"> <%= humanize_boolean(patient.is_age_60_or_more) %> </p>
     </div>
     <div>
-        <p><%= t 'views.public.patients.edit.health_questions.age_question' %></p>
+        <p><%= t 'views.public.patients.edit.health_questions.testing_reasons' %></p>
         <p class="font-bold"> <%= humanize_boolean(patient.has_other_reason) %> </p>
 
         <% if patient.has_other_reason == true %>
