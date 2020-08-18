@@ -1,4 +1,15 @@
 <h2 class="text-xl font-bold mb-4"> <%= t 'views.public.patients.review.personal_information.title' %> </h2>
+
+<% if school_mode? %>
+    <div class="field-side-by-side">
+        <div>
+            <p> <%= t 'views.public.patients.review.personal_information.county' %> </p>
+            <p class="font-bold"> <%= @patient.county %> </p>
+        </div>
+        <div> </div>
+    </div>
+<% end %>
+
 <div class="field-side-by-side">
     <div class="md:flex lg:flex">
         <div class="w-full md:w-9/12 md:mr-2 lg:w-8/12 lg:mr-2">
