@@ -54,7 +54,7 @@
         <% end %>
     </div>
     <div>
-        <h2 class="title"><%= t 'views.public.patients.edit.health_questions.age_question' %><span class="field-required">*</span></h2>
+        <h2 class="title"><%= t 'views.public.patients.edit.health_questions.testing_reasons' %><span class="field-required">*</span></h2>
         <% t('activerecord.models.patient.has_other_reason').each do |o| %>
             <label class="mr-3"><%= f.radio_button :has_other_reason, o == 'Yes' ? true : false, required: true %>
               <span><%= o %></span>
