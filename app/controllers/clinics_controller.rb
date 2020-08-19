@@ -1,7 +1,7 @@
 class ClinicsController < ClinicManagementController
   include ApplicationHelper
 
-  load_and_authorize_resource except: [:index]
+  load_and_authorize_resource
   before_action :get_clinic, only: [:edit, :update]
 
   def index

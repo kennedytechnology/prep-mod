@@ -56,14 +56,14 @@
     <div>
         <h2 class="title"><%= t 'views.public.patients.edit.health_questions.testing_reasons' %><span class="field-required">*</span></h2>
         <% t('activerecord.models.patient.has_other_reason').each do |o| %>
-            <label class="mr-3"><%= f.radio_button :has_other_reason, o == 'Yes' ? true : false, required: true %>
+            <label class="mr-3"><%= f.radio_button :has_other_reason, o == 'Yes' ? true : false, required: true, data: {action: "click->consent-form#toggleHasOtherReasonBox", target: "consent-form.hasOtherReason"} %>
               <span><%= o %></span>
             </label>
         <% end %>
 
         <div class="hidden" data-target="consent-form.otherReasonExplanation">
             <%= f.label :has_other_reason_explanation, t('activerecord.models.patient.has_other_reason_explanation'), class: "block w-full" %>
-            <%= f.text_area :has_other_reason_explanation, class: "form-textarea w-full" %>
+            <%= f.text_area :has_other_reason_explanation, class: "form-textarea w-full", data: {target: "consent-form.otherReasonExplanationArea"} %>
         </div>
     </div>
 </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_16_173005) do
+ActiveRecord::Schema.define(version: 2020_08_18_100030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -646,7 +646,6 @@ ActiveRecord::Schema.define(version: 2020_08_16_173005) do
     t.integer "provider_id"
     t.string "email_confirmation"
     t.string "county"
-    t.bigint "venue_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
@@ -655,7 +654,13 @@ ActiveRecord::Schema.define(version: 2020_08_16_173005) do
     t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by_type_and_invited_by_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
-    t.index ["venue_id"], name: "index_users_on_venue_id"
+  end
+
+  create_table "users_venues", id: false, force: :cascade do |t|
+    t.bigint "venue_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id", "venue_id"], name: "index_users_venues_on_user_id_and_venue_id"
+    t.index ["venue_id", "user_id"], name: "index_users_venues_on_venue_id_and_user_id"
   end
 
   create_table "vaccine_event_details", force: :cascade do |t|
@@ -698,5 +703,4 @@ ActiveRecord::Schema.define(version: 2020_08_16_173005) do
   add_foreign_key "supply_inventories", "users"
   add_foreign_key "supply_inventory_events", "supply_inventories"
   add_foreign_key "test_kits", "clinics"
-  add_foreign_key "users", "venues"
 end

@@ -48,16 +48,34 @@
                   <% end %>
                   <%= f.select :county, COUNTIES, {prompt: "Select"}, {class: "form-select w-full"} %>
 
-                    <%# f.label :venues, class: "block" do %>
-                        <!-- <span> Venue </span> -->
-                    <%# end %>
-                    <%# f.select :venues, VENUE_TYPES, {include_blank: "None"}, {class: "form-select w-full"} %>
-
-                <%= f.label :venue_id, class: "block" do %>
-                    <span> Venue </span>
-                    <span class="field-required">*</span>
-                <% end %>
-                <%= f.select :venue_id, options_for_select(Venue.all.collect { | venue | [venue.name, venue.id] }), {prompt: "Select"}, {class: "form-select w-full"} %>
+                <div class="" data-controller="consent-form">
+                  <p class="label">
+                    <span> Choose Venues: </span>
+                  </p>
+                  <p data-target="consent-form.companyInputField" class="text-lg md:text-xl lg:text-xl"></p>
+                  <div class="multiselect-dropdown">
+                    <div class="selectBox" data-action="click->consent-form#showCheckboxes">
+                      <input type="text" id="predict_company_name" data-action="keyup->consent-form#search" placeholder="Search venue name" class="form-input w-full md:w-1/3 lg:w-full" style="height: 50px;" />
+                    </div>
+                    <div class="checkboxes-in-dropdown w-full" id="locationsCheckboxes" data-target="consent-form.locationsCheckboxes">
+                      <%= collection_check_boxes(:user, :venue_ids, Venue.all, :id, :name) do |b| %>
+                        <div class="relative flex items-start px-3 hover:bg-blue-50" data-target="consent-form.searchableRow" data-search-content="<%= [b.object.name.try(:downcase)] %>">
+                          <div class="absolute flex items-center h-5">
+                            <%= b.check_box(class: "form-checkbox cursor-pointer text-base font-bold",
+                                            data: {action: "click->consent-form#displayLocations",
+                                                   locations: "",
+                                                   employer: "#{b.object.name}",
+                                                   target: "consent-form.companyCheckbox"
+                                            }) %>
+                          </div>
+                          <div class="pl-6 text-sm leading-5">
+                            <%= b.label %>
+                          </div>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
 
 
                   <%= f.label :role, class: "block" do %>

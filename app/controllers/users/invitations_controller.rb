@@ -13,6 +13,6 @@ class Users::InvitationsController < Devise::InvitationsController
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:invite, keys: [:first_name, :last_name, :email, :email_confirmation, :role, :county, :venues, :venue_id ])
+    devise_parameter_sanitizer.permit(:invite, keys: [:first_name, :last_name, :email, :email_confirmation, :role, :county, :venues, venue_ids: [] ])
   end
 end
