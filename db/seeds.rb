@@ -225,7 +225,7 @@ puts "Creating clinics..."
 CLINIC_COUNT.times.each do |i|
   address = addresses.pop
   clinic = Clinic.create(
-    user_id: User.take.id,
+    users: User.all.sample(rand(3)),
     provider_enrollment_id: ProviderEnrollment.take.id,
     venue_name: Faker::University.unique.name,
     clinic_date: Faker::Date.between(from: 3.days.from_now, to: 6.months.from_now),
