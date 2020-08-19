@@ -19,7 +19,14 @@ class Ability
       end
 
       if user.has_role?(:government)
-        cannot :manage, :all
+        can :manage, Patient
+        cannot :manage, Provider
+        cannot :manage, Employer
+        cannot :manage, SupplyInventory
+        cannot :manage, Clinic
+        cannot :records_search, Patient
+        cannot :upload_record, Patient
+        cannot :download_records, Patient
       end
 
       if user.has_role?(:provider_employer)
