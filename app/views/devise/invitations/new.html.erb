@@ -82,7 +82,7 @@
                       <span> Role </span>
                       <span class="field-required">*</span>
                   <% end %>
-                  <%= f.select :role, current_user.assignable_roles.reject{|role| role == ["Super Admin", "super_admin"]}, {prompt: "Select"}, {class: "form-select w-full", required: true} %>
+                  <%= f.select :role, current_user.assignable_roles, {prompt: "Select"}, {class: "form-select w-full", required: true} %>
               </div>
               <div></div>
           </div>

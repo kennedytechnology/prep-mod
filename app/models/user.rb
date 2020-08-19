@@ -41,8 +41,7 @@ class User < ApplicationRecord
 
   def assignable_roles
     roles = User.valid_roles.map { |r| [r.to_s.titleize, r.to_s]}
-    roles = roles.map.reject { |r| r[1] == 'super_admin' } unless has_role?(:super_admin)
-    roles = roles.map.reject { |r| r[1] == 'regional_admin' } unless has_roles?(:super_admin, :regional_admin)
+    roles = roles.map.reject { |r| r[1] == 'super_admin' || r[1] == 'regional_admin' || r[1] == 'government' }
     roles
   end
 
