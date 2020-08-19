@@ -61,7 +61,7 @@ class Clinic < ApplicationRecord
     if user.has_roles?(:super_admin)
       all
     else
-      where(venue_name: user.venues)
+      where(venue: user.venues)
     end
   }
 

@@ -95,7 +95,7 @@ USER_COUNT.times.each do |i|
     first_name: i == 5 ? "Sam" : Faker::Name.unique.first_name,
     last_name: i == 5 ? "Kennedy" : Faker::Name.unique.last_name,
     clinics: Clinic.all.sample(5),
-    venue_id: Faker::Number.between(from: 5, to: Venue.count)
+    venues: Venue.all.sample(rand(3))
   )
 end
 

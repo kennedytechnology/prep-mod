@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :patients
   has_many :supply_inventories
   belongs_to :provider, optional: true
-  belongs_to :venue, optional: true
+  has_and_belongs_to_many :venues, optional: true
 
   validates_presence_of :first_name, :last_name, :role, :email
 

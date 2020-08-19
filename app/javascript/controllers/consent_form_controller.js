@@ -37,7 +37,7 @@ export default class extends Controller {
       this.locationsTarget.innerText = e.currentTarget.getAttribute("data-locations");
     }
 
-    this.companyInputFieldTarget.innerHTML = "Selected: <br/>" + this.companyCheckboxTargets.filter(e => e.checked).map(e => e.dataset.employer).join("<br/> ")
+    this.companyInputFieldTarget.innerHTML = "<b>Selected:</b> <br/>" + this.companyCheckboxTargets.filter(e => e.checked).map(e => e.dataset.employer).join("<br/> ")
   }
 
   toggleModal(event) {
