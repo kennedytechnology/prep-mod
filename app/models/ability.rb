@@ -54,6 +54,7 @@ class Ability
         can :manage, Clinic
         cannot :create, Clinic
         can :manage, Patient
+        staff_enrolment_provider_access
       end
 
       if user.has_role?(:staff)
@@ -61,7 +62,14 @@ class Ability
         cannot :edit, Clinic
         cannot :create, Clinic
         can :manage, Patient
+        staff_enrolment_provider_access
       end
     end
+  end
+
+  private
+  def staff_enrolment_provider_access
+    cannot :manage, ProviderEnrollment
+    cannot :manage, Employer
   end
 end

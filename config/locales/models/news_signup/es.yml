@@ -2,6 +2,8 @@ es:
   activerecords:
     models:
       news_signup:
+        one: "Signup"
+        other: "Signups"
         first_name: "First Name (Spanish)"
         last_name: "Last Name"
         date_of_birth: "Date of Birth"

@@ -2,6 +2,8 @@ es:
   activerecord:
     models:
       employer:
+        one: "Employer"
+        other: "Employers"
         screening_info: "COVID-19 Screening"
         testing_info: "COVID-19 Testing"
         vacination_info: "COVID-19 Vaccination"

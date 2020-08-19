@@ -1,5 +1,6 @@
 class ProviderEnrollmentsController < ApplicationController
   before_action :authenticate_user!, except: [:new, :create]
+  load_and_authorize_resource
   layout "clinic_management", except: [:new, :create]
 
   def index

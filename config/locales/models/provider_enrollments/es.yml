@@ -2,6 +2,8 @@ es:
   activerecord:
     models:
       provider_enrollments:
+        one: "Provider"
+        other: "Providers"
         clinic_services: ""
         clinic_age_groups: ""
         clinic_primary_groups: ""
