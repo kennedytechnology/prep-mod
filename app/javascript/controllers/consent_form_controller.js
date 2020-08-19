@@ -2,7 +2,7 @@ import { Controller } from "stimulus"
 
 export default class extends Controller {
   static targets = [ "searchableRow", "employer", "locations",
-      "companyCheckbox", "companyInputField", "locationsCheckboxes", "otherReasonExplanation",
+      "companyCheckbox", "companyInputField", "locationsCheckboxes", "hasOtherReason", "otherReasonExplanation", "otherReasonExplanationArea",
       "emailField", "confirmEmailField", "confirmEmailError" ]
 
   connect() {
@@ -12,8 +12,9 @@ export default class extends Controller {
       }
     });
 
-    if ((this.hasOtherReasonExplanationTarget) && (document.getElementById("patient_has_other_reason_true").checked)) {
-      this.otherReasonExplanationTarget.classList.remove("hidden");
+    var that = this;
+    if (this.hasOtherReasonTargets) {
+      that.toggleHasOtherReasonBox();
     }
   }
 
@@ -45,12 +46,16 @@ export default class extends Controller {
     modal.classList.toggle('pointer-events-none')
   }
 
-  showOtherReasonExplanation() {
-    this.otherReasonExplanationTarget.classList.remove("hidden");
-  }
-
-  hideOtherReasonExplanation() {
-    this.otherReasonExplanationTarget.classList.add("hidden");
-    document.getElementById("patient_has_other_reason_explanation").value = "";
+  toggleHasOtherReasonBox() {
+    let that = this;
+    
+    this.hasOtherReasonTargets.forEach((item, index) => {
+      if (item.checked && item.value === "true") {
+        that.otherReasonExplanationTargets[index].classList.remove("hidden")
+      } else {
+        that.otherReasonExplanationTargets[index].classList.add("hidden")
+        that.otherReasonExplanationAreaTargets[index].value = "";
+      }
+    })
   }
 }

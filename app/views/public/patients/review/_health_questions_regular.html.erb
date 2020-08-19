@@ -41,7 +41,7 @@
 
         <% if patient.has_other_reason == true %>
             <p> <%= t('activerecord.models.patient.has_other_reason_explanation') %> </p>
-            <p class="font-bold"> <%= humanize_boolean(patient.has_other_reason_explanation) %> </p>
+            <p class="font-bold"> <%= patient.has_other_reason_explanation %> </p>
         <% end %>
     </div>
 </div>
