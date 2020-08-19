@@ -3,7 +3,8 @@ en:
     public:
       patients:
         edit:
-          title: "Register for Vaccination:"
+          title-regular: "Register for COVID-19 Testing:"
+          title-school: "Register for Vaccination:"
           buttons:
             back: "Back"
             save_add_household_member: "Save and Add Another Child"

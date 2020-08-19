@@ -9,7 +9,11 @@
 <div class="md:flex justify-center items-center mt-6">
     <%= link_to "#{t'views.public.patients.edit.buttons.back'}", client_registration_path(clinic_id: @clinic.id, next_step: "health_insurance"), class: "button-action mb-4 md:mb-0" %>
     <button type="submit" name="next_step" value="consent_for_services" class="button-action mb-4 md:mb-0">
-        Save and Select Vaccines
+        <% if school_mode? %>
+            Save and Select Vaccines
+        <% else %>
+            Save and Select Testing
+        <% end %>
     </button>    
 </div>
 

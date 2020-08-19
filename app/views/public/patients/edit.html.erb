@@ -2,7 +2,11 @@
   <%# javascript_pack_tag 'prevent_unsaved_form', 'data-turbolinks-track': 'reload' %>
 <%# end %>
 
-<h1 class="main-title mt-8 md:mt-0"> <%= t 'views.public.patients.edit.title' %> <%= @clinic.name %></h1>
+<% if school_mode? %>
+  <h1 class="main-title mt-8 md:mt-0"> <%= t 'views.public.patients.edit.title-school' %> <%= @clinic.name %></h1>
+<% else %>
+  <h1 class="main-title mt-8 md:mt-0"> <%= t 'views.public.patients.edit.title-regular' %> <%= @clinic.name %></h1>
+<% end %>
 
 <%= form_for(@patient, url: "/client/registration", remote: false, data: {controller: "inventory-new-entry"}) do |f| %>
   <div class="min-w-full mb-12 hidden md:block">

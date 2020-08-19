@@ -61,6 +61,19 @@
 </div>
 
 <div class="field-side-by-side" data-controller="age-calculator">
+    <% if !school_mode? %>
+        <div class="flex">
+            <div class="flex-1 mr-2">
+                <%= f.label :race, "Race" %>
+                <%= f.select :race, options_for_select(US_RACES, @patient.race), {prompt: "--"}, {class: "form-select w-full"} %>
+            </div>
+            <div class="flex-1">
+                <%= f.label :occupation %>
+                <%= f.select :occupation, options_for_select(PATIENT_OCCUPATIONS, @patient.occupation), {prompt: "--"}, {class: "form-select w-full"} %>
+            </div>
+        </div>
+    <% end %>
+
     <div class="md:flex lg:flex">
         <div class="flex-1 md:mr-2 lg:mr-2">
             <%= f.label :date_of_birth do %>
