@@ -174,7 +174,8 @@ class Public::PatientsController < ApplicationController
         :has_fever_over, :has_difficult_breathing, :had_traveled_to_affected_place,
         :had_contact_with_confirmed_case, :has_risk_factor, :is_age_60_or_more, :has_other_reason,
         :has_child_allergies, :has_child_serious_reaction_to_vaccine, :has_child_immune_system_problem, 
-        :is_child_pregnant_or_possible_to_become, :has_child_been_vaccinated_last_four_weeks, :_destroy, vaccine_offering_ids: [],] )
+        :is_child_pregnant_or_possible_to_become, :has_child_been_vaccinated_last_four_weeks, :_destroy,
+        :has_cough, :has_other_reason_explanation, vaccine_offering_ids: [],] )
   end
 
   def appointment_params
