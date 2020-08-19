@@ -66,7 +66,7 @@ csv.each do |row|
   Venue.create!(row.to_h)
 end
 
-# 
+#
 # VENUE_COUNT.times.each do |i|
 #   address = addresses.sample
 #   venue = Venue.create(
@@ -346,7 +346,7 @@ PATIENT_COUNT.times.each do |i|
       user: users.sample,
       notes: Faker::Lorem.paragraph(sentence_count: 0, random_sentences_to_add: 2, supplemental: true)
     )
-    
+
     if ce.category == "Vaccinated"
       (rand(2) + 2).times do
         ce.vaccine_event_details.create!(
@@ -379,7 +379,7 @@ end
 #     user: users.sample,
 #     notes: Faker::Lorem.paragraph(sentence_count: 0, random_sentences_to_add: 2, supplemental: true)
 #   )
-  
+
 #   if ce.category == "Vaccinated"
 #     (rand(2) + 2).times do
 #       ce.vaccine_event_details.create!(
@@ -472,6 +472,25 @@ SCHOOL_VACCINES.each do |k,v|
   VaccineOffering.create!(
     name: v,
     short_name: k
+  )
+end
+
+puts "Creating user roles..."
+user_roles = ["super_admin", "government", "regional_admin", "local_admin", "provider_employer",
+"venue_admin", "school_nurse", "lead_staff", "staff"]
+user_roles.each do |role|
+  email = "#{role}@test.com"
+  User.create!(
+    email: email,
+    email_confirmation: email,
+    password: 'password',
+    password_confirmation: 'password',
+    role: role,
+    venues: VENUE_TYPES.sample(7),
+    first_name: Faker::Name.unique.first_name,
+    last_name: Faker::Name.unique.last_name,
+    clinics: Clinic.all.sample(5),
+    venue_id: Faker::Number.between(from: 5, to: Venue.count)
   )
 end
 
