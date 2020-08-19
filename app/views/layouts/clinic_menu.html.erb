@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CW</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= yield :google_maps_script if content_for?(:google_maps_script) %>
+    <%= yield :prevent_unsaved_form_script if content_for?(:prevent_unsaved_form_script) %>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+  </head>
+
+  <body data-controller="main">
+    <%= render partial: "layouts/flash_message", locals: {message: alert ? "alert" : "notice", flash_message: (alert || notice)} if flash.any? %>
+
+    <div class="main-container">
+        <% unless @hide_header %>
+          <div class="flex justify-between items-center">
+            <a href="/"><%= image_tag clinic_logo, class: "mt-2 mb-4 h-32 logo-#{ENV['PUBLIC_LOGO']}" %></a>
+            <!--
+            <div class="flex">
+              <%= link_to "EN", {locale: :en}, class: "mr-3" %>
+              <%= link_to "ES", {locale: :es} %>
+            </div>
+            -->
+          </div>
+        <% end %>
+
+        <%= yield %>
+    </div>
+
+    <%= render partial: "layouts/footer" unless (action_name == "index" && controller_name == "public_portal") %>
+  </body>
+</html>
