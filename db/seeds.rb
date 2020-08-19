@@ -91,10 +91,9 @@ USER_COUNT.times.each do |i|
     password: 'password',
     password_confirmation: 'password',
     role: i == 1 ? "super_admin" : USER_ROLES.sample,
-    venues: VENUE_TYPES.sample(7),
+    venues: Venue.all.sample(3),
     first_name: i == 5 ? "Sam" : Faker::Name.unique.first_name,
     last_name: i == 5 ? "Kennedy" : Faker::Name.unique.last_name,
-    clinics: Clinic.all.sample(5),
     venues: Venue.all.sample(rand(3))
   )
 end
@@ -486,11 +485,10 @@ user_roles.each do |role|
     password: 'password',
     password_confirmation: 'password',
     role: role,
-    venues: VENUE_TYPES.sample(7),
+    venues: Venue.all.sample(rand(3)),
     first_name: Faker::Name.unique.first_name,
     last_name: Faker::Name.unique.last_name,
-    clinics: Clinic.all.sample(5),
-    venue_id: Faker::Number.between(from: 5, to: Venue.count)
+    clinics: Clinic.all.sample(5)
   )
 end
 
