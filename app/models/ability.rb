@@ -34,20 +34,25 @@ class Ability
         cannot :create, Provider
         cannot :manage, Employer
         can :manage, SupplyInventory
+        staff_enrolment_provider_access
       end
 
       if user.has_role?(:venue_admin)
         can :manage, :all
-        cannot :create, Provider
+        cannot :manage, Provider
         cannot :manage, Employer
         can :manage, SupplyInventory
+        staff_enrolment_provider_access
       end
 
       if user.has_role?(:school_nurse)
         can :manage, Patient
         can :manage, Message
-        can :view, Clinic
+        can :manage, Clinic
         can :report, Clinic
+        cannot :create, Clinic
+        cannot :edit, Clinic
+        cannot :data_transfer, Clinic
       end
 
       if user.has_role?(:lead_staff)
@@ -62,6 +67,7 @@ class Ability
         cannot :edit, Clinic
         cannot :create, Clinic
         can :manage, Patient
+        cannot :data_transfer, Clinic
         staff_enrolment_provider_access
       end
     end
