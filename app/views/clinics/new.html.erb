@@ -68,7 +68,6 @@
             <div>
             <%= f.label :county, class: "block" do %>
                     <span> County </span>
-                    <span class="field-required">*</span>
                 <% end %>
                 <% county_options = Venue.all.collect(&:county).sort.uniq.collect{|c| [c, c, 
                     data: {
@@ -76,12 +75,11 @@
                         vaccine_items: options_for_select(SupplyInventory.where(county: c).order(:category).collect{|o| [o.name, o.id]})
                     }]
                     } %>
-                <%= f.select :county, county_options, {prompt: "Select"}, {class: "form-select w-full", required: true, data: {target: 'select-child-items.parent', action: 'select-child-items#update'}} %>
+                <%= f.select :county, county_options, {prompt: "Select"}, {class: "form-select w-full", data: {target: 'select-child-items.parent', action: 'select-child-items#update'}} %>
             </div>
             <div>
                 <%= f.label :venue_id, class: "block" do %>
                     <span> Venue </span>
-                    <span class="field-required">*</span>
                 <% end %>
                 <%= f.select :venue_id, options_for_select([]), {prompt: "Select"}, {class: "form-select w-full", data: {target: 'select-child-items.children'}} %>
             </div>
@@ -128,10 +126,6 @@
 
             <div>
                 <h1 class="title"> &nbsp; </h1>
-                
-
-                <%= f.label :venue_name, "Venue Name", class: "block" %>
-                <%= f.text_field :venue_name, placeholder: "Venue Name", class: "form-input w-full" %>
 
                 <%= f.label :address, class: "block" %>
                 <%= f.text_field :address, id: "autocomplete", onFocus: "geolocate()", class: "form-input w-full", placeholder: "Address" %>
