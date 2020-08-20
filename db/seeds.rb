@@ -91,7 +91,6 @@ USER_COUNT.times.each do |i|
     password: 'password',
     password_confirmation: 'password',
     role: i == 1 ? "super_admin" : USER_ROLES.sample,
-    venues: Venue.all.sample(3),
     first_name: i == 5 ? "Sam" : Faker::Name.unique.first_name,
     last_name: i == 5 ? "Kennedy" : Faker::Name.unique.last_name,
     venues: Venue.all.sample(rand(3))
