@@ -70,7 +70,7 @@
                 <%= f.label :county, class: "block" do %>
                     <span> County </span>
                 <% end %>
-                
+
                 <% county_options = Venue.all.collect(&:county).sort.uniq.collect{|c| [c, c,
                                                                                        data: {
                                                                                            child_items: options_for_select(Venue.where(county: c).order(:name).collect{|v| [v.name, v.id]}, f.object.venue_id),
@@ -113,7 +113,7 @@
                     values = (start_time..end_time).step(15.minutes)
                 %>
                 <select class="hour form-select" name="clinic[start_hour_minute]">
-                    <%= options_for_select(values.map{ |t| Time.at(t).strftime("%I:%M") }, @clinic.start_time ? @clinic.start_time.strftime('%I:%M') : nil) %>
+                    <%= options_for_select(values.map{ |t| Time.at(t).strftime("%I:%M") }, @clinic.start_time ? @clinic.start_time.utc.strftime('%I:%M') : nil) %>
                 </select>
 
                 <select class="meridiem form-select" name="clinic[start_meridiem]">
@@ -123,7 +123,7 @@
                 <p class="label">End Time <span class="field-required">*</span></p>
                 <select class="hour form-select"
                     name="clinic[end_hour_minute]">
-                    <%= options_for_select(values.map{ |t| Time.at(t).strftime("%I:%M") }, @clinic.end_time ? @clinic.end_time.strftime('%I:%M') : nil) %>
+                    <%= options_for_select(values.map{ |t| Time.at(t).strftime("%I:%M") }, @clinic.end_time ? @clinic.end_time.utc.strftime('%I:%M') : nil) %>
                 </select>
 
                 <select name="clinic[end_meridiem]"
@@ -255,7 +255,7 @@
         <%= render partial: 'supply_inventories', locals: {f: f} %>
 
         <div class="flex justify-end mt-8">
-            
+
             <%= f.submit "Update", class: "button-primary" %>
             <%= link_to "Cancel", clinics_path, class: "button-primary" %>
         </div>
