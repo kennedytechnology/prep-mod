@@ -177,8 +177,8 @@ class Clinic < ApplicationRecord
   end
 
   def appointment_times
-    this_time = start_time
-    last_time = end_time
+    this_time = start_time.utc
+    last_time = end_time.utc
     results = []
     while this_time < last_time
       results << this_time.strftime("%l:%M%P").strip

@@ -14,9 +14,9 @@
                         <tr>
                             <td class="flex">
                                 <% if @clinic.appointment_slots_for(time).to_i > 0 %>
-                                     <%= af.radio_button(:appointment_at, time, class: "form-radio", required: "true", 
-                                        data: { 
-                                            target: "consent-form-appointments.appointmentAt", 
+                                    <%= af.radio_button(:appointment_at, time, class: "form-radio", required: "true",
+                                        data: {
+                                            target: "consent-form-appointments.appointmentAt",
                                             action: "click->consent-form-appointments#validateWaitingList" }) %>
                                 <% else %>
                                     <%= af.radio_button(:appointment_at, time, class: "form-radio", disabled: "true") %>
@@ -28,8 +28,8 @@
                     <% end %>
                     <tr class="border-t-4 border-gray-600">
                         <td>
-                            <%= af.radio_button(:on_waiting_list, "1", class: "form-radio", required: "true", 
-                                data: { 
+                            <%= af.radio_button(:on_waiting_list, "1", class: "form-radio", required: "true",
+                                data: {
                                     target: "consent-form-appointments.onWaitingList",
                                     action: "click->consent-form-appointments#validateAppointmentTimeInputs" }) %>
                             <span class="ml-1"><%= t 'views.public.patients.edit.appointment.waiting_list' %></span>

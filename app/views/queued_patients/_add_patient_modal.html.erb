@@ -8,7 +8,7 @@
 
   <div class="modal-overlay fixed w-full h-full bg-black opacity-25 top-0 left-0 cursor-pointer"></div>
   <div class="absolute p-8 bg-white rounded-lg shadow-lg flex <%= @patient.id.nil? ? "overflow-y-scroll" : "" %>" style="<%= "top:50px; bottom: 50px;" if @patient.id.nil? %>">
-    
+
     <div class="w-full">
         <!--<%# unless category_selection == "AddPatient" %>
           <h1 class="text-lg leading-6 font-medium text-gray-900">
@@ -18,7 +18,7 @@
 
       <h1 class="main-title">Add a Patient</h1>
 
-        <%= form_with(scope: :appointment, remote: false, url: update_appointment_clinic_queued_patients_path(clinic_id: @clinic.id), 
+        <%= form_with(scope: :appointment, remote: false, url: update_appointment_clinic_queued_patients_path(clinic_id: @clinic.id),
             method: :post, data: {controller: "testing-referral-review-form age-calculator"}) do |f| %>
 
             <div>
