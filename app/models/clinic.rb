@@ -37,8 +37,6 @@ class Clinic < ApplicationRecord
     :end_hour_minute, :end_meridiem
 
   validates :public_or_private, presence: true
-  # validates :venue_name, presence: true
-  # validates :county, presence: true
   validates :address, presence: true
   # validates :clinic_date, presence: true
 
