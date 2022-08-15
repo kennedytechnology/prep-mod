@@ -256,7 +256,7 @@ CLINIC_COUNT.times.each do |i|
     backup_contact_phone_number: Faker::PhoneNumber.cell_phone,
     contact_email: Faker::Internet.email,
     backup_contact_email: Faker::Internet.email,
-    venue_id: Faker::Number.between(from: 1, to: Venue.count)
+    # venue_id: Faker::Number.between(from: 1, to: Venue.count)
   )
 end
 

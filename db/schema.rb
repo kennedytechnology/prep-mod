@@ -218,8 +218,6 @@ ActiveRecord::Schema.define(version: 2020_08_19_103002) do
     t.string "backup_contact_email"
     t.integer "appointments_count"
     t.datetime "canceled_at"
-    t.bigint "venue_id"
-    t.index ["venue_id"], name: "index_clinics_on_venue_id"
   end
 
   create_table "clinics_supply_inventories", id: false, force: :cascade do |t|
@@ -696,7 +694,6 @@ ActiveRecord::Schema.define(version: 2020_08_19_103002) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "appointments", "clinics"
   add_foreign_key "appointments", "patients"
-  add_foreign_key "clinics", "venues"
   add_foreign_key "patients", "venues"
   add_foreign_key "providers", "users"
   add_foreign_key "supply_inventories", "users"
