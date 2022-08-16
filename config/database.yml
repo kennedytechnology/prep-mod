@@ -56,7 +56,7 @@ test:
 
 production:
   <<: *default
-  database: cw2_production
+  database: cw2_prod
   username: cw2
   password: <%= ENV['CW2_DATABASE_PASSWORD'] %>
   url: <%= ENV['DATABASE_URL'] %>
